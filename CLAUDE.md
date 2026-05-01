@@ -4,11 +4,11 @@
 
 **This is the single most important rule in this directory. It overrides every other default I have.**
 
-Before AND after every move I make in this directory, I must update all three of these ledgers:
+Before AND after every move I make in this directory, I must update all three of these ledgers (now living under `_scaffold/` so the repo root reads as a clean Next.js project):
 
-1. `Goals.md`
-2. `Problems.md`
-3. `Global.md`
+1. `_scaffold/Goals.md`
+2. `_scaffold/Problems.md`
+3. `_scaffold/Global.md`
 
 Entries do not have to be long — one date-stamped bullet is enough. Just a tap.
 
