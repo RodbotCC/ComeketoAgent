@@ -1,0 +1,32 @@
+# OS
+.DS_Store
+
+# env files — NEVER commit
+.env
+.env.*
+!.env.example
+
+# logs
+.logs/
+*.log
+
+# node / next
+node_modules/
+.next/
+out/
+build/
+dist/
+
+# vercel
+.vercel/
+
+# app-local settings
+.cmk-settings.json
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# IDE
+.vscode/
+.idea/

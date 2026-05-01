@@ -1,0 +1,163 @@
+/* ===== CHAT — calm, ChatGPT/Claude-style ===== */
+
+.chat-shell {
+  height: 100vh;
+  display: flex;
+  background: var(--paper);
+  overflow: hidden;
+}
+.chat-shell.with-sb { display: grid; grid-template-columns: 240px 1fr; }
+
+/* Sidebar */
+.sb { background: var(--paper-2); border-right: 1px solid var(--rule); padding: 14px 12px; overflow-y: auto; display: flex; flex-direction: column; gap: 4px; }
+.sb-head { display: flex; align-items: center; justify-content: space-between; padding: 4px 6px 14px; border-bottom: 1px solid var(--rule-soft); margin-bottom: 12px; }
+.sb-new { background: transparent; border: 1px solid var(--rule); border-radius: 4px; padding: 4px 10px; font-size: 11px; color: var(--ink); cursor: pointer; }
+.sb-section { font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); padding: 12px 8px 6px; }
+.sb-list { list-style: none; margin: 0; padding: 0; }
+.sb-list li { padding: 7px 10px; font-size: 13px; color: var(--ink-mid); border-radius: 4px; cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sb-list li:hover { background: var(--card); }
+.sb-list li.active { background: var(--card); color: var(--ink); }
+
+.chat-col { display: flex; flex-direction: column; min-width: 0; }
+
+/* Top bar — minimal */
+.chat-top {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 28px;
+  border-bottom: 1px solid var(--rule-soft);
+  flex: none;
+}
+.chat-top-right { display: flex; align-items: center; gap: 18px; font-size: 12px; color: var(--ink-mid); }
+.chat-model { font-size: 11px; color: var(--ink-soft); }
+.chat-top-link { color: var(--ink-mid); text-decoration: none; cursor: pointer; }
+
+/* Stream */
+.chat-stream {
+  flex: 1;
+  overflow-y: auto;
+  padding: 32px 24px 24px;
+}
+.chat-inner {
+  max-width: var(--maxw, 760px);
+  margin: 0 auto;
+  font-size: var(--fs, 15px);
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+/* Messages — flat, calm */
+.msg { padding: 8px 0 22px; }
+.msg-body p { margin: 0 0 12px; }
+.msg-body p:last-child { margin: 0; }
+.msg-body code { background: var(--card-2); padding: 1px 5px; border-radius: 3px; font-family: var(--mono); font-size: 0.9em; }
+
+.msg-user.flat .msg-body { color: var(--ink); }
+.msg-user.flat { padding-bottom: 8px; }
+.msg-user.flat .msg-body { background: var(--card); border-radius: 12px; padding: 12px 16px; margin-left: auto; max-width: 85%; width: fit-content; }
+.msg-user.flat ~ .msg-user.flat .msg-body { margin-left: auto; }
+
+.msg-agent.flat .msg-body { color: var(--ink); }
+
+.msg.bubble { padding: 6px 0; }
+.msg-user.bubble .msg-body { background: var(--card); border: 1px solid var(--rule-soft); border-radius: 12px; padding: 12px 16px; max-width: 85%; margin-left: auto; width: fit-content; }
+.msg-agent.bubble .msg-body { background: transparent; }
+
+.msg.rule { padding: 14px 0; border-top: 1px solid var(--rule-soft); }
+.msg.rule:first-child { border-top: 0; }
+.msg-user.rule .msg-body::before { content: 'You'; display: block; font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 6px; }
+.msg-agent.rule .msg-body::before { content: 'Rodbot'; display: block; font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 6px; }
+
+/* Thinking block — collapsed by default feel */
+.tk {
+  margin: 6px 0 14px;
+  border: 1px solid var(--rule-soft);
+  border-radius: 8px;
+  background: var(--card);
+  overflow: hidden;
+  font-size: 13px;
+}
+.tk-head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  text-align: left;
+  color: var(--ink-mid);
+  font-size: 12.5px;
+}
+.tk-head:hover { background: var(--card-2); }
+.tk-caret { color: var(--ink-faint); width: 12px; }
+.tk-label { flex: 1; }
+.tk-meta { color: var(--ink-faint); font-size: 11px; }
+.tk-body { padding: 6px 14px 14px 36px; border-top: 1px solid var(--rule-soft); }
+.tk-list { list-style: none; padding: 4px 0 0; margin: 0; }
+.tk-list li { padding: 3px 0; color: var(--ink-mid); font-size: 12.5px; position: relative; padding-left: 18px; }
+.tk-list li::before { content: '✓'; position: absolute; left: 0; color: var(--sage-deep); }
+.tk-list li.cur::before { content: '·'; color: var(--ink); }
+.tk-log { padding: 4px 0; }
+.tk-log-row { display: flex; gap: 10px; align-items: baseline; padding: 2px 0; font-family: var(--mono); font-size: 11.5px; color: var(--ink-mid); }
+.tk-log-bullet { width: 5px; height: 5px; border-radius: 50%; background: var(--sage-deep); }
+.tk-log-row.pend .tk-log-bullet { background: var(--ink-faint); }
+.tk-prose { margin: 4px 0 0; color: var(--ink-mid); font-size: 13px; line-height: 1.55; font-style: italic; font-family: var(--serif); }
+.tk-mono { margin: 4px 0 0; font-family: var(--mono); font-size: 11.5px; color: var(--ink-mid); white-space: pre-wrap; }
+
+/* Tool call — Send Automation */
+.tc {
+  margin: 14px 0;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: var(--card);
+  overflow: hidden;
+}
+.tc-head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--card-2);
+  border: 0;
+  border-bottom: 1px solid var(--rule-soft);
+  cursor: pointer;
+  text-align: left;
+  font-size: 13px;
+}
+.tc-caret { color: var(--ink-faint); width: 12px; }
+.tc-tool { font-size: 11.5px; color: var(--ink-mid); background: var(--paper); padding: 2px 7px; border-radius: 3px; }
+.tc-arrow { color: var(--ink-faint); }
+.tc-name { flex: 1; color: var(--ink); font-family: var(--serif); font-style: italic; font-size: 14px; }
+.tc-status { font-family: var(--mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; padding: 3px 8px; border-radius: 3px; }
+.tc-status.pending { background: var(--queued); color: #4A4566; }
+.tc-status.sent    { background: var(--sage); color: #41502F; }
+
+.tc-body { padding: 12px 16px; }
+.tc-row { display: grid; grid-template-columns: 70px 1fr; gap: 14px; padding: 5px 0; align-items: center; font-size: 13px; }
+.tc-k { font-family: var(--mono); font-size: 10.5px; color: var(--ink-soft); letter-spacing: .08em; text-transform: uppercase; }
+.tc-v { color: var(--ink); display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.tc-tag { background: var(--ink); color: var(--paper); font-family: var(--mono); font-size: 10px; padding: 2px 7px; border-radius: 3px; letter-spacing: .05em; }
+.tc-chip { font-size: 11.5px; padding: 3px 9px; border: 1px solid var(--rule); border-radius: 999px; background: var(--paper); color: var(--ink); }
+.tc-foot { display: flex; gap: 8px; justify-content: flex-end; padding: 12px 0 4px; border-top: 1px solid var(--rule-soft); margin-top: 8px; }
+.tc-foot.done { justify-content: flex-start; padding: 10px 0 0; color: var(--sage-deep); font-size: 11.5px; }
+.tc-btn { padding: 7px 14px; border: 1px solid var(--rule); border-radius: 4px; background: var(--paper); color: var(--ink); font-size: 12px; cursor: pointer; }
+.tc-btn.primary { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.tc-btn:hover { background: var(--card-2); }
+.tc-btn.primary:hover { background: var(--ink-2); }
+
+/* Composer — bottom-docked, single field */
+.cp-wrap { padding: 8px 24px 18px; flex: none; background: var(--paper); }
+.cp { max-width: var(--maxw, 760px); margin: 0 auto; background: var(--card); border: 1px solid var(--rule); border-radius: 16px; padding: 6px 10px 6px 16px; box-shadow: 0 2px 8px -4px rgba(26,24,21,0.08); }
+.cp textarea { width: 100%; border: 0; background: transparent; resize: none; font-size: 15px; color: var(--ink); font-family: inherit; padding: 10px 0 4px; line-height: 1.5; max-height: 220px; overflow-y: auto; }
+.cp textarea::placeholder { color: var(--ink-faint); }
+.cp-row { display: flex; justify-content: space-between; align-items: center; padding: 0 0 4px; }
+.cp-tools { display: flex; gap: 4px; }
+.cp-icon { width: 30px; height: 30px; border-radius: 50%; border: 0; background: transparent; color: var(--ink-mid); font-size: 16px; cursor: pointer; }
+.cp-icon:hover { background: var(--card-2); }
+.cp-send { width: 30px; height: 30px; border-radius: 50%; border: 0; background: var(--ink); color: var(--paper); font-size: 14px; cursor: pointer; }
+.cp-send:hover { background: var(--ink-2); }
+.cp-fine { max-width: var(--maxw, 760px); margin: 6px auto 0; text-align: center; font-size: 11px; color: var(--ink-faint); }
+
+.dim { color: var(--ink-soft); }

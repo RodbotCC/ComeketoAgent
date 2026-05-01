@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Comeketo Agent — Index</title>
+  <link rel="stylesheet" href="shared.css"/>
+  <style>
+    .ix { max-width: 980px; margin: 0 auto; padding: 56px 36px; }
+    .ix-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 28px; }
+    .ix-card { display: block; background: var(--card); border: 1px solid var(--rule); border-radius: 8px; padding: 22px 24px; text-decoration: none; color: var(--ink); transition: border-color .15s, background .15s; }
+    .ix-card:hover { background: var(--card-2); border-color: var(--ink-faint); }
+    .ix-eyebrow { font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-soft); }
+    .ix-name { font-family: var(--serif); font-size: 26px; line-height: 1.1; margin: 8px 0 10px; }
+    .ix-name em { font-style: italic; }
+    .ix-desc { font-size: 13px; color: var(--ink-mid); line-height: 1.5; margin: 0 0 14px; }
+    .ix-meta { display: flex; gap: 10px; font-size: 11px; color: var(--ink-soft); }
+    .ix-meta .cme-pill { font-size: 9.5px; }
+  </style>
+</head>
+<body>
+  <header class="cme-header">
+    <a href="index.html" class="cme-wordmark">Comeketo <em>Agent</em><span class="dot">.</span></a>
+    <div class="cme-utility">
+      <a>proposals</a><a>personal</a><a>briefing</a>
+    </div>
+  </header>
+  <main class="ix">
+    <div class="cme-section-label">00 · explorations</div>
+    <h1 class="cme-h1">Three pages. <em>Ten variants each, wired into Tweaks.</em></h1>
+    <p class="cme-lede">Toggle Tweaks on the toolbar to switch through layouts, panels, motifs, and copy. The header system stays consistent across all three.</p>
+
+    <div class="ix-grid">
+      <a class="ix-card" href="Chat.html">
+        <span class="ix-eyebrow">01 · chat</span>
+        <div class="ix-name">Chat. <em>Editorial.</em></div>
+        <p class="ix-desc">A delegations chat — automation setup for Brenda &amp; Steve. Six thinking-panel styles, six tool-use styles, five layouts.</p>
+        <div class="ix-meta">
+          <span class="cme-pill tone-running">live</span>
+          <span>10+ variants</span>
+        </div>
+      </a>
+      <a class="ix-card" href="Automation.html">
+        <span class="ix-eyebrow">02 · automation</span>
+        <div class="ix-name">Triggers. <em>Composed.</em></div>
+        <p class="ix-desc">Daily clock, trigger picker, cron list, compose UI — all four exposed as variant axes. Boxes finally fit their contents.</p>
+        <div class="ix-meta">
+          <span class="cme-pill tone-done">fixed</span>
+          <span>3 × 3 × 3 × 3 = 81 combos</span>
+        </div>
+      </a>
+      <a class="ix-card" href="Hero.html">
+        <span class="ix-eyebrow">03 · hero</span>
+        <div class="ix-name">Sign in. <em>Compose the week.</em></div>
+        <p class="ix-desc">Six layouts × six decorative motifs × five taglines. Google sign-in, workspace-SSO copy, calm cream paper.</p>
+        <div class="ix-meta">
+          <span class="cme-pill tone-queued">v1</span>
+          <span>30+ combos</span>
+        </div>
+      </a>
+    </div>
+
+    <p style="margin-top: 32px; font-size: 12px; color: var(--ink-soft); font-family: var(--mono);">— each page persists its tweaks, so you can land on a config you like and it'll stick.</p>
+  </main>
+  <footer class="cme-footer">
+    <div class="cme-breadcrumb"><span>grid · morning</span><span class="sep">/</span><span>index</span></div>
+    <div style="display:flex; gap:16px; align-items:center; font-size:11px; color:var(--ink-soft);">
+      <span>Comeketo Agent</span>
+    </div>
+  </footer>
+</body>
+</html>
