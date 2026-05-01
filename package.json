@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "fresh": "rm -rf .next app/.next .turbo && next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -18,7 +19,8 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-markdown": "^9.0.1",
-    "remark-gfm": "^4.0.0"
+    "remark-gfm": "^4.0.0",
+    "vercel": "^53.0.1"
   },
   "devDependencies": {
     "@types/node": "^22.9.0",

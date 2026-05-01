@@ -33,6 +33,15 @@ yarn-error.log*
 # local settings (model picker, etc.) — written by the running app
 .cmk-settings.json
 
+# Phantom app/ directory — Next dev sometimes regenerates an empty app/
+# at the repo root after Server Action / dynamic route changes. The real
+# Next.js source lives in src/app/.
+/app/
+
+# Reference dumps too large for git (we keep the markdown form)
+_reference/close-api-docs.json
+_reference/close-api-docs/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

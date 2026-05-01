@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 
-type Mode = "openai" | "supabase" | "github";
+type Mode = "openai" | "supabase" | "github" | "close";
 
 type TestResult = {
   ok: boolean;
@@ -28,6 +28,11 @@ const MODES: Array<{ key: Mode; title: string; description: string }> = [
     key: "github",
     title: "GitHub",
     description: "Calls /user via Octokit using the GITHUB_PAT. Confirms the token works and prints account basics.",
+  },
+  {
+    key: "close",
+    title: "Close",
+    description: "Lists active workflows + email templates from your Close org via direct REST. Confirms CLOSE_API_KEY and surfaces real workflow names so you can see the agent's playing field.",
   },
 ];
 

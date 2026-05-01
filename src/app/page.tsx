@@ -1,4 +1,5 @@
-import Link from "next/link";
+import { AppHeader } from "@/components/AppHeader";
+import { TabNav } from "@/components/TabNav";
 
 /* ============ DAILY CLOCK MOTIF ============ */
 
@@ -138,25 +139,8 @@ function CounterStrip() {
 export default function HeroPage() {
   return (
     <div className="cme-shell hero-shell">
-      <header className="cme-header hero-header">
-        <span className="cme-wordmark-row">
-          <span className="cme-identity-dots" aria-hidden>
-            <span className="cme-dot brown" />
-            <span className="cme-dot gold" />
-            <span className="cme-dot sage" />
-            <span className="cme-dot lavender" />
-          </span>
-          <Link href="/chat" className="cme-wordmark">
-            Comeketo <em>Agent</em>
-            <span className="dot">.</span>
-          </Link>
-        </span>
-        <div className="cme-utility">
-          <a>about</a>
-          <a>changelog</a>
-          <a>request invite</a>
-        </div>
-      </header>
+      <AppHeader wordmarkHref="/" />
+      <TabNav />
 
       <main className="hero-main">
         <div className="hero-split">

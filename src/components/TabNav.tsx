@@ -1,27 +1,22 @@
 import Link from "next/link";
 import { icons } from "./icons";
 
-type TabKey = "people" | "activity" | "intake" | "analytics" | "boxes" | "automation" | "delegations";
+type TabKey = "leads" | "intake" | "automation" | "heartbeat" | "delegations";
 
 type Tab = {
   key: TabKey;
   label: string;
   icon: React.ReactNode;
   href: string;
-  /** sage/amber dot for active alerts (visual only for now). */
   dot?: "sage" | "amber" | "lavender";
-  /** "▾" suffix on the people tab. */
-  suffix?: string;
 };
 
 const TABS: Tab[] = [
-  { key: "people",      label: "people",      icon: icons.people,      href: "#",         suffix: "▾" },
-  { key: "activity",    label: "activity",    icon: icons.activity,    href: "#",         dot: "sage" },
-  { key: "intake",      label: "intake",      icon: icons.intake,      href: "/intake",   dot: "amber" },
-  { key: "analytics",   label: "analytics",   icon: icons.analytics,   href: "#" },
-  { key: "boxes",       label: "boxes",       icon: icons.boxes,       href: "#" },
-  { key: "automation",  label: "automation",  icon: icons.automation,  href: "#",         dot: "sage" },
-  { key: "delegations", label: "delegations", icon: icons.delegations, href: "/chat" }, /* /chat IS the delegations chat */
+  { key: "leads",       label: "leads",       icon: icons.boxes,       href: "/leads" },
+  { key: "intake",      label: "intake",      icon: icons.intake,      href: "/intake",     dot: "amber" },
+  { key: "automation",  label: "automation",  icon: icons.automation,  href: "/automation", dot: "sage" },
+  { key: "heartbeat",   label: "heartbeat",   icon: icons.activity,    href: "/heartbeat" },
+  { key: "delegations", label: "delegations", icon: icons.delegations, href: "/chat" },
 ];
 
 const DOT_COLOR: Record<NonNullable<Tab["dot"]>, string> = {
@@ -61,19 +56,11 @@ export function TabNav({ active }: Props) {
             <>
               {tab.icon}
               <span>{tab.label}</span>
-              {tab.suffix ? <span style={{ opacity: 0.5 }}>{tab.suffix}</span> : null}
               {tab.dot ? (
                 <span className="cmk-nav-dot" style={{ background: DOT_COLOR[tab.dot] }} />
               ) : null}
             </>
           );
-          if (tab.href === "#") {
-            return (
-              <span key={tab.key} className="cmk-nav" style={baseStyle}>
-                {inner}
-              </span>
-            );
-          }
           return (
             <Link key={tab.key} href={tab.href} className="cmk-nav" style={{ ...baseStyle, textDecoration: "none" }}>
               {inner}

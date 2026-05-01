@@ -43,3 +43,26 @@ Append a short timestamped entry under today's date. One bullet is fine. Mark it
 - Jake is the orchestrator; I do the fine details.
 - Momentum and energy matter. Don't stall on ceremony beyond the three-ledger rule.
 - Honest, no flattery. Jake is a seasoned AI veteran and wants the truth.
+- The three ledgers + this CLAUDE.md ARE the project memory. Do NOT write to the Claude global memory dir (`~/.claude/projects/.../memory/`) for this project — Jake doesn't want to read two memory systems.
+
+## Hard rules
+
+- **No building without functionality.** Every shipped UI element must do something real. No inert buttons, no decorative tabs that route nowhere, no "we'll wire it later" stubs that look real. If a feature isn't functional yet, omit the UI entirely. The only acceptable non-functional elements are pure visual chrome (logos, dividers, decorative dots). When in doubt, ask before adding a stub.
+- **Don't push to main on every change.** Local edits stay local until Jake explicitly says push. Vercel deploys only on push to `main`, so the live site (`comeketo-agent-ra8h.vercel.app`) is intentionally behind the working tree. Always ask before pushing.
+- **Tell Jake to `npm run fresh` after any non-trivial sprint.** Next 14's dev server caches webpack chunks in memory. When we add Server Actions, new dynamic routes (`[param]`), or shuffle client/server boundaries underneath a running `next dev`, the cache desyncs and pages start throwing "Cannot find module '../XXX.js'" or 404'ing. `npm run fresh` (added as a script) nukes `.next` and any phantom `app/.next` then restarts. Mention this proactively after any sprint that touches Server Actions, new routes, or client-component shape — don't make Jake debug a stale-cache phantom.
+- **Land in position. Don't ask "what's next" by default.** When a sprint completes, the job isn't shipped — the next move has to be teed up. Read the current Goals milestone, look at the Watch items in the latest after-tap, and pick the most *blocking-removal* next move (not the most exciting one). Then either execute it inline as part of the sprint, or land the workspace one click from doing it (file scaffolding in place, todos clear, dependencies wired). Only hand the choice back to Jake when there's a real fork his judgment is needed for. If I find myself listing 3+ options as a question, I'm avoiding the work of choosing — pick one and go. Jake will course-correct if it's wrong; that's cheaper than him navigating from a menu every time.
+
+- **Atomize hard moves before executing.** When a move is non-trivial (touches multiple files / multiple systems / could fan out), write the atomization first: a numbered list of micro-tasks where each atom names (a) what files/state it touches, (b) its inputs, (c) what "done" looks like — concrete enough that another agent could pick it up cold. This is the artifact that makes parallelism possible: Jake can fan 10 versions of me at independent atoms and just let it rip. The discipline isn't "more planning" — it's *making the work parceleable*. If I can't write a clean atomization for a move, I don't actually understand it yet.
+
+## Product North Star — `Guardrails.md`
+
+The product spec lives at `/Users/jakeaaron/ComeketoAgent/Guardrails.md` (v3.0+). It is the durable contract for what Comeketo Agent is and how it must behave. Read it before making product decisions. Key shape:
+
+- **Lead OS, not inbox sender.** Every Andre-owned lead gets a hydrated **Box** (Close state + comms + call transcripts + extracted facts) and a tailored **seven-day cycle**.
+- **Hard gates** non-negotiable: ownership=Andre, status≠Won/Lost, stop signals, reply gate, send window, frequency cap, fresh-Box requirement, snapshot match.
+- **Heartbeat** every 30-60 min rehydrates Boxes and pauses stale plans before sending.
+- **No customer-facing send without explicit execution-mode + Andre approval + snapshot match.**
+- **NEPQ voice** on drafts. No fake warmth. Ask, don't pitch.
+- **Skip codes** enum is the language of "why this didn't fire." Always explicit, never silent.
+
+When my work conflicts with Guardrails, Guardrails wins. When Guardrails is silent or vague on a build choice, ask Jake.

@@ -19,9 +19,12 @@ export const env = {
   // GitHub direct API (Octokit)
   GITHUB_PAT: read("GITHUB_PAT"),
 
-  // Close CRM (reserved for later)
+  // Close CRM
   CLOSE_API_KEY: read("CLOSE_API_KEY"),
-  CLOSE_USER_ID: read("CLOSE_USER_ID"),
+  // Two-actor identity in the practice org. Per Guardrails, the app's
+  // sends are "as Andre" — JAKE is for admin/dev actions only.
+  CLOSE_USER_ID_JAKE: read("CLOSE_USER_ID_JAKE"),
+  CLOSE_USER_ID_ANDRE: read("CLOSE_USER_ID_ANDRE"),
 
   // ClickUp (reserved for later)
   CLICKUP_API_TOKEN: read("CLICKUP_API_TOKEN"),
@@ -44,6 +47,8 @@ export function envStatus() {
     SUPABASE_SECRET_KEY: { set: !!env.SUPABASE_SECRET_KEY, fingerprint: fingerprint(env.SUPABASE_SECRET_KEY) },
     GITHUB_PAT: { set: !!env.GITHUB_PAT, fingerprint: fingerprint(env.GITHUB_PAT) },
     CLOSE_API_KEY: { set: !!env.CLOSE_API_KEY, fingerprint: fingerprint(env.CLOSE_API_KEY) },
+    CLOSE_USER_ID_JAKE: { set: !!env.CLOSE_USER_ID_JAKE, fingerprint: fingerprint(env.CLOSE_USER_ID_JAKE) },
+    CLOSE_USER_ID_ANDRE: { set: !!env.CLOSE_USER_ID_ANDRE, fingerprint: fingerprint(env.CLOSE_USER_ID_ANDRE) },
     CLICKUP_API_TOKEN: { set: !!env.CLICKUP_API_TOKEN, fingerprint: fingerprint(env.CLICKUP_API_TOKEN) },
   };
 }

@@ -3,11 +3,12 @@ import OpenAI from "openai";
 import { env } from "@/lib/env";
 import { getOctokit } from "@/lib/github";
 import { getSettings } from "@/lib/settings";
+import { closeListWorkflows, closeListEmailTemplates } from "@/lib/close";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-type Mode = "openai" | "supabase" | "github";
+type Mode = "openai" | "supabase" | "github" | "close";
 
 async function testOpenAI() {
   if (!env.OPENAI_API_KEY) {
@@ -87,6 +88,22 @@ async function testGitHub() {
   };
 }
 
+async function testClose() {
+  // Two reads in parallel: workflows + email templates. Both confirm the
+  // API key works, the network path is open, and we can paginate Close.
+  const [workflows, templates] = await Promise.all([
+    closeListWorkflows({ limit: 50 }),
+    closeListEmailTemplates({ limit: 50 }),
+  ]);
+  return {
+    workflow_count: workflows.length,
+    workflows_active: workflows.filter((w) => w.status === "active").length,
+    workflow_names: workflows.slice(0, 12).map((w) => w.name),
+    email_template_count: templates.length,
+    sample_templates: templates.slice(0, 6).map((t) => t.name),
+  };
+}
+
 export async function POST(req: Request) {
   const startedAt = Date.now();
 
@@ -98,9 +115,9 @@ export async function POST(req: Request) {
   }
 
   const mode = body.mode;
-  if (!mode || !["openai", "supabase", "github"].includes(mode)) {
+  if (!mode || !["openai", "supabase", "github", "close"].includes(mode)) {
     return NextResponse.json(
-      { ok: false, error: "mode must be one of: openai, supabase, github" },
+      { ok: false, error: "mode must be one of: openai, supabase, github, close" },
       { status: 400 }
     );
   }
@@ -111,7 +128,9 @@ export async function POST(req: Request) {
         ? await testOpenAI()
         : mode === "supabase"
         ? await testSupabase()
-        : await testGitHub();
+        : mode === "github"
+        ? await testGitHub()
+        : await testClose();
 
     return NextResponse.json({
       ok: true,
