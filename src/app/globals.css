@@ -4,6 +4,125 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&display=swap');
 
+/* ============ /SETTINGS/AUXILIARIES PAGE ============ */
+.cmk-aux-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 14px;
+  margin-top: 14px;
+}
+.cmk-aux-slot {
+  background: var(--card);
+  border: 0.5px solid rgba(0, 0, 0, 0.13);
+  border-radius: 10px;
+  padding: 14px 16px 16px;
+  box-shadow: 0 1px 1px rgba(26, 24, 21, 0.025), 0 4px 12px rgba(26, 24, 21, 0.04);
+}
+.cmk-aux-slot-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 10px;
+  border-bottom: 0.5px solid var(--rule);
+  margin-bottom: 12px;
+}
+.cmk-aux-slot-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 2px var(--card), 0 0 0 3px rgba(0, 0, 0, 0.08);
+}
+.cmk-aux-slot-name { font-family: var(--serif); font-size: 16px; color: var(--ink); }
+.cmk-aux-slot-meta {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-top: 2px;
+}
+.cmk-aux-field { display: flex; flex-direction: column; gap: 4px; margin-bottom: 10px; }
+.cmk-aux-field-label {
+  font-size: 9.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  font-weight: 500;
+}
+.cmk-aux-field input[type="text"],
+.cmk-aux-field select {
+  font-family: var(--mono);
+  font-size: 12px;
+  padding: 7px 10px;
+  border-radius: 5px;
+  border: 0.5px solid var(--rule);
+  background: var(--card-2);
+  color: var(--ink);
+}
+.cmk-aux-caps {
+  border: 0.5px solid var(--rule);
+  border-radius: 7px;
+  padding: 8px 10px 4px;
+  margin: 12px 0;
+  background: var(--paper-2);
+}
+.cmk-aux-caps legend {
+  padding: 0 6px;
+  font-size: 9.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  font-weight: 500;
+}
+.cmk-aux-cap {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  padding: 7px 6px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 120ms;
+}
+.cmk-aux-cap:hover { background: rgba(0, 0, 0, 0.025); }
+.cmk-aux-cap input[type="checkbox"] { margin-top: 3px; flex-shrink: 0; }
+.cmk-aux-cap-name {
+  font-size: 12px;
+  color: var(--ink);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.cmk-aux-cap-blurb {
+  font-size: 11px;
+  color: var(--ink-soft);
+  margin-top: 2px;
+  line-height: 1.4;
+}
+.cmk-aux-cap-tag {
+  font-size: 8.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--lemon-deep) 22%, var(--card));
+  color: color-mix(in oklab, var(--lemon-deep) 95%, var(--ink));
+  font-weight: 500;
+}
+.cmk-aux-cap-tag-locked {
+  background: color-mix(in oklab, var(--rose-deep) 18%, var(--card));
+  color: color-mix(in oklab, var(--rose-deep) 95%, var(--ink));
+}
+.cmk-aux-cap-locked { opacity: 0.45; cursor: not-allowed; }
+.cmk-aux-cap-pending .cmk-aux-cap-blurb { font-style: italic; }
+.cmk-aux-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+  border-top: 0.5px solid var(--rule);
+}
+
 /* ============ /ANALYTICS PAGE ============ */
 .cmk-an-strip {
   display: grid;

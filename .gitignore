@@ -30,8 +30,11 @@ yarn-error.log*
 .env.*
 !.env.example
 
-# local settings (model picker, etc.) — written by the running app
+# local settings + ledger files — written by the running app, operator-specific
 .cmk-settings.json
+.cmk-auxiliaries.json
+.cmk-continuity.jsonl
+.cmk-open-problems.jsonl
 
 # Phantom app/ directory — Next dev sometimes regenerates an empty app/
 # at the repo root after Server Action / dynamic route changes. The real

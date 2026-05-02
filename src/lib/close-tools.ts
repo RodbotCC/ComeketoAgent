@@ -544,7 +544,18 @@ export type CloseToolName =
  */
 export async function dispatchCloseTool(
   name: string,
-  args: Record<string, unknown>
+  args: Record<string, unknown>,
+  /**
+   * Optional auxiliary hooks. When provided, the voice_lint_buddy slot
+   * intercepts outbound email/SMS bodies before they hit Close and rewrites
+   * them to clear blocking voice/lint violations.
+   */
+  hooks?: {
+    voiceLint?: (
+      channel: "email" | "sms",
+      body: string
+    ) => Promise<{ rewritten: string; slot: string } | null>;
+  }
 ): Promise<unknown> {
   try {
     switch (name as CloseToolName) {
@@ -806,14 +817,24 @@ export async function dispatchCloseTool(
         const st = args.status as string | undefined;
         const status =
           st === "outbox" || st === "sent" ? st : "draft";
-        return await closeLogEmail({
+        let body = args.body_text as string;
+        let lintRewriteSlot: string | null = null;
+        if (hooks?.voiceLint && body) {
+          const rew = await hooks.voiceLint("email", body);
+          if (rew) {
+            body = rew.rewritten;
+            lintRewriteSlot = rew.slot;
+          }
+        }
+        const r = await closeLogEmail({
           lead_id: leadId,
           contact_id: args.contact_id as string,
           subject: args.subject as string,
-          body_text: args.body_text as string,
+          body_text: body,
           status,
           user_id: env.CLOSE_USER_ID_ANDRE || undefined,
         });
+        return lintRewriteSlot ? { ...r, voice_lint_rewrite: { slot: lintRewriteSlot } } : r;
       }
       case "close_log_sms_activity": {
         const leadId = args.lead_id as string;
@@ -830,13 +851,23 @@ export async function dispatchCloseTool(
         const st = args.status as string | undefined;
         const status =
           st === "outbox" || st === "sent" ? st : "draft";
-        return await closeLogSms({
+        let text = args.text as string;
+        let lintRewriteSlot: string | null = null;
+        if (hooks?.voiceLint && text) {
+          const rew = await hooks.voiceLint("sms", text);
+          if (rew) {
+            text = rew.rewritten;
+            lintRewriteSlot = rew.slot;
+          }
+        }
+        const r = await closeLogSms({
           lead_id: leadId,
           contact_id: args.contact_id as string,
-          text: args.text as string,
+          text,
           status,
           user_id: env.CLOSE_USER_ID_ANDRE || undefined,
         });
+        return lintRewriteSlot ? { ...r, voice_lint_rewrite: { slot: lintRewriteSlot } } : r;
       }
       case "close_create_lead": {
         const contactName = args.contact_name as string;

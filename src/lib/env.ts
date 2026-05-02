@@ -8,8 +8,14 @@ function read(name: string, fallback: string = ""): string {
 }
 
 export const env = {
-  // OpenAI
+  // OpenAI — main key powers the chat agent.
   OPENAI_API_KEY: read("OPENAI_API_KEY"),
+  // Three additional OpenAI keys reserved for the Auxiliary Agents fleet
+  // (the four-dot identity from the wordmark — main + 3 auxiliaries).
+  // Each auxiliary slot can choose which key powers it via /settings/auxiliaries.
+  OPENAI_API_KEY_AUX_BROWN: read("OPENAI_API_KEY_AUX_BROWN"),
+  OPENAI_API_KEY_AUX_GOLD: read("OPENAI_API_KEY_AUX_GOLD"),
+  OPENAI_API_KEY_AUX_SAGE: read("OPENAI_API_KEY_AUX_SAGE"),
 
   // Supabase direct SDK
   SUPABASE_URL: read("SUPABASE_URL"),
@@ -34,6 +40,14 @@ export const env = {
   CLICKUP_API_TOKEN: read("CLICKUP_API_TOKEN"),
   CLICKUP_TEAM_ID: read("CLICKUP_TEAM_ID"),
   CLICKUP_SPACE_ID: read("CLICKUP_SPACE_ID"),
+
+  /** Optional. When set, the slack_mirror auxiliary POSTs a one-line JSON `{text}`
+   *  to this URL on every assistant turn + meaningful tool action. */
+  SLACK_WEBHOOK_URL: read("SLACK_WEBHOOK_URL"),
+  /** Optional. Repo for the github_mirror auxiliary — format `owner/name`. Defaults
+   *  to RodbotCC/ComeketoAgent if blank. Branch is `main`, file is appended. */
+  GITHUB_AUDIT_REPO: read("GITHUB_AUDIT_REPO", "RodbotCC/ComeketoAgent"),
+  GITHUB_AUDIT_PATH: read("GITHUB_AUDIT_PATH", "_audit/auxiliary-events.jsonl"),
 } as const;
 
 /**

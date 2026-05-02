@@ -1595,15 +1595,39 @@ export function ChatLayout() {
       const data = await res.json();
 
       if (data.ok || data.assistant_message) {
+        // If an auxiliary reflector posted a note, fold it into the assistant
+        // message body as a final italic line. Persisted on the next refresh.
+        const reflection = data.aux_reflection as { note: string; slot: string } | null;
+        const assistantMsg = data.assistant_message as Message;
+        const messageWithReflection: Message = reflection?.note
+          ? {
+              ...assistantMsg,
+              content: `${assistantMsg.content}\n\n_— ${reflection.slot}: ${reflection.note}_`,
+            }
+          : assistantMsg;
         setMessages((prev) => {
           const without = prev.filter((m) => m.id !== optimisticUser.id);
-          return [...without, data.user_message as Message, data.assistant_message as Message];
+          return [...without, data.user_message as Message, messageWithReflection];
         });
         if (data.thread_id && data.thread_id !== activeId) setActiveId(data.thread_id);
         await refreshThreads();
         setSendSuccess((n) => n + 1);
         if (typeof data.trace_id === "string" && data.trace_id.length > 8) {
           toast.push(`Run trace ${data.trace_id.slice(0, 8)}… — see bar above reply`, { tone: "success", ttl: 4200 });
+        }
+        // Auxiliary TTS audio — play inline if a slot owns tts_narrator.
+        const aud = data.aux_audio as { audio_b64: string; mime: string; slot: string } | null;
+        if (aud?.audio_b64) {
+          try {
+            const audio = new Audio(`data:${aud.mime};base64,${aud.audio_b64}`);
+            void audio.play();
+          } catch {
+            /* autoplay may be blocked; fail silently */
+          }
+        }
+        if (data.aux_rewrite) {
+          const rw = data.aux_rewrite as { slot: string; rewritten_text: string };
+          toast.push(`${rw.slot} tightened your ask`, { tone: "default", ttl: 2400 });
         }
       } else {
         setMessages((prev) => [

@@ -17,6 +17,17 @@ import {
 import { CLOSE_TOOLS, dispatchCloseTool } from "@/lib/close-tools";
 import { logDelegationsToolCall } from "@/lib/delegations-tool-audit";
 import { pollBackgroundResponse } from "@/lib/openai-background";
+import { getAuxiliaries } from "@/lib/auxiliaries";
+import {
+  runPromptRewriter,
+  runPostTurnReflector,
+  runTtsNarrator,
+  runVoiceLintBuddy,
+  logContinuity,
+  logOpenProblem,
+  mirrorToSlack,
+  mirrorToGitHub,
+} from "@/lib/auxiliaries-runtime";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -203,6 +214,24 @@ export async function POST(req: Request) {
   const history = await listMessages(threadId);
   const responsesInput = history.map(toResponsesMessage);
 
+  // 3.5) Auxiliary fleet — load config once + run the prompt-rewriter slot
+  // before the main agent sees the input. The persisted user message stays
+  // raw (audit trail); only the model-bound copy gets the rewrite.
+  const auxConfig = await getAuxiliaries();
+  let rewrittenForModel: string | null = null;
+  let rewriteUsedSlot: string | null = null;
+  if (auxConfig.engine_enabled && userText && attachments.length === 0) {
+    const rewrite = await runPromptRewriter(auxConfig, userText, settings.model);
+    if (rewrite) {
+      rewrittenForModel = rewrite.rewritten;
+      rewriteUsedSlot = rewrite.slot;
+      const last = responsesInput[responsesInput.length - 1] as { role: string; content: unknown };
+      if (last && last.role !== "assistant") {
+        last.content = rewrite.rewritten;
+      }
+    }
+  }
+
   // 4) Fire OpenAI Responses with Close tools attached. Loop on tool_calls.
   let assistantText = "";
   let modelUsage: unknown = null;
@@ -275,7 +304,11 @@ export async function POST(req: Request) {
         } catch {
           parsed = {};
         }
-        const result = await dispatchCloseTool(call.name ?? "", parsed);
+        const result = await dispatchCloseTool(call.name ?? "", parsed, {
+          voiceLint: auxConfig.engine_enabled
+            ? (channel, body) => runVoiceLintBuddy(auxConfig, channel, body, settings.model)
+            : undefined,
+        });
         const ok = !(result && typeof result === "object" && "error" in (result as object));
         delegationsAuditLogged =
           logDelegationsToolCall({
@@ -362,6 +395,54 @@ export async function POST(req: Request) {
   // 6) Bump the thread updated_at; if it was new and still default-titled, set the title.
   await touchThread(threadId, isNewThread ? { title: deriveTitle(userText) } : undefined);
 
+  // 7) Auxiliary post-turn hooks — none of these block the response. They
+  // run when the engine is on and a slot owns the relevant capability.
+  let auxReflection: { note: string; slot: string } | null = null;
+  let auxAudio: { audio_b64: string; mime: string; slot: string } | null = null;
+  if (auxConfig.engine_enabled && !modelError && assistantText) {
+    const [reflection, narration] = await Promise.all([
+      runPostTurnReflector(auxConfig, userText, assistantText, settings.model),
+      runTtsNarrator(auxConfig, assistantText.slice(0, 800)),
+    ]);
+    auxReflection = reflection;
+    auxAudio = narration;
+  }
+  // Ledger + mirror writes — fire-and-forget; never await.
+  if (auxConfig.engine_enabled) {
+    void logContinuity(auxConfig, {
+      thread_id: threadId,
+      user: userText.slice(0, 400),
+      agent: (assistantText || "").slice(0, 400),
+      tools_used: toolTrace.length,
+    });
+    if (modelError) {
+      void logOpenProblem(auxConfig, {
+        kind: "chat_error",
+        thread_id: threadId,
+        detail: modelError.slice(0, 400),
+      });
+    }
+    const failedTools = toolTrace.filter((t) => !t.ok);
+    for (const f of failedTools) {
+      void logOpenProblem(auxConfig, {
+        kind: "tool_failure",
+        thread_id: threadId,
+        detail: `${f.name}: ${(f.summary ?? "").slice(0, 240)}`,
+      });
+    }
+    const summary = `*${threadId.slice(0, 8)}* · ${
+      toolTrace.length ? `${toolTrace.length} tool call${toolTrace.length === 1 ? "" : "s"}` : "no tools"
+    }${modelError ? " · ERROR" : ""}\n> ${userText.slice(0, 200)}`;
+    void mirrorToSlack(auxConfig, summary);
+    void mirrorToGitHub(auxConfig, {
+      kind: "chat_turn",
+      thread_id: threadId,
+      tool_count: toolTrace.length,
+      error: modelError ?? null,
+      user_excerpt: userText.slice(0, 200),
+    });
+  }
+
   return NextResponse.json({
     ok: !modelError,
     thread_id: threadId,
@@ -373,6 +454,11 @@ export async function POST(req: Request) {
     assistant_message: assistantMessage,
     usage: modelUsage,
     tools_used: toolTrace,
+    aux_rewrite: rewrittenForModel
+      ? { slot: rewriteUsedSlot, rewritten_text: rewrittenForModel }
+      : null,
+    aux_reflection: auxReflection,
+    aux_audio: auxAudio,
     error: modelError,
   });
 }

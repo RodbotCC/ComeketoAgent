@@ -279,6 +279,34 @@ export default async function SettingsPage() {
         </div>
 
         <div className="cmk-stack-panel cmk-stack-panel--lavender">
+          <h2>Auxiliary fleet</h2>
+          <p className="muted">
+            The four-dot identity. Main agent runs the chat; three auxiliary slots
+            ride alongside, each with its own role + capabilities + OpenAI key.
+            Configure on the dedicated page.
+          </p>
+          <p style={{ marginTop: 6 }}>
+            <Link
+              href="/settings/auxiliaries"
+              style={{
+                fontSize: 11,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                padding: "8px 14px",
+                border: "0.5px solid var(--rule)",
+                borderRadius: 6,
+                display: "inline-block",
+                textDecoration: "none",
+                color: "var(--ink)",
+                background: "var(--card-2)",
+              }}
+            >
+              Configure auxiliaries →
+            </Link>
+          </p>
+        </div>
+
+        <div className="cmk-stack-panel cmk-stack-panel--lavender">
           <h2>Reserved for later</h2>
           <p className="muted">Close CRM keys, webhook signing, and ClickUp — read from <code>.env.local</code>.</p>
           {table(reserved)}
