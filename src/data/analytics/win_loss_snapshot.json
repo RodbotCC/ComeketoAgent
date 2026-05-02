@@ -1,0 +1,1549 @@
+{
+  "_meta": {
+    "schema_version": "1.0",
+    "description": "Win/loss conversion intelligence — auto-generated from Close CRM opportunity history.",
+    "generated_at": "2026-04-27T22:26:57Z",
+    "window_days": 365,
+    "opportunity_count": 4569,
+    "won_count": 553,
+    "lost_count": 3437,
+    "active_count": 579,
+    "overall_win_rate_pct": 12.1
+  },
+  "funnel": {
+    "total": 4569,
+    "won": 553,
+    "lost": 3437,
+    "active": 579,
+    "win_rate_pct": 12.1,
+    "total_won_value_cents": 138582536,
+    "total_won_value_fmt": "$1.4M",
+    "total_lost_value_cents": 445158506,
+    "total_lost_value_fmt": "$4.5M"
+  },
+  "by_event_type": [
+    {
+      "key": "unknown",
+      "lead_count": 1948,
+      "won_count": 185,
+      "lost_count": 1438,
+      "active_count": 325,
+      "win_rate_pct": 9.5,
+      "avg_won_value_cents": 179792,
+      "avg_won_value_fmt": "$1.8k",
+      "total_won_value_cents": 18878197,
+      "total_won_value_fmt": "$188.8k"
+    },
+    {
+      "key": "wedding",
+      "lead_count": 1107,
+      "won_count": 217,
+      "lost_count": 776,
+      "active_count": 114,
+      "win_rate_pct": 19.6,
+      "avg_won_value_cents": 416421,
+      "avg_won_value_fmt": "$4.2k",
+      "total_won_value_cents": 89946902,
+      "total_won_value_fmt": "$899.5k"
+    },
+    {
+      "key": "other",
+      "lead_count": 542,
+      "won_count": 62,
+      "lost_count": 427,
+      "active_count": 53,
+      "win_rate_pct": 11.4,
+      "avg_won_value_cents": 246557,
+      "avg_won_value_fmt": "$2.5k",
+      "total_won_value_cents": 14300301,
+      "total_won_value_fmt": "$143.0k"
+    },
+    {
+      "key": "birthday",
+      "lead_count": 488,
+      "won_count": 39,
+      "lost_count": 412,
+      "active_count": 37,
+      "win_rate_pct": 8.0,
+      "avg_won_value_cents": 157580,
+      "avg_won_value_fmt": "$1.6k",
+      "total_won_value_cents": 5988024,
+      "total_won_value_fmt": "$59.9k"
+    },
+    {
+      "key": "graduation",
+      "lead_count": 205,
+      "won_count": 17,
+      "lost_count": 163,
+      "active_count": 25,
+      "win_rate_pct": 8.3,
+      "avg_won_value_cents": 188183,
+      "avg_won_value_fmt": "$1.9k",
+      "total_won_value_cents": 3199117,
+      "total_won_value_fmt": "$32.0k"
+    },
+    {
+      "key": "baby_shower",
+      "lead_count": 125,
+      "won_count": 2,
+      "lost_count": 106,
+      "active_count": 17,
+      "win_rate_pct": 1.6,
+      "avg_won_value_cents": 163103,
+      "avg_won_value_fmt": "$1.6k",
+      "total_won_value_cents": 326206,
+      "total_won_value_fmt": "$3.3k"
+    },
+    {
+      "key": "holiday",
+      "lead_count": 39,
+      "won_count": 8,
+      "lost_count": 31,
+      "active_count": 0,
+      "win_rate_pct": 20.5,
+      "avg_won_value_cents": 67449,
+      "avg_won_value_fmt": "$674",
+      "total_won_value_cents": 472144,
+      "total_won_value_fmt": "$4.7k"
+    },
+    {
+      "key": "corporate",
+      "lead_count": 35,
+      "won_count": 17,
+      "lost_count": 16,
+      "active_count": 2,
+      "win_rate_pct": 48.6,
+      "avg_won_value_cents": 166261,
+      "avg_won_value_fmt": "$1.7k",
+      "total_won_value_cents": 2826445,
+      "total_won_value_fmt": "$28.3k"
+    },
+    {
+      "key": "quinceañera",
+      "lead_count": 32,
+      "won_count": 3,
+      "lost_count": 26,
+      "active_count": 3,
+      "win_rate_pct": 9.4,
+      "avg_won_value_cents": 311917,
+      "avg_won_value_fmt": "$3.1k",
+      "total_won_value_cents": 935750,
+      "total_won_value_fmt": "$9.4k"
+    },
+    {
+      "key": "bridal_shower",
+      "lead_count": 30,
+      "won_count": 1,
+      "lost_count": 27,
+      "active_count": 2,
+      "win_rate_pct": 3.3,
+      "avg_won_value_cents": 215400,
+      "avg_won_value_fmt": "$2.2k",
+      "total_won_value_cents": 215400,
+      "total_won_value_fmt": "$2.2k"
+    },
+    {
+      "key": "anniversary",
+      "lead_count": 18,
+      "won_count": 2,
+      "lost_count": 15,
+      "active_count": 1,
+      "win_rate_pct": 11.1,
+      "avg_won_value_cents": 747025,
+      "avg_won_value_fmt": "$7.5k",
+      "total_won_value_cents": 1494050,
+      "total_won_value_fmt": "$14.9k"
+    }
+  ],
+  "by_guest_bucket": [
+    {
+      "key": "1-25",
+      "lead_count": 306,
+      "won_count": 44,
+      "lost_count": 241,
+      "active_count": 21,
+      "win_rate_pct": 14.4,
+      "avg_won_value_cents": 80934,
+      "avg_won_value_fmt": "$809",
+      "total_won_value_cents": 3480172,
+      "total_won_value_fmt": "$34.8k"
+    },
+    {
+      "key": "26-50",
+      "lead_count": 694,
+      "won_count": 89,
+      "lost_count": 527,
+      "active_count": 78,
+      "win_rate_pct": 12.8,
+      "avg_won_value_cents": 152424,
+      "avg_won_value_fmt": "$1.5k",
+      "total_won_value_cents": 13108484,
+      "total_won_value_fmt": "$131.1k"
+    },
+    {
+      "key": "51-100",
+      "lead_count": 914,
+      "won_count": 156,
+      "lost_count": 673,
+      "active_count": 85,
+      "win_rate_pct": 17.1,
+      "avg_won_value_cents": 319946,
+      "avg_won_value_fmt": "$3.2k",
+      "total_won_value_cents": 49591595,
+      "total_won_value_fmt": "$495.9k"
+    },
+    {
+      "key": "101-150",
+      "lead_count": 314,
+      "won_count": 51,
+      "lost_count": 234,
+      "active_count": 29,
+      "win_rate_pct": 16.2,
+      "avg_won_value_cents": 526887,
+      "avg_won_value_fmt": "$5.3k",
+      "total_won_value_cents": 26871216,
+      "total_won_value_fmt": "$268.7k"
+    },
+    {
+      "key": "150+",
+      "lead_count": 157,
+      "won_count": 23,
+      "lost_count": 119,
+      "active_count": 15,
+      "win_rate_pct": 14.6,
+      "avg_won_value_cents": 796605,
+      "avg_won_value_fmt": "$8.0k",
+      "total_won_value_cents": 18321910,
+      "total_won_value_fmt": "$183.2k"
+    },
+    {
+      "key": "unknown",
+      "lead_count": 2184,
+      "won_count": 190,
+      "lost_count": 1643,
+      "active_count": 351,
+      "win_rate_pct": 8.7,
+      "avg_won_value_cents": 251937,
+      "avg_won_value_fmt": "$2.5k",
+      "total_won_value_cents": 27209159,
+      "total_won_value_fmt": "$272.1k"
+    }
+  ],
+  "by_value_bucket": [
+    {
+      "key": "no value",
+      "lead_count": 2043,
+      "won_count": 87,
+      "lost_count": 1637,
+      "active_count": 319,
+      "win_rate_pct": 4.3,
+      "avg_won_value_cents": 0,
+      "avg_won_value_fmt": "$0",
+      "total_won_value_cents": 0,
+      "total_won_value_fmt": "$0"
+    },
+    {
+      "key": "<$1k",
+      "lead_count": 670,
+      "won_count": 143,
+      "lost_count": 477,
+      "active_count": 50,
+      "win_rate_pct": 21.3,
+      "avg_won_value_cents": 47010,
+      "avg_won_value_fmt": "$470",
+      "total_won_value_cents": 6722425,
+      "total_won_value_fmt": "$67.2k"
+    },
+    {
+      "key": "$1-3k",
+      "lead_count": 1071,
+      "won_count": 150,
+      "lost_count": 804,
+      "active_count": 117,
+      "win_rate_pct": 14.0,
+      "avg_won_value_cents": 182515,
+      "avg_won_value_fmt": "$1.8k",
+      "total_won_value_cents": 27377240,
+      "total_won_value_fmt": "$273.8k"
+    },
+    {
+      "key": "$3-6k",
+      "lead_count": 624,
+      "won_count": 120,
+      "lost_count": 424,
+      "active_count": 80,
+      "win_rate_pct": 19.2,
+      "avg_won_value_cents": 437016,
+      "avg_won_value_fmt": "$4.4k",
+      "total_won_value_cents": 52441899,
+      "total_won_value_fmt": "$524.4k"
+    },
+    {
+      "key": "$6-10k",
+      "lead_count": 119,
+      "won_count": 35,
+      "lost_count": 75,
+      "active_count": 9,
+      "win_rate_pct": 29.4,
+      "avg_won_value_cents": 768265,
+      "avg_won_value_fmt": "$7.7k",
+      "total_won_value_cents": 26889282,
+      "total_won_value_fmt": "$268.9k"
+    },
+    {
+      "key": "$10k+",
+      "lead_count": 42,
+      "won_count": 18,
+      "lost_count": 20,
+      "active_count": 4,
+      "win_rate_pct": 42.9,
+      "avg_won_value_cents": 1397316,
+      "avg_won_value_fmt": "$14.0k",
+      "total_won_value_cents": 25151690,
+      "total_won_value_fmt": "$251.5k"
+    }
+  ],
+  "by_source_family": [
+    {
+      "key": "digital_inbound",
+      "lead_count": 2552,
+      "won_count": 211,
+      "lost_count": 2048,
+      "active_count": 293,
+      "win_rate_pct": 8.3,
+      "avg_won_value_cents": 291787,
+      "avg_won_value_fmt": "$2.9k",
+      "total_won_value_cents": 59524595,
+      "total_won_value_fmt": "$595.2k"
+    },
+    {
+      "key": "marketplace",
+      "lead_count": 765,
+      "won_count": 83,
+      "lost_count": 627,
+      "active_count": 55,
+      "win_rate_pct": 10.8,
+      "avg_won_value_cents": 304778,
+      "avg_won_value_fmt": "$3.0k",
+      "total_won_value_cents": 25296584,
+      "total_won_value_fmt": "$253.0k"
+    },
+    {
+      "key": "expo_event",
+      "lead_count": 539,
+      "won_count": 8,
+      "lost_count": 469,
+      "active_count": 62,
+      "win_rate_pct": 1.5,
+      "avg_won_value_cents": 246627,
+      "avg_won_value_fmt": "$2.5k",
+      "total_won_value_cents": 1479760,
+      "total_won_value_fmt": "$14.8k"
+    },
+    {
+      "key": "other",
+      "lead_count": 248,
+      "won_count": 87,
+      "lost_count": 111,
+      "active_count": 50,
+      "win_rate_pct": 35.1,
+      "avg_won_value_cents": 318403,
+      "avg_won_value_fmt": "$3.2k",
+      "total_won_value_cents": 23243453,
+      "total_won_value_fmt": "$232.4k"
+    },
+    {
+      "key": "relationship_partner",
+      "lead_count": 199,
+      "won_count": 60,
+      "lost_count": 37,
+      "active_count": 102,
+      "win_rate_pct": 30.2,
+      "avg_won_value_cents": 377093,
+      "avg_won_value_fmt": "$3.8k",
+      "total_won_value_cents": 7164764,
+      "total_won_value_fmt": "$71.6k"
+    },
+    {
+      "key": "phone_inbound",
+      "lead_count": 166,
+      "won_count": 65,
+      "lost_count": 95,
+      "active_count": 6,
+      "win_rate_pct": 39.2,
+      "avg_won_value_cents": 275612,
+      "avg_won_value_fmt": "$2.8k",
+      "total_won_value_cents": 17087967,
+      "total_won_value_fmt": "$170.9k"
+    },
+    {
+      "key": "unknown",
+      "lead_count": 100,
+      "won_count": 39,
+      "lost_count": 50,
+      "active_count": 11,
+      "win_rate_pct": 39.0,
+      "avg_won_value_cents": 251864,
+      "avg_won_value_fmt": "$2.5k",
+      "total_won_value_cents": 4785413,
+      "total_won_value_fmt": "$47.9k"
+    }
+  ],
+  "by_source_channel": [
+    {
+      "key": "Facebook, Paid",
+      "lead_count": 1948,
+      "won_count": 81,
+      "lost_count": 1660,
+      "active_count": 207,
+      "win_rate_pct": 4.2,
+      "avg_won_value_cents": 260570,
+      "avg_won_value_fmt": "$2.6k",
+      "total_won_value_cents": 20845617,
+      "total_won_value_fmt": "$208.5k"
+    },
+    {
+      "key": "ComeketoCatering.com",
+      "lead_count": 271,
+      "won_count": 81,
+      "lost_count": 160,
+      "active_count": 30,
+      "win_rate_pct": 29.9,
+      "avg_won_value_cents": 341953,
+      "avg_won_value_fmt": "$3.4k",
+      "total_won_value_cents": 27356229,
+      "total_won_value_fmt": "$273.6k"
+    },
+    {
+      "key": "Eventective",
+      "lead_count": 267,
+      "won_count": 6,
+      "lost_count": 253,
+      "active_count": 8,
+      "win_rate_pct": 2.2,
+      "avg_won_value_cents": 175810,
+      "avg_won_value_fmt": "$1.8k",
+      "total_won_value_cents": 1054860,
+      "total_won_value_fmt": "$10.5k"
+    },
+    {
+      "key": "Crisp Chat",
+      "lead_count": 248,
+      "won_count": 30,
+      "lost_count": 186,
+      "active_count": 32,
+      "win_rate_pct": 12.1,
+      "avg_won_value_cents": 260461,
+      "avg_won_value_fmt": "$2.6k",
+      "total_won_value_cents": 7553369,
+      "total_won_value_fmt": "$75.5k"
+    },
+    {
+      "key": "The Knot",
+      "lead_count": 164,
+      "won_count": 35,
+      "lost_count": 113,
+      "active_count": 16,
+      "win_rate_pct": 21.3,
+      "avg_won_value_cents": 277902,
+      "avg_won_value_fmt": "$2.8k",
+      "total_won_value_cents": 9726585,
+      "total_won_value_fmt": "$97.3k"
+    },
+    {
+      "key": "Inbound Call",
+      "lead_count": 163,
+      "won_count": 64,
+      "lost_count": 94,
+      "active_count": 5,
+      "win_rate_pct": 39.3,
+      "avg_won_value_cents": 275612,
+      "avg_won_value_fmt": "$2.8k",
+      "total_won_value_cents": 17087967,
+      "total_won_value_fmt": "$170.9k"
+    },
+    {
+      "key": "Wed Expo April 27th- Attended",
+      "lead_count": 150,
+      "won_count": 0,
+      "lost_count": 150,
+      "active_count": 0,
+      "win_rate_pct": 0.0,
+      "avg_won_value_cents": 0,
+      "avg_won_value_fmt": "$0",
+      "total_won_value_cents": 0,
+      "total_won_value_fmt": "$0"
+    },
+    {
+      "key": "Happily Ever EXPO",
+      "lead_count": 148,
+      "won_count": 0,
+      "lost_count": 117,
+      "active_count": 31,
+      "win_rate_pct": 0.0,
+      "avg_won_value_cents": 0,
+      "avg_won_value_fmt": "$0",
+      "total_won_value_cents": 0,
+      "total_won_value_fmt": "$0"
+    },
+    {
+      "key": "Zola",
+      "lead_count": 131,
+      "won_count": 23,
+      "lost_count": 87,
+      "active_count": 21,
+      "win_rate_pct": 17.6,
+      "avg_won_value_cents": 285072,
+      "avg_won_value_fmt": "$2.9k",
+      "total_won_value_cents": 6556661,
+      "total_won_value_fmt": "$65.6k"
+    },
+    {
+      "key": "Wedding Wire",
+      "lead_count": 113,
+      "won_count": 15,
+      "lost_count": 92,
+      "active_count": 6,
+      "win_rate_pct": 13.3,
+      "avg_won_value_cents": 425531,
+      "avg_won_value_fmt": "$4.3k",
+      "total_won_value_cents": 6382970,
+      "total_won_value_fmt": "$63.8k"
+    },
+    {
+      "key": "unknown",
+      "lead_count": 100,
+      "won_count": 39,
+      "lost_count": 50,
+      "active_count": 11,
+      "win_rate_pct": 39.0,
+      "avg_won_value_cents": 251864,
+      "avg_won_value_fmt": "$2.5k",
+      "total_won_value_cents": 4785413,
+      "total_won_value_fmt": "$47.9k"
+    },
+    {
+      "key": "Free Tasting",
+      "lead_count": 97,
+      "won_count": 6,
+      "lost_count": 78,
+      "active_count": 13,
+      "win_rate_pct": 6.2,
+      "avg_won_value_cents": 295852,
+      "avg_won_value_fmt": "$3.0k",
+      "total_won_value_cents": 1479260,
+      "total_won_value_fmt": "$14.8k"
+    },
+    {
+      "key": "Bark",
+      "lead_count": 89,
+      "won_count": 4,
+      "lost_count": 81,
+      "active_count": 4,
+      "win_rate_pct": 4.5,
+      "avg_won_value_cents": 393877,
+      "avg_won_value_fmt": "$3.9k",
+      "total_won_value_cents": 1575508,
+      "total_won_value_fmt": "$15.8k"
+    },
+    {
+      "key": "Wedding Expo 04/06/2025",
+      "lead_count": 80,
+      "won_count": 0,
+      "lost_count": 79,
+      "active_count": 1,
+      "win_rate_pct": 0.0,
+      "avg_won_value_cents": 0,
+      "avg_won_value_fmt": "$0",
+      "total_won_value_cents": 0,
+      "total_won_value_fmt": "$0"
+    },
+    {
+      "key": "Instagram",
+      "lead_count": 77,
+      "won_count": 15,
+      "lost_count": 37,
+      "active_count": 25,
+      "win_rate_pct": 19.5,
+      "avg_won_value_cents": 218712,
+      "avg_won_value_fmt": "$2.2k",
+      "total_won_value_cents": 2843250,
+      "total_won_value_fmt": "$28.4k"
+    },
+    {
+      "key": "Venue",
+      "lead_count": 77,
+      "won_count": 23,
+      "lost_count": 11,
+      "active_count": 43,
+      "win_rate_pct": 29.9,
+      "avg_won_value_cents": 240414,
+      "avg_won_value_fmt": "$2.4k",
+      "total_won_value_cents": 961654,
+      "total_won_value_fmt": "$9.6k"
+    },
+    {
+      "key": "Rodrigo´s Leads",
+      "lead_count": 53,
+      "won_count": 26,
+      "lost_count": 21,
+      "active_count": 6,
+      "win_rate_pct": 49.1,
+      "avg_won_value_cents": 230902,
+      "avg_won_value_fmt": "$2.3k",
+      "total_won_value_cents": 5310754,
+      "total_won_value_fmt": "$53.1k"
+    },
+    {
+      "key": "Event Planner and Decorator",
+      "lead_count": 51,
+      "won_count": 14,
+      "lost_count": 7,
+      "active_count": 30,
+      "win_rate_pct": 27.5,
+      "avg_won_value_cents": 200250,
+      "avg_won_value_fmt": "$2.0k",
+      "total_won_value_cents": 400500,
+      "total_won_value_fmt": "$4.0k"
+    },
+    {
+      "key": "Google",
+      "lead_count": 45,
+      "won_count": 16,
+      "lost_count": 23,
+      "active_count": 6,
+      "win_rate_pct": 35.6,
+      "avg_won_value_cents": 221954,
+      "avg_won_value_fmt": "$2.2k",
+      "total_won_value_cents": 3107361,
+      "total_won_value_fmt": "$31.1k"
+    },
+    {
+      "key": "EXPO",
+      "lead_count": 28,
+      "won_count": 0,
+      "lost_count": 14,
+      "active_count": 14,
+      "win_rate_pct": 0.0,
+      "avg_won_value_cents": 0,
+      "avg_won_value_fmt": "$0",
+      "total_won_value_cents": 0,
+      "total_won_value_fmt": "$0"
+    },
+    {
+      "key": "Church",
+      "lead_count": 27,
+      "won_count": 2,
+      "lost_count": 4,
+      "active_count": 21,
+      "win_rate_pct": 7.4,
+      "avg_won_value_cents": 290000,
+      "avg_won_value_fmt": "$2.9k",
+      "total_won_value_cents": 580000,
+      "total_won_value_fmt": "$5.8k"
+    },
+    {
+      "key": "Partner Venues",
+      "lead_count": 25,
+      "won_count": 8,
+      "lost_count": 3,
+      "active_count": 14,
+      "win_rate_pct": 32.0,
+      "avg_won_value_cents": 338487,
+      "avg_won_value_fmt": "$3.4k",
+      "total_won_value_cents": 1015460,
+      "total_won_value_fmt": "$10.2k"
+    },
+    {
+      "key": "Bulk import",
+      "lead_count": 23,
+      "won_count": 0,
+      "lost_count": 23,
+      "active_count": 0,
+      "win_rate_pct": 0.0,
+      "avg_won_value_cents": 0,
+      "avg_won_value_fmt": "$0",
+      "total_won_value_cents": 0,
+      "total_won_value_fmt": "$0"
+    },
+    {
+      "key": "Facebook, Organic",
+      "lead_count": 21,
+      "won_count": 3,
+      "lost_count": 17,
+      "active_count": 1,
+      "win_rate_pct": 14.3,
+      "avg_won_value_cents": 463065,
+      "avg_won_value_fmt": "$4.6k",
+      "total_won_value_cents": 926130,
+      "total_won_value_fmt": "$9.3k"
+    },
+    {
+      "key": "Wed Expo:Booth Visit (04/06/2025)",
+      "lead_count": 18,
+      "won_count": 0,
+      "lost_count": 18,
+      "active_count": 0,
+      "win_rate_pct": 0.0,
+      "avg_won_value_cents": 0,
+      "avg_won_value_fmt": "$0",
+      "total_won_value_cents": 0,
+      "total_won_value_fmt": "$0"
+    },
+    {
+      "key": "EZ CATER",
+      "lead_count": 17,
+      "won_count": 8,
+      "lost_count": 9,
+      "active_count": 0,
+      "win_rate_pct": 47.1,
+      "avg_won_value_cents": 77700,
+      "avg_won_value_fmt": "$777",
+      "total_won_value_cents": 77700,
+      "total_won_value_fmt": "$777"
+    },
+    {
+      "key": "Referral from previous event",
+      "lead_count": 14,
+      "won_count": 5,
+      "lost_count": 9,
+      "active_count": 0,
+      "win_rate_pct": 35.7,
+      "avg_won_value_cents": 523670,
+      "avg_won_value_fmt": "$5.2k",
+      "total_won_value_cents": 2618350,
+      "total_won_value_fmt": "$26.2k"
+    },
+    {
+      "key": "Google, I Do Society",
+      "lead_count": 13,
+      "won_count": 5,
+      "lost_count": 7,
+      "active_count": 1,
+      "win_rate_pct": 38.5,
+      "avg_won_value_cents": 618366,
+      "avg_won_value_fmt": "$6.2k",
+      "total_won_value_cents": 3091830,
+      "total_won_value_fmt": "$30.9k"
+    },
+    {
+      "key": "EMail",
+      "lead_count": 11,
+      "won_count": 3,
+      "lost_count": 8,
+      "active_count": 0,
+      "win_rate_pct": 27.3,
+      "avg_won_value_cents": 271023,
+      "avg_won_value_fmt": "$2.7k",
+      "total_won_value_cents": 813070,
+      "total_won_value_fmt": "$8.1k"
+    },
+    {
+      "key": "House Deal",
+      "lead_count": 11,
+      "won_count": 9,
+      "lost_count": 2,
+      "active_count": 0,
+      "win_rate_pct": 81.8,
+      "avg_won_value_cents": 301546,
+      "avg_won_value_fmt": "$3.0k",
+      "total_won_value_cents": 2713914,
+      "total_won_value_fmt": "$27.1k"
+    },
+    {
+      "key": "Leads Venue",
+      "lead_count": 11,
+      "won_count": 3,
+      "lost_count": 1,
+      "active_count": 7,
+      "win_rate_pct": 27.3,
+      "avg_won_value_cents": 0,
+      "avg_won_value_fmt": "$0",
+      "total_won_value_cents": 0,
+      "total_won_value_fmt": "$0"
+    },
+    {
+      "key": "Restaurant",
+      "lead_count": 10,
+      "won_count": 7,
+      "lost_count": 1,
+      "active_count": 2,
+      "win_rate_pct": 70.0,
+      "avg_won_value_cents": 407936,
+      "avg_won_value_fmt": "$4.1k",
+      "total_won_value_cents": 2447614,
+      "total_won_value_fmt": "$24.5k"
+    },
+    {
+      "key": "Internal, Restaurant",
+      "lead_count": 8,
+      "won_count": 5,
+      "lost_count": 2,
+      "active_count": 1,
+      "win_rate_pct": 62.5,
+      "avg_won_value_cents": 1029102,
+      "avg_won_value_fmt": "$10.3k",
+      "total_won_value_cents": 4116406,
+      "total_won_value_fmt": "$41.2k"
+    },
+    {
+      "key": "Referral Event Planner & Decorator",
+      "lead_count": 7,
+      "won_count": 0,
+      "lost_count": 3,
+      "active_count": 4,
+      "win_rate_pct": 0.0,
+      "avg_won_value_cents": 0,
+      "avg_won_value_fmt": "$0",
+      "total_won_value_cents": 0,
+      "total_won_value_fmt": "$0"
+    },
+    {
+      "key": "Pop Menu",
+      "lead_count": 6,
+      "won_count": 0,
+      "lost_count": 5,
+      "active_count": 1,
+      "win_rate_pct": 0.0,
+      "avg_won_value_cents": 0,
+      "avg_won_value_fmt": "$0",
+      "total_won_value_cents": 0,
+      "total_won_value_fmt": "$0"
+    },
+    {
+      "key": "Bibi",
+      "lead_count": 5,
+      "won_count": 4,
+      "lost_count": 0,
+      "active_count": 1,
+      "win_rate_pct": 80.0,
+      "avg_won_value_cents": 216765,
+      "avg_won_value_fmt": "$2.2k",
+      "total_won_value_cents": 867060,
+      "total_won_value_fmt": "$8.7k"
+    },
+    {
+      "key": "CHRISTALIGHT",
+      "lead_count": 5,
+      "won_count": 2,
+      "lost_count": 2,
+      "active_count": 1,
+      "win_rate_pct": 40.0,
+      "avg_won_value_cents": 58872,
+      "avg_won_value_fmt": "$589",
+      "total_won_value_cents": 117744,
+      "total_won_value_fmt": "$1.2k"
+    },
+    {
+      "key": "Photographer",
+      "lead_count": 5,
+      "won_count": 0,
+      "lost_count": 0,
+      "active_count": 5,
+      "win_rate_pct": 0.0,
+      "avg_won_value_cents": 0,
+      "avg_won_value_fmt": "$0",
+      "total_won_value_cents": 0,
+      "total_won_value_fmt": "$0"
+    },
+    {
+      "key": "Referral from Vendor",
+      "lead_count": 4,
+      "won_count": 3,
+      "lost_count": 1,
+      "active_count": 0,
+      "win_rate_pct": 75.0,
+      "avg_won_value_cents": 320153,
+      "avg_won_value_fmt": "$3.2k",
+      "total_won_value_cents": 960460,
+      "total_won_value_fmt": "$9.6k"
+    },
+    {
+      "key": "DJ",
+      "lead_count": 3,
+      "won_count": 1,
+      "lost_count": 0,
+      "active_count": 2,
+      "win_rate_pct": 33.3,
+      "avg_won_value_cents": 0,
+      "avg_won_value_fmt": "$0",
+      "total_won_value_cents": 0,
+      "total_won_value_fmt": "$0"
+    },
+    {
+      "key": "Doceira",
+      "lead_count": 3,
+      "won_count": 2,
+      "lost_count": 0,
+      "active_count": 1,
+      "win_rate_pct": 66.7,
+      "avg_won_value_cents": 0,
+      "avg_won_value_fmt": "$0",
+      "total_won_value_cents": 0,
+      "total_won_value_fmt": "$0"
+    },
+    {
+      "key": "PartySlate",
+      "lead_count": 3,
+      "won_count": 0,
+      "lost_count": 2,
+      "active_count": 1,
+      "win_rate_pct": 0.0,
+      "avg_won_value_cents": 0,
+      "avg_won_value_fmt": "$0",
+      "total_won_value_cents": 0,
+      "total_won_value_fmt": "$0"
+    },
+    {
+      "key": "Venue: Harding Allen Estate",
+      "lead_count": 3,
+      "won_count": 3,
+      "lost_count": 0,
+      "active_count": 0,
+      "win_rate_pct": 100.0,
+      "avg_won_value_cents": 566920,
+      "avg_won_value_fmt": "$5.7k",
+      "total_won_value_cents": 1133840,
+      "total_won_value_fmt": "$11.3k"
+    }
+  ],
+  "by_customer_type": [
+    {
+      "key": "Customer",
+      "lead_count": 3257,
+      "won_count": 339,
+      "lost_count": 2548,
+      "active_count": 370,
+      "win_rate_pct": 10.4,
+      "avg_won_value_cents": 304028,
+      "avg_won_value_fmt": "$3.0k",
+      "total_won_value_cents": 100025356,
+      "total_won_value_fmt": "$1.0M"
+    },
+    {
+      "key": "unknown",
+      "lead_count": 1104,
+      "won_count": 162,
+      "lost_count": 877,
+      "active_count": 65,
+      "win_rate_pct": 14.7,
+      "avg_won_value_cents": 290078,
+      "avg_won_value_fmt": "$2.9k",
+      "total_won_value_cents": 37420027,
+      "total_won_value_fmt": "$374.2k"
+    },
+    {
+      "key": "Venue",
+      "lead_count": 208,
+      "won_count": 52,
+      "lost_count": 12,
+      "active_count": 144,
+      "win_rate_pct": 25.0,
+      "avg_won_value_cents": 142144,
+      "avg_won_value_fmt": "$1.4k",
+      "total_won_value_cents": 1137153,
+      "total_won_value_fmt": "$11.4k"
+    }
+  ],
+  "by_owner": [
+    {
+      "key": "Sales Team Event Consultant Team",
+      "lead_count": 1812,
+      "won_count": 197,
+      "lost_count": 1415,
+      "active_count": 200,
+      "win_rate_pct": 10.9,
+      "avg_won_value_cents": 309748,
+      "avg_won_value_fmt": "$3.1k",
+      "total_won_value_cents": 51108456,
+      "total_won_value_fmt": "$511.1k"
+    },
+    {
+      "key": "Eduarda Fedrizzi",
+      "lead_count": 850,
+      "won_count": 114,
+      "lost_count": 648,
+      "active_count": 88,
+      "win_rate_pct": 13.4,
+      "avg_won_value_cents": 306772,
+      "avg_won_value_fmt": "$3.1k",
+      "total_won_value_cents": 33131341,
+      "total_won_value_fmt": "$331.3k"
+    },
+    {
+      "key": "Event Consultant",
+      "lead_count": 838,
+      "won_count": 81,
+      "lost_count": 691,
+      "active_count": 66,
+      "win_rate_pct": 9.7,
+      "avg_won_value_cents": 292368,
+      "avg_won_value_fmt": "$2.9k",
+      "total_won_value_cents": 21927585,
+      "total_won_value_fmt": "$219.3k"
+    },
+    {
+      "key": "Andre Raw",
+      "lead_count": 742,
+      "won_count": 68,
+      "lost_count": 551,
+      "active_count": 123,
+      "win_rate_pct": 9.2,
+      "avg_won_value_cents": 312499,
+      "avg_won_value_fmt": "$3.1k",
+      "total_won_value_cents": 17499942,
+      "total_won_value_fmt": "$175.0k"
+    },
+    {
+      "key": "Rhonna Ricafort",
+      "lead_count": 274,
+      "won_count": 63,
+      "lost_count": 121,
+      "active_count": 90,
+      "win_rate_pct": 23.0,
+      "avg_won_value_cents": 198442,
+      "avg_won_value_fmt": "$2.0k",
+      "total_won_value_cents": 7342353,
+      "total_won_value_fmt": "$73.4k"
+    },
+    {
+      "key": "Bibi De Los Santos",
+      "lead_count": 53,
+      "won_count": 30,
+      "lost_count": 11,
+      "active_count": 12,
+      "win_rate_pct": 56.6,
+      "avg_won_value_cents": 302914,
+      "avg_won_value_fmt": "$3.0k",
+      "total_won_value_cents": 7572859,
+      "total_won_value_fmt": "$75.7k"
+    }
+  ],
+  "stage_of_death": [
+    {
+      "stage": "🔲🔲 Archived Catering Customer 🔲🔲",
+      "count": 2445,
+      "pct_of_lost": 71.1
+    },
+    {
+      "stage": "👤🔴🚫 Lost Catering Customer 🚫🔴👤",
+      "count": 349,
+      "pct_of_lost": 10.2
+    },
+    {
+      "stage": "⬜ - 00. Dormant (30 Days F/U)",
+      "count": 211,
+      "pct_of_lost": 6.1
+    },
+    {
+      "stage": "📵⛔️DO NOT CALL LIST 📵⛔️🙅‍♀️",
+      "count": 176,
+      "pct_of_lost": 5.1
+    },
+    {
+      "stage": "❌ No Response",
+      "count": 130,
+      "pct_of_lost": 3.8
+    },
+    {
+      "stage": "❌ Not Interested",
+      "count": 74,
+      "pct_of_lost": 2.2
+    },
+    {
+      "stage": "❌ Disqualified",
+      "count": 37,
+      "pct_of_lost": 1.1
+    },
+    {
+      "stage": "😞 Refunded",
+      "count": 14,
+      "pct_of_lost": 0.4
+    },
+    {
+      "stage": "🚫 Lost Business Opportunity",
+      "count": 1,
+      "pct_of_lost": 0.0
+    }
+  ],
+  "owner_x_source": [
+    {
+      "dim_a": "Bibi De Los Santos",
+      "dim_b": "other",
+      "lead_count": 27,
+      "won_count": 19,
+      "lost_count": 6,
+      "win_rate_pct": 70.4
+    },
+    {
+      "dim_a": "Eduarda Fedrizzi",
+      "dim_b": "unknown",
+      "lead_count": 11,
+      "won_count": 7,
+      "lost_count": 3,
+      "win_rate_pct": 63.6
+    },
+    {
+      "dim_a": "Bibi De Los Santos",
+      "dim_b": "unknown",
+      "lead_count": 8,
+      "won_count": 5,
+      "lost_count": 1,
+      "win_rate_pct": 62.5
+    },
+    {
+      "dim_a": "Andre Raw",
+      "dim_b": "unknown",
+      "lead_count": 9,
+      "won_count": 5,
+      "lost_count": 2,
+      "win_rate_pct": 55.6
+    },
+    {
+      "dim_a": "Eduarda Fedrizzi",
+      "dim_b": "other",
+      "lead_count": 49,
+      "won_count": 26,
+      "lost_count": 15,
+      "win_rate_pct": 53.1
+    },
+    {
+      "dim_a": "Sales Team Event Consultant Team",
+      "dim_b": "phone_inbound",
+      "lead_count": 80,
+      "won_count": 42,
+      "lost_count": 36,
+      "win_rate_pct": 52.5
+    },
+    {
+      "dim_a": "Andre Raw",
+      "dim_b": "relationship_partner",
+      "lead_count": 26,
+      "won_count": 11,
+      "lost_count": 4,
+      "win_rate_pct": 42.3
+    },
+    {
+      "dim_a": "Rhonna Ricafort",
+      "dim_b": "marketplace",
+      "lead_count": 12,
+      "won_count": 5,
+      "lost_count": 6,
+      "win_rate_pct": 41.7
+    },
+    {
+      "dim_a": "Sales Team Event Consultant Team",
+      "dim_b": "relationship_partner",
+      "lead_count": 39,
+      "won_count": 16,
+      "lost_count": 15,
+      "win_rate_pct": 41.0
+    },
+    {
+      "dim_a": "Rhonna Ricafort",
+      "dim_b": "phone_inbound",
+      "lead_count": 20,
+      "won_count": 8,
+      "lost_count": 12,
+      "win_rate_pct": 40.0
+    },
+    {
+      "dim_a": "Event Consultant",
+      "dim_b": "other",
+      "lead_count": 21,
+      "won_count": 8,
+      "lost_count": 11,
+      "win_rate_pct": 38.1
+    },
+    {
+      "dim_a": "Sales Team Event Consultant Team",
+      "dim_b": "unknown",
+      "lead_count": 32,
+      "won_count": 12,
+      "lost_count": 20,
+      "win_rate_pct": 37.5
+    },
+    {
+      "dim_a": "Sales Team Event Consultant Team",
+      "dim_b": "other",
+      "lead_count": 49,
+      "won_count": 17,
+      "lost_count": 27,
+      "win_rate_pct": 34.7
+    },
+    {
+      "dim_a": "Bibi De Los Santos",
+      "dim_b": "digital_inbound",
+      "lead_count": 3,
+      "won_count": 1,
+      "lost_count": 1,
+      "win_rate_pct": 33.3
+    },
+    {
+      "dim_a": "Rhonna Ricafort",
+      "dim_b": "unknown",
+      "lead_count": 22,
+      "won_count": 7,
+      "lost_count": 10,
+      "win_rate_pct": 31.8
+    },
+    {
+      "dim_a": "Rhonna Ricafort",
+      "dim_b": "digital_inbound",
+      "lead_count": 65,
+      "won_count": 18,
+      "lost_count": 26,
+      "win_rate_pct": 27.7
+    },
+    {
+      "dim_a": "Andre Raw",
+      "dim_b": "phone_inbound",
+      "lead_count": 33,
+      "won_count": 9,
+      "lost_count": 23,
+      "win_rate_pct": 27.3
+    },
+    {
+      "dim_a": "Bibi De Los Santos",
+      "dim_b": "relationship_partner",
+      "lead_count": 11,
+      "won_count": 3,
+      "lost_count": 3,
+      "win_rate_pct": 27.3
+    },
+    {
+      "dim_a": "Rhonna Ricafort",
+      "dim_b": "relationship_partner",
+      "lead_count": 74,
+      "won_count": 19,
+      "lost_count": 3,
+      "win_rate_pct": 25.7
+    },
+    {
+      "dim_a": "Eduarda Fedrizzi",
+      "dim_b": "phone_inbound",
+      "lead_count": 17,
+      "won_count": 4,
+      "lost_count": 11,
+      "win_rate_pct": 23.5
+    }
+  ],
+  "etype_x_source": [
+    {
+      "dim_a": "wedding",
+      "dim_b": "unknown",
+      "lead_count": 7,
+      "won_count": 7,
+      "lost_count": 0,
+      "win_rate_pct": 100.0
+    },
+    {
+      "dim_a": "birthday",
+      "dim_b": "unknown",
+      "lead_count": 4,
+      "won_count": 4,
+      "lost_count": 0,
+      "win_rate_pct": 100.0
+    },
+    {
+      "dim_a": "other",
+      "dim_b": "unknown",
+      "lead_count": 3,
+      "won_count": 3,
+      "lost_count": 0,
+      "win_rate_pct": 100.0
+    },
+    {
+      "dim_a": "corporate",
+      "dim_b": "phone_inbound",
+      "lead_count": 11,
+      "won_count": 10,
+      "lost_count": 0,
+      "win_rate_pct": 90.9
+    },
+    {
+      "dim_a": "birthday",
+      "dim_b": "other",
+      "lead_count": 10,
+      "won_count": 8,
+      "lost_count": 2,
+      "win_rate_pct": 80.0
+    },
+    {
+      "dim_a": "graduation",
+      "dim_b": "other",
+      "lead_count": 5,
+      "won_count": 4,
+      "lost_count": 0,
+      "win_rate_pct": 80.0
+    },
+    {
+      "dim_a": "other",
+      "dim_b": "phone_inbound",
+      "lead_count": 17,
+      "won_count": 12,
+      "lost_count": 5,
+      "win_rate_pct": 70.6
+    },
+    {
+      "dim_a": "wedding",
+      "dim_b": "phone_inbound",
+      "lead_count": 29,
+      "won_count": 19,
+      "lost_count": 8,
+      "win_rate_pct": 65.5
+    },
+    {
+      "dim_a": "wedding",
+      "dim_b": "other",
+      "lead_count": 25,
+      "won_count": 16,
+      "lost_count": 7,
+      "win_rate_pct": 64.0
+    },
+    {
+      "dim_a": "holiday",
+      "dim_b": "phone_inbound",
+      "lead_count": 8,
+      "won_count": 5,
+      "lost_count": 3,
+      "win_rate_pct": 62.5
+    },
+    {
+      "dim_a": "other",
+      "dim_b": "other",
+      "lead_count": 26,
+      "won_count": 16,
+      "lost_count": 9,
+      "win_rate_pct": 61.5
+    },
+    {
+      "dim_a": "wedding",
+      "dim_b": "relationship_partner",
+      "lead_count": 17,
+      "won_count": 10,
+      "lost_count": 6,
+      "win_rate_pct": 58.8
+    },
+    {
+      "dim_a": "corporate",
+      "dim_b": "other",
+      "lead_count": 12,
+      "won_count": 6,
+      "lost_count": 6,
+      "win_rate_pct": 50.0
+    },
+    {
+      "dim_a": "other",
+      "dim_b": "relationship_partner",
+      "lead_count": 8,
+      "won_count": 3,
+      "lost_count": 4,
+      "win_rate_pct": 37.5
+    },
+    {
+      "dim_a": "unknown",
+      "dim_b": "unknown",
+      "lead_count": 86,
+      "won_count": 25,
+      "lost_count": 50,
+      "win_rate_pct": 29.1
+    },
+    {
+      "dim_a": "unknown",
+      "dim_b": "relationship_partner",
+      "lead_count": 168,
+      "won_count": 45,
+      "lost_count": 23,
+      "win_rate_pct": 26.8
+    },
+    {
+      "dim_a": "corporate",
+      "dim_b": "digital_inbound",
+      "lead_count": 4,
+      "won_count": 1,
+      "lost_count": 3,
+      "win_rate_pct": 25.0
+    },
+    {
+      "dim_a": "unknown",
+      "dim_b": "other",
+      "lead_count": 166,
+      "won_count": 35,
+      "lost_count": 85,
+      "win_rate_pct": 21.1
+    },
+    {
+      "dim_a": "unknown",
+      "dim_b": "phone_inbound",
+      "lead_count": 93,
+      "won_count": 19,
+      "lost_count": 73,
+      "win_rate_pct": 20.4
+    },
+    {
+      "dim_a": "wedding",
+      "dim_b": "expo_event",
+      "lead_count": 5,
+      "won_count": 1,
+      "lost_count": 3,
+      "win_rate_pct": 20.0
+    }
+  ],
+  "time_patterns": {
+    "event_by_month": [
+      {
+        "month": "Jan",
+        "month_num": 1,
+        "event_count": 8
+      },
+      {
+        "month": "Feb",
+        "month_num": 2,
+        "event_count": 7
+      },
+      {
+        "month": "Mar",
+        "month_num": 3,
+        "event_count": 7
+      },
+      {
+        "month": "Apr",
+        "month_num": 4,
+        "event_count": 17
+      },
+      {
+        "month": "May",
+        "month_num": 5,
+        "event_count": 45
+      },
+      {
+        "month": "Jun",
+        "month_num": 6,
+        "event_count": 95
+      },
+      {
+        "month": "Jul",
+        "month_num": 7,
+        "event_count": 35
+      },
+      {
+        "month": "Aug",
+        "month_num": 8,
+        "event_count": 72
+      },
+      {
+        "month": "Sep",
+        "month_num": 9,
+        "event_count": 51
+      },
+      {
+        "month": "Oct",
+        "month_num": 10,
+        "event_count": 74
+      },
+      {
+        "month": "Nov",
+        "month_num": 11,
+        "event_count": 23
+      },
+      {
+        "month": "Dec",
+        "month_num": 12,
+        "event_count": 21
+      }
+    ],
+    "close_time_buckets": [
+      {
+        "bucket": "<7d",
+        "count": 100
+      },
+      {
+        "bucket": "7-14d",
+        "count": 47
+      },
+      {
+        "bucket": "15-30d",
+        "count": 85
+      },
+      {
+        "bucket": "31-60d",
+        "count": 59
+      },
+      {
+        "bucket": "61-90d",
+        "count": 23
+      },
+      {
+        "bucket": "90d+",
+        "count": 59
+      }
+    ],
+    "median_days_to_close": 25.1,
+    "mean_days_to_close": 49.2,
+    "fastest_close_days": 0.0
+  },
+  "top_win_profiles": [
+    {
+      "key": "corporate",
+      "lead_count": 35,
+      "won_count": 17,
+      "lost_count": 16,
+      "active_count": 2,
+      "win_rate_pct": 48.6,
+      "avg_won_value_cents": 166261,
+      "avg_won_value_fmt": "$1.7k",
+      "total_won_value_cents": 2826445,
+      "total_won_value_fmt": "$28.3k"
+    },
+    {
+      "key": "phone_inbound",
+      "lead_count": 166,
+      "won_count": 65,
+      "lost_count": 95,
+      "active_count": 6,
+      "win_rate_pct": 39.2,
+      "avg_won_value_cents": 275612,
+      "avg_won_value_fmt": "$2.8k",
+      "total_won_value_cents": 17087967,
+      "total_won_value_fmt": "$170.9k"
+    },
+    {
+      "key": "unknown",
+      "lead_count": 100,
+      "won_count": 39,
+      "lost_count": 50,
+      "active_count": 11,
+      "win_rate_pct": 39.0,
+      "avg_won_value_cents": 251864,
+      "avg_won_value_fmt": "$2.5k",
+      "total_won_value_cents": 4785413,
+      "total_won_value_fmt": "$47.9k"
+    },
+    {
+      "key": "other",
+      "lead_count": 248,
+      "won_count": 87,
+      "lost_count": 111,
+      "active_count": 50,
+      "win_rate_pct": 35.1,
+      "avg_won_value_cents": 318403,
+      "avg_won_value_fmt": "$3.2k",
+      "total_won_value_cents": 23243453,
+      "total_won_value_fmt": "$232.4k"
+    },
+    {
+      "key": "relationship_partner",
+      "lead_count": 199,
+      "won_count": 60,
+      "lost_count": 37,
+      "active_count": 102,
+      "win_rate_pct": 30.2,
+      "avg_won_value_cents": 377093,
+      "avg_won_value_fmt": "$3.8k",
+      "total_won_value_cents": 7164764,
+      "total_won_value_fmt": "$71.6k"
+    }
+  ],
+  "summary_text": "4569 opportunities · 553 won · 3437 lost · 12.1% overall win rate · won value $1.4M · lost pipeline $4.5M · median close 25.1d"
+}

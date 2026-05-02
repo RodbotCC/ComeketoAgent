@@ -4,8 +4,13 @@
  * Auth: HTTP Basic with the API key as the username and a blank password.
  * Docs: https://developer.close.com/api/overview/api-key-authentication
  *
- * This is the minimal surface — adds endpoints as we wire them. Every
- * function throws if CLOSE_API_KEY is missing or the response is non-2xx.
+ * Doc index (repo): `_reference/close-llms.md` — live tree: https://developer.close.com/llms.txt
+ *
+ * Coverage grows by product need; prefer adding typed helpers here over scattering
+ * raw fetch across the app. Lead Box + plans: hydrated comms (activities +
+ * email threads), snapshots, assignee-scoped lead lists. Automation: sequences,
+ * subscriptions, templates, telephony. Wiring map: `_reference/close-llms.md`
+ * section “Comeketo wiring”.
  */
 
 import { env } from "./env";
@@ -59,6 +64,9 @@ export type CloseWorkflow = {
   id: string;
   name: string;
   status: "active" | "paused" | "draft";
+  html_url?: string;
+  date_created?: string;
+  date_updated?: string;
   steps: Array<{
     id: string;
     step_type: string;
@@ -66,6 +74,14 @@ export type CloseWorkflow = {
     [k: string]: unknown;
   }>;
 };
+
+/** Close web app — sequence editor. Uses `html_url` from the API when present. */
+export function closeSequenceBrowserUrl(workflow: CloseWorkflow): string {
+  const h = workflow.html_url;
+  if (typeof h === "string" && /^https?:\/\//i.test(h)) return h;
+  const id = encodeURIComponent(workflow.id);
+  return `https://app.close.com/sequences/${id}/`;
+}
 
 export type CloseLead = {
   id: string;
@@ -125,6 +141,62 @@ export async function closeListWorkflows(opts: { limit?: number } = {}): Promise
   return r.data;
 }
 
+const LEAD_LIST_FIELDS = [
+  "id",
+  "display_name",
+  "name",
+  "status_id",
+  "status_label",
+  "contacts",
+  "url",
+  "date_created",
+  "date_updated",
+  "user_id",
+  "user_name",
+  "description",
+] as const;
+
+/** Cap how many leads we scan via `GET /lead/?_skip=` for assignee tabs (org-wide safety). */
+const LEAD_SCAN_MAX_SKIP = 50_000;
+
+/**
+ * Page through GET /lead/ and collect leads matching `predicate`, stopping at `limit`
+ * matches or when Close reports no more pages. Close Advanced Filtering does not expose
+ * `user_id` on lead as a regular_field; assignee lives on REST `user_id` / `user_name`.
+ */
+async function scanLeadsMatching(
+  predicate: (lead: CloseLead & { user_id?: string }) => boolean,
+  limit: number
+): Promise<CloseLead[]> {
+  const matches: CloseLead[] = [];
+  const pageSize = 100;
+  let skip = 0;
+
+  while (matches.length < limit && skip < LEAD_SCAN_MAX_SKIP) {
+    const r = await closeFetch<Paged<CloseLead>>("/lead/", {
+      query: {
+        _limit: pageSize,
+        _skip: skip,
+        _fields: [...LEAD_LIST_FIELDS].join(","),
+      },
+    });
+    const batch = r.data ?? [];
+    for (const lead of batch) {
+      const row = lead as CloseLead & { user_id?: string };
+      if (predicate(row)) {
+        matches.push(lead);
+        if (matches.length >= limit) return matches;
+      }
+    }
+    const more =
+      r.has_more === true || (r.has_more === undefined && batch.length === pageSize);
+    if (!more || batch.length === 0) break;
+    skip += pageSize;
+  }
+
+  return matches;
+}
+
 /** POST /data/search/ — flexible lead search. Pass a Close query string. */
 export async function closeSearchLeads(query: string, limit = 10): Promise<CloseLead[]> {
   const body = {
@@ -134,7 +206,7 @@ export async function closeSearchLeads(query: string, limit = 10): Promise<Close
     },
     _limit: limit,
     _fields: {
-      lead: ["id", "display_name", "name", "status_label", "contacts", "url", "date_created"],
+      lead: [...LEAD_LIST_FIELDS],
     },
   };
   // Close's /data/search/ wraps results in { data: [...] } too.
@@ -143,6 +215,70 @@ export async function closeSearchLeads(query: string, limit = 10): Promise<Close
     body: JSON.stringify(body),
   });
   return r.data;
+}
+
+/**
+ * Leads assigned to a Close user (REST `user_id`). Uses GET /lead/ pagination + filter —
+ * not POST /data/search/ `user_id` (invalid field on lead in Advanced Filtering).
+ */
+export async function closeListLeadsByAssignee(
+  assigneeUserId: string,
+  limit = 200
+): Promise<CloseLead[]> {
+  return scanLeadsMatching((row) => row.user_id === assigneeUserId, limit);
+}
+
+/**
+ * POST /data/search/ — leads with a specific lead status (stat_*).
+ * Uses Advanced Filtering reference `status.lead` per Close docs.
+ */
+export async function closeListLeadsByStatusId(
+  statusId: string,
+  limit = 200
+): Promise<CloseLead[]> {
+  const body = {
+    query: {
+      type: "and" as const,
+      queries: [
+        { type: "object_type" as const, object_type: "lead" as const },
+        {
+          type: "field_condition" as const,
+          field: {
+            type: "regular_field" as const,
+            object_type: "lead" as const,
+            field_name: "status_id",
+          },
+          condition: {
+            type: "reference" as const,
+            reference_type: "status.lead" as const,
+            object_ids: [statusId],
+          },
+        },
+      ],
+    },
+    _limit: limit,
+    _fields: {
+      lead: [...LEAD_LIST_FIELDS],
+    },
+  };
+  type Row = CloseLead & { __object_type?: string };
+  const r = await closeFetch<Paged<Row>>("/data/search/", {
+    method: "POST",
+    body: JSON.stringify(body),
+  });
+  return (r.data ?? []).map(({ __object_type: _o, ...lead }) => lead as CloseLead);
+}
+
+/** Assignee (REST user_id) AND lead status — GET /lead/ scan; status-only path still uses Advanced Filtering. */
+export async function closeListLeadsByAssigneeAndStatus(
+  assigneeUserId: string,
+  statusId: string,
+  limit = 200
+): Promise<CloseLead[]> {
+  return scanLeadsMatching(
+    (row) => row.user_id === assigneeUserId && row.status_id === statusId,
+    limit
+  );
 }
 
 /** GET /lead/{id}/ */
@@ -229,12 +365,57 @@ export type CloseSequenceSubscription = {
   pause_reason?: string;
 };
 
-/** GET /activity/?lead_id=... — full activity feed for a lead (all types). */
+/** GET /activity/?lead_id=... — one page of activity feed (all types). */
 export async function closeListActivities(leadId: string, limit = 100): Promise<CloseActivity[]> {
   const r = await closeFetch<Paged<CloseActivity>>(`/activity/`, {
     query: { lead_id: leadId, _limit: limit },
   });
   return r.data;
+}
+
+/**
+ * GET /activity/?lead_id=... with pagination until `has_more` is false or `maxItems` reached.
+ * Newest-first order matches Close list default. Use for Box hydration + snapshot accuracy.
+ */
+export async function closeListActivitiesForLead(
+  leadId: string,
+  opts: { pageSize?: number; maxItems?: number } = {}
+): Promise<CloseActivity[]> {
+  const pageSize = opts.pageSize ?? 100;
+  const maxItems = opts.maxItems ?? 500;
+  const all: CloseActivity[] = [];
+  let skip = 0;
+  for (;;) {
+    const r = await closeFetch<Paged<CloseActivity>>(`/activity/`, {
+      query: { lead_id: leadId, _limit: pageSize, _skip: skip },
+    });
+    const batch = r.data ?? [];
+    all.push(...batch);
+    if (!r.has_more || batch.length === 0 || all.length >= maxItems) break;
+    skip += pageSize;
+  }
+  return all.length > maxItems ? all.slice(0, maxItems) : all;
+}
+
+/** GET /activity/emailthread/?lead_id= — one row per email conversation (subject thread). */
+export type CloseEmailThread = {
+  id: string;
+  lead_id?: string;
+  date_created?: string;
+  date_updated?: string;
+  subject?: string;
+  organization_id?: string;
+  [k: string]: unknown;
+};
+
+export async function closeListEmailThreadsForLead(
+  leadId: string,
+  opts: { limit?: number } = {}
+): Promise<CloseEmailThread[]> {
+  const r = await closeFetch<Paged<CloseEmailThread>>("/activity/emailthread/", {
+    query: { lead_id: leadId, _limit: opts.limit ?? 50 },
+  });
+  return r.data ?? [];
 }
 
 /** GET /sequence_subscription/?lead_id=... — workflow enrollments for a lead. */
@@ -250,24 +431,29 @@ export async function closeListSequenceSubscriptions(
 
 export type CloseLeadFull = {
   lead: CloseLead;
+  /** All activity types; paginated up to maxItems in closeGetLeadFull. */
   activities: CloseActivity[];
+  /** Email conversation threads (supplements flat Email activities in the feed). */
+  email_threads: CloseEmailThread[];
   subscriptions: CloseSequenceSubscription[];
   fetched_at: string;
 };
 
 /**
- * Fan-out fetch for a single lead Box: lead core + activity feed +
- * workflow subscriptions in parallel. Returns one merged blob.
+ * Fan-out fetch for a single lead Box: lead core + paginated activity feed +
+ * email threads + workflow subscriptions in parallel.
  */
 export async function closeGetLeadFull(leadId: string): Promise<CloseLeadFull> {
-  const [lead, activities, subscriptions] = await Promise.all([
+  const [lead, activities, email_threads, subscriptions] = await Promise.all([
     closeGetLead(leadId),
-    closeListActivities(leadId, 100),
+    closeListActivitiesForLead(leadId, { pageSize: 100, maxItems: 500 }),
+    closeListEmailThreadsForLead(leadId, { limit: 50 }),
     closeListSequenceSubscriptions(leadId, 50),
   ]);
   return {
     lead,
     activities,
+    email_threads,
     subscriptions,
     fetched_at: new Date().toISOString(),
   };
@@ -276,9 +462,55 @@ export async function closeGetLeadFull(leadId: string): Promise<CloseLeadFull> {
 /** GET /lead/?_limit=N — list leads (newest first by default). */
 export async function closeListLeads(opts: { limit?: number; query?: string } = {}): Promise<CloseLead[]> {
   const r = await closeFetch<Paged<CloseLead>>("/lead/", {
-    query: { _limit: opts.limit ?? 25, query: opts.query },
+    query: {
+      _limit: opts.limit ?? 25,
+      query: opts.query,
+      _fields: [...LEAD_LIST_FIELDS].join(","),
+    },
   });
   return r.data;
+}
+
+/** POST /lead/ — create a lead with nested contacts (and optional addresses). */
+export type CloseCreateLeadInput = {
+  name: string;
+  description?: string;
+  url?: string;
+  /** Lead owner (Assignee) — Close user id. */
+  user_id?: string;
+  contacts: Array<{
+    name: string;
+    title?: string;
+    emails?: Array<{ email: string; type?: string }>;
+    phones?: Array<{ phone: string; type?: string }>;
+  }>;
+  addresses?: Array<{
+    address_1?: string;
+    address_2?: string;
+    city?: string;
+    state?: string;
+    zipcode?: string;
+    country?: string;
+    label?: string;
+  }>;
+};
+
+export async function closeCreateLead(input: CloseCreateLeadInput): Promise<CloseLead> {
+  return closeFetch<CloseLead>("/lead/", {
+    method: "POST",
+    body: JSON.stringify(input),
+  });
+}
+
+/**
+ * PUT /lead/{id}/ — partial update. Pass any writable fields Close accepts (e.g.
+ * status_id, name, description, url, user_id, custom.cf_*).
+ */
+export async function closeUpdateLead(leadId: string, patch: Record<string, unknown>): Promise<CloseLead> {
+  return closeFetch<CloseLead>(`/lead/${encodeURIComponent(leadId)}/`, {
+    method: "PUT",
+    body: JSON.stringify(patch),
+  });
 }
 
 // ─── Write helpers (used by heartbeat in execution mode) ─────────────────
@@ -361,6 +593,145 @@ export async function closeLogSms(input: {
       direction: "outbound",
       status: input.status ?? "draft",
       user_id: input.user_id,
+    }),
+  });
+}
+
+// ─── Automation + org config (sequences, subscriptions, templates, telephony) ─
+
+export type CloseLeadStatusEntry = {
+  id: string;
+  label: string;
+  organization_id?: string;
+  [k: string]: unknown;
+};
+
+export type CloseSmsTemplate = {
+  id: string;
+  name: string;
+  body?: string;
+  [k: string]: unknown;
+};
+
+export type ClosePhoneNumber = {
+  id: string;
+  phone?: string;
+  [k: string]: unknown;
+};
+
+/** GET /sequence/{id}/ — full workflow (steps, delays, channel actions). */
+export async function closeGetWorkflow(
+  sequenceId: string
+): Promise<CloseWorkflow & Record<string, unknown>> {
+  return closeFetch(`/sequence/${encodeURIComponent(sequenceId)}/`);
+}
+
+/** POST /sequence/ — create a sequence (name, timezone, schedule, steps, …). */
+export async function closeCreateSequence(
+  body: Record<string, unknown>
+): Promise<CloseWorkflow & Record<string, unknown>> {
+  return closeFetch(`/sequence/`, {
+    method: "POST",
+    body: JSON.stringify(body),
+  });
+}
+
+/** PUT /sequence/{id}/ — update an existing sequence. */
+export async function closeUpdateSequence(
+  sequenceId: string,
+  patch: Record<string, unknown>
+): Promise<CloseWorkflow & Record<string, unknown>> {
+  return closeFetch(`/sequence/${encodeURIComponent(sequenceId)}/`, {
+    method: "PUT",
+    body: JSON.stringify(patch),
+  });
+}
+
+/** GET /sequence_subscription/{id}/ — subscription detail (status, pause_reason, …). */
+export async function closeGetSequenceSubscription(
+  subscriptionId: string
+): Promise<CloseSequenceSubscription & Record<string, unknown>> {
+  return closeFetch(`/sequence_subscription/${encodeURIComponent(subscriptionId)}/`);
+}
+
+/**
+ * PUT /sequence_subscription/{id}/ — e.g. `{ "status": "paused" }` or `{ "status": "active" }`.
+ * https://developer.close.com/api/resources/sequences/update-subscription
+ */
+export async function closeUpdateSequenceSubscription(
+  subscriptionId: string,
+  patch: Record<string, unknown>
+): Promise<CloseSequenceSubscription & Record<string, unknown>> {
+  return closeFetch(`/sequence_subscription/${encodeURIComponent(subscriptionId)}/`, {
+    method: "PUT",
+    body: JSON.stringify(patch),
+  });
+}
+
+/** GET /sms_template/ */
+export async function closeListSmsTemplates(opts: { limit?: number } = {}): Promise<CloseSmsTemplate[]> {
+  const r = await closeFetch<Paged<CloseSmsTemplate>>("/sms_template/", {
+    query: { _limit: opts.limit ?? 50 },
+  });
+  return r.data;
+}
+
+/** GET /status/lead/ — lead status picklist for automation + UI. */
+export async function closeListLeadStatuses(): Promise<CloseLeadStatusEntry[]> {
+  const r = await closeFetch<Paged<CloseLeadStatusEntry>>("/status/lead/");
+  return r.data;
+}
+
+/** GET /phone_number/ — org sending lines (SMS/call). Use for `local_phone` on real sends. */
+export async function closeListPhoneNumbers(opts: { limit?: number } = {}): Promise<ClosePhoneNumber[]> {
+  const r = await closeFetch<Paged<ClosePhoneNumber>>("/phone_number/", {
+    query: { _limit: opts.limit ?? 50 },
+  });
+  return r.data;
+}
+
+export type CloseWebhookSubscription = {
+  id: string;
+  url?: string;
+  status?: string;
+  /** Present on create/list — store in `CLOSE_WEBHOOK_SIGNATURE_KEY` for `/api/webhooks/close`. */
+  signature_key?: string;
+  events?: Array<{ object_type: string; action: string; extra_filter?: unknown }>;
+  [k: string]: unknown;
+};
+
+/** GET /webhook/ — org webhook subscriptions (URLs, event filters, signature keys). */
+export async function closeListWebhookSubscriptions(
+  opts: { limit?: number } = {}
+): Promise<CloseWebhookSubscription[]> {
+  const r = await closeFetch<Paged<CloseWebhookSubscription>>("/webhook/", {
+    query: { _limit: opts.limit ?? 50 },
+  });
+  return r.data;
+}
+
+/**
+ * POST /activity/note/ — internal note on a lead (operator-visible, not customer send).
+ */
+export async function closeLogNote(input: {
+  lead_id: string;
+  note?: string;
+  note_html?: string;
+  contact_id?: string;
+  user_id?: string;
+  pinned?: boolean;
+  title?: string;
+}): Promise<CloseActivityCreated> {
+  return closeFetch<CloseActivityCreated>("/activity/note/", {
+    method: "POST",
+    body: JSON.stringify({
+      lead_id: input.lead_id,
+      note: input.note,
+      note_html: input.note_html,
+      contact_id: input.contact_id,
+      user_id: input.user_id,
+      pinned: input.pinned,
+      title: input.title,
     }),
   });
 }

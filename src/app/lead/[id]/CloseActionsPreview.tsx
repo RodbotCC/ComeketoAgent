@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { Modal } from "./Modal";
+import { Modal } from "@/components/Modal";
 import { getCloseCodegenPreview } from "./actions";
 import type { CodegenResult, PlannedCloseAction } from "@/lib/plan-to-close";
 
@@ -45,7 +45,7 @@ export function CloseActionsPreview({ planId }: { planId: string }) {
         type="button"
         className="plan-btn"
         onClick={openModal}
-        title="See the Close API actions this plan would fire"
+        title="Planned Close operations derived from this plan and the current Box"
       >
         Preview Close actions
       </button>
@@ -55,10 +55,12 @@ export function CloseActionsPreview({ planId }: { planId: string }) {
           <header className="plan-day-modal-head" style={{ background: "var(--paper-2)" }}>
             <span className="cme-eyebrow">close codegen</span>
             <h2 id="close-codegen-h" className="plan-day-modal-title">
-              What this plan would do in Close
+              Planned Close operations
             </h2>
             <p className="plan-day-modal-context">
-              Preview of the API calls. Nothing fires from this screen — execution happens via the heartbeat once the plan is approved and fresh.
+              Translation of each plan day into task/activity/enrollment shapes the heartbeat uses. This modal does
+              not call Close. Execution runs on heartbeat schedule when the plan is approved, snapshot-fresh, and
+              Settings execution mode allows writes (<code>approved_plan_execution</code>).
             </p>
           </header>
           <div className="plan-day-modal-body">

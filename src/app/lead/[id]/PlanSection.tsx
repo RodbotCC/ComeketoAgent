@@ -24,11 +24,10 @@ const GOAL_LABEL: Record<SevenDayPlan["primary_goal"], string> = {
   re_engage: "Re-engage",
 };
 
-// Seven distinct soft pastels — modeled on the four-box identity palette,
-// extended with three siblings (lemon / rose / sky) so each day owns a
-// color. Tones cycle once if the day count changes, but plans always
-// have 7 days so this is fixed.
+// Pastel tones cycle for any plan length.
 const DAY_TONES = ["lavender", "sky", "sage", "lemon", "peach", "rose", "blue"] as const;
+
+const HORIZON_PRESETS = [1, 2, 3, 5, 7, 14, 21, 30, 45, 60, 90] as const;
 
 function fmtTime(iso?: string) {
   if (!iso) return "—";
@@ -39,21 +38,40 @@ export function PlanSection({
   leadId,
   plan,
   currentSnapshotId,
+  defaultHorizonDays,
 }: {
   leadId: string;
   plan: PersistedPlan | null;
   currentSnapshotId: string;
+  defaultHorizonDays: number;
 }) {
   // ─── No plan yet — show the generate button ───
   if (!plan) {
     return (
       <div className="lead-card widget plan-empty">
-        <h3 className="lead-card-h">Seven-day plan</h3>
+        <h3 className="lead-card-h">Cycle plan</h3>
         <p className="plan-empty-msg">
-          No plan yet. Generate one from the current Box state — uses NEPQ voice and Guardrails §D rules.
+          No plan yet. Generate from the current Box — NEPQ voice, Guardrails §D. Default week length is 7 days (NEPQ sweep); pick another length for same-day blitz or a longer bridge.
         </p>
-        <form action={generatePlanAction}>
+        <form action={generatePlanAction} className="plan-generate-form">
           <input type="hidden" name="lead_id" value={leadId} />
+          <label className="plan-horizon-label">
+            <span>Calendar days in cycle</span>
+            <input
+              type="number"
+              name="horizon_days"
+              min={1}
+              max={180}
+              defaultValue={defaultHorizonDays}
+              list={`plan-horizon-presets-${leadId}`}
+              className="plan-horizon-input"
+            />
+            <datalist id={`plan-horizon-presets-${leadId}`}>
+              {HORIZON_PRESETS.map((n) => (
+                <option key={n} value={n} />
+              ))}
+            </datalist>
+          </label>
           <button type="submit" className="plan-btn plan-btn-primary">Generate plan</button>
         </form>
       </div>
@@ -64,11 +82,20 @@ export function PlanSection({
   const isLocked = plan.status === "killed" || plan.status === "completed";
 
   return (
-    <PlanCardClient planId={plan.plan_id} leadId={leadId} status={plan.status}>
+    <PlanCardClient
+      planId={plan.plan_id}
+      leadId={leadId}
+      status={plan.status}
+      planDayCount={plan.days.length}
+      regenerateHorizonDays={plan.days.length}
+      planStale={stale}
+    >
     <div className="lead-card widget plan-card">
       <div className="plan-head">
         <div className="plan-head-l">
-          <h3 className="lead-card-h" style={{ marginBottom: 4 }}>Seven-day plan</h3>
+          <h3 className="lead-card-h" style={{ marginBottom: 4 }}>
+            Cycle plan <span className="plan-horizon-pill">{plan.days.length} days</span>
+          </h3>
           <div className="plan-meta">
             <span className={`plan-status plan-status-${plan.status}`}>{plan.status}</span>
             <span className="lead-sep">·</span>
@@ -95,6 +122,12 @@ export function PlanSection({
 
       {plan.goal_summary && <p className="plan-summary">{plan.goal_summary}</p>}
       {plan.lead_state_summary && <p className="plan-state">{plan.lead_state_summary}</p>}
+
+      <p className="muted" style={{ fontSize: 11, margin: "6px 0 4px" }}>
+        <strong>Same-day multi-touch:</strong> you can add several touches per calendar day; the heartbeat runs each
+        in order. Rolling caps (1/24h, 4/7d) still apply — a second outbound may show{" "}
+        <code>FREQUENCY_CAP_*</code> until the window passes.
+      </p>
 
       <div className="plan-facts">
         {plan.known_facts.length > 0 && (
@@ -125,13 +158,14 @@ export function PlanSection({
       <div className="plan-days">
         {plan.days.map((d, idx) => (
           <PlanDayCard
-            key={d.day}
+            key={`${plan.plan_id}-${idx}`}
             day={d}
             dayIndex={idx}
             tone={DAY_TONES[idx % DAY_TONES.length]}
             planId={plan.plan_id}
             leadId={leadId}
             goalSummary={plan.goal_summary}
+            planStale={stale}
           />
         ))}
       </div>
@@ -165,8 +199,26 @@ export function PlanSection({
               <button type="submit" className="plan-btn">Pause</button>
             </form>
           )}
-          <form action={generatePlanAction} style={{ display: "inline" }}>
+          <form action={generatePlanAction} style={{ display: "inline-flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
             <input type="hidden" name="lead_id" value={leadId} />
+            <label className="plan-horizon-label plan-horizon-inline">
+              <span>Regenerate as</span>
+              <input
+                type="number"
+                name="horizon_days"
+                min={1}
+                max={180}
+                defaultValue={plan.days.length}
+                list={`plan-horizon-presets-regen-${leadId}`}
+                className="plan-horizon-input"
+              />
+              <span className="plan-horizon-suffix">days</span>
+            </label>
+            <datalist id={`plan-horizon-presets-regen-${leadId}`}>
+              {HORIZON_PRESETS.map((n) => (
+                <option key={n} value={n} />
+              ))}
+            </datalist>
             <button type="submit" className="plan-btn">Regenerate</button>
           </form>
           <CloseActionsPreview planId={plan.plan_id} />

@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { envStatus } from "@/lib/env";
-import { AVAILABLE_MODELS, EXECUTION_MODES, getSettings } from "@/lib/settings";
-import { updateModelAction, updateExecutionModeAction } from "./actions";
+import { operatorLockEnabled } from "@/lib/operator-guard";
+import { AVAILABLE_MODELS, EXECUTION_MODES, clampPlanHorizonDays, getSettings, PLAN_HORIZON_MIN, PLAN_HORIZON_MAX } from "@/lib/settings";
+import { updateModelAction, updateExecutionModeAction, updateDefaultPlanHorizonAction } from "./actions";
+import { SettingsForm } from "./SettingsForm";
 
 const EXEC_MODE_LABEL: Record<(typeof EXECUTION_MODES)[number], { name: string; blurb: string; tone: "ok" | "warn" | "live" }> = {
   draft_only: {
@@ -31,6 +33,7 @@ export const dynamic = "force-dynamic";
 export default async function SettingsPage() {
   const status = envStatus();
   const settings = await getSettings();
+  const operatorLockOn = operatorLockEnabled();
 
   const primary: Array<[string, { set: boolean; fingerprint: string | null }]> = [
     ["OPENAI_API_KEY", status.OPENAI_API_KEY],
@@ -42,6 +45,9 @@ export default async function SettingsPage() {
 
   const reserved: Array<[string, { set: boolean; fingerprint: string | null }]> = [
     ["CLOSE_API_KEY", status.CLOSE_API_KEY],
+    ["CLOSE_WEBHOOK_SIGNATURE_KEY", status.CLOSE_WEBHOOK_SIGNATURE_KEY],
+    ["OPERATOR_PASSWORD", status.OPERATOR_PASSWORD],
+    ["OPERATOR_COOKIE_SECRET", status.OPERATOR_COOKIE_SECRET],
     ["CLICKUP_API_TOKEN", status.CLICKUP_API_TOKEN],
   ];
 
@@ -92,7 +98,6 @@ export default async function SettingsPage() {
         </span>
         <div className="cme-utility">
           <Link href="/chat">chat</Link>
-          <Link href="/intake">intake</Link>
           <Link href="/settings">settings</Link>
           <Link href="/test">test</Link>
         </div>
@@ -105,52 +110,88 @@ export default async function SettingsPage() {
           Credentials live in <code>.env.local</code>. Model selection lives in <code>.cmk-settings.json</code> (gitignored, written by this page).
         </p>
 
-        {/* MODEL PICKER */}
-        <h2>Model</h2>
-        <p className="muted">
-          Which OpenAI Responses model the chat and test endpoints use. Saved on submit; takes effect on the next request.
-        </p>
-        <form action={updateModelAction} style={{ marginTop: 12, display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
-          <select
-            name="model"
-            defaultValue={settings.model}
-            style={{
-              fontFamily: "var(--mono)",
-              fontSize: 12,
-              padding: "8px 12px",
-              borderRadius: 5,
-              border: "1px solid var(--rule)",
-              background: "var(--card)",
-              color: "var(--ink)",
-              minWidth: 280,
-            }}
-          >
-            {AVAILABLE_MODELS.map((m) => (
-              <option key={m} value={m}>{m}</option>
-            ))}
-          </select>
-          <button
-            type="submit"
-            style={{
-              fontSize: 11,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              padding: "8px 14px",
-            }}
-          >
-            Save
-          </button>
-          <span style={{ fontSize: 11, color: "var(--ink-faint)" }}>
-            currently using <span style={{ fontFamily: "var(--mono)", color: "var(--ink-mid)" }}>{settings.model}</span>
-          </span>
-        </form>
+        <div className="cmk-stack-panel cmk-stack-panel--rose">
+          <h2>Operator lock</h2>
+          <p className="muted">
+            With <code>OPERATOR_PASSWORD</code> and <code>OPERATOR_COOKIE_SECRET</code> set, sensitive Box actions (generate, refine, approve, enroll, heartbeat run, etc.) require a browser session from{" "}
+            <Link href="/operator-login">/operator-login</Link>. The Next.js server uses the Supabase service role and bypasses RLS; do not expose that key in client bundles.
+          </p>
+          <p style={{ fontSize: 13, marginTop: 8, marginBottom: 0 }}>
+            Operator lock is <strong>{operatorLockOn ? "on" : "off"}</strong>.
+          </p>
+        </div>
 
-        {/* EXECUTION MODE PICKER */}
-        <h2>Heartbeat execution</h2>
-        <p className="muted">
-          Controls what the heartbeat does with fire-eligible verdicts. Default <code>draft_only</code> never touches Close. Flip to <code>approved_plan_execution</code> to write tasks + log activity drafts during sweeps. Email/SMS activities are always logged as <code>status:&quot;draft&quot;</code> for now — they appear in the lead&apos;s activity feed but don&apos;t actually send via SMTP/Twilio.
-        </p>
-        <form action={updateExecutionModeAction} style={{ marginTop: 12, display: "flex", flexDirection: "column", gap: 10, maxWidth: 720 }}>
+        <div className="cmk-stack-panel cmk-stack-panel--lavender">
+          <h2>Model</h2>
+          <p className="muted">
+            Which OpenAI Responses model the chat and test endpoints use. Saved on submit; takes effect on the next request.
+          </p>
+          <SettingsForm action={updateModelAction} style={{ marginTop: 12, display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
+            <select name="model" defaultValue={settings.model} className="cmk-field-panel" style={{ fontFamily: "var(--mono)", minWidth: 280 }}>
+              {AVAILABLE_MODELS.map((m) => (
+                <option key={m} value={m}>{m}</option>
+              ))}
+            </select>
+            <button
+              type="submit"
+              className="plan-btn plan-btn-primary"
+              style={{
+                fontSize: 11,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                padding: "8px 14px",
+              }}
+            >
+              Save
+            </button>
+            <span style={{ fontSize: 11, color: "var(--ink-faint)" }}>
+              currently using <span style={{ fontFamily: "var(--mono)", color: "var(--ink-mid)" }}>{settings.model}</span>
+            </span>
+          </SettingsForm>
+        </div>
+
+        <div className="cmk-stack-panel cmk-stack-panel--sage">
+          <h2>Cycle plan default</h2>
+          <p className="muted">
+            Number of calendar-day buckets when you click Generate on a Box without changing the field (1–{PLAN_HORIZON_MAX}). Seven stays the NEPQ-style default; use 1–3 for same-day or short pushes.
+          </p>
+          <SettingsForm action={updateDefaultPlanHorizonAction} style={{ marginTop: 12, display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
+            <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13 }}>
+              <span style={{ color: "var(--ink-mid)" }}>Days</span>
+              <input
+                type="number"
+                name="default_plan_horizon_days"
+                min={PLAN_HORIZON_MIN}
+                max={PLAN_HORIZON_MAX}
+                defaultValue={clampPlanHorizonDays(settings.default_plan_horizon_days)}
+                className="cmk-field-panel"
+                style={{ fontFamily: "var(--mono)", width: 88 }}
+              />
+            </label>
+            <button
+              type="submit"
+              className="plan-btn plan-btn-primary"
+              style={{
+                fontSize: 11,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                padding: "8px 14px",
+              }}
+            >
+              Save
+            </button>
+            <span style={{ fontSize: 11, color: "var(--ink-faint)" }}>
+              current default <span style={{ fontFamily: "var(--mono)", color: "var(--ink-mid)" }}>{settings.default_plan_horizon_days}</span> days
+            </span>
+          </SettingsForm>
+        </div>
+
+        <div className="cmk-stack-panel cmk-stack-panel--peach">
+          <h2>Heartbeat execution</h2>
+          <p className="muted">
+            Controls what the heartbeat does with fire-eligible verdicts. Default <code>draft_only</code> never touches Close. Flip to <code>approved_plan_execution</code> to write tasks + log activity drafts during sweeps. Email/SMS activities are always logged as <code>status:&quot;draft&quot;</code> for now — they appear in the lead&apos;s activity feed but don&apos;t actually send via SMTP/Twilio.
+          </p>
+        <SettingsForm action={updateExecutionModeAction} style={{ marginTop: 12, display: "flex", flexDirection: "column", gap: 10, maxWidth: 720 }}>
           {EXECUTION_MODES.map((m) => {
             const info = EXEC_MODE_LABEL[m];
             const checked = settings.execution_mode === m;
@@ -162,10 +203,13 @@ export default async function SettingsPage() {
                   alignItems: "flex-start",
                   gap: 10,
                   padding: "12px 14px",
-                  borderRadius: 6,
+                  borderRadius: 8,
                   border: `1px solid ${checked ? "var(--ink)" : "var(--rule)"}`,
-                  background: checked ? "var(--paper-2)" : "var(--card)",
+                  background: checked
+                    ? "color-mix(in oklab, var(--paper-2) 75%, var(--peach-deep) 12%)"
+                    : "color-mix(in oklab, var(--card) 92%, var(--peach-deep) 5%)",
                   cursor: "pointer",
+                  boxShadow: checked ? "inset 0 1px 2px rgba(26,24,21,0.04)" : "none",
                 }}
               >
                 <input
@@ -211,6 +255,7 @@ export default async function SettingsPage() {
           <div>
             <button
               type="submit"
+              className="plan-btn plan-btn-primary"
               style={{
                 fontSize: 11,
                 letterSpacing: "0.1em",
@@ -224,24 +269,36 @@ export default async function SettingsPage() {
               currently <span style={{ color: "var(--ink-mid)", fontWeight: 500 }}>{EXEC_MODE_LABEL[settings.execution_mode].name}</span>
             </span>
           </div>
-        </form>
+        </SettingsForm>
+        </div>
 
-        <h2>Primary credentials</h2>
-        <p className="muted">Used by the app&apos;s direct API paths — OpenAI, Supabase, and GitHub.</p>
-        {table(primary)}
+        <div className="cmk-stack-panel cmk-stack-panel--sky">
+          <h2>Primary credentials</h2>
+          <p className="muted">Used by the app&apos;s direct API paths — OpenAI, Supabase, and GitHub.</p>
+          {table(primary)}
+        </div>
 
-        <h2>Reserved for later</h2>
-        <p className="muted">Configured in <code>.env.local</code> but not yet wired to any code path.</p>
-        {table(reserved)}
+        <div className="cmk-stack-panel cmk-stack-panel--lavender">
+          <h2>Reserved for later</h2>
+          <p className="muted">Close CRM keys, webhook signing, and ClickUp — read from <code>.env.local</code>.</p>
+          {table(reserved)}
+        </div>
 
-        <h2>Where these are used</h2>
-        <ul className="muted">
+        <div className="cmk-stack-panel cmk-stack-panel--sage">
+          <h2>Where these are used</h2>
+          <ul className="muted" style={{ marginBottom: 0 }}>
           <li><strong>OPENAI_API_KEY</strong> — Responses API call from <code>/api/chat</code> and <code>/api/test</code>.</li>
           <li><strong>SUPABASE_URL</strong> + <strong>SUPABASE_SECRET_KEY</strong> — direct PostgREST access from the API route (server-side only).</li>
           <li><strong>SUPABASE_PUBLISHABLE_KEY</strong> — client-safe key for any browser-side Supabase access we add later.</li>
           <li><strong>GITHUB_PAT</strong> — Octokit auth for direct GitHub API calls.</li>
-          <li><strong>CLOSE / CLICKUP</strong> — reserved. Not wired yet.</li>
+          <li><strong>CLOSE_API_KEY</strong> — Lead Box, heartbeat, chat Close tools, <code>/api/test</code> Close mode.</li>
+          <li>
+            <strong>CLOSE_WEBHOOK_SIGNATURE_KEY</strong> — hex <code>signature_key</code> from your Close webhook subscription response;
+            verifies HMAC on <code>/api/webhooks/close</code> (required in production; dev accepts unsigned POSTs if unset).
+          </li>
+          <li><strong>CLICKUP_*</strong> — reserved.</li>
         </ul>
+        </div>
       </main>
 
       <footer className="cme-footer">

@@ -125,7 +125,7 @@ function CounterStrip() {
   return (
     <div className="hero-strip">
       {items.map((it, i) => (
-        <div key={i} className="hero-strip-item">
+        <div key={i} className="hero-strip-item" style={{ animationDelay: `${i * 90}ms` }}>
           <span className="hero-strip-n serif">{it.n}</span>
           <span className="hero-strip-l">{it.l}</span>
         </div>

@@ -4,8 +4,58 @@ Running ledger of blockers, bugs, friction, anything broken. Tapped before & aft
 
 ---
 
+## 2026-05-02
+
+- **before [operator nav + lock parity]:** Chat/book could load without cookie while `/lead` could not — inconsistent exposure if `OPERATOR_PASSWORD` set.
+- **after [operator nav + lock parity]:** Aligned; `/chat`, `/leads`, `/intake`, `/api/chat`, `/api/threads` added to matcher.
+- **before [operator API matcher sweep]:** `/api/leads/*`, `/api/test`, and `/test` UI still bypassed operator cookie when lock on.
+- **after [operator API matcher sweep]:** Matcher adds `/api/leads`, `/api/test`, `/test`, `/analytics` (+ `:path*`); public remains `/api/auth/operator`, `/api/webhooks/:path*` (not matched).
+- **before [operator lock on `/`]:** Marketing `/` leaked without cookie when lock on.
+- **after [operator lock on `/`]:** Matcher includes `/`; `/operator-login` still open.
+- **before [login land on console from `/`]:** Post-login `next=/` showed hero again — wrong first screen for ops.
+- **after [login land on console from `/`]:** `postLoginDestination` maps root → `/console`.
+- **before [console trace column]:** None — UX completeness.
+- **after [console trace column]:** Clean.
+- **before [trace → UI + console filter]:** Console could filter by lead/plan informally only; no `?trace=` contract.
+- **after [trace → UI + console filter]:** UUID `trace` query validated; bad param falls back with error banner.
+- **before [delegations → execution_log]:** No `trace_id` on `/api/chat` response; console could not correlate a send with log rows without reading thread content.
+- **after [delegations → execution_log]:** Resolved for audited tools + plan gen; `trace_id` returned when `tools_used` non-empty.
+- **before [operator console]:** Approvals page used `TabNav active="heartbeat"` (misleading); `/console` not in operator middleware matcher when lock on.
+- **after [operator console]:** Approvals `TabNav` matches surface (was heartbeat); `/console` behind operator middleware.
+- **before [Lead Box multi-tab routes]:** None — IA/density issue on one page.
+- **after [Lead Box multi-tab routes]:** Deep links: `#cycle-plan` still on Plan tab; server actions revalidate lead layout segment; approvals links unchanged.
+- **before [Close leads assignee search]:** None beyond UX — root cause was API misuse (`user_id` not an advanced-filter field on `lead`).
+- **after [Close leads assignee search]:** Watch: assignee tabs scan `GET /lead/` pages until matches or `has_more` ends — large orgs may hit `LEAD_SCAN_MAX_SKIP` cap (see `scanLeadsMatching` in `close.ts`); raise if operators need full-org certainty.
+- **before [automation UX sweep — Rodbot + inspector + drafts]:** Draft detail had no in-chat interpret wiring; inspector rail was placeholder copy.
+- **after [automation UX sweep — Rodbot + inspector + drafts]:** Watch: draft **save** + inline **generateCloseSteps** UI removed — steps must reach DB via another path (e.g. future chat tool / manual) or publish flow stalls without existing `close_steps_json`.
+- **before [workflow studio route]:** None — discoverability-only gap (demo graph lived under dev-only `<details>`).
+- **after [workflow studio route]:** Clean — demo graph no longer dev-only.
+- **before [automation empty states + matcher doc]:** Sequences pill filter could imply demo graph was “their” filtered data; operators adding `/api/foo` could forget matcher.
+- **after [automation empty states + matcher doc]:** Filter-mismatch panel + middleware inventory comment; audit: all current `page.tsx` / `route.ts` roots covered or intentionally public.
+- **before [intake route + TabNav + attachment types]:** `tsc` / build red: missing `@/app/intake/*`, `TabKey` mismatch, `Attachment` union.
+- **after [intake route + TabNav + attachment types]:** Intake recreated.
+- **before [intake download error surfacing]:** Failed signed URL / mismatch redirected to Box with no explanation.
+- **after [intake download error surfacing]:** [`redirectIntakeArtifactDownload`](src/app/intake/actions.ts) sets `?intake_dl=bad_request|not_found|signed_url`; [`box/page.tsx`](src/app/lead/[id]/box/page.tsx) + [`IntakeArtifactsPanel`](src/app/lead/[id]/IntakeArtifactsPanel.tsx) show dismissible message.
+- **before [ledger / agent discipline — anti-churn]:** User friction: **delete ↔ restore loops** when agents green-build by bringing back files Jake removed; taps were the missing guardrail in practice.
+- **after [ledger / agent discipline — anti-churn]:** Rule in Problems: missing modules → **assume intentional deletion until proven otherwise**; strip imports / routes / matcher first; **`before:` tap must state that**; never bulk-restore without Jake OK.
+- **before [panel + icon-hover UI pass]:** Flat forms + default inputs; nav icons had no hover affordance.
+- **after [panel + icon-hover UI pass]:** None blocking — cosmetic IA; watch select arrow custom style on quirky browsers.
+- **before [panel pass — console + leads + approvals]:** Operator index pages visually disjoint from the tinted panel system used on settings/intake.
+- **after [panel pass — console + leads + approvals]:** Clean — same `cmk-stack-panel` language; watch double-wrap if a future row adds its own full-bleed tint.
+
 ## 2026-05-01
 
+- **before [pre-break ledger sweep]:** Consolidate open watches + ops reminders into Problems for Jake’s return.
+- **handoff [pre-break] — active watches & ops:**
+  - **Supabase:** Keep local/prod in sync with repo migrations in timestamp order — notably `20260501180000_automation_drafts`, `20260502120000_close_webhook_events`, `20260503120000_intake_artifacts`, `20260504100000_rls_publishable_denied`, `20260505120000_execution_audit`. `/automation/drafts` 404s or table-missing errors usually mean an unapplied migration.
+  - **Close API:** `POST /sequence/` response shape in prod may differ from typings — publish flow throws with export fallback; confirm whether `id` is top-level on create.
+  - **Dev hygiene:** After sprints touching Server Actions / routes, Jake runs `npm run fresh` if chunk/cache weirdness (per [`CLAUDE.md`](CLAUDE.md)).
+  - **Historic / non-repo:** Customer scheduled tasks were disabled earlier — not fixed by this codebase; revisit if live follow-ups matter.
+- **after [pre-break ledger sweep]:** Handoff watches grouped above; epic-specific bullets kept below for traceability.
+- **before [automation IA polish]:** None — small UX-only change.
+- **after [automation IA polish]:** Clean.
+- **before [automation + multi-touch epic]:** None known; large surface area (Close write paths + AI) may expose integration gaps during verification.
+- **after [automation + multi-touch epic]:** Watch Close `POST /sequence/` response shape in the wild (id may be nested); publish path errors should fall back to JSON export per UI. Confirm Supabase migration applied for `automation_drafts`.
 - **inception:** None yet. Workspace was empty. Build has not started.
 - **watch:** Scheduled tasks were disabled, not deleted — if the new functionality doesn't supersede them, the live customer follow-ups (Hugo, Steve, Daphney, Dawn, Eliana, Elizabeth) are now silent until re-enabled.
 - **after inception:** No new problems surfaced setting up the ledgers. Clean.
@@ -53,3 +103,52 @@ Running ledger of blockers, bugs, friction, anything broken. Tapped before & aft
 - **recurring [phantom app/ dir keeps regenerating 2026-05-01]:** Same phantom showed up AGAIN ~3 hours after first removal. Found at 15:23 with just an `app/.env.local` file inside (identical to root `.env.local`). When present, Next builds with empty App Router output (`.next/server/app/` doesn't even get created, route table shows only Pages 404). Source unknown — possibly Vercel CLI (`vercel pull` / `vercel env pull` defaults to `app/.env.local`?), possibly an editor / file-sync. Fix again: `rm -rf app/`. Watch item: if it returns a third time, add `app/` to `.gitignore` AND inspect what tool created it. Could also add a precommit/preinstall hook that errors on its presence.
 - **dev-server stale chunk cache 2026-05-01:** After adding Server Actions + new dynamic routes ([id]) underneath a running `next dev`, the dev server's in-memory webpack state desyncs from disk. Symptoms: random pages start 404'ing (e.g. `/chat`) and dynamic routes throw "Cannot find module '../XXX.js'" errors pointing at non-existent chunks. `next build` from a clean tree is fine — only the running dev server is broken. Fix: Ctrl-C the dev server and `npm run dev` again. Repro pattern: any move that adds a `[param]` segment + Server Actions in the same commit. Worth a heads-up to Jake whenever we ship that combo.
 - **resolved [server→client function-prop boundary 2026-05-01]:** Server-rendered page.tsx was passing `{kind:"item", label:"Open in Close", onSelect: () => window.open(...)}` arrow functions as the `menu` prop to `<BoxPanel>` (a "use client" component). Next 14 throws `Error: Event handlers cannot be passed to Client Component props.` because functions can't be serialized across the boundary. Fix: redefined `BoxPanelMenuAction` as a fully serializable discriminated union (`{type: "open_expanded"}` | `{type: "open_url", url}` | `{type: "copy", text}`) and resolve to live handlers inside the client component. Lesson: any prop a server component hands to a client component must be JSON-serializable. When designing reusable client primitives, the public API has to accept declarative descriptors, not callbacks.
+- **resolved [FAB cluster overlapped page header 2026-05-01]:** PlanCardClient rendered the `.plan-card-fab` as a sibling of the children (not inside the .plan-card div). With `position: absolute`, it anchored to the nearest positioned ancestor — which was way up the DOM, effectively the viewport. Result: Approve & run / Approve all / Refine plan buttons floated at the top-right of the page, on top of the AppHeader's wordmark + utility links. Fix: wrap children + FAB + toast in a `.plan-card-shell` div with `position: relative`. The FAB now anchors to the shell which is the same width as the plan card. Lesson: when wrapping server-component children with absolute-positioned siblings, always wrap them in a shared positioned ancestor.
+
+- **before [practice lead seed + Close comms probe]:** None — purely additive against Openera practice org; script is idempotent only if re-run manually (would duplicate leads unless we add guards later).
+- **after [practice lead seed + Close comms probe]:** No new product bugs. Watch: re-running the seed script will create another 50 leads and reshuffle **all** leads again — add a dry-run or `[Comeketo practice seed]` filter before re-execution if that becomes painful.
+
+## 2026-05-02
+
+- **before [Close API automation + surface expansion]:** `close.ts` covered list/get workflows + enroll + opps + activities but not full sequence definition fetch, subscription CRUD, telephony/templates/config — friction for automation editor + SMS debugging.
+- **after [Close API automation + surface expansion]:** Addressed for the automation slice + operator debugging (templates, statuses, phone inventory). Watch: **creating/updating/deleting sequences via API** not wired yet (destructive — needs explicit approval UX). **Webhook subscription CRUD via our app** still not wired (operators use Close UI or raw REST; ingress endpoint exists). Chat tool surface growing — watch OpenAI tool payload size if we add 20+ more tools (may need grouping or lazy tools).
+
+- **before [Close webhook ingress]:** Inbound path missing — could not durably record Close-driven state changes for Box freshness / future Realtime.
+- **after [Close webhook ingress]:** `/api/webhooks/close` live + `close_webhook_events` schema committed. Watch: **subscription create/update/delete via API** still manual in Close UI or raw REST for now. **Table must exist** before POST succeeds (migration). **Replay / ordering:** Close does not guarantee order — consumers must tolerate; duplicate `event_id` returns 200 idempotent.
+
+- **watch [Close webhook go-live deferred]:** Jake table-applied + parking lot — full **ops** checklist (public URL, Vercel env, Close subscription, `CLOSE_WEBHOOK_SIGNATURE_KEY`) lives under **“Things to do — Close webhooks”** in `_scaffold/Global.md`. **Not** app-login auth; can stay queued without blocking other build momentum.
+
+- **watch [snapshot bump post-comms-depth]:** New `snapshotIdForBox` — existing `lead_plans` may show stale vs live Box until operators regenerate (expected).
+
+- **after [Delegations page magic]:** No bugs surfaced. tsc + next build clean. Watch items: (a) `ContextMenu` is imported from `lead/[id]/ContextMenu.tsx` — minor cross-route coupling, fine until a third surface needs it, then move to `src/components/`; (b) coordinate with the parallel Close-API agent — this sprint only added to `lib/threads.ts` (no `lib/close.ts` edits), collision risk low but verify before merging; (c) **`npm run fresh` recommended** — added `/api/threads/[id]` route and reshaped /chat client surface significantly, dev server may carry stale chunks; (d) rail row's button-inside-ContextMenu pattern: right-click also bubbles to `onClick` in some browsers — observed OK in Next 14 build, watch for double-fire reports.
+
+- **after [Delegations round 2]:** Build threw `PageNotFoundError` for `/_document` and `/settings` mid-collect — caused by stale `.next/server/pages/_document.js` references from a previous incremental build. Fixed by `rm -rf .next && npx next build`. Recurring symptom — `next dev` and partial cache states keep regenerating phantom pages-router artifacts in `.next/`. Fully resolved with the manual clear; ran clean afterward. Watch items: (a) `Modal` and `ContextMenu` are still imported from `src/app/lead/[id]/` — third surface now uses them, cross-route coupling has been accepted; if a fourth shows up, move them under `src/components/`; (b) localStorage layout key versioned `cmk-chat-layout-v1` so future shape changes can migrate without breaking persisted prefs; (c) the parallel Close-API agent edited `api/chat/route.ts` between rounds — merged cleanly with my round-2 edits (added `summary` field), no conflicts; (d) `npm run fresh` strongly recommended — modal shape, animation keyframes, and grid transition fight stale dev-server chunks; (e) tool result `summary` is hard-truncated at 600 chars — long Close payloads will show `…` suffix in the modal, which is fine for preview but not full audit; (f) the fully-static phrase list for animated thinking will get repetitive — move to settings or compute from current state when it gets old.
+
+- **before [variable horizon + practice /leads]:** Cycle plans fixed at 7 days; practice rows not flagged on /leads.
+
+- **after [variable horizon + practice /leads]:** No bugs in tsc/next build. Watch: (a) `closeListLeads` `_fields`; (b) practice counts from 200-cap snapshot.
+
+- **before [/automation Close sequences]:** Automation route still demo-only vs CRM.
+
+- **after [/automation Close sequences]:** Live sequence list + `close:list-sequences` script. Watch: Close app URL pattern may differ by org — verify "Open in Close" links.
+
+- **after [Delegations round 3]:** No bugs surfaced. tsc + next build clean (/chat 52→54.4 kB). The `PageNotFoundError` on `/api/leads/[id]/summary` showed up again on the first incremental build and resolved with `rm -rf .next && next build` — same recurring Next 14 dev-cache phantom we've had before, not introduced by this sprint. Watch items: (a) `Toast` (in `src/components/`), `Modal` + `ContextMenu` (still under `src/app/lead/[id]/`) are all load-bearing across multiple routes — if a fourth surface needs Modal/ContextMenu, hoist them into `src/components/`; (b) auto-grow textarea triggers a layout pass on every keystroke — fine at message length, watch for jank if input grows multi-paragraph; (c) shortcut "?" listener guards against editable focus but `⌘\` may collide with browser dev-tools on some Linux setups and `⌘⇧N` competes with private-window in Firefox; (d) `prefers-reduced-motion` is not yet honored — could add a `@media` block to flatten the keyframes if a motion-sensitive operator asks; (e) drag-drop overlay backdrop-blur is GPU-cheap on modern browsers but degrades to translucent fill on older ones; (f) `relativeTime()` doesn't auto-refresh on the rail, so a thread that was "now" at mount stays "now" until next reload — could add a 60s interval if it gets noticed; (g) hydration: `useChatLayout()` initializes with DEFAULT_LAYOUT then updates after first effect, so a brief flash is possible if the user previously hid both panes — observed OK, not a server/client mismatch.
+
+- **after [Delegations round 4]:** No bugs. tsc + next build clean (/chat 54.4→55.8 kB). Resolved the round-3 watch item (f) — `relativeTime` now auto-ticks every 60s via `nowTick` state. Watch items: (a) Esc-to-cancel intercepts the keydown only when `abortRef.current` is set, but it does so before any other Esc handler — Modal's own Esc-to-close still works because Modals close via their own handler before this listener (different elements); if we ever stack a Modal during a request, Esc will cancel the request first then a second Esc will close the modal — that's the correct hierarchy IMO; (b) the slash palette closes if the user types past the matched prefix without space — by design (it disappears when no match, no need to dismiss), but worth confirming feels right at use; (c) `/lead <id>` smart-routes by `lead_xxx` prefix — if Close ever changes the prefix, update the slash command; (d) thread filter is purely client-side substring match against `title` only — no fuzzy match, no body content; fine for current scale; (e) code-copy reads `innerText` which means whatever the browser rendered — if we add a syntax highlighter later that injects markup tokens, copy may include them; non-issue today; (f) the abort fetch returns synthesized error message `"_(canceled)_"` rendered as italic markdown — operator might prefer a more visible "canceled" pill; can revisit if it gets confusing.
+
+- **before [Close surface sprint]:** None blocking — REST-only read surfaces + scripts; auth stays out of scope. Risk to watch: Advanced Filtering `reference_type` for lead status must match Close (`status.lead`); 200-cap + `?q=` client-side status/assignee trim same as other list views.
+
+- **after [Close surface sprint]:** No new bugs from tsc/build. Watch: if Close rejects `status.lead` on `/data/search/`, adjust `reference_type` per current Advanced Filtering docs; text search + filters still bounded by `_limit` 200.
+
+- **before [big moves roadmap]:** `use server` files cannot export arbitrary values — Settings build was failing until state moved out of `actions.ts`; Supabase migrations are in-repo but must be applied on the remote project.
+- **after [big moves roadmap]:** Resolved. Watch: `intake` bucket + `intake_artifacts` table must exist for uploads; operator lock is optional (empty `OPERATOR_PASSWORD` leaves actions open).
+
+---
+
+## 2026-05-01
+
+- **watch [post-auth epic ops]:** Ensure migration `20260505120000_execution_audit.sql` is applied on the Supabase project so `execution_log` / `approval_audit` / `lead_activity_touches` exist. Playwright smoke remains optional (not added to package.json).
+
+- **after [polish plan rounds 5→9 autopilot]:** No new bugs. Two unblocker fixes to parallel-agent code: (1) `heartbeat/[run_id]/page.tsx` `SkipBreakdownSection`: removed explicit `: ReactNode` return type so TS infers JSX.Element (Server Component constraint); (2) `PlanDayCard.tsx`: `as const` on every `kind:` field of the items array. Both 1-line, logic untouched. Watch items: (a) `useFormState` is now a load-bearing pattern via `SettingsForm` — if Next.js bumps to App Router strict mode this needs revisit; (b) toast dedup uses `bumpKey` to force React key change — works across the existing render but if a future toast wants persistent stacking, add a `dedup: false` option; (c) responsive breakpoints add `!important` overrides to padding tokens — fragile if those token values change, fine for now; (d) `prefers-reduced-motion` rule uses `*` and `!important` to enforce — heavy-handed but appropriate for a one-line accessibility commitment; (e) recurring `.next` phantom cache still appears on first incremental build — workaround stays `rm -rf .next && next build`.
+
+- **after [Round 11 — chat-first widgets]:** No bugs. tsc + next build clean. Watch items: (a) `pinFromCall` knows only `close_get_lead_full`, `close_get_lead`, `generate_seven_day_plan`; everything else falls to a generic `tool-result` pin — extend the switch as new tool shapes matter; (b) auto-pin guard via `lastAutoPinned.current` keyed `${msgId}:${callIdx}` — fine while message IDs stay stable; (c) `RichToolResult` reads `parsed.lead`, `parsed.contacts`, etc. from the JSON-stringified summary which is hard-truncated at 600 chars — long contact lists will be clipped at the API layer, the renderer doesn't fix that; (d) the empty-pinboard state still talks about the old "scope" mental model — copy could be tightened; (e) backspace lead-picker, `/day <id> <N>` command, and Lead Box widget extraction are all queued for next rounds; (f) the parallel agent's heartbeat/[run_id] page still has a TS error elsewhere that doesn't affect /chat — Jake's other agent owns it.

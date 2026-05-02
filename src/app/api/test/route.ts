@@ -3,7 +3,14 @@ import OpenAI from "openai";
 import { env } from "@/lib/env";
 import { getOctokit } from "@/lib/github";
 import { getSettings } from "@/lib/settings";
-import { closeListWorkflows, closeListEmailTemplates } from "@/lib/close";
+import {
+  closeListWorkflows,
+  closeListEmailTemplates,
+  closeListSmsTemplates,
+  closeListLeadStatuses,
+  closeListPhoneNumbers,
+  closeListWebhookSubscriptions,
+} from "@/lib/close";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -89,11 +96,13 @@ async function testGitHub() {
 }
 
 async function testClose() {
-  // Two reads in parallel: workflows + email templates. Both confirm the
-  // API key works, the network path is open, and we can paginate Close.
-  const [workflows, templates] = await Promise.all([
+  const [workflows, templates, smsTemplates, leadStatuses, phones, webhooks] = await Promise.all([
     closeListWorkflows({ limit: 50 }),
     closeListEmailTemplates({ limit: 50 }),
+    closeListSmsTemplates({ limit: 50 }),
+    closeListLeadStatuses(),
+    closeListPhoneNumbers({ limit: 50 }),
+    closeListWebhookSubscriptions({ limit: 50 }),
   ]);
   return {
     workflow_count: workflows.length,
@@ -101,6 +110,14 @@ async function testClose() {
     workflow_names: workflows.slice(0, 12).map((w) => w.name),
     email_template_count: templates.length,
     sample_templates: templates.slice(0, 6).map((t) => t.name),
+    sms_template_count: smsTemplates.length,
+    sample_sms_templates: smsTemplates.slice(0, 6).map((t) => t.name),
+    lead_status_count: leadStatuses.length,
+    sample_lead_statuses: leadStatuses.slice(0, 8).map((s) => `${s.label} (${s.id})`),
+    phone_number_count: phones.length,
+    sample_phones: phones.slice(0, 6).map((p) => (p.phone as string) ?? p.id),
+    webhook_subscription_count: webhooks.length,
+    webhook_urls: webhooks.slice(0, 8).map((w) => w.url ?? w.id),
   };
 }
 

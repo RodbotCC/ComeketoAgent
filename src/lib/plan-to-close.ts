@@ -1,16 +1,13 @@
 /**
  * Plan → Close codegen.
  *
- * Translates an approved Comeketo seven-day plan into the concrete Close
- * REST API calls that would execute it. This is the "code" Guardrails §M
- * refers to — the bridge from abstract plan into real CRM operations.
+ * Maps each `required_action` on the seven-day plan to typed `PlannedCloseAction`
+ * records (tasks, logged email/SMS drafts, enrollment hints). Used by the Lead
+ * Box preview and by `runHeartbeatForPlan` when building the per-action verdict
+ * and executing writes under `approved_plan_execution`.
  *
- * For now this is a PREVIEW translator: it returns a typed list of
- * `PlannedCloseAction` objects describing what each day's required_action
- * would do. Actual execution lives in the heartbeat cron (next sprint).
- *
- * Per Guardrails §I4 every write requires confirmed intent — so the
- * translator emits intent, not side effects.
+ * Per Guardrails §I4, customer-facing sends still require operator-controlled
+ * execution mode and gates; this module only describes the intended Close shape.
  */
 
 import type { SevenDayPlan, SevenDayPlanDay, PlannedTouchpoint } from "./plan";
@@ -93,15 +90,13 @@ function pickPrimaryContactId(box: CloseLeadFull): string | null {
 // ─── Translator ───────────────────────────────────────────────────────────
 
 /**
- * Translate a plan into the list of Close actions that would execute it.
+ * Translate a plan into the list of Close actions the heartbeat evaluates and may execute.
  *
  * Conventions:
  * - Day 1 = plan.cycle_started_at; Day 2 = +1d; etc.
  * - Skipped days emit a single "skip" action so the preview shows them.
  * - call & task channels → create_task assigned to Andre
- * - email & sms channels → log_activity (direct send) for now. The agent
- *   would later choose between this and enroll_in_workflow when a matching
- *   Close sequence is identified.
+ * - email & sms channels → log_activity (draft status in Close until outbox/send is enabled).
  * - Missing primary contact → blocking_warnings (no contact to send to).
  */
 export function codegenPlanForClose(input: CodegenInput): CodegenResult {

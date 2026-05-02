@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { AppHeader } from "@/components/AppHeader";
 import { TabNav } from "@/components/TabNav";
 import { ChatLayout } from "./ChatPanel";
@@ -5,10 +6,12 @@ import { ChatLayout } from "./ChatPanel";
 export default function ChatPage() {
   return (
     <div className="cme-shell chat-shell">
-      <AppHeader wordmarkHref="/" />
+      <AppHeader />
       <TabNav active="delegations" />
 
-      <ChatLayout />
+      <Suspense fallback={<div className="cmk-chat-suspense">Loading delegations…</div>}>
+        <ChatLayout />
+      </Suspense>
 
       <footer
         style={{

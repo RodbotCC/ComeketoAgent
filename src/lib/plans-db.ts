@@ -149,6 +149,35 @@ export async function pausePlan(planId: string): Promise<void> {
 }
 
 /**
+ * Append one `required_action` to a day. Sets `approval_status` to `needs_review` so multi-touch edits surface in the queue.
+ */
+export async function appendRequiredActionToPlanDay(
+  planId: string,
+  dayIndex: number,
+  touch: import("./plan").PlannedTouchpoint
+): Promise<void> {
+  const sb = getSupabaseServer();
+  const { data: row, error: readErr } = await sb
+    .from("lead_plans")
+    .select("days")
+    .eq("id", planId)
+    .single();
+  if (readErr) throw new Error(`appendRequiredActionToPlanDay read failed: ${readErr.message}`);
+  const days = ((row as { days: import("./plan").SevenDayPlanDay[] }).days ?? []).slice();
+  if (dayIndex < 0 || dayIndex >= days.length) {
+    throw new Error(`appendRequiredActionToPlanDay: day index ${dayIndex} out of range (have ${days.length})`);
+  }
+  const d = days[dayIndex];
+  days[dayIndex] = {
+    ...d,
+    required_actions: [...d.required_actions, touch],
+    approval_status: "needs_review",
+  };
+  const { error: writeErr } = await sb.from("lead_plans").update({ days }).eq("id", planId);
+  if (writeErr) throw new Error(`appendRequiredActionToPlanDay write failed: ${writeErr.message}`);
+}
+
+/**
  * Replace one day in a plan's `days` array. Used by the per-day AI
  * refinement flow: the LLM regenerates a single day from the user's
  * instruction; everything else stays.
@@ -219,4 +248,53 @@ export async function setDayStatus(
   days[dayIndex] = { ...days[dayIndex], approval_status: status };
   const { error: writeErr } = await sb.from("lead_plans").update({ days }).eq("id", planId);
   if (writeErr) throw new Error(`setDayStatus write failed: ${writeErr.message}`);
+}
+
+function planHasNeedsReviewDay(r: Row): boolean {
+  return (r.days || []).some((d) => d.approval_status === "needs_review");
+}
+
+/**
+ * Recent plans that might contain `needs_review` days (same window as list/count queue).
+ * Capped at 120 by generated_at — very old pending rows beyond the window won't appear in counts.
+ */
+async function fetchPlansEligibleForReviewScan(): Promise<Row[]> {
+  const sb = getSupabaseServer();
+  const { data, error } = await sb
+    .from("lead_plans")
+    .select("*")
+    .in("status", ["draft", "approved", "active"])
+    .order("generated_at", { ascending: false })
+    .limit(120);
+  if (error) throw new Error(`fetchPlansEligibleForReviewScan failed: ${error.message}`);
+  return (data as Row[]) ?? [];
+}
+
+/** Count plans with at least one day in `needs_review` (within scan window). */
+export async function countPlansNeedingReview(): Promise<number> {
+  const rows = await fetchPlansEligibleForReviewScan();
+  return rows.filter(planHasNeedsReviewDay).length;
+}
+
+export async function countPlansWithStatus(status: PlanStatus): Promise<number> {
+  const sb = getSupabaseServer();
+  const { count, error } = await sb
+    .from("lead_plans")
+    .select("id", { count: "exact", head: true })
+    .eq("status", status);
+  if (error) throw new Error(`countPlansWithStatus failed: ${error.message}`);
+  return count ?? 0;
+}
+
+/** Plans with at least one day in needs_review (approval queue). */
+export async function listPlansNeedingReview(limit = 40): Promise<Row[]> {
+  const rows = await fetchPlansEligibleForReviewScan();
+  const filtered: Row[] = [];
+  for (const r of rows) {
+    if (planHasNeedsReviewDay(r)) {
+      filtered.push(r);
+      if (filtered.length >= limit) break;
+    }
+  }
+  return filtered;
 }

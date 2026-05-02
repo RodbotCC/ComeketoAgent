@@ -12,7 +12,15 @@
  * chat-emitted workflow JSON ingestion.
  */
 
-import { useMemo, useState } from "react";
+import {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState,
+  type ForwardedRef,
+} from "react";
 
 // ─── Types ────────────────────────────────────────────────────────────────
 
@@ -78,7 +86,7 @@ function truncateLabel(label: string, role: NodeRole) {
 // Glyphs by kind — pulled from CC Agent LIBRARY.
 const KIND_GLYPHS: Record<string, string> = {
   // actors
-  rodbot: "◉", human: "◐", andre: "▲", sub_agent: "◎", customer: "♛", external_api: "⧉",
+  human: "◐", andre: "▲", sub_agent: "◎", customer: "♛", external_api: "⧉",
   // triggers
   cron: "⧗", webhook: "⌁", mcp_event: "◈", manual: "✦", interval: "↻", file_watch: "⌥",
   // transforms
@@ -175,17 +183,19 @@ function SelectionRing({ role }: { role: NodeRole }) {
 function GraphNode({
   node,
   selected,
+  pulse,
   onSelect,
 }: {
   node: WorkflowNode;
   selected: boolean;
+  pulse?: boolean;
   onSelect: (id: string) => void;
 }) {
   const off = endpointOffsets(node.role);
   const glyph = KIND_GLYPHS[node.kind] || "·";
   return (
     <g
-      className={"ag-node" + (selected ? " selected" : "")}
+      className={"ag-node" + (selected ? " selected" : "") + (pulse ? " ag-node-pulse" : "")}
       data-role={node.role}
       transform={`translate(${node.x} ${node.y})`}
       onClick={(e) => { e.stopPropagation(); onSelect(node.id); }}
@@ -250,8 +260,40 @@ function ConnectionPath({
 
 // ─── Main canvas ──────────────────────────────────────────────────────────
 
-export function AutomationCanvas({ workflow }: { workflow: Workflow }) {
+export type AutomationCanvasHandle = {
+  clearSelection: () => void;
+};
+
+export const AutomationCanvas = forwardRef(function AutomationCanvas(
+  {
+    workflow,
+    readOnly = false,
+    pulseNodeId = null,
+    externalInspector = false,
+    onSelectionChange,
+  }: {
+    workflow: Workflow;
+    /** When true, node clicks do not select (inspection-only graph). */
+    readOnly?: boolean;
+    /** When set, applies a walkthrough highlight ring to that node. */
+    pulseNodeId?: string | null;
+    /** When true, hide the floating inspector (parent renders selection elsewhere). */
+    externalInspector?: boolean;
+    onSelectionChange?: (node: WorkflowNode | null) => void;
+  },
+  ref: ForwardedRef<AutomationCanvasHandle>,
+) {
   const [selected, setSelected] = useState<string | null>(null);
+  const selNotify = useRef(onSelectionChange);
+  selNotify.current = onSelectionChange;
+  useImperativeHandle(ref, () => ({
+    clearSelection: () => setSelected(null),
+  }), []);
+
+  useEffect(() => {
+    const node = selected ? workflow.nodes.find((n) => n.id === selected) ?? null : null;
+    selNotify.current?.(node);
+  }, [selected, workflow.nodes]);
 
   // Compute viewBox bounds from node positions so the canvas auto-fits.
   const bounds = useMemo(() => {
@@ -270,6 +312,11 @@ export function AutomationCanvas({ workflow }: { workflow: Workflow }) {
 
   return (
     <div className="ag-canvas-frame">
+      {readOnly && (
+        <p className="muted" style={{ margin: "0 0 10px", fontSize: 11 }}>
+          Graph matches Close sequence steps (read-only).
+        </p>
+      )}
       <svg
         className="ag-canvas"
         viewBox={`${bounds.x} ${bounds.y} ${bounds.w} ${bounds.h}`}
@@ -289,10 +336,16 @@ export function AutomationCanvas({ workflow }: { workflow: Workflow }) {
           <ConnectionPath key={c.id} conn={c} nodes={workflow.nodes} />
         ))}
         {workflow.nodes.map(n => (
-          <GraphNode key={n.id} node={n} selected={selected === n.id} onSelect={setSelected} />
+          <GraphNode
+            key={n.id}
+            node={n}
+            selected={selected === n.id}
+            pulse={pulseNodeId === n.id}
+            onSelect={readOnly ? () => {} : setSelected}
+          />
         ))}
       </svg>
-      {selectedNode && (
+      {selectedNode && !externalInspector && (
         <aside className="ag-inspector">
           <div className="ag-inspector-eyebrow">{selectedNode.role} · {selectedNode.kind}</div>
           <h3 className="ag-inspector-h">{selectedNode.label}</h3>
@@ -318,4 +371,5 @@ export function AutomationCanvas({ workflow }: { workflow: Workflow }) {
       )}
     </div>
   );
-}
+});
+AutomationCanvas.displayName = "AutomationCanvas";

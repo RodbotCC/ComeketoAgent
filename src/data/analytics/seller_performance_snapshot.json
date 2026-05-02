@@ -1,0 +1,531 @@
+{
+  "_meta": {
+    "schema_version": "1.0",
+    "description": "Seller performance & pipeline health — auto-generated from Close CRM opportunity data.",
+    "generated_at": "2026-04-27T22:03:28Z",
+    "window_days": 30,
+    "opportunity_count": 666,
+    "owner_count": 6
+  },
+  "owner_profiles": [
+    {
+      "owner_name": "Sales Team Event Consultant Team",
+      "lead_count": 264,
+      "active_count": 111,
+      "won_count": 32,
+      "lost_count": 121,
+      "win_rate_pct": 12.1,
+      "pipeline_value_cents": 23023700,
+      "pipeline_value_fmt": "$230.2k",
+      "total_won_value_cents": 9420449,
+      "total_won_value_fmt": "$94.2k",
+      "avg_won_value_cents": 324843,
+      "avg_won_value_fmt": "$3.2k",
+      "median_days_to_close": 29.5,
+      "top_active_stages": [
+        {
+          "stage": "⬜ 00. Prospect",
+          "count": 55
+        },
+        {
+          "stage": "🔥 05A. Quote sent",
+          "count": 16
+        },
+        {
+          "stage": "🟩 01. Qualified",
+          "count": 11
+        },
+        {
+          "stage": "📲 02. Asking For Quote",
+          "count": 6
+        },
+        {
+          "stage": "📲 02. Setting Tasting Appointment",
+          "count": 6
+        }
+      ],
+      "new_opps_this_period": 139
+    },
+    {
+      "owner_name": "Andre Raw",
+      "lead_count": 161,
+      "active_count": 68,
+      "won_count": 13,
+      "lost_count": 80,
+      "win_rate_pct": 8.1,
+      "pipeline_value_cents": 13704600,
+      "pipeline_value_fmt": "$137.0k",
+      "total_won_value_cents": 5575472,
+      "total_won_value_fmt": "$55.8k",
+      "avg_won_value_cents": 506861,
+      "avg_won_value_fmt": "$5.1k",
+      "median_days_to_close": 29.4,
+      "top_active_stages": [
+        {
+          "stage": "⬜ 00. Prospect",
+          "count": 49
+        },
+        {
+          "stage": "📲 02. Setting Tasting Appointment",
+          "count": 6
+        },
+        {
+          "stage": "🔥 03. Booked for Tasting",
+          "count": 5
+        },
+        {
+          "stage": "🔥 05. Quote Phase",
+          "count": 3
+        },
+        {
+          "stage": "⬜ -00. Dormant (30 Days)",
+          "count": 1
+        }
+      ],
+      "new_opps_this_period": 78
+    },
+    {
+      "owner_name": "Eduarda Fedrizzi",
+      "lead_count": 105,
+      "active_count": 37,
+      "won_count": 15,
+      "lost_count": 53,
+      "win_rate_pct": 14.3,
+      "pipeline_value_cents": 5668602,
+      "pipeline_value_fmt": "$56.7k",
+      "total_won_value_cents": 3679042,
+      "total_won_value_fmt": "$36.8k",
+      "avg_won_value_cents": 262789,
+      "avg_won_value_fmt": "$2.6k",
+      "median_days_to_close": 21.2,
+      "top_active_stages": [
+        {
+          "stage": "⬜ 00. Prospect",
+          "count": 17
+        },
+        {
+          "stage": "🟩 01. Qualified",
+          "count": 5
+        },
+        {
+          "stage": "📲 02. Asking For Quote",
+          "count": 4
+        },
+        {
+          "stage": "🔥 05A. Quote sent",
+          "count": 4
+        },
+        {
+          "stage": "🔥 04. Attended Tasting",
+          "count": 4
+        }
+      ],
+      "new_opps_this_period": 36
+    },
+    {
+      "owner_name": "Event Consultant",
+      "lead_count": 99,
+      "active_count": 42,
+      "won_count": 9,
+      "lost_count": 48,
+      "win_rate_pct": 9.1,
+      "pipeline_value_cents": 6327800,
+      "pipeline_value_fmt": "$63.3k",
+      "total_won_value_cents": 3716365,
+      "total_won_value_fmt": "$37.2k",
+      "avg_won_value_cents": 412929,
+      "avg_won_value_fmt": "$4.1k",
+      "median_days_to_close": 18.1,
+      "top_active_stages": [
+        {
+          "stage": "⬜ 00. Prospect",
+          "count": 23
+        },
+        {
+          "stage": "🟩 01. Qualified",
+          "count": 5
+        },
+        {
+          "stage": "📲 02. Setting Tasting Appointment",
+          "count": 4
+        },
+        {
+          "stage": "🔥 05A. Quote sent",
+          "count": 2
+        },
+        {
+          "stage": "📲 02. Asking For Quote",
+          "count": 2
+        }
+      ],
+      "new_opps_this_period": 48
+    },
+    {
+      "owner_name": "Rhonna Ricafort",
+      "lead_count": 27,
+      "active_count": 11,
+      "won_count": 5,
+      "lost_count": 11,
+      "win_rate_pct": 18.5,
+      "pipeline_value_cents": 351500,
+      "pipeline_value_fmt": "$3.5k",
+      "total_won_value_cents": 781780,
+      "total_won_value_fmt": "$7.8k",
+      "avg_won_value_cents": 156356,
+      "avg_won_value_fmt": "$1.6k",
+      "median_days_to_close": 17.4,
+      "top_active_stages": [
+        {
+          "stage": "💼 01. Aware of us",
+          "count": 4
+        },
+        {
+          "stage": "⬜ 00. Prospect",
+          "count": 3
+        },
+        {
+          "stage": "💼 00. Prospect",
+          "count": 2
+        },
+        {
+          "stage": "🟩 01. Qualified",
+          "count": 1
+        },
+        {
+          "stage": "🔥 05A. Quote sent",
+          "count": 1
+        }
+      ],
+      "new_opps_this_period": 10
+    },
+    {
+      "owner_name": "Bibi De Los Santos",
+      "lead_count": 10,
+      "active_count": 4,
+      "won_count": 5,
+      "lost_count": 1,
+      "win_rate_pct": 50.0,
+      "pipeline_value_cents": 569000,
+      "pipeline_value_fmt": "$5.7k",
+      "total_won_value_cents": 948260,
+      "total_won_value_fmt": "$9.5k",
+      "avg_won_value_cents": 189652,
+      "avg_won_value_fmt": "$1.9k",
+      "median_days_to_close": 16.2,
+      "top_active_stages": [
+        {
+          "stage": "🔥 05A. Quote sent",
+          "count": 1
+        },
+        {
+          "stage": "🟩 01. Qualified",
+          "count": 1
+        },
+        {
+          "stage": "💼 01. Aware of us",
+          "count": 1
+        },
+        {
+          "stage": "💼 00. Prospect",
+          "count": 1
+        }
+      ],
+      "new_opps_this_period": 1
+    }
+  ],
+  "pipeline": {
+    "stages": [
+      {
+        "status_label": "🔲🔲 Archived Catering Customer 🔲🔲",
+        "status_type": "lost",
+        "count": 234,
+        "active_count": 0,
+        "won_count": 0,
+        "lost_count": 234,
+        "total_value_cents": 26833578,
+        "total_value_fmt": "$268.3k"
+      },
+      {
+        "status_label": "⬜ 00. Prospect",
+        "status_type": "active",
+        "count": 147,
+        "active_count": 147,
+        "won_count": 0,
+        "lost_count": 0,
+        "total_value_cents": 25683100,
+        "total_value_fmt": "$256.8k"
+      },
+      {
+        "status_label": "👤🔴🚫 Lost Catering Customer 🚫🔴👤",
+        "status_type": "lost",
+        "count": 51,
+        "active_count": 0,
+        "won_count": 0,
+        "lost_count": 51,
+        "total_value_cents": 4933500,
+        "total_value_fmt": "$49.3k"
+      },
+      {
+        "status_label": "💲 06. Booked / Deposit 35%",
+        "status_type": "won",
+        "count": 26,
+        "active_count": 0,
+        "won_count": 26,
+        "lost_count": 0,
+        "total_value_cents": 10861854,
+        "total_value_fmt": "$108.6k"
+      },
+      {
+        "status_label": "🟩 01. Qualified",
+        "status_type": "active",
+        "count": 24,
+        "active_count": 24,
+        "won_count": 0,
+        "lost_count": 0,
+        "total_value_cents": 5064900,
+        "total_value_fmt": "$50.6k"
+      },
+      {
+        "status_label": "🔥 05A. Quote sent",
+        "status_type": "active",
+        "count": 24,
+        "active_count": 24,
+        "won_count": 0,
+        "lost_count": 0,
+        "total_value_cents": 4139800,
+        "total_value_fmt": "$41.4k"
+      },
+      {
+        "status_label": "⬜ - 00. Dormant (30 Days F/U)",
+        "status_type": "lost",
+        "count": 21,
+        "active_count": 0,
+        "won_count": 0,
+        "lost_count": 21,
+        "total_value_cents": 1845800,
+        "total_value_fmt": "$18.5k"
+      },
+      {
+        "status_label": "💲 09. Fully Paid",
+        "status_type": "won",
+        "count": 18,
+        "active_count": 0,
+        "won_count": 18,
+        "lost_count": 0,
+        "total_value_cents": 3737604,
+        "total_value_fmt": "$37.4k"
+      },
+      {
+        "status_label": "📲 02. Setting Tasting Appointment",
+        "status_type": "active",
+        "count": 16,
+        "active_count": 16,
+        "won_count": 0,
+        "lost_count": 0,
+        "total_value_cents": 3413300,
+        "total_value_fmt": "$34.1k"
+      },
+      {
+        "status_label": "📲 02. Asking For Quote",
+        "status_type": "active",
+        "count": 12,
+        "active_count": 12,
+        "won_count": 0,
+        "lost_count": 0,
+        "total_value_cents": 2327300,
+        "total_value_fmt": "$23.3k"
+      },
+      {
+        "status_label": "💲 07. Paid 50%",
+        "status_type": "won",
+        "count": 11,
+        "active_count": 0,
+        "won_count": 11,
+        "lost_count": 0,
+        "total_value_cents": 5135017,
+        "total_value_fmt": "$51.4k"
+      },
+      {
+        "status_label": "🔥 03. Booked for Tasting",
+        "status_type": "active",
+        "count": 10,
+        "active_count": 10,
+        "won_count": 0,
+        "lost_count": 0,
+        "total_value_cents": 2625500,
+        "total_value_fmt": "$26.3k"
+      },
+      {
+        "status_label": "🔥 04. Attended Tasting",
+        "status_type": "active",
+        "count": 10,
+        "active_count": 10,
+        "won_count": 0,
+        "lost_count": 0,
+        "total_value_cents": 1765902,
+        "total_value_fmt": "$17.7k"
+      },
+      {
+        "status_label": "✅ 10. Job Complete",
+        "status_type": "won",
+        "count": 9,
+        "active_count": 0,
+        "won_count": 9,
+        "lost_count": 0,
+        "total_value_cents": 971413,
+        "total_value_fmt": "$9.7k"
+      },
+      {
+        "status_label": "💲 08. Final 20% Paid",
+        "status_type": "won",
+        "count": 8,
+        "active_count": 0,
+        "won_count": 8,
+        "lost_count": 0,
+        "total_value_cents": 3014020,
+        "total_value_fmt": "$30.1k"
+      },
+      {
+        "status_label": "💼 01. Aware of us",
+        "status_type": "active",
+        "count": 7,
+        "active_count": 7,
+        "won_count": 0,
+        "lost_count": 0,
+        "total_value_cents": 0,
+        "total_value_fmt": "$0"
+      },
+      {
+        "status_label": "🔥 05. Quote Phase",
+        "status_type": "active",
+        "count": 7,
+        "active_count": 7,
+        "won_count": 0,
+        "lost_count": 0,
+        "total_value_cents": 770400,
+        "total_value_fmt": "$7.7k"
+      },
+      {
+        "status_label": "⬜ -00. Dormant (30 Days)",
+        "status_type": "active",
+        "count": 6,
+        "active_count": 6,
+        "won_count": 0,
+        "lost_count": 0,
+        "total_value_cents": 2270400,
+        "total_value_fmt": "$22.7k"
+      },
+      {
+        "status_label": "💼 00. Prospect",
+        "status_type": "active",
+        "count": 6,
+        "active_count": 6,
+        "won_count": 0,
+        "lost_count": 0,
+        "total_value_cents": 150000,
+        "total_value_fmt": "$1.5k"
+      },
+      {
+        "status_label": "📵⛔️DO NOT CALL LIST 📵⛔️🙅‍♀️",
+        "status_type": "lost",
+        "count": 5,
+        "active_count": 0,
+        "won_count": 0,
+        "lost_count": 5,
+        "total_value_cents": 357300,
+        "total_value_fmt": "$3.6k"
+      },
+      {
+        "status_label": "📲 02. Booked Call",
+        "status_type": "active",
+        "count": 4,
+        "active_count": 4,
+        "won_count": 0,
+        "lost_count": 0,
+        "total_value_cents": 1434600,
+        "total_value_fmt": "$14.3k"
+      },
+      {
+        "status_label": "💼🎉 Converterted to B2B",
+        "status_type": "won",
+        "count": 3,
+        "active_count": 0,
+        "won_count": 3,
+        "lost_count": 0,
+        "total_value_cents": 0,
+        "total_value_fmt": "$0"
+      },
+      {
+        "status_label": "✅ 11. Review Gained",
+        "status_type": "won",
+        "count": 2,
+        "active_count": 0,
+        "won_count": 2,
+        "lost_count": 0,
+        "total_value_cents": 343400,
+        "total_value_fmt": "$3.4k"
+      },
+      {
+        "status_label": "❌ No Response",
+        "status_type": "lost",
+        "count": 2,
+        "active_count": 0,
+        "won_count": 0,
+        "lost_count": 2,
+        "total_value_cents": 0,
+        "total_value_fmt": "$0"
+      },
+      {
+        "status_label": "❌ Not Interested",
+        "status_type": "lost",
+        "count": 1,
+        "active_count": 0,
+        "won_count": 0,
+        "lost_count": 1,
+        "total_value_cents": 315000,
+        "total_value_fmt": "$3.1k"
+      },
+      {
+        "status_label": "❌ No Review",
+        "status_type": "won",
+        "count": 1,
+        "active_count": 0,
+        "won_count": 1,
+        "lost_count": 0,
+        "total_value_cents": 58060,
+        "total_value_fmt": "$581"
+      },
+      {
+        "status_label": "💼 04. Sent Some Referrals",
+        "status_type": "won",
+        "count": 1,
+        "active_count": 0,
+        "won_count": 1,
+        "lost_count": 0,
+        "total_value_cents": 0,
+        "total_value_fmt": "$0"
+      }
+    ],
+    "total_active_count": 273,
+    "total_won_count": 79,
+    "total_active_value_cents": 49645202,
+    "total_active_value_fmt": "$496.5k",
+    "total_won_value_cents": 24121368,
+    "total_won_value_fmt": "$241.2k",
+    "new_opps_this_period": 312
+  },
+  "global_metrics": {
+    "total_opportunities": 666,
+    "won_count": 79,
+    "lost_count": 314,
+    "active_count": 273,
+    "win_rate_pct": 11.9,
+    "global_median_days_to_close": 27.3,
+    "total_active_value_cents": 49645202,
+    "total_active_value_fmt": "$496.5k",
+    "total_won_value_cents": 24121368,
+    "total_won_value_fmt": "$241.2k",
+    "new_opps_this_period": 312
+  },
+  "summary_text": "666 opportunities · 79 won · 314 lost · 273 active · pipeline $496.5k · won value $241.2k · median close 27.3d · 6 owners"
+}

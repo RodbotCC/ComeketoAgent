@@ -2,15 +2,14 @@ import Link from "next/link";
 import { icons } from "./icons";
 
 type Props = {
-  /** Where the wordmark links. Defaults to "/chat" — the app's home for authenticated users. */
+  /** Where the wordmark links. Defaults to `/console` — operator command center. */
   wordmarkHref?: string;
 };
 
 /**
  * Shared header for authenticated app pages: four-dot identity + wordmark + utility ribbon.
- * Used on /chat, /intake, and any future authenticated page.
  */
-export function AppHeader({ wordmarkHref = "/chat" }: Props) {
+export function AppHeader({ wordmarkHref = "/console" }: Props) {
   return (
     <header
       style={{
@@ -47,7 +46,7 @@ export function AppHeader({ wordmarkHref = "/chat" }: Props) {
           <span style={{ opacity: 0.4 }}>·</span> personal{" "}
           <span style={{ opacity: 0.4 }}>·</span> briefing
         </span>
-        <Link href="/settings" style={{ color: "inherit", display: "inline-flex" }} aria-label="settings">
+        <Link href="/settings" className="cmk-icon-hit" style={{ color: "inherit" }} aria-label="settings">
           {icons.gear}
         </Link>
       </div>

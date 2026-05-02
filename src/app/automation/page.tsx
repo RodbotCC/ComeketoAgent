@@ -1,52 +1,171 @@
+import Link from "next/link";
 import { AppHeader } from "@/components/AppHeader";
 import { TabNav } from "@/components/TabNav";
-import { AutomationCanvas, type Workflow } from "./AutomationCanvas";
+import { AutomationSubNav } from "./AutomationSubNav";
+import { SequencesWorkflowPreview } from "./SequencesWorkflowPreview";
+import { closeListWorkflows, closeSequenceBrowserUrl, type CloseWorkflow } from "@/lib/close";
+import { env } from "@/lib/env";
 
-/**
- * Demo workflow — Morning Sweep → Grid.
- * Same shape as `comeketo.automation_graph.v1` from CC Agent. Will be
- * replaced by Supabase-loaded workflows once persistence lands.
- */
-const DEMO_WORKFLOW: Workflow = {
-  id: "wf_morning_sweep",
-  slug: "morning-sweep",
-  name: "Morning Sweep → Grid",
-  nodes: [
-    { id: "n_trg_dawn",   role: "trigger",   kind: "cron",        label: "6:45 AM daily", x: 160, y: 200, config: { cron: "45 6 * * *", tz: "America/New_York" }, notes: "Fires at dawn, weekdays and weekends alike.", description: "The day opens. A cron clock fires at 6:45 AM and wakes the workflow." },
-    { id: "n_sto_inbox",  role: "state",     kind: "inbox",       label: "Inbox",         x: 160, y: 380, config: { path: "_inbox/inbox.jsonl" }, notes: "Yesterday's residue — notes, commits, drifts.", description: "Yesterday's residue — notes, commits, and drifts — waits to be swept up." },
-    { id: "n_act_rodbot", role: "actor",     kind: "rodbot",      label: "Rodbot",        x: 400, y: 280, config: { model: "claude-sonnet-4-6", register: "intimate" }, notes: "Reads the trigger + inbox residue, writes the grid.", description: "Rodbot reads yesterday's residue and decides what today should look like." },
-    { id: "n_xf_reflect", role: "transform", kind: "reflect",     label: "Reflection",    x: 640, y: 200, config: { schema: "grid_cell_v1", max_cells: 9 }, notes: "Turns raw state into 9 named cells.", description: "Raw thinking becomes nine named cells, ready to render as the morning grid." },
-    { id: "n_sto_ledger", role: "state",     kind: "ledger",      label: "Activity",      x: 640, y: 380, config: { path: "_ledger/activity.jsonl" }, notes: "Audit trail (append-only JSONL).", description: "Every pass leaves a trace in the append-only activity ledger." },
-    { id: "n_snk_grid",   role: "sink",      kind: "grid_render", label: "Morning grid",  x: 880, y: 200, config: { grid_id: "morning" }, notes: "The 3×3 that Jake sees at open.", description: "The 3×3 morning grid lands in the UI — the first thing Jake sees." },
-    { id: "n_snk_slack",  role: "sink",      kind: "slack_post",  label: "Team Slack",    x: 880, y: 340, config: { channel: "#comeketo-ops" }, notes: "Briefs the team on the day's shape.", description: "If the day has heat, the team gets a Slack brief." },
-  ],
-  connections: [
-    { id: "c_trg_rod",       src: "n_trg_dawn",   dst: "n_act_rodbot", kind: "trigger",     label: "fire" },
-    { id: "c_inbox_rod",     src: "n_sto_inbox",  dst: "n_act_rodbot", kind: "reference",   label: "read" },
-    { id: "c_rod_reflect",   src: "n_act_rodbot", dst: "n_xf_reflect", kind: "data",        label: "raw state" },
-    { id: "c_reflect_led",   src: "n_xf_reflect", dst: "n_sto_ledger", kind: "data",        label: "append" },
-    { id: "c_reflect_grid",  src: "n_xf_reflect", dst: "n_snk_grid",   kind: "data" },
-    { id: "c_reflect_slack", src: "n_xf_reflect", dst: "n_snk_slack",  kind: "conditional", label: "if interesting" },
-  ],
-};
+export const dynamic = "force-dynamic";
 
-export default function AutomationPage() {
+type SearchParams = { status?: string };
+
+type StatusFilter = "all" | "active" | "paused" | "draft";
+
+function automationHref(status: StatusFilter): string {
+  if (status === "all") return "/automation";
+  return `/automation?status=${status}`;
+}
+
+function automationDetailHref(id: string, status: StatusFilter): string {
+  const base = `/automation/${encodeURIComponent(id)}`;
+  if (status === "all") return base;
+  return `${base}?status=${status}`;
+}
+
+function stepTypeSummary(w: CloseWorkflow): string {
+  const types = [...new Set((w.steps ?? []).map((s) => s.step_type).filter(Boolean))];
+  const t = types.slice(0, 8).join(", ");
+  return types.length > 8 ? `${t}, …` : t || "—";
+}
+
+function normalizeStatus(s: string | undefined): StatusFilter {
+  if (s === "active" || s === "paused" || s === "draft") return s;
+  return "all";
+}
+
+function statusFilterDisplay(s: StatusFilter): string {
+  if (s === "all") return "all";
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
+export default async function AutomationPage({ searchParams }: { searchParams: SearchParams }) {
+  const statusFilter = normalizeStatus(searchParams.status);
+
+  let workflows: CloseWorkflow[] = [];
+  let fetchError: string | null = null;
+
+  if (!env.CLOSE_API_KEY) {
+    fetchError = "CLOSE_API_KEY is not set — add it to .env.local to load sequences.";
+  } else {
+    try {
+      workflows = await closeListWorkflows({ limit: 100 });
+    } catch (err) {
+      fetchError = err instanceof Error ? err.message : String(err);
+    }
+  }
+
+  const filtered =
+    statusFilter === "all" ? workflows : workflows.filter((w) => w.status === statusFilter);
+
+  const countActive = workflows.filter((w) => w.status === "active").length;
+  const countPaused = workflows.filter((w) => w.status === "paused").length;
+  const countDraft = workflows.filter((w) => w.status === "draft").length;
+
+  const pills: Array<{ key: StatusFilter; label: string; count: number }> = [
+    { key: "all", label: "All", count: workflows.length },
+    { key: "active", label: "Active", count: countActive },
+    { key: "paused", label: "Paused", count: countPaused },
+    { key: "draft", label: "Draft", count: countDraft },
+  ];
+
   return (
     <div className="cme-shell">
-      <AppHeader wordmarkHref="/" />
+      <AppHeader />
       <TabNav active="automation" />
 
-      <main className="ag-main">
+      <main className="ag-main ag-main-stack">
+        <AutomationSubNav active="sequences" />
         <div className="ag-toolbar">
           <div className="ag-toolbar-l">
-            <span className="cme-eyebrow">workflow</span>
-            <h1 className="ag-title">{DEMO_WORKFLOW.name}</h1>
+            <span className="cme-eyebrow">automation · sequences</span>
+            <h1 className="ag-title">Close sequences</h1>
+            <p className="ag-lede muted">
+              Live from your org API. Open the{" "}
+              <Link href="/automation/workflows">workflow canvas</Link> for the Morning Sweep demo graph. Build new flows in{" "}
+              <Link href="/automation/drafts">Drafts</Link>, review AI-proposed steps, then publish to Close (operator-confirmed).
+            </p>
           </div>
-          <div className="ag-toolbar-r">
-            <span className="ag-toolbar-meta">{DEMO_WORKFLOW.nodes.length} nodes · {DEMO_WORKFLOW.connections.length} edges</span>
+          <div className="ag-toolbar-r" style={{ display: "flex", gap: 12, alignItems: "center", flexWrap: "wrap" }}>
+            <span className="ag-toolbar-meta">
+              {fetchError ? "—" : `${filtered.length} shown · ${workflows.length} total`}
+            </span>
           </div>
         </div>
-        <AutomationCanvas workflow={DEMO_WORKFLOW} />
+
+        <div className="ag-seq-filter">
+          {pills.map((p) => (
+            <Link
+              key={p.key}
+              href={automationHref(p.key)}
+              className={`leads-filter-pill${statusFilter === p.key ? " active" : ""}`}
+            >
+              {p.label} <span className="leads-filter-count">{p.count}</span>
+            </Link>
+          ))}
+        </div>
+
+        {fetchError && (
+          <div className="leads-error ag-seq-error">
+            <strong>Close API:</strong> {fetchError}
+          </div>
+        )}
+
+        {!fetchError && filtered.length === 0 && workflows.length > 0 ? (
+          <div className="widget ag-seq-filter-empty">
+            <p className="muted" style={{ margin: 0 }}>
+              No sequences with status <strong>{statusFilterDisplay(statusFilter)}</strong>.{" "}
+              <Link href={automationHref("all")}>Show all</Link>
+              {" · "}
+              <Link href="/automation/drafts">Drafts</Link>
+            </p>
+          </div>
+        ) : !fetchError && filtered.length === 0 ? (
+          <SequencesWorkflowPreview />
+        ) : !fetchError ? (
+          <div className="ag-seq-table widget">
+            <div className="ag-seq-row ag-seq-row-head">
+              <div className="ag-seq-col-name">Sequence</div>
+              <div className="ag-seq-col-status">Status</div>
+              <div className="ag-seq-col-steps">Steps</div>
+              <div className="ag-seq-col-types">Step types</div>
+              <div className="ag-seq-col-id">Id</div>
+              <div className="ag-seq-col-link">Close</div>
+            </div>
+            {filtered.map((w) => {
+              const browserUrl = closeSequenceBrowserUrl(w);
+              const stepCount = w.steps?.length ?? 0;
+              const detailHref = automationDetailHref(w.id, statusFilter);
+              return (
+                <div key={w.id} className="ag-seq-row">
+                  <div className="ag-seq-col-name">
+                    <Link href={detailHref} className="ag-seq-name-link">
+                      <span className="ag-seq-name">{w.name || "(unnamed)"}</span>
+                    </Link>
+                  </div>
+                  <div className="ag-seq-col-status">
+                    <span className={`ag-seq-status ag-seq-status-${w.status}`}>{w.status}</span>
+                  </div>
+                  <div className="ag-seq-col-steps">{stepCount}</div>
+                  <div className="ag-seq-col-types ag-seq-types" title={stepTypeSummary(w)}>
+                    {stepTypeSummary(w)}
+                  </div>
+                  <div className="ag-seq-col-id">
+                    <Link href={detailHref} className="ag-seq-id-link">
+                      <code className="ag-seq-mono">{w.id}</code>
+                    </Link>
+                  </div>
+                  <div className="ag-seq-col-link">
+                    <a href={browserUrl} target="_blank" rel="noreferrer" className="ag-seq-open">
+                      Open →
+                    </a>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        ) : null}
+
       </main>
 
       <footer
@@ -61,10 +180,9 @@ export default function AutomationPage() {
           borderTop: "0.5px solid rgba(0,0,0,0.05)",
         }}
       >
-        <span>graph · read-only</span>
+        <span>Close · GET /sequence/</span>
         <span>
-          comeketo.automation_graph.v1{" "}
-          <span style={{ fontFamily: "var(--serif)", fontStyle: "italic" }}>· Comeketo Agent</span>
+          <span style={{ fontFamily: "var(--serif)", fontStyle: "italic" }}>Comeketo Agent</span>
         </span>
       </footer>
     </div>

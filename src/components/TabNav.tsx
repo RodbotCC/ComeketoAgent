@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { icons } from "./icons";
 
-type TabKey = "leads" | "intake" | "automation" | "heartbeat" | "delegations";
+type TabKey = "console" | "leads" | "analytics" | "automation" | "heartbeat" | "delegations" | "intake";
 
 type Tab = {
   key: TabKey;
@@ -12,10 +12,12 @@ type Tab = {
 };
 
 const TABS: Tab[] = [
+  { key: "console",     label: "console",     icon: icons.analytics,   href: "/console" },
   { key: "leads",       label: "leads",       icon: icons.boxes,       href: "/leads" },
-  { key: "intake",      label: "intake",      icon: icons.intake,      href: "/intake",     dot: "amber" },
+  { key: "analytics",   label: "analytics",   icon: icons.analytics,   href: "/analytics" },
   { key: "automation",  label: "automation",  icon: icons.automation,  href: "/automation", dot: "sage" },
   { key: "heartbeat",   label: "heartbeat",   icon: icons.activity,    href: "/heartbeat" },
+  { key: "intake",      label: "intake",      icon: icons.intake,       href: "/intake" },
   { key: "delegations", label: "delegations", icon: icons.delegations, href: "/chat" },
 ];
 
@@ -41,7 +43,7 @@ export function TabNav({ active }: Props) {
         display: "flex",
         justifyContent: "flex-end",
         flexShrink: 0,
-        borderBottom: "0.5px solid rgba(0,0,0,0.05)",
+        borderBottom: "1px solid rgba(26, 24, 21, 0.10)",
       }}
     >
       <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
@@ -54,7 +56,7 @@ export function TabNav({ active }: Props) {
           };
           const inner = (
             <>
-              {tab.icon}
+              <span className="cmk-icon-hit">{tab.icon}</span>
               <span>{tab.label}</span>
               {tab.dot ? (
                 <span className="cmk-nav-dot" style={{ background: DOT_COLOR[tab.dot] }} />

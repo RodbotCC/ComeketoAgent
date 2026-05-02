@@ -2,15 +2,32 @@ import { getSupabaseServer } from "./supabase";
 
 export type Role = "user" | "assistant" | "system";
 
-export type Attachment = {
-  /** "image" for now; future: "file", "audio". */
-  type: "image";
-  /** Data URL: "data:image/png;base64,...". Client encodes; server stores as-is. */
-  data_url: string;
-  mime: string;
-  /** Optional file name for display. */
-  name?: string;
-};
+/**
+ * Attachment shape stored on a message. Supports two kinds today:
+ *
+ *  - `image`: inline data URL the model sees as a vision input.
+ *  - `text`: extracted text body from a file the operator dropped (PDF/text/
+ *    JSON/CSV/HTML stripped to plain text). Pulled from the intake pipeline
+ *    (`/api/intake/upload` → `/api/intake/extract`). The model sees the
+ *    content as input_text in the next turn.
+ */
+export type Attachment =
+  | {
+      type: "image";
+      /** Data URL: "data:image/png;base64,...". */
+      data_url: string;
+      mime: string;
+      name?: string;
+    }
+  | {
+      type: "text";
+      /** Plain-text body extracted from the file. Truncated upstream. */
+      text: string;
+      mime: string;
+      name?: string;
+      /** Supabase intake_artifacts row id, when produced by the intake pipeline. */
+      artifact_id?: string;
+    };
 
 export type Thread = {
   id: string;
@@ -84,6 +101,31 @@ export async function archiveThread(id: string): Promise<void> {
     .update({ archived_at: new Date().toISOString() })
     .eq("id", id);
   if (error) throw new Error(`archiveThread: ${error.message}`);
+}
+
+export async function unarchiveThread(id: string): Promise<void> {
+  const supa = getSupabaseServer();
+  const { error } = await supa
+    .from("threads")
+    .update({ archived_at: null })
+    .eq("id", id);
+  if (error) throw new Error(`unarchiveThread: ${error.message}`);
+}
+
+export async function renameThread(id: string, title: string): Promise<void> {
+  const trimmed = title.trim().slice(0, TITLE_MAX);
+  if (!trimmed) throw new Error("renameThread: title required");
+  const supa = getSupabaseServer();
+  const { error } = await supa.from("threads").update({ title: trimmed }).eq("id", id);
+  if (error) throw new Error(`renameThread: ${error.message}`);
+}
+
+export async function deleteThread(id: string): Promise<void> {
+  const supa = getSupabaseServer();
+  const { error: msgErr } = await supa.from("messages").delete().eq("thread_id", id);
+  if (msgErr) throw new Error(`deleteThread (messages): ${msgErr.message}`);
+  const { error } = await supa.from("threads").delete().eq("id", id);
+  if (error) throw new Error(`deleteThread: ${error.message}`);
 }
 
 /* ============ MESSAGES ============ */

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useToast } from "@/components/Toast";
 
 type Mode = "openai" | "supabase" | "github" | "close";
 
@@ -39,6 +40,7 @@ const MODES: Array<{ key: Mode; title: string; description: string }> = [
 export default function TestPage() {
   const [results, setResults] = useState<Partial<Record<Mode, TestResult | null>>>({});
   const [loading, setLoading] = useState<Partial<Record<Mode, boolean>>>({});
+  const toast = useToast();
 
   async function fire(mode: Mode) {
     setLoading((s) => ({ ...s, [mode]: true }));
@@ -51,8 +53,15 @@ export default function TestPage() {
       });
       const data = (await res.json()) as TestResult;
       setResults((r) => ({ ...r, [mode]: data }));
+      if (data.ok) {
+        toast.push(`${MODES.find((m) => m.key === mode)?.title ?? mode} reachable${data.durationMs ? ` · ${data.durationMs}ms` : ""}`, { tone: "success" });
+      } else {
+        toast.push(`${mode} failed${data.error ? ` — ${data.error.slice(0, 80)}` : ""}`, { tone: "error", ttl: 4500 });
+      }
     } catch (err) {
-      setResults((r) => ({ ...r, [mode]: { ok: false, mode, error: String(err) } }));
+      const msg = err instanceof Error ? err.message : String(err);
+      setResults((r) => ({ ...r, [mode]: { ok: false, mode, error: msg } }));
+      toast.push(`${mode} failed — ${msg.slice(0, 80)}`, { tone: "error", ttl: 4500 });
     } finally {
       setLoading((s) => ({ ...s, [mode]: false }));
     }
@@ -75,7 +84,6 @@ export default function TestPage() {
         </span>
         <div className="cme-utility">
           <Link href="/chat">chat</Link>
-          <Link href="/intake">intake</Link>
           <Link href="/settings">settings</Link>
           <Link href="/test">test</Link>
         </div>
@@ -89,25 +97,47 @@ export default function TestPage() {
         {MODES.map(({ key, title, description }) => {
           const result = results[key];
           const busy = !!loading[key];
+          const resultText = result ? JSON.stringify(result.error ?? result.output, null, 2) : "";
           return (
             <section key={key} style={{ marginTop: 32, paddingTop: 16, borderTop: "1px solid var(--rule)" }}>
               <h2>{title}</h2>
               <p className="muted">{description}</p>
-              <button onClick={() => fire(key)} disabled={busy}>
-                {busy ? "Firing…" : `Test ${title}`}
+              <button onClick={() => fire(key)} disabled={busy} className={busy ? "test-btn-busy" : ""}>
+                {busy ? (
+                  <>
+                    <span className="test-spinner" aria-hidden /> testing…
+                  </>
+                ) : (
+                  `Test ${title}`
+                )}
               </button>
               {result && (
-                <>
-                  <h3 style={{ marginTop: 16 }}>
-                    {result.ok ? "✓ ok" : "✗ failed"}
-                    {typeof result.durationMs === "number" ? (
-                      <span className="muted" style={{ marginLeft: 12, fontSize: 11, fontFamily: "var(--mono)" }}>
-                        {result.durationMs}ms
-                      </span>
-                    ) : null}
-                  </h3>
-                  <pre>{JSON.stringify(result.error ?? result.output, null, 2)}</pre>
-                </>
+                <div className={`test-result test-result-${result.ok ? "ok" : "fail"}`}>
+                  <div className="test-result-head">
+                    <span className="test-result-status">
+                      {result.ok ? "✓ ok" : "✗ failed"}
+                    </span>
+                    {typeof result.durationMs === "number" && (
+                      <span className="test-result-ms">{result.durationMs}ms</span>
+                    )}
+                    <button
+                      type="button"
+                      className="test-result-copy"
+                      onClick={() => {
+                        if (navigator.clipboard) {
+                          void navigator.clipboard.writeText(resultText).then(() => {
+                            toast.push("Result copied", { tone: "success" });
+                          });
+                        }
+                      }}
+                      title="Copy result"
+                      aria-label="Copy result"
+                    >
+                      ⎘
+                    </button>
+                  </div>
+                  <pre className="test-result-pre">{resultText}</pre>
+                </div>
               )}
             </section>
           );

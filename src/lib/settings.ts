@@ -36,14 +36,29 @@ export const EXECUTION_MODES = [
 ] as const;
 export type ExecutionMode = (typeof EXECUTION_MODES)[number];
 
+/** Calendar-day buckets in a generated cycle plan (NEPQ week default = 7). */
+export const DEFAULT_PLAN_HORIZON_DAYS = 7;
+export const PLAN_HORIZON_MIN = 1;
+export const PLAN_HORIZON_MAX = 180;
+
+export function clampPlanHorizonDays(raw: unknown): number {
+  const n = typeof raw === "number" ? raw : typeof raw === "string" ? Number(raw) : NaN;
+  const r = Math.round(n);
+  if (!Number.isFinite(r)) return DEFAULT_PLAN_HORIZON_DAYS;
+  return Math.min(PLAN_HORIZON_MAX, Math.max(PLAN_HORIZON_MIN, r));
+}
+
 export type Settings = {
   model: ModelId;
   execution_mode: ExecutionMode;
+  /** Default N-day cycle when the UI does not pass an explicit horizon. */
+  default_plan_horizon_days: number;
 };
 
 export const DEFAULT_SETTINGS: Settings = {
   model: "gpt-5.4-mini-2026-03-17",
   execution_mode: "draft_only",
+  default_plan_horizon_days: DEFAULT_PLAN_HORIZON_DAYS,
 };
 
 const SETTINGS_PATH = path.join(process.cwd(), ".cmk-settings.json");
@@ -64,6 +79,9 @@ export async function getSettings(): Promise<Settings> {
       execution_mode: isValidExecutionMode(parsed.execution_mode)
         ? parsed.execution_mode
         : DEFAULT_SETTINGS.execution_mode,
+      default_plan_horizon_days: clampPlanHorizonDays(
+        parsed.default_plan_horizon_days ?? DEFAULT_SETTINGS.default_plan_horizon_days
+      ),
     };
   } catch {
     return { ...DEFAULT_SETTINGS };
@@ -77,6 +95,10 @@ export async function setSettings(partial: Partial<Settings>): Promise<Settings>
     execution_mode: isValidExecutionMode(partial.execution_mode)
       ? partial.execution_mode
       : current.execution_mode,
+    default_plan_horizon_days:
+      partial.default_plan_horizon_days !== undefined
+        ? clampPlanHorizonDays(partial.default_plan_horizon_days)
+        : current.default_plan_horizon_days,
   };
   await fs.writeFile(SETTINGS_PATH, JSON.stringify(next, null, 2) + "\n", "utf-8");
   return next;

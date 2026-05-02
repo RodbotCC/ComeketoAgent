@@ -83,7 +83,7 @@ export default async function HeartbeatDashboardPage() {
 
   return (
     <div className="cme-shell">
-      <AppHeader wordmarkHref="/" />
+      <AppHeader />
       <TabNav active="heartbeat" />
 
       <main className="hb-page-main scroll-hide">
@@ -94,6 +94,12 @@ export default async function HeartbeatDashboardPage() {
           </div>
           <div className="hb-page-toolbar-r">
             <span className={`hb-mode hb-mode-${modeInfo.tone}`}>{modeInfo.label}</span>
+            <Link href="/heartbeat/webhooks" className="ag-seq-open" style={{ fontSize: 11 }}>
+              Webhooks →
+            </Link>
+            <Link href="/approvals" className="ag-seq-open" style={{ fontSize: 11 }}>
+              Approval queue →
+            </Link>
             <span className="hb-page-window">last 24h</span>
           </div>
         </div>

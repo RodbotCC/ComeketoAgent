@@ -4,12 +4,16 @@
  * The heartbeat sweeps active plans every 30-60 minutes during work hours.
  * For each plan it: rehydrates the Box from Close, recomputes the snapshot
  * id, marks the plan stale on mismatch, and (if not stale) walks each day
- * to determine which actions would fire NOW under the gate stack.
+ * and every `required_action` to evaluate gate outcomes (ownership, reply
+ * gate, send window, frequency cap, voice, execution mode).
  *
- * Critical: per §E2 + §I1 the heartbeat NEVER silently sends. By default
- * `executionMode` is `draft_only` — the heartbeat emits a report of what
- * WOULD have fired, with skip codes for what didn't. Real customer-facing
- * sends require `approved_plan_execution` mode (not yet enabled).
+ * Execution semantics by mode:
+ * - `draft_only` — no Close writes; gate-passing touches appear as skipped with
+ *   skip_code `EXECUTION_DISABLED` in the persisted report.
+ * - `approval_required` — eligible touches have `verdict.fire: true` but the
+ *   heartbeat still does not call Close (eligibility snapshot only).
+ * - `approved_plan_execution` — eligible touches trigger real Close API writes
+ *   (tasks, draft email/SMS activities per plan-to-close helpers).
  *
  * Each run writes a row to `heartbeat_runs` for audit (Guardrails §O).
  */
@@ -39,6 +43,8 @@ import { codegenPlanForClose } from "./plan-to-close";
 import { validateNepqVoice, hasBlockingViolation, type VoiceViolation } from "./nepq";
 import { setDayStatus } from "./plans-db";
 import { resolveLeadTimezone, type TimezoneResolution } from "./timezone";
+import { randomUUID } from "crypto";
+import { logExecution } from "./execution-audit";
 
 export type ExecutionMode =
   | "draft_only"            // heartbeat reports only, never sends
@@ -231,7 +237,8 @@ async function executeAction(
 export async function runHeartbeatForPlan(
   planId: string,
   trigger: "cron" | "manual" | "api" = "manual",
-  executionMode: ExecutionMode = "draft_only"
+  executionMode: ExecutionMode = "draft_only",
+  traceId?: string | null
 ): Promise<HeartbeatReport> {
   const startedAt = Date.now();
   const sb = getSupabaseServer();
@@ -253,6 +260,17 @@ export async function runHeartbeatForPlan(
   if (!snapshotMatch && (plan.status === "approved" || plan.status === "active")) {
     planWasStale = true;
     await sb.from("lead_plans").update({ status: "paused" }).eq("id", plan.plan_id);
+    void logExecution({
+      action_kind: "plan_paused_stale",
+      close_lead_id: plan.close_lead_id,
+      plan_id: plan.plan_id,
+      trace_id: traceId ?? null,
+      snapshot_id_at_action: currentSnapshotId,
+      payload: {
+        plan_snapshot_id: plan.based_on_snapshot_id,
+        trigger,
+      },
+    });
   }
 
   // Run all the gates against the current Box.
@@ -317,6 +335,20 @@ export async function runHeartbeatForPlan(
             reason: "fired",
             executed: { kind: result.kind, close_id: result.close_id },
           };
+          void logExecution({
+            action_kind: "close_write",
+            close_lead_id: plan.close_lead_id,
+            plan_id: plan.plan_id,
+            trace_id: traceId ?? null,
+            snapshot_id_at_action: currentSnapshotId,
+            payload: {
+              channel: req.channel,
+              kind: result.kind,
+              close_id: result.close_id,
+              intent: req.intent,
+              trigger,
+            },
+          });
         } else {
           dayAllFiresSucceeded = false;
           finalVerdict = {
@@ -325,6 +357,16 @@ export async function runHeartbeatForPlan(
             reason: `Close write failed: ${result.error}`,
             close_error: result.error,
           };
+          void logExecution({
+            action_kind: "close_write",
+            close_lead_id: plan.close_lead_id,
+            plan_id: plan.plan_id,
+            trace_id: traceId ?? null,
+            result: "error",
+            skip_code: "CLOSE_API_ERROR",
+            snapshot_id_at_action: currentSnapshotId,
+            payload: { channel: req.channel, error: result.error, trigger },
+          });
         }
       }
 
@@ -418,6 +460,25 @@ export async function runHeartbeatForPlan(
     trigger,
   });
 
+  void logExecution({
+    action_kind: "heartbeat_run",
+    close_lead_id: plan.close_lead_id,
+    plan_id: plan.plan_id,
+    trace_id: traceId ?? null,
+    snapshot_id_at_action: currentSnapshotId,
+    payload: {
+      trigger,
+      execution_mode: executionMode,
+      actions_eligible,
+      actions_fired,
+      actions_skipped,
+      skip_breakdown,
+      snapshot_match: snapshotMatch,
+      plan_was_stale: planWasStale,
+      duration_ms: report.duration_ms,
+    },
+  });
+
   return report;
 }
 
@@ -426,7 +487,13 @@ export async function runHeartbeatForPlan(
 export async function runHeartbeatSweep(
   trigger: "cron" | "manual" | "api" = "cron",
   executionMode: ExecutionMode = "draft_only"
-): Promise<{ runs: HeartbeatReport[]; errors: Array<{ plan_id: string; error: string }> }> {
+): Promise<{
+  runs: HeartbeatReport[];
+  errors: Array<{ plan_id: string; error: string }>;
+  trace_id: string;
+}> {
+  const sweepStarted = Date.now();
+  const traceId = randomUUID();
   const sb = getSupabaseServer();
   // Sweep approved + active + draft (draft so we still catch staleness).
   const { data, error } = await sb
@@ -440,7 +507,7 @@ export async function runHeartbeatSweep(
   const errors: Array<{ plan_id: string; error: string }> = [];
   for (const pid of ids) {
     try {
-      const r = await runHeartbeatForPlan(pid, trigger, executionMode);
+      const r = await runHeartbeatForPlan(pid, trigger, executionMode, traceId);
       runs.push(r);
     } catch (err) {
       errors.push({ plan_id: pid, error: err instanceof Error ? err.message : String(err) });
@@ -457,17 +524,36 @@ export async function runHeartbeatSweep(
       breakdown[k] = (breakdown[k] ?? 0) + v;
     }
   }
+  const lead_summaries = runs.map((r) => ({
+    close_lead_id: r.close_lead_id,
+    plan_id: r.plan_id,
+    snapshot_match: r.snapshot_match,
+    plan_was_stale: r.plan_was_stale,
+    current_snapshot_id: r.current_snapshot_id,
+    plan_snapshot_id: r.plan_snapshot_id,
+    actions_eligible: r.actions_eligible,
+    actions_fired: r.actions_fired,
+    actions_skipped: r.actions_skipped,
+    skip_breakdown: r.skip_breakdown,
+  }));
   await sb.from("heartbeat_runs").insert({
     scope: "all",
     actions_eligible: totalEligible,
     actions_fired: totalFired,
     actions_skipped: totalSkipped,
     skip_breakdown: breakdown,
-    report: { plan_count: runs.length, error_count: errors.length, errors },
+    report: {
+      trace_id: traceId,
+      sweep_duration_ms: Date.now() - sweepStarted,
+      plan_count: runs.length,
+      error_count: errors.length,
+      errors,
+      lead_summaries,
+    },
     trigger,
   });
 
-  return { runs, errors };
+  return { runs, errors, trace_id: traceId };
 }
 
 // ─── DB helpers for the UI ──────────────────────────────────────────────

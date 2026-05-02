@@ -47,7 +47,6 @@ export function ContextMenu({
     };
   }, [pos]);
 
-  // Clamp menu to viewport.
   useEffect(() => {
     if (!pos || !menuRef.current) return;
     const el = menuRef.current;

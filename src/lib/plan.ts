@@ -1,20 +1,19 @@
 /**
- * Seven-day plan generator for a Lead Box.
+ * Variable-horizon cycle plan generator for a Lead Box.
  *
- * Per Guardrails §D — every Andre-owned lead enters a tailored 7-day cycle
- * that prefers a scheduled phone call as the conversion target. The plan
- * is generated from the hydrated Box (Close lead + activity feed +
- * subscriptions) by an LLM call with strict JSON output.
+ * Per Guardrails §D — Andre-owned leads get a tailored N-calendar-day cycle
+ * (default 7 for NEPQ-style week) toward a scheduled phone call. The plan is
+ * generated from the hydrated Box by an LLM with strict JSON output.
  *
- * This module is server-only. It composes a system prompt that bakes in
- * NEPQ voice rules, hard gates, send windows, frequency caps, and the
- * canonical tasting dates. It returns a SevenDayPlan matching the schema
- * in Guardrails §D4 (with a generated plan_id).
+ * Sub-day or sub-year scheduling is not modeled here: each "day" is one
+ * calendar bucket; heartbeat still applies send windows inside that day.
+ *
+ * This module is server-only.
  */
 
 import OpenAI from "openai";
 import { env } from "./env";
-import { getSettings } from "./settings";
+import { getSettings, clampPlanHorizonDays } from "./settings";
 import { closeGetLeadFull, type CloseActivity, type CloseLeadFull } from "./close";
 import { savePlan } from "./plans-db";
 
@@ -34,7 +33,8 @@ export type PlannedTouchpoint = {
 };
 
 export type SevenDayPlanDay = {
-  day: 1 | 2 | 3 | 4 | 5 | 6 | 7;
+  /** 1-based index within this plan (1 … days.length). */
+  day: number;
   objective: string;
   required_actions: PlannedTouchpoint[];
   send_window: string;   // human-readable send window
@@ -54,7 +54,7 @@ export type SevenDayPlan = {
   based_on_snapshot_id: string;
   status: PlanStatus;
   primary_goal: PlanGoal;
-  goal_summary: string;       // one sentence — what the week is FOR
+  goal_summary: string;       // one sentence — what the cycle is FOR
   lead_state_summary: string; // one paragraph — current state in plain English
   known_facts: string[];
   unknowns: string[];
@@ -68,21 +68,35 @@ export type SevenDayPlan = {
 
 /**
  * Generate a snapshot id for a Box state. Per Guardrails §E3 the heartbeat
- * compares snapshot ids to detect staleness. Hash the lead update timestamp
- * + activity count + last activity timestamp — anything that changes when
- * the lead changes in Close will change the snapshot id.
+ * compares snapshot ids to detect staleness. Uses sorted activity timestamps,
+ * newest activity id, email-thread count + latest thread touch, lead
+ * `date_updated`, and subscription rows — so new comms or thread updates
+ * invalidate the plan without relying on API sort order of `/activity/`.
  */
 export function snapshotIdForBox(box: CloseLeadFull): string {
-  const last = box.activities[0]?.date_created || "";
+  const sortedActs = [...box.activities].sort(
+    (a, b) => new Date(b.date_created).getTime() - new Date(a.date_created).getTime()
+  );
+  const lastActTime = sortedActs[0]?.date_created || "";
+  const lastActId = sortedActs[0]?.id || "";
+  const threads = box.email_threads ?? [];
+  const sortedThreads = [...threads].sort(
+    (a, b) =>
+      new Date(b.date_updated || b.date_created || 0).getTime() -
+      new Date(a.date_updated || a.date_created || 0).getTime()
+  );
+  const lastThreadTouch =
+    sortedThreads[0]?.date_updated || sortedThreads[0]?.date_created || "";
+  const lastThreadId = sortedThreads[0]?.id || "";
   const subs = box.subscriptions.map((s) => `${s.id}:${s.status}`).sort().join("|");
-  const stamp = `${box.lead.id}|${box.lead.date_updated || ""}|${box.activities.length}|${last}|${subs}`;
+  const stamp = `${box.lead.id}|${box.lead.date_updated || ""}|${sortedActs.length}|${lastActTime}|${lastActId}|${threads.length}|${lastThreadTouch}|${lastThreadId}|${subs}`;
   // Tiny non-cryptographic hash to keep the id short.
   let h = 0;
   for (let i = 0; i < stamp.length; i++) {
     h = (h << 5) - h + stamp.charCodeAt(i);
     h |= 0;
   }
-  return `snap_${Math.abs(h).toString(36)}_${box.activities.length}`;
+  return `snap_${Math.abs(h).toString(36)}_${sortedActs.length}`;
 }
 
 // ─── Prompt assembly ──────────────────────────────────────────────────────
@@ -93,9 +107,12 @@ const TASTING_DATES = [
   "Sunday, May 31, 2026 at 2:00 PM",
 ];
 
-const SYSTEM_PROMPT = `You are the Seven-Day Plan composer for Comeketo Agent.
+function buildGenerateSystemPrompt(horizonDays: number): string {
+  const n = horizonDays;
+  const tasting = TASTING_DATES.map((d) => `  - ${d}`).join("\n");
+  return `You are the Cycle Plan composer for Comeketo Agent.
 
-You compose a tailored 7-day plan to move a single catering lead toward a SCHEDULED PHONE CALL with Andre. You are NOT a generic nurture sequence. You read the lead's full Box (profile + activity feed + workflow enrollments) and write a real plan that respects what has already happened.
+You compose a tailored ${n}-calendar-day plan to move a single catering lead toward a SCHEDULED PHONE CALL with Andre. You are NOT a generic nurture sequence. You read the lead's full Box (profile + activity feed + workflow enrollments) and write a real plan that respects what has already happened.
 
 ## Voice (NEPQ-style — ALWAYS)
 - Ask, don't pitch.
@@ -111,7 +128,7 @@ You compose a tailored 7-day plan to move a single catering lead toward a SCHEDU
 A SCHEDULED PHONE CALL with Andre. Tasting is secondary unless the lead has already asked for one or the lead is clearly tasting-ready.
 
 ## Tasting dates (only ones allowed)
-${TASTING_DATES.map((d) => `  - ${d}`).join("\n")}
+${tasting}
 Do NOT invent tasting dates.
 
 ## Send windows (must be inside these)
@@ -119,46 +136,50 @@ Do NOT invent tasting dates.
 - Email: 7:00 AM – 9:00 PM lead-local time
 - Sunday SMS: after 11:00 AM lead-local time
 
-## Frequency cap
+## Frequency cap (rolling wall-clock, independent of plan length)
 - Max 1 outbound per lead per rolling 24h.
 - Max 4 outbound per lead per rolling 7d.
+- **Multi-touch same calendar day:** you may still *plan* more than one outbound for a day when channels/timing differ, but the heartbeat applies this cap — the second touch may show \`FREQUENCY_CAP_24H\` / \`FREQUENCY_CAP_7D\` in the report until the window clears (strict default; see product note in Box plan UI).
 
 ## Hard rules for the plan
-- Day 1 starts today.
+- Day 1 is the first calendar bucket of the cycle (today). The plan has exactly ${n} calendar-day buckets numbered 1…${n}.
+- **Multiple touchpoints per day are normal when the Box warrants it** (e.g. morning SMS + afternoon email). Use **distinct intent** per touch, explicit order in \`required_actions\`, and do **not** duplicate the same move twice the same day.
 - Channel mix should be realistic given what comms exist on the lead.
 - If the last touch was an email, lean SMS or call next.
 - If the last inbound was a question, the next move answers it.
-- Recognize stop signals if present in activity ("stop", "remove me", "not interested") — if seen, return primary_goal "re_engage" only if it would be safe; otherwise return a plan with a single day_1 that surfaces the stop signal and recommends pausing.
+- Recognize stop signals if present in activity ("stop", "remove me", "not interested") — if seen, return primary_goal "re_engage" only if it would be safe; otherwise return a plan with a single day (day=1) that surfaces the stop signal and recommends pausing (still emit exactly ${n} days: day 1 = the warning; later days = minimal safe holding actions or explicit "wait" tasks if you must fill buckets).
 - Acknowledge what's already enrolled in workflows. Do not double-enroll into the same Close sequence.
 - Every day must include at least one required_action (call/email/sms/task). Empty days are not allowed.
 - The "primary_goal" you pick MUST be one of: scheduled_call | tasting | quote | clarify | re_engage.
-- "approval_required" is ALWAYS true (plans never auto-execute without Andre's explicit approval).
+- "approval_required" in the JSON spec below is implied always true — plans never auto-execute without Andre's explicit approval.
 
 ## Output
 Return ONLY a single JSON object matching this exact shape (no prose, no code fences):
 
 {
   "primary_goal": "scheduled_call" | "tasting" | "quote" | "clarify" | "re_engage",
-  "goal_summary": "one sentence — what this week is for",
+  "goal_summary": "one sentence — what this ${n}-day cycle is for",
   "lead_state_summary": "one paragraph — concrete current state, name real specifics from the activity feed",
   "known_facts": ["fact 1", "fact 2", ...],
   "unknowns": ["unknown 1", "unknown 2", ...],
   "best_next_question": "one specific NEPQ-style question Andre should ask this lead",
   "days": [
+    /* Exactly ${n} objects. "day" must run 1 through ${n} in order with no gaps or duplicates. */
     {
       "day": 1,
       "objective": "string",
       "required_actions": [
         { "channel": "call|email|sms|task", "intent": "string", "draft_seed": "string", "notes": "optional" }
+        /* You MAY include >1 object here when multiple touches the same calendar day are justified. */
       ],
       "send_window": "string"
-    },
-    ... 7 entries total
+    }
   ],
   "stop_conditions": [
     { "trigger": "string", "action": "pause|kill|surface" }
   ]
 }`;
+}
 
 function summarizeBoxForPrompt(box: CloseLeadFull): string {
   const lead = box.lead;
@@ -177,6 +198,20 @@ function summarizeBoxForPrompt(box: CloseLeadFull): string {
 
   const subs = box.subscriptions
     .map((s) => `  - ${s.sequence_name || s.sequence_id}: ${s.status}`)
+    .join("\n");
+
+  const thr = (box.email_threads ?? [])
+    .slice()
+    .sort(
+      (a, b) =>
+        new Date(b.date_updated || b.date_created || 0).getTime() -
+        new Date(a.date_updated || a.date_created || 0).getTime()
+    )
+    .slice(0, 15)
+    .map((t) => {
+      const when = (t.date_updated || t.date_created || "").slice(0, 16).replace("T", " ");
+      return `  [${when}] "${(t.subject || "(no subject)").slice(0, 80)}"`;
+    })
     .join("\n");
 
   // Activity feed (newest first, capped). Compact one-line format the LLM can scan.
@@ -203,6 +238,9 @@ function summarizeBoxForPrompt(box: CloseLeadFull): string {
     `# Workflow enrollments`,
     subs || "(none)",
     "",
+    `# Email threads (conversation grouping — use with activity feed)`,
+    thr || "(none)",
+    "",
     `# Activity feed (newest first, capped at 30)`,
     acts || "(no activity)",
   ].join("\n");
@@ -218,6 +256,7 @@ function activityCompactLine(a: CloseActivity): string {
   else if (t === "Call") body = `dur=${a.duration ?? "?"}s note="${((a.note as string) || "").slice(0, 80)}"`;
   else if (t === "Note") body = `note="${((a.note as string) || "").slice(0, 100)}"`;
   else if (t === "Task") body = `task="${((a.text as string) || (a.note as string) || "").slice(0, 80)}"`;
+  else if (t === "WhatsApp") body = `text="${String((a.text as string | undefined) ?? "").slice(0, 100)}"`;
   return `[${when}] ${dir} ${t} ${body}`;
 }
 
@@ -227,15 +266,19 @@ export type GeneratePlanResult =
   | { ok: true; plan: SevenDayPlan; saveError?: string }
   | { ok: false; error: string; raw?: string };
 
-export async function generateSevenDayPlanForLead(leadId: string): Promise<GeneratePlanResult> {
+export async function generateSevenDayPlanForLead(
+  leadId: string,
+  opts?: { horizonDays?: number }
+): Promise<GeneratePlanResult> {
   if (!env.OPENAI_API_KEY) return { ok: false, error: "OPENAI_API_KEY not set" };
 
   const box = await closeGetLeadFull(leadId);
   const settings = await getSettings();
+  const horizon = clampPlanHorizonDays(opts?.horizonDays ?? settings.default_plan_horizon_days);
   const client = new OpenAI({ apiKey: env.OPENAI_API_KEY });
 
   const userPrompt = [
-    "Generate a 7-day plan for the following lead Box. Output ONLY the JSON object as instructed.",
+    `Generate a ${horizon}-calendar-day cycle plan for the following lead Box. Output ONLY the JSON object as instructed.`,
     "",
     summarizeBoxForPrompt(box),
   ].join("\n");
@@ -244,7 +287,7 @@ export async function generateSevenDayPlanForLead(leadId: string): Promise<Gener
   try {
     const response = await client.responses.create({
       model: settings.model,
-      instructions: SYSTEM_PROMPT,
+      instructions: buildGenerateSystemPrompt(horizon),
       input: userPrompt,
     });
     raw = response.output_text ?? "";
@@ -266,18 +309,18 @@ export async function generateSevenDayPlanForLead(leadId: string): Promise<Gener
   }
 
   // Validate minimum shape.
-  if (!parsed.days || !Array.isArray(parsed.days) || parsed.days.length !== 7) {
-    return { ok: false, error: `expected 7 days, got ${parsed.days?.length ?? 0}`, raw };
+  if (!parsed.days || !Array.isArray(parsed.days) || parsed.days.length !== horizon) {
+    return { ok: false, error: `expected ${horizon} days, got ${parsed.days?.length ?? 0}`, raw };
   }
 
   const now = new Date().toISOString();
   const planId = `plan_${Math.random().toString(36).slice(2, 10)}`;
   const snapshotId = snapshotIdForBox(box);
 
-  // Fill in approval_status defaults on each day.
-  const days: SevenDayPlanDay[] = parsed.days.map((d) => ({
-    day: d.day,
-    objective: d.objective,
+  // Force canonical day indices 1…N (model sometimes drifts labels).
+  const days: SevenDayPlanDay[] = parsed.days.map((d, i) => ({
+    day: i + 1,
+    objective: d.objective ?? "",
     required_actions: d.required_actions ?? [],
     send_window: d.send_window || "9:00 AM – 7:00 PM lead-local",
     approval_status: "needs_review" as const,
@@ -317,32 +360,32 @@ export async function generateSevenDayPlanForLead(leadId: string): Promise<Gener
 
 // ─── Per-day refinement (AI re-prompt) ────────────────────────────────────
 
-const REFINE_DAY_SYSTEM = `You revise ONE day of an existing 7-day Comeketo plan based on the operator's refinement instruction.
+function buildRefineDaySystem(totalDays: number): string {
+  return `You revise ONE day of an existing ${totalDays}-calendar-day Comeketo cycle plan based on the operator's refinement instruction.
 
 Voice: same NEPQ rules — ask, don't pitch; specific to the lead; no "checking in" / "touching base" / "circle back" / "I hope this finds you well"; max one exclamation point; designed to get a reply.
 
 You will receive:
-1. The full plan context (all 7 days) so you understand the cadence.
+1. The full plan context (all ${totalDays} day buckets) so you understand the cadence.
 2. The specific day to revise (its index and current contents).
 3. The operator's refinement instruction in plain English.
 
-You return ONLY a single JSON object matching this exact shape (no prose, no code fences):
+You return ONLY a single JSON object (no prose, no code fences) with keys:
+- day (integer): MUST equal the calendar bucket number being revised — see "DAY TO REVISE" in the user message.
+- objective (string)
+- required_actions: array of { "channel": "call|email|sms|task", "intent": "string", "draft_seed": "string", "tasting_date": "optional", "notes": "optional" }
+- send_window (string)
 
-{
-  "day": 1-7,
-  "objective": "string",
-  "required_actions": [
-    { "channel": "call|email|sms|task", "intent": "string", "draft_seed": "string", "tasting_date": "optional", "notes": "optional" }
-  ],
-  "send_window": "string"
-}
+Example shape (values are illustrative):
+{ "day": 3, "objective": "string", "required_actions": [{ "channel": "email", "intent": "string", "draft_seed": "string" }], "send_window": "string" }
 
 Hard rules:
-- Keep the day number unchanged.
-- Every day must include at least one required_action.
+- Keep the day number unchanged (it must match the day being revised).
+- Every day must include at least one required_action; **you may include several** when cadence calls for multi-touch (ordered; unique intent per touch).
 - Do NOT invent tasting dates. Allowed tasting dates are: Sun May 3 5:30pm, Sun May 17 2:00pm, Sun May 31 2:00pm.
 - Send windows: SMS 9am–7pm lead-local, email 7am–9pm, Sunday SMS after 11am.
 - Respect what other days in the plan are doing — don't double-book the same channel back-to-back unless the instruction asks for it.`;
+}
 
 export type RefineDayResult =
   | { ok: true; day: SevenDayPlanDay }
@@ -381,11 +424,12 @@ export async function refinePlanDay(
     2
   );
 
+  const n = fullPlan.days.length;
   const userPrompt = [
-    "PLAN CONTEXT (all 7 days):",
+    `PLAN CONTEXT (all ${n} calendar-day buckets):`,
     planContext,
     "",
-    `DAY TO REVISE (index ${dayIndex}, currently day ${currentDay.day}):`,
+    `DAY TO REVISE (index ${dayIndex}, calendar bucket ${currentDay.day}):`,
     JSON.stringify(currentDay, null, 2),
     "",
     "OPERATOR INSTRUCTION:",
@@ -398,7 +442,7 @@ export async function refinePlanDay(
   try {
     const response = await client.responses.create({
       model: settings.model,
-      instructions: REFINE_DAY_SYSTEM,
+      instructions: buildRefineDaySystem(n),
       input: userPrompt,
     });
     raw = response.output_text ?? "";
@@ -422,7 +466,7 @@ export async function refinePlanDay(
   }
 
   const newDay: SevenDayPlanDay = {
-    day: currentDay.day, // preserve day number
+    day: currentDay.day,
     objective: parsed.objective ?? currentDay.objective,
     required_actions: parsed.required_actions,
     send_window: parsed.send_window || currentDay.send_window,
@@ -431,12 +475,14 @@ export async function refinePlanDay(
   return { ok: true, day: newDay };
 }
 
-// ─── Whole-plan refinement (AI re-prompt all 7 days) ──────────────────────
+// ─── Whole-plan refinement (AI re-prompt full cycle) ─────────────────────
 
-const REFINE_PLAN_SYSTEM = `You revise an existing 7-day Comeketo plan based on the operator's refinement instruction.
+function buildRefineWholePlanSystem(horizonDays: number): string {
+  const n = horizonDays;
+  return `You revise an existing ${n}-calendar-day Comeketo cycle plan based on the operator's refinement instruction.
 
 You will receive:
-1. The CURRENT plan (all 7 days).
+1. The CURRENT plan (all ${n} day buckets).
 2. The operator's refinement instruction in plain English.
 
 You return ONLY a single JSON object with the same shape as the original plan generation output:
@@ -448,7 +494,7 @@ You return ONLY a single JSON object with the same shape as the original plan ge
   "known_facts": ["..."],
   "unknowns": ["..."],
   "best_next_question": "string",
-  "days": [ { "day":1, "objective":"...", "required_actions":[{"channel":"...","intent":"...","draft_seed":"..."}], "send_window":"..." }, ... 7 entries ],
+  "days": [ { "day":1, "objective":"...", "required_actions":[{"channel":"...","intent":"...","draft_seed":"..."}], "send_window":"..." }, ... exactly ${n} entries with day running 1..${n} ],
   "stop_conditions": [{ "trigger":"...", "action":"..." }]
 }
 
@@ -458,12 +504,13 @@ NEPQ voice rules:
 - Calm, direct, short.
 
 Hard rules:
-- Always 7 days. No empty days. Every day needs at least one required_action.
+- Always exactly ${n} calendar-day buckets. No empty days. Every day needs at least one required_action (**multiple ordered touches allowed** when justified).
 - Allowed tasting dates ONLY: Sun May 3 5:30pm, Sun May 17 2pm, Sun May 31 2pm. Don't invent dates.
 - Send windows: SMS 9am–7pm, email 7am–9pm, Sunday SMS after 11am.
-- Frequency cap: max 1 outbound/24h, 4/7d.
+- Frequency cap: max 1 outbound/24h, 4/7d rolling — heartbeat enforces; a second outbound the same calendar day may be skipped (FREQUENCY_CAP_*) even if listed in the plan.
 - Respect the existing plan's structure UNLESS the instruction tells you to break it.
 - Apply the operator's instruction concretely — don't just paraphrase the existing plan.`;
+}
 
 export type RefineWholePlanResult =
   | { ok: true; plan: Pick<
@@ -486,6 +533,7 @@ export async function refineWholePlan(
   if (!env.OPENAI_API_KEY) return { ok: false, error: "OPENAI_API_KEY not set" };
   const settings = await getSettings();
   const client = new OpenAI({ apiKey: env.OPENAI_API_KEY });
+  const n = fullPlan.days.length;
 
   const planContext = JSON.stringify(
     {
@@ -516,7 +564,7 @@ export async function refineWholePlan(
   try {
     const response = await client.responses.create({
       model: settings.model,
-      instructions: REFINE_PLAN_SYSTEM,
+      instructions: buildRefineWholePlanSystem(n),
       input: userPrompt,
     });
     raw = response.output_text ?? "";
@@ -544,12 +592,12 @@ export async function refineWholePlan(
   } catch (err) {
     return { ok: false, error: `JSON parse failed: ${err instanceof Error ? err.message : err}`, raw };
   }
-  if (!Array.isArray(parsed.days) || parsed.days.length !== 7) {
-    return { ok: false, error: `expected 7 days, got ${parsed.days?.length ?? 0}`, raw };
+  if (!Array.isArray(parsed.days) || parsed.days.length !== n) {
+    return { ok: false, error: `expected ${n} days, got ${parsed.days?.length ?? 0}`, raw };
   }
   // Reset all days to needs_review so the operator re-approves the new plan.
-  const days: SevenDayPlanDay[] = parsed.days.map((d) => ({
-    day: d.day,
+  const days: SevenDayPlanDay[] = parsed.days.map((d, i) => ({
+    day: i + 1,
     objective: d.objective,
     required_actions: d.required_actions ?? [],
     send_window: d.send_window || "9:00 AM – 7:00 PM lead-local",

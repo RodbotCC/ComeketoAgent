@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { runHeartbeatSweep } from "@/lib/heartbeat";
 import { getSettings } from "@/lib/settings";
+import { logStructured } from "@/lib/observability";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -22,9 +23,16 @@ export async function GET(req: Request) {
   const startedAt = Date.now();
   try {
     const settings = await getSettings();
-    const { runs, errors } = await runHeartbeatSweep("cron", settings.execution_mode);
+    const { runs, errors, trace_id } = await runHeartbeatSweep("cron", settings.execution_mode);
+    logStructured("info", "cron.heartbeat", "sweep_complete", {
+      trace_id,
+      execution_mode: settings.execution_mode,
+      plans_swept: runs.length,
+      errors: errors.length,
+    });
     return NextResponse.json({
       ok: true,
+      trace_id,
       durationMs: Date.now() - startedAt,
       execution_mode: settings.execution_mode,
       plans_swept: runs.length,

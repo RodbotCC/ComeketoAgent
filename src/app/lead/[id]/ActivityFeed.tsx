@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Modal } from "./Modal";
+import { Modal } from "@/components/Modal";
 import type { CloseActivity } from "@/lib/close";
 
 function fmtDate(iso?: string): string {
@@ -76,12 +76,13 @@ export function ActivityFeed({ activities }: { activities: CloseActivity[] }) {
   return (
     <>
       <ol className="lead-feed">
-        {sorted.slice(0, 60).map((a) => {
+        {sorted.slice(0, 60).map((a, i) => {
           const { kind, direction, line } = activityLine(a);
           return (
             <li
               key={a.id}
               className={`lead-feed-item lead-feed-item-${kind} lead-feed-item-clickable`}
+              style={{ animationDelay: `${Math.min(i, 8) * 40}ms` }}
               onClick={() => setOpenId(a.id)}
               role="button"
               tabIndex={0}

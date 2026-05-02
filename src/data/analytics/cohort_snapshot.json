@@ -1,0 +1,2080 @@
+{
+  "_meta": {
+    "generated_at": "2026-04-27T23:02:36.229292+00:00",
+    "window_days": 730,
+    "total_opps": 8514,
+    "total_cohorts": 32,
+    "conversion_windows": [
+      "30d",
+      "60d",
+      "90d",
+      "6mo",
+      "1yr",
+      "2yr"
+    ]
+  },
+  "conversion_curves": [
+    {
+      "window": "30d",
+      "window_days": 30,
+      "avg_conversion_rate_pct": 3.3,
+      "total_converted": 300,
+      "total_eligible_leads": 8234,
+      "overall_rate_pct": 3.6
+    },
+    {
+      "window": "60d",
+      "window_days": 60,
+      "avg_conversion_rate_pct": 4.3,
+      "total_converted": 364,
+      "total_eligible_leads": 7804,
+      "overall_rate_pct": 4.7
+    },
+    {
+      "window": "90d",
+      "window_days": 90,
+      "avg_conversion_rate_pct": 5.1,
+      "total_converted": 372,
+      "total_eligible_leads": 7623,
+      "overall_rate_pct": 4.9
+    },
+    {
+      "window": "6mo",
+      "window_days": 180,
+      "avg_conversion_rate_pct": 8.4,
+      "total_converted": 383,
+      "total_eligible_leads": 7072,
+      "overall_rate_pct": 5.4
+    },
+    {
+      "window": "1yr",
+      "window_days": 365,
+      "avg_conversion_rate_pct": 13.9,
+      "total_converted": 286,
+      "total_eligible_leads": 5067,
+      "overall_rate_pct": 5.6
+    },
+    {
+      "window": "2yr",
+      "window_days": 730,
+      "avg_conversion_rate_pct": 25.1,
+      "total_converted": 50,
+      "total_eligible_leads": 1098,
+      "overall_rate_pct": 4.6
+    }
+  ],
+  "cohort_grid": [
+    {
+      "cohort": "2023-09",
+      "total_leads": 3,
+      "total_converted": 1,
+      "total_value_cents": 300000,
+      "age_days": 969,
+      "maturity": "mature",
+      "windows": {
+        "30d": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "60d": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "90d": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "6mo": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "1yr": {
+          "converted": 1,
+          "rate_pct": 33.3
+        },
+        "2yr": {
+          "converted": 1,
+          "rate_pct": 33.3
+        }
+      },
+      "best_rate_pct": 33.3
+    },
+    {
+      "cohort": "2023-10",
+      "total_leads": 10,
+      "total_converted": 3,
+      "total_value_cents": 1482150,
+      "age_days": 939,
+      "maturity": "mature",
+      "windows": {
+        "30d": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "60d": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "90d": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "6mo": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "1yr": {
+          "converted": 3,
+          "rate_pct": 30.0
+        },
+        "2yr": {
+          "converted": 3,
+          "rate_pct": 30.0
+        }
+      },
+      "best_rate_pct": 30.0
+    },
+    {
+      "cohort": "2023-11",
+      "total_leads": 9,
+      "total_converted": 5,
+      "total_value_cents": 1892350,
+      "age_days": 908,
+      "maturity": "mature",
+      "windows": {
+        "30d": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "60d": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "90d": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "6mo": {
+          "converted": 3,
+          "rate_pct": 33.3
+        },
+        "1yr": {
+          "converted": 5,
+          "rate_pct": 55.6
+        },
+        "2yr": {
+          "converted": 5,
+          "rate_pct": 55.6
+        }
+      },
+      "best_rate_pct": 55.6
+    },
+    {
+      "cohort": "2023-12",
+      "total_leads": 14,
+      "total_converted": 1,
+      "total_value_cents": 533862,
+      "age_days": 878,
+      "maturity": "mature",
+      "windows": {
+        "30d": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "60d": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "90d": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "6mo": {
+          "converted": 1,
+          "rate_pct": 7.1
+        },
+        "1yr": {
+          "converted": 1,
+          "rate_pct": 7.1
+        },
+        "2yr": {
+          "converted": 1,
+          "rate_pct": 7.1
+        }
+      },
+      "best_rate_pct": 7.1
+    },
+    {
+      "cohort": "2024-01",
+      "total_leads": 15,
+      "total_converted": 3,
+      "total_value_cents": 1382950,
+      "age_days": 847,
+      "maturity": "mature",
+      "windows": {
+        "30d": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "60d": {
+          "converted": 1,
+          "rate_pct": 6.7
+        },
+        "90d": {
+          "converted": 1,
+          "rate_pct": 6.7
+        },
+        "6mo": {
+          "converted": 3,
+          "rate_pct": 20.0
+        },
+        "1yr": {
+          "converted": 3,
+          "rate_pct": 20.0
+        },
+        "2yr": {
+          "converted": 3,
+          "rate_pct": 20.0
+        }
+      },
+      "best_rate_pct": 20.0
+    },
+    {
+      "cohort": "2024-02",
+      "total_leads": 14,
+      "total_converted": 5,
+      "total_value_cents": 1700387,
+      "age_days": 816,
+      "maturity": "mature",
+      "windows": {
+        "30d": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "60d": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "90d": {
+          "converted": 3,
+          "rate_pct": 21.4
+        },
+        "6mo": {
+          "converted": 5,
+          "rate_pct": 35.7
+        },
+        "1yr": {
+          "converted": 5,
+          "rate_pct": 35.7
+        },
+        "2yr": {
+          "converted": 5,
+          "rate_pct": 35.7
+        }
+      },
+      "best_rate_pct": 35.7
+    },
+    {
+      "cohort": "2024-03",
+      "total_leads": 19,
+      "total_converted": 3,
+      "total_value_cents": 1159040,
+      "age_days": 787,
+      "maturity": "mature",
+      "windows": {
+        "30d": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "60d": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "90d": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "6mo": {
+          "converted": 2,
+          "rate_pct": 10.5
+        },
+        "1yr": {
+          "converted": 3,
+          "rate_pct": 15.8
+        },
+        "2yr": {
+          "converted": 3,
+          "rate_pct": 15.8
+        }
+      },
+      "best_rate_pct": 15.8
+    },
+    {
+      "cohort": "2024-04",
+      "total_leads": 1014,
+      "total_converted": 29,
+      "total_value_cents": 10892595,
+      "age_days": 756,
+      "maturity": "mature",
+      "windows": {
+        "30d": {
+          "converted": 11,
+          "rate_pct": 1.1
+        },
+        "60d": {
+          "converted": 19,
+          "rate_pct": 1.9
+        },
+        "90d": {
+          "converted": 24,
+          "rate_pct": 2.4
+        },
+        "6mo": {
+          "converted": 26,
+          "rate_pct": 2.6
+        },
+        "1yr": {
+          "converted": 29,
+          "rate_pct": 2.9
+        },
+        "2yr": {
+          "converted": 29,
+          "rate_pct": 2.9
+        }
+      },
+      "best_rate_pct": 2.9
+    },
+    {
+      "cohort": "2024-05",
+      "total_leads": 297,
+      "total_converted": 12,
+      "total_value_cents": 3146890,
+      "age_days": 726,
+      "maturity": "mature",
+      "windows": {
+        "30d": {
+          "converted": 5,
+          "rate_pct": 1.7
+        },
+        "60d": {
+          "converted": 8,
+          "rate_pct": 2.7
+        },
+        "90d": {
+          "converted": 10,
+          "rate_pct": 3.4
+        },
+        "6mo": {
+          "converted": 11,
+          "rate_pct": 3.7
+        },
+        "1yr": {
+          "converted": 12,
+          "rate_pct": 4.0
+        },
+        "2yr": {
+          "converted": 12,
+          "rate_pct": 4.0
+        }
+      },
+      "best_rate_pct": 4.0
+    },
+    {
+      "cohort": "2024-06",
+      "total_leads": 223,
+      "total_converted": 11,
+      "total_value_cents": 3732055,
+      "age_days": 695,
+      "maturity": "mature",
+      "windows": {
+        "30d": {
+          "converted": 5,
+          "rate_pct": 2.2
+        },
+        "60d": {
+          "converted": 7,
+          "rate_pct": 3.1
+        },
+        "90d": {
+          "converted": 8,
+          "rate_pct": 3.6
+        },
+        "6mo": {
+          "converted": 10,
+          "rate_pct": 4.5
+        },
+        "1yr": {
+          "converted": 10,
+          "rate_pct": 4.5
+        },
+        "2yr": {
+          "converted": 11,
+          "rate_pct": 4.9
+        }
+      },
+      "best_rate_pct": 4.5
+    },
+    {
+      "cohort": "2024-07",
+      "total_leads": 215,
+      "total_converted": 20,
+      "total_value_cents": 5681497,
+      "age_days": 665,
+      "maturity": "mature",
+      "windows": {
+        "30d": {
+          "converted": 15,
+          "rate_pct": 7.0
+        },
+        "60d": {
+          "converted": 19,
+          "rate_pct": 8.8
+        },
+        "90d": {
+          "converted": 20,
+          "rate_pct": 9.3
+        },
+        "6mo": {
+          "converted": 20,
+          "rate_pct": 9.3
+        },
+        "1yr": {
+          "converted": 20,
+          "rate_pct": 9.3
+        },
+        "2yr": {
+          "converted": 20,
+          "rate_pct": 9.3
+        }
+      },
+      "best_rate_pct": 9.3
+    },
+    {
+      "cohort": "2024-08",
+      "total_leads": 241,
+      "total_converted": 18,
+      "total_value_cents": 6423739,
+      "age_days": 634,
+      "maturity": "mature",
+      "windows": {
+        "30d": {
+          "converted": 11,
+          "rate_pct": 4.6
+        },
+        "60d": {
+          "converted": 16,
+          "rate_pct": 6.6
+        },
+        "90d": {
+          "converted": 18,
+          "rate_pct": 7.5
+        },
+        "6mo": {
+          "converted": 18,
+          "rate_pct": 7.5
+        },
+        "1yr": {
+          "converted": 18,
+          "rate_pct": 7.5
+        },
+        "2yr": {
+          "converted": 18,
+          "rate_pct": 7.5
+        }
+      },
+      "best_rate_pct": 7.5
+    },
+    {
+      "cohort": "2024-09",
+      "total_leads": 383,
+      "total_converted": 14,
+      "total_value_cents": 2689449,
+      "age_days": 603,
+      "maturity": "mature",
+      "windows": {
+        "30d": {
+          "converted": 12,
+          "rate_pct": 3.1
+        },
+        "60d": {
+          "converted": 12,
+          "rate_pct": 3.1
+        },
+        "90d": {
+          "converted": 12,
+          "rate_pct": 3.1
+        },
+        "6mo": {
+          "converted": 12,
+          "rate_pct": 3.1
+        },
+        "1yr": {
+          "converted": 13,
+          "rate_pct": 3.4
+        },
+        "2yr": {
+          "converted": 14,
+          "rate_pct": 3.7
+        }
+      },
+      "best_rate_pct": 3.4
+    },
+    {
+      "cohort": "2024-10",
+      "total_leads": 276,
+      "total_converted": 34,
+      "total_value_cents": 8758173,
+      "age_days": 573,
+      "maturity": "mature",
+      "windows": {
+        "30d": {
+          "converted": 20,
+          "rate_pct": 7.2
+        },
+        "60d": {
+          "converted": 27,
+          "rate_pct": 9.8
+        },
+        "90d": {
+          "converted": 28,
+          "rate_pct": 10.1
+        },
+        "6mo": {
+          "converted": 33,
+          "rate_pct": 12.0
+        },
+        "1yr": {
+          "converted": 34,
+          "rate_pct": 12.3
+        },
+        "2yr": {
+          "converted": 34,
+          "rate_pct": 12.3
+        }
+      },
+      "best_rate_pct": 12.3
+    },
+    {
+      "cohort": "2024-11",
+      "total_leads": 215,
+      "total_converted": 23,
+      "total_value_cents": 6730637,
+      "age_days": 542,
+      "maturity": "mature",
+      "windows": {
+        "30d": {
+          "converted": 17,
+          "rate_pct": 7.9
+        },
+        "60d": {
+          "converted": 20,
+          "rate_pct": 9.3
+        },
+        "90d": {
+          "converted": 22,
+          "rate_pct": 10.2
+        },
+        "6mo": {
+          "converted": 23,
+          "rate_pct": 10.7
+        },
+        "1yr": {
+          "converted": 23,
+          "rate_pct": 10.7
+        },
+        "2yr": {
+          "converted": 23,
+          "rate_pct": 10.7
+        }
+      },
+      "best_rate_pct": 10.7
+    },
+    {
+      "cohort": "2024-12",
+      "total_leads": 273,
+      "total_converted": 20,
+      "total_value_cents": 3251878,
+      "age_days": 512,
+      "maturity": "mature",
+      "windows": {
+        "30d": {
+          "converted": 12,
+          "rate_pct": 4.4
+        },
+        "60d": {
+          "converted": 14,
+          "rate_pct": 5.1
+        },
+        "90d": {
+          "converted": 16,
+          "rate_pct": 5.9
+        },
+        "6mo": {
+          "converted": 18,
+          "rate_pct": 6.6
+        },
+        "1yr": {
+          "converted": 20,
+          "rate_pct": 7.3
+        },
+        "2yr": {
+          "converted": 20,
+          "rate_pct": 7.3
+        }
+      },
+      "best_rate_pct": 7.3
+    },
+    {
+      "cohort": "2025-01",
+      "total_leads": 391,
+      "total_converted": 22,
+      "total_value_cents": 6281561,
+      "age_days": 481,
+      "maturity": "mature",
+      "windows": {
+        "30d": {
+          "converted": 11,
+          "rate_pct": 2.8
+        },
+        "60d": {
+          "converted": 16,
+          "rate_pct": 4.1
+        },
+        "90d": {
+          "converted": 17,
+          "rate_pct": 4.3
+        },
+        "6mo": {
+          "converted": 19,
+          "rate_pct": 4.9
+        },
+        "1yr": {
+          "converted": 21,
+          "rate_pct": 5.4
+        },
+        "2yr": {
+          "converted": 22,
+          "rate_pct": 5.6
+        }
+      },
+      "best_rate_pct": 5.4
+    },
+    {
+      "cohort": "2025-02",
+      "total_leads": 390,
+      "total_converted": 22,
+      "total_value_cents": 7859894,
+      "age_days": 450,
+      "maturity": "mature",
+      "windows": {
+        "30d": {
+          "converted": 16,
+          "rate_pct": 4.1
+        },
+        "60d": {
+          "converted": 18,
+          "rate_pct": 4.6
+        },
+        "90d": {
+          "converted": 19,
+          "rate_pct": 4.9
+        },
+        "6mo": {
+          "converted": 22,
+          "rate_pct": 5.6
+        },
+        "1yr": {
+          "converted": 22,
+          "rate_pct": 5.6
+        },
+        "2yr": {
+          "converted": 22,
+          "rate_pct": 5.6
+        }
+      },
+      "best_rate_pct": 5.6
+    },
+    {
+      "cohort": "2025-03",
+      "total_leads": 420,
+      "total_converted": 21,
+      "total_value_cents": 6136396,
+      "age_days": 422,
+      "maturity": "mature",
+      "windows": {
+        "30d": {
+          "converted": 10,
+          "rate_pct": 2.4
+        },
+        "60d": {
+          "converted": 17,
+          "rate_pct": 4.0
+        },
+        "90d": {
+          "converted": 19,
+          "rate_pct": 4.5
+        },
+        "6mo": {
+          "converted": 21,
+          "rate_pct": 5.0
+        },
+        "1yr": {
+          "converted": 21,
+          "rate_pct": 5.0
+        },
+        "2yr": {
+          "converted": 21,
+          "rate_pct": 5.0
+        }
+      },
+      "best_rate_pct": 5.0
+    },
+    {
+      "cohort": "2025-04",
+      "total_leads": 645,
+      "total_converted": 22,
+      "total_value_cents": 5143766,
+      "age_days": 391,
+      "maturity": "mature",
+      "windows": {
+        "30d": {
+          "converted": 17,
+          "rate_pct": 2.6
+        },
+        "60d": {
+          "converted": 20,
+          "rate_pct": 3.1
+        },
+        "90d": {
+          "converted": 20,
+          "rate_pct": 3.1
+        },
+        "6mo": {
+          "converted": 22,
+          "rate_pct": 3.4
+        },
+        "1yr": {
+          "converted": 22,
+          "rate_pct": 3.4
+        },
+        "2yr": {
+          "converted": 22,
+          "rate_pct": 3.4
+        }
+      },
+      "best_rate_pct": 3.4
+    },
+    {
+      "cohort": "2025-05",
+      "total_leads": 239,
+      "total_converted": 17,
+      "total_value_cents": 7445974,
+      "age_days": 361,
+      "maturity": "developing",
+      "windows": {
+        "30d": {
+          "converted": 11,
+          "rate_pct": 4.6
+        },
+        "60d": {
+          "converted": 11,
+          "rate_pct": 4.6
+        },
+        "90d": {
+          "converted": 12,
+          "rate_pct": 5.0
+        },
+        "6mo": {
+          "converted": 17,
+          "rate_pct": 7.1
+        },
+        "1yr": {
+          "converted": 17,
+          "rate_pct": 7.1
+        },
+        "2yr": {
+          "converted": 17,
+          "rate_pct": 7.1
+        }
+      },
+      "best_rate_pct": 7.1
+    },
+    {
+      "cohort": "2025-06",
+      "total_leads": 455,
+      "total_converted": 26,
+      "total_value_cents": 6994229,
+      "age_days": 330,
+      "maturity": "developing",
+      "windows": {
+        "30d": {
+          "converted": 20,
+          "rate_pct": 4.4
+        },
+        "60d": {
+          "converted": 26,
+          "rate_pct": 5.7
+        },
+        "90d": {
+          "converted": 26,
+          "rate_pct": 5.7
+        },
+        "6mo": {
+          "converted": 26,
+          "rate_pct": 5.7
+        },
+        "1yr": {
+          "converted": 26,
+          "rate_pct": 5.7
+        },
+        "2yr": {
+          "converted": 26,
+          "rate_pct": 5.7
+        }
+      },
+      "best_rate_pct": 5.7
+    },
+    {
+      "cohort": "2025-07",
+      "total_leads": 456,
+      "total_converted": 27,
+      "total_value_cents": 9947281,
+      "age_days": 300,
+      "maturity": "developing",
+      "windows": {
+        "30d": {
+          "converted": 18,
+          "rate_pct": 3.9
+        },
+        "60d": {
+          "converted": 23,
+          "rate_pct": 5.0
+        },
+        "90d": {
+          "converted": 23,
+          "rate_pct": 5.0
+        },
+        "6mo": {
+          "converted": 26,
+          "rate_pct": 5.7
+        },
+        "1yr": {
+          "converted": 26,
+          "rate_pct": 5.7
+        },
+        "2yr": {
+          "converted": 27,
+          "rate_pct": 5.9
+        }
+      },
+      "best_rate_pct": 5.7
+    },
+    {
+      "cohort": "2025-08",
+      "total_leads": 361,
+      "total_converted": 25,
+      "total_value_cents": 7415252,
+      "age_days": 269,
+      "maturity": "developing",
+      "windows": {
+        "30d": {
+          "converted": 19,
+          "rate_pct": 5.3
+        },
+        "60d": {
+          "converted": 23,
+          "rate_pct": 6.4
+        },
+        "90d": {
+          "converted": 23,
+          "rate_pct": 6.4
+        },
+        "6mo": {
+          "converted": 25,
+          "rate_pct": 6.9
+        },
+        "1yr": {
+          "converted": 25,
+          "rate_pct": 6.9
+        },
+        "2yr": {
+          "converted": 25,
+          "rate_pct": 6.9
+        }
+      },
+      "best_rate_pct": 6.9
+    },
+    {
+      "cohort": "2025-09",
+      "total_leads": 286,
+      "total_converted": 12,
+      "total_value_cents": 2312666,
+      "age_days": 238,
+      "maturity": "developing",
+      "windows": {
+        "30d": {
+          "converted": 9,
+          "rate_pct": 3.1
+        },
+        "60d": {
+          "converted": 10,
+          "rate_pct": 3.5
+        },
+        "90d": {
+          "converted": 11,
+          "rate_pct": 3.8
+        },
+        "6mo": {
+          "converted": 11,
+          "rate_pct": 3.8
+        },
+        "1yr": {
+          "converted": 12,
+          "rate_pct": 4.2
+        },
+        "2yr": {
+          "converted": 12,
+          "rate_pct": 4.2
+        }
+      },
+      "best_rate_pct": 3.8
+    },
+    {
+      "cohort": "2025-10",
+      "total_leads": 208,
+      "total_converted": 9,
+      "total_value_cents": 2187029,
+      "age_days": 208,
+      "maturity": "developing",
+      "windows": {
+        "30d": {
+          "converted": 7,
+          "rate_pct": 3.4
+        },
+        "60d": {
+          "converted": 7,
+          "rate_pct": 3.4
+        },
+        "90d": {
+          "converted": 7,
+          "rate_pct": 3.4
+        },
+        "6mo": {
+          "converted": 9,
+          "rate_pct": 4.3
+        },
+        "1yr": {
+          "converted": 9,
+          "rate_pct": 4.3
+        },
+        "2yr": {
+          "converted": 9,
+          "rate_pct": 4.3
+        }
+      },
+      "best_rate_pct": 4.3
+    },
+    {
+      "cohort": "2025-11",
+      "total_leads": 172,
+      "total_converted": 13,
+      "total_value_cents": 5383428,
+      "age_days": 177,
+      "maturity": "developing",
+      "windows": {
+        "30d": {
+          "converted": 8,
+          "rate_pct": 4.7
+        },
+        "60d": {
+          "converted": 10,
+          "rate_pct": 5.8
+        },
+        "90d": {
+          "converted": 10,
+          "rate_pct": 5.8
+        },
+        "6mo": {
+          "converted": 13,
+          "rate_pct": 7.6
+        },
+        "1yr": {
+          "converted": 13,
+          "rate_pct": 7.6
+        },
+        "2yr": {
+          "converted": 13,
+          "rate_pct": 7.6
+        }
+      },
+      "best_rate_pct": 5.8
+    },
+    {
+      "cohort": "2025-12",
+      "total_leads": 166,
+      "total_converted": 11,
+      "total_value_cents": 1770899,
+      "age_days": 147,
+      "maturity": "developing",
+      "windows": {
+        "30d": {
+          "converted": 9,
+          "rate_pct": 5.4
+        },
+        "60d": {
+          "converted": 11,
+          "rate_pct": 6.6
+        },
+        "90d": {
+          "converted": 11,
+          "rate_pct": 6.6
+        },
+        "6mo": {
+          "converted": 11,
+          "rate_pct": 6.6
+        },
+        "1yr": {
+          "converted": 11,
+          "rate_pct": 6.6
+        },
+        "2yr": {
+          "converted": 11,
+          "rate_pct": 6.6
+        }
+      },
+      "best_rate_pct": 6.6
+    },
+    {
+      "cohort": "2026-01",
+      "total_leads": 213,
+      "total_converted": 14,
+      "total_value_cents": 5242598,
+      "age_days": 116,
+      "maturity": "developing",
+      "windows": {
+        "30d": {
+          "converted": 7,
+          "rate_pct": 3.3
+        },
+        "60d": {
+          "converted": 9,
+          "rate_pct": 4.2
+        },
+        "90d": {
+          "converted": 12,
+          "rate_pct": 5.6
+        },
+        "6mo": {
+          "converted": 13,
+          "rate_pct": 6.1
+        },
+        "1yr": {
+          "converted": 14,
+          "rate_pct": 6.6
+        },
+        "2yr": {
+          "converted": 14,
+          "rate_pct": 6.6
+        }
+      },
+      "best_rate_pct": 5.6
+    },
+    {
+      "cohort": "2026-02",
+      "total_leads": 181,
+      "total_converted": 22,
+      "total_value_cents": 7652927,
+      "age_days": 85,
+      "maturity": "young",
+      "windows": {
+        "30d": {
+          "converted": 18,
+          "rate_pct": 9.9
+        },
+        "60d": {
+          "converted": 20,
+          "rate_pct": 11.0
+        },
+        "90d": {
+          "converted": 21,
+          "rate_pct": 11.6
+        },
+        "6mo": {
+          "converted": 22,
+          "rate_pct": 12.2
+        },
+        "1yr": {
+          "converted": 22,
+          "rate_pct": 12.2
+        },
+        "2yr": {
+          "converted": 22,
+          "rate_pct": 12.2
+        }
+      },
+      "best_rate_pct": 11.0
+    },
+    {
+      "cohort": "2026-03",
+      "total_leads": 430,
+      "total_converted": 16,
+      "total_value_cents": 5787395,
+      "age_days": 57,
+      "maturity": "young",
+      "windows": {
+        "30d": {
+          "converted": 12,
+          "rate_pct": 2.8
+        },
+        "60d": {
+          "converted": 15,
+          "rate_pct": 3.5
+        },
+        "90d": {
+          "converted": 15,
+          "rate_pct": 3.5
+        },
+        "6mo": {
+          "converted": 16,
+          "rate_pct": 3.7
+        },
+        "1yr": {
+          "converted": 16,
+          "rate_pct": 3.7
+        },
+        "2yr": {
+          "converted": 16,
+          "rate_pct": 3.7
+        }
+      },
+      "best_rate_pct": 2.8
+    },
+    {
+      "cohort": "2026-04",
+      "total_leads": 278,
+      "total_converted": 6,
+      "total_value_cents": 1764579,
+      "age_days": 26,
+      "maturity": "young",
+      "windows": {
+        "30d": {
+          "converted": 4,
+          "rate_pct": 1.4
+        },
+        "60d": {
+          "converted": 4,
+          "rate_pct": 1.4
+        },
+        "90d": {
+          "converted": 4,
+          "rate_pct": 1.4
+        },
+        "6mo": {
+          "converted": 5,
+          "rate_pct": 1.8
+        },
+        "1yr": {
+          "converted": 5,
+          "rate_pct": 1.8
+        },
+        "2yr": {
+          "converted": 6,
+          "rate_pct": 2.2
+        }
+      },
+      "best_rate_pct": 1.4
+    }
+  ],
+  "best_cohorts": [
+    {
+      "cohort": "2024-02",
+      "total_leads": 14,
+      "total_converted": 5,
+      "total_value_cents": 1700387,
+      "age_days": 816,
+      "maturity": "mature",
+      "windows": {
+        "30d": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "60d": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "90d": {
+          "converted": 3,
+          "rate_pct": 21.4
+        },
+        "6mo": {
+          "converted": 5,
+          "rate_pct": 35.7
+        },
+        "1yr": {
+          "converted": 5,
+          "rate_pct": 35.7
+        },
+        "2yr": {
+          "converted": 5,
+          "rate_pct": 35.7
+        }
+      },
+      "best_rate_pct": 35.7
+    },
+    {
+      "cohort": "2024-11",
+      "total_leads": 215,
+      "total_converted": 23,
+      "total_value_cents": 6730637,
+      "age_days": 542,
+      "maturity": "mature",
+      "windows": {
+        "30d": {
+          "converted": 17,
+          "rate_pct": 7.9
+        },
+        "60d": {
+          "converted": 20,
+          "rate_pct": 9.3
+        },
+        "90d": {
+          "converted": 22,
+          "rate_pct": 10.2
+        },
+        "6mo": {
+          "converted": 23,
+          "rate_pct": 10.7
+        },
+        "1yr": {
+          "converted": 23,
+          "rate_pct": 10.7
+        },
+        "2yr": {
+          "converted": 23,
+          "rate_pct": 10.7
+        }
+      },
+      "best_rate_pct": 10.7
+    },
+    {
+      "cohort": "2024-10",
+      "total_leads": 276,
+      "total_converted": 34,
+      "total_value_cents": 8758173,
+      "age_days": 573,
+      "maturity": "mature",
+      "windows": {
+        "30d": {
+          "converted": 20,
+          "rate_pct": 7.2
+        },
+        "60d": {
+          "converted": 27,
+          "rate_pct": 9.8
+        },
+        "90d": {
+          "converted": 28,
+          "rate_pct": 10.1
+        },
+        "6mo": {
+          "converted": 33,
+          "rate_pct": 12.0
+        },
+        "1yr": {
+          "converted": 34,
+          "rate_pct": 12.3
+        },
+        "2yr": {
+          "converted": 34,
+          "rate_pct": 12.3
+        }
+      },
+      "best_rate_pct": 12.3
+    },
+    {
+      "cohort": "2024-07",
+      "total_leads": 215,
+      "total_converted": 20,
+      "total_value_cents": 5681497,
+      "age_days": 665,
+      "maturity": "mature",
+      "windows": {
+        "30d": {
+          "converted": 15,
+          "rate_pct": 7.0
+        },
+        "60d": {
+          "converted": 19,
+          "rate_pct": 8.8
+        },
+        "90d": {
+          "converted": 20,
+          "rate_pct": 9.3
+        },
+        "6mo": {
+          "converted": 20,
+          "rate_pct": 9.3
+        },
+        "1yr": {
+          "converted": 20,
+          "rate_pct": 9.3
+        },
+        "2yr": {
+          "converted": 20,
+          "rate_pct": 9.3
+        }
+      },
+      "best_rate_pct": 9.3
+    },
+    {
+      "cohort": "2024-08",
+      "total_leads": 241,
+      "total_converted": 18,
+      "total_value_cents": 6423739,
+      "age_days": 634,
+      "maturity": "mature",
+      "windows": {
+        "30d": {
+          "converted": 11,
+          "rate_pct": 4.6
+        },
+        "60d": {
+          "converted": 16,
+          "rate_pct": 6.6
+        },
+        "90d": {
+          "converted": 18,
+          "rate_pct": 7.5
+        },
+        "6mo": {
+          "converted": 18,
+          "rate_pct": 7.5
+        },
+        "1yr": {
+          "converted": 18,
+          "rate_pct": 7.5
+        },
+        "2yr": {
+          "converted": 18,
+          "rate_pct": 7.5
+        }
+      },
+      "best_rate_pct": 7.5
+    }
+  ],
+  "worst_cohorts": [
+    {
+      "cohort": "2023-09",
+      "total_leads": 3,
+      "total_converted": 1,
+      "total_value_cents": 300000,
+      "age_days": 969,
+      "maturity": "mature",
+      "windows": {
+        "30d": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "60d": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "90d": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "6mo": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "1yr": {
+          "converted": 1,
+          "rate_pct": 33.3
+        },
+        "2yr": {
+          "converted": 1,
+          "rate_pct": 33.3
+        }
+      },
+      "best_rate_pct": 33.3
+    },
+    {
+      "cohort": "2023-10",
+      "total_leads": 10,
+      "total_converted": 3,
+      "total_value_cents": 1482150,
+      "age_days": 939,
+      "maturity": "mature",
+      "windows": {
+        "30d": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "60d": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "90d": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "6mo": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "1yr": {
+          "converted": 3,
+          "rate_pct": 30.0
+        },
+        "2yr": {
+          "converted": 3,
+          "rate_pct": 30.0
+        }
+      },
+      "best_rate_pct": 30.0
+    },
+    {
+      "cohort": "2023-11",
+      "total_leads": 9,
+      "total_converted": 5,
+      "total_value_cents": 1892350,
+      "age_days": 908,
+      "maturity": "mature",
+      "windows": {
+        "30d": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "60d": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "90d": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "6mo": {
+          "converted": 3,
+          "rate_pct": 33.3
+        },
+        "1yr": {
+          "converted": 5,
+          "rate_pct": 55.6
+        },
+        "2yr": {
+          "converted": 5,
+          "rate_pct": 55.6
+        }
+      },
+      "best_rate_pct": 55.6
+    },
+    {
+      "cohort": "2023-12",
+      "total_leads": 14,
+      "total_converted": 1,
+      "total_value_cents": 533862,
+      "age_days": 878,
+      "maturity": "mature",
+      "windows": {
+        "30d": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "60d": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "90d": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "6mo": {
+          "converted": 1,
+          "rate_pct": 7.1
+        },
+        "1yr": {
+          "converted": 1,
+          "rate_pct": 7.1
+        },
+        "2yr": {
+          "converted": 1,
+          "rate_pct": 7.1
+        }
+      },
+      "best_rate_pct": 7.1
+    },
+    {
+      "cohort": "2024-03",
+      "total_leads": 19,
+      "total_converted": 3,
+      "total_value_cents": 1159040,
+      "age_days": 787,
+      "maturity": "mature",
+      "windows": {
+        "30d": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "60d": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "90d": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "6mo": {
+          "converted": 2,
+          "rate_pct": 10.5
+        },
+        "1yr": {
+          "converted": 3,
+          "rate_pct": 15.8
+        },
+        "2yr": {
+          "converted": 3,
+          "rate_pct": 15.8
+        }
+      },
+      "best_rate_pct": 15.8
+    }
+  ],
+  "recent_cohort_health": [
+    {
+      "cohort": "2025-10",
+      "total_leads": 208,
+      "total_converted": 9,
+      "total_value_cents": 2187029,
+      "age_days": 208,
+      "maturity": "developing",
+      "windows": {
+        "30d": {
+          "converted": 7,
+          "rate_pct": 3.4
+        },
+        "60d": {
+          "converted": 7,
+          "rate_pct": 3.4
+        },
+        "90d": {
+          "converted": 7,
+          "rate_pct": 3.4
+        },
+        "6mo": {
+          "converted": 9,
+          "rate_pct": 4.3
+        },
+        "1yr": {
+          "converted": 9,
+          "rate_pct": 4.3
+        },
+        "2yr": {
+          "converted": 9,
+          "rate_pct": 4.3
+        }
+      },
+      "best_rate_pct": 4.3
+    },
+    {
+      "cohort": "2025-11",
+      "total_leads": 172,
+      "total_converted": 13,
+      "total_value_cents": 5383428,
+      "age_days": 177,
+      "maturity": "developing",
+      "windows": {
+        "30d": {
+          "converted": 8,
+          "rate_pct": 4.7
+        },
+        "60d": {
+          "converted": 10,
+          "rate_pct": 5.8
+        },
+        "90d": {
+          "converted": 10,
+          "rate_pct": 5.8
+        },
+        "6mo": {
+          "converted": 13,
+          "rate_pct": 7.6
+        },
+        "1yr": {
+          "converted": 13,
+          "rate_pct": 7.6
+        },
+        "2yr": {
+          "converted": 13,
+          "rate_pct": 7.6
+        }
+      },
+      "best_rate_pct": 5.8
+    },
+    {
+      "cohort": "2025-12",
+      "total_leads": 166,
+      "total_converted": 11,
+      "total_value_cents": 1770899,
+      "age_days": 147,
+      "maturity": "developing",
+      "windows": {
+        "30d": {
+          "converted": 9,
+          "rate_pct": 5.4
+        },
+        "60d": {
+          "converted": 11,
+          "rate_pct": 6.6
+        },
+        "90d": {
+          "converted": 11,
+          "rate_pct": 6.6
+        },
+        "6mo": {
+          "converted": 11,
+          "rate_pct": 6.6
+        },
+        "1yr": {
+          "converted": 11,
+          "rate_pct": 6.6
+        },
+        "2yr": {
+          "converted": 11,
+          "rate_pct": 6.6
+        }
+      },
+      "best_rate_pct": 6.6
+    },
+    {
+      "cohort": "2026-01",
+      "total_leads": 213,
+      "total_converted": 14,
+      "total_value_cents": 5242598,
+      "age_days": 116,
+      "maturity": "developing",
+      "windows": {
+        "30d": {
+          "converted": 7,
+          "rate_pct": 3.3
+        },
+        "60d": {
+          "converted": 9,
+          "rate_pct": 4.2
+        },
+        "90d": {
+          "converted": 12,
+          "rate_pct": 5.6
+        },
+        "6mo": {
+          "converted": 13,
+          "rate_pct": 6.1
+        },
+        "1yr": {
+          "converted": 14,
+          "rate_pct": 6.6
+        },
+        "2yr": {
+          "converted": 14,
+          "rate_pct": 6.6
+        }
+      },
+      "best_rate_pct": 5.6
+    },
+    {
+      "cohort": "2026-02",
+      "total_leads": 181,
+      "total_converted": 22,
+      "total_value_cents": 7652927,
+      "age_days": 85,
+      "maturity": "young",
+      "windows": {
+        "30d": {
+          "converted": 18,
+          "rate_pct": 9.9
+        },
+        "60d": {
+          "converted": 20,
+          "rate_pct": 11.0
+        },
+        "90d": {
+          "converted": 21,
+          "rate_pct": 11.6
+        },
+        "6mo": {
+          "converted": 22,
+          "rate_pct": 12.2
+        },
+        "1yr": {
+          "converted": 22,
+          "rate_pct": 12.2
+        },
+        "2yr": {
+          "converted": 22,
+          "rate_pct": 12.2
+        }
+      },
+      "best_rate_pct": 11.0
+    },
+    {
+      "cohort": "2026-03",
+      "total_leads": 430,
+      "total_converted": 16,
+      "total_value_cents": 5787395,
+      "age_days": 57,
+      "maturity": "young",
+      "windows": {
+        "30d": {
+          "converted": 12,
+          "rate_pct": 2.8
+        },
+        "60d": {
+          "converted": 15,
+          "rate_pct": 3.5
+        },
+        "90d": {
+          "converted": 15,
+          "rate_pct": 3.5
+        },
+        "6mo": {
+          "converted": 16,
+          "rate_pct": 3.7
+        },
+        "1yr": {
+          "converted": 16,
+          "rate_pct": 3.7
+        },
+        "2yr": {
+          "converted": 16,
+          "rate_pct": 3.7
+        }
+      },
+      "best_rate_pct": 2.8
+    },
+    {
+      "cohort": "2026-04",
+      "total_leads": 278,
+      "total_converted": 6,
+      "total_value_cents": 1764579,
+      "age_days": 26,
+      "maturity": "young",
+      "windows": {
+        "30d": {
+          "converted": 4,
+          "rate_pct": 1.4
+        },
+        "60d": {
+          "converted": 4,
+          "rate_pct": 1.4
+        },
+        "90d": {
+          "converted": 4,
+          "rate_pct": 1.4
+        },
+        "6mo": {
+          "converted": 5,
+          "rate_pct": 1.8
+        },
+        "1yr": {
+          "converted": 5,
+          "rate_pct": 1.8
+        },
+        "2yr": {
+          "converted": 6,
+          "rate_pct": 2.2
+        }
+      },
+      "best_rate_pct": 1.4
+    }
+  ],
+  "source_cohorts": [
+    {
+      "cohort": "expo_event",
+      "total_leads": 484,
+      "total_converted": 0,
+      "total_value_cents": 0,
+      "age_days": 365,
+      "maturity": "mature",
+      "windows": {
+        "30d": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "60d": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "90d": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "6mo": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "1yr": {
+          "converted": 0,
+          "rate_pct": 0.0
+        },
+        "2yr": {
+          "converted": 0,
+          "rate_pct": 0.0
+        }
+      },
+      "best_rate_pct": 0.0,
+      "source": "expo_event"
+    },
+    {
+      "cohort": "marketplace",
+      "total_leads": 749,
+      "total_converted": 75,
+      "total_value_cents": 29279138,
+      "age_days": 365,
+      "maturity": "mature",
+      "windows": {
+        "30d": {
+          "converted": 39,
+          "rate_pct": 5.2
+        },
+        "60d": {
+          "converted": 54,
+          "rate_pct": 7.2
+        },
+        "90d": {
+          "converted": 64,
+          "rate_pct": 8.5
+        },
+        "6mo": {
+          "converted": 75,
+          "rate_pct": 10.0
+        },
+        "1yr": {
+          "converted": 75,
+          "rate_pct": 10.0
+        },
+        "2yr": {
+          "converted": 75,
+          "rate_pct": 10.0
+        }
+      },
+      "best_rate_pct": 10.0,
+      "source": "marketplace"
+    },
+    {
+      "cohort": "other",
+      "total_leads": 1857,
+      "total_converted": 160,
+      "total_value_cents": 47473138,
+      "age_days": 365,
+      "maturity": "mature",
+      "windows": {
+        "30d": {
+          "converted": 105,
+          "rate_pct": 5.7
+        },
+        "60d": {
+          "converted": 131,
+          "rate_pct": 7.1
+        },
+        "90d": {
+          "converted": 140,
+          "rate_pct": 7.5
+        },
+        "6mo": {
+          "converted": 153,
+          "rate_pct": 8.2
+        },
+        "1yr": {
+          "converted": 160,
+          "rate_pct": 8.6
+        },
+        "2yr": {
+          "converted": 160,
+          "rate_pct": 8.6
+        }
+      },
+      "best_rate_pct": 8.6,
+      "source": "other"
+    },
+    {
+      "cohort": "referral",
+      "total_leads": 33,
+      "total_converted": 11,
+      "total_value_cents": 5394389,
+      "age_days": 365,
+      "maturity": "mature",
+      "windows": {
+        "30d": {
+          "converted": 8,
+          "rate_pct": 24.2
+        },
+        "60d": {
+          "converted": 9,
+          "rate_pct": 27.3
+        },
+        "90d": {
+          "converted": 10,
+          "rate_pct": 30.3
+        },
+        "6mo": {
+          "converted": 11,
+          "rate_pct": 33.3
+        },
+        "1yr": {
+          "converted": 11,
+          "rate_pct": 33.3
+        },
+        "2yr": {
+          "converted": 11,
+          "rate_pct": 33.3
+        }
+      },
+      "best_rate_pct": 33.3,
+      "source": "referral"
+    },
+    {
+      "cohort": "search",
+      "total_leads": 63,
+      "total_converted": 18,
+      "total_value_cents": 6960357,
+      "age_days": 365,
+      "maturity": "mature",
+      "windows": {
+        "30d": {
+          "converted": 12,
+          "rate_pct": 19.0
+        },
+        "60d": {
+          "converted": 17,
+          "rate_pct": 27.0
+        },
+        "90d": {
+          "converted": 17,
+          "rate_pct": 27.0
+        },
+        "6mo": {
+          "converted": 18,
+          "rate_pct": 28.6
+        },
+        "1yr": {
+          "converted": 18,
+          "rate_pct": 28.6
+        },
+        "2yr": {
+          "converted": 18,
+          "rate_pct": 28.6
+        }
+      },
+      "best_rate_pct": 28.6,
+      "source": "search"
+    },
+    {
+      "cohort": "social_media",
+      "total_leads": 3454,
+      "total_converted": 87,
+      "total_value_cents": 23452647,
+      "age_days": 365,
+      "maturity": "mature",
+      "windows": {
+        "30d": {
+          "converted": 42,
+          "rate_pct": 1.2
+        },
+        "60d": {
+          "converted": 55,
+          "rate_pct": 1.6
+        },
+        "90d": {
+          "converted": 61,
+          "rate_pct": 1.8
+        },
+        "6mo": {
+          "converted": 78,
+          "rate_pct": 2.3
+        },
+        "1yr": {
+          "converted": 83,
+          "rate_pct": 2.4
+        },
+        "2yr": {
+          "converted": 87,
+          "rate_pct": 2.5
+        }
+      },
+      "best_rate_pct": 2.4,
+      "source": "social_media"
+    },
+    {
+      "cohort": "unknown",
+      "total_leads": 1448,
+      "total_converted": 59,
+      "total_value_cents": 8854604,
+      "age_days": 365,
+      "maturity": "mature",
+      "windows": {
+        "30d": {
+          "converted": 40,
+          "rate_pct": 2.8
+        },
+        "60d": {
+          "converted": 48,
+          "rate_pct": 3.3
+        },
+        "90d": {
+          "converted": 48,
+          "rate_pct": 3.3
+        },
+        "6mo": {
+          "converted": 51,
+          "rate_pct": 3.5
+        },
+        "1yr": {
+          "converted": 59,
+          "rate_pct": 4.1
+        },
+        "2yr": {
+          "converted": 59,
+          "rate_pct": 4.1
+        }
+      },
+      "best_rate_pct": 4.1,
+      "source": "unknown"
+    },
+    {
+      "cohort": "website_direct",
+      "total_leads": 426,
+      "total_converted": 78,
+      "total_value_cents": 27991253,
+      "age_days": 365,
+      "maturity": "mature",
+      "windows": {
+        "30d": {
+          "converted": 58,
+          "rate_pct": 13.6
+        },
+        "60d": {
+          "converted": 69,
+          "rate_pct": 16.2
+        },
+        "90d": {
+          "converted": 72,
+          "rate_pct": 16.9
+        },
+        "6mo": {
+          "converted": 77,
+          "rate_pct": 18.1
+        },
+        "1yr": {
+          "converted": 77,
+          "rate_pct": 18.1
+        },
+        "2yr": {
+          "converted": 78,
+          "rate_pct": 18.3
+        }
+      },
+      "best_rate_pct": 18.1,
+      "source": "website_direct"
+    }
+  ],
+  "summary_text": "32 monthly cohorts over 730d. Average 90d conversion: 4.9%. Average 1yr conversion: 5.6%. Best cohort: 2024-02 (21.4% at 90d). 7 cohorts in last 6 months still developing."
+}

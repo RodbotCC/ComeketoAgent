@@ -1,0 +1,379 @@
+{
+  "_meta": {
+    "generated_at": "2026-04-27T22:59:40.517258+00:00",
+    "window_days": 730,
+    "total_opps": 8514,
+    "won_with_event_date": 562,
+    "won_with_future_event": 525
+  },
+  "global_stats": {
+    "bookings_with_lead_time": 525,
+    "bookings_total": 562,
+    "median_days": 51,
+    "mean_days": 115.0,
+    "p25_days": 11.0,
+    "p75_days": 191.0,
+    "p90_days": 318.0,
+    "min_days": 0,
+    "max_days": 698
+  },
+  "urgency_segments": {
+    "last_minute": {
+      "count": 215,
+      "pct": 38.3,
+      "avg_value_cents": 161551,
+      "avg_value_fmt": "$1.6k"
+    },
+    "planned": {
+      "count": 161,
+      "pct": 28.6,
+      "avg_value_cents": 431178,
+      "avg_value_fmt": "$4.3k"
+    },
+    "long_horizon": {
+      "count": 43,
+      "pct": 7.7,
+      "avg_value_cents": 499861,
+      "avg_value_fmt": "$5.0k"
+    }
+  },
+  "histogram": [
+    {
+      "bucket": "<30d",
+      "label": "Last minute (<30d)",
+      "count": 215,
+      "pct_of_bookings": 38.3,
+      "won_value_cents": 34733519,
+      "won_value_fmt": "$347.3k",
+      "avg_value_cents": 161551,
+      "avg_value_fmt": "$1.6k"
+    },
+    {
+      "bucket": "30-60d",
+      "label": "Short notice (30-60d)",
+      "count": 61,
+      "pct_of_bookings": 10.9,
+      "won_value_cents": 15325563,
+      "won_value_fmt": "$153.3k",
+      "avg_value_cents": 251239,
+      "avg_value_fmt": "$2.5k"
+    },
+    {
+      "bucket": "60-90d",
+      "label": "Moderate (60-90d)",
+      "count": 45,
+      "pct_of_bookings": 8.0,
+      "won_value_cents": 14045657,
+      "won_value_fmt": "$140.5k",
+      "avg_value_cents": 312126,
+      "avg_value_fmt": "$3.1k"
+    },
+    {
+      "bucket": "90-180d",
+      "label": "Planned (90-180d)",
+      "count": 64,
+      "pct_of_bookings": 11.4,
+      "won_value_cents": 24694906,
+      "won_value_fmt": "$246.9k",
+      "avg_value_cents": 385858,
+      "avg_value_fmt": "$3.9k"
+    },
+    {
+      "bucket": "180-365d",
+      "label": "Well planned (6-12mo)",
+      "count": 97,
+      "pct_of_bookings": 17.3,
+      "won_value_cents": 44724708,
+      "won_value_fmt": "$447.2k",
+      "avg_value_cents": 461079,
+      "avg_value_fmt": "$4.6k"
+    },
+    {
+      "bucket": "365d+",
+      "label": "Long horizon (1yr+)",
+      "count": 43,
+      "pct_of_bookings": 7.7,
+      "won_value_cents": 21494027,
+      "won_value_fmt": "$214.9k",
+      "avg_value_cents": 499861,
+      "avg_value_fmt": "$5.0k"
+    },
+    {
+      "bucket": "past_event",
+      "label": "Past event at booking",
+      "count": 37,
+      "pct_of_bookings": 6.6,
+      "won_value_cents": 4831990,
+      "won_value_fmt": "$48.3k",
+      "avg_value_cents": 130594,
+      "avg_value_fmt": "$1.3k"
+    }
+  ],
+  "by_event_type": [
+    {
+      "event_type": "wedding",
+      "count": 240,
+      "median_days": 168.0,
+      "mean_days": 182.1,
+      "min_days": 0,
+      "max_days": 696,
+      "won_value_cents": 101088560,
+      "won_value_fmt": "$1.0M",
+      "pct_under_90d": 37.5,
+      "pct_over_180d": 47.1
+    },
+    {
+      "event_type": "quincea\u00f1era",
+      "count": 8,
+      "median_days": 59.5,
+      "mean_days": 76.9,
+      "min_days": 0,
+      "max_days": 268,
+      "won_value_cents": 2486143,
+      "won_value_fmt": "$24.9k",
+      "pct_under_90d": 62.5,
+      "pct_over_180d": 12.5
+    },
+    {
+      "event_type": "baby_shower",
+      "count": 3,
+      "median_days": 59,
+      "mean_days": 100,
+      "min_days": 2,
+      "max_days": 239,
+      "won_value_cents": 541606,
+      "won_value_fmt": "$5.4k",
+      "pct_under_90d": 66.7,
+      "pct_over_180d": 33.3
+    },
+    {
+      "event_type": "graduation",
+      "count": 17,
+      "median_days": 40,
+      "mean_days": 63.2,
+      "min_days": 2,
+      "max_days": 186,
+      "won_value_cents": 2644189,
+      "won_value_fmt": "$26.4k",
+      "pct_under_90d": 58.8,
+      "pct_over_180d": 11.8
+    },
+    {
+      "event_type": "other",
+      "count": 67,
+      "median_days": 21,
+      "mean_days": 63.0,
+      "min_days": 0,
+      "max_days": 695,
+      "won_value_cents": 15054250,
+      "won_value_fmt": "$150.5k",
+      "pct_under_90d": 80.6,
+      "pct_over_180d": 9.0
+    },
+    {
+      "event_type": "unknown",
+      "count": 105,
+      "median_days": 19,
+      "mean_days": 74.0,
+      "min_days": 0,
+      "max_days": 698,
+      "won_value_cents": 18192672,
+      "won_value_fmt": "$181.9k",
+      "pct_under_90d": 78.1,
+      "pct_over_180d": 13.3
+    },
+    {
+      "event_type": "birthday",
+      "count": 52,
+      "median_days": 15.0,
+      "mean_days": 43.4,
+      "min_days": 0,
+      "max_days": 393,
+      "won_value_cents": 7831030,
+      "won_value_fmt": "$78.3k",
+      "pct_under_90d": 88.5,
+      "pct_over_180d": 5.8
+    },
+    {
+      "event_type": "memorial",
+      "count": 3,
+      "median_days": 6,
+      "mean_days": 6.3,
+      "min_days": 4,
+      "max_days": 9,
+      "won_value_cents": 2105055,
+      "won_value_fmt": "$21.1k",
+      "pct_under_90d": 100.0,
+      "pct_over_180d": 0.0
+    },
+    {
+      "event_type": "holiday",
+      "count": 9,
+      "median_days": 4,
+      "mean_days": 5.3,
+      "min_days": 0,
+      "max_days": 12,
+      "won_value_cents": 628200,
+      "won_value_fmt": "$6.3k",
+      "pct_under_90d": 100.0,
+      "pct_over_180d": 0.0
+    },
+    {
+      "event_type": "corporate",
+      "count": 21,
+      "median_days": 4,
+      "mean_days": 17.5,
+      "min_days": 0,
+      "max_days": 109,
+      "won_value_cents": 4446675,
+      "won_value_fmt": "$44.5k",
+      "pct_under_90d": 95.2,
+      "pct_over_180d": 0.0
+    }
+  ],
+  "by_source_family": [
+    {
+      "source": "website_direct",
+      "count": 86,
+      "median_days": 130.0,
+      "mean_days": 189.8,
+      "pct_under_90d": 41.9,
+      "pct_over_180d": 46.5
+    },
+    {
+      "source": "referral",
+      "count": 11,
+      "median_days": 109,
+      "mean_days": 160.7,
+      "pct_under_90d": 36.4,
+      "pct_over_180d": 45.5
+    },
+    {
+      "source": "search",
+      "count": 21,
+      "median_days": 97,
+      "mean_days": 115.7,
+      "pct_under_90d": 47.6,
+      "pct_over_180d": 23.8
+    },
+    {
+      "source": "marketplace",
+      "count": 86,
+      "median_days": 92.5,
+      "mean_days": 148.6,
+      "pct_under_90d": 48.8,
+      "pct_over_180d": 31.4
+    },
+    {
+      "source": "social_media",
+      "count": 96,
+      "median_days": 42.0,
+      "mean_days": 119.7,
+      "pct_under_90d": 60.4,
+      "pct_over_180d": 33.3
+    },
+    {
+      "source": "other",
+      "count": 182,
+      "median_days": 22.0,
+      "mean_days": 75.2,
+      "pct_under_90d": 75.3,
+      "pct_over_180d": 16.5
+    },
+    {
+      "source": "unknown",
+      "count": 43,
+      "median_days": 17,
+      "mean_days": 44.1,
+      "pct_under_90d": 79.1,
+      "pct_over_180d": 2.3
+    }
+  ],
+  "by_event_month": [
+    {
+      "month_num": 1,
+      "month_name": "Jan",
+      "count": 12,
+      "median_days": 13.0,
+      "mean_days": 59.6
+    },
+    {
+      "month_num": 2,
+      "month_name": "Feb",
+      "count": 8,
+      "median_days": 7.5,
+      "mean_days": 12
+    },
+    {
+      "month_num": 3,
+      "month_name": "Mar",
+      "count": 8,
+      "median_days": 19.5,
+      "mean_days": 102.1
+    },
+    {
+      "month_num": 4,
+      "month_name": "Apr",
+      "count": 17,
+      "median_days": 21,
+      "mean_days": 66.9
+    },
+    {
+      "month_num": 5,
+      "month_name": "May",
+      "count": 47,
+      "median_days": 80,
+      "mean_days": 129.8
+    },
+    {
+      "month_num": 6,
+      "month_name": "Jun",
+      "count": 94,
+      "median_days": 64.5,
+      "mean_days": 101.7
+    },
+    {
+      "month_num": 7,
+      "month_name": "Jul",
+      "count": 38,
+      "median_days": 25.5,
+      "mean_days": 110.2
+    },
+    {
+      "month_num": 8,
+      "month_name": "Aug",
+      "count": 71,
+      "median_days": 47,
+      "mean_days": 142.7
+    },
+    {
+      "month_num": 9,
+      "month_name": "Sep",
+      "count": 56,
+      "median_days": 156.0,
+      "mean_days": 160.4
+    },
+    {
+      "month_num": 10,
+      "month_name": "Oct",
+      "count": 89,
+      "median_days": 91,
+      "mean_days": 165.9
+    },
+    {
+      "month_num": 11,
+      "month_name": "Nov",
+      "count": 47,
+      "median_days": 17,
+      "mean_days": 50.1
+    },
+    {
+      "month_num": 12,
+      "month_name": "Dec",
+      "count": 38,
+      "median_days": 11.0,
+      "mean_days": 40.1
+    }
+  ],
+  "summary_text": "525 won bookings with measurable lead time. Median 51d advance notice (P25=11.0d, P75=191.0d). Last-minute (<30d): 38.3% of bookings, avg $1.6k. Planned (90-180d): 28.6%, avg $4.3k. Longest lead time: wedding at 168.0d median. Shortest: corporate at 4d."
+}

@@ -1,11 +1,14 @@
 "use client";
 
 import { useMemo, useState, useTransition } from "react";
-import { Modal } from "./Modal";
-import { ContextMenu, type ContextMenuItem } from "./ContextMenu";
-import { refinePlanDayAction, setDayStatusAction, type RefineDayState } from "./actions";
+import { Modal } from "@/components/Modal";
+import { ContextMenu, type ContextMenuItem } from "@/components/ContextMenu";
+import { useToast } from "@/components/Toast";
+import { refinePlanDayAction, setDayStatusAction, addPlanDayTouchAction, type RefineDayState } from "./actions";
 import type { SevenDayPlanDay } from "@/lib/plan";
 import { validateNepqVoice, hasBlockingViolation, type VoiceViolation } from "@/lib/nepq";
+import { lintOutboundDraft, draftLintHasBlocking, type DraftLintIssue } from "@/lib/draft-lint";
+import { emailDraftPlainToPreviewHtml } from "@/lib/email-draft-html";
 
 const CHANNEL_GLYPH: Record<string, string> = {
   call: "📞",
@@ -21,13 +24,16 @@ type Props = {
   planId: string;
   leadId: string;
   goalSummary: string;
+  /** When true, AI day refinements are blocked (§I3). */
+  planStale?: boolean;
 };
 
-export function PlanDayCard({ day, dayIndex, tone, planId, leadId, goalSummary }: Props) {
+export function PlanDayCard({ day, dayIndex, tone, planId, leadId, goalSummary, planStale }: Props) {
   const [open, setOpen] = useState(false);
   const [instruction, setInstruction] = useState("");
   const [state, setState] = useState<RefineDayState>({ ok: true });
   const [pending, startTransition] = useTransition();
+  const toast = useToast();
 
   // NEPQ voice scan for every email/sms draft seed in this day.
   const voiceHits = useMemo(() => {
@@ -41,8 +47,26 @@ export function PlanDayCard({ day, dayIndex, tone, planId, leadId, goalSummary }
     });
     return map;
   }, [day]);
-  const dayHasBlocking = Object.values(voiceHits).some(hasBlockingViolation);
-  const dayHitCount = Object.values(voiceHits).reduce((s, arr) => s + arr.length, 0);
+  const draftLintHits = useMemo(() => {
+    const map: Record<number, DraftLintIssue[]> = {};
+    day.required_actions.forEach((a, i) => {
+      if (a.channel === "email" || a.channel === "sms") {
+        const text = a.draft_seed || a.intent || "";
+        const issues = lintOutboundDraft({ channel: a.channel, text });
+        if (issues.length) map[i] = issues;
+      }
+    });
+    return map;
+  }, [day]);
+
+  const dayHasBlocking = (() => {
+    const voiceBlock = Object.values(voiceHits).some(hasBlockingViolation);
+    const lintBlock = Object.values(draftLintHits).some(draftLintHasBlocking);
+    return voiceBlock || lintBlock;
+  })();
+  const dayHitCount =
+    Object.values(voiceHits).reduce((s, arr) => s + arr.length, 0) +
+    Object.values(draftLintHits).reduce((s, arr) => s + arr.length, 0);
 
   function submit(form: FormData) {
     startTransition(async () => {
@@ -51,6 +75,9 @@ export function PlanDayCard({ day, dayIndex, tone, planId, leadId, goalSummary }
       if (r.ok) {
         setOpen(false);
         setInstruction("");
+        toast.push(`Day ${day.day} refined`, { tone: "success" });
+      } else {
+        toast.push(`Refine failed — ${r.error ?? "unknown"}`, { tone: "error", ttl: 4500 });
       }
     });
   }
@@ -62,18 +89,28 @@ export function PlanDayCard({ day, dayIndex, tone, planId, leadId, goalSummary }
     fd.set("day_index", String(dayIndex));
     fd.set("status", status);
     startTransition(async () => {
-      await setDayStatusAction(fd);
+      try {
+        await setDayStatusAction(fd);
+        toast.push(`Day ${day.day} → ${status.replace(/_/g, " ")}`, { tone: "success" });
+      } catch (err) {
+        toast.push(
+          `Status change failed — ${err instanceof Error ? err.message : String(err)}`,
+          { tone: "error", ttl: 4500 }
+        );
+      }
     });
   }
 
   const items: ContextMenuItem[] = [
-    { kind: "label", text: `Day ${day.day}` },
-    { kind: "item", label: "Edit & refine…", onSelect: () => setOpen(true) },
-    { kind: "divider" },
-    { kind: "item", label: "Mark approved", onSelect: () => setStatus("approved") },
-    { kind: "item", label: "Mark needs review", onSelect: () => setStatus("needs_review") },
-    { kind: "item", label: "Mark sent", onSelect: () => setStatus("sent") },
-    { kind: "item", label: "Skip this day", tone: "danger", onSelect: () => setStatus("skipped") },
+    { kind: "label" as const, text: `Day ${day.day}` },
+    ...(planStale
+      ? [{ kind: "label" as const, text: "Refine blocked — box stale (§I3)" }]
+      : [{ kind: "item" as const, label: "Edit & refine…", onSelect: () => setOpen(true) }]),
+    { kind: "divider" as const },
+    { kind: "item" as const, label: "Mark approved", onSelect: () => setStatus("approved") },
+    { kind: "item" as const, label: "Mark needs review", onSelect: () => setStatus("needs_review") },
+    { kind: "item" as const, label: "Mark sent", onSelect: () => setStatus("sent") },
+    { kind: "item" as const, label: "Skip this day", tone: "danger" as const, onSelect: () => setStatus("skipped") },
   ];
 
   return (
@@ -82,10 +119,13 @@ export function PlanDayCard({ day, dayIndex, tone, planId, leadId, goalSummary }
       <div
         className="plan-day plan-day-clickable"
         data-tone={tone}
-        onClick={() => setOpen(true)}
+        onClick={() => {
+          if (!planStale) setOpen(true);
+        }}
         role="button"
         tabIndex={0}
         onKeyDown={(e) => {
+          if (planStale) return;
           if (e.key === "Enter" || e.key === " ") {
             e.preventDefault();
             setOpen(true);
@@ -98,7 +138,7 @@ export function PlanDayCard({ day, dayIndex, tone, planId, leadId, goalSummary }
             {dayHitCount > 0 && (
               <span
                 className={`plan-day-voice ${dayHasBlocking ? "block" : "warn"}`}
-                title={`${dayHitCount} voice ${dayHitCount === 1 ? "issue" : "issues"} — open to view`}
+                title={`${dayHitCount} guardrail ${dayHitCount === 1 ? "issue" : "issues"} — open to view`}
               >
                 {dayHasBlocking ? "voice ✗" : "voice ⚠"}
               </span>
@@ -164,6 +204,28 @@ export function PlanDayCard({ day, dayIndex, tone, planId, leadId, goalSummary }
                   <div className="plan-action-body">
                     <div className="plan-action-intent">{a.intent}</div>
                     {a.draft_seed && <div className="plan-action-seed">{a.draft_seed}</div>}
+                    {a.channel === "email" && a.draft_seed && (
+                      <div
+                        className="plan-email-html-preview"
+                        style={{
+                          marginTop: 8,
+                          padding: 10,
+                          background: "var(--paper-2)",
+                          borderRadius: 6,
+                          border: "0.5px solid var(--rule)",
+                        }}
+                      >
+                        <div className="cme-eyebrow" style={{ marginBottom: 6 }}>
+                          Email preview (§H1 safe HTML)
+                        </div>
+                        <div
+                          className="plan-email-html-body"
+                          dangerouslySetInnerHTML={{
+                            __html: emailDraftPlainToPreviewHtml(a.draft_seed),
+                          }}
+                        />
+                      </div>
+                    )}
                     {a.tasting_date && <div className="plan-action-tasting">tasting: {a.tasting_date}</div>}
                     {a.notes && <div className="plan-action-notes">{a.notes}</div>}
                     {voiceHits[i] && voiceHits[i].length > 0 && (
@@ -180,10 +242,68 @@ export function PlanDayCard({ day, dayIndex, tone, planId, leadId, goalSummary }
                         ))}
                       </ul>
                     )}
+                    {draftLintHits[i] && draftLintHits[i].length > 0 && (
+                      <ul className="plan-action-voice">
+                        {draftLintHits[i].map((issue, li) => (
+                          <li
+                            key={li}
+                            className={`plan-action-voice-row plan-action-voice-${issue.blocking ? "block" : "warn"}`}
+                          >
+                            <span className="plan-action-voice-tag">{issue.blocking ? "block" : "lint"}</span>
+                            <span className="plan-action-voice-rule">{issue.code}</span>
+                            <span>{issue.message}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
                 </div>
               ))}
             </section>
+
+            {!planStale && (
+              <section className="plan-day-modal-section">
+                <h3 className="cme-eyebrow">Add another touch</h3>
+                <p className="plan-day-modal-hint" style={{ fontSize: 11, marginBottom: 10 }}>
+                  Appends to this calendar day and sets the day to <strong>needs review</strong>. The rolling
+                  frequency cap can still skip a second SMS/email the same day — see heartbeat skip codes.
+                </p>
+                <form action={addPlanDayTouchAction} className="plan-add-touch-form">
+                  <input type="hidden" name="plan_id" value={planId} />
+                  <input type="hidden" name="lead_id" value={leadId} />
+                  <input type="hidden" name="day_index" value={String(dayIndex)} />
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 10, alignItems: "flex-end", marginBottom: 10 }}>
+                    <label style={{ display: "flex", flexDirection: "column", gap: 4, fontSize: 11 }}>
+                      Channel
+                      <select name="channel" className="plan-horizon-input" defaultValue="sms">
+                        <option value="sms">sms</option>
+                        <option value="email">email</option>
+                        <option value="call">call</option>
+                        <option value="task">task</option>
+                      </select>
+                    </label>
+                    <label style={{ display: "flex", flexDirection: "column", gap: 4, fontSize: 11, flex: "1 1 160px" }}>
+                      Intent
+                      <input
+                        name="intent"
+                        className="plan-horizon-input"
+                        placeholder="One-line move (required)"
+                        required
+                      />
+                    </label>
+                  </div>
+                  <label style={{ display: "flex", flexDirection: "column", gap: 4, fontSize: 11, width: "100%" }}>
+                    Draft seed (optional)
+                    <input name="draft_seed" className="plan-horizon-input" placeholder="For email/SMS body seed" />
+                  </label>
+                  <div style={{ marginTop: 12 }}>
+                    <button type="submit" className="plan-btn plan-btn-primary" disabled={pending}>
+                      Add touch
+                    </button>
+                  </div>
+                </form>
+              </section>
+            )}
 
             <section className="plan-day-modal-section">
               <h3 className="cme-eyebrow">Send window</h3>
@@ -192,10 +312,18 @@ export function PlanDayCard({ day, dayIndex, tone, planId, leadId, goalSummary }
 
             <section className="plan-day-modal-refine">
               <h3 className="cme-eyebrow">Tell the AI what to change</h3>
-              <p className="plan-day-modal-hint">
-                Plain English. Examples: &ldquo;Make this more aggressive about scheduling a call.&rdquo;
-                &nbsp;&nbsp;&ldquo;Switch to email-first.&rdquo;&nbsp;&nbsp;&ldquo;Pivot to a tasting offer for May 17.&rdquo;
-              </p>
+              {planStale ? (
+                <div className="plan-day-modal-error" style={{ marginBottom: 10 }}>
+                  Box changed since this plan was generated. Regenerate the plan from the Box before AI day
+                  refinements (Guardrails §I3).
+                </div>
+              ) : (
+                <p className="plan-day-modal-hint">
+                  Plain English. Examples: &ldquo;Make this more aggressive about scheduling a call.&rdquo;
+                  &nbsp;&nbsp;&ldquo;Switch to email-first.&rdquo;&nbsp;&nbsp;&ldquo;Pivot to a tasting offer for May
+                  17.&rdquo;
+                </p>
+              )}
               <form
                 action={(fd) => {
                   fd.set("plan_id", planId);
@@ -212,7 +340,7 @@ export function PlanDayCard({ day, dayIndex, tone, planId, leadId, goalSummary }
                   rows={3}
                   value={instruction}
                   onChange={(e) => setInstruction(e.target.value)}
-                  disabled={pending}
+                  disabled={pending || planStale}
                 />
                 <div className="plan-day-modal-actions">
                   <button
@@ -226,7 +354,7 @@ export function PlanDayCard({ day, dayIndex, tone, planId, leadId, goalSummary }
                   <button
                     type="submit"
                     className="plan-btn plan-btn-primary"
-                    disabled={pending}
+                    disabled={pending || planStale}
                   >
                     {pending ? "AI is rewriting…" : "Take another crack"}
                   </button>

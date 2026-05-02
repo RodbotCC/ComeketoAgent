@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
-import { Modal } from "./Modal";
-import { ContextMenu, type ContextMenuItem } from "./ContextMenu";
+import { Modal } from "@/components/Modal";
+import { ContextMenu, type ContextMenuItem } from "@/components/ContextMenu";
+import { useToast } from "@/components/Toast";
 
 /**
  * Serializable menu prop — server components can pass these from page.tsx
@@ -38,6 +39,7 @@ export function BoxPanel({
   expanded,
   menu,
   hint,
+  index = 0,
 }: {
   title: string;
   eyebrow?: string;
@@ -45,10 +47,13 @@ export function BoxPanel({
   expanded: ReactNode;
   menu?: BoxPanelMenuAction[];
   hint?: string;
+  /** Position in a sibling group — drives staggered entrance keyframe delay. */
+  index?: number;
 }) {
   const [open, setOpen] = useState(false);
+  const toast = useToast();
 
-  function resolveAction(action: Extract<BoxPanelMenuAction, { kind: "item" }>["action"]): () => void {
+  function resolveAction(action: Extract<BoxPanelMenuAction, { kind: "item" }>["action"], label: string): () => void {
     switch (action.type) {
       case "open_expanded":
         return () => setOpen(true);
@@ -56,7 +61,12 @@ export function BoxPanel({
         return () => window.open(action.url, "_blank", "noreferrer");
       case "copy":
         return () => {
-          if (navigator.clipboard) navigator.clipboard.writeText(action.text);
+          if (navigator.clipboard) {
+            void navigator.clipboard.writeText(action.text).then(
+              () => toast.push(`${label} copied`, { tone: "success" }),
+              () => toast.push("Copy failed", { tone: "error" })
+            );
+          }
         };
     }
   }
@@ -74,7 +84,7 @@ export function BoxPanel({
           kind: "item",
           label: m.label,
           tone: m.tone,
-          onSelect: resolveAction(m.action),
+          onSelect: resolveAction(m.action, m.label),
         };
       })
     : defaultItems;
@@ -84,6 +94,7 @@ export function BoxPanel({
       <ContextMenu items={items}>
         <div
           className="lead-card widget box-panel"
+          style={{ animationDelay: `${Math.min(index, 8) * 60}ms` }}
           onClick={() => setOpen(true)}
           role="button"
           tabIndex={0}

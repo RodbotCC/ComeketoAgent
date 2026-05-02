@@ -1,0 +1,793 @@
+{
+  "_meta": {
+    "generated_at": "2026-04-27T22:38:17.305559+00:00",
+    "window_days": 730,
+    "total_opps": 8514,
+    "won_count": 791,
+    "lost_count": 6819,
+    "active_count": 904,
+    "total_won_revenue_cents": 170344461,
+    "total_won_revenue_fmt": "$1.7M",
+    "won_with_value_count": 585
+  },
+  "yoy_comparison": {
+    "last_12mo_revenue_cents": 88381252,
+    "last_12mo_revenue_fmt": "$883.8k",
+    "prior_12mo_revenue_cents": 85541846,
+    "prior_12mo_revenue_fmt": "$855.4k",
+    "revenue_growth_pct": 3.3,
+    "last_12mo_won_count": 405,
+    "prior_12mo_won_count": 412,
+    "won_count_growth_pct": -1.7,
+    "last_12mo_lead_volume": 4090,
+    "prior_12mo_lead_volume": 4983,
+    "lead_volume_growth_pct": -17.9,
+    "last_12mo_avg_deal_cents": 218225,
+    "last_12mo_avg_deal_fmt": "$2.2k",
+    "prior_12mo_avg_deal_cents": 207626,
+    "prior_12mo_avg_deal_fmt": "$2.1k",
+    "avg_deal_growth_pct": 5.1
+  },
+  "deal_size_percentiles": {
+    "p25_cents": 77600,
+    "p25_fmt": "$776",
+    "p50_cents": 200000,
+    "p50_fmt": "$2.0k",
+    "p75_cents": 414000,
+    "p75_fmt": "$4.1k",
+    "p90_cents": 644077,
+    "p90_fmt": "$6.4k",
+    "mean_cents": 291187,
+    "mean_fmt": "$2.9k",
+    "median_cents": 200000,
+    "median_fmt": "$2.0k",
+    "max_cents": 2556206,
+    "max_fmt": "$25.6k"
+  },
+  "deal_size_distribution": [
+    {
+      "bucket": "<$500",
+      "count": 7,
+      "pct_of_deals": 1.2,
+      "total_value_cents": 10450,
+      "total_value_fmt": "$104",
+      "pct_of_revenue": 0.0
+    },
+    {
+      "bucket": "$500-1k",
+      "count": 0,
+      "pct_of_deals": 0.0,
+      "total_value_cents": 0,
+      "total_value_fmt": "$0",
+      "pct_of_revenue": 0.0
+    },
+    {
+      "bucket": "$1-2k",
+      "count": 0,
+      "pct_of_deals": 0.0,
+      "total_value_cents": 0,
+      "total_value_fmt": "$0",
+      "pct_of_revenue": 0.0
+    },
+    {
+      "bucket": "$2-3k",
+      "count": 0,
+      "pct_of_deals": 0.0,
+      "total_value_cents": 0,
+      "total_value_fmt": "$0",
+      "pct_of_revenue": 0.0
+    },
+    {
+      "bucket": "$3-5k",
+      "count": 0,
+      "pct_of_deals": 0.0,
+      "total_value_cents": 0,
+      "total_value_fmt": "$0",
+      "pct_of_revenue": 0.0
+    },
+    {
+      "bucket": "$5-8k",
+      "count": 0,
+      "pct_of_deals": 0.0,
+      "total_value_cents": 0,
+      "total_value_fmt": "$0",
+      "pct_of_revenue": 0.0
+    },
+    {
+      "bucket": "$8-12k",
+      "count": 0,
+      "pct_of_deals": 0.0,
+      "total_value_cents": 0,
+      "total_value_fmt": "$0",
+      "pct_of_revenue": 0.0
+    },
+    {
+      "bucket": "$12k+",
+      "count": 12,
+      "pct_of_deals": 2.1,
+      "total_value_cents": 18256353,
+      "total_value_fmt": "$182.6k",
+      "pct_of_revenue": 10.7
+    }
+  ],
+  "revenue_concentration": [
+    {
+      "top_pct_of_deals": 5,
+      "deal_count": 29,
+      "revenue_cents": 35203094,
+      "revenue_fmt": "$352.0k",
+      "pct_of_total_revenue": 20.7
+    },
+    {
+      "top_pct_of_deals": 10,
+      "deal_count": 58,
+      "revenue_cents": 57031388,
+      "revenue_fmt": "$570.3k",
+      "pct_of_total_revenue": 33.5
+    },
+    {
+      "top_pct_of_deals": 20,
+      "deal_count": 117,
+      "revenue_cents": 89305374,
+      "revenue_fmt": "$893.1k",
+      "pct_of_total_revenue": 52.4
+    },
+    {
+      "top_pct_of_deals": 25,
+      "deal_count": 146,
+      "revenue_cents": 102137466,
+      "revenue_fmt": "$1.0M",
+      "pct_of_total_revenue": 60.0
+    },
+    {
+      "top_pct_of_deals": 50,
+      "deal_count": 292,
+      "revenue_cents": 145094433,
+      "revenue_fmt": "$1.5M",
+      "pct_of_total_revenue": 85.2
+    }
+  ],
+  "monthly_trend": [
+    {
+      "month": "2024-04",
+      "month_label": "Apr '24",
+      "new_leads": 1014,
+      "won_count": 120,
+      "won_value_cents": 8479168,
+      "won_value_fmt": "$84.8k",
+      "avg_deal_cents": 70660,
+      "avg_deal_fmt": "$707",
+      "win_rate_pct": 100.0
+    },
+    {
+      "month": "2024-05",
+      "month_label": "May '24",
+      "new_leads": 297,
+      "won_count": 17,
+      "won_value_cents": 2706855,
+      "won_value_fmt": "$27.1k",
+      "avg_deal_cents": 159227,
+      "avg_deal_fmt": "$1.6k",
+      "win_rate_pct": 21.2
+    },
+    {
+      "month": "2024-06",
+      "month_label": "Jun '24",
+      "new_leads": 223,
+      "won_count": 28,
+      "won_value_cents": 9516126,
+      "won_value_fmt": "$95.2k",
+      "avg_deal_cents": 339862,
+      "avg_deal_fmt": "$3.4k",
+      "win_rate_pct": 39.4
+    },
+    {
+      "month": "2024-07",
+      "month_label": "Jul '24",
+      "new_leads": 215,
+      "won_count": 21,
+      "won_value_cents": 5771210,
+      "won_value_fmt": "$57.7k",
+      "avg_deal_cents": 274820,
+      "avg_deal_fmt": "$2.7k",
+      "win_rate_pct": 21.6
+    },
+    {
+      "month": "2024-08",
+      "month_label": "Aug '24",
+      "new_leads": 241,
+      "won_count": 18,
+      "won_value_cents": 6291801,
+      "won_value_fmt": "$62.9k",
+      "avg_deal_cents": 349544,
+      "avg_deal_fmt": "$3.5k",
+      "win_rate_pct": 24.3
+    },
+    {
+      "month": "2024-09",
+      "month_label": "Sep '24",
+      "new_leads": 383,
+      "won_count": 19,
+      "won_value_cents": 6620272,
+      "won_value_fmt": "$66.2k",
+      "avg_deal_cents": 348435,
+      "avg_deal_fmt": "$3.5k",
+      "win_rate_pct": 1.3
+    },
+    {
+      "month": "2024-10",
+      "month_label": "Oct '24",
+      "new_leads": 276,
+      "won_count": 31,
+      "won_value_cents": 6450659,
+      "won_value_fmt": "$64.5k",
+      "avg_deal_cents": 208086,
+      "avg_deal_fmt": "$2.1k",
+      "win_rate_pct": 14.1
+    },
+    {
+      "month": "2024-11",
+      "month_label": "Nov '24",
+      "new_leads": 215,
+      "won_count": 31,
+      "won_value_cents": 7032097,
+      "won_value_fmt": "$70.3k",
+      "avg_deal_cents": 226842,
+      "avg_deal_fmt": "$2.3k",
+      "win_rate_pct": 15.2
+    },
+    {
+      "month": "2024-12",
+      "month_label": "Dec '24",
+      "new_leads": 273,
+      "won_count": 28,
+      "won_value_cents": 6267085,
+      "won_value_fmt": "$62.7k",
+      "avg_deal_cents": 223824,
+      "avg_deal_fmt": "$2.2k",
+      "win_rate_pct": 12.4
+    },
+    {
+      "month": "2025-01",
+      "month_label": "Jan '25",
+      "new_leads": 391,
+      "won_count": 18,
+      "won_value_cents": 2947167,
+      "won_value_fmt": "$29.5k",
+      "avg_deal_cents": 163732,
+      "avg_deal_fmt": "$1.6k",
+      "win_rate_pct": 7.9
+    },
+    {
+      "month": "2025-02",
+      "month_label": "Feb '25",
+      "new_leads": 390,
+      "won_count": 23,
+      "won_value_cents": 5859248,
+      "won_value_fmt": "$58.6k",
+      "avg_deal_cents": 254750,
+      "avg_deal_fmt": "$2.5k",
+      "win_rate_pct": 9.3
+    },
+    {
+      "month": "2025-03",
+      "month_label": "Mar '25",
+      "new_leads": 420,
+      "won_count": 30,
+      "won_value_cents": 12364946,
+      "won_value_fmt": "$123.6k",
+      "avg_deal_cents": 412165,
+      "avg_deal_fmt": "$4.1k",
+      "win_rate_pct": 7.2
+    },
+    {
+      "month": "2025-04",
+      "month_label": "Apr '25",
+      "new_leads": 645,
+      "won_count": 28,
+      "won_value_cents": 5235212,
+      "won_value_fmt": "$52.4k",
+      "avg_deal_cents": 186972,
+      "avg_deal_fmt": "$1.9k",
+      "win_rate_pct": 6.9
+    },
+    {
+      "month": "2025-05",
+      "month_label": "May '25",
+      "new_leads": 239,
+      "won_count": 39,
+      "won_value_cents": 7705007,
+      "won_value_fmt": "$77.1k",
+      "avg_deal_cents": 197564,
+      "avg_deal_fmt": "$2.0k",
+      "win_rate_pct": 11.3
+    },
+    {
+      "month": "2025-06",
+      "month_label": "Jun '25",
+      "new_leads": 455,
+      "won_count": 42,
+      "won_value_cents": 4773943,
+      "won_value_fmt": "$47.7k",
+      "avg_deal_cents": 113665,
+      "avg_deal_fmt": "$1.1k",
+      "win_rate_pct": 10.0
+    },
+    {
+      "month": "2025-07",
+      "month_label": "Jul '25",
+      "new_leads": 456,
+      "won_count": 39,
+      "won_value_cents": 9676021,
+      "won_value_fmt": "$96.8k",
+      "avg_deal_cents": 248103,
+      "avg_deal_fmt": "$2.5k",
+      "win_rate_pct": 9.0
+    },
+    {
+      "month": "2025-08",
+      "month_label": "Aug '25",
+      "new_leads": 361,
+      "won_count": 51,
+      "won_value_cents": 8756004,
+      "won_value_fmt": "$87.6k",
+      "avg_deal_cents": 171686,
+      "avg_deal_fmt": "$1.7k",
+      "win_rate_pct": 11.3
+    },
+    {
+      "month": "2025-09",
+      "month_label": "Sep '25",
+      "new_leads": 286,
+      "won_count": 41,
+      "won_value_cents": 11041052,
+      "won_value_fmt": "$110.4k",
+      "avg_deal_cents": 269294,
+      "avg_deal_fmt": "$2.7k",
+      "win_rate_pct": 13.9
+    },
+    {
+      "month": "2025-10",
+      "month_label": "Oct '25",
+      "new_leads": 208,
+      "won_count": 30,
+      "won_value_cents": 6004595,
+      "won_value_fmt": "$60.0k",
+      "avg_deal_cents": 200153,
+      "avg_deal_fmt": "$2.0k",
+      "win_rate_pct": 12.2
+    },
+    {
+      "month": "2025-11",
+      "month_label": "Nov '25",
+      "new_leads": 172,
+      "won_count": 16,
+      "won_value_cents": 1422005,
+      "won_value_fmt": "$14.2k",
+      "avg_deal_cents": 88875,
+      "avg_deal_fmt": "$889",
+      "win_rate_pct": 4.7
+    },
+    {
+      "month": "2025-12",
+      "month_label": "Dec '25",
+      "new_leads": 166,
+      "won_count": 22,
+      "won_value_cents": 7456797,
+      "won_value_fmt": "$74.6k",
+      "avg_deal_cents": 338945,
+      "avg_deal_fmt": "$3.4k",
+      "win_rate_pct": 11.3
+    },
+    {
+      "month": "2026-01",
+      "month_label": "Jan '26",
+      "new_leads": 213,
+      "won_count": 22,
+      "won_value_cents": 3366928,
+      "won_value_fmt": "$33.7k",
+      "avg_deal_cents": 153042,
+      "avg_deal_fmt": "$1.5k",
+      "win_rate_pct": 12.5
+    },
+    {
+      "month": "2026-02",
+      "month_label": "Feb '26",
+      "new_leads": 181,
+      "won_count": 21,
+      "won_value_cents": 6575777,
+      "won_value_fmt": "$65.8k",
+      "avg_deal_cents": 313132,
+      "avg_deal_fmt": "$3.1k",
+      "win_rate_pct": 8.6
+    },
+    {
+      "month": "2026-03",
+      "month_label": "Mar '26",
+      "new_leads": 430,
+      "won_count": 20,
+      "won_value_cents": 6401390,
+      "won_value_fmt": "$64.0k",
+      "avg_deal_cents": 320070,
+      "avg_deal_fmt": "$3.2k",
+      "win_rate_pct": 6.4
+    },
+    {
+      "month": "2026-04",
+      "month_label": "Apr '26",
+      "new_leads": 278,
+      "won_count": 22,
+      "won_value_cents": 5780566,
+      "won_value_fmt": "$57.8k",
+      "avg_deal_cents": 262753,
+      "avg_deal_fmt": "$2.6k",
+      "win_rate_pct": 6.8
+    },
+    {
+      "month": "2026-05",
+      "month_label": "May '26",
+      "new_leads": 0,
+      "won_count": 4,
+      "won_value_cents": 1457550,
+      "won_value_fmt": "$14.6k",
+      "avg_deal_cents": 364388,
+      "avg_deal_fmt": "$3.6k",
+      "win_rate_pct": 100.0
+    },
+    {
+      "month": "2026-06",
+      "month_label": "Jun '26",
+      "new_leads": 0,
+      "won_count": 2,
+      "won_value_cents": 1200775,
+      "won_value_fmt": "$12.0k",
+      "avg_deal_cents": 600388,
+      "avg_deal_fmt": "$6.0k",
+      "win_rate_pct": 100.0
+    },
+    {
+      "month": "2026-07",
+      "month_label": "Jul '26",
+      "new_leads": 0,
+      "won_count": 2,
+      "won_value_cents": 507700,
+      "won_value_fmt": "$5.1k",
+      "avg_deal_cents": 253850,
+      "avg_deal_fmt": "$2.5k",
+      "win_rate_pct": 100.0
+    },
+    {
+      "month": "2026-08",
+      "month_label": "Aug '26",
+      "new_leads": 0,
+      "won_count": 1,
+      "won_value_cents": 169050,
+      "won_value_fmt": "$1.7k",
+      "avg_deal_cents": 169050,
+      "avg_deal_fmt": "$1.7k",
+      "win_rate_pct": 100.0
+    },
+    {
+      "month": "2026-10",
+      "month_label": "Oct '26",
+      "new_leads": 0,
+      "won_count": 2,
+      "won_value_cents": 535880,
+      "won_value_fmt": "$5.4k",
+      "avg_deal_cents": 267940,
+      "avg_deal_fmt": "$2.7k",
+      "win_rate_pct": 100.0
+    },
+    {
+      "month": "2027-11",
+      "month_label": "Nov '27",
+      "new_leads": 0,
+      "won_count": 1,
+      "won_value_cents": 315000,
+      "won_value_fmt": "$3.1k",
+      "avg_deal_cents": 315000,
+      "avg_deal_fmt": "$3.1k",
+      "win_rate_pct": 100.0
+    }
+  ],
+  "peak_booking_months": [
+    {
+      "month_num": 1,
+      "month_name": "Jan",
+      "won_count": 41,
+      "won_value_cents": 7155095,
+      "won_value_fmt": "$71.6k"
+    },
+    {
+      "month_num": 2,
+      "month_name": "Feb",
+      "won_count": 44,
+      "won_value_cents": 12435025,
+      "won_value_fmt": "$124.4k"
+    },
+    {
+      "month_num": 3,
+      "month_name": "Mar",
+      "won_count": 51,
+      "won_value_cents": 19581911,
+      "won_value_fmt": "$195.8k"
+    },
+    {
+      "month_num": 4,
+      "month_name": "Apr",
+      "won_count": 170,
+      "won_value_cents": 19494946,
+      "won_value_fmt": "$194.9k"
+    },
+    {
+      "month_num": 5,
+      "month_name": "May",
+      "won_count": 60,
+      "won_value_cents": 11869412,
+      "won_value_fmt": "$118.7k"
+    },
+    {
+      "month_num": 6,
+      "month_name": "Jun",
+      "won_count": 72,
+      "won_value_cents": 15490844,
+      "won_value_fmt": "$154.9k"
+    },
+    {
+      "month_num": 7,
+      "month_name": "Jul",
+      "won_count": 62,
+      "won_value_cents": 15954931,
+      "won_value_fmt": "$159.5k"
+    },
+    {
+      "month_num": 8,
+      "month_name": "Aug",
+      "won_count": 70,
+      "won_value_cents": 15216855,
+      "won_value_fmt": "$152.2k"
+    },
+    {
+      "month_num": 9,
+      "month_name": "Sep",
+      "won_count": 60,
+      "won_value_cents": 17661324,
+      "won_value_fmt": "$176.6k"
+    },
+    {
+      "month_num": 10,
+      "month_name": "Oct",
+      "won_count": 63,
+      "won_value_cents": 12991134,
+      "won_value_fmt": "$129.9k"
+    },
+    {
+      "month_num": 11,
+      "month_name": "Nov",
+      "won_count": 48,
+      "won_value_cents": 8769102,
+      "won_value_fmt": "$87.7k"
+    },
+    {
+      "month_num": 12,
+      "month_name": "Dec",
+      "won_count": 50,
+      "won_value_cents": 13723882,
+      "won_value_fmt": "$137.2k"
+    }
+  ],
+  "source_revenue_share": [
+    {
+      "source": "other",
+      "total_leads": 1004,
+      "won_count": 247,
+      "won_value_cents": 53479931,
+      "won_value_fmt": "$534.8k",
+      "pct_of_total_revenue": 31.4,
+      "avg_won_value_cents": 216518,
+      "avg_won_value_fmt": "$2.2k",
+      "win_rate_pct": 24.6
+    },
+    {
+      "source": "marketplace",
+      "total_leads": 748,
+      "won_count": 94,
+      "won_value_cents": 31068402,
+      "won_value_fmt": "$310.7k",
+      "pct_of_total_revenue": 18.2,
+      "avg_won_value_cents": 330515,
+      "avg_won_value_fmt": "$3.3k",
+      "win_rate_pct": 12.6
+    },
+    {
+      "source": "website_direct",
+      "total_leads": 426,
+      "won_count": 95,
+      "won_value_cents": 29767747,
+      "won_value_fmt": "$297.7k",
+      "pct_of_total_revenue": 17.5,
+      "avg_won_value_cents": 313345,
+      "avg_won_value_fmt": "$3.1k",
+      "win_rate_pct": 22.3
+    },
+    {
+      "source": "social_media",
+      "total_leads": 3454,
+      "won_count": 113,
+      "won_value_cents": 26088305,
+      "won_value_fmt": "$260.9k",
+      "pct_of_total_revenue": 15.3,
+      "avg_won_value_cents": 230870,
+      "avg_won_value_fmt": "$2.3k",
+      "win_rate_pct": 3.3
+    },
+    {
+      "source": "unknown",
+      "total_leads": 1448,
+      "won_count": 182,
+      "won_value_cents": 14102288,
+      "won_value_fmt": "$141.0k",
+      "pct_of_total_revenue": 8.3,
+      "avg_won_value_cents": 77485,
+      "avg_won_value_fmt": "$775",
+      "win_rate_pct": 12.6
+    },
+    {
+      "source": "search",
+      "total_leads": 63,
+      "won_count": 25,
+      "won_value_cents": 8155847,
+      "won_value_fmt": "$81.6k",
+      "pct_of_total_revenue": 4.8,
+      "avg_won_value_cents": 326234,
+      "avg_won_value_fmt": "$3.3k",
+      "win_rate_pct": 39.7
+    },
+    {
+      "source": "referral",
+      "total_leads": 33,
+      "won_count": 12,
+      "won_value_cents": 5413511,
+      "won_value_fmt": "$54.1k",
+      "pct_of_total_revenue": 3.2,
+      "avg_won_value_cents": 451126,
+      "avg_won_value_fmt": "$4.5k",
+      "win_rate_pct": 36.4
+    },
+    {
+      "source": "expo_event",
+      "total_leads": 1319,
+      "won_count": 20,
+      "won_value_cents": 1455360,
+      "won_value_fmt": "$14.6k",
+      "pct_of_total_revenue": 0.9,
+      "avg_won_value_cents": 72768,
+      "avg_won_value_fmt": "$728",
+      "win_rate_pct": 1.5
+    },
+    {
+      "source": "email_campaign",
+      "total_leads": 19,
+      "won_count": 3,
+      "won_value_cents": 813070,
+      "won_value_fmt": "$8.1k",
+      "pct_of_total_revenue": 0.5,
+      "avg_won_value_cents": 271023,
+      "avg_won_value_fmt": "$2.7k",
+      "win_rate_pct": 15.8
+    }
+  ],
+  "event_type_revenue_share": [
+    {
+      "event_type": "wedding",
+      "total_leads": 1619,
+      "won_count": 252,
+      "won_value_cents": 104590184,
+      "won_value_fmt": "$1.0M",
+      "pct_of_total_revenue": 61.4,
+      "avg_won_value_cents": 415040,
+      "avg_won_value_fmt": "$4.2k"
+    },
+    {
+      "event_type": "unknown",
+      "total_leads": 4184,
+      "won_count": 327,
+      "won_value_cents": 24910173,
+      "won_value_fmt": "$249.1k",
+      "pct_of_total_revenue": 14.6,
+      "avg_won_value_cents": 76178,
+      "avg_won_value_fmt": "$762"
+    },
+    {
+      "event_type": "other",
+      "total_leads": 983,
+      "won_count": 82,
+      "won_value_cents": 16977284,
+      "won_value_fmt": "$169.8k",
+      "pct_of_total_revenue": 10.0,
+      "avg_won_value_cents": 207040,
+      "avg_won_value_fmt": "$2.1k"
+    },
+    {
+      "event_type": "birthday",
+      "total_leads": 782,
+      "won_count": 56,
+      "won_value_cents": 8054526,
+      "won_value_fmt": "$80.5k",
+      "pct_of_total_revenue": 4.7,
+      "avg_won_value_cents": 143831,
+      "avg_won_value_fmt": "$1.4k"
+    },
+    {
+      "event_type": "corporate",
+      "total_leads": 81,
+      "won_count": 25,
+      "won_value_cents": 4696675,
+      "won_value_fmt": "$47.0k",
+      "pct_of_total_revenue": 2.8,
+      "avg_won_value_cents": 187867,
+      "avg_won_value_fmt": "$1.9k"
+    },
+    {
+      "event_type": "graduation",
+      "total_leads": 312,
+      "won_count": 18,
+      "won_value_cents": 3282190,
+      "won_value_fmt": "$32.8k",
+      "pct_of_total_revenue": 1.9,
+      "avg_won_value_cents": 182344,
+      "avg_won_value_fmt": "$1.8k"
+    },
+    {
+      "event_type": "quincea\u00f1era",
+      "total_leads": 74,
+      "won_count": 9,
+      "won_value_cents": 2786143,
+      "won_value_fmt": "$27.9k",
+      "pct_of_total_revenue": 1.6,
+      "avg_won_value_cents": 309571,
+      "avg_won_value_fmt": "$3.1k"
+    },
+    {
+      "event_type": "memorial",
+      "total_leads": 19,
+      "won_count": 3,
+      "won_value_cents": 2105055,
+      "won_value_fmt": "$21.1k",
+      "pct_of_total_revenue": 1.2,
+      "avg_won_value_cents": 701685,
+      "avg_won_value_fmt": "$7.0k"
+    },
+    {
+      "event_type": "anniversary",
+      "total_leads": 73,
+      "won_count": 2,
+      "won_value_cents": 1494050,
+      "won_value_fmt": "$14.9k",
+      "pct_of_total_revenue": 0.9,
+      "avg_won_value_cents": 747025,
+      "avg_won_value_fmt": "$7.5k"
+    },
+    {
+      "event_type": "holiday",
+      "total_leads": 112,
+      "won_count": 14,
+      "won_value_cents": 906575,
+      "won_value_fmt": "$9.1k",
+      "pct_of_total_revenue": 0.5,
+      "avg_won_value_cents": 64755,
+      "avg_won_value_fmt": "$648"
+    },
+    {
+      "event_type": "baby_shower",
+      "total_leads": 275,
+      "won_count": 3,
+      "won_value_cents": 541606,
+      "won_value_fmt": "$5.4k",
+      "pct_of_total_revenue": 0.3,
+      "avg_won_value_cents": 180535,
+      "avg_won_value_fmt": "$1.8k"
+    }
+  ],
+  "summary_text": "8,514 opps over 730d. 791 won \u00b7 $1.7M total won revenue. YoY revenue up 3.3% ($855.4k \u2192 $883.8k). Median deal $2.0k \u00b7 mean $2.9k \u00b7 top deal $25.6k. Revenue concentration: top 10% of deals = 33.5% of revenue. Peak booking month: Mar ($195.8k). Top revenue source: other. Top event type: wedding."
+}

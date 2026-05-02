@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { Modal } from "./Modal";
-import { ContextMenu, type ContextMenuItem } from "./ContextMenu";
+import { Modal } from "@/components/Modal";
+import { ContextMenu, type ContextMenuItem } from "@/components/ContextMenu";
+import { useToast } from "@/components/Toast";
 import {
   refineWholePlanAction,
   approvePlanAction,
@@ -13,6 +14,10 @@ import {
   approveAndRunAction,
   type RefinePlanState,
 } from "./actions";
+import {
+  heartbeatReportHeadline,
+  type ExecutionMode,
+} from "@/lib/heartbeat-summary";
 import type { HeartbeatReport } from "@/lib/heartbeat";
 
 /**
@@ -28,25 +33,46 @@ export function PlanCardClient({
   planId,
   leadId,
   status,
+  planDayCount,
+  regenerateHorizonDays,
+  planStale,
   children,
 }: {
   planId: string;
   leadId: string;
   status: string;
+  planDayCount: number;
+  /** Default length when regenerating from the context menu (matches current plan unless operator changed the form). */
+  regenerateHorizonDays: number;
+  /** Box fingerprint ≠ plan → block AI refinements (§I3). */
+  planStale?: boolean;
   children: React.ReactNode;
 }) {
   const [open, setOpen] = useState(false);
   const [instruction, setInstruction] = useState("");
   const [state, setState] = useState<RefinePlanState>({ ok: true });
   const [pending, startTransition] = useTransition();
+  const toast = useToast();
 
-  function fireForm(action: (fd: FormData) => Promise<unknown> | unknown, extra?: Record<string, string>) {
+  function fireForm(
+    action: (fd: FormData) => Promise<unknown> | unknown,
+    extra?: Record<string, string>,
+    okMessage?: string
+  ) {
     const fd = new FormData();
     fd.set("plan_id", planId);
     fd.set("lead_id", leadId);
     if (extra) for (const [k, v] of Object.entries(extra)) fd.set(k, v);
     startTransition(async () => {
-      await action(fd);
+      try {
+        await action(fd);
+        if (okMessage) toast.push(okMessage, { tone: "success" });
+      } catch (err) {
+        toast.push(
+          `Action failed — ${err instanceof Error ? err.message : String(err)}`,
+          { tone: "error", ttl: 4500 }
+        );
+      }
     });
   }
 
@@ -61,12 +87,16 @@ export function PlanCardClient({
       if (r.ok) {
         setOpen(false);
         setInstruction("");
+        toast.push("Plan refined — review the rewritten week", { tone: "success" });
+      } else {
+        toast.push(`Refine failed — ${r.error ?? "unknown"}`, { tone: "error", ttl: 4500 });
       }
     });
   }
 
   const [allDaysToast, setAllDaysToast] = useState<string | null>(null);
   const [runReport, setRunReport] = useState<HeartbeatReport | null>(null);
+  const [runReportMode, setRunReportMode] = useState<ExecutionMode>("draft_only");
   const [runOpen, setRunOpen] = useState(false);
 
   function approveAll() {
@@ -98,8 +128,11 @@ export function PlanCardClient({
         const skippedPart = r.skipped_voice ? `${r.skipped_voice} voice-blocked` : "";
         const fired = r.report?.actions_fired ?? 0;
         const skipped = r.report?.actions_skipped ?? 0;
-        const mode = r.execution_mode === "approved_plan_execution" ? "fired" : "would-fire";
-        const parts = [approvedPart, skippedPart, `${fired} ${mode} · ${skipped} skipped`].filter(Boolean);
+        const execMode = (r.execution_mode ?? "draft_only") as ExecutionMode;
+        const hbLine =
+          r.report ? heartbeatReportHeadline(r.report, execMode) : `${fired} · ${skipped}`;
+        const parts = [approvedPart, skippedPart, hbLine].filter(Boolean);
+        setRunReportMode(execMode);
         setAllDaysToast(parts.join(" · "));
         if (r.report) setRunReport(r.report);
         window.setTimeout(() => setAllDaysToast(null), 5000);
@@ -113,28 +146,37 @@ export function PlanCardClient({
     { kind: "label", text: "Plan actions" },
     { kind: "item", label: "Approve & run heartbeat", onSelect: approveAndRun },
     { kind: "item", label: "Approve all days", onSelect: approveAll },
-    { kind: "item", label: "Refine whole plan…", onSelect: () => setOpen(true) },
-    { kind: "item", label: "Regenerate from scratch", onSelect: () => fireForm(generatePlanAction) },
-    { kind: "divider" },
   ];
+  if (!planStale) {
+    items.push({ kind: "item", label: "Refine whole plan…", onSelect: () => setOpen(true) });
+  } else {
+    items.push({ kind: "label", text: "Whole-plan refine blocked (box stale · §I3)" });
+  }
+  items.push({
+    kind: "item",
+    label: "Regenerate from scratch",
+    onSelect: () => fireForm(generatePlanAction, { horizon_days: String(regenerateHorizonDays) }, "Plan regenerated"),
+  });
+  items.push({ kind: "divider" });
   if (status === "draft") {
-    items.push({ kind: "item", label: "Approve", onSelect: () => fireForm(approvePlanAction) });
+    items.push({ kind: "item", label: "Approve", onSelect: () => fireForm(approvePlanAction, undefined, "Plan approved") });
   }
   if (status === "approved" || status === "active") {
-    items.push({ kind: "item", label: "Pause", onSelect: () => fireForm(pausePlanAction) });
+    items.push({ kind: "item", label: "Pause", onSelect: () => fireForm(pausePlanAction, undefined, "Plan paused") });
   }
   if (status !== "killed" && status !== "completed") {
     items.push({
       kind: "item",
       label: "Kill plan",
       tone: "danger",
-      onSelect: () => fireForm(killPlanAction, { reason: "killed by operator (right-click)" }),
+      onSelect: () => fireForm(killPlanAction, { reason: "killed by operator (right-click)" }, "Plan killed"),
     });
   }
 
   return (
     <>
       <ContextMenu items={items}>
+        <div className="plan-card-shell">
         {children}
         <div className="plan-card-fab">
           <button
@@ -159,7 +201,12 @@ export function PlanCardClient({
             type="button"
             className="plan-fab-btn plan-fab-btn-primary"
             onClick={() => setOpen(true)}
-            title="Refine the entire plan with a plain-English instruction"
+            disabled={pending || planStale}
+            title={
+              planStale
+                ? "Regenerate plan — box changed since snapshot (§I3)"
+                : "Refine the entire plan with a plain-English instruction"
+            }
           >
             Refine plan…
           </button>
@@ -178,6 +225,7 @@ export function PlanCardClient({
             )}
           </div>
         )}
+        </div>
       </ContextMenu>
 
       <Modal open={runOpen && !!runReport} onClose={() => setRunOpen(false)} labelledBy="run-report-h">
@@ -186,7 +234,7 @@ export function PlanCardClient({
             <header className="plan-day-modal-head" style={{ background: "var(--paper-2)" }}>
               <span className="cme-eyebrow">approve &amp; run</span>
               <h2 id="run-report-h" className="plan-day-modal-title">
-                {runReport.actions_fired} would fire · {runReport.actions_skipped} skipped
+                {heartbeatReportHeadline(runReport, runReportMode)}
               </h2>
               <p className="plan-day-modal-context">
                 Lead tz {runReport.lead_tz}
@@ -225,16 +273,23 @@ export function PlanCardClient({
               Tell the AI how to revise this plan
             </h2>
             <p className="plan-day-modal-context">
-              The AI will rewrite all 7 days. Approval resets to draft so you can review the new version before anything fires.
+              The AI will rewrite all {planDayCount} calendar-day bucket{planDayCount === 1 ? "" : "s"}.
+              Approval resets to draft so you can review the new version before anything fires.
             </p>
           </header>
           <div className="plan-day-modal-body">
+            {planStale && (
+              <div className="plan-day-modal-error" style={{ marginBottom: 12 }}>
+                Box is stale vs this plan snapshot — regenerate the cycle before whole-plan refine (Guardrails §I3).
+              </div>
+            )}
             <section className="plan-day-modal-refine">
               <h3 className="cme-eyebrow">Instruction</h3>
               <p className="plan-day-modal-hint">
                 Examples: &ldquo;Make the whole week more aggressive about scheduling a call.&rdquo;&nbsp;&nbsp;
                 &ldquo;Pivot from email-first to SMS-first.&rdquo;&nbsp;&nbsp;
-                &ldquo;Cut Day 7 down — they&rsquo;ve gone cold, just one re-engage SMS.&rdquo;
+                &ldquo;Shorten to a 3-day push — they&rsquo;re hot.&rdquo;&nbsp;&nbsp;
+                &ldquo;Cut the last day — they&rsquo;ve gone cold, just one re-engage SMS.&rdquo;
               </p>
               <textarea
                 className="plan-day-modal-textarea"
@@ -242,7 +297,7 @@ export function PlanCardClient({
                 rows={4}
                 value={instruction}
                 onChange={(e) => setInstruction(e.target.value)}
-                disabled={pending}
+                disabled={pending || planStale}
               />
               <div className="plan-day-modal-actions">
                 <button
@@ -257,9 +312,9 @@ export function PlanCardClient({
                   type="button"
                   className="plan-btn plan-btn-primary"
                   onClick={refine}
-                  disabled={pending}
+                  disabled={pending || planStale}
                 >
-                  {pending ? "AI is rewriting all 7 days…" : "Rewrite plan"}
+                  {pending ? `AI is rewriting all ${planDayCount}…` : "Rewrite plan"}
                 </button>
               </div>
               {!state.ok && state.error && (

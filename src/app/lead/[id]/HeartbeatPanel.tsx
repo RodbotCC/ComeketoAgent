@@ -1,8 +1,12 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { Modal } from "./Modal";
+import { Modal } from "@/components/Modal";
 import { runHeartbeatNowAction } from "./actions";
+import {
+  heartbeatReportHeadline,
+  type ExecutionMode,
+} from "@/lib/heartbeat-summary";
 import type { HeartbeatReport } from "@/lib/heartbeat";
 
 const SKIP_LABEL: Record<string, string> = {
@@ -23,6 +27,7 @@ const SKIP_LABEL: Record<string, string> = {
   EXECUTION_DISABLED: "Draft-only mode",
   NEEDS_APPROVAL: "Needs approval",
   VOICE_FAIL: "NEPQ voice fail",
+  CLOSE_API_ERROR: "Close API error",
 };
 
 function fmtTime(iso?: string) {
@@ -56,7 +61,7 @@ export function HeartbeatPanel({
   planId: string;
   leadId: string;
   latest: LatestSummary;
-  executionMode: string;
+  executionMode: ExecutionMode;
 }) {
   const modeInfo = MODE_LABEL[executionMode] ?? { label: executionMode, tone: "ok" as const };
   const [open, setOpen] = useState(false);
@@ -89,8 +94,15 @@ export function HeartbeatPanel({
             <span>last sweep <strong>{fmtTime(latest.ran_at)}</strong></span>
             <span className="lead-sep">·</span>
             <span>
-              <strong>{latest.actions_fired}</strong> would fire ·{" "}
-              <strong>{latest.actions_skipped}</strong> skipped
+              <strong>{latest.actions_eligible}</strong> touches ·{" "}
+              {heartbeatReportHeadline(
+                {
+                  actions_fired: latest.actions_fired,
+                  actions_skipped: latest.actions_skipped,
+                  skip_breakdown: latest.skip_breakdown,
+                },
+                executionMode as ExecutionMode
+              )}
             </span>
             {!latest.snapshot_match && (
               <>
@@ -136,7 +148,7 @@ export function HeartbeatPanel({
             <header className="plan-day-modal-head" style={{ background: "var(--paper-2)" }}>
               <span className="cme-eyebrow">heartbeat report</span>
               <h2 id="hb-h" className="plan-day-modal-title">
-                {report.actions_fired} would fire · {report.actions_skipped} skipped
+                {heartbeatReportHeadline(report, executionMode as ExecutionMode)}
               </h2>
               <p className="plan-day-modal-context">
                 Ran {fmtTime(report.ran_at)} · {report.duration_ms}ms · lead tz <strong>{report.lead_tz}</strong>
@@ -197,7 +209,9 @@ export function HeartbeatPanel({
                           </span>
                           <span className="hb-action-intent">{a.intent}</span>
                           {a.verdict.fire ? (
-                            <span className="hb-action-fire">would fire</span>
+                            <span className="hb-action-fire" title={a.verdict.reason}>
+                              {a.verdict.reason === "fired" ? "Close write ok" : "Gate-eligible (not sent)"}
+                            </span>
                           ) : (
                             <span className="hb-action-skip" title={a.verdict.reason}>
                               {SKIP_LABEL[a.verdict.skip_code] || a.verdict.skip_code}

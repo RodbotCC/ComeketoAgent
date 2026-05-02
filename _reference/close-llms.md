@@ -364,3 +364,21 @@
 The raw OpenAPI 3.1 specification for this API is available at:
 \- \[OpenAPI JSON\](https://developer.close.com/openapi.json)
 \- \[OpenAPI YAML\](https://developer.close.com/openapi.yaml)
+
+\## Comeketo Agent — where this doc lands in the repo
+
+\- **Index:** this file (\`_reference/close-llms.md\`). **Bulk scrape mirror:** \`_reference/close-api-docs.json\` (reference only; implementation is TypeScript).
+
+| Surface | Module | What to use |
+| --- | --- | --- |
+| Lead Box, 7-day plan, heartbeat | \`src/lib/close.ts\` + \`src/lib/plan.ts\` | \`closeGetLeadFull\` = lead + **paginated** activities (up to 500) + \`closeListEmailThreadsForLead\` + sequence subs. \`snapshotIdForBox\` in \`plan.ts\` fingerprints comms + threads + subs so plans go **stale** when Close updates. |
+| \`/leads\` | \`closeListLeads\`, \`closeListLeadsByAssignee\`, \`closeListLeadsByStatusId\`, \`closeListLeadsByAssigneeAndStatus\`, \`closeListLeadStatuses\` | Query: \`?q=\` → \`GET /lead/?query=\`; \`?status_id=stat_…\` → Advanced Filtering (\`status.lead\`); \`?owner=andre|jake|all\` — assignee tabs use paginated \`GET /lead/?_skip\` + match \`user_id\` (not \`/data/search/\` \`user_id\` — invalid on lead). Filters compose (with \`?q=\`, assignee/status trimmed client-side on text search). Shareable GET form + chips. |
+| \`/automation\` | \`closeListWorkflows\`, \`closeSequenceBrowserUrl\`, \`closeCreateSequence\`, \`closeUpdateSequence\` | Live sequence list from \`GET /sequence/\`. Dev-only layout sandbox (\`demo-workflow\`) must not ship as live data (§M2). |
+| \`/automation/[id]\` | \`closeGetWorkflow\`, \`closeStepsToWorkflow\` (\`src/lib/close-workflow-graph.ts\`), \`AutomationDetailGraph\` | Step **table + graph** from \`GET /sequence/{id}/\` (graph is API-faithful). |
+| \`/automation/drafts\`, \`/automation/drafts/[id]\` | \`src/lib/automation-drafts.ts\`, \`src/lib/sequence-ai.ts\`, \`src/app/automation/actions.ts\` | Supabase \`automation_drafts\`: AI proposes \`close_steps_json\`, operator approves, \`publishDraftToCloseAction\` calls Close create/update. |
+| Lead Box subscription telemetry | \`closeGetSequenceSubscription\`, \`getSequenceSubscriptionSnapshotAction\`, \`SubscriptionRunWatch\` | Poll UI (~22s, tab visible) — near real-time, not instant. |
+| Chat agent | \`src/lib/close-tools.ts\` | Thin wrappers; add endpoints here when the model needs them. |
+| Webhooks | \`src/lib/close-webhook.ts\`, \`/api/webhooks/close\` | Event log → Supabase. |
+| Scripts | \`npm run close:box-audit\`, \`npm run close:list-sequences\`, \`npm run close:list-lead-statuses\`, \`npm run close:search-leads\`, \`npm run seed:practice-leads\` | Box audit, sequence JSON dump, lead statuses JSON, saved-search lead probe, practice data. |
+
+**Rule:** add typed helpers to \`close.ts\` first, then wire the UI or tool that consumes them — so nothing in \`close-api-docs.json\` rots unused unless it is truly out of scope.
