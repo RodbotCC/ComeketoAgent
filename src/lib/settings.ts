@@ -7,6 +7,10 @@ import path from "node:path";
  */
 
 export const AVAILABLE_MODELS = [
+  "gpt-5.5",
+  "gpt-5.5-2026-04-23",
+  "gpt-5.5-pro",
+  "gpt-5.5-pro-2026-04-23",
   "gpt-5.4-nano-2026-03-17",
   "gpt-5.4-mini-2026-03-17",
   "gpt-5.4-2026-03-05",
@@ -53,12 +57,30 @@ export type Settings = {
   execution_mode: ExecutionMode;
   /** Default N-day cycle when the UI does not pass an explicit horizon. */
   default_plan_horizon_days: number;
+  /**
+   * Solo-operator mode (2026-05-02). When true, heartbeat strips every
+   * operator-imposed friction gate so the agent fires for the single human
+   * driving it. Real-world safety still applies — STOP_SIGNAL and severe
+   * voice violations still block. But ownership splits, status_won/lost,
+   * stale-box pauses, send-window hours, frequency caps, and the
+   * "approve every day before fire" requirement are all OFF. Default ON
+   * because Andre is the only operator on the live profile.
+   */
+  solo_operator: boolean;
+  /**
+   * Auto-approve days at heartbeat time when the day's drafts pass the voice
+   * lint. Eliminates the DAY_NOT_APPROVED skip pile-up. When false, operator
+   * must click approve on each day before its actions fire.
+   */
+  auto_approve_clean_days: boolean;
 };
 
 export const DEFAULT_SETTINGS: Settings = {
   model: "gpt-5.4-mini-2026-03-17",
-  execution_mode: "draft_only",
+  execution_mode: "approved_plan_execution",
   default_plan_horizon_days: DEFAULT_PLAN_HORIZON_DAYS,
+  solo_operator: true,
+  auto_approve_clean_days: true,
 };
 
 const SETTINGS_PATH = path.join(process.cwd(), ".cmk-settings.json");
@@ -82,6 +104,14 @@ export async function getSettings(): Promise<Settings> {
       default_plan_horizon_days: clampPlanHorizonDays(
         parsed.default_plan_horizon_days ?? DEFAULT_SETTINGS.default_plan_horizon_days
       ),
+      solo_operator:
+        typeof parsed.solo_operator === "boolean"
+          ? parsed.solo_operator
+          : DEFAULT_SETTINGS.solo_operator,
+      auto_approve_clean_days:
+        typeof parsed.auto_approve_clean_days === "boolean"
+          ? parsed.auto_approve_clean_days
+          : DEFAULT_SETTINGS.auto_approve_clean_days,
     };
   } catch {
     return { ...DEFAULT_SETTINGS };
@@ -99,6 +129,14 @@ export async function setSettings(partial: Partial<Settings>): Promise<Settings>
       partial.default_plan_horizon_days !== undefined
         ? clampPlanHorizonDays(partial.default_plan_horizon_days)
         : current.default_plan_horizon_days,
+    solo_operator:
+      typeof partial.solo_operator === "boolean"
+        ? partial.solo_operator
+        : current.solo_operator,
+    auto_approve_clean_days:
+      typeof partial.auto_approve_clean_days === "boolean"
+        ? partial.auto_approve_clean_days
+        : current.auto_approve_clean_days,
   };
   await fs.writeFile(SETTINGS_PATH, JSON.stringify(next, null, 2) + "\n", "utf-8");
   return next;

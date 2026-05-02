@@ -124,7 +124,7 @@ export default async function SettingsPage() {
         <div className="cmk-stack-panel cmk-stack-panel--lavender">
           <h2>Model</h2>
           <p className="muted">
-            Which OpenAI Responses model the chat and test endpoints use. Saved on submit; takes effect on the next request.
+            Which OpenAI Responses model the chat, plan generation, and test ping use — including the GPT‑5.5 line. Saved on submit; takes effect on the next request.
           </p>
           <SettingsForm action={updateModelAction} style={{ marginTop: 12, display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
             <select name="model" defaultValue={settings.model} className="cmk-field-panel" style={{ fontFamily: "var(--mono)", minWidth: 280 }}>
@@ -287,7 +287,7 @@ export default async function SettingsPage() {
         <div className="cmk-stack-panel cmk-stack-panel--sage">
           <h2>Where these are used</h2>
           <ul className="muted" style={{ marginBottom: 0 }}>
-          <li><strong>OPENAI_API_KEY</strong> — Responses API call from <code>/api/chat</code> and <code>/api/test</code>.</li>
+          <li><strong>OPENAI_API_KEY</strong> — Responses + audio + images: <code>/api/chat</code>, <code>/api/test</code>, <code>/api/openai/tts</code>, <code>/api/openai/transcribe</code>, <code>/api/openai/image</code>, plus plan/sequence generation helpers in <code>lib/</code>.</li>
           <li><strong>SUPABASE_URL</strong> + <strong>SUPABASE_SECRET_KEY</strong> — direct PostgREST access from the API route (server-side only).</li>
           <li><strong>SUPABASE_PUBLISHABLE_KEY</strong> — client-safe key for any browser-side Supabase access we add later.</li>
           <li><strong>GITHUB_PAT</strong> — Octokit auth for direct GitHub API calls.</li>

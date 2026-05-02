@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useToast } from "@/components/Toast";
+import { OpenAiMediaLab } from "./OpenAiMediaLab";
 
 type Mode = "openai" | "supabase" | "github" | "close";
 
@@ -18,7 +19,7 @@ const MODES: Array<{ key: Mode; title: string; description: string }> = [
   {
     key: "openai",
     title: "OpenAI",
-    description: "Fires a tiny Responses API call (model: gpt-4.1, no tools attached). Confirms the SDK path and key.",
+    description: "Tiny Responses ping using the model saved in Settings (same path as /chat). Confirms the SDK and key.",
   },
   {
     key: "supabase",
@@ -142,6 +143,7 @@ export default function TestPage() {
             </section>
           );
         })}
+        <OpenAiMediaLab />
       </main>
 
       <footer className="cme-footer">

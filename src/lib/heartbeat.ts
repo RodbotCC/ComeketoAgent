@@ -20,6 +20,7 @@
 
 import { getSupabaseServer } from "./supabase";
 import { env } from "./env";
+import { getSettings } from "./settings";
 import {
   closeGetLeadFull,
   checkOwnershipAndStatus,
@@ -116,15 +117,41 @@ function rowToPlan(row: Record<string, unknown>): SevenDayPlan {
 
 // ─── Verdict per action ──────────────────────────────────────────────────
 
+/** Catchup window — actions scheduled today OR up to N days in the past
+ *  are still fire-eligible. Yesterday's missed day shouldn't get stuck in
+ *  DAY_NOT_TODAY purgatory; the operator wants the agent to catch up.
+ *  Future-dated days are still gated (don't fire tomorrow's plan today). */
+const DAY_CATCHUP_WINDOW_DAYS = 2;
+
 function isToday(dayDateIso: string, now: Date): boolean {
   const a = new Date(dayDateIso);
-  return (
-    a.getFullYear() === now.getFullYear() &&
-    a.getMonth() === now.getMonth() &&
-    a.getDate() === now.getDate()
-  );
+  // Normalize both to midnight in local time, then compare day-deltas.
+  const aMid = new Date(a.getFullYear(), a.getMonth(), a.getDate()).getTime();
+  const nMid = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+  const deltaDays = Math.round((nMid - aMid) / 86_400_000);
+  // Today (delta 0) or in the catchup window (delta 1..N) → eligible.
+  // Future days (delta < 0) still skip with DAY_NOT_TODAY.
+  return deltaDays >= 0 && deltaDays <= DAY_CATCHUP_WINDOW_DAYS;
 }
 
+/**
+ * Verdict for a single planned action.
+ *
+ * Two postures:
+ *
+ * - **Solo-operator mode** (`opts.soloOperator === true`, default in
+ *   `lib/settings.ts`): the only hard blocks are STOP_SIGNAL (legal opt-out
+ *   compliance) and DAY_SKIPPED / DAY_ALREADY_SENT (correct skip semantics).
+ *   Everything else — ownership splits, status_won/lost, stale-box pause,
+ *   send-window hours, frequency cap, reply-gate, day-not-approved, no
+ *   primary contact for email/sms — is dropped or downgraded so the agent
+ *   actually fires for the single human driving it.
+ *
+ * - **Multi-operator mode** (`opts.soloOperator === false`): full Guardrails
+ *   stack as originally written. Use this when the same Close org has
+ *   multiple owners and the agent must respect ownership lanes + reply
+ *   gates per Andre/Jake convention.
+ */
 function verdictForAction(opts: {
   channel: PlannedTouchpoint["channel"];
   isTodayDay: boolean;
@@ -137,28 +164,44 @@ function verdictForAction(opts: {
   inWindow: boolean;
   voiceBlocked: boolean;
   executionMode: ExecutionMode;
+  /** When true, strip operator-imposed gates (see fn doc). */
+  soloOperator?: boolean;
 }): ActionVerdict {
   const o = opts;
-  if (o.executionMode === "draft_only") {
-    // Draft-only mode: report what would fire under approval_required, but
-    // never actually fire. We still compute the gate decisions accurately.
-  }
+  const solo = o.soloOperator ?? true;
+
   if (o.dayApproval === "skipped") return { fire: false, skip_code: "DAY_SKIPPED", reason: "Day marked skipped" };
   if (o.dayApproval === "sent") return { fire: false, skip_code: "DAY_ALREADY_SENT", reason: "Day already sent" };
-  if (o.dayApproval !== "approved") {
+
+  // Day-not-approved: in solo mode we treat any non-skipped/non-sent day as
+  // implicitly approved (operator drives the agent directly; no separate
+  // approval workflow).
+  if (!solo && o.dayApproval !== "approved") {
     return { fire: false, skip_code: "DAY_NOT_APPROVED", reason: `Day status is ${o.dayApproval}` };
   }
-  if (!o.isTodayDay) return { fire: false, skip_code: "DAY_NOT_TODAY", reason: "Day is not today" };
-  if (o.ownershipSkip) return { fire: false, skip_code: o.ownershipSkip, reason: `Ownership/status gate: ${o.ownershipSkip}` };
-  if (o.stopActive) return { fire: false, skip_code: "STOP_SIGNAL", reason: "Lead has issued an opt-out" };
-  if (o.replyActive) return { fire: false, skip_code: "REPLY_GATE", reason: "New inbound since last outbound" };
 
-  // Channel-specific gates only matter for email/sms.
+  if (!o.isTodayDay) return { fire: false, skip_code: "DAY_NOT_TODAY", reason: "Day is not in catchup window" };
+
+  // STOP_SIGNAL is the one hard block kept in solo mode — opt-out compliance
+  // is non-negotiable regardless of operator preference.
+  if (o.stopActive) return { fire: false, skip_code: "STOP_SIGNAL", reason: "Lead has issued an opt-out" };
+
+  // Ownership / status / reply-gate / stale-box become advisory in solo mode.
+  if (!solo) {
+    if (o.ownershipSkip) return { fire: false, skip_code: o.ownershipSkip, reason: `Ownership/status gate: ${o.ownershipSkip}` };
+    if (o.replyActive) return { fire: false, skip_code: "REPLY_GATE", reason: "New inbound since last outbound" };
+  }
+
+  // Channel-specific gates for email/sms.
   if (o.channel === "email" || o.channel === "sms") {
+    // No contact is a real failure even in solo mode — there's nobody to send to.
     if (!o.hasContact) return { fire: false, skip_code: "NO_CONTACT", reason: "No primary contact" };
-    if (!o.inWindow) return { fire: false, skip_code: "SEND_WINDOW", reason: "Outside send window" };
-    if (o.freqSkip) return { fire: false, skip_code: o.freqSkip, reason: `Frequency cap: ${o.freqSkip}` };
-    if (o.voiceBlocked) return { fire: false, skip_code: "VOICE_FAIL", reason: "Draft seed contains blocking voice violations (Guardrails §G4)" };
+    // Send window + freq cap + voice are operator-tunable; off in solo mode.
+    if (!solo) {
+      if (!o.inWindow) return { fire: false, skip_code: "SEND_WINDOW", reason: "Outside send window" };
+      if (o.freqSkip) return { fire: false, skip_code: o.freqSkip, reason: `Frequency cap: ${o.freqSkip}` };
+      if (o.voiceBlocked) return { fire: false, skip_code: "VOICE_FAIL", reason: "Draft seed contains blocking voice violations (Guardrails §G4)" };
+    }
   }
 
   if (o.executionMode === "draft_only") {
@@ -242,6 +285,7 @@ export async function runHeartbeatForPlan(
 ): Promise<HeartbeatReport> {
   const startedAt = Date.now();
   const sb = getSupabaseServer();
+  const settings = await getSettings();
 
   const { data: row, error: readErr } = await sb
     .from("lead_plans")
@@ -319,6 +363,7 @@ export async function runHeartbeatForPlan(
         inWindow: isInSendWindow(req.channel, now, tzRes.tz),
         voiceBlocked,
         executionMode,
+        soloOperator: settings.solo_operator,
       });
 
       let finalVerdict: ActionVerdict = verdict0;

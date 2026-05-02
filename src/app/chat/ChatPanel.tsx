@@ -896,18 +896,27 @@ const THINKING_PHRASES = [
   "tasting the brief",
 ];
 
-function AnimatedThinking() {
+const DEEP_THINK_PHRASES = [
+  "queued with OpenAI",
+  "running in the background",
+  "still reasoning",
+  "nursing a long answer",
+  "this can take a few minutes",
+];
+
+function AnimatedThinking({ deep }: { deep?: boolean }) {
+  const phrases = deep ? DEEP_THINK_PHRASES : THINKING_PHRASES;
   const [i, setI] = useState(0);
   useEffect(() => {
-    const t = window.setInterval(() => setI((n) => (n + 1) % THINKING_PHRASES.length), 1700);
+    const t = window.setInterval(() => setI((n) => (n + 1) % phrases.length), deep ? 2400 : 1700);
     return () => window.clearInterval(t);
-  }, []);
+  }, [deep, phrases.length]);
   return (
-    <div className="cmk-thinking">
+    <div className={`cmk-thinking${deep ? " cmk-thinking-deep" : ""}`}>
       <span className="cmk-thinking-dots" aria-hidden>
         <span /><span /><span />
       </span>
-      <span className="cmk-thinking-phrase">{THINKING_PHRASES[i]}…</span>
+      <span className="cmk-thinking-phrase">{phrases[i]}…</span>
     </div>
   );
 }
@@ -1254,6 +1263,9 @@ export function ChatLayout() {
   const [input, setInput] = useState("");
   const [pending, setPending] = useState<PendingAttachment[]>([]);
   const [loading, setLoading] = useState(false);
+  /** Long OpenAI background response — no Close tools that turn. */
+  const [deepThink, setDeepThink] = useState(false);
+  const [thinkingDeep, setThinkingDeep] = useState(false);
   const [threadsLoading, setThreadsLoading] = useState(true);
   const [activeQuickId, setActiveQuickId] = useState<string | null>(null);
   const [lastDelegation, setLastDelegation] = useState<QuickDelegation | null>(null);
@@ -1569,6 +1581,7 @@ export function ChatLayout() {
     const sentAttachments = pending.map(({ localId: _l, ...a }) => a);
     setPending([]);
     setLoading(true);
+    setThinkingDeep(deepThink);
 
     const ctrl = new AbortController();
     abortRef.current = ctrl;
@@ -1576,7 +1589,7 @@ export function ChatLayout() {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ thread_id: activeId, input: text, attachments: sentAttachments }),
+        body: JSON.stringify({ thread_id: activeId, input: text, attachments: sentAttachments, deep_think: deepThink }),
         signal: ctrl.signal,
       });
       const data = await res.json();
@@ -1626,6 +1639,7 @@ export function ChatLayout() {
       }
     } finally {
       setLoading(false);
+      setThinkingDeep(false);
       setActiveQuickId(null);
       abortRef.current = null;
     }
@@ -2155,7 +2169,7 @@ export function ChatLayout() {
                   <AssistantMessage key={msg.id} message={msg} />
                 )
               )}
-              {loading && <AnimatedThinking />}
+              {loading && <AnimatedThinking deep={thinkingDeep} />}
             </>
           )}
         </div>
@@ -2236,6 +2250,29 @@ export function ChatLayout() {
               </div>
             </div>
           )}
+          <label
+            className="cmk-deep-think-bar"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 8,
+              padding: "6px 14px 4px",
+              fontSize: 11,
+              color: "var(--ink-soft)",
+              cursor: loading ? "default" : "pointer",
+              userSelect: "none",
+            }}
+          >
+            <input
+              type="checkbox"
+              checked={deepThink}
+              onChange={(e) => setDeepThink(e.target.checked)}
+              disabled={loading}
+            />
+            <span>
+              Deep think — OpenAI <strong>background</strong> response (no Close tools this turn; can take a few minutes)
+            </span>
+          </label>
           <div style={{ display: "flex", alignItems: "center", gap: 9 }}>
             <input
               ref={fileRef}

@@ -42,6 +42,8 @@ Running ledger of blockers, bugs, friction, anything broken. Tapped before & aft
 - **after [panel + icon-hover UI pass]:** None blocking — cosmetic IA; watch select arrow custom style on quirky browsers.
 - **before [panel pass — console + leads + approvals]:** Operator index pages visually disjoint from the tinted panel system used on settings/intake.
 - **after [panel pass — console + leads + approvals]:** Clean — same `cmk-stack-panel` language; watch double-wrap if a future row adds its own full-bleed tint.
+- **before [OpenAI breadth — 5.5 + media + background]:** GPT‑5.5 not in picker; media APIs absent; background Responses not exposed (operator perception = “only chat completions”).
+- **after [OpenAI breadth — 5.5 + media + background]:** Watch: **Deep think** disables Close tools for that turn; Vercel **hobby** may kill long polls before OpenAI finishes — Pro/`maxDuration` or a future async job table may be needed; transcribe upload MIME/extension quirks across browsers; new model strings still **runtime-validated by OpenAI** only.
 
 ## 2026-05-01
 

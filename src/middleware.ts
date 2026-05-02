@@ -18,8 +18,8 @@ function operatorLockEnv(): { on: true; password: string; secret: string } | { o
  * cmk_operator cookie (same token as /api/auth/operator).
  *
  * Matcher inventory (2026-05): pages `/`, `/lead/*`, `/approvals`, `/settings`, `/heartbeat`,
- * `/automation`, `/console`, `/chat`, `/leads`, ``/test`, `/analytics` (+ `:path*` where listed).
- * APIs `/api/cron`, `/api`/api/chat`, `/api/threads`, `/api/leads`, `/api/test` (+ children).
+ * `/automation`, `/console`, `/chat`, `/leads`, `/test`, `/analytics` (+ `:path*` where listed).
+ * APIs `/api/cron`, `/api/chat`, `/api/openai`, `/api/threads`, `/api/leads`, `/api/test` (+ children).
  * Not matched (stay public): `/operator-login`, `/api/auth/operator`, `/api/webhooks/:path*`.
  * New top-level app route or `/api/*` (except webhooks/auth) → extend `matcher` or it stays open when lock is on.
  */
@@ -77,6 +77,8 @@ export const config = {
     "/leads/:path*",
     "/api/chat",
     "/api/chat/:path*",
+    "/api/openai",
+    "/api/openai/:path*",
     "/api/threads",
     "/api/threads/:path*",
     "/api/leads",

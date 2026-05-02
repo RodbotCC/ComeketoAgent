@@ -1530,6 +1530,9 @@ select.cmk-field-panel {
   font-family: var(--serif);
   padding: 4px 0;
 }
+.cmk-thinking-deep {
+  color: var(--lavender-deep);
+}
 .cmk-thinking-dots {
   display: inline-flex;
   align-items: center;
