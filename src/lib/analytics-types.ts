@@ -129,6 +129,7 @@ export type WinLossSnapshot = {
     lost_count: number;
     active_count: number;
     overall_win_rate_pct: number;
+    window_days: number;
   };
   funnel: {
     total: number;
@@ -207,6 +208,7 @@ export type RevenueTrendsSnapshot = {
     total_won_revenue_cents: number;
     total_won_revenue_fmt?: string;
     won_with_value_count: number;
+    window_days: number;
   };
   yoy_comparison: {
     last_12mo_revenue_cents: number;

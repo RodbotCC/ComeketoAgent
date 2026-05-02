@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { AppHeader } from "@/components/AppHeader";
 import { TabNav } from "@/components/TabNav";
 import type {
@@ -11,6 +10,7 @@ import type {
   CohortSnapshot,
   WinLossCut,
   CohortWindowKey,
+  UrgencySegment,
 } from "@/lib/analytics-types";
 
 import sourceChannel from "@/data/analytics/source_channel_snapshot.json";
@@ -26,17 +26,16 @@ export const dynamic = "force-static";
 /* ========================================================================
    /analytics — lead intelligence dashboard.
 
-   This is Rodrigo's surface — source channels, owner performance, pipeline
-   funnel, win/loss, revenue, lead time, cohorts. Data lives in
-   `src/data/analytics/*.json` — these are SNAPSHOTS exported from the
-   previous Comeketo Close org by the Python scripts in
-   `_reference/CC Agent (legacy)/CCAgentindex/analytics_scripts/`. Each
-   snapshot carries `_meta.generated_at`, which we surface as a "snapshot:
-   YYYY-MM-DD" pill so we never present stale data as live.
+   Source channels, owner performance, pipeline funnel, win/loss, revenue,
+   lead time, cohorts. Data lives in `src/data/analytics/*.json` — these
+   are SNAPSHOTS exported from the previous Comeketo Close org. Each
+   snapshot carries `_meta.generated_at`, surfaced as a "snapshot:
+   YYYY-MM-DD" pill so stale data is never presented as live.
 
-   The Python scripts have hardcoded paths + custom-field IDs from the OLD
-   Close org. Porting them to the new org is tracked in
-   `_reference/analytics-port-manifest.md`.
+   The exporter scripts live outside this repo (legacy laptop) and have
+   hardcoded custom-field IDs from the OLD Close org. The port manifest
+   at `_reference/analytics-port-manifest.md` maps each script to its
+   snapshot and tracks what each one needs to rerun against the new org.
    ======================================================================== */
 
 type Snap = { _meta?: { generated_at?: string }; summary_text?: string };
@@ -49,14 +48,14 @@ function fmtDate(iso?: string): string {
 }
 
 function fmtCents(cents?: number): string {
-  if (typeof cents !== "number") return "—";
+  if (typeof cents !== "number" || !Number.isFinite(cents)) return "—";
   if (cents >= 1_000_000_00) return `$${(cents / 100_000_000).toFixed(1)}M`;
   if (cents >= 100_000) return `$${(cents / 100_000).toFixed(1)}k`;
   return `$${(cents / 100).toFixed(0)}`;
 }
 
 function pct(n?: number, signed = false): string {
-  if (typeof n !== "number") return "—";
+  if (typeof n !== "number" || !Number.isFinite(n)) return "—";
   const sign = signed && n > 0 ? "+" : "";
   return `${sign}${n.toFixed(1)}%`;
 }
@@ -195,7 +194,12 @@ export default function AnalyticsPage() {
   // ── Cohort ─────────────────────────────────────────────────────────────
   const conversionCurves = coh.conversion_curves;
   const curvesMax = safeMax(conversionCurves.map((c) => c.avg_conversion_rate_pct));
-  const cohortGrid = coh.cohort_grid.slice(0, 12);
+  // `cohort_grid` is oldest-first; sort descending then slice so the table
+  // shows the 12 most-recent cohorts (matches the section heading and the
+  // server-side `best_cohorts[0]` / `worst_cohorts[0]` references).
+  const cohortGrid = [...coh.cohort_grid]
+    .sort((a, b) => b.cohort.localeCompare(a.cohort))
+    .slice(0, 12);
   const cohortWindows: CohortWindowKey[] = ["30d", "60d", "90d", "6mo", "1yr", "2yr"];
   const allRates: number[] = [];
   for (const row of cohortGrid) {
@@ -224,11 +228,12 @@ export default function AnalyticsPage() {
     { key: "cohort",         label: "Cohort analysis",   snap: coh,    has_view: true },
   ];
 
-  // Pipeline funnel is now built (derived from win_loss.funnel). Conversation
-  // intel was OMITTED this sprint — no `conversation_intel_snapshot.json`
-  // exists; deal-pattern fields (`win_loss.time_patterns`, `top_win_profiles`)
-  // are not conversation data, so labeling them "conversation intel" would
-  // mislabel the source. Per CLAUDE.md "no building without functionality."
+  // Conversation Intel is intentionally not in this list. No
+  // `conversation_intel_snapshot.json` exists, and the closest fields in
+  // `win_loss.time_patterns` / `win_loss.top_win_profiles` are deal-pattern
+  // data, not conversation data — labeling them as conversation intel
+  // would mislabel the source. If a real comms-style snapshot lands later,
+  // add it here.
   const missingViews: string[] = [];
 
   const oldestGenerated = datasets
@@ -383,15 +388,20 @@ export default function AnalyticsPage() {
           <div className="cmk-an-funnel">
             {funnelStages.map((stage, i) => {
               const widthPct = (stage.count / funnelMax) * 100;
-              const dropPct =
-                i > 0 && funnelStages[i - 1].count > 0
-                  ? ((funnelStages[i - 1].count - stage.count) / funnelStages[i - 1].count) * 100
+              // Only Total → Active is a real subset transition. Won and Lost
+              // are sibling disposition buckets (a lead is one of them, not
+              // sequential through them), so a drop-% between them would be a
+              // meaningless ratio. Won/Lost rows already carry "% of total"
+              // in their own `sub` line.
+              const stillActivePct =
+                i === 1 && funnelStages[0].count > 0
+                  ? (stage.count / funnelStages[0].count) * 100
                   : null;
               return (
                 <div key={stage.label}>
-                  {dropPct !== null && i > 0 && (
+                  {stillActivePct !== null && (
                     <div className="cmk-an-funnel-arrow">
-                      ↓ {dropPct >= 0 ? `${dropPct.toFixed(1)}% drop` : `+${Math.abs(dropPct).toFixed(1)}%`}
+                      ↓ {stillActivePct.toFixed(1)}% of total are still active
                     </div>
                   )}
                   <div className="cmk-an-funnel-row" style={{ animationDelay: `${i * 70}ms` }}>
@@ -732,15 +742,9 @@ export default function AnalyticsPage() {
             ))}
           </div>
           <p className="muted" style={{ fontSize: 11, marginTop: 12 }}>
-            Snapshots come from the legacy Close org. The Python scripts that built them live in{" "}
-            <code className="ag-seq-mono" style={{ fontSize: 10 }}>
-              _reference/CC Agent (legacy)/CCAgentindex/analytics_scripts/
-            </code>
-            . Custom-field IDs and CSV paths are hardcoded for the old org — see{" "}
-            <Link href="/analytics" style={{ textDecoration: "underline" }}>
-              port manifest
-            </Link>{" "}
-            in <code className="ag-seq-mono" style={{ fontSize: 10 }}>_reference/analytics-port-manifest.md</code> for the rerun checklist.
+            Snapshots come from the legacy Close org. The Python exporter scripts live outside this repo
+            (legacy laptop) and have custom-field IDs hardcoded for the old org — see the rerun checklist in{" "}
+            <code className="ag-seq-mono" style={{ fontSize: 10 }}>_reference/analytics-port-manifest.md</code>.
             Conversation intel is intentionally omitted — no comms-style snapshot exists, and the deal-pattern data we have is not honestly that.
           </p>
         </div>
@@ -805,13 +809,6 @@ function WinLossSubChart({
 
 /* ============ Urgency card ============ */
 
-type UrgencyCardSeg = {
-  count: number;
-  pct: number;
-  avg_value_cents: number;
-  avg_value_fmt?: string;
-};
-
 function UrgencyCard({
   label,
   tone,
@@ -821,7 +818,7 @@ function UrgencyCard({
 }: {
   label: string;
   tone: "leads" | "active" | "won" | "winrate" | "pipeline" | "events" | "yoy";
-  seg: UrgencyCardSeg;
+  seg: UrgencySegment;
   delay: number;
   sub: string;
 }) {
