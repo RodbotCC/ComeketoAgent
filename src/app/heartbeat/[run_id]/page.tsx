@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { AppHeader } from "@/components/AppHeader";
 import { TabNav } from "@/components/TabNav";
 import { getHeartbeatRunById, type DayVerdict, type HeartbeatRunRow } from "@/lib/heartbeat";
+import { resolveLeadNames, displayName } from "@/lib/lead-names";
 
 export const dynamic = "force-dynamic";
 
@@ -49,7 +50,7 @@ type LeadSummaryRow = {
   skip_breakdown?: Record<string, number>;
 };
 
-function SweepLeadSummary({ report }: { report: Record<string, unknown> }) {
+function SweepLeadSummary({ report, leadNames }: { report: Record<string, unknown>; leadNames: Map<string, string> }) {
   const traceId = typeof report.trace_id === "string" ? report.trace_id : null;
   const sweepMs = typeof report.sweep_duration_ms === "number" ? report.sweep_duration_ms : null;
   const leadSummaries = Array.isArray(report.lead_summaries)
@@ -92,12 +93,8 @@ function SweepLeadSummary({ report }: { report: Record<string, unknown> }) {
             {leadSummaries.map((row) => (
               <div key={`${row.plan_id}-${row.close_lead_id}`} className="hb-runs-row">
                 <div>
-                  <Link href={`/lead/${row.close_lead_id}`} className="ag-back-link">
-                    <code className="ag-seq-mono" style={{ fontSize: 10 }}>
-                      {row.close_lead_id.length > 22
-                        ? row.close_lead_id.slice(0, 20) + "…"
-                        : row.close_lead_id}
-                    </code>
+                  <Link href={`/lead/${row.close_lead_id}`} className="ag-back-link" title={row.close_lead_id}>
+                    {displayName(row.close_lead_id, leadNames)}
                   </Link>
                 </div>
                 <div>
@@ -162,6 +159,7 @@ export default async function HeartbeatRunPage({ params }: { params: { run_id: s
   } catch (err) {
     fetchError = err instanceof Error ? err.message : String(err);
   }
+  const leadNames = await resolveLeadNames();
 
   if (fetchError || !run) {
     return (
@@ -278,7 +276,7 @@ export default async function HeartbeatRunPage({ params }: { params: { run_id: s
 
         {/* Sweep: structured per-lead summary + trace */}
         {isSweepSummary && run.report && typeof run.report === "object" && run.report !== null ? (
-          <SweepLeadSummary report={run.report as Record<string, unknown>} />
+          <SweepLeadSummary report={run.report as Record<string, unknown>} leadNames={leadNames} />
         ) : null}
 
         {/* Sweep summary fallback (scope=all) legacy */}

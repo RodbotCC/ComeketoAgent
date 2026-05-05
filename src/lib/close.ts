@@ -197,24 +197,20 @@ async function scanLeadsMatching(
   return matches;
 }
 
-/** POST /data/search/ — flexible lead search. Pass a Close query string. */
+/**
+ * Plain-text lead search via GET /lead/?query=. The LLM passes whatever
+ * the operator typed; Close does basic name/contact/email matching.
+ *
+ * NOTE: This used to POST to /data/search/ with a Klaus-DSL `_query`
+ * payload, but Close's Advanced Filtering schema rejected the body shape
+ * with "value_search.id required". The simpler GET endpoint is what
+ * closeListLeads already uses successfully and is what the LLM was
+ * recovering to anyway. If we ever want structured queries
+ * (status:Customer, has:email, etc.), build a proper /data/search/
+ * payload with type: "and" + `queries: [{type: "field_condition", ...}]`.
+ */
 export async function closeSearchLeads(query: string, limit = 10): Promise<CloseLead[]> {
-  const body = {
-    query: {
-      type: "saved_search" as const,
-      _query: query,
-    },
-    _limit: limit,
-    _fields: {
-      lead: [...LEAD_LIST_FIELDS],
-    },
-  };
-  // Close's /data/search/ wraps results in { data: [...] } too.
-  const r = await closeFetch<Paged<CloseLead>>("/data/search/", {
-    method: "POST",
-    body: JSON.stringify(body),
-  });
-  return r.data;
+  return closeListLeads({ query, limit });
 }
 
 /**

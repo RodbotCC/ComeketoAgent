@@ -3,6 +3,7 @@ import { AppHeader } from "@/components/AppHeader";
 import { TabNav } from "@/components/TabNav";
 import { listRecentCloseWebhookEvents, type CloseWebhookEventRow } from "@/lib/webhook-events";
 import { envStatus } from "@/lib/env";
+import { resolveLeadNames, displayName } from "@/lib/lead-names";
 
 export const dynamic = "force-dynamic";
 
@@ -29,6 +30,7 @@ export default async function WebhookEventsPage({
     err = e instanceof Error ? e.message : String(e);
   }
   const status = envStatus();
+  const leadNames = await resolveLeadNames();
 
   return (
     <div className="cme-shell">
@@ -101,10 +103,8 @@ export default async function WebhookEventsPage({
                 <div style={{ fontSize: 11 }}>{r.action || "—"}</div>
                 <div>
                   {r.lead_id ? (
-                    <Link href={`/lead/${r.lead_id}`} className="ag-back-link">
-                      <code className="ag-seq-mono" style={{ fontSize: 10 }}>
-                        {r.lead_id.length > 20 ? r.lead_id.slice(0, 18) + "…" : r.lead_id}
-                      </code>
+                    <Link href={`/lead/${r.lead_id}`} className="ag-back-link" title={r.lead_id}>
+                      {displayName(r.lead_id, leadNames)}
                     </Link>
                   ) : (
                     "—"

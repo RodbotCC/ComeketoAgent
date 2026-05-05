@@ -53,3 +53,6 @@ next-env.d.ts
 .vscode/
 .idea/
 .vercel/
+
+# Claude Code per-project local settings (operator-specific, not for git)
+.claude/

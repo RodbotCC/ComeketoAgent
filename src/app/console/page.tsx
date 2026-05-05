@@ -3,7 +3,15 @@ import { AppHeader } from "@/components/AppHeader";
 import { TabNav } from "@/components/TabNav";
 import { getSettings } from "@/lib/settings";
 import { countPlansNeedingReview, countPlansWithStatus } from "@/lib/plans-db";
-import { listRecentExecutionGlobal, listExecutionByTraceId, type ExecutionLogRow } from "@/lib/execution-audit";
+import {
+  listRecentExecutionGlobal,
+  listExecutionByTraceId,
+  listExecutionByKind,
+  isExecutionLogKind,
+  type ExecutionLogRow,
+  type ExecutionLogKind,
+} from "@/lib/execution-audit";
+import { resolveLeadNames, displayName } from "@/lib/lead-names";
 
 export const dynamic = "force-dynamic";
 
@@ -13,6 +21,27 @@ function traceQueryParam(raw: string | string[] | undefined): string {
   if (typeof raw === "string") return raw.trim();
   if (Array.isArray(raw) && raw[0]) return String(raw[0]).trim();
   return "";
+}
+
+function kindQueryParam(raw: string | string[] | undefined): string {
+  if (typeof raw === "string") return raw.trim();
+  if (Array.isArray(raw) && raw[0]) return String(raw[0]).trim();
+  return "";
+}
+
+/** Curated kind filter pills surfaced in the console toolbar. Order = priority. */
+const KIND_PILLS: Array<{ kind: ExecutionLogKind; label: string }> = [
+  { kind: "mcp_fallback", label: "MCP fallback" },
+  { kind: "heartbeat_run", label: "Heartbeat runs" },
+  { kind: "delegations_close_tool", label: "Chat writes" },
+  { kind: "approve_run", label: "Approve & run" },
+];
+
+function payloadTargetTool(payload: unknown): string | null {
+  if (!payload || typeof payload !== "object") return null;
+  const p = payload as Record<string, unknown>;
+  const t = p.target_tool;
+  return typeof t === "string" ? t : null;
 }
 
 const MODE_LABEL: Record<string, { label: string; tone: "ok" | "live" | "warn" }> = {
@@ -39,7 +68,7 @@ function shortId(id: string | null | undefined, len = 12): string {
 export default async function ConsolePage({
   searchParams,
 }: {
-  searchParams: { trace?: string | string[] };
+  searchParams: { trace?: string | string[]; kind?: string | string[] };
 }) {
   const settings = await getSettings();
   const modeInfo =
@@ -49,11 +78,19 @@ export default async function ConsolePage({
   const traceFiltered = traceParam.length > 0 && TRACE_UUID_RE.test(traceParam);
   const traceInvalid = traceParam.length > 0 && !traceFiltered;
 
+  const kindParam = kindQueryParam(searchParams.kind);
+  const kindFiltered = kindParam.length > 0 && isExecutionLogKind(kindParam);
+  const kindInvalid = kindParam.length > 0 && !kindFiltered;
+  const activeKind: ExecutionLogKind | null = kindFiltered ? (kindParam as ExecutionLogKind) : null;
+  // Trace filter takes precedence — a single chat run is the tightest scope.
+  const useKindOnly = !traceFiltered && kindFiltered;
+
   let pendingReview = 0;
   let activePlans = 0;
   let draftPlans = 0;
   let logRows: ExecutionLogRow[] = [];
   let fetchError: string | null = null;
+  const leadNames = await resolveLeadNames();
 
   try {
     if (traceFiltered) {
@@ -62,6 +99,13 @@ export default async function ConsolePage({
         countPlansWithStatus("active"),
         countPlansWithStatus("draft"),
         listExecutionByTraceId(traceParam, 80),
+      ]);
+    } else if (useKindOnly && activeKind) {
+      [pendingReview, activePlans, draftPlans, logRows] = await Promise.all([
+        countPlansNeedingReview(),
+        countPlansWithStatus("active"),
+        countPlansWithStatus("draft"),
+        listExecutionByKind(activeKind, 80),
       ]);
     } else {
       [pendingReview, activePlans, draftPlans, logRows] = await Promise.all([
@@ -75,11 +119,22 @@ export default async function ConsolePage({
     fetchError = e instanceof Error ? e.message : String(e);
   }
 
-  const logHeading = traceFiltered ? "Execution log · this run" : "Recent execution log";
+  const logHeading = traceFiltered
+    ? "Execution log · this run"
+    : useKindOnly && activeKind
+    ? `Execution log · ${activeKind.replace(/_/g, " ")}`
+    : "Recent execution log";
   const logEmptyMsg = traceFiltered
     ? "No audited rows for this trace yet — only writes and plan generation log here (read-only tools do not)."
+    : useKindOnly && activeKind
+    ? `No \`${activeKind}\` rows yet. ${
+        activeKind === "mcp_fallback"
+          ? "Set CLOSE_MCP_URL in .env.local and have the chat agent reach for an operation not covered by direct tools."
+          : "Rows of this kind will appear here once they fire."
+      }`
     : "No rows yet — heartbeats, writes, and approvals land here.";
   const showTraceColumn = !traceFiltered;
+  const showTargetToolSubLine = activeKind === "mcp_fallback";
 
   return (
     <div className="cme-shell">
@@ -158,17 +213,6 @@ export default async function ConsolePage({
             <span className="hb-kpi-sub">runs & skips →</span>
           </Link>
           <Link
-            href="/automation"
-            className="hb-kpi-card"
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
-            <span className="hb-kpi-label">Automation</span>
-            <span className="hb-kpi-num" style={{ fontSize: 22 }}>
-              Studio
-            </span>
-            <span className="hb-kpi-sub">sequences & drafts →</span>
-          </Link>
-          <Link
             href="/settings"
             className="hb-kpi-card"
             style={{ textDecoration: "none", color: "inherit" }}
@@ -206,6 +250,14 @@ export default async function ConsolePage({
           </div>
         )}
 
+        {kindInvalid && (
+          <div className="lead-error" style={{ marginBottom: 12 }}>
+            Invalid <code className="ag-seq-mono">kind</code> query param —{" "}
+            <code className="ag-seq-mono">{kindParam}</code> is not a known action_kind. Showing the
+            full tail.
+          </div>
+        )}
+
         {traceFiltered && (
           <div className="cmk-stack-panel cmk-stack-panel--sky cmk-stack-panel--tight-top">
             <div className="cmk-console-trace-banner">
@@ -218,6 +270,43 @@ export default async function ConsolePage({
               <Link href="/console" className="cmk-console-trace-clear">
                 Clear filter
               </Link>
+            </div>
+          </div>
+        )}
+
+        {useKindOnly && activeKind && (
+          <div className="cmk-stack-panel cmk-stack-panel--sky cmk-stack-panel--tight-top">
+            <div className="cmk-console-trace-banner">
+              <span>
+                Filtering kind{" "}
+                <code className="ag-seq-mono" title={activeKind}>
+                  {activeKind}
+                </code>
+              </span>
+              <Link href="/console" className="cmk-console-trace-clear">
+                Clear filter
+              </Link>
+            </div>
+          </div>
+        )}
+
+        {!traceFiltered && !kindFiltered && (
+          <div className="cmk-stack-panel cmk-stack-panel--sky cmk-stack-panel--tight-top">
+            <div
+              className="cmk-console-trace-banner"
+              style={{ flexWrap: "wrap", gap: 6 }}
+            >
+              <span style={{ marginRight: 4 }}>Scope by kind:</span>
+              {KIND_PILLS.map((p) => (
+                <Link
+                  key={p.kind}
+                  href={`/console?kind=${encodeURIComponent(p.kind)}`}
+                  className="cmk-console-trace-clear"
+                  title={p.kind}
+                >
+                  {p.label}
+                </Link>
+              ))}
             </div>
           </div>
         )}
@@ -240,13 +329,39 @@ export default async function ConsolePage({
                 <div>Lead</div>
                 <div>Plan</div>
               </div>
-              {logRows.map((r) => (
+              {logRows.map((r) => {
+                const targetTool = showTargetToolSubLine ? payloadTargetTool(r.payload) : null;
+                const isWriteFlag = Boolean(
+                  showTargetToolSubLine &&
+                    r.payload &&
+                    typeof r.payload === "object" &&
+                    (r.payload as Record<string, unknown>).is_write === true
+                );
+                return (
                 <div key={r.id} className="hb-runs-row console-ex-row">
                   <div>{fmtTime(r.at)}</div>
                   <div>
                     <code className="ag-seq-mono" style={{ fontSize: 10 }}>
                       {r.action_kind}
                     </code>
+                    {targetTool && (
+                      <div
+                        style={{ marginTop: 2, display: "flex", gap: 6, alignItems: "center" }}
+                      >
+                        <code className="ag-seq-mono muted" style={{ fontSize: 10 }}>
+                          → {targetTool}
+                        </code>
+                        {isWriteFlag && (
+                          <span
+                            className="hb-skip-code"
+                            style={{ fontSize: 9 }}
+                            title="Heuristic write-detection flagged this MCP call as a write."
+                          >
+                            write
+                          </span>
+                        )}
+                      </div>
+                    )}
                   </div>
                   {showTraceColumn ? (
                     <div>
@@ -279,8 +394,8 @@ export default async function ConsolePage({
                   </div>
                   <div>
                     {r.close_lead_id ? (
-                      <Link href={`/lead/${r.close_lead_id}`} className="plan-btn" style={{ fontSize: 10 }}>
-                        {shortId(r.close_lead_id, 14)}
+                      <Link href={`/lead/${r.close_lead_id}`} className="plan-btn" style={{ fontSize: 10 }} title={r.close_lead_id}>
+                        {displayName(r.close_lead_id, leadNames)}
                       </Link>
                     ) : (
                       <span className="muted">—</span>
@@ -296,7 +411,8 @@ export default async function ConsolePage({
                     )}
                   </div>
                 </div>
-              ))}
+                );
+              })}
             </div>
           )}
           </div>

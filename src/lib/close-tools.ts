@@ -40,6 +40,27 @@ import {
 import { env } from "./env";
 import { generateSevenDayPlanForLead } from "./plan";
 import { clampPlanHorizonDays } from "./settings";
+import { closeMcpListTools, closeMcpCallTool } from "./close-mcp";
+import { pipelineStateForOwner, type PipelineOwner } from "./pipeline-state";
+
+/** Names of the MCP fallback tools — kept here so `getCloseToolsForSettings`
+ *  and the dispatcher gate stay in sync. */
+const MCP_TOOL_NAMES = new Set(["close_mcp_list_tools", "close_mcp_call"]);
+
+/**
+ * Return the chat-tool array filtered for the operator's current settings.
+ * When `enable_mcp_fallback` is false, the MCP escape-hatch tools are removed
+ * from the model's view so it can't reach for them at all (vs. the dispatcher
+ * just refusing to execute them).
+ */
+export function getCloseToolsForSettings(opts: {
+  enable_mcp_fallback: boolean;
+}): typeof CLOSE_TOOLS {
+  if (opts.enable_mcp_fallback) return CLOSE_TOOLS;
+  return CLOSE_TOOLS.filter(
+    (t) => !MCP_TOOL_NAMES.has(t.name as string)
+  ) as typeof CLOSE_TOOLS;
+}
 
 /**
  * Tool definitions in OpenAI Responses tool format.
@@ -65,11 +86,11 @@ export const CLOSE_TOOLS = [
     type: "function" as const,
     name: "close_search_leads",
     description:
-      "Search leads in Close using a Close query string (e.g. 'name:Hugo' or 'status:\"Potential\"' or 'has:email'). Returns up to `limit` matches with id, display_name, status, contacts.",
+      "Find leads by plain text — name, company, contact, or email substring (e.g. 'Maya Esposito' or 'Trailhead Catering'). Returns up to `limit` matches with id, display_name, status, contacts. NOTE: This is plain text matching, NOT Klaus DSL — do not pass 'name:Hugo' / 'status:\"X\"' / 'has:email'-style filters.",
     parameters: {
       type: "object",
       properties: {
-        query: { type: "string", description: "Close query string." },
+        query: { type: "string", description: "Plain text to match against lead name, company, or contact." },
         limit: { type: "number", description: "Max results (default 10, capped at 50)." },
       },
       required: ["query"],
@@ -504,6 +525,68 @@ export const CLOSE_TOOLS = [
       additionalProperties: false,
     },
   },
+  // ── MCP fallback (escape hatch — see lib/close-mcp.ts) ───────────────────
+  // Use ONLY when a direct close_* tool above doesn't cover the operation.
+  // Bypasses Guardrails ownership/voice/snapshot gates; fallback writes are
+  // stamped to execution_log as `mcp_fallback` for /console visibility.
+  {
+    type: "function" as const,
+    name: "close_mcp_list_tools",
+    description:
+      "List the operations available on Close's official MCP server (the fallback layer). Use this when none of the close_* tools above cover what the operator asked for — discover what the MCP exposes, then call close_mcp_call.",
+    parameters: {
+      type: "object",
+      properties: {},
+      required: [],
+      additionalProperties: false,
+    },
+  },
+  {
+    type: "function" as const,
+    name: "close_mcp_call",
+    description:
+      "Invoke a tool on Close's MCP server by name. ONLY use after close_mcp_list_tools confirms the tool exists and ONLY when no direct close_* tool above can do the job — direct tools carry Guardrails gates that this path skips. Writes via this tool are audited as mcp_fallback in /console.",
+    parameters: {
+      type: "object",
+      properties: {
+        tool_name: {
+          type: "string",
+          description: "Exact tool name as returned by close_mcp_list_tools.",
+        },
+        tool_args: {
+          type: "object",
+          description: "Arguments object for the MCP tool. Schema depends on the tool — match what tools/list described.",
+          additionalProperties: true,
+        },
+      },
+      required: ["tool_name"],
+      additionalProperties: false,
+    },
+  },
+  // ─── Pipeline state — the morning briefing ─────────────────────────────
+  // One call answers "what's my morning?" / "state of the pipeline?". Cross-
+  // cuts active plans + last 24h heartbeat runs and returns a compact shape
+  // (counts + capped example arrays) sized for the chat widget summary
+  // budget. Reach for this BEFORE chaining `close_list_leads_by_assignee` +
+  // per-lead reads — it answers the briefing question in a single tool call.
+  {
+    type: "function" as const,
+    name: "pipeline_state_for_owner",
+    description:
+      "Cross-plan morning briefing for one owner (or all). Returns counts {plans_active, today_eligible, waiting_count, fired_count} plus capped example arrays (waiting_top, fired_top, gated_top). Use this for 'what's my morning?', 'state of the pipeline', 'what's going on today', 'what's waiting on me' — answers in ONE tool call instead of chaining N per-lead reads. Lean payload by design (≈600 chars stringified) so the chat widget can render it as a structured card.",
+    parameters: {
+      type: "object",
+      properties: {
+        owner: {
+          type: "string",
+          enum: ["andre", "jake", "all"],
+          description: "Whose pipeline to summarize. Default 'andre'.",
+        },
+      },
+      required: [],
+      additionalProperties: false,
+    },
+  },
 ];
 
 export type CloseToolName =
@@ -535,7 +618,10 @@ export type CloseToolName =
   | "close_create_lead"
   | "close_list_webhook_subscriptions"
   | "close_create_sequence"
-  | "close_update_sequence";
+  | "close_update_sequence"
+  | "close_mcp_list_tools"
+  | "close_mcp_call"
+  | "pipeline_state_for_owner";
 
 /**
  * Execute a tool call. Returns a value the model will see as JSON on its
@@ -548,16 +634,30 @@ export async function dispatchCloseTool(
   /**
    * Optional auxiliary hooks. When provided, the voice_lint_buddy slot
    * intercepts outbound email/SMS bodies before they hit Close and rewrites
-   * them to clear blocking voice/lint violations.
+   * them to clear blocking voice/lint violations. `enable_mcp_fallback`
+   * gates `close_mcp_*` execution defensively — `getCloseToolsForSettings`
+   * already filters them from the model's view, but a stale message context
+   * could still try to invoke them.
    */
   hooks?: {
     voiceLint?: (
       channel: "email" | "sms",
       body: string
     ) => Promise<{ rewritten: string; slot: string } | null>;
+    enable_mcp_fallback?: boolean;
   }
 ): Promise<unknown> {
   try {
+    if (
+      MCP_TOOL_NAMES.has(name) &&
+      hooks?.enable_mcp_fallback === false
+    ) {
+      return {
+        error:
+          "MCP fallback is disabled in operator settings. " +
+          "Re-enable in /settings → Close MCP fallback, or use a direct close_* tool.",
+      };
+    }
     switch (name as CloseToolName) {
       case "close_list_workflows": {
         const wfs = await closeListWorkflows({ limit: (args.limit as number) ?? 50 });
@@ -923,6 +1023,35 @@ export async function dispatchCloseTool(
           return { error: "patch_json must be valid JSON object" };
         }
         return await closeUpdateSequence(args.sequence_id as string, patch);
+      }
+      case "close_mcp_list_tools": {
+        const r = await closeMcpListTools();
+        if (!r.ok) return { error: r.error };
+        return {
+          tools: r.tools.map((t) => ({
+            name: t.name,
+            description: t.description ?? "",
+            input_schema: t.inputSchema ?? null,
+          })),
+          count: r.tools.length,
+        };
+      }
+      case "close_mcp_call": {
+        const toolName = (args.tool_name as string | undefined)?.trim();
+        if (!toolName) return { error: "tool_name is required" };
+        const toolArgs =
+          args.tool_args && typeof args.tool_args === "object" && !Array.isArray(args.tool_args)
+            ? (args.tool_args as Record<string, unknown>)
+            : {};
+        const r = await closeMcpCallTool(toolName, toolArgs);
+        if (!r.ok) return { error: r.error, fallback_tool: toolName };
+        return { content: r.content, fallback_tool: toolName };
+      }
+      case "pipeline_state_for_owner": {
+        const raw = (args.owner as string | undefined)?.trim().toLowerCase();
+        const owner: PipelineOwner =
+          raw === "jake" ? "jake" : raw === "all" ? "all" : "andre";
+        return await pipelineStateForOwner(owner);
       }
       default:
         return { error: `unknown tool: ${name}` };

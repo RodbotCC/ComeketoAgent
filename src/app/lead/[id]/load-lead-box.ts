@@ -30,6 +30,13 @@ export type LeadBoxPageData = {
   leadId: string;
   box: CloseLeadFull;
   plan: Awaited<ReturnType<typeof getLatestPlanForLead>>;
+  /**
+   * Set when getLatestPlanForLead threw. Lets PlanSection distinguish
+   * "this lead has no plan" (plan === null && planError === null — show
+   * Generate button) from "the plan exists but we couldn't load it"
+   * (plan === null && planError !== null — show fetch-failed UI).
+   */
+  planError: string | null;
   latestHeartbeat: Awaited<ReturnType<typeof getLatestHeartbeatForLead>>;
   settings: Awaited<ReturnType<typeof getSettings>>;
   whLatestAt: string | null;
@@ -73,7 +80,14 @@ export const loadLeadBoxPageData = cache(
       return { error: error || "(unknown)", box: null };
     }
 
-    const plan = await getLatestPlanForLead(leadId).catch(() => null);
+    let plan: Awaited<ReturnType<typeof getLatestPlanForLead>> = null;
+    let planError: string | null = null;
+    try {
+      plan = await getLatestPlanForLead(leadId);
+    } catch (err) {
+      planError = err instanceof Error ? err.message : String(err);
+      console.error(`[load-lead-box] getLatestPlanForLead(${leadId}) failed:`, planError);
+    }
     const latestHeartbeat = plan
       ? await getLatestHeartbeatForLead(leadId).catch(() => null)
       : null;
@@ -138,6 +152,7 @@ export const loadLeadBoxPageData = cache(
       leadId,
       box,
       plan,
+      planError,
       latestHeartbeat,
       settings,
       whLatestAt,

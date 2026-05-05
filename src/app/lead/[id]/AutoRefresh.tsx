@@ -10,12 +10,17 @@ import { useRouter } from "next/navigation";
  * directly in Close (status flips, new emails, new notes, etc.) propagate
  * into the Box without a manual reload.
  *
- * Click to pause/resume. Pauses automatically when the tab is hidden so
+ * Defaults to OFF on the lead page: this page is actively edited, so
+ * passive 30s polling raced with plan generation and made the just-rendered
+ * plan vanish whenever a plan-read transiently failed. Operator can opt in
+ * by clicking the pill.
+ *
+ * Click to toggle on/off. Pauses automatically when the tab is hidden so
  * we don't burn Close API quota on a backgrounded window.
  */
 export function AutoRefresh({
   intervalMs = 30000,
-  defaultEnabled = true,
+  defaultEnabled = false,
 }: {
   intervalMs?: number;
   defaultEnabled?: boolean;
@@ -85,10 +90,10 @@ export function AutoRefresh({
         type="button"
         className={`auto-refresh-pill${enabled ? " on" : " off"}${pending ? " pulsing" : ""}`}
         onClick={() => setEnabled((v) => !v)}
-        title={enabled ? `Auto-refreshing every ${seconds}s — click to pause` : "Paused — click to resume"}
+        title={enabled ? `Auto-refreshing every ${seconds}s — click to turn off` : `Auto-refresh off — click to enable (every ${seconds}s)`}
       >
         <span className="auto-refresh-dot" />
-        {enabled ? `auto · ${seconds}s` : "paused"}
+        {enabled ? `auto · ${seconds}s` : "auto off"}
       </button>
       <button
         type="button"
