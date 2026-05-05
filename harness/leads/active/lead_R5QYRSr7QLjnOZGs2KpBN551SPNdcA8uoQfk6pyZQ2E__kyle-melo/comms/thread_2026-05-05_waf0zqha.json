@@ -1,8 +1,6 @@
 {
-  "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
-  "latest_normalized_subject": "Comeketo´s Interactive Menu",
-  "_type": "EmailThread",
-  "date_created": "2026-05-05T13:22:53.473000+00:00",
+  "id": "acti_uZrwHAjroaNRCENLArRqjUnxM14GUHulwq5WAf0ZqHa",
+  "activity_at": "2026-05-05T13:22:53.473000+00:00",
   "latest_emails": [
     {
       "id": "acti_1fkziZoVkhljjg1LW8EwbNH3iRfvo7cllNeNdkI8t8e",
@@ -53,30 +51,32 @@
       }
     }
   ],
-  "user_name": "Andre Raw",
-  "id": "acti_uZrwHAjroaNRCENLArRqjUnxM14GUHulwq5WAf0ZqHa",
-  "users": [
-    "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt"
-  ],
-  "date_updated": "2026-05-05T13:22:54.385000+00:00",
+  "created_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
   "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "user_name": "Andre Raw",
   "created_by_name": "Andre Raw",
-  "summary": null,
+  "date_created": "2026-05-05T13:22:53.473000+00:00",
+  "latest_normalized_subject": "Comeketo´s Interactive Menu",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "_type": "EmailThread",
+  "n_emails": 1,
   "importance": {
     "type": "important",
     "reason": "most-recent-communication"
   },
+  "date_updated": "2026-05-05T13:22:54.385000+00:00",
+  "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "summary": null,
+  "updated_by_name": "Andre Raw",
+  "users": [
+    "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt"
+  ],
   "contact_id": null,
-  "lead_id": "lead_R5QYRSr7QLjnOZGs2KpBN551SPNdcA8uoQfk6pyZQ2E",
   "participants": [
     {
       "email": "comeketo@m.comeketocatering.com",
       "name": "Comeketo Catering Team"
     }
   ],
-  "updated_by_name": "Andre Raw",
-  "n_emails": 1,
-  "activity_at": "2026-05-05T13:22:53.473000+00:00",
-  "created_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
-  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq"
+  "lead_id": "lead_R5QYRSr7QLjnOZGs2KpBN551SPNdcA8uoQfk6pyZQ2E"
 }
