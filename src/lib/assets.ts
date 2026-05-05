@@ -1,7 +1,26 @@
-import { getSupabaseServer } from "./supabase";
+/**
+ * Lead asset library — file-canonical (Phase 6.1, 2026-05-05).
+ *
+ * Thin compatibility layer that preserves existing call sites (UI components,
+ * server actions) while routing through the harness file tree. All actual
+ * logic lives in `assets-fs.ts`.
+ */
+
+import {
+  listAssetsForLeadFs,
+  getAssetByIdFs,
+  deleteAssetByIdFs,
+  assetKind,
+  type AssetMeta,
+  type AssetWithRawUrl,
+} from "./assets-fs";
+
+export { assetKind };
+export type { AssetMeta };
 
 export type AssetScope = "lead" | "global";
 
+/** Legacy row shape preserved so existing UI consumers don't churn. */
 export type LeadAssetRow = {
   id: string;
   created_at: string;
@@ -26,60 +45,46 @@ export type LeadAssetWithUrl = LeadAssetRow & {
   signed_url: string | null;
 };
 
-export function assetKind(filename: string, mime?: string | null): string {
-  const m = (mime || "").toLowerCase();
-  const f = filename.toLowerCase();
-  if (m.startsWith("image/") || /\.(png|jpe?g|webp|gif|svg)$/i.test(f)) return "image";
-  if (m.includes("html") || /\.html?$/i.test(f)) return "html";
-  if (m.includes("pdf") || /\.pdf$/i.test(f)) return "pdf";
-  if (m.includes("csv") || /\.csv$/i.test(f)) return "csv";
-  if (m.includes("json") || /\.json$/i.test(f)) return "json";
-  if (m.startsWith("text/") || /\.(txt|md)$/i.test(f)) return "text";
-  return "file";
+function adapt(meta: AssetMeta): LeadAssetRow {
+  return {
+    id: meta.id,
+    created_at: meta.created_at,
+    updated_at: meta.updated_at,
+    scope: meta.scope,
+    close_lead_id: meta.close_lead_id,
+    title: meta.title,
+    filename: meta.filename,
+    storage_bucket: "harness",
+    storage_path: meta.storage_path,
+    mime: meta.mime,
+    byte_size: meta.byte_size,
+    kind: meta.kind,
+    description: meta.description,
+    alt_text: meta.alt_text,
+    approved_for_customer: meta.approved_for_customer,
+    source: meta.source,
+    metadata: {},
+  };
 }
 
 export async function listAssetsForLead(
   leadId: string,
-  limit = 40
+  limit = 40,
 ): Promise<LeadAssetWithUrl[]> {
-  const sb = getSupabaseServer();
-  const { data, error } = await sb
-    .from("lead_assets")
-    .select("*")
-    .or(`scope.eq.global,close_lead_id.eq.${leadId}`)
-    .order("created_at", { ascending: false })
-    .limit(limit);
-  if (error) throw new Error(`listAssetsForLead: ${error.message}`);
-
-  const rows = ((data as LeadAssetRow[]) ?? []).filter(
-    (row) => row.scope === "global" || row.close_lead_id === leadId
-  );
-
-  return Promise.all(
-    rows.map(async (row) => {
-      const { data: signed } = await sb.storage
-        .from(row.storage_bucket)
-        .createSignedUrl(row.storage_path, 300);
-      return { ...row, signed_url: signed?.signedUrl ?? null };
-    })
+  const items = await listAssetsForLeadFs(leadId, limit);
+  return items.map(
+    (a: AssetWithRawUrl): LeadAssetWithUrl => ({
+      ...adapt(a),
+      signed_url: a.raw_url, // raw GitHub URL serves as the asset link
+    }),
   );
 }
 
 export async function getAssetById(id: string): Promise<LeadAssetRow | null> {
-  const sb = getSupabaseServer();
-  const { data, error } = await sb.from("lead_assets").select("*").eq("id", id).maybeSingle();
-  if (error) throw new Error(`getAssetById: ${error.message}`);
-  return (data as LeadAssetRow) ?? null;
+  const meta = await getAssetByIdFs(id);
+  return meta ? adapt(meta) : null;
 }
 
 export async function deleteAssetById(id: string): Promise<void> {
-  const sb = getSupabaseServer();
-  const row = await getAssetById(id);
-  if (!row) return;
-  const rm = await sb.storage.from(row.storage_bucket).remove([row.storage_path]);
-  if (rm.error) {
-    console.warn("[assets] storage remove failed", rm.error.message);
-  }
-  const { error } = await sb.from("lead_assets").delete().eq("id", id);
-  if (error) throw new Error(`deleteAssetById: ${error.message}`);
+  await deleteAssetByIdFs(id);
 }

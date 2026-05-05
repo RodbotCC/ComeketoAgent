@@ -78,7 +78,7 @@ Per-lead narrative content lives in **files** under `harness/`, not Supabase tab
 - `threads` + `messages` (chat cockpit history; per-token git commits would be absurd).
 - `lead_activity_touches` (single-row freshness signal updated 1000s of times per day).
 - Storage buckets for >1MB binaries.
-- `automation_drafts` and `lead_assets` (small surfaces; defer migration).
+- `automation_drafts` (small surface, deferred per Jake — "garbage anyway").
 
 **What moved to files (file-canonical — no Supabase writes or reads):**
 - Per-lead profile, discovery, NEPQ openers, comms history, call transcripts, win angles, identity notes, intake artifacts.

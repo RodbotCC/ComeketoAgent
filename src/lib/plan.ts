@@ -22,7 +22,18 @@ import { savePlan } from "./plans-db";
 export type PlanGoal = "scheduled_call" | "tasting" | "quote" | "clarify" | "re_engage";
 export type PlanStatus = "draft" | "approved" | "active" | "paused" | "completed" | "killed";
 export type ApprovalStatus = "not_ready" | "needs_review" | "approved" | "sent" | "skipped";
-export type PlanChannel = "call" | "email" | "sms" | "task";
+/**
+ * Channels the AGENT can actually fire on its own:
+ *   - email: send via Close email-log API
+ *   - sms:   send via Close SMS-log API
+ *   - task:  create a Close task assigned to Andre (for things only Andre can do —
+ *           calls, in-person follow-ups, anything off-channel)
+ *
+ * "call" is intentionally NOT a channel: the agent has no telephony — Andre
+ * makes calls. If the plan needs Andre to call someone, use a `task` with the
+ * intent reflecting that ("Call Eliana to confirm tasting time").
+ */
+export type PlanChannel = "email" | "sms" | "task";
 
 export type PlannedTouchpoint = {
   channel: PlanChannel;
@@ -149,7 +160,8 @@ Do NOT invent tasting dates.
 - If the last inbound was a question, the next move answers it.
 - Recognize stop signals if present in activity ("stop", "remove me", "not interested") — if seen, return primary_goal "re_engage" only if it would be safe; otherwise return a plan with a single day (day=1) that surfaces the stop signal and recommends pausing (still emit exactly ${n} days: day 1 = the warning; later days = minimal safe holding actions or explicit "wait" tasks if you must fill buckets).
 - Acknowledge what's already enrolled in workflows. Do not double-enroll into the same Close sequence.
-- Every day must include at least one required_action (call/email/sms/task). Empty days are not allowed.
+- Every day must include at least one required_action (email/sms/task). Empty days are not allowed.
+- The agent has NO telephony. If a day's intent involves Andre calling the lead, use channel="task" with intent="Call <lead_name> to ..." — never channel="call".
 - The "primary_goal" you pick MUST be one of: scheduled_call | tasting | quote | clarify | re_engage.
 - "approval_required" in the JSON spec below is implied always true — plans never auto-execute without Andre's explicit approval.
 
@@ -169,7 +181,7 @@ Return ONLY a single JSON object matching this exact shape (no prose, no code fe
       "day": 1,
       "objective": "string",
       "required_actions": [
-        { "channel": "call|email|sms|task", "intent": "string", "draft_seed": "string", "notes": "optional" }
+        { "channel": "email|sms|task", "intent": "string", "draft_seed": "string", "notes": "optional" }
         /* You MAY include >1 object here when multiple touches the same calendar day are justified. */
       ],
       "send_window": "string"
@@ -373,7 +385,7 @@ You will receive:
 You return ONLY a single JSON object (no prose, no code fences) with keys:
 - day (integer): MUST equal the calendar bucket number being revised — see "DAY TO REVISE" in the user message.
 - objective (string)
-- required_actions: array of { "channel": "call|email|sms|task", "intent": "string", "draft_seed": "string", "tasting_date": "optional", "notes": "optional" }
+- required_actions: array of { "channel": "email|sms|task", "intent": "string", "draft_seed": "string", "tasting_date": "optional", "notes": "optional" }
 - send_window (string)
 
 Example shape (values are illustrative):

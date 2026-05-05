@@ -920,12 +920,12 @@ export function isReplyGateActive(activities: CloseActivity[]): boolean {
  * Omit it for legacy operator-machine-local behavior.
  */
 export function isInSendWindow(
-  channel: "email" | "sms" | "call" | "task",
+  channel: "email" | "sms" | "task",
   now: Date = new Date(),
   tz?: string
 ): boolean {
-  // Calls and tasks aren't customer-facing — the gate doesn't apply.
-  if (channel === "call" || channel === "task") return true;
+  // Tasks aren't customer-facing — the send-window gate doesn't apply.
+  if (channel === "task") return true;
 
   let day: number;
   let hour: number;

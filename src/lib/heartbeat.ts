@@ -227,15 +227,6 @@ async function executeAction(
   ctx: { lead_id: string; contact_id: string | null; date: string; andre_user_id: string }
 ): Promise<{ ok: true; kind: string; close_id: string } | { ok: false; error: string }> {
   try {
-    if (channel === "call") {
-      const r = await closeCreateTask({
-        lead_id: ctx.lead_id,
-        text: `📞 Call: ${action.intent}`,
-        date: ctx.date,
-        assigned_to: ctx.andre_user_id,
-      });
-      return { ok: true, kind: "task", close_id: r.id };
-    }
     if (channel === "task") {
       const r = await closeCreateTask({
         lead_id: ctx.lead_id,

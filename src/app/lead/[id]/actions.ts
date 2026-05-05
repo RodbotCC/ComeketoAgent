@@ -180,7 +180,7 @@ export async function addPlanDayTouchAction(formData: FormData) {
   if (!intent) throw new Error("intent required");
 
   const ch: PlannedTouchpoint["channel"] =
-    channel === "email" || channel === "sms" || channel === "call" || channel === "task"
+    channel === "email" || channel === "sms" || channel === "task"
       ? channel
       : "task";
   const touch: PlannedTouchpoint = {
@@ -214,7 +214,7 @@ export async function editPlanDayTouchAction(formData: FormData) {
   if (!intent) throw new Error("intent required");
 
   const ch: PlannedTouchpoint["channel"] =
-    channel === "email" || channel === "sms" || channel === "call" || channel === "task"
+    channel === "email" || channel === "sms" || channel === "task"
       ? channel
       : "task";
   const touch: PlannedTouchpoint = {

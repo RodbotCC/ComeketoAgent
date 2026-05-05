@@ -41,7 +41,7 @@ const SAMPLE_PLAN: SevenDayPlan = {
       objective: "close the call",
       required_actions: [
         { channel: "sms", intent: "morning bump" },
-        { channel: "call", intent: "Andre dials" },
+        { channel: "task", intent: "Andre to call lead" },
       ],
       send_window: "all_day",
       approval_status: "not_ready",

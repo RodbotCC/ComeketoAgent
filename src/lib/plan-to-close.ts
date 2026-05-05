@@ -24,7 +24,7 @@ export type PlannedCloseAction =
       text: string;
       lead_id: string;
       // For preview rendering:
-      origin: { channel: "call" | "task"; intent: string };
+      origin: { channel: "task"; intent: string };
     }
   | {
       kind: "log_activity";
@@ -127,7 +127,7 @@ export function codegenPlanForClose(input: CodegenInput): CodegenResult {
       });
     } else {
       for (const req of day.required_actions) {
-        if (req.channel === "call" || req.channel === "task") {
+        if (req.channel === "task") {
           if (!andreUserId) {
             actions.push({
               kind: "skip",
@@ -143,7 +143,7 @@ export function codegenPlanForClose(input: CodegenInput): CodegenResult {
             due_date: date,
             due_window: day.send_window,
             assigned_to: andreUserId,
-            text: req.channel === "call" ? `📞 Call: ${req.intent}` : req.intent,
+            text: req.intent,
             lead_id: plan.close_lead_id,
             origin: { channel: req.channel, intent: req.intent },
           });

@@ -85,11 +85,10 @@ type Props = {
   };
 };
 
-const CHANNELS: PlanChannel[] = ["sms", "email", "call", "task"];
+const CHANNELS: PlanChannel[] = ["sms", "email", "task"];
 const CHANNEL_GLYPH: Record<PlanChannel, string> = {
   sms: "⌨",
   email: "✉",
-  call: "☎",
   task: "□",
 };
 const STATUS_LABEL: Record<ApprovalStatus, string> = {
