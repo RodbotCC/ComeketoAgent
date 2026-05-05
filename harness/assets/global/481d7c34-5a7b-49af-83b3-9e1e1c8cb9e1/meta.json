@@ -1,0 +1,17 @@
+{
+  "id": "481d7c34-5a7b-49af-83b3-9e1e1c8cb9e1",
+  "scope": "global",
+  "close_lead_id": null,
+  "title": "6b84d060-f353-4bea-9fc2-634d98b0c710.jpg",
+  "filename": "6b84d060-f353-4bea-9fc2-634d98b0c710.jpg",
+  "mime": "image/jpeg",
+  "byte_size": 459636,
+  "kind": "image",
+  "description": null,
+  "alt_text": null,
+  "approved_for_customer": true,
+  "source": "operator_upload",
+  "created_at": "2026-05-05T16:53:37.349Z",
+  "updated_at": "2026-05-05T16:53:37.349Z",
+  "storage_path": "harness/assets/global/481d7c34-5a7b-49af-83b3-9e1e1c8cb9e1/file.jpg"
+}
