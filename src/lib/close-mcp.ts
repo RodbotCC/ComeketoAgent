@@ -67,7 +67,13 @@ let requestCounter = 1;
 function authHeader(): string {
   const override = env.CLOSE_MCP_AUTH_HEADER.trim();
   if (override) return override;
-  if (env.CLOSE_API_KEY) return `Bearer ${env.CLOSE_API_KEY}`;
+  if (env.CLOSE_API_KEY) {
+    // Close MCP uses HTTP Basic auth with api_key as username + empty password
+    // (same scheme as Close REST). Bearer with the api_key returns 401
+    // "invalid_token". CLOSE_MCP_AUTH_HEADER override remains for OAuth flows.
+    const b64 = Buffer.from(`${env.CLOSE_API_KEY}:`).toString("base64");
+    return `Basic ${b64}`;
+  }
   return "";
 }
 
