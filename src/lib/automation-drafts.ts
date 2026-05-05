@@ -4,7 +4,7 @@
  */
 
 import { getSupabaseServer } from "./supabase";
-import type { Workflow } from "@/app/automation/AutomationCanvas";
+import type { Workflow } from "@/components/AutomationCanvas";
 
 export type AutomationDraftStatus =
   | "draft"

@@ -3,7 +3,7 @@
  * Keeps M2 honest: graph pixels reflect API-returned steps (read-only inspection v1).
  */
 
-import type { Workflow, WorkflowEdge, WorkflowNode, NodeRole } from "@/app/automation/AutomationCanvas";
+import type { Workflow, WorkflowEdge, WorkflowNode, NodeRole } from "@/components/AutomationCanvas";
 
 export type CloseStep = {
   id?: string;

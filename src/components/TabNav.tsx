@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { icons } from "./icons";
 
-type TabKey = "console" | "leads" | "analytics" | "automation" | "heartbeat" | "delegations" | "intake";
+type TabKey = "console" | "leads" | "analytics" | "heartbeat" | "delegations" | "intake";
 
 type Tab = {
   key: TabKey;
@@ -15,7 +15,6 @@ const TABS: Tab[] = [
   { key: "console",     label: "console",     icon: icons.analytics,   href: "/console" },
   { key: "leads",       label: "leads",       icon: icons.boxes,       href: "/leads" },
   { key: "analytics",   label: "analytics",   icon: icons.analytics,   href: "/analytics" },
-  { key: "automation",  label: "automation",  icon: icons.automation,  href: "/automation", dot: "sage" },
   { key: "heartbeat",   label: "heartbeat",   icon: icons.activity,    href: "/heartbeat" },
   { key: "intake",      label: "intake",      icon: icons.intake,       href: "/intake" },
   { key: "delegations", label: "delegations", icon: icons.delegations, href: "/chat" },

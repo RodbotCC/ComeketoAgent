@@ -67,8 +67,6 @@ export const config = {
     "/heartbeat",
     "/heartbeat/:path*",
     "/api/intake/:path*",
-    "/automation",
-    "/automation/:path*",
     "/console",
     "/console/:path*",
     "/chat",

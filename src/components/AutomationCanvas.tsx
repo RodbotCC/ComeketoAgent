@@ -184,11 +184,14 @@ function GraphNode({
   node,
   selected,
   pulse,
+  state,
   onSelect,
 }: {
   node: WorkflowNode;
   selected: boolean;
   pulse?: boolean;
+  /** Visual state overlay (e.g. dry-run verdict). */
+  state?: "fire" | "skip" | null;
   onSelect: (id: string) => void;
 }) {
   const off = endpointOffsets(node.role);
@@ -197,6 +200,7 @@ function GraphNode({
     <g
       className={"ag-node" + (selected ? " selected" : "") + (pulse ? " ag-node-pulse" : "")}
       data-role={node.role}
+      data-state={state ?? undefined}
       transform={`translate(${node.x} ${node.y})`}
       onClick={(e) => { e.stopPropagation(); onSelect(node.id); }}
       style={{ cursor: "pointer" }}
@@ -270,6 +274,7 @@ export const AutomationCanvas = forwardRef(function AutomationCanvas(
     readOnly = false,
     pulseNodeId = null,
     externalInspector = false,
+    nodeStates,
     onSelectionChange,
   }: {
     workflow: Workflow;
@@ -279,6 +284,8 @@ export const AutomationCanvas = forwardRef(function AutomationCanvas(
     pulseNodeId?: string | null;
     /** When true, hide the floating inspector (parent renders selection elsewhere). */
     externalInspector?: boolean;
+    /** Per-node visual state (e.g. dry-run verdicts: fire/skip). Map<node_id, state>. */
+    nodeStates?: Map<string, "fire" | "skip">;
     onSelectionChange?: (node: WorkflowNode | null) => void;
   },
   ref: ForwardedRef<AutomationCanvasHandle>,
@@ -341,6 +348,7 @@ export const AutomationCanvas = forwardRef(function AutomationCanvas(
             node={n}
             selected={selected === n.id}
             pulse={pulseNodeId === n.id}
+            state={nodeStates?.get(n.id) ?? null}
             onSelect={readOnly ? () => {} : setSelected}
           />
         ))}

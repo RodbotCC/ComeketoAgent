@@ -6,7 +6,7 @@
 import OpenAI from "openai";
 import { env } from "./env";
 import { getSettings } from "./settings";
-import type { Workflow } from "@/app/automation/AutomationCanvas";
+import type { Workflow } from "@/components/AutomationCanvas";
 
 export type SequenceAiResult = {
   steps: Array<Record<string, unknown>>;

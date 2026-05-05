@@ -20,6 +20,8 @@ import { icons } from "@/components/icons";
 import { ContextMenu, type ContextMenuItem } from "@/components/ContextMenu";
 import { Modal } from "@/components/Modal";
 import { useToast } from "@/components/Toast";
+import { LeadPicker } from "./LeadPicker";
+import { PlanDayStrip } from "./PlanDayStrip";
 
 /* ============ TYPES ============ */
 
@@ -58,13 +60,22 @@ type ToolCall = {
 
 type PaneMode = "hidden" | "normal" | "wide";
 
+type ChatMode = "andre" | "lead";
+
 type ChatLayout = {
   rail: PaneMode;
   scope: PaneMode;
+  /** Andre = open chat (no lead context). Lead = chat is bound to one lead. */
+  mode: ChatMode;
+  /** When mode === "lead" and lead_id is set, the chat API receives it and the rails switch content. */
+  lead_id: string | null;
+  /** Display name cache so the active-lead header renders without a Close fetch. */
+  lead_name: string | null;
 };
 
-const DEFAULT_LAYOUT: ChatLayout = { rail: "normal", scope: "normal" };
-const LAYOUT_KEY = "cmk-chat-layout-v1";
+const DEFAULT_LAYOUT: ChatLayout = { rail: "normal", scope: "normal", mode: "andre", lead_id: null, lead_name: null };
+const LAYOUT_KEY = "cmk-chat-layout-v2";
+const LAYOUT_KEY_V1 = "cmk-chat-layout-v1";
 
 /* ============ PINBOARD ============
    The right In-Scope dock is a stack of pinned widgets — Andre's active work
@@ -172,6 +183,42 @@ function usePinboardCtx(): PinboardCtx {
   return ctx;
 }
 
+/** Client-side lead-name cache. Fetched once on mount via /api/leads/search.
+ *  Lets the pin renderer (and anywhere else that has a lead_id but no name)
+ *  show "Trailhead Catering Guild" instead of "lead_xxxxxxxxxxxxxxxxxxxxx".
+ */
+const LeadNamesContext = createContext<Map<string, string>>(new Map());
+
+function useLeadNamesProvider(): Map<string, string> {
+  const [names, setNames] = useState<Map<string, string>>(new Map());
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/leads/search?limit=200")
+      .then((r) => r.json())
+      .then((data) => {
+        if (cancelled || !data.ok) return;
+        const m = new Map<string, string>();
+        for (const l of data.leads as Array<{ id: string; display_name: string }>) {
+          if (l.id && l.display_name) m.set(l.id, l.display_name);
+        }
+        setNames(m);
+      })
+      .catch(() => {
+        /* defensive — no names is acceptable, falls back to lead_xxx */
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+  return names;
+}
+
+function useLeadName(id: string | null | undefined): string | null {
+  const names = useContext(LeadNamesContext);
+  if (!id) return null;
+  return names.get(id) ?? null;
+}
+
 /* ============ QUICK DELEGATIONS ============ */
 
 type QuickDelegation = {
@@ -230,6 +277,47 @@ const QUICK_DELEGATIONS: QuickDelegation[] = [
   },
 ];
 
+// Lead-mode quick prompts. The chat API receives the lead_id and prepends
+// the Box context so these prompts read naturally without naming the lead.
+const LEAD_QUICK_DELEGATIONS: QuickDelegation[] = [
+  {
+    id: "lead-state",
+    label: "What's the state",
+    hint: "Box, last comms, next move",
+    tone: "sage",
+    prompt:
+      "Give me the state of this lead in three lines: what we know, where we are in the cycle, " +
+      "and the single sharpest next move in NEPQ voice.",
+  },
+  {
+    id: "lead-todays-actions",
+    label: "Draft today's actions",
+    hint: "From the active plan",
+    tone: "lavender",
+    prompt:
+      "Look at the active plan for this lead and draft today's required actions (SMS / email / call task). " +
+      "Show me the drafts before firing anything.",
+  },
+  {
+    id: "lead-comms",
+    label: "Latest comms",
+    hint: "Inbound + outbound",
+    tone: "peach",
+    prompt:
+      "Pull the last 5 activities on this lead — emails, SMS, calls, notes — most recent first. " +
+      "Tell me what's likely on their mind right now.",
+  },
+  {
+    id: "lead-generate-plan",
+    label: "Generate / refine plan",
+    hint: "7-day cycle",
+    tone: "lemon",
+    prompt:
+      "Generate a 7-day plan for this lead in NEPQ voice. If a plan already exists, suggest the " +
+      "smallest refinement that would tighten it given the latest Box state.",
+  },
+];
+
 /* ============ HELPERS ============ */
 
 function newId() {
@@ -282,28 +370,52 @@ function useCopy() {
   );
 }
 
+type ToolGroup = {
+  status: "ok" | "recovered" | "failed";
+  calls: ToolCall[];
+};
+
+const TOOL_GROUPS_BLOCK = /^```cmk:tool-groups\n([\s\S]*?)\n```\n\n?/;
 const TOOL_BLOCK = /^```cmk:tools\n([\s\S]*?)\n```\n\n?/;
 const TRACE_BLOCK =
   /^```cmk:trace\n([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})\n```\n\n?/i;
 
-function parseToolTrace(content: string): { calls: ToolCall[]; rest: string } {
+function parseToolTrace(content: string): { groups: ToolGroup[]; rest: string } {
+  // Prefer the new grouped fence.
+  const gm = content.match(TOOL_GROUPS_BLOCK);
+  if (gm) {
+    try {
+      const groups = JSON.parse(gm[1]) as ToolGroup[];
+      return { groups, rest: content.slice(gm[0].length) };
+    } catch {
+      return { groups: [], rest: content };
+    }
+  }
+  // Backward-compat: messages persisted before grouping shipped use the
+  // legacy flat fence. Promote each call to a single-call group so they
+  // still render — recovered chains will look "broken" in old history,
+  // which matches what the user actually saw at the time.
   const m = content.match(TOOL_BLOCK);
-  if (!m) return { calls: [], rest: content };
+  if (!m) return { groups: [], rest: content };
   try {
     const calls = JSON.parse(m[1]) as ToolCall[];
-    return { calls, rest: content.slice(m[0].length) };
+    const groups: ToolGroup[] = calls.map((c) => ({
+      status: c.ok ? "ok" : "failed",
+      calls: [c],
+    }));
+    return { groups, rest: content.slice(m[0].length) };
   } catch {
-    return { calls: [], rest: content };
+    return { groups: [], rest: content };
   }
 }
 
-function parseAssistantPayload(content: string): { calls: ToolCall[]; traceId: string | null; rest: string } {
-  const { calls, rest: afterTools } = parseToolTrace(content);
+function parseAssistantPayload(content: string): { groups: ToolGroup[]; traceId: string | null; rest: string } {
+  const { groups, rest: afterTools } = parseToolTrace(content);
   const tm = afterTools.match(TRACE_BLOCK);
   if (tm) {
-    return { calls, traceId: tm[1], rest: afterTools.slice(tm[0].length) };
+    return { groups, traceId: tm[1], rest: afterTools.slice(tm[0].length) };
   }
-  return { calls, traceId: null, rest: afterTools };
+  return { groups, traceId: null, rest: afterTools };
 }
 
 /* ============ TOOL CATEGORIZATION ============ */
@@ -311,21 +423,124 @@ function parseAssistantPayload(content: string): { calls: ToolCall[]; traceId: s
 type ToolCategory = "read" | "list" | "generate" | "write";
 
 const TOOL_CATEGORY: Record<string, ToolCategory> = {
+  // Read — leads
   close_get_lead: "read",
   close_get_lead_full: "read",
-  close_get_workflow: "read",
-  close_get_sequence_subscription: "read",
   close_search_leads: "read",
+  close_list_leads: "list",
+  close_list_leads_by_assignee: "list",
+  close_list_leads_by_status_id: "list",
+  // Read — comms + history
+  close_list_activities: "list",
+  close_list_email_threads: "list",
+  close_list_sequence_subscriptions: "list",
+  close_get_sequence_subscription: "read",
+  // Read — config
   close_list_workflows: "list",
+  close_get_workflow: "read",
   close_list_email_templates: "list",
   close_list_sms_templates: "list",
   close_list_lead_statuses: "list",
   close_list_phone_numbers: "list",
-  generate_seven_day_plan: "generate",
-  close_enroll_in_workflow: "write",
+  close_list_webhook_subscriptions: "list",
+  // Write — lead state
+  close_create_lead: "write",
+  close_update_lead: "write",
   close_create_opportunity: "write",
-  close_update_sequence_subscription: "write",
+  // Write — outbound + tasks
+  close_create_task: "write",
+  close_log_email_activity: "write",
+  close_log_sms_activity: "write",
   close_log_internal_note: "write",
+  // Write — workflows
+  close_enroll_in_workflow: "write",
+  close_update_sequence_subscription: "write",
+  close_create_sequence: "write",
+  close_update_sequence: "write",
+  // Plan / briefing
+  generate_seven_day_plan: "generate",
+  pipeline_state_for_owner: "list",
+  // Composite (batch) tools — lib/composite-tools.ts
+  find_top_n_leads_for_owner: "list",
+  generate_plans_for_leads: "generate",
+  approve_and_fire_plans: "write",
+  // MCP wrappers — close_mcp_call category is computed dynamically (see categoryOf)
+  close_mcp_list_tools: "list",
+};
+
+/**
+ * MCP tool-name → ToolCategory. Lets close_mcp_call inherit a sensible
+ * category from the underlying MCP operation it's invoking. Default for
+ * unknown MCP tools is "write" (conservative — MCP escapes Guardrails
+ * gates so treating unknown as write keeps the visual signal honest).
+ */
+const MCP_TOOL_CATEGORY: Record<string, ToolCategory> = {
+  // mcp.read scope
+  activity_search: "list",
+  aggregation: "read",
+  get_fields: "list",
+  close_product_knowledge_search: "read",
+  fetch: "read",
+  fetch_lead: "read",
+  fetch_contact: "read",
+  fetch_opportunity: "read",
+  fetch_opportunity_status: "read",
+  fetch_pipeline_and_opportunity_statuses: "read",
+  fetch_lead_status: "read",
+  fetch_lead_smart_view: "read",
+  fetch_email_template: "read",
+  fetch_sms_template: "read",
+  lead_search: "read",
+  search: "read",
+  paginate_search: "read",
+  org_info: "read",
+  org_users: "list",
+  find_lead_statuses: "list",
+  find_lead_smart_views: "list",
+  find_lead_custom_fields: "list",
+  find_pipelines_and_opportunity_statuses: "list",
+  find_opportunities: "list",
+  find_email_templates: "list",
+  find_sms_templates: "list",
+  find_workflows: "list",
+  find_call_outcomes: "list",
+  find_meeting_outcomes: "list",
+  find_custom_activities: "list",
+  find_forms: "list",
+  find_groups: "list",
+  find_scheduling_links: "list",
+  find_agent_configs: "list",
+  // mcp.write_safe + mcp.write_destructive — all write
+  create_lead: "write",
+  create_contact: "write",
+  create_address: "write",
+  create_opportunity: "write",
+  create_opportunity_status_tool: "write",
+  create_pipeline: "write",
+  create_lead_status: "write",
+  create_task: "write",
+  create_email_template: "write",
+  create_sms_template: "write",
+  create_workflow: "write",
+  update_lead: "write",
+  update_contact: "write",
+  update_opportunity: "write",
+  update_opportunity_status_tool: "write",
+  update_lead_status: "write",
+  update_pipeline: "write",
+  update_lead_smart_view: "write",
+  update_email_template: "write",
+  update_sms_template: "write",
+  delete_lead: "write",
+  delete_contact: "write",
+  delete_address: "write",
+  delete_opportunity: "write",
+  delete_opportunity_status_tool: "write",
+  delete_pipeline: "write",
+  delete_lead_status: "write",
+  delete_lead_smart_view: "write",
+  delete_email_template: "write",
+  delete_sms_template: "write",
 };
 
 const CATEGORY_LABEL: Record<ToolCategory, string> = {
@@ -342,12 +557,25 @@ const CATEGORY_GLYPH: Record<ToolCategory, string> = {
   write: "↗",
 };
 
-function categoryOf(name: string): ToolCategory {
+function categoryOf(name: string, args?: Record<string, unknown>): ToolCategory {
+  // close_mcp_call categorizes by the underlying MCP tool it's invoking.
+  if (name === "close_mcp_call" && args && typeof args.tool_name === "string") {
+    return MCP_TOOL_CATEGORY[args.tool_name] ?? "write";
+  }
   return TOOL_CATEGORY[name] ?? "read";
 }
 
 function toolHeadline(call: ToolCall): string {
   const a = call.args ?? {};
+  // MCP wrapper: surface the actual MCP tool being invoked instead of the
+  // generic "close_mcp_call" name. The operator cares which MCP op fired.
+  if (call.name === "close_mcp_call") {
+    const tool = typeof a.tool_name === "string" ? a.tool_name : "(unknown)";
+    return `MCP · ${tool}`;
+  }
+  if (call.name === "close_mcp_list_tools") {
+    return "MCP · list tools";
+  }
   switch (call.name) {
     case "close_get_lead":
     case "close_get_lead_full":
@@ -370,6 +598,25 @@ function toolHeadline(call: ToolCall): string {
       return `Subscription ${typeof a.subscription_id === "string" ? a.subscription_id.slice(0, 12) + "…" : ""}`;
     case "generate_seven_day_plan":
       return `7-day plan · ${typeof a.lead_id === "string" ? a.lead_id.slice(0, 12) + "…" : "lead"}`;
+    case "find_top_n_leads_for_owner": {
+      const owner = typeof a.owner === "string" && a.owner ? a.owner : "andre";
+      const n = typeof a.n === "number" ? a.n : 5;
+      return `Top ${n} · ${owner}`;
+    }
+    case "generate_plans_for_leads": {
+      const ids = Array.isArray(a.lead_ids) ? a.lead_ids : [];
+      const horizon =
+        typeof a.horizon_days === "number" ? ` · ${a.horizon_days}d` : "";
+      return `Plans · ${ids.length} lead${ids.length === 1 ? "" : "s"}${horizon}`;
+    }
+    case "approve_and_fire_plans": {
+      const ids = Array.isArray(a.plan_ids) ? a.plan_ids : [];
+      return `Approve & fire · ${ids.length} plan${ids.length === 1 ? "" : "s"}`;
+    }
+    case "pipeline_state_for_owner": {
+      const owner = typeof a.owner === "string" && a.owner ? a.owner : "andre";
+      return `Morning briefing · ${owner}`;
+    }
     case "close_enroll_in_workflow":
       return "Enroll lead in workflow";
     case "close_create_opportunity":
@@ -502,6 +749,98 @@ function pinFromCall(call: ToolCall): Pin | null {
       data: { lead_id: call.lead_id, plan_id: str("plan_id") },
     };
   }
+  if (call.name === "pipeline_state_for_owner") {
+    const owner = str("owner") || "andre";
+    const today =
+      typeof parsed?.today_eligible === "number" ? (parsed.today_eligible as number) : 0;
+    const waiting =
+      typeof parsed?.waiting_count === "number" ? (parsed.waiting_count as number) : 0;
+    const fired =
+      typeof parsed?.fired_count === "number" ? (parsed.fired_count as number) : 0;
+    return {
+      id: "",
+      kind: "tool-result",
+      label: `Morning · ${owner}`,
+      sublabel: `${today} eligible · ${waiting} waiting · ${fired} fired`,
+      added_at: "",
+      collapsed: false,
+      data: {
+        tool_name: call.name,
+        summary_text: call.summary,
+      },
+    };
+  }
+  if (call.name === "find_top_n_leads_for_owner") {
+    const owner = str("owner") || "andre";
+    const leads = Array.isArray(parsed?.leads)
+      ? (parsed.leads as Array<Record<string, unknown>>)
+      : [];
+    const total =
+      typeof parsed?.total_in_pool === "number"
+        ? (parsed.total_in_pool as number)
+        : leads.length;
+    return {
+      id: "",
+      kind: "tool-result",
+      label: `Top ${leads.length} · ${owner}`,
+      sublabel: `${leads.length} of ${total} ${owner === "all" ? "" : owner} leads`,
+      added_at: "",
+      collapsed: false,
+      data: {
+        tool_name: call.name,
+        summary_text: call.summary,
+      },
+    };
+  }
+  if (call.name === "generate_plans_for_leads") {
+    const succeeded =
+      typeof parsed?.succeeded === "number" ? (parsed.succeeded as number) : 0;
+    const skipped =
+      typeof parsed?.skipped === "number" ? (parsed.skipped as number) : 0;
+    const failed =
+      typeof parsed?.failed === "number" ? (parsed.failed as number) : 0;
+    const requested =
+      typeof parsed?.requested === "number" ? (parsed.requested as number) : 0;
+    return {
+      id: "",
+      kind: "tool-result",
+      label: `Plans · ${succeeded}/${requested}`,
+      sublabel: `${succeeded} ok · ${skipped} skipped · ${failed} failed`,
+      added_at: "",
+      collapsed: false,
+      data: {
+        tool_name: call.name,
+        summary_text: call.summary,
+      },
+    };
+  }
+  if (call.name === "approve_and_fire_plans") {
+    const totals = (parsed?.totals as Record<string, unknown>) || {};
+    const fired =
+      typeof totals.actions_fired === "number"
+        ? (totals.actions_fired as number)
+        : 0;
+    const eligible =
+      typeof totals.actions_eligible === "number"
+        ? (totals.actions_eligible as number)
+        : 0;
+    const succeeded =
+      typeof parsed?.succeeded === "number" ? (parsed.succeeded as number) : 0;
+    const requested =
+      typeof parsed?.requested === "number" ? (parsed.requested as number) : 0;
+    return {
+      id: "",
+      kind: "tool-result",
+      label: `Approve & fire · ${succeeded}/${requested}`,
+      sublabel: `${fired}/${eligible} actions fired`,
+      added_at: "",
+      collapsed: false,
+      data: {
+        tool_name: call.name,
+        summary_text: call.summary,
+      },
+    };
+  }
   // Generic tool result pin for everything else.
   return {
     id: "",
@@ -527,8 +866,180 @@ function parseToolResult(call: ToolCall): Record<string, unknown> | null {
   }
 }
 
+/* ============ PIPELINE STATE WIDGET ============
+ * The morning-briefing tool's summary lives in the chat message body,
+ * which truncates at 600 chars. When example arrays + long lead names
+ * exceed the budget the JSON ends mid-array and JSON.parse fails. This
+ * widget always renders the KPI strip — full structured render when
+ * parse succeeds, counts-only via regex fallback when it doesn't. */
+
+type PipeRow = { lead_id?: string; name?: string; channel?: string; intent?: string; day?: number };
+type GatedRow = { code?: string; count?: number };
+type PipelineWidgetData = {
+  owner: string;
+  plans: number;
+  today: number;
+  waiting: number;
+  fired: number;
+  solo: boolean;
+  waitingTop: PipeRow[];
+  firedTop: PipeRow[];
+  gatedTop: GatedRow[];
+  /** True when the structured arrays got dropped by truncation. */
+  partial: boolean;
+};
+
+function numFromRe(text: string, re: RegExp): number | null {
+  const m = text.match(re);
+  if (!m) return null;
+  const n = Number(m[1]);
+  return Number.isFinite(n) ? n : null;
+}
+
+function parsePipelineSummary(call: ToolCall): PipelineWidgetData | null {
+  const summary = call.summary;
+  if (!summary) return null;
+  const stripped = summary.replace(/…$/, "");
+
+  // Full parse first — succeeds whenever the payload fit in the budget.
+  try {
+    const parsed = JSON.parse(stripped) as Record<string, unknown>;
+    return {
+      owner: (parsed.owner as string) || "andre",
+      plans: typeof parsed.plans_active === "number" ? (parsed.plans_active as number) : 0,
+      today: typeof parsed.today_eligible === "number" ? (parsed.today_eligible as number) : 0,
+      waiting: typeof parsed.waiting_count === "number" ? (parsed.waiting_count as number) : 0,
+      fired: typeof parsed.fired_count === "number" ? (parsed.fired_count as number) : 0,
+      solo: Boolean(parsed.solo_mode),
+      waitingTop: Array.isArray(parsed.waiting_top) ? (parsed.waiting_top as PipeRow[]) : [],
+      firedTop: Array.isArray(parsed.fired_top) ? (parsed.fired_top as PipeRow[]) : [],
+      gatedTop: Array.isArray(parsed.gated_top) ? (parsed.gated_top as GatedRow[]) : [],
+      partial: false,
+    };
+  } catch {
+    /* fall through to regex extraction */
+  }
+
+  // Regex fallback — counts live at the head of the JSON (server emits them
+  // before the example arrays in object-key order), so truncation past the
+  // arrays still leaves the count fields intact at the start of the string.
+  const ownerMatch = summary.match(/"owner"\s*:\s*"([^"]+)"/);
+  const owner = ownerMatch ? ownerMatch[1] : "andre";
+  const solo = /"solo_mode"\s*:\s*true/.test(summary);
+  const plans = numFromRe(summary, /"plans_active"\s*:\s*(\d+)/);
+  const today = numFromRe(summary, /"today_eligible"\s*:\s*(\d+)/);
+  const waiting = numFromRe(summary, /"waiting_count"\s*:\s*(\d+)/);
+  const fired = numFromRe(summary, /"fired_count"\s*:\s*(\d+)/);
+
+  if (plans === null && today === null && waiting === null && fired === null) {
+    return null;
+  }
+  return {
+    owner,
+    plans: plans ?? 0,
+    today: today ?? 0,
+    waiting: waiting ?? 0,
+    fired: fired ?? 0,
+    solo,
+    waitingTop: [],
+    firedTop: [],
+    gatedTop: [],
+    partial: true,
+  };
+}
+
+function PipelineRow({ row, fired }: { row: PipeRow; fired?: boolean }) {
+  const inner = (
+    <>
+      <span className="cmk-rich-pipeline-row-name">{row.name || "—"}</span>
+      <span className="cmk-rich-pipeline-row-ch">{row.channel || "—"}</span>
+      <span className="cmk-rich-pipeline-row-i">{row.intent || ""}</span>
+    </>
+  );
+  const cls = fired
+    ? "cmk-rich-pipeline-row cmk-rich-pipeline-row-fired"
+    : "cmk-rich-pipeline-row";
+  return row.lead_id ? (
+    <Link href={`/lead/${row.lead_id}`} className={cls}>
+      {inner}
+    </Link>
+  ) : (
+    <div className={cls}>{inner}</div>
+  );
+}
+
+function PipelineStateWidget({ call }: { call: ToolCall }) {
+  const data = parsePipelineSummary(call);
+  if (!data) return null;
+  return (
+    <div className="cmk-rich-pipeline">
+      <div className="cmk-rich-pipeline-head">
+        <div className="cmk-rich-pipeline-owner">Morning · {data.owner}</div>
+        {data.solo && <span className="cmk-rich-pipeline-mode">solo mode</span>}
+      </div>
+      <div className="cmk-rich-pipeline-kpis">
+        <div className="cmk-rich-pipeline-kpi cmk-rich-pipeline-kpi-today">
+          <div className="cmk-rich-pipeline-kpi-n">{data.today}</div>
+          <div className="cmk-rich-pipeline-kpi-l">today eligible</div>
+        </div>
+        <div className="cmk-rich-pipeline-kpi cmk-rich-pipeline-kpi-waiting">
+          <div className="cmk-rich-pipeline-kpi-n">{data.waiting}</div>
+          <div className="cmk-rich-pipeline-kpi-l">waiting on you</div>
+        </div>
+        <div className="cmk-rich-pipeline-kpi cmk-rich-pipeline-kpi-fired">
+          <div className="cmk-rich-pipeline-kpi-n">{data.fired}</div>
+          <div className="cmk-rich-pipeline-kpi-l">fired 24h</div>
+        </div>
+        <div className="cmk-rich-pipeline-kpi">
+          <div className="cmk-rich-pipeline-kpi-n">{data.plans}</div>
+          <div className="cmk-rich-pipeline-kpi-l">active plans</div>
+        </div>
+      </div>
+      {data.waitingTop.length > 0 && (
+        <div className="cmk-rich-pipeline-section">
+          <div className="cme-eyebrow">Waiting on you</div>
+          {data.waitingTop.map((w, i) => (
+            <PipelineRow key={i} row={w} />
+          ))}
+        </div>
+      )}
+      {data.firedTop.length > 0 && (
+        <div className="cmk-rich-pipeline-section">
+          <div className="cme-eyebrow">Fired in last 24h</div>
+          {data.firedTop.map((f, i) => (
+            <PipelineRow key={i} row={f} fired />
+          ))}
+        </div>
+      )}
+      {data.gatedTop.length > 0 && (
+        <div className="cmk-rich-pipeline-section">
+          <div className="cme-eyebrow">Top skip codes</div>
+          <div className="cmk-rich-pipeline-gated">
+            {data.gatedTop.map((g, i) => (
+              <span key={i} className="cmk-rich-pipeline-gated-pill">
+                <span className="cmk-rich-pipeline-gated-code">{g.code || "—"}</span>
+                <span className="cmk-rich-pipeline-gated-n">{g.count ?? 0}</span>
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+      {data.partial && (
+        <div className="cmk-rich-pipeline-partial">
+          Lists truncated — counts above are reliable. See raw payload below for full data.
+        </div>
+      )}
+    </div>
+  );
+}
+
 /** Renders a tool call's result as a structured widget when we know the shape. */
 function RichToolResult({ call }: { call: ToolCall }) {
+  // Pipeline state owns its own parser so it can render counts-only when the
+  // 600-char summary truncation drops the structured arrays mid-string.
+  if (call.name === "pipeline_state_for_owner") {
+    return <PipelineStateWidget call={call} />;
+  }
   const parsed = parseToolResult(call) as Record<string, unknown> | null;
   if (!parsed) return null;
 
@@ -613,6 +1124,362 @@ function RichToolResult({ call }: { call: ToolCall }) {
     );
   }
 
+  // ── Composite tool widgets (lib/composite-tools.ts) ────────────────────
+
+  if (call.name === "find_top_n_leads_for_owner") {
+    type ToplistLead = {
+      id?: string;
+      display_name?: string;
+      status_label?: string;
+      status_id?: string;
+      date_updated?: string;
+    };
+    const owner = (parsed.owner as string) || "andre";
+    const sortBy = (parsed.sort_by as string) || "recent_update";
+    const total =
+      typeof parsed.total_in_pool === "number" ? (parsed.total_in_pool as number) : 0;
+    const eligible =
+      typeof parsed.eligible_after_filter === "number"
+        ? (parsed.eligible_after_filter as number)
+        : 0;
+    const leads = (parsed.leads as ToplistLead[]) || [];
+    return (
+      <div className="cmk-rich-toplist">
+        <div className="cmk-rich-toplist-head">
+          <div className="cmk-rich-toplist-title">
+            Top {leads.length} · {owner}
+          </div>
+          <div className="cmk-rich-toplist-meta">
+            <span className="cmk-rich-toplist-sort">
+              {sortBy === "recent_update" ? "newest first" : "oldest first"}
+            </span>
+            <span className="cmk-rich-toplist-pool">
+              {eligible} eligible of {total}
+            </span>
+          </div>
+        </div>
+        {leads.length > 0 ? (
+          <div className="cmk-rich-toplist-rows">
+            {leads.map((l, i) =>
+              l.id ? (
+                <Link
+                  key={i}
+                  href={`/lead/${l.id}`}
+                  className="cmk-rich-toplist-row"
+                >
+                  <span className="cmk-rich-toplist-rank">{i + 1}</span>
+                  <span className="cmk-rich-toplist-name">
+                    {l.display_name || "(unnamed)"}
+                  </span>
+                  <span className="cmk-rich-toplist-status">
+                    {l.status_label || "—"}
+                  </span>
+                  <span className="cmk-rich-toplist-when">
+                    {l.date_updated ? relativeTime(l.date_updated) : ""}
+                  </span>
+                </Link>
+              ) : null
+            )}
+          </div>
+        ) : (
+          <div className="cmk-rich-toplist-empty">No leads matched.</div>
+        )}
+      </div>
+    );
+  }
+
+  if (call.name === "generate_plans_for_leads") {
+    type PlanResult = {
+      lead_id?: string;
+      ok?: boolean;
+      skipped?: boolean;
+      skip_code?: string;
+      lead_name?: string;
+      status_label?: string;
+      plan_id?: string;
+      primary_goal?: string;
+      goal_summary?: string;
+      best_next_question?: string;
+      day_count?: number;
+      error?: string;
+      reason?: string;
+    };
+    const requested =
+      typeof parsed.requested === "number" ? (parsed.requested as number) : 0;
+    const succeeded =
+      typeof parsed.succeeded === "number" ? (parsed.succeeded as number) : 0;
+    const skipped =
+      typeof parsed.skipped === "number" ? (parsed.skipped as number) : 0;
+    const failed =
+      typeof parsed.failed === "number" ? (parsed.failed as number) : 0;
+    const horizon = parsed.horizon_days as number | string | undefined;
+    const traceId = (parsed.trace_id as string) || "";
+    const results = (parsed.results as PlanResult[]) || [];
+    return (
+      <div className="cmk-rich-batch-plans">
+        <div className="cmk-rich-batch-head">
+          <div className="cmk-rich-batch-title">
+            Plans · {succeeded}/{requested} generated
+          </div>
+          <div className="cmk-rich-batch-meta">
+            {skipped > 0 && (
+              <span className="cmk-rich-batch-pill cmk-rich-batch-pill-skip">
+                {skipped} skipped
+              </span>
+            )}
+            {failed > 0 && (
+              <span className="cmk-rich-batch-pill cmk-rich-batch-pill-fail">
+                {failed} failed
+              </span>
+            )}
+            {horizon !== undefined && (
+              <span className="cmk-rich-batch-horizon">
+                {typeof horizon === "number" ? `${horizon}-day` : `${horizon} horizon`}
+              </span>
+            )}
+            {traceId && (
+              <Link
+                href={`/console?trace=${traceId}`}
+                className="cmk-rich-batch-trace"
+                title={`Trace ${traceId}`}
+              >
+                trace ↗
+              </Link>
+            )}
+          </div>
+        </div>
+        <div className="cmk-rich-batch-rows">
+          {results.map((r, i) => {
+            const head = (
+              <div className="cmk-rich-batch-plan-head">
+                <span className="cmk-rich-batch-plan-name">
+                  {r.lead_name || r.lead_id?.slice(0, 12) || "(lead)"}
+                </span>
+                {r.ok ? (
+                  <span className="cmk-rich-batch-plan-tag cmk-rich-batch-plan-tag-ok">
+                    plan ready
+                  </span>
+                ) : r.skipped ? (
+                  <span className="cmk-rich-batch-plan-tag cmk-rich-batch-plan-tag-skip">
+                    {r.skip_code || "skipped"}
+                  </span>
+                ) : (
+                  <span className="cmk-rich-batch-plan-tag cmk-rich-batch-plan-tag-fail">
+                    error
+                  </span>
+                )}
+              </div>
+            );
+            const body =
+              r.ok ? (
+                <>
+                  {r.primary_goal && (
+                    <div className="cmk-rich-batch-plan-goal">
+                      <span className="cme-eyebrow">Goal</span>
+                      <span className="cmk-rich-batch-plan-goal-body">{r.primary_goal}</span>
+                    </div>
+                  )}
+                  {r.best_next_question && (
+                    <div className="cmk-rich-batch-plan-q">
+                      <span className="cme-eyebrow">Best next question</span>
+                      <span className="cmk-rich-batch-plan-q-body">
+                        {r.best_next_question}
+                      </span>
+                    </div>
+                  )}
+                  {r.day_count !== undefined && (
+                    <div className="cmk-rich-batch-plan-days-line">
+                      {r.day_count}-day cycle
+                    </div>
+                  )}
+                </>
+              ) : r.skipped ? (
+                <div className="cmk-rich-batch-plan-reason">
+                  {r.reason ||
+                    (r.skip_code === "OWNERSHIP"
+                      ? "Not Andre-owned."
+                      : r.skip_code?.startsWith("STATUS_")
+                      ? `Status is ${r.status_label || r.skip_code}.`
+                      : `Gate: ${r.skip_code || "skipped"}.`)}
+                </div>
+              ) : (
+                <div className="cmk-rich-batch-plan-reason cmk-rich-batch-plan-reason-fail">
+                  {r.error || "Unknown error."}
+                </div>
+              );
+            return r.lead_id ? (
+              <Link
+                key={i}
+                href={`/lead/${r.lead_id}`}
+                className="cmk-rich-batch-plan-row"
+              >
+                {head}
+                <div className="cmk-rich-batch-plan-body">{body}</div>
+              </Link>
+            ) : (
+              <div key={i} className="cmk-rich-batch-plan-row">
+                {head}
+                <div className="cmk-rich-batch-plan-body">{body}</div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
+
+  if (call.name === "approve_and_fire_plans") {
+    type FireReport = {
+      plan_id?: string;
+      close_lead_id?: string;
+      ok?: boolean;
+      approved_days?: number;
+      skipped_voice?: number;
+      execution_mode?: string;
+      actions_eligible?: number;
+      actions_fired?: number;
+      actions_skipped?: number;
+      snapshot_match?: boolean;
+      snapshot_was_stale?: boolean;
+      skip_breakdown?: Record<string, number>;
+      error?: string;
+    };
+    const requested =
+      typeof parsed.requested === "number" ? (parsed.requested as number) : 0;
+    const succeeded =
+      typeof parsed.succeeded === "number" ? (parsed.succeeded as number) : 0;
+    const failed =
+      typeof parsed.failed === "number" ? (parsed.failed as number) : 0;
+    const mode = (parsed.execution_mode as string) || "draft_only";
+    const totals = (parsed.totals as Record<string, unknown>) || {};
+    const totalApproved = Number(totals.approved_days ?? 0);
+    const totalEligible = Number(totals.actions_eligible ?? 0);
+    const totalFired = Number(totals.actions_fired ?? 0);
+    const totalSkipped = Number(totals.actions_skipped ?? 0);
+    const traceId = (parsed.trace_id as string) || "";
+    const reports = (parsed.reports as FireReport[]) || [];
+    return (
+      <div className="cmk-rich-batch-fire">
+        <div className="cmk-rich-batch-head">
+          <div className="cmk-rich-batch-title">
+            Fired · {succeeded}/{requested} plans
+          </div>
+          <div className="cmk-rich-batch-meta">
+            <span className="cmk-rich-batch-mode">{mode}</span>
+            {failed > 0 && (
+              <span className="cmk-rich-batch-pill cmk-rich-batch-pill-fail">
+                {failed} failed
+              </span>
+            )}
+            {traceId && (
+              <Link
+                href={`/console?trace=${traceId}`}
+                className="cmk-rich-batch-trace"
+                title={`Trace ${traceId}`}
+              >
+                trace ↗
+              </Link>
+            )}
+          </div>
+        </div>
+        <div className="cmk-rich-batch-totals">
+          <div className="cmk-rich-batch-total cmk-rich-batch-total-approved">
+            <div className="cmk-rich-batch-total-n">{totalApproved}</div>
+            <div className="cmk-rich-batch-total-l">days approved</div>
+          </div>
+          <div className="cmk-rich-batch-total cmk-rich-batch-total-eligible">
+            <div className="cmk-rich-batch-total-n">{totalEligible}</div>
+            <div className="cmk-rich-batch-total-l">actions eligible</div>
+          </div>
+          <div className="cmk-rich-batch-total cmk-rich-batch-total-fired">
+            <div className="cmk-rich-batch-total-n">{totalFired}</div>
+            <div className="cmk-rich-batch-total-l">fired</div>
+          </div>
+          <div className="cmk-rich-batch-total cmk-rich-batch-total-skipped">
+            <div className="cmk-rich-batch-total-n">{totalSkipped}</div>
+            <div className="cmk-rich-batch-total-l">gated</div>
+          </div>
+        </div>
+        <div className="cmk-rich-batch-rows">
+          {reports.map((r, i) => {
+            const skipPills = r.skip_breakdown
+              ? Object.entries(r.skip_breakdown)
+                  .filter(([, n]) => Number(n) > 0)
+                  .sort((a, b) => Number(b[1]) - Number(a[1]))
+                  .slice(0, 4)
+              : [];
+            const head = (
+              <div className="cmk-rich-batch-fire-head">
+                <span className="cmk-rich-batch-fire-name">
+                  {r.close_lead_id?.slice(0, 14) || r.plan_id?.slice(0, 12) || "(plan)"}
+                </span>
+                {r.ok ? (
+                  <span className="cmk-rich-batch-fire-counts">
+                    <span className="cmk-rich-batch-fire-fired">
+                      {r.actions_fired ?? 0}
+                    </span>
+                    <span className="cmk-rich-batch-fire-sep">/</span>
+                    <span className="cmk-rich-batch-fire-eligible">
+                      {r.actions_eligible ?? 0}
+                    </span>
+                  </span>
+                ) : (
+                  <span className="cmk-rich-batch-plan-tag cmk-rich-batch-plan-tag-fail">
+                    error
+                  </span>
+                )}
+              </div>
+            );
+            const body = r.ok ? (
+              <div className="cmk-rich-batch-fire-meta">
+                {r.approved_days !== undefined && (
+                  <span>{r.approved_days} approved</span>
+                )}
+                {(r.skipped_voice ?? 0) > 0 && (
+                  <span className="cmk-rich-batch-fire-voice">
+                    {r.skipped_voice} voice-blocked
+                  </span>
+                )}
+                {r.snapshot_was_stale && (
+                  <span className="cmk-rich-batch-fire-stale">stale Box</span>
+                )}
+                {skipPills.length > 0 && (
+                  <span className="cmk-rich-batch-fire-skips">
+                    {skipPills.map(([code, n]) => (
+                      <span key={code} className="cmk-rich-pipeline-gated-pill">
+                        <span className="cmk-rich-pipeline-gated-code">{code}</span>
+                        <span className="cmk-rich-pipeline-gated-n">{Number(n)}</span>
+                      </span>
+                    ))}
+                  </span>
+                )}
+              </div>
+            ) : (
+              <div className="cmk-rich-batch-plan-reason cmk-rich-batch-plan-reason-fail">
+                {r.error || "Unknown error."}
+              </div>
+            );
+            return r.close_lead_id ? (
+              <Link
+                key={i}
+                href={`/lead/${r.close_lead_id}`}
+                className="cmk-rich-batch-fire-row"
+              >
+                {head}
+                {body}
+              </Link>
+            ) : (
+              <div key={i} className="cmk-rich-batch-fire-row">
+                {head}
+                {body}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
+
   return null;
 }
 
@@ -621,7 +1488,7 @@ function ToolPanel({ call, index }: { call: ToolCall; index: number }) {
   const copy = useCopy();
   const toast = useToast();
   const { addPin } = usePinboardCtx();
-  const cat = categoryOf(call.name);
+  const cat = categoryOf(call.name, call.args);
   const headline = toolHeadline(call);
   const ok = call.ok;
   const summaryText = call.summary ?? "";
@@ -776,14 +1643,84 @@ function RunTraceBar({ traceId }: { traceId: string }) {
   );
 }
 
-function ToolTrace({ calls, traceId }: { calls: ToolCall[]; traceId?: string | null }) {
-  if (calls.length === 0 && !traceId) return null;
+function ToolTrace({ groups, traceId }: { groups: ToolGroup[]; traceId?: string | null }) {
+  if (groups.length === 0 && !traceId) return null;
   return (
     <div className="cmk-tp-stack">
-      {calls.map((c, i) => (
-        <ToolPanel key={i} call={c} index={i} />
+      {groups.map((g, i) => (
+        <ToolGroupPanel key={i} group={g} index={i} />
       ))}
       {traceId ? <RunTraceBar traceId={traceId} /> : null}
+    </div>
+  );
+}
+
+/**
+ * Render one intent group. Three shapes:
+ *  - "ok" with a single call → render as today (no extra chrome).
+ *  - "recovered" → outer card with a calm "ok via MCP fallback" pill, the
+ *    final successful panel inline, and the prior failed attempts behind
+ *    a collapsible "▸ N attempts" footer.
+ *  - "failed" → outer card with a red pill; all calls visible by default
+ *    so the operator can see what was tried.
+ */
+function ToolGroupPanel({ group, index }: { group: ToolGroup; index: number }) {
+  const [expanded, setExpanded] = useState(group.status === "failed");
+
+  // Single-success groups render exactly as before — no group chrome.
+  if (group.status === "ok" && group.calls.length === 1) {
+    return <ToolPanel call={group.calls[0]} index={index} />;
+  }
+
+  if (group.status === "recovered") {
+    const final = group.calls[group.calls.length - 1];
+    const attempts = group.calls.slice(0, -1);
+    return (
+      <div className="cmk-tp-group cmk-tp-group-recovered">
+        <div className="cmk-tp-group-head">
+          <span className="cmk-tp-status cmk-tp-status-recovered">
+            ok after retry
+          </span>
+          <span className="cmk-tp-group-sub">
+            {attempts.length} earlier attempt{attempts.length === 1 ? "" : "s"} failed first
+          </span>
+        </div>
+        <ToolPanel call={final} index={index} />
+        <button
+          type="button"
+          className="cmk-tp-group-attempts-toggle"
+          onClick={() => setExpanded((v) => !v)}
+          aria-expanded={expanded}
+        >
+          {expanded ? "▾" : "▸"} {attempts.length} prior attempt{attempts.length === 1 ? "" : "s"}
+        </button>
+        {expanded && (
+          <div className="cmk-tp-group-attempts">
+            {attempts.map((c, i) => (
+              <ToolPanel key={i} call={c} index={index + i + 1} />
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  // status === "failed" with one or more calls
+  return (
+    <div className="cmk-tp-group cmk-tp-group-failed">
+      <div className="cmk-tp-group-head">
+        <span className="cmk-tp-status cmk-tp-status-fail">
+          failed
+        </span>
+        <span className="cmk-tp-group-sub">
+          {group.calls.length} attempt{group.calls.length === 1 ? "" : "s"} — none recovered
+        </span>
+      </div>
+      <div className="cmk-tp-group-attempts">
+        {group.calls.map((c, i) => (
+          <ToolPanel key={i} call={c} index={index + i} />
+        ))}
+      </div>
     </div>
   );
 }
@@ -854,7 +1791,11 @@ function UserMessage({ message }: { message: Message }) {
 
 function AssistantMessage({ message }: { message: Message }) {
   const copy = useCopy();
-  const { calls, traceId, rest } = useMemo(() => parseAssistantPayload(message.content), [message.content]);
+  const { groups, traceId, rest } = useMemo(() => parseAssistantPayload(message.content), [message.content]);
+  const totalCalls = useMemo(
+    () => groups.reduce((n, g) => n + g.calls.length, 0),
+    [groups]
+  );
   const plainText = useMemo(() => {
     return rest.replace(/```[\s\S]*?```/g, (block) => block.replace(/```[a-z:]*\n?|\n?```/g, ""))
       .replace(/[*_`]/g, "")
@@ -864,17 +1805,17 @@ function AssistantMessage({ message }: { message: Message }) {
     { kind: "label", text: "ASSISTANT" },
     { kind: "item", label: "Copy plain text", onSelect: () => copy(plainText, "Reply copied") },
     { kind: "item", label: "Copy markdown source", onSelect: () => copy(rest, "Markdown copied") },
-    ...(calls.length > 0
+    ...(totalCalls > 0
       ? ([
           { kind: "divider" },
-          { kind: "label", text: `${calls.length} TOOL CALL${calls.length === 1 ? "" : "S"}` },
+          { kind: "label", text: `${totalCalls} TOOL CALL${totalCalls === 1 ? "" : "S"}` },
         ] as ContextMenuItem[])
       : []),
   ];
   return (
     <ContextMenu items={items}>
       <div className="chat-msg-text">
-        <ToolTrace calls={calls} traceId={traceId} />
+        <ToolTrace groups={groups} traceId={traceId} />
         <MarkdownBody source={rest} />
       </div>
     </ContextMenu>
@@ -1037,7 +1978,7 @@ function ScopeDock({
                   <div className="cmk-pin-head" onClick={() => onToggle(pin.id)} role="button" tabIndex={0}>
                     <span className="cmk-pin-kind">{pinKindGlyph(pin.kind)}</span>
                     <div className="cmk-pin-title-wrap">
-                      <div className="cmk-pin-title">{pin.label}</div>
+                      <PinTitle pin={pin} />
                       {pin.sublabel && <div className="cmk-pin-sub">{pin.sublabel}</div>}
                     </div>
                     <button
@@ -1077,6 +2018,20 @@ function pinKindGlyph(kind: PinKind): string {
   }
 }
 
+/**
+ * Pin headline that prefers the live lead-name cache over whatever was
+ * captured at pin-creation time. Auto-pinned leads from list/search calls
+ * never knew their display name; the cache fills it in at render time.
+ */
+function PinTitle({ pin }: { pin: Pin }) {
+  const cached = useLeadName(pin.kind === "lead" ? pin.data.lead_id : null);
+  const display =
+    pin.kind === "lead"
+      ? pin.data.display_name || cached || pin.label
+      : pin.label;
+  return <div className="cmk-pin-title">{display}</div>;
+}
+
 function PinBody({ pin }: { pin: Pin }) {
   if (pin.kind === "lead") {
     return (
@@ -1085,12 +2040,6 @@ function PinBody({ pin }: { pin: Pin }) {
           <div className="cmk-pin-row">
             <span className="cmk-pin-k">status</span>
             <span className="cmk-pin-v">{pin.data.status_label}</span>
-          </div>
-        )}
-        {pin.data.lead_id && (
-          <div className="cmk-pin-row" title={pin.data.lead_id}>
-            <span className="cmk-pin-k">id</span>
-            <span className="cmk-pin-v cmk-pin-id">{pin.data.lead_id.slice(0, 12)}…</span>
           </div>
         )}
         {pin.data.lead_id && (
@@ -1199,13 +2148,33 @@ function useChatLayout() {
 
   useEffect(() => {
     try {
+      // Try v2 first (current shape).
       const raw = window.localStorage.getItem(LAYOUT_KEY);
       if (raw) {
         const parsed = JSON.parse(raw) as Partial<ChatLayout>;
         setLayout({
           rail: parsed.rail ?? DEFAULT_LAYOUT.rail,
           scope: parsed.scope ?? DEFAULT_LAYOUT.scope,
+          mode: parsed.mode ?? DEFAULT_LAYOUT.mode,
+          lead_id: parsed.lead_id ?? DEFAULT_LAYOUT.lead_id,
+          lead_name: parsed.lead_name ?? DEFAULT_LAYOUT.lead_name,
         });
+      } else {
+        // Migrate v1 → v2 if present.
+        const v1 = window.localStorage.getItem(LAYOUT_KEY_V1);
+        if (v1) {
+          try {
+            const old = JSON.parse(v1) as { rail?: PaneMode; scope?: PaneMode };
+            setLayout({
+              ...DEFAULT_LAYOUT,
+              rail: old.rail ?? DEFAULT_LAYOUT.rail,
+              scope: old.scope ?? DEFAULT_LAYOUT.scope,
+            });
+          } catch {
+            /* ignore */
+          }
+          window.localStorage.removeItem(LAYOUT_KEY_V1);
+        }
       }
     } catch {
       /* ignore */
@@ -1222,21 +2191,30 @@ function useChatLayout() {
     }
   }, [layout, hydrated]);
 
-  const cycle = useCallback((pane: keyof ChatLayout) => {
+  // Pane-mode setters operate only on the rail/scope keys.
+  type PaneKey = "rail" | "scope";
+  const cycle = useCallback((pane: PaneKey) => {
     setLayout((prev) => {
       const cur = prev[pane];
       const next: PaneMode = cur === "normal" ? "wide" : cur === "wide" ? "normal" : "normal";
       return { ...prev, [pane]: next };
     });
   }, []);
-  const hide = useCallback((pane: keyof ChatLayout) => {
+  const hide = useCallback((pane: PaneKey) => {
     setLayout((prev) => ({ ...prev, [pane]: "hidden" }));
   }, []);
-  const show = useCallback((pane: keyof ChatLayout) => {
+  const show = useCallback((pane: PaneKey) => {
     setLayout((prev) => ({ ...prev, [pane]: "normal" }));
   }, []);
 
-  return { layout, cycle, hide, show };
+  const setMode = useCallback((mode: ChatMode) => {
+    setLayout((prev) => ({ ...prev, mode }));
+  }, []);
+  const setLead = useCallback((leadId: string | null, leadName: string | null) => {
+    setLayout((prev) => ({ ...prev, lead_id: leadId, lead_name: leadName }));
+  }, []);
+
+  return { layout, cycle, hide, show, setMode, setLead };
 }
 
 function gridTemplate(rail: PaneMode, scope: PaneMode): string {
@@ -1264,8 +2242,6 @@ export function ChatLayout() {
   const [pending, setPending] = useState<PendingAttachment[]>([]);
   const [loading, setLoading] = useState(false);
   /** Long OpenAI background response — no Close tools that turn. */
-  const [deepThink, setDeepThink] = useState(false);
-  const [thinkingDeep, setThinkingDeep] = useState(false);
   const [threadsLoading, setThreadsLoading] = useState(true);
   const [activeQuickId, setActiveQuickId] = useState<string | null>(null);
   const [lastDelegation, setLastDelegation] = useState<QuickDelegation | null>(null);
@@ -1280,8 +2256,9 @@ export function ChatLayout() {
   const fileRef = useRef<HTMLInputElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
-  const { layout, cycle, hide, show } = useChatLayout();
+  const { layout, cycle, hide, show, setMode, setLead } = useChatLayout();
   const { pins, addPin, removePin, togglePin, clearPins } = usePinboard();
+  const leadNames = useLeadNamesProvider();
   const toast = useToast();
   const copy = useCopy();
 
@@ -1366,7 +2343,8 @@ export function ChatLayout() {
     for (let i = messages.length - 1; i >= 0; i--) {
       const m = messages[i];
       if (m.role !== "assistant") continue;
-      const { calls } = parseToolTrace(m.content);
+      const { groups } = parseToolTrace(m.content);
+      const calls = groups.flatMap((g) => g.calls);
       for (let j = calls.length - 1; j >= 0; j--) {
         const c = calls[j];
         if (!c.lead_id) continue;
@@ -1581,7 +2559,6 @@ export function ChatLayout() {
     const sentAttachments = pending.map(({ localId: _l, ...a }) => a);
     setPending([]);
     setLoading(true);
-    setThinkingDeep(deepThink);
 
     const ctrl = new AbortController();
     abortRef.current = ctrl;
@@ -1589,7 +2566,14 @@ export function ChatLayout() {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ thread_id: activeId, input: text, attachments: sentAttachments, deep_think: deepThink }),
+        body: JSON.stringify({
+          thread_id: activeId,
+          input: text,
+          attachments: sentAttachments,
+          // Lead-mode cockpit context — server prepends a Box summary to the
+          // system prompt so the agent stops re-discovering scope via tools.
+          lead_id: layout.mode === "lead" ? layout.lead_id ?? undefined : undefined,
+        }),
         signal: ctrl.signal,
       });
       const data = await res.json();
@@ -1612,6 +2596,42 @@ export function ChatLayout() {
         if (data.thread_id && data.thread_id !== activeId) setActiveId(data.thread_id);
         await refreshThreads();
         setSendSuccess((n) => n + 1);
+
+        // Cross-surface plan-state sync: if the agent fired any plan-mutating
+        // tool this turn, dispatch comeketo:plan-changed so the cockpit's
+        // PlanDayStrip + the /lead/[id]/graph view re-fetch instead of
+        // silently going stale (which would let the operator generate a
+        // duplicate plan from a UI showing 'no plan yet').
+        const toolGroups = (data.tools_used ?? []) as Array<{ calls?: Array<{ name?: string; args?: Record<string, unknown> }> }>;
+        const PLAN_MUTATING = new Set([
+          "generate_seven_day_plan",
+          "generate_plans_for_leads",
+          "approve_and_fire_plans",
+        ]);
+        const mutatedLeadIds = new Set<string>();
+        for (const g of toolGroups) {
+          for (const c of g.calls ?? []) {
+            if (!c.name) continue;
+            if (PLAN_MUTATING.has(c.name)) {
+              const arg = c.args ?? {};
+              const lid = typeof arg.lead_id === "string" ? arg.lead_id : null;
+              if (lid) mutatedLeadIds.add(lid);
+              const lids = Array.isArray(arg.lead_ids) ? arg.lead_ids : [];
+              for (const x of lids) if (typeof x === "string") mutatedLeadIds.add(x);
+            }
+          }
+        }
+        // Always dispatch (with the active lead_id if no per-call lead_id
+        // was extractable) so listeners can re-fetch even on day-refine /
+        // approve flows that don't carry an explicit lead_id arg.
+        if (mutatedLeadIds.size === 0 && layout.mode === "lead" && layout.lead_id) {
+          mutatedLeadIds.add(layout.lead_id);
+        }
+        for (const lid of mutatedLeadIds) {
+          window.dispatchEvent(
+            new CustomEvent("comeketo:plan-changed", { detail: { lead_id: lid } })
+          );
+        }
         if (typeof data.trace_id === "string" && data.trace_id.length > 8) {
           toast.push(`Run trace ${data.trace_id.slice(0, 8)}… — see bar above reply`, { tone: "success", ttl: 4200 });
         }
@@ -1663,7 +2683,6 @@ export function ChatLayout() {
       }
     } finally {
       setLoading(false);
-      setThinkingDeep(false);
       setActiveQuickId(null);
       abortRef.current = null;
     }
@@ -1808,6 +2827,18 @@ export function ChatLayout() {
         },
       },
       {
+        id: "morning",
+        keys: ["/morning", "/morn", "/brief"],
+        label: "/morning",
+        hint: "What's my morning? — pipeline_state_for_owner briefing",
+        run: () => {
+          void send(
+            "What's my morning? Call pipeline_state_for_owner({owner: \"andre\"}) and give me the briefing — " +
+              "lead with one sentence using the counts, then call out the names in waiting + fired."
+          );
+        },
+      },
+      {
         id: "rerun",
         keys: ["/rerun", "/again"],
         label: "/rerun",
@@ -1872,7 +2903,8 @@ export function ChatLayout() {
           for (let i = messages.length - 1; i >= 0; i--) {
             const m = messages[i];
             if (m.role !== "assistant") continue;
-            const { calls } = parseToolTrace(m.content);
+            const { groups } = parseToolTrace(m.content);
+            const calls = groups.flatMap((g) => g.calls);
             for (let j = calls.length - 1; j >= 0; j--) {
               const candidate = pinFromCall(calls[j]);
               if (candidate) {
@@ -1997,6 +3029,7 @@ export function ChatLayout() {
   const scopeNarrow = layout.scope !== "wide";
 
   return (
+    <LeadNamesContext.Provider value={leadNames}>
     <PinboardContext.Provider value={{ addPin }}>
     <div
       className="cmk-chat-grid"
@@ -2035,6 +3068,67 @@ export function ChatLayout() {
           </div>
 
           <div className="cmk-scroll scroll-hide" style={{ flex: 1, overflowY: "auto", padding: 8 }}>
+            {/* ── Cockpit mode toggle ─────────────────────────────────────── */}
+            <div className="cmk-mode-toggle" role="tablist" aria-label="Cockpit mode">
+              <button
+                type="button"
+                role="tab"
+                aria-selected={layout.mode === "andre"}
+                className={`cmk-mode-toggle-btn${layout.mode === "andre" ? " on" : ""}`}
+                onClick={() => setMode("andre")}
+                title="Open chat — no specific lead in scope"
+              >
+                Andre
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={layout.mode === "lead"}
+                className={`cmk-mode-toggle-btn${layout.mode === "lead" ? " on" : ""}`}
+                onClick={() => setMode("lead")}
+                title="Bind chat to one lead — agent receives the lead's Box context"
+              >
+                Lead{layout.lead_name ? ` · ${layout.lead_name.slice(0, 18)}` : ""}
+              </button>
+            </div>
+
+            {/* ── Lead mode: picker + lead-scoped quick prompts ───────────── */}
+            {layout.mode === "lead" && (
+              <div style={{ marginBottom: 8 }}>
+                <LeadPicker
+                  activeLeadId={layout.lead_id}
+                  activeLeadName={layout.lead_name}
+                  onPick={(id, name) => setLead(id, name)}
+                  onClear={() => setLead(null, null)}
+                />
+                {layout.lead_id && (
+                  <div className="cmk-quick-list" style={{ marginTop: 8 }}>
+                    {LEAD_QUICK_DELEGATIONS.map((q, qi) => {
+                      const isRunning = activeQuickId === q.id && loading;
+                      return (
+                        <button
+                          key={q.id}
+                          type="button"
+                          onClick={() => fireQuickDelegation(q)}
+                          className={`cmk-quick cmk-quick-${q.tone}${isRunning ? " cmk-quick-running" : ""}`}
+                          disabled={loading}
+                          title={q.prompt}
+                          style={{ animationDelay: `${qi * 50}ms` }}
+                        >
+                          <div className="cmk-quick-label">{q.label}</div>
+                          <div className="cmk-quick-hint">{isRunning ? "running…" : q.hint}</div>
+                          {isRunning && <span className="cmk-quick-flare" aria-hidden />}
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* ── Andre mode: original quick delegations + thread list ─────── */}
+            {layout.mode === "andre" && (
+            <>
             <div className="cmk-quick-list">
               {QUICK_DELEGATIONS.map((q, qi) => {
                 const isRunning = activeQuickId === q.id && loading;
@@ -2145,6 +3239,8 @@ export function ChatLayout() {
                 })}
               </>
             )}
+            </>
+            )}{/* end andre mode */}
           </div>
         </aside>
       )}
@@ -2193,7 +3289,7 @@ export function ChatLayout() {
                   <AssistantMessage key={msg.id} message={msg} />
                 )
               )}
-              {loading && <AnimatedThinking deep={thinkingDeep} />}
+              {loading && <AnimatedThinking />}
             </>
           )}
         </div>
@@ -2274,29 +3370,6 @@ export function ChatLayout() {
               </div>
             </div>
           )}
-          <label
-            className="cmk-deep-think-bar"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 8,
-              padding: "6px 14px 4px",
-              fontSize: 11,
-              color: "var(--ink-soft)",
-              cursor: loading ? "default" : "pointer",
-              userSelect: "none",
-            }}
-          >
-            <input
-              type="checkbox"
-              checked={deepThink}
-              onChange={(e) => setDeepThink(e.target.checked)}
-              disabled={loading}
-            />
-            <span>
-              Deep think — OpenAI <strong>background</strong> response (no Close tools this turn; can take a few minutes)
-            </span>
-          </label>
           <div style={{ display: "flex", alignItems: "center", gap: 9 }}>
             <input
               ref={fileRef}
@@ -2389,7 +3462,9 @@ export function ChatLayout() {
         <aside className="cmk-panel cmk-scope" style={{ display: "flex", flexDirection: "column", minHeight: 0 }}>
           <div className="cmk-panel-head">
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              <span className="cmk-eyebrow">In scope</span>
+              <span className="cmk-eyebrow">
+                {layout.mode === "lead" && layout.lead_id ? "Lead plan" : "In scope"}
+              </span>
               <span className="cmk-mode-pill">{layout.scope}</span>
             </div>
             <PaneControl
@@ -2398,16 +3473,29 @@ export function ChatLayout() {
               onHide={() => hide("scope")}
             />
           </div>
-          <ScopeDock
-            pins={pins}
-            onUnpin={removePin}
-            onToggle={togglePin}
-            onClearAll={clearPins}
-            narrow={scopeNarrow}
-          />
+          {layout.mode === "lead" && layout.lead_id ? (
+            <div className="cmk-scroll scroll-hide" style={{ flex: 1, overflowY: "auto", padding: 10 }}>
+              <PlanDayStrip leadId={layout.lead_id} leadName={layout.lead_name} />
+            </div>
+          ) : layout.mode === "lead" ? (
+            <div className="cmk-scope-empty" style={{ display: "flex", flexDirection: "column", height: "100%", minHeight: 0, padding: 16 }}>
+              <p className="muted" style={{ fontSize: 12, margin: 0 }}>
+                Pick a lead in the left rail to see its plan, day-strip, and last heartbeat here.
+              </p>
+            </div>
+          ) : (
+            <ScopeDock
+              pins={pins}
+              onUnpin={removePin}
+              onToggle={togglePin}
+              onClearAll={clearPins}
+              narrow={scopeNarrow}
+            />
+          )}
         </aside>
       )}
     </div>
     </PinboardContext.Provider>
+    </LeadNamesContext.Provider>
   );
 }
