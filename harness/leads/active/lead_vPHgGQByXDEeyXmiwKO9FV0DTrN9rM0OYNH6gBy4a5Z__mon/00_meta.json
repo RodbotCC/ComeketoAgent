@@ -1,0 +1,30 @@
+{
+  "contact_id": "cont_sRxKJLWkSzheG6vMJX835WJRFTUTpucsFKKC1bPGieI",
+  "counts": {
+    "activities": 20,
+    "calls": 3,
+    "emails": 4,
+    "meetings": 0,
+    "notes": 3,
+    "smses": 8,
+    "subscriptions": 2,
+    "tasks": 1,
+    "threads": 3
+  },
+  "last_sweep_at": "2026-05-05T20:14:16.170Z",
+  "lead_id": "lead_vPHgGQByXDEeyXmiwKO9FV0DTrN9rM0OYNH6gBy4a5Z",
+  "name": "Mon",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "primary_email": "marleny_a25@hotmail.com",
+  "primary_phone": "+17819139837",
+  "raw_contract_version": 2,
+  "raw_files": {
+    "comms_dir": "comms/",
+    "continuity": "02_continuity.jsonl",
+    "lead": "01_raw_lead.json"
+  },
+  "status_id": "stat_qGpMKenDu31cIY56uTpvo8evqhcNnK4KDWtz4y9NPz3",
+  "status_label": "🔘 Maybe",
+  "user_id": null,
+  "user_name": null
+}
