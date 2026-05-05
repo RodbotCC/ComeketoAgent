@@ -34,6 +34,8 @@ const MCP_FALLBACK_CALL_TOOL = "close_mcp_call";
 const COMPOSITE_SELF_AUDITED_TOOLS = new Set([
   "generate_plans_for_leads",
   "approve_and_fire_plans",
+  "extract_discovery_facts",
+  "set_discovery_slot",
 ]);
 
 function isRecord(v: unknown): v is Record<string, unknown> {

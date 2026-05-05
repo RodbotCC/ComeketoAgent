@@ -113,6 +113,24 @@ export async function listPlansForLead(
   return ((data as Row[]) ?? []).map(rowToPlan);
 }
 
+/**
+ * Recent active plans for the Proposals workbench. This intentionally scans
+ * plan JSON in app code because day/touch status lives inside `days`.
+ */
+export async function listPlansForProposalReview(
+  limit = 80
+): Promise<Array<ReturnType<typeof rowToPlan>>> {
+  const sb = getSupabaseServer();
+  const { data, error } = await sb
+    .from("lead_plans")
+    .select("*")
+    .in("status", ["draft", "approved", "active", "paused"])
+    .order("generated_at", { ascending: false })
+    .limit(limit);
+  if (error) throw new Error(`listPlansForProposalReview failed: ${error.message}`);
+  return ((data as Row[]) ?? []).map(rowToPlan);
+}
+
 export async function approvePlan(planId: string, approver: string): Promise<void> {
   const sb = getSupabaseServer();
   const { error } = await sb

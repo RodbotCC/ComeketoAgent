@@ -464,6 +464,9 @@ const TOOL_CATEGORY: Record<string, ToolCategory> = {
   find_top_n_leads_for_owner: "list",
   generate_plans_for_leads: "generate",
   approve_and_fire_plans: "write",
+  extract_discovery_facts: "generate",
+  lead_journey_score: "read",
+  set_discovery_slot: "write",
   // MCP wrappers — close_mcp_call category is computed dynamically (see categoryOf)
   close_mcp_list_tools: "list",
 };
@@ -613,6 +616,12 @@ function toolHeadline(call: ToolCall): string {
       const ids = Array.isArray(a.plan_ids) ? a.plan_ids : [];
       return `Approve & fire · ${ids.length} plan${ids.length === 1 ? "" : "s"}`;
     }
+    case "extract_discovery_facts":
+      return `Discovery scan · ${typeof a.lead_id === "string" ? a.lead_id.slice(0, 12) + "…" : "lead"}`;
+    case "lead_journey_score":
+      return `Journey · ${typeof a.lead_id === "string" ? a.lead_id.slice(0, 12) + "…" : "lead"}`;
+    case "set_discovery_slot":
+      return `Discovery · set ${typeof a.slot_id === "string" ? a.slot_id : "slot"}`;
     case "pipeline_state_for_owner": {
       const owner = typeof a.owner === "string" && a.owner ? a.owner : "andre";
       return `Morning briefing · ${owner}`;
@@ -836,6 +845,62 @@ function pinFromCall(call: ToolCall): Pin | null {
       added_at: "",
       collapsed: false,
       data: {
+        tool_name: call.name,
+        summary_text: call.summary,
+      },
+    };
+  }
+  if (call.name === "lead_journey_score") {
+    const clarity = typeof parsed?.clarity === "number" ? (parsed.clarity as number) : 0;
+    const readiness = typeof parsed?.readiness === "number" ? (parsed.readiness as number) : 0;
+    const stageObj = parsed?.stage as { current?: string } | undefined;
+    const stageLbl = typeof stageObj?.current === "string" ? stageObj.current : "—";
+    return {
+      id: "",
+      kind: "tool-result",
+      label: `Journey · ${typeof parsed?.lead_id === "string" ? (parsed.lead_id as string).slice(0, 12) + "…" : "lead"}`,
+      sublabel: `clarity ${clarity}% · readiness ${readiness}% · ${stageLbl}`,
+      added_at: "",
+      collapsed: false,
+      data: {
+        lead_id: typeof parsed?.lead_id === "string" ? (parsed.lead_id as string) : call.lead_id,
+        tool_name: call.name,
+        summary_text: call.summary,
+      },
+    };
+  }
+  if (call.name === "set_discovery_slot") {
+    const slotId = typeof parsed?.slot_id === "string" ? (parsed.slot_id as string) : "";
+    const value = parsed?.value;
+    const valueStr = typeof value === "string" ? value : value != null ? String(value) : "";
+    return {
+      id: "",
+      kind: "tool-result",
+      label: `Discovery · ${slotId || "slot"}`,
+      sublabel: valueStr ? `${slotId} = ${valueStr.slice(0, 36)}${valueStr.length > 36 ? "…" : ""}` : `set ${slotId}`,
+      added_at: "",
+      collapsed: false,
+      data: {
+        lead_id: typeof parsed?.lead_id === "string" ? (parsed.lead_id as string) : call.lead_id,
+        tool_name: call.name,
+        summary_text: call.summary,
+      },
+    };
+  }
+  if (call.name === "extract_discovery_facts") {
+    const extracted = typeof parsed?.slots_extracted === "number" ? (parsed.slots_extracted as number) : 0;
+    const skipped = Array.isArray(parsed?.slots_skipped_already_known)
+      ? (parsed!.slots_skipped_already_known as unknown[]).length
+      : 0;
+    return {
+      id: "",
+      kind: "tool-result",
+      label: `Discovery scan`,
+      sublabel: `${extracted} new fact${extracted === 1 ? "" : "s"} · ${skipped} already known`,
+      added_at: "",
+      collapsed: false,
+      data: {
+        lead_id: typeof parsed?.lead_id === "string" ? (parsed.lead_id as string) : call.lead_id,
         tool_name: call.name,
         summary_text: call.summary,
       },
@@ -1476,6 +1541,110 @@ function RichToolResult({ call }: { call: ToolCall }) {
             );
           })}
         </div>
+      </div>
+    );
+  }
+
+  if (call.name === "set_discovery_slot" && parsed) {
+    const ok = parsed.ok === true;
+    const slotId = (parsed.slot_id as string) || "";
+    const value = parsed.value;
+    const valueStr = typeof value === "string" ? value : value != null ? String(value) : "";
+    const lead_id = (parsed.lead_id as string) || "";
+    if (!ok) {
+      return (
+        <div className="cmk-rich-discovery-set">
+          <div className="cmk-rich-discovery-set-fail">
+            Could not write {slotId || "slot"}: {(parsed.error as string) || "unknown error"}
+          </div>
+        </div>
+      );
+    }
+    return (
+      <div className="cmk-rich-discovery-set">
+        <div className="cmk-rich-discovery-set-row">
+          <span className="cmk-rich-discovery-set-icon" aria-hidden>✓</span>
+          <span className="cmk-rich-discovery-set-body">
+            Saved <strong>{slotId}</strong> = <em>{valueStr}</em>
+            <span className="cmk-rich-discovery-set-meta"> · operator override</span>
+          </span>
+          {lead_id && (
+            <Link href={`/lead/${lead_id}/discovery`} className="cmk-rich-batch-trace">
+              open discovery ↗
+            </Link>
+          )}
+        </div>
+      </div>
+    );
+  }
+  if (call.name === "lead_journey_score" && parsed) {
+    const lead_id = (parsed.lead_id as string) || "";
+    const clarity = (parsed.clarity as number) ?? 0;
+    const readiness = (parsed.readiness as number) ?? 0;
+    const restraint = parsed.restraint as number | null;
+    const xp = (parsed.discovery_xp as number) ?? 0;
+    const stage = parsed.stage as { current?: string; reached?: { id: string; label: string }[] } | undefined;
+    const slots = Array.isArray(parsed.slots) ? (parsed.slots as Array<Record<string, unknown>>) : [];
+    const hot_tags = Array.isArray(parsed.hot_tags) ? (parsed.hot_tags as string[]) : [];
+    const breakdown = parsed.restraint_breakdown as
+      | { fires?: number; good_skips?: number; bad_skips?: number }
+      | undefined;
+    return (
+      <div className="cmk-rich-journey">
+        <div className="cmk-rich-batch-head">
+          <div>
+            <div className="cmk-rich-batch-title">Journey · {lead_id ? lead_id.slice(0, 14) + "…" : "lead"}</div>
+            <div className="cmk-rich-batch-meta">
+              stage {stage?.current ?? "—"} · xp {xp}
+              {hot_tags.length > 0 ? ` · 🟢 ${hot_tags.length} hot tag${hot_tags.length === 1 ? "" : "s"}` : ""}
+            </div>
+          </div>
+          {lead_id && (
+            <Link href={`/lead/${lead_id}/discovery`} className="cmk-rich-batch-trace">
+              open discovery ↗
+            </Link>
+          )}
+        </div>
+        <div className="cmk-rich-batch-totals">
+          <div className="cmk-rich-batch-total cmk-rich-batch-total-sky">
+            <div className="cmk-rich-batch-total-n">{clarity}%</div>
+            <div className="cmk-rich-batch-total-l">Clarity</div>
+          </div>
+          <div className="cmk-rich-batch-total cmk-rich-batch-total-sage">
+            <div className="cmk-rich-batch-total-n">{readiness}%</div>
+            <div className="cmk-rich-batch-total-l">Readiness</div>
+          </div>
+          <div className="cmk-rich-batch-total cmk-rich-batch-total-lavender">
+            <div className="cmk-rich-batch-total-n">{restraint == null ? "—" : `${restraint}%`}</div>
+            <div className="cmk-rich-batch-total-l">Restraint</div>
+          </div>
+          <div className="cmk-rich-batch-total cmk-rich-batch-total-peach">
+            <div className="cmk-rich-batch-total-n">{xp}</div>
+            <div className="cmk-rich-batch-total-l">XP</div>
+          </div>
+        </div>
+        <div className="cmk-rich-journey-slots">
+          {slots.map((s, i) => {
+            const status = s.status as string;
+            const label = s.label as string;
+            const value = s.value;
+            return (
+              <div key={i} className={`cmk-rich-journey-slot cmk-rich-journey-slot--${status}`}>
+                <div className="cmk-rich-journey-slot-lbl">{label}</div>
+                <div className="cmk-rich-journey-slot-val">
+                  {status === "unknown" ? <em>unknown</em> : Array.isArray(value) ? value.join(" · ") : String(value ?? "")}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+        {breakdown && (
+          <div className="cmk-rich-journey-restraint">
+            <span className="cmk-rich-batch-meta">
+              {breakdown.fires ?? 0} fired · {breakdown.good_skips ?? 0} held back · {breakdown.bad_skips ?? 0} failed (last 10 heartbeats)
+            </span>
+          </div>
+        )}
       </div>
     );
   }
@@ -3043,22 +3212,44 @@ export function ChatLayout() {
         <aside className="cmk-panel cmk-rail" style={{ display: "flex", flexDirection: "column", minHeight: 0 }}>
           <div className="cmk-panel-head">
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              <span className="cmk-eyebrow">Delegations</span>
-              <span className="cmk-mode-pill">{layout.rail}</span>
+              <button
+                type="button"
+                className="cmk-eyebrow cmk-eyebrow-btn"
+                onClick={() => setMode(layout.mode === "andre" ? "lead" : "andre")}
+                title={
+                  layout.mode === "andre"
+                    ? "Switch to Lead mode (bind chat to one lead)"
+                    : "Switch to Andre mode (no lead in scope)"
+                }
+                aria-label={`Switch cockpit mode (currently ${layout.mode})`}
+              >
+                Delegations · {layout.mode === "andre" ? "Andre" : "Lead"}
+                <span className="cmk-eyebrow-btn-glyph" aria-hidden>
+                  ⇄
+                </span>
+              </button>
             </div>
-            <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
               {lastDelegation && !loading && (
                 <button
                   type="button"
                   onClick={() => fireQuickDelegation(lastDelegation)}
-                  className="cmk-rail-new cmk-rail-rerun"
+                  className="cmk-rail-icon-btn"
                   title={`Re-run: ${lastDelegation.label}`}
                   aria-label="Re-run last delegation"
                 >
                   ↻
                 </button>
               )}
-              <button type="button" onClick={handleNewThread} className="cmk-rail-new">+ new</button>
+              <button
+                type="button"
+                onClick={handleNewThread}
+                className="cmk-rail-icon-btn"
+                title="New thread (⌘N)"
+                aria-label="New thread"
+              >
+                +
+              </button>
               <PaneControl
                 mode={layout.rail}
                 onCycle={() => cycle("rail")}
@@ -3068,30 +3259,6 @@ export function ChatLayout() {
           </div>
 
           <div className="cmk-scroll scroll-hide" style={{ flex: 1, overflowY: "auto", padding: 8 }}>
-            {/* ── Cockpit mode toggle ─────────────────────────────────────── */}
-            <div className="cmk-mode-toggle" role="tablist" aria-label="Cockpit mode">
-              <button
-                type="button"
-                role="tab"
-                aria-selected={layout.mode === "andre"}
-                className={`cmk-mode-toggle-btn${layout.mode === "andre" ? " on" : ""}`}
-                onClick={() => setMode("andre")}
-                title="Open chat — no specific lead in scope"
-              >
-                Andre
-              </button>
-              <button
-                type="button"
-                role="tab"
-                aria-selected={layout.mode === "lead"}
-                className={`cmk-mode-toggle-btn${layout.mode === "lead" ? " on" : ""}`}
-                onClick={() => setMode("lead")}
-                title="Bind chat to one lead — agent receives the lead's Box context"
-              >
-                Lead{layout.lead_name ? ` · ${layout.lead_name.slice(0, 18)}` : ""}
-              </button>
-            </div>
-
             {/* ── Lead mode: picker + lead-scoped quick prompts ───────────── */}
             {layout.mode === "lead" && (
               <div style={{ marginBottom: 8 }}>
@@ -3465,7 +3632,6 @@ export function ChatLayout() {
               <span className="cmk-eyebrow">
                 {layout.mode === "lead" && layout.lead_id ? "Lead plan" : "In scope"}
               </span>
-              <span className="cmk-mode-pill">{layout.scope}</span>
             </div>
             <PaneControl
               mode={layout.scope}

@@ -177,6 +177,9 @@ export function PlanDayStrip({ leadId, leadName }: { leadId: string; leadName: s
           <Link href={`/lead/${leadId}/graph`} className="cmk-lead-active-link" style={{ fontSize: 11 }}>
             edit plan →
           </Link>
+          <Link href={`/lead/${leadId}/discovery`} className="cmk-lead-active-link" style={{ fontSize: 11 }}>
+            discovery →
+          </Link>
           <Link href={`/lead/${leadId}`} className="cmk-lead-active-link" style={{ fontSize: 11 }}>
             full Box →
           </Link>

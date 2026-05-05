@@ -1,20 +1,30 @@
 import Link from "next/link";
 import type { IntakeArtifactRow } from "@/lib/intake-artifacts";
-import { redirectIntakeArtifactDownload } from "@/app/intake/actions";
+import { redirectIntakeArtifactDownload } from "./actions";
 
 function fmt(iso: string): string {
-  return new Date(iso).toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
+  return new Date(iso).toLocaleString("en-US", {
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+  });
 }
 
 export function IntakeArtifactsPanel({
   leadId,
   artifacts,
   downloadError,
+  showExtracted = false,
 }: {
   leadId: string;
   artifacts: IntakeArtifactRow[];
   downloadError?: string | null;
+  /** When true, render a collapsible <details> per file with the full extracted text. */
+  showExtracted?: boolean;
 }) {
+  const intakeHref = `/lead/${encodeURIComponent(leadId)}/intake`;
+
   if (artifacts.length === 0) {
     return (
       <div className="lead-card widget" style={{ marginTop: 12 }}>
@@ -22,13 +32,18 @@ export function IntakeArtifactsPanel({
         {downloadError && (
           <div className="leads-error" style={{ marginTop: 10, fontSize: 12 }}>
             {downloadError}{" "}
-            <Link href={`/lead/${encodeURIComponent(leadId)}/box`} className="lead-back" style={{ marginLeft: 8 }}>
+            <Link
+              href={intakeHref}
+              className="lead-back"
+              style={{ marginLeft: 8 }}
+            >
               Dismiss
             </Link>
           </div>
         )}
         <p className="muted" style={{ fontSize: 12, marginTop: 6 }}>
-          No files linked to this lead. Upload on <a href="/intake">/intake</a> with lead id.
+          No files linked to this lead.{" "}
+          <Link href={intakeHref}>Upload one →</Link>
         </p>
       </div>
     );
@@ -40,7 +55,7 @@ export function IntakeArtifactsPanel({
       {downloadError && (
         <div className="leads-error" style={{ marginTop: 10, fontSize: 12 }}>
           {downloadError}{" "}
-          <Link href={`/lead/${encodeURIComponent(leadId)}/box`} className="lead-back" style={{ marginLeft: 8 }}>
+          <Link href={intakeHref} className="lead-back" style={{ marginLeft: 8 }}>
             Dismiss
           </Link>
         </div>
@@ -67,11 +82,49 @@ export function IntakeArtifactsPanel({
                   {(a.byte_size / 1024).toFixed(1)} KB
                 </>
               )}
+              {a.mime && (
+                <>
+                  <span className="lead-sep">·</span>
+                  <span style={{ fontFamily: "var(--font-mono, monospace)", fontSize: 10 }}>
+                    {a.mime}
+                  </span>
+                </>
+              )}
             </div>
             {a.summary && (
               <div style={{ marginTop: 6, fontSize: 11, lineHeight: 1.4, color: "var(--ink)" }}>
                 {a.summary}
               </div>
+            )}
+            {showExtracted && a.extracted_text && (
+              <details style={{ marginTop: 8 }}>
+                <summary
+                  style={{
+                    cursor: "pointer",
+                    fontSize: 11,
+                    color: "var(--ink-soft)",
+                    userSelect: "none",
+                  }}
+                >
+                  View extracted text ({a.extracted_text.length.toLocaleString()} chars)
+                </summary>
+                <pre
+                  style={{
+                    marginTop: 8,
+                    padding: "10px 12px",
+                    background: "var(--paper-2, rgba(0,0,0,0.03))",
+                    borderRadius: 6,
+                    fontSize: 11,
+                    lineHeight: 1.5,
+                    whiteSpace: "pre-wrap",
+                    wordBreak: "break-word",
+                    maxHeight: 360,
+                    overflow: "auto",
+                  }}
+                >
+                  {a.extracted_text}
+                </pre>
+              </details>
             )}
             <form action={redirectIntakeArtifactDownload} style={{ marginTop: 8 }}>
               <input type="hidden" name="artifact_id" value={a.id} />

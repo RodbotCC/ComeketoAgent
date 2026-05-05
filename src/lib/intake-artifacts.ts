@@ -8,6 +8,7 @@ export type IntakeArtifactRow = {
   mime: string | null;
   byte_size: number | null;
   summary: string | null;
+  extracted_text: string | null;
   lead_id: string | null;
 };
 

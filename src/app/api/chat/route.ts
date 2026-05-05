@@ -15,6 +15,7 @@ import {
   type Message,
 } from "@/lib/threads";
 import { closeGetLead } from "@/lib/close";
+import { listIntakeArtifactsForLead, type IntakeArtifactRow } from "@/lib/intake-artifacts";
 import { CLOSE_TOOLS, dispatchCloseTool, getCloseToolsForSettings } from "@/lib/close-tools";
 import {
   COMPOSITE_TOOLS,
@@ -59,6 +60,53 @@ type ChatRequest = {
  * activity stream) — enough for the agent to know who it's talking about.
  * Returns "" if lead_id is missing or the fetch fails.
  */
+/** Total chars of intake material text we'll append. Hard cap to keep prompt sane. */
+const INTAKE_TOTAL_CAP = 15_000;
+/** Per-file cap inside the intake block. */
+const INTAKE_PER_FILE_CAP = 3_000;
+
+function fmtIntakeBlock(artifacts: IntakeArtifactRow[]): string {
+  const withText = artifacts.filter((a) => a.extracted_text && a.extracted_text.trim().length > 0);
+  if (withText.length === 0) return "";
+
+  const sections: string[] = [];
+  let total = 0;
+  let truncatedFiles = 0;
+
+  for (const a of withText) {
+    const remaining = INTAKE_TOTAL_CAP - total;
+    if (remaining <= 200) {
+      truncatedFiles += 1;
+      continue;
+    }
+    const perFileCap = Math.min(INTAKE_PER_FILE_CAP, remaining - 80);
+    const raw = a.extracted_text || "";
+    const body = raw.length > perFileCap ? `${raw.slice(0, perFileCap)}\n…[truncated]` : raw;
+    const when = new Date(a.created_at).toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+    });
+    const head = `### ${a.filename} (${a.mime || "unknown"} · uploaded ${when})`;
+    sections.push(`${head}\n\n${body}`);
+    total += head.length + body.length + 4;
+  }
+
+  const trailer =
+    truncatedFiles > 0
+      ? `\n\n_${truncatedFiles} additional file(s) attached but omitted to fit the prompt window. Ask the operator for specifics if needed._`
+      : "";
+
+  return [
+    "",
+    "## Intake materials (lead-scoped uploads)",
+    "",
+    `The operator has uploaded the following file(s) for this lead. Trust this content over your training defaults when the operator asks about specifics they likely meant to reference (proposal terms, contract dates, CSV row contents, notes).`,
+    "",
+    sections.join("\n\n---\n\n"),
+    trailer,
+  ].join("\n");
+}
+
 async function buildLeadContextBlock(leadId: string | undefined): Promise<string> {
   if (!leadId || !leadId.startsWith("lead_")) return "";
   try {
@@ -81,7 +129,7 @@ async function buildLeadContextBlock(leadId: string | undefined): Promise<string
       .slice(0, 8)
       .map(([k, v]) => `${k.replace("custom.", "")}: ${String(v).slice(0, 80)}`)
       .join("; ");
-    return [
+    const base = [
       "",
       "## Current lead context (cockpit is in Lead mode)",
       "",
@@ -101,6 +149,16 @@ async function buildLeadContextBlock(leadId: string | undefined): Promise<string
       "",
       `Concrete shape: short identification questions ("who is this") → answer from summary. Anything richer → pull the Box first, then answer.`,
     ].filter(Boolean).join("\n");
+
+    let intakeBlock = "";
+    try {
+      const artifacts = await listIntakeArtifactsForLead(leadId, 10);
+      intakeBlock = fmtIntakeBlock(artifacts);
+    } catch {
+      intakeBlock = "";
+    }
+
+    return base + (intakeBlock ? "\n" + intakeBlock : "");
   } catch {
     return "";
   }
@@ -177,6 +235,31 @@ The full demo loop in one turn — when the operator types "make me 5 plans for 
 4. Report back tersely: "Top 5 hottest: X, Y, Z, A, B. Plans generated for 4/5 (one skipped — Won/Lost). 4 plans approved + fired: 12 actions eligible, 8 fired, 4 gated. Trace: <trace_id>." Then list the lead names + what fired.
 
 Do all three in the same turn unless the operator stops you. Don't ask permission between steps.
+
+### Discovery — the buyer-clarity layer (Andre's NEPQ game board)
+Comeketo has a Discovery Map per lead — 9 canonical buyer-facts the salesperson needs to know to sell well. Each lead's Discovery state is shown at \`/lead/<id>/discovery\` and rolled up across the pipeline at \`/personal\`. The 9 slots, with category and short meaning:
+
+**Quest** (the basic facts):
+- \`event_date\` — when's the event (resolves from Close \`Date of Event\`)
+- \`venue\` — venue name (Close \`Venue Name\`)
+- \`location\` — address / city / distance (Close composite)
+- \`client_type\` — Consumer or Venue (Close \`Client Type\`)
+
+**Clarity** (sells-or-not facts):
+- \`budget\` — ballpark or range (Close \`Wedding Budget\`)
+- \`guest_count\` — actual event headcount (LLM-extracted from Box)
+- \`service_style\` — buffet / plated / family / stations / passed / mixed (LLM-extracted)
+
+**Consequence** (timing & decision):
+- \`decision_timeline\` — when they need to decide by (LLM-extracted)
+- \`dietary_constraints\` — allergies / vegan / kosher / kid menu (LLM-extracted)
+
+You have three Discovery tools:
+- \`lead_journey_score({lead_id})\` — read-only. Returns clarity %, readiness %, restraint %, discovery_xp, current pipeline stage, hot tags, and the 9 slot states (known / stale / unknown with values + sources). Use when Jake asks "how's lead X looking", "what do we know about Brenda", or "what's the next move on this one".
+- \`extract_discovery_facts({lead_id})\` — runs an LLM scan over the lead's emails / SMS / call notes / activities and writes any discovery facts it can ground (confidence ≥ 0.6) into the override layer. Only fills the 4 LLM-only slots — the 5 canonical-Close slots are read directly from Close. Use when Jake says "sweep through this client", "scan for what we know", "extract discovery on lead X", or before generating a plan if the Discovery Map looks sparse.
+- \`set_discovery_slot({lead_id, slot_id, value})\` — adds ONE operator-source value to a slot. Use when Jake tells you a fact in conversation: "Brenda told me 115 guests on the call" → \`set_discovery_slot({lead_id, slot_id: "guest_count", value: "115"})\`. Operator-source overrides always win over LLM-extraction. **Important:** for the canonical-Close slots (event_date / venue / location / client_type / budget) prefer \`close_update_lead\` with merge_patch_json — those values belong on Close itself, not in the override layer. Use \`set_discovery_slot\` for those only when the operator explicitly wants an override (e.g. correcting a stale Close value without touching Close yet).
+
+When you write a Discovery fact, confirm tersely in the same turn: "Saved guest_count=115 for Brenda. Discovery now 6/9." Don't repeat the value back in long form — Jake already said it.
 
 ### MCP — Close's full tool surface (escape hatch beyond the direct \`close_*\` tools above)
 

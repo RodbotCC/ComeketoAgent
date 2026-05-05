@@ -4,7 +4,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 /**
- * IA under Leads: Plan (7-day), Box (profile + activity), Heartbeat (ops trace).
+ * IA under Leads: Plan (7-day), Graph (plan-as-graph + simulator), Box (profile +
+ * activity), Discovery (slot map + journey score + quest), Intake (lead-scoped
+ * uploads), Heartbeat (ops trace).
  */
 export function LeadSubNav({ leadId }: { leadId: string }) {
   const pathname = usePathname() || "";
@@ -13,6 +15,8 @@ export function LeadSubNav({ leadId }: { leadId: string }) {
   const planActive = pathname === base || pathname === `${base}/`;
   const boxActive = pathname.startsWith(`${base}/box`);
   const graphActive = pathname.startsWith(`${base}/graph`);
+  const discoveryActive = pathname.startsWith(`${base}/discovery`);
+  const intakeActive = pathname.startsWith(`${base}/intake`);
   const hbActive = pathname.startsWith(`${base}/heartbeat`);
 
   return (
@@ -25,6 +29,18 @@ export function LeadSubNav({ leadId }: { leadId: string }) {
       </Link>
       <Link href={`${base}/box`} className={`lead-subnav-link${boxActive ? " lead-subnav-link-active" : ""}`}>
         Box
+      </Link>
+      <Link
+        href={`${base}/discovery`}
+        className={`lead-subnav-link${discoveryActive ? " lead-subnav-link-active" : ""}`}
+      >
+        Discovery
+      </Link>
+      <Link
+        href={`${base}/intake`}
+        className={`lead-subnav-link${intakeActive ? " lead-subnav-link-active" : ""}`}
+      >
+        Intake
       </Link>
       <Link
         href={`${base}/heartbeat`}

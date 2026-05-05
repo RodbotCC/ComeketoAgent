@@ -15,6 +15,12 @@ export async function POST(req: Request) {
   const leadRaw = fd.get("lead_id");
   const lead_id =
     typeof leadRaw === "string" && leadRaw.startsWith("lead_") ? leadRaw.trim() : null;
+  if (!lead_id) {
+    return NextResponse.json(
+      { error: "lead_id required (must start with `lead_`)" },
+      { status: 400 }
+    );
+  }
 
   const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_").slice(0, 180);
   const path = `${randomUUID()}-${safeName || "upload"}`;

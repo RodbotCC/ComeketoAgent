@@ -37,6 +37,8 @@ import { env } from "@/lib/env";
 import { runHeartbeatForPlan, type HeartbeatReport } from "@/lib/heartbeat";
 import { getSettings, clampPlanHorizonDays } from "@/lib/settings";
 import { logExecution, logApprovalChange } from "@/lib/execution-audit";
+import { redirect } from "next/navigation";
+import { getIntakeArtifactById } from "@/lib/intake-artifacts";
 
 export async function generatePlanAction(formData: FormData) {
   await assertOperatorSession();
@@ -55,6 +57,7 @@ export async function generatePlanAction(formData: FormData) {
     payload: { horizonDays: horizonDays ?? "default" },
   });
   revalidatePath(`/lead/${leadId}`, "layout");
+  revalidatePath("/proposals");
 }
 
 export async function approvePlanAction(formData: FormData) {
@@ -79,6 +82,7 @@ export async function approvePlanAction(formData: FormData) {
     snapshot_id_at_action: String(row.based_on_snapshot_id || ""),
   });
   revalidatePath(`/lead/${leadId}`, "layout");
+  revalidatePath("/proposals");
 }
 
 export async function killPlanAction(formData: FormData) {
@@ -104,6 +108,7 @@ export async function killPlanAction(formData: FormData) {
     payload: { reason },
   });
   revalidatePath(`/lead/${leadId}`, "layout");
+  revalidatePath("/proposals");
 }
 
 export async function pausePlanAction(formData: FormData) {
@@ -190,6 +195,7 @@ export async function addPlanDayTouchAction(formData: FormData) {
     payload: { day_index: dayIndex, channel: ch },
   });
   revalidatePath(`/lead/${leadId}`, "layout");
+  revalidatePath("/proposals");
 }
 
 export async function editPlanDayTouchAction(formData: FormData) {
@@ -223,6 +229,7 @@ export async function editPlanDayTouchAction(formData: FormData) {
     payload: { day_index: dayIndex, touch_index: touchIndex, channel: ch, edit: true },
   });
   revalidatePath(`/lead/${leadId}`, "layout");
+  revalidatePath("/proposals");
 }
 
 export async function deletePlanDayTouchAction(formData: FormData) {
@@ -242,6 +249,7 @@ export async function deletePlanDayTouchAction(formData: FormData) {
     payload: { day_index: dayIndex, touch_index: touchIndex, deleted: true },
   });
   revalidatePath(`/lead/${leadId}`, "layout");
+  revalidatePath("/proposals");
 }
 
 export async function refinePlanDayAction(
@@ -275,6 +283,7 @@ export async function refinePlanDayAction(
       snapshot_id_at_action: plan.based_on_snapshot_id,
     });
     revalidatePath(`/lead/${leadId}`, "layout");
+    revalidatePath("/proposals");
     return { ok: true };
   } catch (err) {
     return { ok: false, error: err instanceof Error ? err.message : String(err) };
@@ -331,6 +340,7 @@ export async function refineWholePlanAction(
       snapshot_id_at_action: plan.based_on_snapshot_id,
     });
     revalidatePath(`/lead/${leadId}`, "layout");
+    revalidatePath("/proposals");
     return { ok: true };
   } catch (err) {
     return { ok: false, error: err instanceof Error ? err.message : String(err) };
@@ -370,6 +380,7 @@ export async function setDayStatusAction(formData: FormData) {
     snapshot_id_at_action: snap,
   });
   revalidatePath(`/lead/${leadId}`, "layout");
+  revalidatePath("/proposals");
 }
 
 /**
@@ -618,6 +629,74 @@ export async function getCloseCodegenPreview(planId: string): Promise<
   } catch (err) {
     return { ok: false, error: err instanceof Error ? err.message : String(err) };
   }
+}
+
+/**
+ * Redirect to a short-lived signed download URL for an intake artifact.
+ * Form: hidden `artifact_id`, `lead_id`. On any failure, redirects back to the
+ * lead's intake tab with a query-string code the page renders into a banner.
+ */
+export async function redirectIntakeArtifactDownload(formData: FormData) {
+  const artifactId = String(formData.get("artifact_id") ?? "").trim();
+  const leadId = String(formData.get("lead_id") ?? "").trim();
+  const intakePath = (code?: string) =>
+    `/lead/${encodeURIComponent(leadId)}/intake${code ? `?intake_dl=${code}` : ""}`;
+
+  if (!artifactId || !leadId) {
+    redirect(leadId ? intakePath("bad_request") : "/leads");
+  }
+
+  const row = await getIntakeArtifactById(artifactId);
+  if (!row || row.lead_id !== leadId) {
+    redirect(intakePath("not_found"));
+  }
+
+  const sb = getSupabaseServer();
+  const { data, error } = await sb.storage.from("intake").createSignedUrl(row.storage_path, 120);
+  if (error || !data?.signedUrl) {
+    redirect(intakePath("signed_url"));
+  }
+
+  redirect(data.signedUrl);
+}
+
+/**
+ * Delete an intake artifact: removes the storage object and the DB row.
+ * Lead-id-scoped — refuses to delete an artifact that doesn't belong to this lead
+ * to prevent accidental cross-lead removal from a stale form post.
+ */
+export async function deleteIntakeArtifactAction(formData: FormData) {
+  await assertOperatorSession();
+  const artifactId = String(formData.get("artifact_id") || "").trim();
+  const leadId = String(formData.get("lead_id") || "").trim();
+  if (!artifactId || !leadId) throw new Error("artifact_id and lead_id required");
+
+  const row = await getIntakeArtifactById(artifactId);
+  if (!row) {
+    revalidatePath(`/lead/${leadId}/intake`);
+    return;
+  }
+  if (row.lead_id !== leadId) throw new Error("artifact lead mismatch");
+
+  const sb = getSupabaseServer();
+  const rm = await sb.storage.from("intake").remove([row.storage_path]);
+  if (rm.error) {
+    void logExecution({
+      action_kind: "intake_extract",
+      close_lead_id: leadId,
+      payload: { artifact_id: artifactId, delete_storage_failed: rm.error.message },
+    });
+  }
+  const { error: dbErr } = await sb.from("intake_artifacts").delete().eq("id", artifactId);
+  if (dbErr) throw new Error(`delete intake row failed: ${dbErr.message}`);
+
+  void logExecution({
+    action_kind: "intake_extract",
+    close_lead_id: leadId,
+    payload: { artifact_id: artifactId, deleted: true, filename: row.filename },
+  });
+  revalidatePath(`/lead/${leadId}/intake`);
+  revalidatePath(`/lead/${leadId}/box`);
 }
 
 /** Run a manual heartbeat sweep for one plan. Uses the Settings execution_mode. */

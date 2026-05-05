@@ -42,9 +42,11 @@ export function AppHeader({ wordmarkHref = "/console" }: Props) {
       </div>
       <div style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 11.5, color: "#6b6b66" }}>
         <span>
-          <span style={{ color: "#1a1a1a" }}>proposals</span>{" "}
-          <span style={{ opacity: 0.4 }}>·</span> personal{" "}
-          <span style={{ opacity: 0.4 }}>·</span> briefing
+          <Link href="/proposals" className="cmk-utility-link">proposals</Link>{" "}
+          <span style={{ opacity: 0.4 }}>·</span>{" "}
+          <Link href="/personal" className="cmk-utility-link">personal</Link>{" "}
+          <span style={{ opacity: 0.4 }}>·</span>{" "}
+          <Link href="/briefing" className="cmk-utility-link">briefing</Link>
         </span>
         <Link href="/settings" className="cmk-icon-hit" style={{ color: "inherit" }} aria-label="settings">
           {icons.gear}

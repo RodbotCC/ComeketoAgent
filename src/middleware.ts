@@ -17,8 +17,9 @@ function operatorLockEnv(): { on: true; password: string; secret: string } | { o
  * Operator surfaces: when OPERATOR_PASSWORD + OPERATOR_COOKIE_SECRET are set, require valid
  * cmk_operator cookie (same token as /api/auth/operator).
  *
- * Matcher inventory (2026-05): pages `/`, `/lead/*`, `/approvals`, `/settings`, `/heartbeat`,
- * `/automation`, `/console`, `/chat`, `/leads`, `/test`, `/analytics` (+ `:path*` where listed).
+ * Matcher inventory (2026-05): pages `/`, `/lead/*` (covers per-lead intake tab),
+ * `/proposals`, `/briefing`, `/approvals`, `/settings`, `/heartbeat`, `/console`, `/chat`, `/leads`, `/test`,
+ * `/analytics` (+ `:path*` where listed).
  * APIs `/api/cron`, `/api/chat`, `/api/openai`, `/api/threads`, `/api/leads`, `/api/test` (+ children).
  * Not matched (stay public): `/operator-login`, `/api/auth/operator`, `/api/webhooks/:path*`.
  * New top-level app route or `/api/*` (except webhooks/auth) → extend `matcher` or it stays open when lock is on.
@@ -60,6 +61,10 @@ export const config = {
     "/",
     "/api/cron/:path*",
     "/lead/:path*",
+    "/proposals",
+    "/proposals/:path*",
+    "/briefing",
+    "/briefing/:path*",
     "/approvals",
     "/approvals/:path*",
     "/settings",
@@ -67,6 +72,9 @@ export const config = {
     "/heartbeat",
     "/heartbeat/:path*",
     "/api/intake/:path*",
+    "/workflows",
+    "/workflows/:path*",
+    "/api/workflows/:path*",
     "/console",
     "/console/:path*",
     "/chat",

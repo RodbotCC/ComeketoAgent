@@ -44,6 +44,11 @@ import { getPlanById, setDayStatus } from "./plans-db";
 import { runHeartbeatForPlan, type HeartbeatReport } from "./heartbeat";
 import { validateNepqVoice, hasBlockingViolation } from "./nepq";
 import { logExecution } from "./execution-audit";
+import OpenAI from "openai";
+import { closeGetLeadFull } from "./close";
+import { DISCOVERY_SLOTS } from "./discovery-map";
+import { upsertLeadFact, upsertLeadFactsBulk } from "./lead-facts";
+import { journeyScoreForLead } from "./journey-score";
 
 // ─── Tool defs (OpenAI Responses tool format, top-level name/desc/params) ───
 
@@ -105,6 +110,68 @@ export const COMPOSITE_TOOLS = [
   },
   {
     type: "function" as const,
+    name: "extract_discovery_facts",
+    description:
+      "Scan a lead's Box (emails / SMS / call notes / activities) for the four LLM-only Discovery Map slots (guest_count, service_style, decision_timeline, dietary_constraints) and persist what's grounded in evidence. Use when the operator says 'scan for facts on lead X', 'what do we know about this lead', or before generating a plan if the Discovery Map is sparse. Skips slots that are already filled by Close custom fields. Returns one entry per slot with extracted value + evidence excerpt + confidence, or null if not found in Box.",
+    parameters: {
+      type: "object",
+      properties: {
+        lead_id: { type: "string", description: "Close lead id (lead_*)." },
+      },
+      required: ["lead_id"],
+      additionalProperties: false,
+    },
+  },
+  {
+    type: "function" as const,
+    name: "set_discovery_slot",
+    description:
+      "Add or correct a SINGLE Discovery Map slot for a lead — operator-source write. Use when Jake tells you a fact in chat (e.g. 'Brenda confirmed 115 guests on the call', 'budget is around $15k', 'tasting moved to June 4'). The slot_id MUST be one of: event_date, venue, location, client_type, budget, guest_count, service_style, decision_timeline, dietary_constraints. Operator-source values always win over LLM-extraction. For canonical-Close slots (event_date / venue / location / client_type / budget) prefer using close_update_lead with custom field merge_patch_json instead — those live on Close itself; only use this tool when the user wants the value in our Discovery Map override layer.",
+    parameters: {
+      type: "object",
+      properties: {
+        lead_id: { type: "string", description: "Close lead id (lead_*)." },
+        slot_id: {
+          type: "string",
+          enum: [
+            "event_date",
+            "venue",
+            "location",
+            "client_type",
+            "budget",
+            "guest_count",
+            "service_style",
+            "decision_timeline",
+            "dietary_constraints",
+          ],
+          description: "Which Discovery Map slot to fill.",
+        },
+        value: {
+          type: "string",
+          description:
+            "The value to record. For guest_count, send a number as a string (e.g. '115') — it'll be coerced. For service_style use one of: buffet, plated, family, stations, passed, mixed.",
+        },
+      },
+      required: ["lead_id", "slot_id", "value"],
+      additionalProperties: false,
+    },
+  },
+  {
+    type: "function" as const,
+    name: "lead_journey_score",
+    description:
+      "Read-only — return the Journey Score for a lead: clarity (0-100), readiness (0-100), restraint (0-100 or null), discovery_xp (integer), pipeline stage (lead → discovery_started → tasting_booked → tasting_done → beo_sent → agreement_signed → deposit_in → event_won), Andre's 🟢 SCORE hot-tags, plus the Discovery Map (9 slots with status + value). Use when the operator asks 'how is lead X doing', 'what do we know about Brenda', 'what's the next move for this lead', or wants a single-line readiness check before approving a plan.",
+    parameters: {
+      type: "object",
+      properties: {
+        lead_id: { type: "string", description: "Close lead id (lead_*)." },
+      },
+      required: ["lead_id"],
+      additionalProperties: false,
+    },
+  },
+  {
+    type: "function" as const,
     name: "approve_and_fire_plans",
     description:
       "Approve every voice-clean needs_review day across MULTIPLE plans and fire a heartbeat sweep on each (cap 10). Equivalent to clicking Approve & run on each lead's plan card, batched. Use after generate_plans_for_leads when the operator says 'approve them all', 'send it', or 'fire them'. Returns one report per plan: approved_days, skipped_voice, actions_eligible, actions_fired, actions_skipped, skip_breakdown. Runs at concurrency 2 — heartbeat hits Close hard.",
@@ -126,12 +193,18 @@ export const COMPOSITE_TOOLS = [
 export type CompositeToolName =
   | "find_top_n_leads_for_owner"
   | "generate_plans_for_leads"
-  | "approve_and_fire_plans";
+  | "approve_and_fire_plans"
+  | "extract_discovery_facts"
+  | "lead_journey_score"
+  | "set_discovery_slot";
 
 const COMPOSITE_NAMES: ReadonlySet<string> = new Set([
   "find_top_n_leads_for_owner",
   "generate_plans_for_leads",
   "approve_and_fire_plans",
+  "extract_discovery_facts",
+  "lead_journey_score",
+  "set_discovery_slot",
 ]);
 
 export function isCompositeTool(name: string): name is CompositeToolName {
@@ -499,10 +572,273 @@ export async function dispatchCompositeTool(
         };
       }
 
+      case "extract_discovery_facts": {
+        const leadId = typeof args.lead_id === "string" ? args.lead_id : "";
+        if (!leadId.startsWith("lead_")) {
+          return { error: "lead_id required (lead_*)" };
+        }
+        if (!env.OPENAI_API_KEY) {
+          return { error: "OPENAI_API_KEY not set" };
+        }
+        const traceId = opts?.traceId ?? randomUUID();
+        const result = await extractDiscoveryFactsForLead(leadId);
+        if ("error" in result) {
+          await logExecution({
+            action_kind: "intake_extract",
+            close_lead_id: leadId,
+            trace_id: traceId,
+            payload: {
+              tool: "extract_discovery_facts",
+              scope: "discovery_map",
+              error: result.error,
+            },
+            result: "error",
+          });
+          return result;
+        }
+        // Persist
+        await upsertLeadFactsBulk(
+          result.facts.map((f) => ({
+            lead_id: leadId,
+            slot_id: f.slot_id,
+            value: f.value,
+            source: "llm_extraction",
+            evidence: f.evidence,
+            extracted_at: new Date().toISOString(),
+          }))
+        );
+        await logExecution({
+          action_kind: "intake_extract",
+          close_lead_id: leadId,
+          trace_id: traceId,
+          payload: {
+            tool: "extract_discovery_facts",
+            scope: "discovery_map",
+            slots_written: result.facts.map((f) => f.slot_id),
+          },
+          result: "ok",
+        });
+        return {
+          lead_id: leadId,
+          slots_extracted: result.facts.length,
+          slots_skipped_already_known: result.skipped_known,
+          facts: result.facts,
+          trace_id: traceId,
+        };
+      }
+
+      case "set_discovery_slot": {
+        const leadId = typeof args.lead_id === "string" ? args.lead_id : "";
+        const slotId = typeof args.slot_id === "string" ? args.slot_id : "";
+        const valueRaw = typeof args.value === "string" ? args.value.trim() : "";
+        const validSlots = new Set([
+          "event_date", "venue", "location", "client_type", "budget",
+          "guest_count", "service_style", "decision_timeline", "dietary_constraints",
+        ]);
+        if (!leadId.startsWith("lead_")) return { error: "lead_id required (lead_*)" };
+        if (!validSlots.has(slotId)) return { error: `slot_id must be one of: ${[...validSlots].join(", ")}` };
+        if (valueRaw.length === 0) return { error: "value cannot be empty (use a separate clear if needed)" };
+
+        // Coerce guest_count to integer
+        let value: unknown = valueRaw;
+        if (slotId === "guest_count") {
+          const n = Number(valueRaw);
+          if (Number.isFinite(n) && n > 0) value = Math.round(n);
+        }
+
+        const traceId = opts?.traceId ?? randomUUID();
+        try {
+          await upsertLeadFact({
+            lead_id: leadId,
+            slot_id: slotId,
+            value,
+            source: "operator",
+            evidence: { excerpt: "operator-set via chat agent", confidence: 1.0 },
+            extracted_at: new Date().toISOString(),
+          });
+        } catch (err) {
+          return { error: err instanceof Error ? err.message : String(err) };
+        }
+        await logExecution({
+          action_kind: "intake_extract",
+          close_lead_id: leadId,
+          trace_id: traceId,
+          payload: {
+            tool: "set_discovery_slot",
+            scope: "discovery_map",
+            slot_id: slotId,
+            value,
+            via: "chat_agent",
+          },
+          result: "ok",
+        });
+        return {
+          ok: true,
+          lead_id: leadId,
+          slot_id: slotId,
+          value,
+          source: "operator",
+          trace_id: traceId,
+        };
+      }
+
+      case "lead_journey_score": {
+        const leadId = typeof args.lead_id === "string" ? args.lead_id : "";
+        if (!leadId.startsWith("lead_")) {
+          return { error: "lead_id required (lead_*)" };
+        }
+        const out = await journeyScoreForLead(leadId);
+        if ("error" in out) return out;
+        // Compact payload for the chat widget — keep slot evidence excerpts
+        // tight so the 2000-char tool-summary cap holds even with 9 slots.
+        return {
+          lead_id: leadId,
+          stage: out.score.stage,
+          clarity: out.score.clarity,
+          readiness: out.score.readiness,
+          restraint: out.score.restraint,
+          discovery_xp: out.score.discovery_xp,
+          completeness: Math.round(out.map.completeness * 100) / 100,
+          hot_tags: out.score.hot_tags,
+          restraint_breakdown: out.score.restraint_breakdown,
+          slots: out.map.slots.map((s) => ({
+            id: s.slot.id,
+            label: s.slot.label,
+            category: s.slot.category,
+            status: s.status,
+            source: s.source,
+            value: s.value,
+          })),
+        };
+      }
+
       default:
         return { error: `unknown composite tool: ${name}` };
     }
   } catch (err) {
     return { error: err instanceof Error ? err.message : String(err) };
   }
+}
+
+// ─── Discovery extraction (LLM) ──────────────────────────────────────────
+
+const EXTRACTION_SLOTS = ["guest_count", "service_style", "decision_timeline", "dietary_constraints"] as const;
+type ExtractionSlotId = (typeof EXTRACTION_SLOTS)[number];
+
+type ExtractedFact = {
+  slot_id: string;
+  value: unknown;
+  evidence: { activity_id?: string; excerpt: string; confidence: number };
+};
+
+export async function extractDiscoveryFactsForLead(
+  leadId: string
+): Promise<{ facts: ExtractedFact[]; skipped_known: string[] } | { error: string }> {
+  let box;
+  try {
+    box = await closeGetLeadFull(leadId);
+  } catch (err) {
+    return { error: `closeGetLeadFull: ${err instanceof Error ? err.message : String(err)}` };
+  }
+
+  // Skip slots that are already filled by Close custom fields. We don't
+  // overwrite canonical-Close values — those win on read regardless.
+  const lead = box.lead as Record<string, unknown>;
+  const skipped_known: string[] = [];
+  const slotsToExtract: ExtractionSlotId[] = [];
+  for (const slotId of EXTRACTION_SLOTS) {
+    const def = DISCOVERY_SLOTS.find((s) => s.id === slotId);
+    if (def?.close_custom_key) {
+      const v = lead[`custom.${def.close_custom_key}`];
+      if (v != null && (typeof v !== "string" || v.trim().length > 0)) {
+        skipped_known.push(slotId);
+        continue;
+      }
+    }
+    slotsToExtract.push(slotId);
+  }
+  if (slotsToExtract.length === 0) {
+    return { facts: [], skipped_known };
+  }
+
+  // Build tight Box summary: latest 8 inbound + 4 outbound activities
+  // with body text. Shorter than plan-generation prompt — extraction
+  // doesn't need full history.
+  const sortedActivities = [...box.activities].sort(
+    (a, b) => new Date(b.date_created).getTime() - new Date(a.date_created).getTime()
+  );
+  const inbound = sortedActivities.filter((a) => a.direction === "inbound").slice(0, 8);
+  const outbound = sortedActivities.filter((a) => a.direction === "outbound").slice(0, 4);
+  const lines: string[] = [];
+  for (const a of [...inbound, ...outbound]) {
+    const dir = a.direction === "inbound" ? "← " : "→ ";
+    const t = a._type;
+    const body = (a as { body_text?: string; body?: string; subject?: string; note?: string });
+    const text = (body.body_text || body.body || body.note || body.subject || "").slice(0, 400);
+    if (text) lines.push(`[${a.id}] ${dir}${t}: ${text}`);
+  }
+  const activitiesSummary = lines.join("\n");
+
+  const slotPrompt = slotsToExtract
+    .map((id) => {
+      const def = DISCOVERY_SLOTS.find((s) => s.id === id)!;
+      return `- "${id}" (${def.label}): ${def.why_it_matters}`;
+    })
+    .join("\n");
+
+  const instructions = `You are extracting catering buyer facts from a lead's communication history.
+
+Slots to fill:
+${slotPrompt}
+
+Output ONLY a JSON object: { facts: [ { slot_id, value, evidence: { activity_id, excerpt, confidence } } ] }
+
+Rules:
+- value: keep concise. guest_count = integer (best-effort from text). service_style = one of "buffet" | "plated" | "family" | "stations" | "passed" | "mixed" | other quote. decision_timeline = short phrase (e.g. "by July 1", "next 2 weeks"). dietary_constraints = comma-separated list.
+- evidence.excerpt: a verbatim ~120-char span from the message you're grounding the fact in.
+- evidence.confidence: 0.0..1.0. ONLY include facts with confidence >= 0.6.
+- evidence.activity_id: the [acti_…] id from the line you grounded in.
+- If a slot has no evidence, omit it from facts. Do NOT invent.
+`;
+
+  const client = new OpenAI({ apiKey: env.OPENAI_API_KEY! });
+  let raw = "";
+  try {
+    const settings = await getSettings();
+    const response = await client.responses.create({
+      model: settings.model,
+      instructions,
+      input: `Lead: ${box.lead.display_name}\n\nActivities:\n${activitiesSummary || "(none)"}`,
+    });
+    raw = response.output_text ?? "";
+  } catch (err) {
+    return { error: `OpenAI call failed: ${err instanceof Error ? err.message : String(err)}` };
+  }
+
+  const jsonStart = raw.indexOf("{");
+  const jsonEnd = raw.lastIndexOf("}");
+  if (jsonStart < 0 || jsonEnd <= jsonStart) {
+    return { error: "no JSON object in extraction output" };
+  }
+  let parsed: { facts?: ExtractedFact[] };
+  try {
+    parsed = JSON.parse(raw.slice(jsonStart, jsonEnd + 1));
+  } catch (err) {
+    return { error: `JSON parse failed: ${err instanceof Error ? err.message : err}` };
+  }
+
+  const facts = (parsed.facts ?? [])
+    .filter((f): f is ExtractedFact => {
+      return (
+        typeof f === "object" &&
+        f !== null &&
+        typeof (f as ExtractedFact).slot_id === "string" &&
+        EXTRACTION_SLOTS.includes((f as ExtractedFact).slot_id as ExtractionSlotId) &&
+        (f as ExtractedFact).value != null &&
+        typeof (f as ExtractedFact).evidence === "object"
+      );
+    })
+    .filter((f) => Number(f.evidence.confidence ?? 0) >= 0.6);
+
+  return { facts, skipped_known };
 }

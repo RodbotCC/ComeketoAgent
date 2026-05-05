@@ -2,10 +2,31 @@ import Link from "next/link";
 import type { TimelineItem } from "@/lib/box-timeline";
 import { activityLine } from "./timeline-activity-line";
 
+function fmtAt(iso: string): string {
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return iso;
+  return d.toLocaleString("en-US", {
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+  });
+}
+
+function fmtDay(iso: string): string {
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return iso;
+  return d.toLocaleDateString("en-US", {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+  });
+}
+
 /** Unified comms + threads + plan days (newest first). */
 export function BoxTimeline({ items }: { items: TimelineItem[] }) {
   if (items.length === 0) {
-    return <div className="lead-empty">Nothing on the timeline yet.</div>;
+    return <div className="lead-timeline-empty">Nothing on the timeline yet.</div>;
   }
 
   return (
@@ -19,8 +40,8 @@ export function BoxTimeline({ items }: { items: TimelineItem[] }) {
               <div>
                 <div className="lead-timeline-meta">
                   <span className="lead-timeline-kind">{kind}</span>
-                  <span className="lead-timeline-dir">{direction}</span>
-                  <time dateTime={it.at}>{it.at}</time>
+                  {direction && <span className="lead-timeline-dir">{direction}</span>}
+                  <time dateTime={it.at}>{fmtAt(it.at)}</time>
                 </div>
                 <div className="lead-timeline-body">{line}</div>
               </div>
@@ -35,7 +56,7 @@ export function BoxTimeline({ items }: { items: TimelineItem[] }) {
               <div>
                 <div className="lead-timeline-meta">
                   <span className="lead-timeline-kind">email thread</span>
-                  <time dateTime={it.at}>{it.at}</time>
+                  <time dateTime={it.at}>{fmtAt(it.at)}</time>
                 </div>
                 <div className="lead-timeline-body">{subj}</div>
               </div>
@@ -48,8 +69,10 @@ export function BoxTimeline({ items }: { items: TimelineItem[] }) {
             <div>
               <div className="lead-timeline-meta">
                 <span className="lead-timeline-kind">plan day {it.dayNumber}</span>
-                <span className={`lead-timeline-appr appr-${it.approval_status}`}>{it.approval_status}</span>
-                <time dateTime={it.date}>{it.date}</time>
+                <span className={`lead-timeline-appr appr-${it.approval_status}`}>
+                  {it.approval_status.replace(/_/g, " ")}
+                </span>
+                <time dateTime={it.date}>{fmtDay(it.date)}</time>
               </div>
               <div className="lead-timeline-body">
                 {it.channels.join(" · ")} — {it.intents.slice(0, 2).join(" | ")}
@@ -79,29 +102,41 @@ export function RecentExecutionStrip({
 }) {
   if (rows.length === 0) return null;
   return (
-    <div className="lead-recent-audit widget" style={{ marginTop: 12, padding: "10px 12px", fontSize: 11 }}>
-      <div style={{ fontWeight: 600, marginBottom: 8 }}>Recent actions</div>
-      <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
+    <div className="lead-recent-audit">
+      <div className="lead-recent-audit-h">Recent actions</div>
+      <ul className="lead-recent-audit-list">
         {rows.map((r) => (
-          <li key={r.id} style={{ borderBottom: "1px solid var(--rule-soft)", padding: "6px 0" }}>
-            <span style={{ color: "var(--ink-soft)" }}>{new Date(r.at).toLocaleString()}</span>
-            {" · "}
-            <code>{r.action_kind}</code>
-            {r.result !== "ok" && <span style={{ color: "var(--accent-bad)" }}> ({r.result})</span>}
-            {r.skip_code && <span> · {r.skip_code}</span>}
+          <li key={r.id} className={`lead-recent-audit-row${r.result !== "ok" ? " is-error" : ""}`}>
+            <time className="lead-recent-audit-time" dateTime={r.at}>
+              {new Date(r.at).toLocaleString("en-US", {
+                month: "short",
+                day: "numeric",
+                hour: "numeric",
+                minute: "2-digit",
+              })}
+            </time>
+            <code className="lead-recent-audit-kind">{r.action_kind}</code>
+            {r.result !== "ok" && (
+              <span className="lead-recent-audit-result">{r.result}</span>
+            )}
+            {r.skip_code && (
+              <span className="lead-recent-audit-skip">{r.skip_code}</span>
+            )}
             {r.trace_id && (
-              <>
-                {" · "}
-                <Link href={`/heartbeat`} className="ag-back-link" title={r.trace_id}>
-                  trace
-                </Link>
-              </>
+              <Link
+                href={`/heartbeat`}
+                className="lead-recent-audit-trace"
+                title={r.trace_id}
+              >
+                trace ↗
+              </Link>
             )}
           </li>
         ))}
       </ul>
-      <p style={{ marginTop: 8, color: "var(--ink-faint)" }}>
-        Full audit in Supabase <code>execution_log</code> for lead <code>{leadId.slice(0, 12)}…</code>
+      <p className="lead-recent-audit-foot">
+        Full audit in Supabase <code>execution_log</code> for lead{" "}
+        <code>{leadId.slice(0, 12)}…</code>
       </p>
     </div>
   );
