@@ -1,0 +1,211 @@
+{
+  "addresses": [],
+  "contacts": [
+    {
+      "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "date_created": "2026-05-05T17:26:23.302000+00:00",
+      "date_updated": "2026-05-05T17:26:23.302000+00:00",
+      "display_name": "Cassandra Jamieson",
+      "emails": [
+        {
+          "email": "cassandrajamieson4@gmail.com",
+          "is_unsubscribed": false,
+          "type": "direct"
+        }
+      ],
+      "id": "cont_BwmdkLL9hKwvCs5Rg9prS6dX2BxHVuW3RVq6ljz21Gr",
+      "integration_links": [
+        {
+          "name": "LinkedIn Search",
+          "url": "https://www.linkedin.com/search/results/people/?keywords=Cassandra%20Jamieson"
+        }
+      ],
+      "lead_id": "lead_LIHTvK1YRHQhJmOIok55LA5bDIckVG9DMkFVwQX35nx",
+      "name": "Cassandra Jamieson",
+      "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+      "phones": [
+        {
+          "country": "US",
+          "phone": "+16179875638",
+          "phone_formatted": "+1 617-987-5638",
+          "type": "direct"
+        }
+      ],
+      "timezone": "America/New_York",
+      "timezone_source": "inferred_from_phone_number",
+      "title": "Plain Old Phone (best for SMS)",
+      "updated_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "urls": []
+    },
+    {
+      "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "date_created": "2026-05-05T17:26:36.993000+00:00",
+      "date_updated": "2026-05-05T17:26:36.993000+00:00",
+      "display_name": "Cassandra Jamieson",
+      "emails": [],
+      "id": "cont_h70g3DTVoqMTR1NGn6jL9fhrqD5BDPZ43Fl2nM5AWpn",
+      "integration_links": [
+        {
+          "name": "LinkedIn Search",
+          "url": "https://www.linkedin.com/search/results/people/?keywords=Cassandra%20Jamieson"
+        }
+      ],
+      "lead_id": "lead_LIHTvK1YRHQhJmOIok55LA5bDIckVG9DMkFVwQX35nx",
+      "name": "Cassandra Jamieson",
+      "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+      "phones": [
+        {
+          "country": "US",
+          "phone": "+16179875638",
+          "phone_formatted": "+1 617-987-5638",
+          "type": "mobile"
+        }
+      ],
+      "timezone": "America/New_York",
+      "timezone_source": "inferred_from_phone_number",
+      "title": "Facebook # (Best For Calls)",
+      "updated_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "urls": []
+    }
+  ],
+  "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+  "created_by_name": "Sales Team Event Consultant Team",
+  "custom": {
+    "00. 🪖 LEAD OWNER": "01. 😎 Andre",
+    "02. ⚔︎ WORKFLOW WEAPONS": [
+      "5x5",
+      "✉️ FB Lead Form 1EMAIL"
+    ],
+    "05. 👥 Franchise": "Comeketo",
+    "7 TP Cadence Follow up": [
+      "01. 📞 DAY 1 CALL"
+    ],
+    "Crisp": [
+      "Created"
+    ],
+    "Crisp ID": 0,
+    "Crisp Link": "https://app.crisp.chat/website/6e2ee3ba-8402-4f3a-8240-aace16ee1bac/contacts/profile/bf1e0191-60eb-448c-9a69-fb086307cbd3",
+    "Date of Event": "2026-05-30T15:00:00+00:00",
+    "FB_AD": "VIDEO  RODS WEDDING & FACELESS",
+    "FB_ADSET": "RODS WEDDING & FACELESS",
+    "FB_CAMPAIGN": "01. [CATER] LF EVERGREEN - QUOTE"
+  },
+  "custom.cf_FV2xBkviv7BAQZkkjUf8NUOc3fOpPTObMy5lVxZbyiP": "2026-05-30T15:00:00+00:00",
+  "custom.cf_JlnAQRNnjtHxBcHcZL57YpdSZq6W9YlOv3zXG64pLNv": 0,
+  "custom.cf_NN0HOiT2V7VR8vY0mdaesirgzN0FvEumQoJy6luhMBZ": "RODS WEDDING & FACELESS",
+  "custom.cf_XUgJtr1fW0TOSr4qtiiu1c4MDSZeYeYkkgi4wjriVBE": "VIDEO  RODS WEDDING & FACELESS",
+  "custom.cf_f6hxPXViYgPbzJu8x7XB1nQIxyJHP47eOI6nCuGpc01": [
+    "Created"
+  ],
+  "custom.cf_ka2oCzzw0j2k9T0zlxpQ0udWHP1wUW8fP0LAieNjzXl": [
+    "01. 📞 DAY 1 CALL"
+  ],
+  "custom.cf_l37qDcsFYbEZQJhRRrImt3cwFPY23IbG4kjLBJRN3GZ": [
+    "5x5",
+    "✉️ FB Lead Form 1EMAIL"
+  ],
+  "custom.cf_nzUyCovAbOCJxIG6j5TXccpBmdWlRAFuMLDTAxJ2Y9p": "01. [CATER] LF EVERGREEN - QUOTE",
+  "custom.cf_smf4xXJPUNlJQ2QiG6lgzOhQEuEMQibqZL5WZaL0GHe": "https://app.crisp.chat/website/6e2ee3ba-8402-4f3a-8240-aace16ee1bac/contacts/profile/bf1e0191-60eb-448c-9a69-fb086307cbd3",
+  "custom.cf_vfo9P74IUYaftU7nCUQBxaSmGf69YCC1Bdwbz9w20lU": "Comeketo",
+  "custom.cf_xF8FLufgEx9bsijfRAfHhgIrPBQ5ajuohcazC7OtNmT": "01. 😎 Andre",
+  "date_created": "2026-05-05T17:26:23.272000+00:00",
+  "date_updated": "2026-05-05T18:50:32.864000+00:00",
+  "description": "People 25\nEvent Desc: Graduation party\nEvent Date: May 30\nCampaign Name:\n01. [CATER] LF EVERGREEN - QUOTE",
+  "display_name": "Cassandra Jamieson",
+  "html_url": "https://app.close.com/lead/lead_LIHTvK1YRHQhJmOIok55LA5bDIckVG9DMkFVwQX35nx/",
+  "id": "lead_LIHTvK1YRHQhJmOIok55LA5bDIckVG9DMkFVwQX35nx",
+  "integration_links": [
+    {
+      "name": "Google Search",
+      "url": "https://google.com/search?q=Cassandra%20Jamieson"
+    }
+  ],
+  "name": "Cassandra Jamieson",
+  "opportunities": [
+    {
+      "annualized_expected_value": 15760,
+      "annualized_value": 78800,
+      "attachments": [],
+      "confidence": 20,
+      "contact_id": "cont_BwmdkLL9hKwvCs5Rg9prS6dX2BxHVuW3RVq6ljz21Gr",
+      "contact_name": "Cassandra Jamieson",
+      "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "created_by_name": "Sales Team Event Consultant Team",
+      "custom.cf_3LZk8uGw0lIvPpNzOMvFn4WwiCXbI91X66Ujvt8UJPx": [
+        "NEEDS VENUE NAME"
+      ],
+      "custom.cf_FV2xBkviv7BAQZkkjUf8NUOc3fOpPTObMy5lVxZbyiP": "2026-05-30T15:00:00+00:00",
+      "custom.cf_fs7mrfN5x0M20CyoltczyVg8t0Xul5GFvkC4FNUKvY6": "Customer",
+      "custom.cf_ge7qOebiWpyPvuv7xkzNaYpM8PsmOeNvXasXFOtPXRt": [
+        "Facebook, Paid"
+      ],
+      "custom.cf_goMfyKkS7pFUhmo0xvrl1JvQv1KLaQkfoVo0j93dvhe": "Graduation party",
+      "custom.cf_nQLULOLLmtUAh9OwcpJibPc5pQKIqpFOjdGSTwC9ePO": "25",
+      "date_created": "2026-05-05T17:26:28.909000+00:00",
+      "date_lost": null,
+      "date_updated": "2026-05-05T17:43:59.874000+00:00",
+      "date_won": "2026-05-30",
+      "expected_value": 15760,
+      "id": "oppo_Epd32yq2Gq4Ts07RJzzV1vzo888CuayZu4uHUZmCgHi",
+      "integration_links": [],
+      "lead_id": "lead_LIHTvK1YRHQhJmOIok55LA5bDIckVG9DMkFVwQX35nx",
+      "lead_name": "Cassandra Jamieson",
+      "note": "",
+      "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+      "pipeline_id": "pipe_4s7zfmoJhbc6jcU1aPvIDT",
+      "pipeline_name": "Sales",
+      "status_display_name": "Sales: ⬜ 00. Prospect",
+      "status_id": "stat_wVjlEhuB44DBwtfg0AG5LidEKPJOVMfLTyVgMUxWKmI",
+      "status_label": "⬜ 00. Prospect",
+      "status_type": "active",
+      "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+      "updated_by_name": "Rhonna Ricafort",
+      "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "user_name": "Andre Raw",
+      "value": 78800,
+      "value_currency": "USD",
+      "value_formatted": "$788",
+      "value_period": "one_time"
+    }
+  ],
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "status_id": "stat_qGpMKenDu31cIY56uTpvo8evqhcNnK4KDWtz4y9NPz3",
+  "status_label": "🔘 Maybe",
+  "tasks": [
+    {
+      "_type": "lead",
+      "agent_config_id": null,
+      "assigned_to": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "assigned_to_name": "Andre Raw",
+      "contact_id": null,
+      "contact_name": null,
+      "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "created_by_name": "Sales Team Event Consultant Team",
+      "date": "2026-05-07T13:00:00+00:00",
+      "date_created": "2026-05-05T17:26:30.536000+00:00",
+      "date_updated": "2026-05-05T17:45:10.093000+00:00",
+      "deduplication_key": null,
+      "due_date": "2026-05-07T13:00:00+00:00",
+      "id": "task_Mre2tpkEiU05ZBivfkFTQTVtf4UUFFMHJEU6rcFQOrU",
+      "is_complete": false,
+      "is_dateless": false,
+      "is_primary_lead_notification": true,
+      "lead_id": "lead_LIHTvK1YRHQhJmOIok55LA5bDIckVG9DMkFVwQX35nx",
+      "lead_name": "Cassandra Jamieson",
+      "object_id": null,
+      "object_type": null,
+      "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+      "priority": "medium",
+      "resolution": null,
+      "sequence_id": null,
+      "sequence_subscription_id": null,
+      "text": "Facebook Lead Ads: Cassandra Jamieson\nCampaign: RODS WEDDING & FACELESS",
+      "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "updated_by_name": "Andre Raw",
+      "view": "future"
+    }
+  ],
+  "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "updated_by_name": "Rhonna Ricafort",
+  "url": null
+}
