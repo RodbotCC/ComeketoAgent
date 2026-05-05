@@ -37,14 +37,37 @@ function fmtTime(iso?: string) {
 export function PlanSection({
   leadId,
   plan,
+  planError,
   currentSnapshotId,
   defaultHorizonDays,
 }: {
   leadId: string;
   plan: PersistedPlan | null;
+  planError?: string | null;
   currentSnapshotId: string;
   defaultHorizonDays: number;
 }) {
+  // ─── Plan fetch failed (Supabase blip etc.) — distinct from "no plan yet" ───
+  if (!plan && planError) {
+    return (
+      <div className="lead-card widget plan-empty">
+        <h3 className="lead-card-h">Plan fetch failed</h3>
+        <p className="plan-empty-msg">
+          A plan probably exists for this lead, but we couldn&rsquo;t load it from storage just now.
+          Refresh to retry — if it keeps failing, check the server console for the underlying error.
+        </p>
+        <p className="muted" style={{ fontSize: 11, marginTop: 8 }}>
+          <strong>Error:</strong> {planError}
+        </p>
+        <p style={{ marginTop: 12 }}>
+          <a href={`/lead/${leadId}?retry=${Date.now()}`} className="plan-btn plan-btn-primary">
+            Refresh
+          </a>
+        </p>
+      </div>
+    );
+  }
+
   // ─── No plan yet — show the generate button ───
   if (!plan) {
     return (

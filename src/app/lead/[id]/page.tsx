@@ -4,6 +4,7 @@ import { LeadSubNav } from "./LeadSubNav";
 import { LeadToolbar } from "./LeadToolbar";
 import { loadLeadBoxPageData } from "./load-lead-box";
 import { BoxAnalyticsStrip } from "./BoxTimeline";
+import { PlanPageBeacon } from "./PlanPageBeacon";
 
 export const dynamic = "force-dynamic";
 
@@ -32,10 +33,11 @@ export default async function LeadPlanPage({ params }: Props) {
   }
 
   const data = loaded;
-  const { plan, settings, planEligible, currentSnapshotId, replyGate, planFresh, cycleDayDisplay, lastInbound, lastOutbound } = data;
+  const { plan, planError, settings, planEligible, currentSnapshotId, replyGate, planFresh, cycleDayDisplay, lastInbound, lastOutbound } = data;
 
   return (
     <main className="lead-main lead-main--tab scroll-hide">
+      <PlanPageBeacon leadId={params.id} plan={plan} />
       <LeadSubNav leadId={params.id} />
       <LeadToolbar data={data} />
       <BoxAnalyticsStrip
@@ -52,6 +54,7 @@ export default async function LeadPlanPage({ params }: Props) {
               <PlanSection
                 leadId={params.id}
                 plan={plan}
+                planError={planError}
                 currentSnapshotId={currentSnapshotId}
                 defaultHorizonDays={settings.default_plan_horizon_days}
               />
