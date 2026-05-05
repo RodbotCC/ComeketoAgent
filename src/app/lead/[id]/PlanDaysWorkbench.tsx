@@ -81,100 +81,6 @@ function planToProposalPlanItem(
   };
 }
 
-function fmtSize(bytes: number | null): string {
-  if (!bytes) return "";
-  if (bytes < 1024) return `${bytes}B`;
-  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(0)}KB`;
-  return `${(bytes / (1024 * 1024)).toFixed(1)}MB`;
-}
-
-function artifactKindGlyph(mime: string | null, filename: string): string {
-  const m = (mime || "").toLowerCase();
-  const n = filename.toLowerCase();
-  if (m.startsWith("image/") || /\.(png|jpe?g|gif|webp|svg)$/.test(n)) return "🖼";
-  if (m.includes("pdf") || n.endsWith(".pdf")) return "📄";
-  if (m.includes("html") || n.endsWith(".html") || n.endsWith(".htm")) return "⟨/⟩";
-  if (m.includes("csv") || n.endsWith(".csv")) return "▦";
-  if (m.includes("json") || n.endsWith(".json")) return "{}";
-  if (m.includes("video") || /\.(mp4|mov|webm)$/.test(n)) return "▶";
-  if (m.includes("audio") || /\.(mp3|wav|m4a)$/.test(n)) return "♪";
-  return "◆";
-}
-
-function AssetsPanel({
-  artifacts,
-  leadId,
-}: {
-  artifacts: IntakeArtifactRow[];
-  leadId: string;
-}) {
-  const [copied, setCopied] = useState<string | null>(null);
-
-  const handleCopy = async (a: IntakeArtifactRow) => {
-    const ref =
-      a.mime?.startsWith("image/")
-        ? `<img src="{ASSET:${a.id}}" alt="${a.filename.replace(/"/g, "&quot;")}" />`
-        : `[asset: ${a.filename}${a.extracted_text ? ` · ${a.extracted_text.length} chars extracted` : ""}]`;
-    try {
-      await navigator.clipboard.writeText(ref);
-      setCopied(a.id);
-      setTimeout(() => setCopied(null), 1400);
-    } catch {
-      // fallback: prompt
-      window.prompt("Copy this reference into the AI change request:", ref);
-    }
-  };
-
-  if (artifacts.length === 0) {
-    return (
-      <section className="cmk-pdw-assets cmk-pdw-assets-empty">
-        <div className="proposal-panel-heading">
-          <span>Lead assets</span>
-          <small>0 files</small>
-        </div>
-        <p className="cmk-pdw-assets-empty-msg">
-          No intake artifacts yet for this lead.{" "}
-          <a href={`/lead/${leadId}/intake`}>Upload some →</a>
-        </p>
-      </section>
-    );
-  }
-
-  return (
-    <section className="cmk-pdw-assets">
-      <div className="proposal-panel-heading">
-        <span>Lead assets</span>
-        <small>{artifacts.length} {artifacts.length === 1 ? "file" : "files"}</small>
-      </div>
-      <p className="cmk-pdw-assets-hint">
-        Click any asset to copy a reference. Paste into the AI change request — the agent will pull
-        the asset into the touch.
-      </p>
-      <div className="cmk-pdw-assets-grid">
-        {artifacts.map((a) => (
-          <button
-            key={a.id}
-            type="button"
-            className="cmk-pdw-asset"
-            onClick={() => handleCopy(a)}
-            title={a.summary || a.filename}
-          >
-            <span className="cmk-pdw-asset-glyph">{artifactKindGlyph(a.mime, a.filename)}</span>
-            <span className="cmk-pdw-asset-name">{a.filename}</span>
-            <span className="cmk-pdw-asset-meta">
-              {fmtSize(a.byte_size)}
-              {a.extracted_text ? ` · ${a.extracted_text.length} chars` : ""}
-            </span>
-            <span className="cmk-pdw-asset-action">
-              {copied === a.id ? "Copied ✓" : "Copy ref"}
-            </span>
-          </button>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 export function PlanDaysWorkbench({
   plan,
   leadName,
@@ -308,9 +214,7 @@ export function PlanDaysWorkbench({
           plan={proposalItem}
           onClose={() => setOpenDayIndex(null)}
           initialDayIndex={openDayIndex}
-          assetsSlot={
-            <AssetsPanel artifacts={intakeArtifacts} leadId={plan.close_lead_id} />
-          }
+          intakeArtifacts={intakeArtifacts}
         />
       )}
     </>

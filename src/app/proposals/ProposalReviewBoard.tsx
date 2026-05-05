@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState, useTransition } from "react";
+import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import {
   addPlanDayTouchAction,
   editPlanDayTouchAction,
@@ -11,6 +11,25 @@ import {
 } from "@/app/lead/[id]/actions";
 import { useToast } from "@/components/Toast";
 import type { ApprovalStatus, PlanChannel, PlannedTouchpoint } from "@/lib/plan";
+import type { IntakeArtifactRow } from "@/lib/intake-artifacts";
+
+const AUTO_REFINE_INSTRUCTION =
+  "(no operator instruction — take your best shot at improving this based on the current Box state, the plan goal, and NEPQ voice. Apply your judgment.)";
+
+function assetRefForArtifact(a: IntakeArtifactRow): string {
+  if (a.mime?.startsWith("image/")) {
+    return `<img src="{ASSET:${a.id}}" alt="${a.filename.replace(/"/g, "&quot;")}" />`;
+  }
+  const tail = a.extracted_text ? ` · ${a.extracted_text.length} chars extracted` : "";
+  return `[asset: ${a.filename}${tail}]`;
+}
+
+function fmtAssetSize(bytes: number | null): string {
+  if (!bytes) return "";
+  if (bytes < 1024) return `${bytes}B`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(0)}KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(1)}MB`;
+}
 
 /** Per-day shape — the inner unit, surfaced inside the workbench. */
 export type ProposalDayItem = {
@@ -364,8 +383,20 @@ function RefinePanel({ item }: { item: ProposalReviewItem }) {
   );
 }
 
-function AiChangePanel({ item, activePanel }: { item: ProposalReviewItem; activePanel: ActivePanel }) {
+function AiChangePanel({
+  item,
+  activePanel,
+  intakeArtifacts,
+}: {
+  item: ProposalReviewItem;
+  activePanel: ActivePanel;
+  intakeArtifacts: IntakeArtifactRow[];
+}) {
   const toast = useToast();
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const [pickerOpen, setPickerOpen] = useState(false);
+  const [instruction, setInstruction] = useState("");
+
   const touch =
     activePanel.kind === "touch" ? item.touches[activePanel.touchIndex] : item.touches[0] ?? null;
   const contextLabel =
@@ -377,6 +408,54 @@ function AiChangePanel({ item, activePanel }: { item: ProposalReviewItem; active
           ? "plan rewrite"
           : "day overview";
 
+  function insertAssetRef(a: IntakeArtifactRow) {
+    const ta = textareaRef.current;
+    const snippet = assetRefForArtifact(a);
+    if (!ta) {
+      setInstruction((prev) => (prev ? `${prev} ${snippet}` : snippet));
+    } else {
+      const start = ta.selectionStart ?? ta.value.length;
+      const end = ta.selectionEnd ?? ta.value.length;
+      const before = ta.value.slice(0, start);
+      const after = ta.value.slice(end);
+      const padBefore = before && !/\s$/.test(before) ? " " : "";
+      const padAfter = after && !/^\s/.test(after) ? " " : "";
+      const next = `${before}${padBefore}${snippet}${padAfter}${after}`;
+      setInstruction(next);
+      // Restore focus + caret after React re-renders
+      requestAnimationFrame(() => {
+        if (textareaRef.current) {
+          textareaRef.current.focus();
+          const caret = (before + padBefore + snippet).length;
+          textareaRef.current.setSelectionRange(caret, caret);
+        }
+      });
+    }
+    setPickerOpen(false);
+  }
+
+  async function submit(scope: "day" | "plan", auto: boolean) {
+    const fd = new FormData();
+    fd.set("plan_id", item.plan_id);
+    fd.set("lead_id", item.lead_id);
+    fd.set("day_index", String(item.day_index));
+    const text = instruction.trim();
+    fd.set("instruction", auto || !text ? AUTO_REFINE_INSTRUCTION : text);
+    const result =
+      scope === "plan"
+        ? await refineWholePlanAction({ ok: true }, fd)
+        : await refinePlanDayAction({ ok: true }, fd);
+    if (!result.ok) {
+      toast.push(`AI change failed — ${result.error ?? "unknown"}`, { tone: "error", ttl: 5000 });
+      return;
+    }
+    const verb = auto || !text ? "Auto rewrite" : "Rewrite";
+    toast.push(`${verb} ${scope === "plan" ? "plan" : "day"} queued`, { tone: "success" });
+    if (auto) setInstruction("");
+  }
+
+  const hasAssets = intakeArtifacts.length > 0;
+
   return (
     <section className="proposal-ai-panel">
       <div className="proposal-panel-heading">
@@ -384,39 +463,98 @@ function AiChangePanel({ item, activePanel }: { item: ProposalReviewItem; active
         <small>{contextLabel}</small>
       </div>
       <form
-        action={async (fd) => {
-          fd.set("plan_id", item.plan_id);
-          fd.set("lead_id", item.lead_id);
-          fd.set("day_index", String(item.day_index));
-          const scope = String(fd.get("scope") ?? "day");
-          const result =
-            scope === "plan"
-              ? await refineWholePlanAction({ ok: true }, fd)
-              : await refinePlanDayAction({ ok: true }, fd);
-          if (!result.ok) {
-            toast.push(`AI change failed — ${result.error ?? "unknown"}`, { tone: "error", ttl: 5000 });
-          } else {
-            toast.push(scope === "plan" ? "Plan rewrite queued" : "Day rewrite queued", {
-              tone: "success",
-            });
-          }
-        }}
+        action={() => {}}
+        onSubmit={(e) => e.preventDefault()}
         className="proposal-ai-form"
       >
-        <textarea
-          name="instruction"
-          className="proposal-input proposal-textarea"
-          rows={5}
-          placeholder={`Tell the AI how to change this ${activePanel.kind === "touch" ? "touch" : "day"}...`}
-          required
-        />
+        <div className="proposal-ai-textwrap">
+          <textarea
+            ref={textareaRef}
+            name="instruction"
+            className="proposal-input proposal-textarea"
+            rows={4}
+            placeholder={`Tell the AI how to change this ${activePanel.kind === "touch" ? "touch" : "day"} — or click "Auto" and let the AI take a crack on its own.`}
+            value={instruction}
+            onChange={(e) => setInstruction(e.target.value)}
+          />
+          <div className="proposal-ai-asset-attach">
+            <button
+              type="button"
+              className="proposal-ai-asset-btn"
+              onClick={() => setPickerOpen((o) => !o)}
+              disabled={!hasAssets}
+              title={
+                hasAssets
+                  ? "Attach an intake artifact reference"
+                  : "No intake assets yet — upload via the Intake tab on this lead"
+              }
+              aria-expanded={pickerOpen}
+            >
+              + Asset
+            </button>
+            {pickerOpen && hasAssets && (
+              <div className="proposal-ai-asset-picker" role="menu">
+                {intakeArtifacts.slice(0, 12).map((a) => (
+                  <button
+                    key={a.id}
+                    type="button"
+                    className="proposal-ai-asset-row"
+                    onClick={() => insertAssetRef(a)}
+                    title={a.summary || a.filename}
+                  >
+                    <span className="proposal-ai-asset-name">{a.filename}</span>
+                    <span className="proposal-ai-asset-meta">
+                      {fmtAssetSize(a.byte_size)}
+                      {a.extracted_text ? ` · ${a.extracted_text.length} chars` : ""}
+                    </span>
+                  </button>
+                ))}
+                {intakeArtifacts.length > 12 && (
+                  <div className="proposal-ai-asset-more">
+                    +{intakeArtifacts.length - 12} more — see Intake tab
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
         <div className="proposal-ai-actions">
-          <button type="submit" name="scope" value="day" className="plan-btn plan-btn-primary">
-            Rewrite day
-          </button>
-          <button type="submit" name="scope" value="plan" className="plan-btn">
-            Rewrite plan
-          </button>
+          <div className="proposal-ai-actions-cluster">
+            <button
+              type="button"
+              className="plan-btn plan-btn-primary"
+              onClick={() => submit("day", false)}
+              title="Apply your typed instruction to this day"
+            >
+              Rewrite day
+            </button>
+            <button
+              type="button"
+              className="plan-btn"
+              onClick={() => submit("day", true)}
+              title="Let the AI improve this day on its own — no operator instruction required"
+            >
+              Auto · day
+            </button>
+          </div>
+          <div className="proposal-ai-actions-cluster">
+            <button
+              type="button"
+              className="plan-btn"
+              onClick={() => submit("plan", false)}
+              title="Apply your typed instruction to the entire plan"
+            >
+              Rewrite plan
+            </button>
+            <button
+              type="button"
+              className="plan-btn"
+              onClick={() => submit("plan", true)}
+              title="Let the AI rewrite the whole plan on its own — no operator instruction required"
+            >
+              Auto · plan
+            </button>
+          </div>
         </div>
       </form>
     </section>
@@ -550,9 +688,6 @@ function WorkbenchPanel({
         <StatusButton item={item} status="needs_review" label="Needs review" />
         <StatusButton item={item} status="sent" label="Mark sent" />
         <StatusButton item={item} status="skipped" label="Skip" />
-        <Link href={`/lead/${item.lead_id}/graph`} className="plan-btn">
-          Graph
-        </Link>
         <Link href={`/lead/${item.lead_id}`} className="plan-btn">
           Lead
         </Link>
@@ -564,13 +699,15 @@ function WorkbenchPanel({
 export function ProposalWorkbench({
   plan,
   onClose,
-  assetsSlot,
+  intakeArtifacts = [],
   initialDayIndex,
 }: {
   plan: ProposalPlanItem;
   onClose: () => void;
-  /** Optional render-prop slot for an asset picker (intake artifacts on Plan tab). */
-  assetsSlot?: React.ReactNode;
+  /** Lead's intake artifacts — surface as inline picker in the AI change panel.
+   *  Pass empty array (default) on org-wide views like /proposals; per-lead callers
+   *  pass the loaded artifacts. */
+  intakeArtifacts?: IntakeArtifactRow[];
   /** When set, opens directly to this day instead of the first needs_review. */
   initialDayIndex?: number;
 }) {
@@ -700,8 +837,7 @@ export function ProposalWorkbench({
 
           <div className="proposal-workbench-right">
             <WorkbenchPanel item={item} activePanel={activePanel} setActivePanel={setActivePanel} />
-            <AiChangePanel item={item} activePanel={activePanel} />
-            {assetsSlot}
+            <AiChangePanel item={item} activePanel={activePanel} intakeArtifacts={intakeArtifacts} />
           </div>
         </div>
       </aside>
