@@ -1,5 +1,4 @@
-import { AppHeader } from "@/components/AppHeader";
-import { TabNav } from "@/components/TabNav";
+import Link from "next/link";
 
 /* ============ DAILY CLOCK MOTIF ============ */
 
@@ -139,9 +138,6 @@ function CounterStrip() {
 export default function HeroPage() {
   return (
     <div className="cme-shell hero-shell">
-      <AppHeader wordmarkHref="/" />
-      <TabNav />
-
       <main className="hero-main">
         <div className="hero-split">
           <div className="hero-split-l">
@@ -155,7 +151,13 @@ export default function HeroPage() {
             <SignInCard />
           </div>
           <div className="hero-split-r">
-            <MotifClock />
+            <Link
+              href="/console"
+              aria-label="Enter Comeketo Agent workspace"
+              className="hero-motif-link"
+            >
+              <MotifClock />
+            </Link>
           </div>
         </div>
 
