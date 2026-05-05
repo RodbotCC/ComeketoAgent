@@ -1,13 +1,71 @@
 {
-  "date_created": "2026-05-05T13:22:10.141000+00:00",
-  "id": "acti_1fkziZoVkhljjg1LW8EwbNH3iRfvo7cllNeNdkI8t8e",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "date_updated": "2026-05-05T13:22:54.331000+00:00",
+  "opens_summary": null,
+  "followup_sequence_id": null,
+  "date_sent": "2026-05-05T13:22:53.472000+00:00",
+  "created_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "to": [
+    "kylemelo1999@gmail.com"
+  ],
+  "created_by_name": "Andre Raw",
+  "references": [],
   "opens": [],
-  "cc": [],
+  "attachments": [],
+  "users": [],
+  "sequence_name": null,
+  "followup_sequence_add_cc_bcc": false,
   "contact_id": "cont_LPOsL3btCiah59pXN8xTcZtg6HOU7lKRE8yNN1vgmSn",
-  "_type": "Email",
-  "thread_id": "acti_uZrwHAjroaNRCENLArRqjUnxM14GUHulwq5WAf0ZqHa",
-  "template_name": "*Bullet with Price Calculator",
+  "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "sender": "Comeketo Catering Team <comeketo@m.comeketocatering.com>",
+  "need_smtp_credentials": false,
+  "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "template_id": "tmpl_WLiiW0ImDzVArt10lfbUpo3jyX6IRek6aWTrGOq4D2x",
+  "email_account_id": "emailacct_8zxKXpx93K5V6en5wQlFF3f8ebvhi8W6QBDZQeHhPHR",
+  "user_name": "Andre Raw",
+  "has_reply": false,
   "direction": "outgoing",
+  "body_preview": "Hey Jenn! Quick question before Sunday's tasting — have you had a chance to\ncheck out our full menu yet? I put together an interactive one with all 99+ items and a price calculator: <https://rawdre.gi",
+  "date_created": "2026-05-05T13:22:10.141000+00:00",
+  "message_ids": [
+    "<177798737349.7.14550656951270987006@smtpgw.close.com>",
+    "<177798737349.7.13232655808555541461@smtpgw.close.com>"
+  ],
+  "followup_sequence_delay": null,
+  "activity_at": "2026-05-05T13:22:53.472000+00:00",
+  "send_as_id": null,
+  "date_scheduled": null,
+  "cc": [],
+  "body_html": "<div>Hey Jenn! Quick question before Sunday's tasting — have you had a chance to check out our full menu yet?</div><div><br></div><div>I put together an interactive one with all 99+ items and a price calculator:</div><div><a href=\"https://rawdre.github.io/comeketo-menu-landing/\" rel=\"noopener noreferrer nofollow\">https://rawdre.github.io/comeketo-menu-landing/</a></div><div><br></div><div>Just curious — what's been your experience with catering so far? Any challenges you've faced with other caterers?</div><div><br></div><div>No pressure at all, just want to make sure we cover everything you need during the tasting!</div><span data-system-generated=\"signature\"><br><div dir=\"ltr\"><div style=\"color:rgb(34,34,34)\"><div style=\"margin:8px 0px 0px;padding:0px;overflow-x:hidden;font-family:&quot;Google Sans&quot;,Roboto,RobotoDraft,Helvetica,Arial,sans-serif\"><div><div dir=\"ltr\"><div dir=\"ltr\"><div dir=\"ltr\"><div><div><div><br><br><br><br>-----<br>Regards,</div></div><div><div><strong>Andre Raw</strong><br><em><span style=\"font-size: large;\">​​</span></em>Catering Event Coordinator</div></div><div><div><span style=\"color: rgb(34, 34, 34)\">📲&nbsp;</span>C:&nbsp;<a rel=\"noopener noreferrer\" target=\"_blank\" href=\"tel:19782353791\" style=\"color:rgb(17,85,204)\">(978) 235-3791</a></div></div><div><div>📲&nbsp;W:&nbsp;<a rel=\"noopener noreferrer\" target=\"_blank\" href=\"tel:9783811212\" style=\"color:rgb(17,85,204)\">(978) 381-1212</a><br><a rel=\"noopener noreferrer\" target=\"_blank\" href=\"https://www.facebook.com/comeketocatering\" style=\"color:rgb(17,85,204)\">Facebook</a>&nbsp;|&nbsp;<a rel=\"noopener noreferrer\" target=\"_blank\" href=\"https://instagram.com/comeketocatering\" style=\"color:rgb(17,85,204)\">Instagram</a>&nbsp;|&nbsp;<a rel=\"noopener noreferrer\" target=\"_blank\" href=\"https://comeketocatering.com/\" style=\"color:rgb(17,85,204)\">Website</a></div></div></div></div></div></div><div><br></div><div><br></div></div></div><div style=\"font-family:&quot;Google Sans&quot;,Roboto,RobotoDraft,Helvetica,Arial,sans-serif\"><br></div></div></div></span><span data-system-generated=\"unsubscribe-footer\"><p><div style=\"font-size: 11px; color: gray\">To stop receiving these emails, click <a href=\"https://app.close.com/go/unsubscribe/orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq/kylemelo1999%40gmail.com/f37GuHWhLyWo5Ut7i0pcMh4n-5ssv1MgBVVCnUT6SP4=/\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">here</a></div></p></span>",
+  "status": "sent",
+  "body_html_quoted": [
+    {
+      "expand": true,
+      "html": "<div>Hey Jenn! Quick question before Sunday's tasting — have you had a chance to check out our full menu yet?</div><div><br></div><div>I put together an interactive one with all 99+ items and a price calculator:</div><div><a href=\"https://rawdre.github.io/comeketo-menu-landing/\" rel=\"noopener noreferrer nofollow\">https://rawdre.github.io/comeketo-menu-landing/</a></div><div><br></div><div>Just curious — what's been your experience with catering so far? Any challenges you've faced with other caterers?</div><div><br></div><div>No pressure at all, just want to make sure we cover everything you need during the tasting!</div><span data-system-generated=\"signature\"><br><div dir=\"ltr\"><div style=\"color:rgb(34,34,34)\"><div style='margin:8px 0px 0px;padding:0px;overflow-x:hidden;font-family:\"Google Sans\",Roboto,RobotoDraft,Helvetica,Arial,sans-serif'><div><div dir=\"ltr\"><div dir=\"ltr\"><div dir=\"ltr\"><div><div><div><br><br><br><br>-----<br>Regards,</div></div><div><div><strong>Andre Raw</strong><br><em><span style=\"font-size: large;\">​​</span></em>Catering Event Coordinator</div></div><div><div><span style=\"color: rgb(34, 34, 34)\">📲 </span>C: <a rel=\"noopener noreferrer\" target=\"_blank\" href=\"tel:19782353791\" style=\"color:rgb(17,85,204)\">(978) 235-3791</a></div></div><div><div>📲 W: <a rel=\"noopener noreferrer\" target=\"_blank\" href=\"tel:9783811212\" style=\"color:rgb(17,85,204)\">(978) 381-1212</a><br><a rel=\"noopener noreferrer\" target=\"_blank\" href=\"https://www.facebook.com/comeketocatering\" style=\"color:rgb(17,85,204)\">Facebook</a> | <a rel=\"noopener noreferrer\" target=\"_blank\" href=\"https://instagram.com/comeketocatering\" style=\"color:rgb(17,85,204)\">Instagram</a> | <a rel=\"noopener noreferrer\" target=\"_blank\" href=\"https://comeketocatering.com/\" style=\"color:rgb(17,85,204)\">Website</a></div></div></div></div></div></div><div><br></div><div><br></div></div></div><div style='font-family:\"Google Sans\",Roboto,RobotoDraft,Helvetica,Arial,sans-serif'><br></div></div></div></span><span data-system-generated=\"unsubscribe-footer\"><p></p><div style=\"font-size: 11px; color: gray\">To stop receiving these emails, click <a href=\"https://app.close.com/go/unsubscribe/orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq/kylemelo1999%40gmail.com/f37GuHWhLyWo5Ut7i0pcMh4n-5ssv1MgBVVCnUT6SP4=/\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">here</a></div></span>"
+    }
+  ],
+  "bulk_email_action_id": null,
+  "sequence_id": null,
+  "agent_config_id": null,
+  "template_name": "*Bullet with Price Calculator",
+  "lead_id": "lead_R5QYRSr7QLjnOZGs2KpBN551SPNdcA8uoQfk6pyZQ2E",
+  "thread_id": "acti_uZrwHAjroaNRCENLArRqjUnxM14GUHulwq5WAf0ZqHa",
+  "bcc": [],
+  "_type": "Email",
+  "ai_draft": null,
+  "sequence_subscription_id": null,
+  "updated_by_name": "Andre Raw",
+  "body_text": "Hey Jenn! Quick question before Sunday's tasting — have you had a chance to\ncheck out our full menu yet?\n\n  \n\nI put together an interactive one with all 99+ items and a price calculator:\n\n<https://rawdre.github.io/comeketo-menu-landing/>\n\n  \n\nJust curious — what's been your experience with catering so far? Any\nchallenges you've faced with other caterers?\n\n  \n\nNo pressure at all, just want to make sure we cover everything you need during\nthe tasting!\n\n  \n\n  \n  \n  \n  \n\\-----  \nRegards,\n\n**Andre Raw**  \n _​​_ Catering Event Coordinator\n\n📲 C: [(978) 235-3791](tel:19782353791)\n\n📲 W: [(978) 381-1212](tel:9783811212)  \n[Facebook](https://www.facebook.com/comeketocatering) | [Instagram](https://instagram.com/comeketocatering) | [Website](https://comeketocatering.com/)\n\n  \n\n  \n\n  \n\nTo stop receiving these emails, click\n[here](https://app.close.com/go/unsubscribe/orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq/kylemelo1999%40gmail.com/f37GuHWhLyWo5Ut7i0pcMh4n-5ssv1MgBVVCnUT6SP4=/)",
+  "in_reply_to_id": null,
+  "id": "acti_1fkziZoVkhljjg1LW8EwbNH3iRfvo7cllNeNdkI8t8e",
+  "send_attempts": [],
+  "agent_action_reason": null,
+  "body_text_quoted": [
+    {
+      "expand": true,
+      "text": "Hey Jenn! Quick question before Sunday's tasting — have you had a chance to\ncheck out our full menu yet?\n\n  \n\nI put together an interactive one with all 99+ items and a price calculator:\n\n<https://rawdre.github.io/comeketo-menu-landing/>\n\n  \n\nJust curious — what's been your experience with catering so far? Any\nchallenges you've faced with other caterers?\n\n  \n\nNo pressure at all, just want to make sure we cover everything you need during\nthe tasting!\n\n  \n\n  \n  \n  \n  \n\\-----  \nRegards,\n\n**Andre Raw**  \n _​​_ Catering Event Coordinator\n\n📲 C: [(978) 235-3791](tel:19782353791)\n\n📲 W: [(978) 381-1212](tel:9783811212)  \n[Facebook](https://www.facebook.com/comeketocatering) | [Instagram](https://instagram.com/comeketocatering) | [Website](https://comeketocatering.com/)\n\n  \n\n  \n\n  \n\nTo stop receiving these emails, click\n[here](https://app.close.com/go/unsubscribe/orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq/kylemelo1999%40gmail.com/f37GuHWhLyWo5Ut7i0pcMh4n-5ssv1MgBVVCnUT6SP4=/)"
+    }
+  ],
   "envelope": {
     "date": "Tue, 05 May 2026 13:22:53 +0000",
     "subject": "Comeketo´s Interactive Menu",
@@ -36,63 +94,5 @@
     "message_id": "<177798737349.7.13232655808555541461@smtpgw.close.com>",
     "is_autoreply": false
   },
-  "agent_action_reason": null,
-  "references": [],
-  "agent_config_id": null,
-  "body_html": "<div>Hey Jenn! Quick question before Sunday's tasting — have you had a chance to check out our full menu yet?</div><div><br></div><div>I put together an interactive one with all 99+ items and a price calculator:</div><div><a href=\"https://rawdre.github.io/comeketo-menu-landing/\" rel=\"noopener noreferrer nofollow\">https://rawdre.github.io/comeketo-menu-landing/</a></div><div><br></div><div>Just curious — what's been your experience with catering so far? Any challenges you've faced with other caterers?</div><div><br></div><div>No pressure at all, just want to make sure we cover everything you need during the tasting!</div><span data-system-generated=\"signature\"><br><div dir=\"ltr\"><div style=\"color:rgb(34,34,34)\"><div style=\"margin:8px 0px 0px;padding:0px;overflow-x:hidden;font-family:&quot;Google Sans&quot;,Roboto,RobotoDraft,Helvetica,Arial,sans-serif\"><div><div dir=\"ltr\"><div dir=\"ltr\"><div dir=\"ltr\"><div><div><div><br><br><br><br>-----<br>Regards,</div></div><div><div><strong>Andre Raw</strong><br><em><span style=\"font-size: large;\">​​</span></em>Catering Event Coordinator</div></div><div><div><span style=\"color: rgb(34, 34, 34)\">📲&nbsp;</span>C:&nbsp;<a rel=\"noopener noreferrer\" target=\"_blank\" href=\"tel:19782353791\" style=\"color:rgb(17,85,204)\">(978) 235-3791</a></div></div><div><div>📲&nbsp;W:&nbsp;<a rel=\"noopener noreferrer\" target=\"_blank\" href=\"tel:9783811212\" style=\"color:rgb(17,85,204)\">(978) 381-1212</a><br><a rel=\"noopener noreferrer\" target=\"_blank\" href=\"https://www.facebook.com/comeketocatering\" style=\"color:rgb(17,85,204)\">Facebook</a>&nbsp;|&nbsp;<a rel=\"noopener noreferrer\" target=\"_blank\" href=\"https://instagram.com/comeketocatering\" style=\"color:rgb(17,85,204)\">Instagram</a>&nbsp;|&nbsp;<a rel=\"noopener noreferrer\" target=\"_blank\" href=\"https://comeketocatering.com/\" style=\"color:rgb(17,85,204)\">Website</a></div></div></div></div></div></div><div><br></div><div><br></div></div></div><div style=\"font-family:&quot;Google Sans&quot;,Roboto,RobotoDraft,Helvetica,Arial,sans-serif\"><br></div></div></div></span><span data-system-generated=\"unsubscribe-footer\"><p><div style=\"font-size: 11px; color: gray\">To stop receiving these emails, click <a href=\"https://app.close.com/go/unsubscribe/orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq/kylemelo1999%40gmail.com/f37GuHWhLyWo5Ut7i0pcMh4n-5ssv1MgBVVCnUT6SP4=/\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">here</a></div></p></span>",
-  "date_sent": "2026-05-05T13:22:53.472000+00:00",
-  "email_account_id": "emailacct_8zxKXpx93K5V6en5wQlFF3f8ebvhi8W6QBDZQeHhPHR",
-  "body_text_quoted": [
-    {
-      "expand": true,
-      "text": "Hey Jenn! Quick question before Sunday's tasting — have you had a chance to\ncheck out our full menu yet?\n\n  \n\nI put together an interactive one with all 99+ items and a price calculator:\n\n<https://rawdre.github.io/comeketo-menu-landing/>\n\n  \n\nJust curious — what's been your experience with catering so far? Any\nchallenges you've faced with other caterers?\n\n  \n\nNo pressure at all, just want to make sure we cover everything you need during\nthe tasting!\n\n  \n\n  \n  \n  \n  \n\\-----  \nRegards,\n\n**Andre Raw**  \n _​​_ Catering Event Coordinator\n\n📲 C: [(978) 235-3791](tel:19782353791)\n\n📲 W: [(978) 381-1212](tel:9783811212)  \n[Facebook](https://www.facebook.com/comeketocatering) | [Instagram](https://instagram.com/comeketocatering) | [Website](https://comeketocatering.com/)\n\n  \n\n  \n\n  \n\nTo stop receiving these emails, click\n[here](https://app.close.com/go/unsubscribe/orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq/kylemelo1999%40gmail.com/f37GuHWhLyWo5Ut7i0pcMh4n-5ssv1MgBVVCnUT6SP4=/)"
-    }
-  ],
-  "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
-  "sequence_subscription_id": null,
-  "sequence_name": null,
-  "body_preview": "Hey Jenn! Quick question before Sunday's tasting — have you had a chance to\ncheck out our full menu yet? I put together an interactive one with all 99+ items and a price calculator: <https://rawdre.gi",
-  "body_html_quoted": [
-    {
-      "expand": true,
-      "html": "<div>Hey Jenn! Quick question before Sunday's tasting — have you had a chance to check out our full menu yet?</div><div><br></div><div>I put together an interactive one with all 99+ items and a price calculator:</div><div><a href=\"https://rawdre.github.io/comeketo-menu-landing/\" rel=\"noopener noreferrer nofollow\">https://rawdre.github.io/comeketo-menu-landing/</a></div><div><br></div><div>Just curious — what's been your experience with catering so far? Any challenges you've faced with other caterers?</div><div><br></div><div>No pressure at all, just want to make sure we cover everything you need during the tasting!</div><span data-system-generated=\"signature\"><br><div dir=\"ltr\"><div style=\"color:rgb(34,34,34)\"><div style='margin:8px 0px 0px;padding:0px;overflow-x:hidden;font-family:\"Google Sans\",Roboto,RobotoDraft,Helvetica,Arial,sans-serif'><div><div dir=\"ltr\"><div dir=\"ltr\"><div dir=\"ltr\"><div><div><div><br><br><br><br>-----<br>Regards,</div></div><div><div><strong>Andre Raw</strong><br><em><span style=\"font-size: large;\">​​</span></em>Catering Event Coordinator</div></div><div><div><span style=\"color: rgb(34, 34, 34)\">📲 </span>C: <a rel=\"noopener noreferrer\" target=\"_blank\" href=\"tel:19782353791\" style=\"color:rgb(17,85,204)\">(978) 235-3791</a></div></div><div><div>📲 W: <a rel=\"noopener noreferrer\" target=\"_blank\" href=\"tel:9783811212\" style=\"color:rgb(17,85,204)\">(978) 381-1212</a><br><a rel=\"noopener noreferrer\" target=\"_blank\" href=\"https://www.facebook.com/comeketocatering\" style=\"color:rgb(17,85,204)\">Facebook</a> | <a rel=\"noopener noreferrer\" target=\"_blank\" href=\"https://instagram.com/comeketocatering\" style=\"color:rgb(17,85,204)\">Instagram</a> | <a rel=\"noopener noreferrer\" target=\"_blank\" href=\"https://comeketocatering.com/\" style=\"color:rgb(17,85,204)\">Website</a></div></div></div></div></div></div><div><br></div><div><br></div></div></div><div style='font-family:\"Google Sans\",Roboto,RobotoDraft,Helvetica,Arial,sans-serif'><br></div></div></div></span><span data-system-generated=\"unsubscribe-footer\"><p></p><div style=\"font-size: 11px; color: gray\">To stop receiving these emails, click <a href=\"https://app.close.com/go/unsubscribe/orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq/kylemelo1999%40gmail.com/f37GuHWhLyWo5Ut7i0pcMh4n-5ssv1MgBVVCnUT6SP4=/\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">here</a></div></span>"
-    }
-  ],
-  "lead_id": "lead_R5QYRSr7QLjnOZGs2KpBN551SPNdcA8uoQfk6pyZQ2E",
-  "has_reply": false,
-  "sender": "Comeketo Catering Team <comeketo@m.comeketocatering.com>",
-  "user_name": "Andre Raw",
-  "template_id": "tmpl_WLiiW0ImDzVArt10lfbUpo3jyX6IRek6aWTrGOq4D2x",
-  "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
-  "users": [],
-  "sequence_id": null,
-  "send_attempts": [],
-  "activity_at": "2026-05-05T13:22:53.472000+00:00",
-  "in_reply_to_id": null,
-  "to": [
-    "kylemelo1999@gmail.com"
-  ],
-  "bcc": [],
-  "message_ids": [
-    "<177798737349.7.14550656951270987006@smtpgw.close.com>",
-    "<177798737349.7.13232655808555541461@smtpgw.close.com>"
-  ],
-  "send_as_id": null,
-  "status": "sent",
-  "attachments": [],
-  "ai_draft": null,
-  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
-  "need_smtp_credentials": false,
-  "created_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
-  "updated_by_name": "Andre Raw",
-  "date_scheduled": null,
-  "followup_sequence_add_cc_bcc": false,
-  "bulk_email_action_id": null,
-  "followup_sequence_id": null,
-  "opens_summary": null,
-  "subject": "Comeketo´s Interactive Menu",
-  "date_updated": "2026-05-05T13:22:54.331000+00:00",
-  "created_by_name": "Andre Raw",
-  "followup_sequence_delay": null,
-  "body_text": "Hey Jenn! Quick question before Sunday's tasting — have you had a chance to\ncheck out our full menu yet?\n\n  \n\nI put together an interactive one with all 99+ items and a price calculator:\n\n<https://rawdre.github.io/comeketo-menu-landing/>\n\n  \n\nJust curious — what's been your experience with catering so far? Any\nchallenges you've faced with other caterers?\n\n  \n\nNo pressure at all, just want to make sure we cover everything you need during\nthe tasting!\n\n  \n\n  \n  \n  \n  \n\\-----  \nRegards,\n\n**Andre Raw**  \n _​​_ Catering Event Coordinator\n\n📲 C: [(978) 235-3791](tel:19782353791)\n\n📲 W: [(978) 381-1212](tel:9783811212)  \n[Facebook](https://www.facebook.com/comeketocatering) | [Instagram](https://instagram.com/comeketocatering) | [Website](https://comeketocatering.com/)\n\n  \n\n  \n\n  \n\nTo stop receiving these emails, click\n[here](https://app.close.com/go/unsubscribe/orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq/kylemelo1999%40gmail.com/f37GuHWhLyWo5Ut7i0pcMh4n-5ssv1MgBVVCnUT6SP4=/)"
+  "subject": "Comeketo´s Interactive Menu"
 }
