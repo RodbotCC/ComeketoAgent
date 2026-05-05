@@ -94,11 +94,11 @@
         {
           "channel": "sms",
           "intent": "Offer a simple choice to surface whether there is a live opportunity, optionally reusing the provided asset if it fits the thread context.",
-          "draft_seed": "Include asset {ASSET:b6bc403f-84f8-46f7-ba81-99cde796f38f} only if it adds context.\n\nMaya, is this something Trailhead Catering Guild is still exploring, or should Andre close the loop for now?"
+          "draft_seed": "Include asset {ASSET:b6bc403f-84f8-46f7-ba81-99cde796f38f} only if it adds context.\r\n\r\nMaya, is this something Trailhead Catering Guild is still exploring, or should Andre close the loop for now?"
         }
       ],
       "send_window": "SMS between 11:00 AM and 3:00 PM lead-local time.",
-      "approval_status": "sent"
+      "approval_status": "needs_review"
     },
     {
       "day": 6,
@@ -142,5 +142,5 @@
     }
   ],
   "approval_required": true,
-  "_mirror_at": "2026-05-05T16:55:28.730Z"
+  "_mirror_at": "2026-05-05T16:55:50.317Z"
 }
