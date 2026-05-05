@@ -1,0 +1,152 @@
+{
+  "run_id": "5a513c8a-f087-4386-b514-c8315d42d351",
+  "at": "2026-05-05T16:35:46.449Z",
+  "scope": "lead",
+  "plan_id": "plan_xdd0p4oh",
+  "close_lead_id": "lead_j8TttUIRxUpN0ub85qvQyvO0Q3hJShQWxU3AHyWg0iU",
+  "snapshot_match": true,
+  "plan_was_stale": false,
+  "actions_eligible": 7,
+  "actions_fired": 2,
+  "actions_skipped": 5,
+  "skip_breakdown": {
+    "DAY_NOT_TODAY": 5
+  },
+  "report": [
+    {
+      "day_index": 0,
+      "day_number": 1,
+      "approval_status": "sent",
+      "date": "2026-05-05",
+      "is_today": true,
+      "actions": [
+        {
+          "channel": "task",
+          "intent": "review_recent_duplicate_outreach_and_hold",
+          "verdict": {
+            "fire": true,
+            "reason": "fired",
+            "executed": {
+              "kind": "task",
+              "close_id": "task_E4wV8lwhOdtklqM8AufkxDv0aVYH1Z2kq8i5EQ7P8qX"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "day_index": 1,
+      "day_number": 2,
+      "approval_status": "sent",
+      "date": "2026-05-06",
+      "is_today": true,
+      "actions": [
+        {
+          "channel": "sms",
+          "intent": "reset_and_clarify_interest",
+          "verdict": {
+            "fire": true,
+            "reason": "fired",
+            "executed": {
+              "kind": "sms_draft",
+              "close_id": "acti_3RoG3Um99LfROrLPGzyPg4bKIpR2TUf4xJc4XGrsGZv"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "day_index": 2,
+      "day_number": 3,
+      "approval_status": "approved",
+      "date": "2026-05-07",
+      "is_today": false,
+      "actions": [
+        {
+          "channel": "task",
+          "intent": "monitor_for_reply_and_prepare_branching",
+          "verdict": {
+            "fire": false,
+            "skip_code": "DAY_NOT_TODAY",
+            "reason": "Day is not in catchup window"
+          }
+        }
+      ]
+    },
+    {
+      "day_index": 3,
+      "day_number": 4,
+      "approval_status": "approved",
+      "date": "2026-05-08",
+      "is_today": false,
+      "actions": [
+        {
+          "channel": "email",
+          "intent": "fit_check_email",
+          "verdict": {
+            "fire": false,
+            "skip_code": "DAY_NOT_TODAY",
+            "reason": "Day is not in catchup window"
+          }
+        }
+      ]
+    },
+    {
+      "day_index": 4,
+      "day_number": 5,
+      "approval_status": "approved",
+      "date": "2026-05-09",
+      "is_today": false,
+      "actions": [
+        {
+          "channel": "call",
+          "intent": "live_connect_or_voicemail",
+          "verdict": {
+            "fire": false,
+            "skip_code": "DAY_NOT_TODAY",
+            "reason": "Day is not in catchup window"
+          }
+        }
+      ]
+    },
+    {
+      "day_index": 5,
+      "day_number": 6,
+      "approval_status": "approved",
+      "date": "2026-05-10",
+      "is_today": false,
+      "actions": [
+        {
+          "channel": "sms",
+          "intent": "decision_process_question",
+          "verdict": {
+            "fire": false,
+            "skip_code": "DAY_NOT_TODAY",
+            "reason": "Day is not in catchup window"
+          }
+        }
+      ]
+    },
+    {
+      "day_index": 6,
+      "day_number": 7,
+      "approval_status": "approved",
+      "date": "2026-05-11",
+      "is_today": false,
+      "actions": [
+        {
+          "channel": "email",
+          "intent": "soft_close_with_call_option",
+          "verdict": {
+            "fire": false,
+            "skip_code": "DAY_NOT_TODAY",
+            "reason": "Day is not in catchup window"
+          }
+        }
+      ]
+    }
+  ],
+  "duration_ms": 5829,
+  "trigger": "manual",
+  "trace_id": "c0cc7cdd-8d52-4e2d-93ad-3dbd20277443"
+}
