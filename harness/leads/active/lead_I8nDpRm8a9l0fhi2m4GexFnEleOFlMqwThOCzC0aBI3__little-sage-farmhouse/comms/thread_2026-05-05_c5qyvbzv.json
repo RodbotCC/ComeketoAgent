@@ -1,0 +1,82 @@
+{
+  "latest_emails": [
+    {
+      "id": "acti_qKmatCysOAX5XEfVKC4yB00M2aLNEupkirB9mhNp5vN",
+      "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+      "body_preview": "Hey Little, Just shooting you this quick email, we got your request for more catering info, and our event planner will connect shortly. ❤️ - Comeketo Catering p.s. check out [this quick video](https:/",
+      "date_sent": "2026-05-05T17:19:45.270000+00:00",
+      "opens_summary": "Opened by Little Sage Farmhouse <miosotygonzalez@gmail.com> (2026-05-05)",
+      "to": [
+        "Little Sage Farmhouse <miosotygonzalez@gmail.com>"
+      ],
+      "has_attachments": true,
+      "date_created": "2026-05-05T17:19:45.270000+00:00",
+      "date_updated": "2026-05-05T17:19:50.522000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "[✅ CATERING] You're in Little! ",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Rhonna Ricafort <contact@comeketocatering.com>",
+      "envelope": {
+        "date": "Tue, 05 May 2026 17:19:46 +0000",
+        "subject": "[✅ CATERING] You're in Little! ",
+        "from": [
+          {
+            "email": "contact@comeketocatering.com",
+            "name": "Rhonna Ricafort"
+          }
+        ],
+        "sender": [
+          {
+            "email": "contact@comeketocatering.com",
+            "name": "Rhonna Ricafort"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "miosotygonzalez@gmail.com",
+            "name": "Little Sage Farmhouse"
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<177800158574.7.13493724933280975597@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ],
+  "user_name": "Rhonna Ricafort",
+  "participants": [
+    {
+      "email": "contact@comeketocatering.com",
+      "name": "Rhonna Ricafort"
+    }
+  ],
+  "date_created": "2026-05-05T17:19:45.271000+00:00",
+  "date_updated": "2026-05-05T17:19:50.617000+00:00",
+  "n_emails": 1,
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "summary": null,
+  "users": [
+    "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo"
+  ],
+  "contact_id": null,
+  "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "created_by": null,
+  "updated_by_name": "Rhonna Ricafort",
+  "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "latest_normalized_subject": "[✅ CATERING] You're in Little!",
+  "activity_at": "2026-05-05T17:19:45.271000+00:00",
+  "importance": {
+    "type": "not_important",
+    "reason": "automated-outbound"
+  },
+  "_type": "EmailThread",
+  "created_by_name": null,
+  "lead_id": "lead_I8nDpRm8a9l0fhi2m4GexFnEleOFlMqwThOCzC0aBI3",
+  "id": "acti_QKy0Tom03bVGbcJ9nFTVOZWqM5WPmScIx8gC5qyvBzv"
+}
