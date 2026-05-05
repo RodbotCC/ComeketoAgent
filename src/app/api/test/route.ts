@@ -11,11 +11,12 @@ import {
   closeListPhoneNumbers,
   closeListWebhookSubscriptions,
 } from "@/lib/close";
+import { closeMcpListTools, closeMcpStatus } from "@/lib/close-mcp";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-type Mode = "openai" | "supabase" | "github" | "close";
+type Mode = "openai" | "supabase" | "github" | "close" | "close-mcp";
 
 async function testOpenAI() {
   if (!env.OPENAI_API_KEY) {
@@ -95,6 +96,39 @@ async function testGitHub() {
   };
 }
 
+async function testCloseMcp() {
+  const status = closeMcpStatus();
+  if (!status.configured) {
+    // Not an exception — return the same shape the chat tools see when blank,
+    // so operators learn what the agent would see if it tried to fall back.
+    return {
+      configured: false,
+      url_set: status.url_set,
+      auth_resolved: status.auth_resolved,
+      tool_count: 0,
+      sample_tool_names: [],
+      hint:
+        "Set CLOSE_MCP_URL in .env.local to enable the MCP fallback path. " +
+        "CLOSE_MCP_AUTH_HEADER is optional — defaults to Bearer ${CLOSE_API_KEY}.",
+    };
+  }
+
+  const result = await closeMcpListTools();
+  if (!result.ok) {
+    // Surface as an error — the URL was set but the call failed (auth shape,
+    // transport variant, network).
+    throw new Error(result.error);
+  }
+  return {
+    configured: true,
+    url_set: status.url_set,
+    auth_resolved: status.auth_resolved,
+    tool_count: result.tools.length,
+    sample_tool_names: result.tools.slice(0, 12).map((t) => t.name),
+    has_descriptions: result.tools.filter((t) => !!t.description).length,
+  };
+}
+
 async function testClose() {
   const [workflows, templates, smsTemplates, leadStatuses, phones, webhooks] = await Promise.all([
     closeListWorkflows({ limit: 50 }),
@@ -132,9 +166,9 @@ export async function POST(req: Request) {
   }
 
   const mode = body.mode;
-  if (!mode || !["openai", "supabase", "github", "close"].includes(mode)) {
+  if (!mode || !["openai", "supabase", "github", "close", "close-mcp"].includes(mode)) {
     return NextResponse.json(
-      { ok: false, error: "mode must be one of: openai, supabase, github, close" },
+      { ok: false, error: "mode must be one of: openai, supabase, github, close, close-mcp" },
       { status: 400 }
     );
   }
@@ -147,7 +181,9 @@ export async function POST(req: Request) {
         ? await testSupabase()
         : mode === "github"
         ? await testGitHub()
-        : await testClose();
+        : mode === "close"
+        ? await testClose()
+        : await testCloseMcp();
 
     return NextResponse.json({
       ok: true,

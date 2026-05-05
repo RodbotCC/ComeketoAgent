@@ -33,6 +33,13 @@ export const env = {
   // sends are "as Andre" — JAKE is for admin/dev actions only.
   CLOSE_USER_ID_JAKE: read("CLOSE_USER_ID_JAKE"),
   CLOSE_USER_ID_ANDRE: read("CLOSE_USER_ID_ANDRE"),
+  /** Optional. Close's official MCP server URL. When set, the chat agent gets
+   *  `close_mcp_list_tools` + `close_mcp_call` as fallback tools for Close
+   *  operations not yet wrapped by the direct REST helpers. Blank disables. */
+  CLOSE_MCP_URL: read("CLOSE_MCP_URL"),
+  /** Optional. Full Authorization header value sent to the MCP server (e.g.
+   *  "Bearer <token>"). When blank, defaults to "Bearer ${CLOSE_API_KEY}". */
+  CLOSE_MCP_AUTH_HEADER: read("CLOSE_MCP_AUTH_HEADER"),
 
   /** Optional: require /operator-login before sensitive server actions when set with OPERATOR_COOKIE_SECRET. */
   OPERATOR_PASSWORD: read("OPERATOR_PASSWORD"),
@@ -70,6 +77,15 @@ export function envStatus() {
     CLOSE_WEBHOOK_SIGNATURE_KEY: {
       set: !!env.CLOSE_WEBHOOK_SIGNATURE_KEY,
       fingerprint: fingerprint(env.CLOSE_WEBHOOK_SIGNATURE_KEY),
+    },
+    CLOSE_MCP_URL: {
+      set: !!env.CLOSE_MCP_URL.trim(),
+      // URL is not a secret — render it directly so operators can sanity-check.
+      fingerprint: env.CLOSE_MCP_URL.trim() || null,
+    },
+    CLOSE_MCP_AUTH_HEADER: {
+      set: !!env.CLOSE_MCP_AUTH_HEADER.trim(),
+      fingerprint: fingerprint(env.CLOSE_MCP_AUTH_HEADER),
     },
     OPERATOR_PASSWORD: {
       set: !!env.OPERATOR_PASSWORD.trim(),

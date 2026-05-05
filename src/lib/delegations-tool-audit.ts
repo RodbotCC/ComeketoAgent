@@ -4,6 +4,7 @@
  */
 
 import { logExecution } from "./execution-audit";
+import { looksLikeMcpWrite } from "./close-mcp";
 
 const AUDITED_CLOSE_WRITE_TOOLS = new Set([
   "close_update_sequence_subscription",
@@ -20,6 +21,20 @@ const AUDITED_CLOSE_WRITE_TOOLS = new Set([
 ]);
 
 const GENERATE_TOOL = "generate_seven_day_plan";
+
+const MCP_FALLBACK_CALL_TOOL = "close_mcp_call";
+
+/**
+ * Composite (batch) write-class tools — they self-log per-success rows via
+ * direct `logExecution` calls inside `lib/composite-tools.ts` (sharing the
+ * route's `traceId`), so we don't re-log here. We just acknowledge them so
+ * the chat route's `delegationsAuditLogged` flag flips and `/console` +
+ * `/approvals` get revalidated after the turn.
+ */
+const COMPOSITE_SELF_AUDITED_TOOLS = new Set([
+  "generate_plans_for_leads",
+  "approve_and_fire_plans",
+]);
 
 function isRecord(v: unknown): v is Record<string, unknown> {
   return typeof v === "object" && v !== null && !Array.isArray(v);
@@ -121,6 +136,42 @@ export function logDelegationsToolCall(input: {
     }
     return false;
   }
+
+  if (name === MCP_FALLBACK_CALL_TOOL) {
+    // Every `close_mcp_call` reaches outside the gated direct-API path.
+    // We always log it so /console can show fallback usage; the verb
+    // heuristic just flags whether to treat it as a write.
+    const targetTool =
+      typeof args.tool_name === "string" ? args.tool_name.trim() : "(unspecified)";
+    const isWrite = looksLikeMcpWrite(targetTool);
+    let execResult: "ok" | "error" = "ok";
+    if (isRecord(result) && (typeof result.error === "string" || result.ok === false)) {
+      execResult = "error";
+    }
+    void logExecution({
+      action_kind: "mcp_fallback",
+      close_lead_id: null,
+      result: execResult,
+      trace_id: traceId,
+      payload: {
+        source: "delegations_chat",
+        thread_id: threadId,
+        round,
+        tool: name,
+        target_tool: targetTool,
+        is_write: isWrite,
+        arg_keys: Object.keys(
+          (isRecord(args.tool_args) ? args.tool_args : args) as Record<string, unknown>
+        ),
+      },
+    });
+    return true;
+  }
+
+  // Composite write-class tools have already written their own audit rows
+  // (per-success, sharing the same traceId). Returning true triggers the
+  // chat route's revalidate without double-logging.
+  if (COMPOSITE_SELF_AUDITED_TOOLS.has(name)) return true;
 
   if (!AUDITED_CLOSE_WRITE_TOOLS.has(name)) return false;
 

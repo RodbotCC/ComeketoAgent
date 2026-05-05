@@ -5,28 +5,36 @@
 
 import { getSupabaseServer } from "./supabase";
 
-export type ExecutionLogKind =
-  | "heartbeat_run"
-  | "close_write"
-  | "delegations_close_tool"
-  | "plan_paused_stale"
-  | "approve_plan"
-  | "kill_plan"
-  | "pause_plan"
-  | "generate_plan"
-  | "enroll_workflow"
-  | "webhook_ingest"
-  | "refine_plan_day"
-  | "refine_whole_plan"
-  | "day_status_change"
-  | "approve_run"
-  | "manual_heartbeat"
-  | "reject_plan_queue"
-  | "intake_extract"
-  | "pause_subscription"
-  | "resume_subscription"
-  | "publish_automation_draft"
-  | "add_plan_day_touch";
+export const EXECUTION_LOG_KINDS = [
+  "heartbeat_run",
+  "close_write",
+  "delegations_close_tool",
+  "plan_paused_stale",
+  "approve_plan",
+  "kill_plan",
+  "pause_plan",
+  "generate_plan",
+  "enroll_workflow",
+  "webhook_ingest",
+  "refine_plan_day",
+  "refine_whole_plan",
+  "day_status_change",
+  "approve_run",
+  "manual_heartbeat",
+  "reject_plan_queue",
+  "intake_extract",
+  "pause_subscription",
+  "resume_subscription",
+  "publish_automation_draft",
+  "add_plan_day_touch",
+  "mcp_fallback",
+] as const;
+
+export type ExecutionLogKind = (typeof EXECUTION_LOG_KINDS)[number];
+
+export function isExecutionLogKind(s: string): s is ExecutionLogKind {
+  return (EXECUTION_LOG_KINDS as readonly string[]).includes(s);
+}
 
 export type LogExecutionInput = {
   action_kind: ExecutionLogKind;
@@ -133,6 +141,24 @@ export async function listRecentExecutionGlobal(limit = 40): Promise<ExecutionLo
     .order("at", { ascending: false })
     .limit(limit);
   if (error) throw new Error(`listRecentExecutionGlobal: ${error.message}`);
+  return (data as ExecutionLogRow[]) ?? [];
+}
+
+/** All recent log rows for a single action_kind (console kind filter). */
+export async function listExecutionByKind(
+  kind: ExecutionLogKind,
+  limit = 80
+): Promise<ExecutionLogRow[]> {
+  const sb = getSupabaseServer();
+  const { data, error } = await sb
+    .from("execution_log")
+    .select(
+      "id, at, action_kind, close_lead_id, plan_id, payload, result, skip_code, trace_id, snapshot_id_at_action"
+    )
+    .eq("action_kind", kind)
+    .order("at", { ascending: false })
+    .limit(limit);
+  if (error) throw new Error(`listExecutionByKind: ${error.message}`);
   return (data as ExecutionLogRow[]) ?? [];
 }
 

@@ -51,3 +51,23 @@ export async function updateDefaultPlanHorizonAction(
   revalidatePath("/settings");
   return { ok: true, message: `Plan horizon default · ${days} days`, nonce: prev.nonce + 1 };
 }
+
+export async function updateMcpFallbackAction(
+  prev: SettingsActionState,
+  formData: FormData
+): Promise<SettingsActionState> {
+  // Checkbox semantics: if the field is missing, treat as false (HTML form
+  // omits unchecked checkboxes from the submission).
+  const raw = formData.get("enable_mcp_fallback");
+  const enabled = raw === "on" || raw === "true" || raw === "1";
+  await setSettings({ enable_mcp_fallback: enabled });
+  revalidatePath("/settings");
+  // Chat reads tools from CLOSE_TOOLS via getCloseToolsForSettings — bust the
+  // cache so the next /chat turn picks up the new tool surface.
+  revalidatePath("/chat");
+  return {
+    ok: true,
+    message: enabled ? "MCP fallback enabled" : "MCP fallback disabled",
+    nonce: prev.nonce + 1,
+  };
+}

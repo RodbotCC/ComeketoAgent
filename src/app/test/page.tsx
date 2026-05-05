@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useToast } from "@/components/Toast";
 import { OpenAiMediaLab } from "./OpenAiMediaLab";
 
-type Mode = "openai" | "supabase" | "github" | "close";
+type Mode = "openai" | "supabase" | "github" | "close" | "close-mcp";
 
 type TestResult = {
   ok: boolean;
@@ -35,6 +35,11 @@ const MODES: Array<{ key: Mode; title: string; description: string }> = [
     key: "close",
     title: "Close",
     description: "Lists active workflows + email templates from your Close org via direct REST. Confirms CLOSE_API_KEY and surfaces real workflow names so you can see the agent's playing field.",
+  },
+  {
+    key: "close-mcp",
+    title: "Close MCP fallback",
+    description: "Calls tools/list on Close's official MCP server (the chat agent's escape hatch for operations not wrapped by direct REST). Reports tool count + first 12 names + first-call latency. When CLOSE_MCP_URL is blank, returns the same not-configured shape the agent sees — the result pane shows exactly what's wired and what isn't.",
   },
 ];
 

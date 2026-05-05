@@ -73,6 +73,15 @@ export type Settings = {
    * must click approve on each day before its actions fire.
    */
   auto_approve_clean_days: boolean;
+  /**
+   * MCP fallback kill switch (2026-05-02). When true (default), the chat
+   * agent sees `close_mcp_list_tools` + `close_mcp_call` in its tools array
+   * if `CLOSE_MCP_URL` is set in env. When false, those two tools are
+   * filtered out of the agent's view AND the dispatcher refuses to run them
+   * even if a stale message context tries. Use to flip MCP off without
+   * blanking env vars when fallback misuse appears.
+   */
+  enable_mcp_fallback: boolean;
 };
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -81,6 +90,7 @@ export const DEFAULT_SETTINGS: Settings = {
   default_plan_horizon_days: DEFAULT_PLAN_HORIZON_DAYS,
   solo_operator: true,
   auto_approve_clean_days: true,
+  enable_mcp_fallback: true,
 };
 
 const SETTINGS_PATH = path.join(process.cwd(), ".cmk-settings.json");
@@ -112,6 +122,10 @@ export async function getSettings(): Promise<Settings> {
         typeof parsed.auto_approve_clean_days === "boolean"
           ? parsed.auto_approve_clean_days
           : DEFAULT_SETTINGS.auto_approve_clean_days,
+      enable_mcp_fallback:
+        typeof parsed.enable_mcp_fallback === "boolean"
+          ? parsed.enable_mcp_fallback
+          : DEFAULT_SETTINGS.enable_mcp_fallback,
     };
   } catch {
     return { ...DEFAULT_SETTINGS };
@@ -137,6 +151,10 @@ export async function setSettings(partial: Partial<Settings>): Promise<Settings>
       typeof partial.auto_approve_clean_days === "boolean"
         ? partial.auto_approve_clean_days
         : current.auto_approve_clean_days,
+    enable_mcp_fallback:
+      typeof partial.enable_mcp_fallback === "boolean"
+        ? partial.enable_mcp_fallback
+        : current.enable_mcp_fallback,
   };
   await fs.writeFile(SETTINGS_PATH, JSON.stringify(next, null, 2) + "\n", "utf-8");
   return next;
