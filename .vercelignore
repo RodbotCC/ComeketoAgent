@@ -1,0 +1,5 @@
+# Per-lead memory lives on the `leads-data` branch and is never present on
+# `main`. This pattern is belt-and-suspenders in case anything ever lands
+# `_leads/` into a main checkout — we don't want it shipped in the deploy
+# bundle.
+_leads/

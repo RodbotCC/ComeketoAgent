@@ -143,41 +143,6 @@ export function PlanSection({
         </div>
       </div>
 
-      {plan.goal_summary && <p className="plan-summary">{plan.goal_summary}</p>}
-      {plan.lead_state_summary && <p className="plan-state">{plan.lead_state_summary}</p>}
-
-      <p className="muted" style={{ fontSize: 11, margin: "6px 0 4px" }}>
-        <strong>Same-day multi-touch:</strong> you can add several touches per calendar day; the heartbeat runs each
-        in order. Rolling caps (1/24h, 4/7d) still apply — a second outbound may show{" "}
-        <code>FREQUENCY_CAP_*</code> until the window passes.
-      </p>
-
-      <div className="plan-facts">
-        {plan.known_facts.length > 0 && (
-          <div>
-            <div className="plan-facts-eyebrow">known</div>
-            <ul className="plan-facts-list">
-              {plan.known_facts.map((f, i) => <li key={`k${i}`}>{f}</li>)}
-            </ul>
-          </div>
-        )}
-        {plan.unknowns.length > 0 && (
-          <div>
-            <div className="plan-facts-eyebrow">unknowns</div>
-            <ul className="plan-facts-list">
-              {plan.unknowns.map((f, i) => <li key={`u${i}`}>{f}</li>)}
-            </ul>
-          </div>
-        )}
-      </div>
-
-      {plan.best_next_question && (
-        <div className="plan-question">
-          <span className="plan-question-eyebrow">best next question</span>
-          <span className="plan-question-text">{plan.best_next_question}</span>
-        </div>
-      )}
-
       <div className="plan-days">
         {plan.days.map((d, idx) => (
           <PlanDayCard
@@ -192,19 +157,6 @@ export function PlanSection({
           />
         ))}
       </div>
-
-      {plan.stop_conditions.length > 0 && (
-        <div className="plan-stops">
-          <div className="plan-facts-eyebrow">stop conditions</div>
-          <ul className="plan-facts-list">
-            {plan.stop_conditions.map((s, i) => (
-              <li key={i}>
-                <strong>{s.trigger}</strong> → {s.action}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
 
       {!isLocked && (
         <div className="plan-actions">

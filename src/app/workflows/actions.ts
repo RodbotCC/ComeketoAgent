@@ -39,12 +39,45 @@ export async function renameWorkflowDraftAction(formData: FormData) {
 export async function deleteWorkflowDraftAction(formData: FormData) {
   await assertOperatorSession();
   const id = String(formData.get("draft_id") || "").trim();
+  const stayOnList = String(formData.get("stay_on_list") || "") === "1";
   if (!id) throw new Error("draft_id required");
   const sb = getSupabaseServer();
   const { error } = await sb.from("automation_drafts").delete().eq("id", id);
   if (error) throw new Error(`delete draft failed: ${error.message}`);
   revalidatePath("/workflows");
-  redirect("/workflows");
+  if (!stayOnList) redirect("/workflows");
+}
+
+/**
+ * Sweep all drafts whose non-wait step count is 0. Used by the "Clear empty
+ * drafts" button on /workflows for cleaning up testing remnants.
+ *
+ * Returns the number of drafts deleted so the UI can show a count.
+ */
+export async function deleteEmptyDraftsAction(): Promise<{ deleted: number }> {
+  await assertOperatorSession();
+  const sb = getSupabaseServer();
+  const { data, error } = await sb
+    .from("automation_drafts")
+    .select("id, workflow_json, close_sequence_id")
+    .is("close_sequence_id", null);
+  if (error) throw new Error(`list drafts failed: ${error.message}`);
+
+  const emptyIds: string[] = [];
+  for (const row of data ?? []) {
+    const wf = (row as { workflow_json?: { nodes?: Array<{ kind?: string }> } }).workflow_json;
+    const stepCount = wf?.nodes?.filter((n) => n.kind !== "wait").length ?? 0;
+    if (stepCount === 0) emptyIds.push((row as { id: string }).id);
+  }
+
+  if (emptyIds.length === 0) {
+    return { deleted: 0 };
+  }
+
+  const { error: delErr } = await sb.from("automation_drafts").delete().in("id", emptyIds);
+  if (delErr) throw new Error(`bulk delete failed: ${delErr.message}`);
+  revalidatePath("/workflows");
+  return { deleted: emptyIds.length };
 }
 
 /**
@@ -60,7 +93,7 @@ export async function publishWorkflowDraftAction(
     const draft = await getAutomationDraft(draftId);
     if (!draft) return { ok: false, error: "draft not found" };
 
-    const body = workflowToCloseSequence(draft);
+    const body = await workflowToCloseSequence(draft);
     const created = await closeCreateSequence(body);
     const sequenceId = String(created.id);
     const htmlUrl = typeof created.html_url === "string" ? created.html_url : undefined;

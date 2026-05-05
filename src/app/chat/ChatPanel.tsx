@@ -2383,7 +2383,7 @@ function useChatLayout() {
     setLayout((prev) => ({ ...prev, lead_id: leadId, lead_name: leadName }));
   }, []);
 
-  return { layout, cycle, hide, show, setMode, setLead };
+  return { layout, hydrated, cycle, hide, show, setMode, setLead };
 }
 
 function gridTemplate(rail: PaneMode, scope: PaneMode): string {
@@ -2403,6 +2403,7 @@ function gridTemplate(rail: PaneMode, scope: PaneMode): string {
 export function ChatLayout() {
   const searchParams = useSearchParams();
   const draftLinkConsumed = useRef(false);
+  const leadLinkConsumed = useRef<string | null>(null);
 
   const [threads, setThreads] = useState<Thread[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
@@ -2425,11 +2426,14 @@ export function ChatLayout() {
   const fileRef = useRef<HTMLInputElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
-  const { layout, cycle, hide, show, setMode, setLead } = useChatLayout();
+  const { layout, hydrated, cycle, hide, show, setMode, setLead } = useChatLayout();
   const { pins, addPin, removePin, togglePin, clearPins } = usePinboard();
   const leadNames = useLeadNamesProvider();
   const toast = useToast();
   const copy = useCopy();
+  const linkedLeadId = (searchParams.get("lead") || searchParams.get("lead_id") || "").trim();
+  const linkedLeadName = (searchParams.get("leadName") || searchParams.get("lead_name") || "").trim();
+  const hasLeadDeepLink = /^lead_[A-Za-z0-9]+$/.test(linkedLeadId);
 
   useEffect(() => {
     const draftId = searchParams.get("draft");
@@ -2454,6 +2458,24 @@ export function ChatLayout() {
     queueMicrotask(() => inputRef.current?.focus());
   }, [searchParams, toast]);
 
+  useEffect(() => {
+    if (!hydrated || !hasLeadDeepLink) return;
+    const key = `${linkedLeadId}:${linkedLeadName}`;
+    if (leadLinkConsumed.current === key) return;
+    leadLinkConsumed.current = key;
+
+    setMode("lead");
+    setLead(linkedLeadId, linkedLeadName || linkedLeadId);
+    show("scope");
+    setActiveId(null);
+    setMessages([]);
+    setPending([]);
+    setInput("");
+    setActiveQuickId(null);
+    toast.push("Lead Box loaded in Delegations", { tone: "success" });
+    queueMicrotask(() => inputRef.current?.focus());
+  }, [hydrated, hasLeadDeepLink, linkedLeadId, linkedLeadName, setMode, setLead, show, toast]);
+
   /* ---- Threads ---- */
 
   async function refreshThreads(): Promise<Thread[] | null> {
@@ -2471,7 +2493,7 @@ export function ChatLayout() {
       setThreadsLoading(true);
       try {
         const list = await refreshThreads();
-        if (list && list.length > 0) setActiveId(list[0].id);
+        if (!hasLeadDeepLink && list && list.length > 0) setActiveId(list[0].id);
       } finally {
         setThreadsLoading(false);
       }

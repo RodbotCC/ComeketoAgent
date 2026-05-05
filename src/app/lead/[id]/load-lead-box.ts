@@ -15,6 +15,7 @@ import { getLatestWebhookActivityForLead } from "@/lib/webhook-events";
 import { buildBoxTimeline } from "@/lib/box-timeline";
 import { listRecentExecutionForLead } from "@/lib/execution-audit";
 import { listIntakeArtifactsForLead } from "@/lib/intake-artifacts";
+import { listAssetsForLead } from "@/lib/assets";
 
 export type GateBadge = { label: string; tone: "ok" | "warn" | "block" };
 
@@ -50,6 +51,7 @@ export type LeadBoxPageData = {
   timelineItems: ReturnType<typeof buildBoxTimeline>;
   execRows: Awaited<ReturnType<typeof listRecentExecutionForLead>>;
   intakeArtifacts: Awaited<ReturnType<typeof listIntakeArtifactsForLead>>;
+  assets: Awaited<ReturnType<typeof listAssetsForLead>>;
   customFields: { key: string; value: unknown }[];
   sortedActivities: CloseLeadFull["activities"];
   lastInbound: CloseLeadFull["activities"][number] | undefined;
@@ -144,6 +146,13 @@ export const loadLeadBoxPageData = cache(
       intakeArtifacts = [];
     }
 
+    let assets: Awaited<ReturnType<typeof listAssetsForLead>> = [];
+    try {
+      assets = await listAssetsForLead(leadId);
+    } catch {
+      assets = [];
+    }
+
     const customFields = Object.entries(lead as unknown as Record<string, unknown>)
       .filter(([k]) => k.startsWith("custom."))
       .map(([k, v]) => ({ key: k.replace("custom.", ""), value: v }));
@@ -166,6 +175,7 @@ export const loadLeadBoxPageData = cache(
       timelineItems,
       execRows,
       intakeArtifacts,
+      assets,
       customFields,
       sortedActivities,
       lastInbound,

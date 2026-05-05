@@ -3,6 +3,8 @@ import { AppHeader } from "@/components/AppHeader";
 import { TabNav } from "@/components/TabNav";
 import { listAutomationDrafts, type AutomationDraftRow } from "@/lib/automation-drafts";
 import { closeListWorkflows, type CloseWorkflow, closeSequenceBrowserUrl } from "@/lib/close";
+import { WorkflowDraftCard } from "./WorkflowDraftCard";
+import { ClearEmptyDraftsButton } from "./ClearEmptyDraftsButton";
 
 export const dynamic = "force-dynamic";
 
@@ -37,6 +39,7 @@ export default async function WorkflowsListPage() {
   // Drafts that have already been published get the "Published in Close" mirror;
   // hide them from the local Drafts column so we don't show the same workflow twice.
   const liveDrafts = drafts.filter((d) => !d.close_sequence_id);
+  const emptyDraftCount = liveDrafts.filter((d) => stepCount(d) === 0).length;
 
   return (
     <div className="cme-shell">
@@ -67,6 +70,9 @@ export default async function WorkflowsListPage() {
           <div className="cmk-workflows-section-h">
             <span>Drafts</span>
             <strong>{liveDrafts.length}</strong>
+            {emptyDraftCount > 0 && (
+              <ClearEmptyDraftsButton disabled={emptyDraftCount === 0} />
+            )}
           </div>
           {liveDrafts.length === 0 ? (
             <div className="cmk-workflows-empty">
@@ -78,21 +84,7 @@ export default async function WorkflowsListPage() {
           ) : (
             <div className="cmk-workflows-grid">
               {liveDrafts.map((d) => (
-                <Link key={d.id} href={`/workflows/${d.id}`} className="cmk-workflows-card">
-                  <div className="cmk-workflows-card-head">
-                    <span className={`cmk-workflows-status cmk-workflows-status-${d.status}`}>
-                      {d.status}
-                    </span>
-                    <span className="cmk-workflows-card-meta">
-                      {stepCount(d)} {stepCount(d) === 1 ? "step" : "steps"}
-                    </span>
-                  </div>
-                  <strong className="cmk-workflows-card-title">{d.name || "Untitled"}</strong>
-                  {d.operator_goal && (
-                    <p className="cmk-workflows-card-goal">{d.operator_goal.slice(0, 160)}</p>
-                  )}
-                  <div className="cmk-workflows-card-foot">Updated {fmtDate(d.updated_at)}</div>
-                </Link>
+                <WorkflowDraftCard key={d.id} draft={d} />
               ))}
             </div>
           )}

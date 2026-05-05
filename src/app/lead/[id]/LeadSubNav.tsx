@@ -5,8 +5,8 @@ import { usePathname } from "next/navigation";
 
 /**
  * IA under Leads: Plan (7-day), Graph (plan-as-graph + simulator), Box (profile +
- * activity), Discovery (slot map + journey score + quest), Intake (lead-scoped
- * uploads), Heartbeat (ops trace).
+ * activity), Delegations (lead-scoped chat), Discovery (slot map + journey score +
+ * quest), Intake (lead-scoped uploads), Heartbeat (ops trace).
  */
 export function LeadSubNav({ leadId }: { leadId: string }) {
   const pathname = usePathname() || "";
@@ -29,6 +29,9 @@ export function LeadSubNav({ leadId }: { leadId: string }) {
       </Link>
       <Link href={`${base}/box`} className={`lead-subnav-link${boxActive ? " lead-subnav-link-active" : ""}`}>
         Box
+      </Link>
+      <Link href={`/chat?lead=${encodeURIComponent(leadId)}&from=lead-box`} className="lead-subnav-link">
+        Delegations
       </Link>
       <Link
         href={`${base}/discovery`}

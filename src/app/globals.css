@@ -9105,6 +9105,225 @@ select.cmk-field-panel {
   }
 }
 
+/* ===========================================================================
+ * LEAD ASSETS — sibling to Intake, but for reusable/customer-facing materials.
+ * ========================================================================= */
+.cmk-assets-panel {
+  margin-top: 12px;
+  padding: 16px;
+}
+.cmk-assets-mode {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--ink) 5%, var(--card));
+}
+.cmk-assets-mode button {
+  min-height: 28px;
+  padding: 5px 10px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink-mid);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.cmk-assets-mode button.on {
+  background: var(--card);
+  color: var(--ink);
+  box-shadow: var(--shadow-sm);
+}
+.cmk-assets-drop {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-top: 12px;
+  padding: 18px;
+  border: 1px dashed color-mix(in oklab, var(--lavender-deep) 40%, var(--rule));
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, color-mix(in oklab, var(--lavender) 18%, transparent), transparent 48%),
+    color-mix(in oklab, var(--card) 84%, var(--paper));
+  cursor: pointer;
+  transition: border-color 140ms ease, background 140ms ease;
+}
+.cmk-assets-drop:hover,
+.cmk-assets-drop:focus-visible,
+.cmk-assets-drop.is-drag {
+  border-color: color-mix(in oklab, var(--lavender-deep) 72%, var(--rule));
+  background:
+    linear-gradient(135deg, color-mix(in oklab, var(--lavender) 28%, transparent), transparent 48%),
+    var(--card);
+  outline: none;
+}
+.cmk-assets-drop-title {
+  font-family: var(--serif);
+  font-size: 21px;
+  font-weight: 500;
+  line-height: 1.08;
+  color: var(--ink);
+}
+.cmk-assets-drop-sub {
+  max-width: 560px;
+  color: var(--ink-mid);
+  font-size: 12px;
+  line-height: 1.42;
+}
+.cmk-assets-check {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 7px;
+  margin-top: 4px;
+  padding: 5px 8px;
+  border: 0.5px solid var(--rule);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--ink-mid);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.cmk-assets-check input {
+  accent-color: var(--sage-deep);
+}
+.cmk-assets-empty {
+  margin-top: 12px;
+}
+.cmk-assets-groups {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+  margin-top: 14px;
+}
+.cmk-assets-group {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.cmk-assets-group-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  color: var(--ink-faint);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.cmk-assets-group-head strong {
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+.cmk-assets-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 10px;
+}
+.cmk-assets-card {
+  display: grid;
+  grid-template-columns: 70px minmax(0, 1fr);
+  gap: 12px;
+  min-width: 0;
+  padding: 10px;
+  border: 0.5px solid var(--rule);
+  border-radius: 8px;
+  background: var(--card);
+  box-shadow: var(--shadow-sm);
+}
+.cmk-assets-thumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  height: 70px;
+  overflow: hidden;
+  border: 0.5px solid var(--rule);
+  border-radius: 8px;
+  background: color-mix(in oklab, var(--paper) 82%, var(--card));
+}
+.cmk-assets-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.cmk-assets-main {
+  min-width: 0;
+}
+.cmk-assets-title {
+  overflow: hidden;
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.12;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.cmk-assets-meta {
+  margin-top: 4px;
+  color: var(--ink-faint);
+  font-size: 10.5px;
+  line-height: 1.35;
+}
+.cmk-assets-main p {
+  margin: 8px 0 0;
+  color: var(--ink-mid);
+  font-size: 12px;
+  line-height: 1.42;
+}
+.cmk-assets-flags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 9px;
+}
+.cmk-assets-flags span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 22px;
+  padding: 3px 7px;
+  border: 0.5px solid var(--rule);
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--paper) 70%, var(--card));
+  color: var(--ink-mid);
+  font-size: 10px;
+  font-weight: 700;
+}
+.cmk-assets-flags span.is-approved {
+  background: color-mix(in oklab, var(--sage) 45%, var(--card));
+  color: var(--sage-deep);
+  border-color: color-mix(in oklab, var(--sage-deep) 22%, var(--rule));
+}
+.cmk-assets-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+.cmk-assets-delete {
+  color: var(--rose-deep);
+}
+@media (max-width: 680px) {
+  .cmk-assets-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .cmk-assets-card {
+    grid-template-columns: 58px minmax(0, 1fr);
+  }
+  .cmk-assets-thumb {
+    width: 58px;
+    height: 58px;
+  }
+}
+
 
 /* ============================================================
    LEAD HEARTBEAT TAB — timeline + recent actions
@@ -10017,6 +10236,73 @@ select.cmk-field-panel {
   margin: 0 auto;
   padding: 16px 22px 32px;
 }
+/* Full-bleed variant — used for the tabbed scoreboard so each tab fills
+   the page width without forcing horizontal scrollbars or page-zoom. */
+.cmk-personal--full {
+  max-width: none;
+  padding: 16px 32px 24px;
+}
+.cmk-personal-tabs {
+  margin-top: 4px;
+  margin-bottom: 14px;
+}
+.cmk-personal-tab {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Per-tab grids — make use of full width on wider monitors. */
+.cmk-personal-tab--coverage {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+}
+.cmk-personal-tab--coverage > section { margin-top: 0; }
+
+.cmk-personal-tab--pipeline {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+}
+.cmk-personal-tab--pipeline > section { margin-top: 0; }
+
+@media (max-width: 960px) {
+  .cmk-personal-tab--coverage,
+  .cmk-personal-tab--pipeline {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .cmk-personal--full { padding: 16px 18px 24px; }
+}
+
+/* Restraint headline — big tab-filling number when there's data */
+.cmk-personal-restraint-headline {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  margin-bottom: 16px;
+  padding: 8px 0;
+}
+.cmk-personal-restraint-num {
+  font-family: var(--serif);
+  font-size: 56px;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  line-height: 1;
+}
+.cmk-personal-restraint-caption {
+  font-size: 13.5px;
+  color: var(--ink);
+  font-style: italic;
+  font-family: var(--serif);
+}
+@media (max-width: 720px) {
+  .cmk-personal-restraint-headline { flex-direction: column; gap: 6px; }
+  .cmk-personal-restraint-num { font-size: 42px; }
+}
 .cmk-personal-head {
   margin-top: 12px;
   margin-bottom: 14px;
@@ -10440,6 +10726,7 @@ select.cmk-field-panel {
   gap: 12px;
 }
 .cmk-workflows-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -10451,6 +10738,51 @@ select.cmk-field-panel {
   color: inherit;
   transition: border-color 140ms ease, box-shadow 140ms ease, transform 140ms ease;
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.02);
+}
+.cmk-workflows-card-x {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  border: 0;
+  background: transparent;
+  color: var(--ink-faint);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 120ms ease, background 120ms ease, color 120ms ease;
+  z-index: 1;
+}
+.cmk-workflows-card:hover .cmk-workflows-card-x {
+  opacity: 1;
+}
+.cmk-workflows-card-x:hover {
+  background: color-mix(in oklab, var(--rose-deep, var(--ink)) 12%, var(--card));
+  color: color-mix(in oklab, var(--rose-deep, var(--ink)) 90%, var(--ink));
+}
+.cmk-workflows-clear-btn {
+  margin-left: auto;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  padding: 4px 10px;
+  background: transparent;
+  border: 0.5px solid var(--rule);
+  border-radius: 6px;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: background 120ms ease, border-color 120ms ease, color 120ms ease;
+}
+.cmk-workflows-clear-btn:hover:not(:disabled) {
+  background: color-mix(in oklab, var(--rose-deep, var(--ink)) 8%, var(--card));
+  border-color: color-mix(in oklab, var(--rose-deep, var(--ink)) 26%, var(--rule));
+  color: color-mix(in oklab, var(--rose-deep, var(--ink)) 90%, var(--ink));
+}
+.cmk-workflows-clear-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 .cmk-workflows-card:hover {
   border-color: color-mix(in oklab, var(--ink) 22%, var(--rule));
@@ -10637,7 +10969,8 @@ select.cmk-field-panel {
   min-height: 0;
 }
 
-/* Chat (left) */
+/* Chat (left) — cockpit aesthetic: flat cards, sage left-rule on agent,
+   mono eyebrow meta. Mirrors chat-msg-* / cmk-rich-* idiom. */
 .cmk-wfa-chat {
   display: flex;
   flex-direction: column;
@@ -10645,10 +10978,26 @@ select.cmk-field-panel {
   min-height: 0;
   background: var(--paper-2);
 }
+.cmk-wfa-chat-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-bottom: 0.5px solid var(--rule);
+  background: var(--paper-2);
+  flex-shrink: 0;
+}
+.cmk-wfa-chat-head-eyebrow {
+  font-size: 9.5px;
+  letter-spacing: 0.16em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  font-weight: 500;
+}
 .cmk-wfa-chat-scroll {
   flex: 1;
   overflow-y: auto;
-  padding: 18px 18px 8px;
+  padding: 16px 16px 8px;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -10657,101 +11006,265 @@ select.cmk-field-panel {
   margin: auto 0;
   text-align: center;
   color: var(--ink-soft);
-  padding: 24px 12px;
+  padding: 32px 12px;
 }
 .cmk-wfa-chat-empty p {
   font-family: var(--serif);
-  font-size: 16px;
-  margin-bottom: 16px;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+  margin-bottom: 18px;
   color: var(--ink);
+  line-height: 1.4;
 }
 .cmk-wfa-starters {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 6px;
-  justify-content: center;
+  align-items: stretch;
+  max-width: 260px;
+  margin: 0 auto;
 }
 .cmk-wfa-starter {
-  font-size: 11px;
-  padding: 6px 12px;
+  font-size: 11.5px;
+  line-height: 1.5;
+  padding: 8px 12px;
   background: var(--card, #fff);
-  border: 0.5px solid var(--rule);
-  border-radius: 999px;
+  border: 0.5px solid rgba(0, 0, 0, 0.10);
+  border-radius: 6px;
   color: var(--ink);
   cursor: pointer;
   transition: background 120ms ease, border-color 120ms ease;
   font-family: inherit;
+  text-align: left;
 }
 .cmk-wfa-starter:hover:not(:disabled) {
-  background: color-mix(in oklab, var(--lavender, var(--ink)) 16%, var(--card));
-  border-color: color-mix(in oklab, var(--lavender-deep, var(--ink)) 26%, var(--rule));
+  background: var(--card, #fff);
+  border-color: rgba(0, 0, 0, 0.20);
 }
 .cmk-wfa-starter:disabled { opacity: 0.5; cursor: not-allowed; }
 
 .cmk-wfa-msg {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  padding: 10px 12px;
-  border-radius: 10px;
+  gap: 5px;
+  padding: 9px 13px;
+  background: #FFFFFF;
+  border: 0.5px solid rgba(0, 0, 0, 0.10);
+  border-radius: 8px;
   max-width: 100%;
 }
 .cmk-wfa-msg-user {
-  background: color-mix(in oklab, var(--lavender, var(--ink)) 14%, var(--card));
-  margin-left: 24px;
+  align-self: flex-end;
+  max-width: 78%;
 }
 .cmk-wfa-msg-assistant {
-  background: var(--card, #fff);
-  border: 0.5px solid var(--rule-soft, var(--rule));
-  margin-right: 24px;
+  align-self: flex-start;
+  max-width: 92%;
+  border-left: 2px solid #6B8E5A;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
 }
 .cmk-wfa-msg-system {
-  background: color-mix(in oklab, var(--rose-deep, var(--ink)) 8%, var(--card));
+  align-self: stretch;
+  background: #FAFAF7;
+  border-color: rgba(0, 0, 0, 0.06);
+  border-left: 2px solid color-mix(in oklab, var(--rose-deep, #c4923d) 70%, var(--ink));
   font-size: 11px;
   color: color-mix(in oklab, var(--rose-deep, var(--ink)) 90%, var(--ink));
 }
-.cmk-wfa-msg-loading { opacity: 0.65; font-style: italic; }
+.cmk-wfa-msg-loading { opacity: 0.7; font-style: italic; }
 .cmk-wfa-msg-meta {
   display: flex;
   align-items: center;
   justify-content: space-between;
   font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
-  font-size: 10px;
-  letter-spacing: 0.06em;
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--ink-faint);
 }
 .cmk-wfa-msg-body {
-  font-size: 13px;
-  line-height: 1.5;
+  font-size: 11.5px;
+  line-height: 1.6;
   color: var(--ink);
   white-space: pre-wrap;
   word-break: break-word;
 }
 
+/* Composer — pill-shaped, mirrors cockpit `chat-input-bar`.
+   + button left → transparent textarea center → inline send arrow right. */
 .cmk-wfa-composer {
-  display: flex;
-  gap: 8px;
+  position: relative;
   padding: 10px 14px 14px;
-  border-top: 0.5px solid var(--rule-soft, var(--rule));
+  border-top: 0.5px solid rgba(0, 0, 0, 0.06);
   background: var(--paper-2);
 }
-.cmk-wfa-input {
-  flex: 1;
-  font: inherit;
-  font-size: 13px;
-  line-height: 1.45;
-  padding: 8px 10px;
+.cmk-wfa-composer-pill {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 10px 8px 8px;
   background: var(--card, #fff);
-  border: 0.5px solid var(--rule);
-  border-radius: 8px;
+  border: 0.5px solid rgba(0, 0, 0, 0.10);
+  border-radius: 10px;
+  transition: border-color 120ms ease;
+}
+.cmk-wfa-composer-pill:focus-within {
+  border-color: rgba(0, 0, 0, 0.22);
+}
+.cmk-wfa-composer-add {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 0.5px solid rgba(0, 0, 0, 0.15);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--ink-soft);
+  font-size: 12px;
+  flex-shrink: 0;
+  transition: background 120ms ease, border-color 120ms ease;
+}
+.cmk-wfa-composer-add:hover:not(:disabled) {
+  background: var(--paper-2);
+  border-color: rgba(0, 0, 0, 0.28);
+}
+.cmk-wfa-composer-add:disabled { opacity: 0.4; cursor: not-allowed; }
+.cmk-wfa-composer-input {
+  flex: 1;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  font-family: inherit;
   resize: none;
+  max-height: 160px;
+}
+.cmk-wfa-composer-send {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.04);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--ink-soft);
+  flex-shrink: 0;
+  transition: opacity 120ms ease, background 120ms ease;
+}
+.cmk-wfa-composer-send:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.08);
   color: var(--ink);
 }
-.cmk-wfa-input:focus {
-  outline: none;
-  border-color: color-mix(in oklab, var(--lavender-deep, var(--ink)) 38%, var(--rule));
+.cmk-wfa-composer-send:disabled { opacity: 0.35; cursor: not-allowed; }
+
+/* Slash command palette */
+.cmk-wfa-slash-palette {
+  position: absolute;
+  bottom: calc(100% - 4px);
+  left: 14px;
+  right: 14px;
+  background: var(--card, #fff);
+  border: 0.5px solid rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+  box-shadow: 0 6px 20px -8px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+  z-index: 10;
+  margin-bottom: 6px;
 }
+.cmk-wfa-slash-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  width: 100%;
+  padding: 8px 12px;
+  background: transparent;
+  border: 0;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 80ms ease;
+}
+.cmk-wfa-slash-row:hover,
+.cmk-wfa-slash-row.active { background: var(--paper-2); }
+.cmk-wfa-slash-key {
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  font-size: 11.5px;
+  color: var(--ink);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  min-width: 78px;
+}
+.cmk-wfa-slash-hint {
+  font-size: 11.5px;
+  color: var(--ink-soft);
+  flex: 1;
+}
+.cmk-wfa-slash-foot {
+  padding: 6px 12px;
+  font-size: 10px;
+  color: var(--ink-faint);
+  border-top: 0.5px solid rgba(0, 0, 0, 0.06);
+  background: var(--paper-2);
+  letter-spacing: 0.04em;
+}
+.cmk-wfa-slash-foot kbd {
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  font-size: 9.5px;
+  padding: 1px 5px;
+  margin: 0 4px 0 8px;
+  background: var(--card, #fff);
+  border: 0.5px solid rgba(0, 0, 0, 0.12);
+  border-radius: 3px;
+  color: var(--ink-soft);
+}
+.cmk-wfa-slash-foot kbd:first-of-type { margin-left: 0; }
+
+/* Multi-choice question card inside an assistant message. */
+.cmk-wfa-q {
+  margin-top: 8px;
+  padding-top: 10px;
+  border-top: 0.5px dashed rgba(0, 0, 0, 0.10);
+}
+.cmk-wfa-q-question {
+  font-family: var(--serif);
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--ink);
+  margin: 0 0 10px;
+  letter-spacing: -0.01em;
+}
+.cmk-wfa-q-choices { display: flex; flex-direction: column; gap: 5px; }
+.cmk-wfa-q-chip {
+  padding: 8px 12px;
+  background: var(--card, #fff);
+  border: 0.5px solid rgba(0, 0, 0, 0.12);
+  border-radius: 6px;
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: var(--ink);
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  transition: background 100ms ease, border-color 100ms ease;
+}
+.cmk-wfa-q-chip:hover:not(:disabled) {
+  background: var(--paper-2);
+  border-color: rgba(0, 0, 0, 0.24);
+}
+.cmk-wfa-q-chip:disabled { opacity: 0.45; cursor: not-allowed; }
+.cmk-wfa-q-chip-freeform {
+  font-style: italic;
+  color: var(--ink-soft);
+  border-style: dashed;
+}
+.cmk-wfa-q-chip-freeform:hover:not(:disabled) { color: var(--ink); }
 
 /* Graph (right) */
 .cmk-wfa-graph {
@@ -10787,4 +11300,199 @@ select.cmk-field-panel {
     grid-template-rows: 1fr 1fr;
   }
   .cmk-wfa-chat { border-right: 0; border-bottom: 0.5px solid var(--rule); }
+}
+
+/* ===========================================================================
+ * /lead/[id]/discovery — tabbed treatment matching /personal pattern.
+ * Persistent score header sits above tabs; each tab fills the viewport.
+ * ========================================================================= */
+.cmk-discovery-tab--full {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.cmk-discovery-tab--full .cmk-discovery-head {
+  margin-top: 12px;
+}
+.cmk-discovery-tab--full .cmk-personal-tabs {
+  margin-top: 14px;
+  margin-bottom: 12px;
+}
+.cmk-discovery-tab--full > section {
+  margin-top: 0;
+}
+
+.cmk-discovery-profile {
+  min-height: 520px;
+}
+.cmk-discovery-profile-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.cmk-discovery-profile-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(340px, 0.88fr);
+  gap: 12px;
+}
+.cmk-discovery-brief {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px 18px;
+  border: 0.5px solid var(--rule);
+  border-radius: 8px;
+  background: color-mix(in oklab, var(--card) 86%, var(--paper));
+  box-shadow: var(--shadow-sm);
+}
+.cmk-discovery-brief--wide {
+  grid-column: 1 / -1;
+}
+.cmk-discovery-brief h3 {
+  max-width: 1120px;
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(22px, 2.3vw, 34px);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+.cmk-discovery-brief p {
+  margin: 0;
+  color: var(--ink-mid);
+  font-size: 14px;
+  line-height: 1.55;
+}
+.cmk-discovery-brief code {
+  padding: 1px 5px;
+  border-radius: 5px;
+  background: color-mix(in oklab, var(--ink) 6%, var(--card));
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 11px;
+}
+.cmk-discovery-brief--question {
+  border-left: 4px solid color-mix(in oklab, var(--lavender-deep) 75%, var(--rule));
+  background: color-mix(in oklab, var(--lavender) 18%, var(--card));
+}
+.cmk-discovery-brief--question blockquote {
+  margin: 0;
+  padding: 10px 12px;
+  border-left: 3px solid color-mix(in oklab, var(--lavender-deep) 45%, var(--rule));
+  border-radius: 0 7px 7px 0;
+  background: var(--card);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 18px;
+  font-style: italic;
+  line-height: 1.38;
+}
+.cmk-discovery-brief-list {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--ink);
+  font-size: 13px;
+  line-height: 1.58;
+}
+.cmk-discovery-brief-list li + li {
+  margin-top: 3px;
+}
+.cmk-discovery-brief--stops {
+  background: color-mix(in oklab, var(--rose) 10%, var(--card));
+}
+.cmk-discovery-stop-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 8px 22px;
+  padding-left: 18px;
+}
+.cmk-discovery-stop-list li {
+  padding-right: 12px;
+}
+.cmk-discovery-stop-list strong {
+  color: var(--ink);
+}
+.cmk-discovery-stop-list span {
+  color: var(--ink-mid);
+}
+.cmk-discovery-profile-empty {
+  padding: 22px;
+  border: 0.5px dashed var(--rule);
+  border-radius: 8px;
+  background: var(--card);
+}
+
+/* Roomy slot grid — bigger cards now that the Map tab owns the full width */
+.cmk-discovery-grid--roomy {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+.cmk-discovery-grid--roomy .cmk-discovery-slot {
+  padding: 14px 16px;
+  gap: 6px;
+  min-height: 92px;
+}
+.cmk-discovery-grid--roomy .cmk-discovery-slot-label {
+  font-size: 10.5px;
+}
+.cmk-discovery-grid--roomy .cmk-discovery-slot-value {
+  font-size: 16px;
+}
+
+/* Roomy quest — more breathing room when Quest owns the tab */
+.cmk-quest--roomy {
+  gap: 18px;
+}
+.cmk-quest--roomy .cmk-quest-row {
+  padding: 4px 0;
+}
+.cmk-quest--roomy .cmk-quest-title {
+  font-size: 17px;
+}
+.cmk-quest--roomy .cmk-quest-body {
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+.cmk-quest--roomy .cmk-quest-question {
+  font-size: 14px;
+  padding: 10px 14px;
+}
+
+/* Roomy pipeline strip — bigger pills + spacing, fills the Pipeline tab */
+.cmk-discovery-pipeline-list--roomy {
+  padding: 14px 8px;
+}
+.cmk-discovery-pipeline-list--roomy .cmk-discovery-pipeline-step {
+  padding: 12px 12px;
+  min-width: 120px;
+  gap: 6px;
+}
+.cmk-discovery-pipeline-list--roomy .cmk-discovery-pipeline-dot {
+  width: 18px;
+  height: 18px;
+}
+.cmk-discovery-pipeline-list--roomy .cmk-discovery-pipeline-step:not(:last-child)::after {
+  top: 21px;
+}
+.cmk-discovery-pipeline-list--roomy .cmk-discovery-pipeline-label {
+  font-size: 12px;
+}
+.cmk-discovery-pipeline-list--roomy .cmk-discovery-pipeline-at {
+  font-size: 10.5px;
+}
+
+@media (max-width: 980px) {
+  .cmk-discovery-profile-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* /analytics — tab nav layout. Sits between toolbar and content. */
+.cmk-an-tabs {
+  margin-top: 12px;
+  margin-bottom: 4px;
 }

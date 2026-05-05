@@ -12,11 +12,15 @@ import {
   closeListWebhookSubscriptions,
 } from "@/lib/close";
 import { closeMcpListTools, closeMcpStatus } from "@/lib/close-mcp";
+import { sweepActiveLeads } from "@/lib/lead-folder-sweeper";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+/** Lead sweep can run 60-90s for ~50 leads × 3 lanes; the other modes return
+ *  in a few seconds. 5-minute ceiling is the same we set on the cron route. */
+export const maxDuration = 300;
 
-type Mode = "openai" | "supabase" | "github" | "close" | "close-mcp";
+type Mode = "openai" | "supabase" | "github" | "close" | "close-mcp" | "lead-sweep";
 
 async function testOpenAI() {
   if (!env.OPENAI_API_KEY) {
@@ -129,6 +133,34 @@ async function testCloseMcp() {
   };
 }
 
+async function testLeadSweep() {
+  const summary = await sweepActiveLeads();
+  // Compact the result for the test pane: keep top-level shape but trim each
+  // swept entry to identifying fields. Full payload is in the cron route's
+  // own response when Vercel runs it.
+  return {
+    considered: summary.considered,
+    in_scope: summary.in_scope,
+    started_at: summary.started_at,
+    finished_at: summary.finished_at,
+    swept_count: summary.swept.length,
+    swept: summary.swept.slice(0, 25).map((s) => ({
+      lead_id: s.lead_id,
+      name: s.name,
+      written: s.written,
+      skipped_identical: s.skipped_identical,
+      total_rendered: s.total_rendered,
+      duration_ms: s.duration_ms,
+    })),
+    error_count: summary.errors.length,
+    errors: summary.errors.slice(0, 10),
+    hint:
+      summary.in_scope === 0
+        ? "0 leads in scope — confirm CLOSE_USER_ID_ANDRE matches your active assignee, and that some leads aren't all in Won/Lost/Not-Interested."
+        : undefined,
+  };
+}
+
 async function testClose() {
   const [workflows, templates, smsTemplates, leadStatuses, phones, webhooks] = await Promise.all([
     closeListWorkflows({ limit: 50 }),
@@ -166,9 +198,9 @@ export async function POST(req: Request) {
   }
 
   const mode = body.mode;
-  if (!mode || !["openai", "supabase", "github", "close", "close-mcp"].includes(mode)) {
+  if (!mode || !["openai", "supabase", "github", "close", "close-mcp", "lead-sweep"].includes(mode)) {
     return NextResponse.json(
-      { ok: false, error: "mode must be one of: openai, supabase, github, close, close-mcp" },
+      { ok: false, error: "mode must be one of: openai, supabase, github, close, close-mcp, lead-sweep" },
       { status: 400 }
     );
   }
@@ -183,7 +215,9 @@ export async function POST(req: Request) {
         ? await testGitHub()
         : mode === "close"
         ? await testClose()
-        : await testCloseMcp();
+        : mode === "close-mcp"
+        ? await testCloseMcp()
+        : await testLeadSweep();
 
     return NextResponse.json({
       ok: true,

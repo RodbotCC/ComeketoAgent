@@ -39,6 +39,7 @@ import { getSettings, clampPlanHorizonDays } from "@/lib/settings";
 import { logExecution, logApprovalChange } from "@/lib/execution-audit";
 import { redirect } from "next/navigation";
 import { getIntakeArtifactById } from "@/lib/intake-artifacts";
+import { deleteAssetById, getAssetById } from "@/lib/assets";
 
 export async function generatePlanAction(formData: FormData) {
   await assertOperatorSession();
@@ -696,6 +697,59 @@ export async function deleteIntakeArtifactAction(formData: FormData) {
     payload: { artifact_id: artifactId, deleted: true, filename: row.filename },
   });
   revalidatePath(`/lead/${leadId}/intake`);
+  revalidatePath(`/lead/${leadId}/box`);
+}
+
+export async function redirectAssetDownload(formData: FormData) {
+  const assetId = String(formData.get("asset_id") ?? "").trim();
+  const leadId = String(formData.get("lead_id") ?? "").trim();
+  const boxPath = (code?: string) =>
+    `/lead/${encodeURIComponent(leadId)}/box${code ? `?asset_dl=${code}` : ""}`;
+
+  if (!assetId || !leadId) {
+    redirect(leadId ? boxPath("bad_request") : "/leads");
+  }
+
+  const row = await getAssetById(assetId);
+  if (!row || (row.scope === "lead" && row.close_lead_id !== leadId)) {
+    redirect(boxPath("not_found"));
+  }
+
+  const sb = getSupabaseServer();
+  const { data, error } = await sb.storage
+    .from(row.storage_bucket)
+    .createSignedUrl(row.storage_path, 120);
+  if (error || !data?.signedUrl) {
+    redirect(boxPath("signed_url"));
+  }
+
+  redirect(data.signedUrl);
+}
+
+export async function deleteLeadAssetAction(formData: FormData) {
+  await assertOperatorSession();
+  const assetId = String(formData.get("asset_id") || "").trim();
+  const leadId = String(formData.get("lead_id") || "").trim();
+  if (!assetId || !leadId) throw new Error("asset_id and lead_id required");
+
+  const row = await getAssetById(assetId);
+  if (!row) {
+    revalidatePath(`/lead/${leadId}/box`);
+    return;
+  }
+  if (row.scope === "lead" && row.close_lead_id !== leadId) throw new Error("asset lead mismatch");
+
+  await deleteAssetById(assetId);
+  void logExecution({
+    action_kind: "asset_library",
+    close_lead_id: row.close_lead_id ?? leadId,
+    payload: {
+      asset_id: assetId,
+      deleted: true,
+      filename: row.filename,
+      scope: row.scope,
+    },
+  });
   revalidatePath(`/lead/${leadId}/box`);
 }
 

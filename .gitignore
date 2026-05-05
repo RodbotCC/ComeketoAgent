@@ -56,3 +56,8 @@ next-env.d.ts
 
 # Claude Code per-project local settings (operator-specific, not for git)
 .claude/
+
+# Per-lead memory — lives ONLY on the `leads-data` branch.
+# If anything ever materializes _leads/ into a `main` checkout (manual sweep
+# debug, accidental cd, etc.), don't let it land in main's history.
+_leads/

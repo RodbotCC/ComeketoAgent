@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useToast } from "@/components/Toast";
 import { OpenAiMediaLab } from "./OpenAiMediaLab";
 
-type Mode = "openai" | "supabase" | "github" | "close" | "close-mcp";
+type Mode = "openai" | "supabase" | "github" | "close" | "close-mcp" | "lead-sweep";
 
 type TestResult = {
   ok: boolean;
@@ -40,6 +40,11 @@ const MODES: Array<{ key: Mode; title: string; description: string }> = [
     key: "close-mcp",
     title: "Close MCP fallback",
     description: "Calls tools/list on Close's official MCP server (the chat agent's escape hatch for operations not wrapped by direct REST). Reports tool count + first 12 names + first-call latency. When CLOSE_MCP_URL is blank, returns the same not-configured shape the agent sees — the result pane shows exactly what's wired and what isn't.",
+  },
+  {
+    key: "lead-sweep",
+    title: "Run lead sweep",
+    description: "Hydrates every Andre-owned, in-progress lead from Close (incl. per-call transcripts) and writes per-lead Markdown folders to the leads-data branch. Idempotent — re-runs with no Close-side changes produce zero commits. Long-running: a full 50-lead sweep takes ~60-90s. Result pane shows {considered, in_scope, swept[], errors[]}. After it completes, browse github.com/RodbotCC/ComeketoAgent/tree/leads-data/_leads/active to see the folders materialize.",
   },
 ];
 

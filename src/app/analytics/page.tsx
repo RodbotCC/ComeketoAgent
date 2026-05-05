@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { AppHeader } from "@/components/AppHeader";
 import { TabNav } from "@/components/TabNav";
 import type {
@@ -22,6 +23,13 @@ import bookingLeadTime from "@/data/analytics/booking_lead_time_snapshot.json";
 import cohort from "@/data/analytics/cohort_snapshot.json";
 
 export const dynamic = "force-static";
+
+type AnalyticsTab = "overview" | "sources" | "funnel" | "revenue" | "timing" | "snapshots";
+const VALID_TABS: AnalyticsTab[] = ["overview", "sources", "funnel", "revenue", "timing", "snapshots"];
+
+type Props = {
+  searchParams?: Record<string, string | string[] | undefined>;
+};
 
 /* ========================================================================
    /analytics — lead intelligence dashboard.
@@ -80,7 +88,13 @@ function familyClass(key: string): string {
   return known.has(key) ? `cmk-an-fam-${key}` : "cmk-an-fam-other";
 }
 
-export default function AnalyticsPage() {
+export default function AnalyticsPage({ searchParams = {} }: Props) {
+  const rawTab = searchParams["tab"];
+  const tabParam = Array.isArray(rawTab) ? rawTab[0] : rawTab;
+  const activeTab: AnalyticsTab = (VALID_TABS as string[]).includes(tabParam || "")
+    ? (tabParam as AnalyticsTab)
+    : "overview";
+
   // ── Typed snapshot handles ─────────────────────────────────────────────
   const sc = sourceChannel as unknown as SourceChannelSnapshot;
   const seller = sellerPerf as unknown as SellerPerformanceSnapshot;
@@ -267,6 +281,25 @@ export default function AnalyticsPage() {
           </div>
         </div>
 
+        {/* Sub-tab nav */}
+        <nav className="proposal-tabs cmk-personal-tabs cmk-an-tabs" aria-label="Analytics sections">
+          <Link href="/analytics" data-tab="overview"
+            className={`proposal-tab${activeTab === "overview" ? " proposal-tab-active" : ""}`}>Overview</Link>
+          <Link href="/analytics?tab=sources" data-tab="sources"
+            className={`proposal-tab${activeTab === "sources" ? " proposal-tab-active" : ""}`}>Sources</Link>
+          <Link href="/analytics?tab=funnel" data-tab="funnel"
+            className={`proposal-tab${activeTab === "funnel" ? " proposal-tab-active" : ""}`}>Funnel</Link>
+          <Link href="/analytics?tab=revenue" data-tab="revenue"
+            className={`proposal-tab${activeTab === "revenue" ? " proposal-tab-active" : ""}`}>Revenue</Link>
+          <Link href="/analytics?tab=timing" data-tab="timing"
+            className={`proposal-tab${activeTab === "timing" ? " proposal-tab-active" : ""}`}>Timing</Link>
+          <Link href="/analytics?tab=snapshots" data-tab="snapshots"
+            className={`proposal-tab${activeTab === "snapshots" ? " proposal-tab-active" : ""}`}>Snapshots</Link>
+        </nav>
+
+        {/* ─── OVERVIEW ─────────────────────────────────────────────── */}
+        {activeTab === "overview" && <>
+
         {/* Metric strip */}
         <div className="cmk-an-strip">
           {stats.map((s, i) => (
@@ -292,6 +325,11 @@ export default function AnalyticsPage() {
             ))}
           </div>
         </div>
+
+        </>}
+
+        {/* ─── SOURCES ──────────────────────────────────────────────── */}
+        {activeTab === "sources" && <>
 
         {/* Source channels — primary view */}
         <div className="hb-section" style={{ marginTop: 22 }}>
@@ -377,6 +415,11 @@ export default function AnalyticsPage() {
           )}
         </div>
 
+        </>}
+
+        {/* ─── FUNNEL ───────────────────────────────────────────────── */}
+        {activeTab === "funnel" && <>
+
         {/* Pipeline funnel — derived from win_loss.funnel */}
         <div className="hb-section" style={{ marginTop: 22 }}>
           <h2 className="hb-section-h">
@@ -444,6 +487,11 @@ export default function AnalyticsPage() {
             <WinLossSubChart title="By value bucket" rows={wlValue}  barClass={() => "cmk-an-bar-lemon"}      />
           </div>
         </div>
+
+        </>}
+
+        {/* ─── REVENUE ──────────────────────────────────────────────── */}
+        {activeTab === "revenue" && <>
 
         {/* Revenue & growth */}
         <div className="hb-section" style={{ marginTop: 22 }}>
@@ -533,6 +581,11 @@ export default function AnalyticsPage() {
             </div>
           </div>
         </div>
+
+        </>}
+
+        {/* ─── TIMING ───────────────────────────────────────────────── */}
+        {activeTab === "timing" && <>
 
         {/* Lead time */}
         <div className="hb-section" style={{ marginTop: 22 }}>
@@ -709,6 +762,34 @@ export default function AnalyticsPage() {
           </div>
         </div>
 
+        </>}
+
+        {/* ─── SNAPSHOTS ────────────────────────────────────────────── */}
+        {activeTab === "snapshots" && <>
+
+        {/* Sweep panel — wire-up state + rerun guidance */}
+        <div className="cmk-stack-panel cmk-stack-panel--lemon" style={{ marginTop: 8 }}>
+          <div className="cmk-stack-panel-head">
+            <h2 className="cmk-stack-panel-title">Sweep — refresh from new Close org</h2>
+            <div className="cmk-stack-panel-meta">oldest snapshot {fmtDate(oldestGenerated)}</div>
+          </div>
+          <p style={{ margin: "6px 0 12px", fontSize: 13, lineHeight: 1.55, color: "var(--ink)" }}>
+            The 7 datasets below are <em>snapshots from the legacy Close org</em>. Refreshing
+            against the current org has a documented run-order in{" "}
+            <code className="ag-seq-mono" style={{ fontSize: 11 }}>_reference/analytics-port-manifest.md</code>:
+          </p>
+          <ol style={{ margin: "0 0 12px 18px", padding: 0, fontSize: 13, lineHeight: 1.7, color: "var(--ink)" }}>
+            <li>Export normalized CSVs from the new org (5 path-only scripts).</li>
+            <li>Map custom-field IDs (one-time per org) → write <code className="ag-seq-mono" style={{ fontSize: 11 }}>_reference/analytics-custom-fields.json</code>.</li>
+            <li>Run path-only scripts against the new normalized export.</li>
+            <li>Patch + run schema-port scripts (source_channel, operational).</li>
+            <li>Drop new snapshots into <code className="ag-seq-mono" style={{ fontSize: 11 }}>src/data/analytics/</code>.</li>
+          </ol>
+          <p className="muted" style={{ fontSize: 11.5, margin: 0 }}>
+            Until the exporter is wired in-repo (<code className="ag-seq-mono" style={{ fontSize: 11 }}>npm run analytics:sweep</code> — TODO), refreshing is a manual run on the legacy laptop. The page reads JSON at build time, so a rebuild ships the new snapshots.
+          </p>
+        </div>
+
         {/* Dataset health — what we have, when it's from, what view is wired */}
         <div className="hb-section" style={{ marginTop: 22 }}>
           <h2 className="hb-section-h">Datasets</h2>
@@ -748,6 +829,8 @@ export default function AnalyticsPage() {
             Conversation intel is intentionally omitted — no comms-style snapshot exists, and the deal-pattern data we have is not honestly that.
           </p>
         </div>
+
+        </>}
       </main>
     </div>
   );

@@ -3,17 +3,22 @@
  * Close sequence body that `closeCreateSequence` expects.
  *
  * v1 vocabulary (must match what `propose_close_workflow` emits):
- *   - email_send     → Close step type "email"
- *   - sms_send       → Close step type "sms"
- *   - task_create    → Close step type "call" (closest analogue in Close sequences)
- *   - wait           → folded into the next step's delay
+ *   - email_send     → Close step type "email" (creates an email template, references its id)
+ *   - sms_send       → Close step type "sms"   (creates an SMS template, references its id)
+ *   - task_create    → Close step type "call"  (inline `text` field; no template needed)
+ *   - wait           → folded into the next step's `delay_in_seconds`
  *
- * Linear flow only; v1 doesn't emit branches. Walks nodes in connection-order
- * starting from any node with no incoming edges.
+ * Linear flow only; v1 doesn't emit branches.
+ *
+ * Why templates: Close's /sequence/ API does NOT accept inline subject/body on
+ * email or sms steps. Each email/sms step must reference a pre-created
+ * `email_template_id` / `sms_template_id`. This module creates those templates
+ * on the fly during publish.
  */
 
 import type { Workflow, WorkflowNode } from "@/components/AutomationCanvas";
 import type { AutomationDraftRow } from "@/lib/automation-drafts";
+import { closeCreateEmailTemplate, closeCreateSmsTemplate } from "@/lib/close";
 
 export type CloseSequenceBody = {
   name: string;
@@ -24,15 +29,8 @@ export type CloseSequenceBody = {
 
 export type CloseSequenceStep = Record<string, unknown> & {
   step_type: "email" | "sms" | "call";
-  delay?: string;
   delay_in_seconds?: number;
 };
-
-/** ISO-8601 duration for "N days" — Close uses this format on the `delay` field. */
-function isoDays(days: number): string {
-  const d = Math.max(0, Math.round(days));
-  return `P${d}D`;
-}
 
 /** Order nodes by walking from any incoming-edge-free root via connections. */
 function topologicalOrder(wf: Workflow): WorkflowNode[] {
@@ -62,7 +60,6 @@ function topologicalOrder(wf: Workflow): WorkflowNode[] {
       if (next) queue.push(next);
     }
   }
-  // Anything left (disconnected) appended in declaration order so we don't drop nodes.
   for (const n of wf.nodes) if (!visited.has(n.id)) out.push(n);
   return out;
 }
@@ -74,27 +71,59 @@ function readDelayDays(node: WorkflowNode): number {
   return Number.isFinite(num) && num > 0 ? num : 0;
 }
 
-function emailStep(node: WorkflowNode, delayDays: number): CloseSequenceStep {
+/** Short slug used to disambiguate templates created for this draft. */
+function templateSuffix(draftId: string, stepIndex: number): string {
+  const tail = draftId.replace(/-/g, "").slice(0, 6);
+  return `${tail}-${stepIndex + 1}`;
+}
+
+async function emailStep(
+  node: WorkflowNode,
+  delayDays: number,
+  draft: AutomationDraftRow,
+  stepIndex: number
+): Promise<CloseSequenceStep> {
   const cfg = (node.config ?? {}) as Record<string, unknown>;
   const subject = String(cfg.subject ?? node.label ?? "(no subject)");
   const body = String(cfg.body_text ?? cfg.body ?? cfg.draft_seed ?? "");
-  return {
-    step_type: "email",
-    delay: isoDays(delayDays),
-    delay_in_seconds: delayDays * 86400,
+  const bodyHtmlRaw = typeof cfg.body_html === "string" ? cfg.body_html.trim() : "";
+  const tplName = `${draft.name || "Workflow"} · email ${stepIndex + 1} · ${templateSuffix(
+    draft.id,
+    stepIndex
+  )}`;
+  const tpl = await closeCreateEmailTemplate({
+    name: tplName,
     subject,
     body_text: body,
+    ...(bodyHtmlRaw ? { body_html: bodyHtmlRaw } : {}),
+  });
+  return {
+    step_type: "email",
+    delay_in_seconds: delayDays * 86400,
+    email_template_id: tpl.id,
   };
 }
 
-function smsStep(node: WorkflowNode, delayDays: number): CloseSequenceStep {
+async function smsStep(
+  node: WorkflowNode,
+  delayDays: number,
+  draft: AutomationDraftRow,
+  stepIndex: number
+): Promise<CloseSequenceStep> {
   const cfg = (node.config ?? {}) as Record<string, unknown>;
   const body = String(cfg.body ?? cfg.body_text ?? cfg.draft_seed ?? "");
+  const tplName = `${draft.name || "Workflow"} · sms ${stepIndex + 1} · ${templateSuffix(
+    draft.id,
+    stepIndex
+  )}`;
+  const tpl = await closeCreateSmsTemplate({
+    name: tplName,
+    body,
+  });
   return {
     step_type: "sms",
-    delay: isoDays(delayDays),
     delay_in_seconds: delayDays * 86400,
-    body,
+    sms_template_id: tpl.id,
   };
 }
 
@@ -103,18 +132,21 @@ function callStep(node: WorkflowNode, delayDays: number): CloseSequenceStep {
   const text = String(cfg.text ?? cfg.body ?? node.label ?? "Call");
   return {
     step_type: "call",
-    delay: isoDays(delayDays),
     delay_in_seconds: delayDays * 86400,
     text,
   };
 }
 
 /**
- * Compile a draft into the Close sequence body shape.
- * Throws if the draft has zero compilable steps so the caller surfaces a
- * clear error before hitting Close's API.
+ * Compile a draft into the Close sequence body shape, creating any
+ * email/SMS templates this draft needs along the way.
+ *
+ * Side effect: posts to /email_template/ and /sms_template/ on Close. The
+ * template ids end up referenced inside the returned step shapes.
  */
-export function workflowToCloseSequence(draft: AutomationDraftRow): CloseSequenceBody {
+export async function workflowToCloseSequence(
+  draft: AutomationDraftRow
+): Promise<CloseSequenceBody> {
   const wf = draft.workflow_json;
   const ordered = topologicalOrder(wf);
 
@@ -127,17 +159,16 @@ export function workflowToCloseSequence(draft: AutomationDraftRow): CloseSequenc
     const totalDelay = pendingWaitDays + inherentDelay;
 
     if (kind === "wait") {
-      // Wait nodes are pure cadence; fold into next step's delay.
       pendingWaitDays = totalDelay;
       continue;
     }
     if (kind === "email_send") {
-      steps.push(emailStep(node, totalDelay));
+      steps.push(await emailStep(node, totalDelay, draft, steps.length));
       pendingWaitDays = 0;
       continue;
     }
     if (kind === "sms_send") {
-      steps.push(smsStep(node, totalDelay));
+      steps.push(await smsStep(node, totalDelay, draft, steps.length));
       pendingWaitDays = 0;
       continue;
     }
@@ -146,8 +177,7 @@ export function workflowToCloseSequence(draft: AutomationDraftRow): CloseSequenc
       pendingWaitDays = 0;
       continue;
     }
-    // Unknown kind — skip silently rather than emit a malformed step. Caller
-    // can spot a step-count mismatch in the UI summary if it matters.
+    // Unknown kind — skip silently.
   }
 
   if (steps.length === 0) {

@@ -4,6 +4,7 @@ import { BoxPanel } from "../BoxPanel";
 import { WorkflowEnrollSection } from "../WorkflowEnrollSection";
 import { WorkflowSubscriptionControls } from "../WorkflowSubscriptionControls";
 import { IntakeArtifactsPanel } from "../IntakeArtifactsPanel";
+import { LeadAssetsPanel } from "../LeadAssetsPanel";
 import { LeadSubNav } from "../LeadSubNav";
 import { LeadToolbar } from "../LeadToolbar";
 import { loadLeadBoxPageData } from "../load-lead-box";
@@ -28,6 +29,19 @@ function intakeDownloadUserMessage(code: string | undefined): string | null {
   }
 }
 
+function assetDownloadUserMessage(code: string | undefined): string | null {
+  switch (code) {
+    case "bad_request":
+      return "Asset download request was incomplete. Try again.";
+    case "not_found":
+      return "That asset is not linked to this lead, or it was removed.";
+    case "signed_url":
+      return "Could not create a private asset download link. Check the assets storage bucket and server credentials.";
+    default:
+      return null;
+  }
+}
+
 function fmtDate(iso?: string): string {
   if (!iso) return "—";
   const d = new Date(iso);
@@ -46,6 +60,9 @@ export default async function LeadBoxTabPage({ params, searchParams = {} }: Prop
   const rawDl = searchParams["intake_dl"];
   const intakeDlCode = Array.isArray(rawDl) ? rawDl[0] : rawDl;
   const intakeDownloadError = intakeDownloadUserMessage(intakeDlCode);
+  const rawAssetDl = searchParams["asset_dl"];
+  const assetDlCode = Array.isArray(rawAssetDl) ? rawAssetDl[0] : rawAssetDl;
+  const assetDownloadError = assetDownloadUserMessage(assetDlCode);
 
   const loaded = await loadLeadBoxPageData(params.id);
 
@@ -66,7 +83,7 @@ export default async function LeadBoxTabPage({ params, searchParams = {} }: Prop
   }
 
   const data = loaded;
-  const { box, counts, lastInbound, lastOutbound, intakeArtifacts, planEligible, customFields } = data;
+  const { box, counts, lastInbound, lastOutbound, intakeArtifacts, assets, planEligible, customFields } = data;
   const { lead, activities, subscriptions, email_threads, fetched_at } = box;
 
   return (
@@ -279,6 +296,12 @@ export default async function LeadBoxTabPage({ params, searchParams = {} }: Prop
               leadId={params.id}
               artifacts={intakeArtifacts}
               downloadError={intakeDownloadError}
+            />
+
+            <LeadAssetsPanel
+              leadId={params.id}
+              assets={assets}
+              downloadError={assetDownloadError}
             />
 
             {(lead.opportunities ?? []).length > 0 && (

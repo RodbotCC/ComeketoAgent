@@ -282,6 +282,17 @@ export async function closeGetLead(leadId: string): Promise<CloseLead> {
   return closeFetch<CloseLead>(`/lead/${encodeURIComponent(leadId)}/`);
 }
 
+/** GET /activity/call/{id}/ — full call payload including `recording_transcript`,
+ *  `note`, `note_html`, `outcome_autofill_reasoning`, `recording_url`,
+ *  `recording_expires_at`. The list endpoint trims these fields; per-call GET
+ *  is required to capture transcripts before they expire (Close keeps audio
+ *  for 30 days from the call timestamp). Returns the raw object. */
+export async function closeGetCall(activityId: string): Promise<CloseActivity> {
+  return closeFetch<CloseActivity>(
+    `/activity/call/${encodeURIComponent(activityId)}/`,
+  );
+}
+
 /** POST /sequence_subscription/ — enroll a lead's contact into a workflow. */
 export async function closeEnrollInWorkflow(input: {
   sequence_id: string;
@@ -302,6 +313,26 @@ export async function closeListEmailTemplates(opts: { limit?: number } = {}): Pr
     query: { _limit: opts.limit ?? 50 },
   });
   return r.data;
+}
+
+/** POST /email_template/ — used when publishing a workflow with inline-authored email bodies. */
+export async function closeCreateEmailTemplate(input: {
+  name: string;
+  subject: string;
+  body_text?: string;
+  body_html?: string;
+  is_shared?: boolean;
+}): Promise<CloseEmailTemplate & { id: string }> {
+  return closeFetch("/email_template/", {
+    method: "POST",
+    body: JSON.stringify({
+      name: input.name,
+      subject: input.subject,
+      body_text: input.body_text ?? "",
+      body_html: input.body_html ?? "",
+      is_shared: input.is_shared ?? true,
+    }),
+  });
 }
 
 /** POST /opportunity/ */
@@ -670,6 +701,22 @@ export async function closeListSmsTemplates(opts: { limit?: number } = {}): Prom
     query: { _limit: opts.limit ?? 50 },
   });
   return r.data;
+}
+
+/** POST /sms_template/ — used when publishing a workflow with inline-authored SMS bodies. */
+export async function closeCreateSmsTemplate(input: {
+  name: string;
+  body: string;
+  is_shared?: boolean;
+}): Promise<CloseSmsTemplate & { id: string }> {
+  return closeFetch("/sms_template/", {
+    method: "POST",
+    body: JSON.stringify({
+      name: input.name,
+      body: input.body,
+      is_shared: input.is_shared ?? true,
+    }),
+  });
 }
 
 /** GET /status/lead/ — lead status picklist for automation + UI. */

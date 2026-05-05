@@ -23,6 +23,7 @@ export const EXECUTION_LOG_KINDS = [
   "manual_heartbeat",
   "reject_plan_queue",
   "intake_extract",
+  "asset_library",
   "pause_subscription",
   "resume_subscription",
   "publish_automation_draft",

@@ -1,8 +1,9 @@
 "use client";
 
-import { useCallback, useRef, useState, useTransition } from "react";
+import { useCallback, useMemo, useRef, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { AutomationCanvas, type Workflow } from "@/components/AutomationCanvas";
+import { icons } from "@/components/icons";
 import type { AutomationDraftRow } from "@/lib/automation-drafts";
 import {
   publishWorkflowDraftAction,
@@ -10,12 +11,81 @@ import {
   deleteWorkflowDraftAction,
 } from "./actions";
 
+type OperatorQuestion = {
+  question: string;
+  choices: string[];
+  allow_freeform: boolean;
+};
+
 type ChatMessage = {
   id: string;
   role: "user" | "assistant" | "system";
   content: string;
   ts: string;
+  /** When set, this assistant message renders a multi-choice question card. */
+  question?: OperatorQuestion;
+  /** Once the operator answered, chips disable. */
+  answered?: boolean;
 };
+
+type SlashCommand = {
+  id: string;
+  label: string;
+  hint: string;
+  template: string;
+};
+
+const SLASH_COMMANDS: SlashCommand[] = [
+  {
+    id: "branded",
+    label: "/branded",
+    hint: "Add a branded HTML email with sections",
+    template: "Add a branded HTML email — multi-section, structured headings, our voice. ",
+  },
+  {
+    id: "timeline",
+    label: "/timeline",
+    hint: "Date-anchored countdown email (Rhonna shape)",
+    template:
+      "Add a date-anchored timeline email like Rhonna's pre-event countdown — bold date headers, soft sign-off. ",
+  },
+  {
+    id: "html",
+    label: "/html",
+    hint: "Add a structured HTML body to the next email step",
+    template: "The next email step should have a structured HTML body. ",
+  },
+  {
+    id: "sms",
+    label: "/sms",
+    hint: "Add an SMS touch",
+    template: "Add an SMS touch — short, NEPQ voice, day ",
+  },
+  {
+    id: "wait",
+    label: "/wait",
+    hint: "Insert a wait step",
+    template: "Insert a wait of N days before the next step. ",
+  },
+  {
+    id: "task",
+    label: "/task",
+    hint: "Add a phone-call task",
+    template: "Add a phone-call task on day ",
+  },
+  {
+    id: "rewrite",
+    label: "/rewrite",
+    hint: "Rewrite a specific step",
+    template: "Rewrite step N — ",
+  },
+  {
+    id: "help",
+    label: "/help",
+    hint: "What can the AI build?",
+    template: "What kinds of workflows can you build? Give me 3 examples I could ask for.",
+  },
+];
 
 type Props = {
   draft: AutomationDraftRow;
@@ -50,8 +120,20 @@ export function WorkflowAuthor({ draft }: Props) {
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
   const [publishMsg, setPublishMsg] = useState<string | null>(null);
+  const [slashOpen, setSlashOpen] = useState(false);
+  const [slashIndex, setSlashIndex] = useState(0);
   const [, startTransition] = useTransition();
   const taRef = useRef<HTMLTextAreaElement>(null);
+
+  const slashMatches = useMemo(() => {
+    if (!slashOpen) return [];
+    const q = input.trim().toLowerCase();
+    if (!q.startsWith("/")) return [];
+    const term = q.slice(1);
+    return SLASH_COMMANDS.filter(
+      (c) => c.label.toLowerCase().includes(term) || c.hint.toLowerCase().includes(term)
+    );
+  }, [input, slashOpen]);
 
   const send = useCallback(
     async (text: string) => {
@@ -65,6 +147,7 @@ export function WorkflowAuthor({ draft }: Props) {
       };
       setMessages((prev) => [...prev, userMsg]);
       setInput("");
+      setSlashOpen(false);
       setBusy(true);
 
       const history = messages.map((m) => ({
@@ -85,6 +168,7 @@ export function WorkflowAuthor({ draft }: Props) {
         const j = (await res.json().catch(() => ({}))) as {
           ok?: boolean;
           output?: string;
+          operator_question?: OperatorQuestion | null;
           error?: string;
           tools_used?: Array<{ name: string; ok: boolean; summary?: string }>;
         };
@@ -98,6 +182,18 @@ export function WorkflowAuthor({ draft }: Props) {
               ts: new Date().toISOString(),
             },
           ]);
+        } else if (j.operator_question) {
+          setMessages((prev) => [
+            ...prev,
+            {
+              id: `q-${Date.now()}`,
+              role: "assistant",
+              content: j.output || "",
+              question: j.operator_question || undefined,
+              ts: new Date().toISOString(),
+            },
+          ]);
+          startTransition(() => router.refresh());
         } else {
           setMessages((prev) => [
             ...prev,
@@ -108,7 +204,6 @@ export function WorkflowAuthor({ draft }: Props) {
               ts: new Date().toISOString(),
             },
           ]);
-          // Refresh server data so canvas re-renders from the updated draft.
           startTransition(() => router.refresh());
         }
       } catch (err) {
@@ -128,6 +223,71 @@ export function WorkflowAuthor({ draft }: Props) {
     },
     [busy, draft.id, messages, router]
   );
+
+  const handleAnswerChoice = useCallback(
+    (msgId: string, choice: string) => {
+      setMessages((prev) => prev.map((m) => (m.id === msgId ? { ...m, answered: true } : m)));
+      void send(choice);
+    },
+    [send]
+  );
+
+  const handleAnswerFreeform = useCallback((msgId: string) => {
+    setMessages((prev) => prev.map((m) => (m.id === msgId ? { ...m, answered: true } : m)));
+    setTimeout(() => taRef.current?.focus(), 30);
+  }, []);
+
+  const runSlashCommand = useCallback((cmd: SlashCommand) => {
+    setInput(cmd.template);
+    setSlashOpen(false);
+    setSlashIndex(0);
+    setTimeout(() => {
+      const ta = taRef.current;
+      if (ta) {
+        ta.focus();
+        ta.setSelectionRange(cmd.template.length, cmd.template.length);
+      }
+    }, 0);
+  }, []);
+
+  const onInputChange = (val: string) => {
+    setInput(val);
+    if (val.startsWith("/") && !val.includes(" ")) {
+      setSlashOpen(true);
+      setSlashIndex(0);
+    } else {
+      setSlashOpen(false);
+    }
+  };
+
+  const onComposerKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (slashOpen && slashMatches.length > 0) {
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        setSlashIndex((i) => (i + 1) % slashMatches.length);
+        return;
+      }
+      if (e.key === "ArrowUp") {
+        e.preventDefault();
+        setSlashIndex((i) => (i - 1 + slashMatches.length) % slashMatches.length);
+        return;
+      }
+      if (e.key === "Tab" || (e.key === "Enter" && !e.shiftKey)) {
+        e.preventDefault();
+        runSlashCommand(slashMatches[slashIndex]);
+        return;
+      }
+      if (e.key === "Escape") {
+        e.preventDefault();
+        setSlashOpen(false);
+        return;
+      }
+    }
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      send(input);
+    }
+  };
 
   const handlePublish = async () => {
     setPublishMsg("Publishing…");
@@ -210,6 +370,14 @@ export function WorkflowAuthor({ draft }: Props) {
       <div className="cmk-wfa-body">
         {/* ── Chat composer (left) ───────────────────────────────────── */}
         <section className="cmk-wfa-chat">
+          <div className="cmk-wfa-chat-head">
+            <span className="cmk-wfa-chat-head-eyebrow">
+              WORKFLOW · {isPublished ? "PUBLISHED" : "DRAFT"}
+            </span>
+            <span className="cmk-wfa-chat-head-eyebrow" aria-hidden="true">
+              {wf.nodes.length} {wf.nodes.length === 1 ? "STEP" : "STEPS"}
+            </span>
+          </div>
           <div className="cmk-wfa-chat-scroll scroll-hide">
             {messages.length === 0 && (
               <div className="cmk-wfa-chat-empty">
@@ -235,7 +403,35 @@ export function WorkflowAuthor({ draft }: Props) {
                   <span>{m.role === "user" ? "you" : m.role === "assistant" ? "agent" : "system"}</span>
                   <time dateTime={m.ts}>{fmtTime(m.ts)}</time>
                 </div>
-                <div className="cmk-wfa-msg-body">{m.content}</div>
+                {m.content && <div className="cmk-wfa-msg-body">{m.content}</div>}
+                {m.question && (
+                  <div className="cmk-wfa-q">
+                    <p className="cmk-wfa-q-question">{m.question.question}</p>
+                    <div className="cmk-wfa-q-choices">
+                      {m.question.choices.map((c, i) => (
+                        <button
+                          key={`${m.id}-c-${i}`}
+                          type="button"
+                          className="cmk-wfa-q-chip"
+                          onClick={() => handleAnswerChoice(m.id, c)}
+                          disabled={busy || m.answered}
+                        >
+                          {c}
+                        </button>
+                      ))}
+                      {m.question.allow_freeform && (
+                        <button
+                          type="button"
+                          className="cmk-wfa-q-chip cmk-wfa-q-chip-freeform"
+                          onClick={() => handleAnswerFreeform(m.id)}
+                          disabled={busy || m.answered}
+                        >
+                          Type my own answer →
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                )}
               </div>
             ))}
             {busy && (
@@ -255,28 +451,66 @@ export function WorkflowAuthor({ draft }: Props) {
               send(input);
             }}
           >
-            <textarea
-              ref={taRef}
-              className="cmk-wfa-input"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" && !e.shiftKey) {
-                  e.preventDefault();
-                  send(input);
+            {slashOpen && slashMatches.length > 0 && (
+              <div className="cmk-wfa-slash-palette" role="listbox" aria-label="Slash commands">
+                {slashMatches.map((cmd, i) => (
+                  <button
+                    key={cmd.id}
+                    type="button"
+                    role="option"
+                    aria-selected={i === slashIndex}
+                    className={`cmk-wfa-slash-row${i === slashIndex ? " active" : ""}`}
+                    onMouseEnter={() => setSlashIndex(i)}
+                    onClick={() => runSlashCommand(cmd)}
+                  >
+                    <span className="cmk-wfa-slash-key">{cmd.label}</span>
+                    <span className="cmk-wfa-slash-hint">{cmd.hint}</span>
+                  </button>
+                ))}
+                <div className="cmk-wfa-slash-foot">
+                  <kbd>↑↓</kbd> select <kbd>↵</kbd> run <kbd>esc</kbd> dismiss
+                </div>
+              </div>
+            )}
+            <div className="cmk-wfa-composer-pill">
+              <button
+                type="button"
+                className="cmk-wfa-composer-add"
+                onClick={() => {
+                  setInput((v) => (v.startsWith("/") ? v : "/"));
+                  setSlashOpen(true);
+                  setSlashIndex(0);
+                  setTimeout(() => taRef.current?.focus(), 0);
+                }}
+                aria-label="Slash commands"
+                title="Type / for commands"
+                disabled={busy}
+              >
+                +
+              </button>
+              <textarea
+                ref={taRef}
+                className="cmk-wfa-composer-input"
+                value={input}
+                onChange={(e) => onInputChange(e.target.value)}
+                onKeyDown={onComposerKeyDown}
+                placeholder={
+                  isEmpty
+                    ? "Tell me what to build. Type / for commands · Enter to send"
+                    : "Refine — 'make the second touch SMS', /branded, /timeline · Enter to send"
                 }
-              }}
-              placeholder={
-                isEmpty
-                  ? "What kind of workflow do you want? e.g. 'a 4-touch tasting follow-up'"
-                  : "Refine the workflow — 'make the second touch SMS', 'add a 3-day wait', 'rewrite the second email warmer'…"
-              }
-              rows={3}
-              disabled={busy}
-            />
-            <button type="submit" className="plan-btn plan-btn-primary" disabled={busy || !input.trim()}>
-              {busy ? "…" : "Send"}
-            </button>
+                rows={1}
+                disabled={busy}
+              />
+              <button
+                type="submit"
+                className="cmk-wfa-composer-send"
+                disabled={busy || !input.trim()}
+                aria-label="Send"
+              >
+                {icons.send}
+              </button>
+            </div>
           </form>
         </section>
 

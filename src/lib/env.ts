@@ -55,6 +55,19 @@ export const env = {
    *  to RodbotCC/ComeketoAgent if blank. Branch is `main`, file is appended. */
   GITHUB_AUDIT_REPO: read("GITHUB_AUDIT_REPO", "RodbotCC/ComeketoAgent"),
   GITHUB_AUDIT_PATH: read("GITHUB_AUDIT_PATH", "_audit/auxiliary-events.jsonl"),
+
+  /** Per-lead memory repo (Atom 0+). Owner/name of the GitHub repo that
+   *  hosts the `leads-data` branch. Defaults to this repo since `_leads/`
+   *  lives on a parallel branch here. */
+  GITHUB_LEADS_OWNER: read("GITHUB_LEADS_OWNER", "RodbotCC"),
+  GITHUB_LEADS_REPO: read("GITHUB_LEADS_REPO", "ComeketoAgent"),
+  /** Branch on which `_leads/` lives. Sweeper writes here; app reads here. */
+  GITHUB_LEADS_BRANCH: read("GITHUB_LEADS_BRANCH", "leads-data"),
+
+  /** Vercel Cron sends `Authorization: Bearer ${CRON_SECRET}` on every cron
+   *  invocation. The `/api/cron/sweep-leads` route accepts either this header
+   *  OR a valid operator session cookie (from the manual `/test` button). */
+  CRON_SECRET: read("CRON_SECRET"),
 } as const;
 
 /**
