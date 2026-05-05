@@ -5,8 +5,9 @@ import {
   pausePlanAction,
 } from "./actions";
 import type { SevenDayPlan } from "@/lib/plan";
-import { PlanDayCard } from "./PlanDayCard";
+import type { IntakeArtifactRow } from "@/lib/intake-artifacts";
 import { PlanCardClient } from "./PlanCardClient";
+import { PlanDaysWorkbench } from "./PlanDaysWorkbench";
 import { CloseActionsPreview } from "./CloseActionsPreview";
 
 type PersistedPlan = SevenDayPlan & {
@@ -24,9 +25,6 @@ const GOAL_LABEL: Record<SevenDayPlan["primary_goal"], string> = {
   re_engage: "Re-engage",
 };
 
-// Pastel tones cycle for any plan length.
-const DAY_TONES = ["lavender", "sky", "sage", "lemon", "peach", "rose", "blue"] as const;
-
 const HORIZON_PRESETS = [1, 2, 3, 5, 7, 14, 21, 30, 45, 60, 90] as const;
 
 function fmtTime(iso?: string) {
@@ -40,12 +38,16 @@ export function PlanSection({
   planError,
   currentSnapshotId,
   defaultHorizonDays,
+  leadName,
+  intakeArtifacts,
 }: {
   leadId: string;
   plan: PersistedPlan | null;
   planError?: string | null;
   currentSnapshotId: string;
   defaultHorizonDays: number;
+  leadName: string;
+  intakeArtifacts: IntakeArtifactRow[];
 }) {
   // ─── Plan fetch failed (Supabase blip etc.) — distinct from "no plan yet" ───
   if (!plan && planError) {
@@ -143,20 +145,16 @@ export function PlanSection({
         </div>
       </div>
 
-      <div className="plan-days">
-        {plan.days.map((d, idx) => (
-          <PlanDayCard
-            key={`${plan.plan_id}-${idx}`}
-            day={d}
-            dayIndex={idx}
-            tone={DAY_TONES[idx % DAY_TONES.length]}
-            planId={plan.plan_id}
-            leadId={leadId}
-            goalSummary={plan.goal_summary}
-            planStale={stale}
-          />
-        ))}
-      </div>
+      <PlanDaysWorkbench
+        plan={plan}
+        leadName={leadName}
+        intakeArtifacts={intakeArtifacts}
+      />
+      {stale && (
+        <p className="plan-empty-msg" style={{ marginTop: 8, fontSize: 11 }}>
+          <strong>Plan is stale:</strong> Box snapshot has changed since plan generation. Regenerate before sending.
+        </p>
+      )}
 
       {!isLocked && (
         <div className="plan-actions">

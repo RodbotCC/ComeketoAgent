@@ -14,8 +14,8 @@ import {
 
 export const dynamic = "force-dynamic";
 
-type DiscoveryTab = "profile" | "map" | "quest" | "pipeline" | "restraint";
-const VALID_TABS: DiscoveryTab[] = ["profile", "map", "quest", "pipeline", "restraint"];
+type DiscoveryTab = "profile" | "briefing" | "map" | "quest" | "pipeline" | "restraint";
+const VALID_TABS: DiscoveryTab[] = ["profile", "briefing", "map", "quest", "pipeline", "restraint"];
 
 type Props = {
   params: { id: string };
@@ -159,6 +159,13 @@ export default async function LeadDiscoveryPage({ params, searchParams = {} }: P
             Profile
           </Link>
           <Link
+            href={`${baseHref}?tab=briefing`}
+            data-tab="briefing"
+            className={`proposal-tab${activeTab === "briefing" ? " proposal-tab-active" : ""}`}
+          >
+            Briefing
+          </Link>
+          <Link
             href={`${baseHref}?tab=map`}
             data-tab="map"
             className={`proposal-tab${activeTab === "map" ? " proposal-tab-active" : ""}`}
@@ -215,12 +222,47 @@ export default async function LeadDiscoveryPage({ params, searchParams = {} }: P
                 </article>
 
                 {plan.best_next_question && (
-                  <article className="cmk-discovery-brief cmk-discovery-brief--question">
+                  <article className="cmk-discovery-brief cmk-discovery-brief--question cmk-discovery-brief--wide">
                     <span className="cme-eyebrow">best next question</span>
                     <blockquote>{plan.best_next_question}</blockquote>
                   </article>
                 )}
 
+                {profileBody && (
+                  <article className="cmk-discovery-brief cmk-discovery-brief--wide">
+                    <span className="cme-eyebrow">profile · generated</span>
+                    <pre className="cmk-discovery-brief-md">{profileBody}</pre>
+                  </article>
+                )}
+              </div>
+            ) : (
+              <div className="cmk-discovery-empty cmk-discovery-profile-empty">
+                Generate a plan first. Discovery will use its plan-derived strategy + best-next-question here. Knowns / unknowns / stop conditions live on the <strong>Briefing</strong> tab.
+              </div>
+            )}
+          </section>
+        )}
+
+        {/* ─── BRIEFING ─────────────────────────────────────────────── */}
+        {activeTab === "briefing" && (
+          <section className="cmk-stack-panel cmk-stack-panel--sky cmk-discovery-profile">
+            <div className="cmk-stack-panel-head">
+              <div>
+                <h2 className="cmk-stack-panel-title">Briefing</h2>
+                <div className="cmk-stack-panel-meta">
+                  {plan ? `from latest ${plan.days.length}-day plan` : "no generated plan yet"}
+                </div>
+              </div>
+              <div className="cmk-discovery-profile-actions">
+                <RunScanButton leadId={params.id} />
+                <Link href={`/lead/${params.id}`} className="plan-btn">
+                  Open plan
+                </Link>
+              </div>
+            </div>
+
+            {plan ? (
+              <div className="cmk-discovery-profile-grid">
                 <article className="cmk-discovery-brief">
                   <span className="cme-eyebrow">known</span>
                   {plan.known_facts.length > 0 ? (
@@ -268,10 +310,17 @@ export default async function LeadDiscoveryPage({ params, searchParams = {} }: P
                     </ul>
                   </article>
                 )}
+
+                {discoveryBody && (
+                  <article className="cmk-discovery-brief cmk-discovery-brief--wide">
+                    <span className="cme-eyebrow">discovery · generated</span>
+                    <pre className="cmk-discovery-brief-md">{discoveryBody}</pre>
+                  </article>
+                )}
               </div>
             ) : (
               <div className="cmk-discovery-empty cmk-discovery-profile-empty">
-                Generate a plan first. Discovery will use its plan-derived strategy, knowns, unknowns, next question, and stop conditions here.
+                Generate a plan first. Briefing surfaces the plan&apos;s knowns / unknowns / stop conditions and any LLM-generated discovery doc.
               </div>
             )}
           </section>
@@ -422,39 +471,6 @@ export default async function LeadDiscoveryPage({ params, searchParams = {} }: P
           </section>
         )}
 
-        {/* ─── File-backed LLM docs (Atom 7) ───────────────────────── */}
-        {(profileBody || discoveryBody) && (
-          <section className="cmk-stack-panel cmk-stack-panel--lavender" style={{ marginTop: 24 }}>
-            <h2 className="cmk-stack-panel-title">📄 Profile &amp; Discovery — generated</h2>
-            <p className="muted" style={{ marginTop: 4, marginBottom: 12 }}>
-              From <code>04_profile.md</code> + <code>06_discovery.md</code> on the <code>leads-data</code> branch. Regenerated when the lead&apos;s comms change. Trigger from <Link href="/test">/test</Link> → &ldquo;Regenerate lead docs&rdquo;.
-            </p>
-            {profileBody && (
-              <details open>
-                <summary><strong>Profile</strong></summary>
-                <pre style={{ whiteSpace: "pre-wrap", fontFamily: "inherit", fontSize: "0.95em", lineHeight: 1.55, marginTop: 8 }}>
-                  {profileBody}
-                </pre>
-              </details>
-            )}
-            {discoveryBody && (
-              <details open style={{ marginTop: 16 }}>
-                <summary><strong>Discovery</strong></summary>
-                <pre style={{ whiteSpace: "pre-wrap", fontFamily: "inherit", fontSize: "0.95em", lineHeight: 1.55, marginTop: 8 }}>
-                  {discoveryBody}
-                </pre>
-              </details>
-            )}
-          </section>
-        )}
-        {!profileBody && !discoveryBody && (
-          <section className="cmk-stack-panel" style={{ marginTop: 24 }}>
-            <h2 className="cmk-stack-panel-title">📄 Profile &amp; Discovery — not yet generated</h2>
-            <p className="muted" style={{ marginTop: 4 }}>
-              Run a lead sweep, then regenerate lead docs from <Link href="/test">/test</Link>. The first time this lead&apos;s comms get processed, profile + discovery docs will appear here.
-            </p>
-          </section>
-        )}
       </div>
     </main>
   );

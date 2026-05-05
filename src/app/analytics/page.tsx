@@ -415,6 +415,88 @@ export default function AnalyticsPage({ searchParams = {} }: Props) {
           )}
         </div>
 
+        {/* Source family rollup — leads grouped by family, not channel */}
+        <div className="hb-section" style={{ marginTop: 22 }}>
+          <h2 className="hb-section-h">
+            Source families · rollup
+            <span style={{ marginLeft: 10, fontWeight: 400, fontSize: 10, color: "var(--ink-faint)" }}>
+              snapshot {fmtDate(sc._meta.generated_at)}
+            </span>
+          </h2>
+          {(() => {
+            const families = Object.entries(sc.source_family_distribution || {})
+              .map(([family, lead_count]) => ({ family, lead_count }))
+              .sort((a, b) => b.lead_count - a.lead_count);
+            const famMax = safeMax(families.map((f) => f.lead_count));
+            return families.length === 0 ? (
+              <div className="cmk-an-empty">No source family rollup in snapshot.</div>
+            ) : (
+              <div className="cmk-an-channels">
+                {families.map((f) => {
+                  const widthPct = (f.lead_count / famMax) * 100;
+                  const total = sc._meta.lead_count || 1;
+                  const sharePct = (f.lead_count / total) * 100;
+                  return (
+                    <div key={f.family} className="cmk-an-channel-row">
+                      <div className="cmk-an-channel-name">
+                        {f.family.replace(/_/g, " ")}
+                        <span className="cmk-an-channel-family">{sharePct.toFixed(1)}% of book</span>
+                      </div>
+                      <div className="cmk-an-channel-bar-wrap">
+                        <div className={`cmk-an-channel-bar ${familyClass(f.family)}`} style={{ width: `${widthPct}%` }} />
+                      </div>
+                      <div className="cmk-an-channel-stats">
+                        <span title="leads">{f.lead_count}</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })()}
+        </div>
+
+        {/* Source revenue share — which sources brought $ home */}
+        <div className="hb-section" style={{ marginTop: 22 }}>
+          <h2 className="hb-section-h">
+            Source revenue share
+            <span style={{ marginLeft: 10, fontWeight: 400, fontSize: 10, color: "var(--ink-faint)" }}>
+              snapshot {fmtDate(rv._meta.generated_at)}
+            </span>
+          </h2>
+          {(() => {
+            const rows = [...(rv.source_revenue_share || [])]
+              .sort((a, b) => b.pct_of_total_revenue - a.pct_of_total_revenue)
+              .slice(0, 10);
+            const maxShare = safeMax(rows.map((r) => r.pct_of_total_revenue));
+            return rows.length === 0 ? (
+              <div className="cmk-an-empty">No source revenue share in snapshot.</div>
+            ) : (
+              <div className="cmk-an-channels">
+                {rows.map((r) => {
+                  const widthPct = maxShare > 0 ? (r.pct_of_total_revenue / maxShare) * 100 : 0;
+                  return (
+                    <div key={r.source} className="cmk-an-channel-row">
+                      <div className="cmk-an-channel-name">
+                        {r.source.replace(/_/g, " ")}
+                        <span className="cmk-an-channel-family">{r.won_count}W of {r.total_leads}L · {r.win_rate_pct.toFixed(1)}% wr</span>
+                      </div>
+                      <div className="cmk-an-channel-bar-wrap">
+                        <div className="cmk-an-channel-bar cmk-an-bar-peach" style={{ width: `${widthPct}%` }} />
+                      </div>
+                      <div className="cmk-an-channel-stats">
+                        <span title="revenue">{r.won_value_fmt ?? fmtCents(r.won_value_cents)}</span>
+                        <span className="lead-sep">·</span>
+                        <span className="cmk-an-channel-pct">{r.pct_of_total_revenue.toFixed(1)}%</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })()}
+        </div>
+
         </>}
 
         {/* ─── FUNNEL ───────────────────────────────────────────────── */}
@@ -485,6 +567,85 @@ export default function AnalyticsPage({ searchParams = {} }: Props) {
             <WinLossSubChart title="By source family" rows={wlSourceFam} barClass={(r) => familyClass(r.key)} showFamilyEyebrow />
             <WinLossSubChart title="By owner"      rows={wlOwner}    barClass={() => "cmk-an-bar-sage"}       />
             <WinLossSubChart title="By value bucket" rows={wlValue}  barClass={() => "cmk-an-bar-lemon"}      />
+          </div>
+        </div>
+
+        {/* Stage of death — where leads die in the pipeline */}
+        <div className="hb-section" style={{ marginTop: 22 }}>
+          <h2 className="hb-section-h">
+            Stage of death · where lost leads stalled
+            <span style={{ marginLeft: 10, fontWeight: 400, fontSize: 10, color: "var(--ink-faint)" }}>
+              snapshot {fmtDate(wl._meta.generated_at)}
+            </span>
+          </h2>
+          {(() => {
+            const stages = [...(wl.stage_of_death || [])]
+              .filter((s) => s.count > 0)
+              .sort((a, b) => b.count - a.count);
+            const maxCnt = safeMax(stages.map((s) => s.count));
+            return stages.length === 0 ? (
+              <div className="cmk-an-empty">No stage-of-death rollup in snapshot.</div>
+            ) : (
+              <div className="cmk-an-channels">
+                {stages.map((s) => {
+                  const widthPct = (s.count / maxCnt) * 100;
+                  return (
+                    <div key={s.stage} className="cmk-an-channel-row">
+                      <div className="cmk-an-channel-name">
+                        {s.stage}
+                        <span className="cmk-an-channel-family">stalled here</span>
+                      </div>
+                      <div className="cmk-an-channel-bar-wrap">
+                        <div className="cmk-an-channel-bar cmk-an-bar-rose" style={{ width: `${widthPct}%` }} />
+                      </div>
+                      <div className="cmk-an-channel-stats">
+                        <span title="lost count">{s.count}</span>
+                        <span className="lead-sep">·</span>
+                        <span className="cmk-an-channel-pct">{s.pct_of_lost.toFixed(1)}% of lost</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })()}
+          <p className="muted" style={{ fontSize: 10, marginTop: 10 }}>
+            The stage where leads were sitting when they got marked Lost. The biggest bucket is your highest-leverage fix point.
+          </p>
+        </div>
+
+        {/* Top win profiles — what wins look like */}
+        <div className="hb-section" style={{ marginTop: 22 }}>
+          <h2 className="hb-section-h">
+            Top win profiles
+            <span style={{ marginLeft: 10, fontWeight: 400, fontSize: 10, color: "var(--ink-faint)" }}>
+              snapshot {fmtDate(wl._meta.generated_at)}
+            </span>
+          </h2>
+          {(() => {
+            const rows = [...(wl.top_win_profiles || [])].slice(0, 10);
+            return rows.length === 0 ? (
+              <div className="cmk-an-empty">No win profiles in snapshot.</div>
+            ) : (
+              <WinLossSubChart title="" rows={rows} barClass={() => "cmk-an-bar-sage"} />
+            );
+          })()}
+          <p className="muted" style={{ fontSize: 10, marginTop: 10 }}>
+            Combinations of dimensions that consistently won. Mirror these for top-of-funnel targeting.
+          </p>
+        </div>
+
+        {/* By guest bucket + by customer type — 2-col */}
+        <div className="hb-section" style={{ marginTop: 22 }}>
+          <h2 className="hb-section-h">
+            Win cuts · guest size + customer type
+            <span style={{ marginLeft: 10, fontWeight: 400, fontSize: 10, color: "var(--ink-faint)" }}>
+              snapshot {fmtDate(wl._meta.generated_at)}
+            </span>
+          </h2>
+          <div className="cmk-an-wl-grid">
+            <WinLossSubChart title="By guest bucket"   rows={[...(wl.by_guest_bucket || [])]}   barClass={() => "cmk-an-bar-lavender"} />
+            <WinLossSubChart title="By customer type"  rows={[...(wl.by_customer_type || [])]}  barClass={() => "cmk-an-bar-sky"} />
           </div>
         </div>
 
@@ -580,6 +741,124 @@ export default function AnalyticsPage({ searchParams = {} }: Props) {
               })}
             </div>
           </div>
+        </div>
+
+        {/* Deal size distribution — histogram of where deals land */}
+        <div className="hb-section" style={{ marginTop: 22 }}>
+          <h2 className="hb-section-h">
+            Deal size distribution
+            <span style={{ marginLeft: 10, fontWeight: 400, fontSize: 10, color: "var(--ink-faint)" }}>
+              snapshot {fmtDate(rv._meta.generated_at)}
+            </span>
+          </h2>
+          {(() => {
+            const buckets = rv.deal_size_distribution || [];
+            const maxPct = safeMax(buckets.map((b) => b.pct_of_deals));
+            return buckets.length === 0 ? (
+              <div className="cmk-an-empty">No deal-size distribution in snapshot.</div>
+            ) : (
+              <div className="cmk-an-channels">
+                {buckets.map((b) => {
+                  const widthPct = maxPct > 0 ? (b.pct_of_deals / maxPct) * 100 : 0;
+                  return (
+                    <div key={b.bucket} className="cmk-an-channel-row">
+                      <div className="cmk-an-channel-name">
+                        {b.bucket}
+                        <span className="cmk-an-channel-family">{b.count} deals · {b.pct_of_revenue.toFixed(1)}% rev</span>
+                      </div>
+                      <div className="cmk-an-channel-bar-wrap">
+                        <div className="cmk-an-channel-bar cmk-an-bar-peach" style={{ width: `${widthPct}%` }} />
+                      </div>
+                      <div className="cmk-an-channel-stats">
+                        <span title="share of deals" className="cmk-an-channel-pct">{b.pct_of_deals.toFixed(1)}%</span>
+                        <span className="lead-sep">·</span>
+                        <span title="bucket revenue">{b.total_value_fmt ?? fmtCents(b.total_value_cents)}</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })()}
+        </div>
+
+        {/* Peak booking months — seasonality */}
+        <div className="hb-section" style={{ marginTop: 22 }}>
+          <h2 className="hb-section-h">
+            Peak booking months · seasonality
+            <span style={{ marginLeft: 10, fontWeight: 400, fontSize: 10, color: "var(--ink-faint)" }}>
+              snapshot {fmtDate(rv._meta.generated_at)}
+            </span>
+          </h2>
+          {(() => {
+            const months = [...(rv.peak_booking_months || [])]
+              .sort((a, b) => b.won_value_cents - a.won_value_cents);
+            const maxVal = safeMax(months.map((m) => m.won_value_cents));
+            return months.length === 0 ? (
+              <div className="cmk-an-empty">No seasonality data in snapshot.</div>
+            ) : (
+              <div className="cmk-an-channels">
+                {months.map((m) => {
+                  const widthPct = maxVal > 0 ? (m.won_value_cents / maxVal) * 100 : 0;
+                  return (
+                    <div key={m.month_num} className="cmk-an-channel-row">
+                      <div className="cmk-an-channel-name">
+                        {m.month_name}
+                        <span className="cmk-an-channel-family">{m.won_count} won</span>
+                      </div>
+                      <div className="cmk-an-channel-bar-wrap">
+                        <div className="cmk-an-channel-bar cmk-an-bar-lemon" style={{ width: `${widthPct}%` }} />
+                      </div>
+                      <div className="cmk-an-channel-stats">
+                        <span title="won revenue">{m.won_value_fmt ?? fmtCents(m.won_value_cents)}</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })()}
+        </div>
+
+        {/* Event type revenue share — which event types pay */}
+        <div className="hb-section" style={{ marginTop: 22 }}>
+          <h2 className="hb-section-h">
+            Event type revenue share
+            <span style={{ marginLeft: 10, fontWeight: 400, fontSize: 10, color: "var(--ink-faint)" }}>
+              snapshot {fmtDate(rv._meta.generated_at)}
+            </span>
+          </h2>
+          {(() => {
+            const rows = [...(rv.event_type_revenue_share || [])]
+              .sort((a, b) => b.pct_of_total_revenue - a.pct_of_total_revenue)
+              .slice(0, 10);
+            const maxShare = safeMax(rows.map((r) => r.pct_of_total_revenue));
+            return rows.length === 0 ? (
+              <div className="cmk-an-empty">No event-type revenue share in snapshot.</div>
+            ) : (
+              <div className="cmk-an-channels">
+                {rows.map((r) => {
+                  const widthPct = maxShare > 0 ? (r.pct_of_total_revenue / maxShare) * 100 : 0;
+                  return (
+                    <div key={r.event_type} className="cmk-an-channel-row">
+                      <div className="cmk-an-channel-name">
+                        {r.event_type}
+                        <span className="cmk-an-channel-family">{r.won_count}W of {r.total_leads}L · avg {r.avg_won_value_fmt ?? fmtCents(r.avg_won_value_cents)}</span>
+                      </div>
+                      <div className="cmk-an-channel-bar-wrap">
+                        <div className="cmk-an-channel-bar cmk-an-bar-sage" style={{ width: `${widthPct}%` }} />
+                      </div>
+                      <div className="cmk-an-channel-stats">
+                        <span title="revenue">{r.won_value_fmt ?? fmtCents(r.won_value_cents)}</span>
+                        <span className="lead-sep">·</span>
+                        <span className="cmk-an-channel-pct">{r.pct_of_total_revenue.toFixed(1)}%</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })()}
         </div>
 
         </>}
@@ -760,6 +1039,179 @@ export default function AnalyticsPage({ searchParams = {} }: Props) {
               </p>
             )}
           </div>
+        </div>
+
+        {/* Close-time patterns — how fast deals close */}
+        <div className="hb-section" style={{ marginTop: 22 }}>
+          <h2 className="hb-section-h">
+            Close-time patterns
+            <span style={{ marginLeft: 10, fontWeight: 400, fontSize: 10, color: "var(--ink-faint)" }}>
+              snapshot {fmtDate(wl._meta.generated_at)}
+            </span>
+          </h2>
+          {wl.time_patterns ? (
+            <>
+              <div className="cmk-an-strip" style={{ marginTop: 6 }}>
+                <div className="cmk-an-card cmk-an-card-winrate">
+                  <div className="cmk-an-label">Median to close</div>
+                  <div className="cmk-an-num">{wl.time_patterns.median_days_to_close.toFixed(0)}d</div>
+                  <div className="cmk-an-sub">half of wins close inside this</div>
+                </div>
+                <div className="cmk-an-card cmk-an-card-leads">
+                  <div className="cmk-an-label">Mean to close</div>
+                  <div className="cmk-an-num">{wl.time_patterns.mean_days_to_close.toFixed(0)}d</div>
+                  <div className="cmk-an-sub">average across wins</div>
+                </div>
+                <div className="cmk-an-card cmk-an-card-yoy">
+                  <div className="cmk-an-label">Fastest close</div>
+                  <div className="cmk-an-num">{wl.time_patterns.fastest_close_days.toFixed(0)}d</div>
+                  <div className="cmk-an-sub">best-case</div>
+                </div>
+              </div>
+              <div className="cmk-an-subsection">
+                <h3 className="cmk-an-wl-h3">Close-time buckets</h3>
+                {(() => {
+                  const buckets = wl.time_patterns.close_time_buckets || [];
+                  const maxCnt = safeMax(buckets.map((b) => b.count));
+                  return buckets.length === 0 ? (
+                    <div className="cmk-an-empty">No close-time buckets.</div>
+                  ) : (
+                    <div className="cmk-an-channels">
+                      {buckets.map((b) => {
+                        const widthPct = maxCnt > 0 ? (b.count / maxCnt) * 100 : 0;
+                        return (
+                          <div key={b.bucket} className="cmk-an-channel-row">
+                            <div className="cmk-an-channel-name">{b.bucket}</div>
+                            <div className="cmk-an-channel-bar-wrap">
+                              <div className="cmk-an-channel-bar cmk-an-bar-sky" style={{ width: `${widthPct}%` }} />
+                            </div>
+                            <div className="cmk-an-channel-stats"><span>{b.count}</span></div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  );
+                })()}
+              </div>
+            </>
+          ) : (
+            <div className="cmk-an-empty">No close-time patterns in snapshot.</div>
+          )}
+        </div>
+
+        {/* Lead time by source family + by event month — 2-col layout */}
+        <div className="hb-section" style={{ marginTop: 22 }}>
+          <h2 className="hb-section-h">
+            Lead time · by source + by month
+            <span style={{ marginLeft: 10, fontWeight: 400, fontSize: 10, color: "var(--ink-faint)" }}>
+              snapshot {fmtDate(blt._meta.generated_at)}
+            </span>
+          </h2>
+          <div className="cmk-an-wl-grid">
+            <div className="cmk-an-wl-sub">
+              <h3 className="cmk-an-wl-h3">By source family</h3>
+              {(() => {
+                const rows = [...(blt.by_source_family || [])].sort((a, b) => b.median_days - a.median_days);
+                const maxMed = safeMax(rows.map((r) => r.median_days));
+                return rows.length === 0 ? (
+                  <div className="cmk-an-empty">No source-family lead time.</div>
+                ) : (
+                  <div className="cmk-an-channels">
+                    {rows.map((r) => {
+                      const widthPct = maxMed > 0 ? (r.median_days / maxMed) * 100 : 0;
+                      return (
+                        <div key={r.source} className="cmk-an-channel-row">
+                          <div className="cmk-an-channel-name">
+                            {r.source.replace(/_/g, " ")}
+                            <span className="cmk-an-channel-family">{r.count} bookings</span>
+                          </div>
+                          <div className="cmk-an-channel-bar-wrap">
+                            <div className={`cmk-an-channel-bar ${familyClass(r.source)}`} style={{ width: `${widthPct}%` }} />
+                          </div>
+                          <div className="cmk-an-channel-stats">
+                            <span title="median days">{r.median_days.toFixed(0)}d</span>
+                            <span className="lead-sep">·</span>
+                            <span style={{ color: "var(--ink-soft)" }}>{r.pct_under_90d.toFixed(0)}% &lt;90d</span>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                );
+              })()}
+            </div>
+            <div className="cmk-an-wl-sub">
+              <h3 className="cmk-an-wl-h3">Bookings by event month</h3>
+              {(() => {
+                const months = [...(blt.by_event_month || [])].sort((a, b) => a.month_num - b.month_num);
+                const maxCnt = safeMax(months.map((m) => m.count));
+                return months.length === 0 ? (
+                  <div className="cmk-an-empty">No event-month rollup.</div>
+                ) : (
+                  <div className="cmk-an-channels">
+                    {months.map((m) => {
+                      const widthPct = maxCnt > 0 ? (m.count / maxCnt) * 100 : 0;
+                      return (
+                        <div key={m.month_num} className="cmk-an-channel-row">
+                          <div className="cmk-an-channel-name">
+                            {m.month_name}
+                            <span className="cmk-an-channel-family">median {m.median_days.toFixed(0)}d lead</span>
+                          </div>
+                          <div className="cmk-an-channel-bar-wrap">
+                            <div className="cmk-an-channel-bar cmk-an-bar-lavender" style={{ width: `${widthPct}%` }} />
+                          </div>
+                          <div className="cmk-an-channel-stats">
+                            <span title="bookings">{m.count}</span>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                );
+              })()}
+            </div>
+          </div>
+        </div>
+
+        {/* Recent cohort health — most-recent cohorts tracked */}
+        <div className="hb-section" style={{ marginTop: 22 }}>
+          <h2 className="hb-section-h">
+            Recent cohort health
+            <span style={{ marginLeft: 10, fontWeight: 400, fontSize: 10, color: "var(--ink-faint)" }}>
+              snapshot {fmtDate(coh._meta.generated_at)}
+            </span>
+          </h2>
+          {(() => {
+            const rows = [...(coh.recent_cohort_health || [])].slice(0, 8);
+            const maxRate = safeMax(rows.map((r) => r.best_rate_pct));
+            return rows.length === 0 ? (
+              <div className="cmk-an-empty">No recent cohort health in snapshot.</div>
+            ) : (
+              <div className="cmk-an-channels">
+                {rows.map((r) => {
+                  const widthPct = maxRate > 0 ? (r.best_rate_pct / maxRate) * 100 : 0;
+                  return (
+                    <div key={r.cohort} className="cmk-an-channel-row">
+                      <div className="cmk-an-channel-name">
+                        {r.cohort}
+                        <span className="cmk-an-channel-family">{r.maturity} · {r.age_days}d old</span>
+                      </div>
+                      <div className="cmk-an-channel-bar-wrap">
+                        <div className="cmk-an-channel-bar cmk-an-bar-sage" style={{ width: `${widthPct}%` }} />
+                      </div>
+                      <div className="cmk-an-channel-stats">
+                        <span title="leads">{r.total_leads}L</span>
+                        <span className="lead-sep">·</span>
+                        <span title="converted">{r.total_converted}W</span>
+                        <span className="lead-sep">·</span>
+                        <span className="cmk-an-channel-pct">{r.best_rate_pct.toFixed(1)}%</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })()}
         </div>
 
         </>}

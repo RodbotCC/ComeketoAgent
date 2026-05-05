@@ -33,7 +33,8 @@ export default async function LeadPlanPage({ params }: Props) {
   }
 
   const data = loaded;
-  const { plan, planError, settings, planEligible, currentSnapshotId, replyGate, planFresh, cycleDayDisplay, lastInbound, lastOutbound } = data;
+  const { plan, planError, settings, planEligible, currentSnapshotId, replyGate, planFresh, cycleDayDisplay, lastInbound, lastOutbound, intakeArtifacts, box } = data;
+  const leadName = box?.lead?.display_name || "(unnamed lead)";
 
   return (
     <main className="lead-main lead-main--tab scroll-hide">
@@ -57,6 +58,8 @@ export default async function LeadPlanPage({ params }: Props) {
                 planError={planError}
                 currentSnapshotId={currentSnapshotId}
                 defaultHorizonDays={settings.default_plan_horizon_days}
+                leadName={leadName}
+                intakeArtifacts={intakeArtifacts}
               />
             </div>
           </div>

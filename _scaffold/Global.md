@@ -6,6 +6,10 @@ Running snapshot of project state. Tapped before & after every move.
 
 ## 2026-05-05
 
+- **before/after [proposals workbench — scale down so 100% looks like 75%]:** Snapshot — workbench overlay was sized for ~85vh + 1560px max + 42px headline; only readable at 75% browser zoom. After — workbench is now 1180×680 max with 28px headline, 14px overview body, 70px panel-tabs, scaled-down right-pane. Operator can use at 100% zoom. CSS-only pass, no JSX. tsc clean.
+
+- **before/after [plan-tab day cards open the proposals workbench, with intake assets pluggable]:** Snapshot before — `/lead/[id]` Plan tab rendered each day as a `<PlanDayCard>` with its own per-card modal; `/proposals` had a different and more complete `ProposalWorkbench` overlay. Two different widgets for the same job. After — both surfaces now share the same workbench; on Plan tab, day boxes are tile launchers (Day N, status pill, serif objective, touch count) that open the workbench overlay. The workbench gained an optional `assetsSlot` render-prop; on Plan tab a new `AssetsPanel` fills it with a copy-on-click grid of intake artifacts (PDFs / images / HTML / CSV / JSON / video / audio), each with a kind glyph + filename + size + extracted-char count. Click an asset → reference like `<img src="{ASSET:<id>}" alt="..." />` (image) or `[asset: filename · N chars extracted]` lands on clipboard for paste into the AI change request textarea. Files: new `src/app/lead/[id]/PlanDaysWorkbench.tsx` + edits to `src/app/proposals/ProposalReviewBoard.tsx` (export + assetsSlot prop) + `src/app/lead/[id]/PlanSection.tsx` (swap day-card loop) + `src/app/lead/[id]/page.tsx` (thread leadName + intakeArtifacts) + `src/app/globals.css` (~150 lines). tsc clean.
+
 - **after [per-lead memory as files — Atoms 8 + 9 + 10] — feature complete:** All 11 atoms done.
   - **Atom 8** (additive): `/lead/[id]/discovery` reads `04_profile.md` + `06_discovery.md` and renders them as a new lavender panel. Original SQL surface untouched. New helpers: `stripFrontmatter`, `readLeadProfileBody`, `readLeadDiscoveryBody`.
   - **Atom 9**: deprecated `lead_facts` migration moved to `supabase/_deprecated/` with a README explaining why + the safe DROP statement. SQL-reading code paths kept as defensive fallback (try/catch returns empty Map when table missing).
@@ -491,3 +495,6 @@ limit 10;
 
 - **before [GPT lead research folder + prompt]** — 2026-05-05: New external-agent research lane. Repo will host a docs-only area for GPT agents to write Close lead research via GitHub MCP. Not a runtime source of truth yet. App ingestion comes after the research folder shape proves stable.
 - **after [GPT lead research folder + prompt]** — 2026-05-05: External-agent research lane exists at `lead-research/`. This is now the designated docs-only drop zone for ChatGPT agents using Close MCP + GitHub MCP to collect Andre lead dossiers. The app should not treat it as runtime state until a future ingestion step is intentionally designed.
+
+- **before [Andre-only Leads index cleanup]** — 2026-05-05: Leads index direction: no more Jake/Andre owner switcher on the primary list. The app should present Andre's lead universe and let operators filter by status/search instead.
+- **after [Andre-only Leads index cleanup]** — 2026-05-05: Leads index UX rule updated in code: `/leads` is a single universe view, not an owner-mode selector. Owner-specific enforcement remains in downstream execution/guardrail surfaces; this change only removes the top-level list switcher.

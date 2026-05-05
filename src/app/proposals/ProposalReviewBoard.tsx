@@ -562,12 +562,15 @@ function WorkbenchPanel({
   );
 }
 
-function ProposalWorkbench({
+export function ProposalWorkbench({
   plan,
   onClose,
+  assetsSlot,
 }: {
   plan: ProposalPlanItem;
   onClose: () => void;
+  /** Optional render-prop slot for an asset picker (intake artifacts on Plan tab). */
+  assetsSlot?: React.ReactNode;
 }) {
   const initialDay = useMemo(() => {
     const idx = plan.days.findIndex((d) => d.approval_status === "needs_review");
@@ -689,6 +692,7 @@ function ProposalWorkbench({
           <div className="proposal-workbench-right">
             <WorkbenchPanel item={item} activePanel={activePanel} setActivePanel={setActivePanel} />
             <AiChangePanel item={item} activePanel={activePanel} />
+            {assetsSlot}
           </div>
         </div>
       </aside>
