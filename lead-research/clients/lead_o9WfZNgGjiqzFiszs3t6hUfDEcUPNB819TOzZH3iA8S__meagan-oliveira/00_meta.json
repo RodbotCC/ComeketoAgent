@@ -1,0 +1,28 @@
+{
+  "close_lead_id": "lead_o9WfZNgGjiqzFiszs3t6hUfDEcUPNB819TOzZH3iA8S",
+  "folder_slug": "lead_o9WfZNgGjiqzFiszs3t6hUfDEcUPNB819TOzZH3iA8S__meagan-oliveira",
+  "display_name": "Meagan Oliveira",
+  "owner": "01. 😎 Andre",
+  "status": "🔘 Maybe",
+  "status_id": "stat_qGpMKenDu31cIY56uTpvo8evqhcNnK4KDWtz4y9NPz3",
+  "chain_state": "open",
+  "date_created": "2026-05-04T20:47:48.752000Z",
+  "date_updated": "2026-05-05T00:42:58.681000Z",
+  "last_close_activity_at": "2026-05-04T22:07:51.442000Z",
+  "last_researched_at": "2026-05-05T00:00:00Z",
+  "transcripts_included": false,
+  "open_loop": true,
+  "source": "Close MCP",
+  "research_agent": "GPT lead research agent",
+  "verification": {
+    "andre_connection_basis": "Lead summary and note show 00. 🪖 LEAD OWNER: 01. 😎 Andre; Rhonna Ricafort changed the lead owner to 01. 😎 Andre.",
+    "write_scope": "lead-research/ only",
+    "close_mutations_performed": false,
+    "customer_messages_sent": false
+  },
+  "known_data_gaps": [
+    "Per-call full transcript was not returned by the Close connector result; only a transcript summary was available.",
+    "Full body for the ballpark quote email was not returned by activity_search, though the lead summary confirms the subject and send event.",
+    "Opportunity fetch was attempted but blocked by tool safety status; opportunity details are preserved from the lead fetch summary."
+  ]
+}
