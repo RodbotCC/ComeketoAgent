@@ -1,74 +1,71 @@
 {
-  "plan_id": "plan_s93y65pz",
+  "plan_id": "plan_3dljn6tv",
   "close_lead_id": "lead_nuglGBVdCnu51TXSjoisc3xAxU0jE6qkvhsTgpYI4YY",
-  "cycle_started_at": "2026-05-05T16:49:50.372Z",
-  "generated_at": "2026-05-05T16:49:50.372Z",
+  "cycle_started_at": "2026-05-05T17:10:49.157Z",
+  "generated_at": "2026-05-05T17:10:49.157Z",
   "based_on_snapshot_id": "snap_w828yq_5",
   "status": "draft",
   "primary_goal": "scheduled_call",
-  "goal_summary": "Use a lighter, question-led sequence to recover from the clustered outreach on May 5, incorporate the provided asset into SMS outreach, and get Maya to choose a short phone call with Andre if there is real interest.",
-  "lead_state_summary": "Trailhead Catering Guild — Maya Esposito is a new potential lead created on May 2. On May 5, Andre sent three outbound SMS messages in the same day at 03:05, 13:39, and 14:12, plus an outgoing email at 14:12 with subject \"contextual_follow_up.\" There is no recorded inbound reply, no workflow enrollment, and no event details yet. The immediate need is to slow the cadence, keep the next touch simple, and use one easy question to open a conversation while incorporating the provided asset into text outreach.",
+  "goal_summary": "Use a lighter, question-led reset after multiple same-day outbound attempts to get Maya to reply and pick a short phone call with Andre.",
+  "lead_state_summary": "Trailhead Catering Guild — Maya Esposito is a new Potential lead created on May 2. On May 5 there were three outbound SMS attempts in the same day at 03:05, 13:39, and 14:12, plus an email at 14:12 with subject/contextual follow-up. There is no recorded inbound reply, no workflow enrollment, and no evidence yet of event details, timing, headcount, or whether Maya is the decision-maker.",
   "known_facts": [
     "Lead name is Trailhead Catering Guild — Maya Esposito.",
-    "Status is Potential.",
+    "Lead status is Potential.",
     "Lead was created on 2026-05-02.",
-    "There are no workflow enrollments.",
-    "An outgoing email was sent on 2026-05-05 at 14:12 with subject \"contextual_follow_up.\"",
-    "Outbound SMS messages were sent on 2026-05-05 at 03:05, 13:39, and 14:12.",
-    "No inbound response is recorded in the Box.",
-    "Contact record includes one email and one phone number for Maya Esposito.",
-    "A creative asset was supplied for use in SMS outreach."
+    "There are no workflow enrollments on this lead.",
+    "Outbound SMS attempts were logged on 2026-05-05 at 03:05, 13:39, and 14:12.",
+    "An outgoing email was sent on 2026-05-05 at 14:12.",
+    "No inbound responses are recorded in the Box."
   ],
   "unknowns": [
-    "Whether Maya is the right person for catering decisions.",
-    "What type of event Trailhead Catering Guild is planning.",
-    "Guest count, date, and budget.",
-    "Whether they are comparing multiple caterers right now.",
-    "Whether Maya prefers text, email, or a phone conversation.",
-    "Whether there is active interest or the lead source was exploratory.",
-    "Whether the supplied asset is relevant enough to prompt a reply."
+    "Whether Maya saw the previous messages",
+    "Whether Maya is actively looking for catering right now",
+    "What type of event she is planning",
+    "Guest count",
+    "Preferred event date or service window",
+    "Budget range",
+    "Whether Maya is the final decision-maker",
+    "Whether a phone call is welcome"
   ],
-  "best_next_question": "Maya, what were you hoping to figure out first when you looked into catering for Trailhead Catering Guild?",
+  "best_next_question": "Maya, is catering something you're actively figuring out right now, or did our timing catch you too early?",
   "days": [
     {
       "day": 1,
-      "objective": "Create a clean pause after the May 5 cluster, verify the thread, and prepare an SMS that uses the supplied asset without adding pressure.",
+      "objective": "Pause additional outreach today and reset after the cluster of same-day touches already sent.",
       "required_actions": [
         {
           "channel": "task",
-          "intent": "Audit the full May 5 thread and confirm there was no missed inbound, opt-out language, or delivery issue before any new outreach resumes.",
-          "draft_seed": "Review the 03:05, 13:39, and 14:12 SMS plus the 14:12 email. Confirm no reply from Maya, no unsubscribe language, and no internal notes that change tomorrow's approach."
-        },
-        {
-          "channel": "task",
-          "intent": "Queue a single SMS for tomorrow that includes the provided asset and one discovery question.",
-          "draft_seed": "Prepare SMS with asset reference {ASSET:b6bc403f-84f8-46f7-ba81-99cde796f38f}. Keep copy short: Maya, sharing this in case it helps. When you looked into catering for Trailhead Catering Guild, what were you hoping to figure out first?"
+          "intent": "Review the May 5 SMS/email cluster before any new outreach and avoid another outbound inside the rolling 24-hour window.",
+          "draft_seed": "No send today. The last touches were three SMS plus one email on May 5 with no reply, so the next move should feel like a reset, not another chase.",
+          "notes": "Use this day to hold and prevent over-contact."
         }
       ],
-      "send_window": "No outbound today; internal review and queue prep during business hours.",
+      "send_window": "No outbound today; hold due to recent same-day SMS and email activity.",
       "approval_status": "needs_review"
     },
     {
       "day": 2,
-      "objective": "Re-open with a softer SMS that includes the supplied asset and asks one easy discovery question.",
+      "objective": "Send a short reset SMS that acknowledges timing and invites a simple reply.",
       "required_actions": [
         {
           "channel": "sms",
-          "intent": "Send a low-pressure text with the provided asset and ask what Maya wanted to understand first.",
-          "draft_seed": "Include asset {ASSET:b6bc403f-84f8-46f7-ba81-99cde796f38f}\n\nMaya, sharing this in case it helps. What were you hoping to figure out first when you looked into catering for Trailhead Catering Guild?"
+          "intent": "Reset the conversation with a low-pressure question that can open a path to a call.",
+          "draft_seed": "Maya, I realized you got a few messages from me on Monday. Rather than add more noise, let me ask it simply: are you actively figuring out catering right now, or did my timing catch you early?",
+          "notes": "If she replies with interest, pivot to offering a short phone call with Andre."
         }
       ],
-      "send_window": "SMS between 10:00 AM and 12:00 PM lead-local time.",
+      "send_window": "SMS between 9:30 AM and 1:00 PM lead-local time.",
       "approval_status": "needs_review"
     },
     {
       "day": 3,
-      "objective": "If still no reply, use email to lower pressure and clarify whether there is an active need worth a short call.",
+      "objective": "Use email to add context and make replying easier if SMS is ignored.",
       "required_actions": [
         {
           "channel": "email",
-          "intent": "Send a brief reset email that asks whether this is active planning or early research.",
-          "draft_seed": "Subject: Quick question\n\nMaya — wanted to ask one simple thing: are you actively planning something right now, or was this more early research?\n\nIf it is active, Andre can do a quick 10-minute call and help you sort through options."
+          "intent": "Acknowledge the earlier outreach and ask one clarifying question tied to event planning stage.",
+          "draft_seed": "Subject: Quick question\n\nMaya — I may have reached out a little too fast on Monday. If catering is on your plate, what are you trying to solve first right now — date, guest count, menu fit, or budget? If it helps, Andre can talk it through in a quick call.",
+          "notes": "Keep this plain text and short."
         }
       ],
       "send_window": "Email between 8:00 AM and 11:00 AM lead-local time.",
@@ -76,25 +73,27 @@
     },
     {
       "day": 4,
-      "objective": "Review for any reply and be ready to convert interest into a scheduled call.",
+      "objective": "Have Andre personally review and prepare a call ask if Maya engages.",
       "required_actions": [
         {
           "channel": "task",
-          "intent": "Review thread and, if Maya has replied with any event details or curiosity, send a personalized response aimed at booking a phone call.",
-          "draft_seed": "If Maya replies, answer her exact point first, then ask: Would it be easier to talk this through for 10 minutes with Andre?"
+          "intent": "Call Maya if she has replied, or prepare a personalized one-line call invitation based on any new signal.",
+          "draft_seed": "If Maya responds with any event detail or interest, Andre should reply with a specific offer for a 10-minute phone call to sort next steps.",
+          "notes": "No phone channel; internal task only."
         }
       ],
-      "send_window": "Internal review between 9:00 AM and 4:00 PM lead-local time.",
+      "send_window": "Internal task during business hours.",
       "approval_status": "needs_review"
     },
     {
       "day": 5,
-      "objective": "Use one final SMS nudge with the asset again only if appropriate, making it easy to say yes, no, or not now.",
+      "objective": "Send one final SMS this cycle focused on whether it makes sense to keep the conversation open.",
       "required_actions": [
         {
           "channel": "sms",
-          "intent": "Offer a simple choice to surface whether there is a live opportunity, optionally reusing the provided asset if it fits the thread context.",
-          "draft_seed": "Include asset {ASSET:b6bc403f-84f8-46f7-ba81-99cde796f38f} only if it adds context.\r\n\r\nMaya, is this something Trailhead Catering Guild is still exploring, or should Andre close the loop for now?"
+          "intent": "Ask a direct permission-based question that reduces pressure and invites a yes/no response.",
+          "draft_seed": "Maya, should I keep a spot open for a quick conversation with Andre about your catering needs, or would it make more sense for me to step back for now?",
+          "notes": "If yes, respond with two simple time options for a phone call."
         }
       ],
       "send_window": "SMS between 11:00 AM and 3:00 PM lead-local time.",
@@ -102,45 +101,47 @@
     },
     {
       "day": 6,
-      "objective": "Pause live outreach and prepare the scheduling response if Maya engages.",
+      "objective": "Hold and monitor for replies while staying within realistic contact frequency.",
       "required_actions": [
         {
           "channel": "task",
-          "intent": "Monitor for response and prepare a short scheduling reply if Maya shows interest.",
-          "draft_seed": "If Maya responds positively, reply with two simple call options and ask which works better for her."
+          "intent": "Monitor for inbound reply and be ready to answer with a call booking prompt.",
+          "draft_seed": "No outbound unless Maya replies. If she does, move quickly to: 'Would a quick 10-minute call be the easiest way to sort this out?'",
+          "notes": "Keeps the cycle under the 7-day outbound cap."
         }
       ],
-      "send_window": "Internal review during business hours.",
+      "send_window": "Internal task during business hours.",
       "approval_status": "needs_review"
     },
     {
       "day": 7,
-      "objective": "Send a final email that gives Maya a low-friction way to either book a call or decline.",
+      "objective": "Close the cycle with a concise email that gives Maya an easy out and one easy next step.",
       "required_actions": [
         {
           "channel": "email",
-          "intent": "Close the loop respectfully and offer a short phone conversation if timing is real.",
-          "draft_seed": "Subject: Should I keep this open?\n\nMaya — I do not want to crowd you.\n\nIf catering is on the table, the easiest next step is a short call with Andre to understand date, headcount, and what you are trying to make happen.\n\nIf now is not the time, I can close the loop on my end."
+          "intent": "Send a respectful close-the-loop note that invites either a short call or a no-for-now reply.",
+          "draft_seed": "Subject: Close the loop?\n\nMaya — I haven't heard back, so I don't want to keep guessing. If catering is still something you're sorting through, we can set up a short call with Andre. If not, a simple 'not now' is enough and I'll step back.",
+          "notes": "This should be the fourth outbound inside the 7-day cycle."
         }
       ],
-      "send_window": "Email between 8:00 AM and 12:00 PM lead-local time.",
+      "send_window": "Email between 2:00 PM and 5:00 PM lead-local time.",
       "approval_status": "needs_review"
     }
   ],
   "stop_conditions": [
     {
-      "trigger": "Maya replies with interest, event details, or asks a question.",
-      "action": "pause"
-    },
-    {
-      "trigger": "Maya asks not to be contacted, says stop, remove me, or not interested.",
+      "trigger": "Maya replies with stop, remove me, unsubscribe, not interested, or any clear opt-out",
       "action": "kill"
     },
     {
-      "trigger": "Another team member manually enrolls Maya into a workflow or books a call.",
+      "trigger": "Maya provides event details or asks a question",
       "action": "surface"
+    },
+    {
+      "trigger": "Maya agrees to talk or asks for availability",
+      "action": "pause"
     }
   ],
   "approval_required": true,
-  "_mirror_at": "2026-05-05T16:55:50.317Z"
+  "_mirror_at": "2026-05-05T17:10:49.596Z"
 }
