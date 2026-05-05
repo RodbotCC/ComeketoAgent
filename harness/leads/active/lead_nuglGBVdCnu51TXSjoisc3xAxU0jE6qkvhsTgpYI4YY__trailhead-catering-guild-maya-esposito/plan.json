@@ -98,7 +98,7 @@
         }
       ],
       "send_window": "SMS between 11:00 AM and 3:00 PM lead-local time.",
-      "approval_status": "needs_review"
+      "approval_status": "sent"
     },
     {
       "day": 6,
@@ -142,5 +142,5 @@
     }
   ],
   "approval_required": true,
-  "_mirror_at": "2026-05-05T16:55:25.937Z"
+  "_mirror_at": "2026-05-05T16:55:28.730Z"
 }
