@@ -1,0 +1,152 @@
+{
+  "plan_id": "plan_rj6shvx5",
+  "close_lead_id": "lead_u5RzyomibdhkBs8yVCC79tkbIluC26zCIeli0TQSVqj",
+  "cycle_started_at": "2026-05-05T17:15:40.085Z",
+  "generated_at": "2026-05-05T17:15:40.085Z",
+  "based_on_snapshot_id": "snap_bwbtkr_19",
+  "status": "draft",
+  "primary_goal": "scheduled_call",
+  "goal_summary": "Use a lighter, lower-pressure 7-day cycle to get Naomi to choose a quick call with Andre or clearly state whether she wants to finalize by email.",
+  "lead_state_summary": "Naomi Friedman is an existing customer tied to the Friedman Anniversary lead. Notes show she had a comped tasting last weekend with glowing feedback and that a proposal was going out. Since then, there have been repeated proposal follow-ups by both email and SMS on May 3, May 4, and May 5, including multiple same-day messages asking whether the proposal landed and offering a quick call. There is no recorded reply in the Box, and the most recent outbound at 2026-05-05 13:38 again asked whether Andre should hold a quick call or keep it by email.",
+  "known_facts": [
+    "Lead name is Friedman Anniversary.",
+    "Primary contact is Naomi Friedman.",
+    "Naomi has both email and SMS contact info on file.",
+    "A comped tasting happened last weekend.",
+    "Internal note says the tasting feedback was glowing.",
+    "A proposal was sent or was intended to go out shortly after the tasting.",
+    "Outbound follow-up happened repeatedly on May 3, May 4, and May 5.",
+    "Recent messaging has already focused heavily on whether the proposal landed and whether Naomi wants a quick call.",
+    "There are no workflow enrollments active.",
+    "There is no visible inbound response recorded in the activity feed."
+  ],
+  "unknowns": [
+    "Whether Naomi actually received and reviewed the proposal.",
+    "Whether Naomi is decision-maker only or coordinating with others.",
+    "What part of the proposal, if any, is holding up approval.",
+    "Whether timing, budget, menu, or logistics are the real sticking point.",
+    "Whether she prefers to finalize by email instead of a phone call.",
+    "Whether the event date and headcount are still unchanged."
+  ],
+  "best_next_question": "Naomi, when you look at the proposal, what feels like the one thing that still needs to be settled before a quick yes?",
+  "days": [
+    {
+      "day": 1,
+      "objective": "Back off the repeated proposal-landed question and send one calmer reset that invites a simple reply.",
+      "required_actions": [
+        {
+          "channel": "sms",
+          "intent": "Send a reset text that acknowledges the proposal is likely with her and asks what still needs to be settled before a short call makes sense.",
+          "draft_seed": "Naomi, I may be overcomplicating this. When you look at the proposal, what feels like the one thing that still needs to be settled on your side before a quick call with Andre would make sense?",
+          "notes": "Last touch was email and SMS on May 5, so use a single SMS only and change the angle."
+        }
+      ],
+      "send_window": "SMS between 9:30 AM and 12:00 PM lead-local time",
+      "approval_status": "needs_review"
+    },
+    {
+      "day": 2,
+      "objective": "Have Andre review the proposal and account context so the next live conversation can be specific, not generic.",
+      "required_actions": [
+        {
+          "channel": "task",
+          "intent": "Call preparation for Naomi Friedman: review tasting feedback, proposal details, and likely adjustment points before any reply comes in.",
+          "draft_seed": "Review Naomi's comped tasting notes, glowing feedback, and current proposal. Be ready to speak to any likely menu, price, or logistics adjustment if she replies.",
+          "notes": "Internal prep only. No outbound today to respect cadence and avoid over-messaging after three straight days of outreach."
+        }
+      ],
+      "send_window": "Any time during business hours",
+      "approval_status": "needs_review"
+    },
+    {
+      "day": 3,
+      "objective": "Use email to offer two low-effort response paths without repeating earlier copy.",
+      "required_actions": [
+        {
+          "channel": "email",
+          "intent": "Send a short email that gives Naomi an easy choice: name what's unresolved or ask Andre to hold a 10-minute call.",
+          "draft_seed": "Subject: one quick question on the anniversary proposal\n\nNaomi,\nFrom the tasting feedback, it seemed like we were close.\n\nWhat feels unresolved on the proposal right now?\n\nIf easier, reply with either:\n- \"send the revision\" and tell me what needs to change, or\n- \"call me\" and Andre can hold 10 minutes to talk it through.\n\nAndre",
+          "notes": "Keep it concise and question-led. Do not mention 'following up' or stack multiple asks."
+        }
+      ],
+      "send_window": "Email between 8:00 AM and 11:00 AM lead-local time",
+      "approval_status": "needs_review"
+    },
+    {
+      "day": 4,
+      "objective": "Create a non-sales internal checkpoint so Andre can decide whether to continue pressing for a call or pivot to a clarification ask only.",
+      "required_actions": [
+        {
+          "channel": "task",
+          "intent": "Review whether Naomi opened, clicked, or replied anywhere and decide if the next touch should seek a call or simply confirm interest.",
+          "draft_seed": "Check engagement across the May 3-5 emails and texts. If there is no sign of engagement, next message should reduce pressure and ask whether this is still active rather than pushing the call too hard.",
+          "notes": "No outbound today."
+        }
+      ],
+      "send_window": "Any time during business hours",
+      "approval_status": "needs_review"
+    },
+    {
+      "day": 5,
+      "objective": "Send one low-pressure text that lets Naomi choose between a call and a clean email-only path.",
+      "required_actions": [
+        {
+          "channel": "sms",
+          "intent": "Text Naomi a simple either-or question that respects her communication preference and invites a direct answer.",
+          "draft_seed": "Naomi, would it be easier to sort the anniversary proposal with a 10-minute call, or would you rather Andre revise it over email if you send the one change you want first?",
+          "notes": "This is distinct from prior 'did it land okay' texts and focuses on her preferred path."
+        }
+      ],
+      "send_window": "SMS between 11:00 AM and 2:00 PM lead-local time",
+      "approval_status": "needs_review"
+    },
+    {
+      "day": 6,
+      "objective": "Prepare a final human close-out style message in case there is still no engagement.",
+      "required_actions": [
+        {
+          "channel": "task",
+          "intent": "Draft final soft-close email for tomorrow that asks Naomi whether to keep this open or pause.",
+          "draft_seed": "Prepare a brief note that says Andre does not want to crowd her inbox and asks whether she wants to keep the proposal active, make one adjustment, or pause for now.",
+          "notes": "Internal only."
+        }
+      ],
+      "send_window": "Any time during business hours",
+      "approval_status": "needs_review"
+    },
+    {
+      "day": 7,
+      "objective": "Use a respectful close-out style email to surface a decision and preserve the relationship if timing is the issue.",
+      "required_actions": [
+        {
+          "channel": "email",
+          "intent": "Send a gentle decision email that asks whether to keep working this now, make one change, or pause.",
+          "draft_seed": "Subject: should we keep this open?\n\nNaomi,\nI don't want to keep chasing this if the timing isn't right.\n\nShould Andre keep the anniversary proposal open and tighten one thing for you, or would you rather pause it for now?\n\nIf a quick call is easier, reply with a good number and window and he'll make time.\n\nAndre",
+          "notes": "This is the final touch in the cycle unless she replies."
+        }
+      ],
+      "send_window": "Email between 8:00 AM and 10:30 AM lead-local time",
+      "approval_status": "needs_review"
+    }
+  ],
+  "stop_conditions": [
+    {
+      "trigger": "Naomi replies with a time window or asks Andre to call",
+      "action": "pause"
+    },
+    {
+      "trigger": "Naomi identifies a specific issue in the proposal",
+      "action": "pause"
+    },
+    {
+      "trigger": "Naomi says not interested, stop, remove me, or any equivalent opt-out",
+      "action": "kill"
+    },
+    {
+      "trigger": "Naomi says she prefers email only",
+      "action": "surface"
+    }
+  ],
+  "approval_required": true,
+  "_mirror_at": "2026-05-05T17:15:40.591Z"
+}
