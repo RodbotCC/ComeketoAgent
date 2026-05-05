@@ -6,6 +6,17 @@ Running snapshot of project state. Tapped before & after every move.
 
 ## 2026-05-05
 
+- **after [harness/ collapse — single-branch on main]:** Done.
+  - `harness/` now lives on `main` alongside `src/`. Single branch, single mental model.
+  - `src/lib/env.ts`: `GITHUB_LEADS_BRANCH` default flipped from `leads-data` → `main`.
+  - `.vercelignore` excludes `harness/` from deploy bundle. The runtime reads via Octokit, not the bundle.
+  - `src/lib/lead-folder.test.ts` updated for new default branch.
+  - `harness/README.md`, `harness/leads/README.md`, `CLAUDE.md` updated — dropped "parallel histories" / "do not merge" framing.
+  - **Suite 110/110 green; tsc clean.**
+  - **Pending Jake (manual)**: (1) Vercel dashboard → Settings → Git → "Ignored Build Step" → command: `git diff --quiet HEAD^ HEAD -- ':!harness'`. This is what makes cron sweep commits skip rebuilds. (2) `git push origin --delete leads-data` after this commit lands on origin.
+
+- **before [harness/ collapse — leads-data branch → single-branch on main]:** Jake flagged that the two-branch architecture was over-engineering creating cognitive friction. Moving harness/ from `leads-data` to `main`, dropping the dual-branch model. Vercel rebuild concern (cron sweep producing 100+ commits/day) gets solved with Vercel's "Ignored Build Step" — a `git diff` command that aborts the build when only `harness/**` changed. Steps: (1) `git checkout leads-data -- harness/` to bring the harness onto main; (2) flip `GITHUB_LEADS_BRANCH` default from `leads-data` to `main`; (3) update `.gitignore`/`.vercelignore` to STOP ignoring harness/; (4) update CLAUDE.md + harness/README.md to drop "parallel histories" framing; (5) delete `leads-data` branch on origin; (6) tell Jake the Vercel ignoreCommand to paste in dashboard. ~30 min target. Risk: low — collapsing toward simpler architecture, not adding complexity.
+
 - **after [harness/ overhaul — Phase 1+2]:** Done end-to-end.
   - **`leads-data` branch on origin (commit `3eed57f`)**: `harness/` is now the canonical root. `_leads/` renamed to `harness/leads/`. 11 new top-level dirs scaffolded (`ledger/`, `approvals/`, `heartbeat/`, `automations/`, `catalog/`, `staff/`, `venues/`, `people/`, `intelligence/`, `summaries/`, `catalog-content/`) — each with `.gitkeep` + `README.md`. Browse: github.com/RodbotCC/ComeketoAgent/tree/leads-data/harness.
   - **`main` branch (this session)**: `lead-folder.ts` flipped to read/write `harness/leads/` natively with a dual-probe fallback to legacy `_leads/`; new `intake-fs.ts` + `intake-extract.ts` libs; rewrote `/api/intake/upload/route.ts` to extract inline + write directly to file tree (no more Supabase round-trip); `intake-artifacts.ts` reads now go through fs; `chat/route.ts` injects intake into LLM context via new `loadIntakeArtifactsWithText`; `LeadIntakeBoard.tsx` dropped the second-call extract step; `/api/intake/extract` is now a deprecated no-op shim.

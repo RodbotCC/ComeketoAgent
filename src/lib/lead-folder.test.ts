@@ -79,9 +79,9 @@ describe("retry pacing", () => {
 });
 
 describe("repo defaults", () => {
-  it("defaults to RodbotCC/ComeketoAgent on leads-data branch when env unset", () => {
+  it("defaults to RodbotCC/ComeketoAgent on the main branch when env unset", () => {
     expect(__TEST_ONLY.REPO_OWNER).toBe("RodbotCC");
     expect(__TEST_ONLY.REPO_NAME).toBe("ComeketoAgent");
-    expect(__TEST_ONLY.REPO_BRANCH).toBe("leads-data");
+    expect(__TEST_ONLY.REPO_BRANCH).toBe("main");
   });
 });

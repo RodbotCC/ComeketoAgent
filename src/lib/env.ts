@@ -56,13 +56,16 @@ export const env = {
   GITHUB_AUDIT_REPO: read("GITHUB_AUDIT_REPO", "RodbotCC/ComeketoAgent"),
   GITHUB_AUDIT_PATH: read("GITHUB_AUDIT_PATH", "_audit/auxiliary-events.jsonl"),
 
-  /** Per-lead memory repo (Atom 0+). Owner/name of the GitHub repo that
-   *  hosts the `leads-data` branch. Defaults to this repo since `_leads/`
-   *  lives on a parallel branch here. */
+  /** Harness file-tree memory repo. Owner/name of the GitHub repo that
+   *  hosts `harness/`. Single-branch architecture as of 2026-05-05:
+   *  harness lives alongside code on the same branch; Vercel skips builds
+   *  for harness-only commits via "Ignored Build Step." */
   GITHUB_LEADS_OWNER: read("GITHUB_LEADS_OWNER", "RodbotCC"),
   GITHUB_LEADS_REPO: read("GITHUB_LEADS_REPO", "ComeketoAgent"),
-  /** Branch on which `_leads/` lives. Sweeper writes here; app reads here. */
-  GITHUB_LEADS_BRANCH: read("GITHUB_LEADS_BRANCH", "leads-data"),
+  /** Branch the harness lives on. Default `main` (the 2026-05-05 collapse
+   *  retired the `leads-data` parallel branch). Override only if hosting
+   *  the harness on a different branch (e.g. for staging). */
+  GITHUB_LEADS_BRANCH: read("GITHUB_LEADS_BRANCH", "main"),
 
   /** Vercel Cron sends `Authorization: Bearer ${CRON_SECRET}` on every cron
    *  invocation. The `/api/cron/sweep-leads` route accepts either this header

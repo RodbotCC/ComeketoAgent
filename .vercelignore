@@ -1,5 +1,10 @@
-# Per-lead memory lives on the `leads-data` branch and is never present on
-# `main`. This pattern is belt-and-suspenders in case anything ever lands
-# `_leads/` into a main checkout — we don't want it shipped in the deploy
-# bundle.
+# `harness/` is the file-tree memory: per-lead state, ledger, etc. It lives
+# in the same branch as the code, but the runtime reads it via Octokit
+# against the GitHub API — the deploy bundle doesn't need a copy. Excluding
+# saves bandwidth and keeps lead data out of the build artifact.
+harness/
+
+# `_leads/` was the pre-collapse name; harmless to leave (no longer used)
+# but kept here so if anything ever materializes it during a checkout, it
+# doesn't end up shipped.
 _leads/

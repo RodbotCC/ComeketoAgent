@@ -56,22 +56,33 @@ Append a short timestamped entry under today's date. One bullet is fine. Mark it
 
 - **Atomize hard moves before executing.** When a move is non-trivial (touches multiple files / multiple systems / could fan out), write the atomization first: a numbered list of micro-tasks where each atom names (a) what files/state it touches, (b) its inputs, (c) what "done" looks like — concrete enough that another agent could pick it up cold. This is the artifact that makes parallelism possible: Jake can fan 10 versions of me at independent atoms and just let it rip. The discipline isn't "more planning" — it's *making the work parceleable*. If I can't write a clean atomization for a move, I don't actually understand it yet.
 
-## Per-lead memory architecture (locked 2026-05-05)
+## Harness architecture (locked 2026-05-05; single-branch since 2026-05-05 collapse)
 
-Per-lead narrative content lives in **files**, not Supabase tables.
+Per-lead narrative content lives in **files** under `harness/`, not Supabase tables. The harness lives on `main` alongside the code — single branch, single mental model.
 
-- **Files on `leads-data` branch** (one folder per lead under `_leads/active/{lead_id}__{slug}/`): `00_meta.json`, `01_comms_digest.md`, `01b_comms_verbatim.md`, `04_profile.md` (LLM-generated), `06_discovery.md` (LLM-generated), `09_andre_alerts.md`, `10_andre_feedback.md` (operator override channel — sweeper never touches), `client_ledger.md`, `comms/{kind}_{date}_{shortid}.json`. Read `_leads/README.md` for the full contract.
-- **Direct REST**, not MCP, hydrates the folders. `closeListActivities` + per-call `closeGetCall` for transcripts. MCP stays as the chat agent's escape hatch only.
-- **Sweeper** (`src/lib/lead-folder-sweeper.ts`) runs every 2h via Vercel cron, plus manual trigger on `/test`. Idempotent — byte-diff means zero commits when nothing changed.
-- **Never push `leads-data` into `main`.** They are intentionally parallel histories. `leads-data` updates don't trigger Vercel rebuilds.
+**File tree** (full doc at `harness/README.md`):
+- `harness/leads/active/{lead_id}__{slug}/` — per-lead state (`00_meta.json`, `01_comms_digest.md`, `01b_comms_verbatim.md`, `04_profile.md` (LLM-generated), `06_discovery.md` (LLM-generated), `09_andre_alerts.md`, **`10_andre_feedback.md`** (operator override — sweeper never touches), `client_ledger.md`, `comms/{kind}_{date}_{shortid}.json`, `intake/{intake_id}/{meta.json,extracted.md}`).
+- `harness/ledger/` — global "what Andre did" ledger (Phase 3+).
+- `harness/{approvals,heartbeat,automations,catalog,staff,venues,people,intelligence,summaries,catalog-content}/` — broader memory categories scaffolded for incremental fill.
 
-**What stays in Supabase tables** (structured state with frequent updates and cross-lead query needs):
-- `execution_log` (audit trail), `heartbeat_runs`, `close_webhook_events`, `automation_drafts`, `intake_artifacts`, `plans`, `lead_assets`.
+**Vercel rebuild discipline:**
+- `.vercelignore` excludes `harness/` from the deploy bundle. The runtime reads files via the GitHub Contents API (Octokit), not from the bundle.
+- Vercel's "Ignored Build Step" command aborts builds when nothing outside `harness/` changed. Cron sweeps writing dozens-to-hundreds of harness commits per day produce **zero** Vercel rebuilds.
+
+**Direct REST**, not MCP, hydrates the folders. `closeListActivities` + per-call `closeGetCall` for transcripts. MCP stays as the chat agent's escape hatch only.
+
+**Sweeper** (`src/lib/lead-folder-sweeper.ts`) runs every 2h via Vercel cron, plus manual trigger on `/test`. Idempotent — byte-diff means zero commits when nothing changed.
+
+**What stays in Supabase as auxiliary memory:**
+- `close_webhook_events` (transactional unique-index dedup on `event_id`).
+- `threads` + `messages` (chat cockpit history; per-token git commits would be absurd).
+- `lead_activity_touches` (single-row freshness signal updated 1000s of times per day).
+- Storage buckets for >1MB binaries.
 
 **What moved to files:**
-- Lead profile, discovery slots, NEPQ openers, comms history, call transcripts, win angles, identity notes.
+- Per-lead profile, discovery slots, NEPQ openers, comms history, call transcripts, win angles, identity notes, intake artifacts.
 
-**Don't add new Supabase tables for lead-scoped narrative content.** If a feature wants to attach prose, slots, or contextual data to a single lead, write a new file in that lead's folder. Reach for a table only when (a) cross-lead aggregation is the primary access pattern, or (b) the data needs ACID transaction semantics.
+**Don't add new Supabase tables for lead-scoped narrative content.** If a feature wants to attach prose, slots, or contextual data to a single lead, write a new file in that lead's folder. Reach for a table only when (a) cross-lead aggregation is the primary access pattern, (b) the data needs ACID transaction semantics, or (c) per-event commit thrash would dominate.
 
 The deprecated `lead_facts` migration lives in `supabase/_deprecated/` as a record of the architecture pivot — do not re-add it.
 
