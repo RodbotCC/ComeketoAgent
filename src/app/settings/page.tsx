@@ -2,8 +2,11 @@ import Link from "next/link";
 import { envStatus } from "@/lib/env";
 import { operatorLockEnabled } from "@/lib/operator-guard";
 import { AVAILABLE_MODELS, EXECUTION_MODES, clampPlanHorizonDays, getSettings, PLAN_HORIZON_MIN, PLAN_HORIZON_MAX } from "@/lib/settings";
-import { updateModelAction, updateExecutionModeAction, updateDefaultPlanHorizonAction } from "./actions";
+import { closeMcpStatus } from "@/lib/close-mcp";
+import { updateModelAction, updateExecutionModeAction, updateDefaultPlanHorizonAction, updateMcpFallbackAction } from "./actions";
 import { SettingsForm } from "./SettingsForm";
+
+type EnvTableCell = { set: boolean; fingerprint: string | null; statusLabel?: string };
 
 const EXEC_MODE_LABEL: Record<(typeof EXECUTION_MODES)[number], { name: string; blurb: string; tone: "ok" | "warn" | "live" }> = {
   draft_only: {
@@ -51,7 +54,46 @@ export default async function SettingsPage() {
     ["CLICKUP_API_TOKEN", status.CLICKUP_API_TOKEN],
   ];
 
-  function table(rows: Array<[string, { set: boolean; fingerprint: string | null }]>) {
+  // MCP fallback config — separate group with a derived status pill below.
+  // CLOSE_MCP_AUTH_HEADER is optional: `close-mcp.ts` sends Bearer ${CLOSE_API_KEY} when blank.
+  // The table must reflect that, not show "missing" when the key comes from CLOSE_API_KEY.
+  const mcpAuthRow: EnvTableCell = status.CLOSE_MCP_AUTH_HEADER.set
+    ? { ...status.CLOSE_MCP_AUTH_HEADER }
+    : status.CLOSE_API_KEY.set
+    ? {
+        set: true,
+        fingerprint:
+          status.CLOSE_API_KEY.fingerprint != null
+            ? `Bearer ${status.CLOSE_API_KEY.fingerprint}`
+            : "Bearer (CLOSE_API_KEY)",
+        statusLabel: "optional · uses CLOSE_API_KEY",
+      }
+    : { set: false, fingerprint: null };
+  const mcpEnvRows: Array<[string, EnvTableCell]> = [
+    ["CLOSE_MCP_URL", status.CLOSE_MCP_URL],
+    ["CLOSE_MCP_AUTH_HEADER", mcpAuthRow],
+  ];
+  const mcp = closeMcpStatus();
+  // Three states: ready (URL + auth resolved), partial (URL set, auth missing), off (URL blank).
+  const mcpState: "ready" | "partial" | "off" = !mcp.url_set
+    ? "off"
+    : !mcp.auth_resolved
+    ? "partial"
+    : "ready";
+  const mcpLabel =
+    mcpState === "ready"
+      ? "MCP fallback ready"
+      : mcpState === "partial"
+      ? "URL set · auth missing"
+      : "MCP fallback off";
+  const mcpBlurb =
+    mcpState === "ready"
+      ? "Chat agent's `close_mcp_list_tools` and `close_mcp_call` will reach Close's MCP server when the model decides a direct tool doesn't cover the operation."
+      : mcpState === "partial"
+      ? "URL is set but neither CLOSE_MCP_AUTH_HEADER nor CLOSE_API_KEY resolves to a usable header value. Set one and reload."
+      : "Set CLOSE_MCP_URL in .env.local to enable. Auth defaults to Bearer ${CLOSE_API_KEY} if CLOSE_MCP_AUTH_HEADER is blank.";
+
+  function table(rows: Array<[string, EnvTableCell | { set: boolean; fingerprint: string | null }]>) {
     return (
       <table style={{ width: "100%", borderCollapse: "collapse", marginTop: 12 }}>
         <thead>
@@ -62,20 +104,24 @@ export default async function SettingsPage() {
           </tr>
         </thead>
         <tbody>
-          {rows.map(([name, info]) => (
-            <tr key={name}>
-              <td style={{ padding: "10px 0", borderBottom: "1px solid var(--rule-soft)", fontFamily: "var(--mono)", fontSize: 12 }}>
-                {name}
-              </td>
-              <td style={{ padding: "10px 0", borderBottom: "1px solid var(--rule-soft)" }}>
-                <span className={`dot ${info.set ? "on" : "off"}`} />
-                {info.set ? "set" : "missing"}
-              </td>
-              <td style={{ padding: "10px 0", borderBottom: "1px solid var(--rule-soft)", fontFamily: "var(--mono)", fontSize: 12, color: "var(--ink-soft)" }}>
-                {info.fingerprint ?? "—"}
-              </td>
-            </tr>
-          ))}
+          {rows.map(([name, info]) => {
+            const cell = info as EnvTableCell;
+            const statusText = cell.statusLabel ?? (cell.set ? "set" : "missing");
+            return (
+              <tr key={name}>
+                <td style={{ padding: "10px 0", borderBottom: "1px solid var(--rule-soft)", fontFamily: "var(--mono)", fontSize: 12 }}>
+                  {name}
+                </td>
+                <td style={{ padding: "10px 0", borderBottom: "1px solid var(--rule-soft)", fontSize: 12 }}>
+                  <span className={`dot ${cell.set ? "on" : "off"}`} />
+                  {statusText}
+                </td>
+                <td style={{ padding: "10px 0", borderBottom: "1px solid var(--rule-soft)", fontFamily: "var(--mono)", fontSize: 12, color: "var(--ink-soft)" }}>
+                  {cell.fingerprint ?? "—"}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     );
@@ -312,6 +358,101 @@ export default async function SettingsPage() {
           {table(reserved)}
         </div>
 
+        <div className="cmk-stack-panel cmk-stack-panel--sky">
+          <h2>Close MCP fallback</h2>
+          <p className="muted">
+            Escape hatch for Close operations the chat agent doesn&apos;t have a direct gated tool for. Audited as{" "}
+            <code className="ag-seq-mono">mcp_fallback</code> in{" "}
+            <Link href="/console?kind=mcp_fallback">/console?kind=mcp_fallback</Link>. Use{" "}
+            <Link href="/test">/test</Link> &rarr; <strong>Test Close MCP fallback</strong> to verify the catalog after setting{" "}
+            <code>CLOSE_MCP_URL</code>. Leave <code>CLOSE_MCP_AUTH_HEADER</code> blank to use{" "}
+            <code>{'Bearer ${CLOSE_API_KEY}'}</code> automatically (same key as the direct Close tools).
+          </p>
+          <div style={{ marginTop: 8, display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
+            <span
+              style={{
+                fontSize: 9.5,
+                fontWeight: 500,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                padding: "3px 9px",
+                borderRadius: 999,
+                background:
+                  mcpState === "ready"
+                    ? "color-mix(in oklab, var(--sage-deep) 18%, var(--card))"
+                    : mcpState === "partial"
+                    ? "color-mix(in oklab, var(--lemon-deep) 22%, var(--card))"
+                    : "color-mix(in oklab, var(--card) 90%, var(--ink) 6%)",
+                color:
+                  mcpState === "ready"
+                    ? "color-mix(in oklab, var(--sage-deep) 90%, var(--ink))"
+                    : mcpState === "partial"
+                    ? "color-mix(in oklab, var(--lemon-deep) 92%, var(--ink))"
+                    : "var(--ink-faint)",
+              }}
+            >
+              {mcpLabel}
+            </span>
+            <span style={{ fontSize: 12, color: "var(--ink-mid)" }}>{mcpBlurb}</span>
+          </div>
+
+          <SettingsForm
+            action={updateMcpFallbackAction}
+            style={{
+              marginTop: 14,
+              padding: "10px 12px",
+              borderRadius: 8,
+              border: "1px solid var(--rule)",
+              background: "var(--card-2)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: 12,
+              flexWrap: "wrap",
+            }}
+          >
+            <label style={{ display: "flex", alignItems: "center", gap: 10, cursor: mcpState === "off" ? "not-allowed" : "pointer", flex: 1, minWidth: 240, opacity: mcpState === "off" ? 0.55 : 1 }}>
+              <input
+                type="checkbox"
+                name="enable_mcp_fallback"
+                defaultChecked={settings.enable_mcp_fallback}
+                disabled={mcpState === "off"}
+                style={{ marginTop: 0 }}
+              />
+              <span style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                <strong style={{ fontFamily: "var(--serif)", fontSize: 14, fontWeight: 500 }}>
+                  Expose MCP fallback to the chat agent
+                </strong>
+                <span style={{ fontSize: 11.5, color: "var(--ink-mid)" }}>
+                  {mcpState === "off" ? (
+                    <>
+                      <strong>Inert until MCP is configured.</strong>{" "}Set <code className="ag-seq-mono">CLOSE_MCP_URL</code> in <code className="ag-seq-mono">.env.local</code> to enable. While off, the chat agent has no MCP escape hatch — all Close work flows through the regular API tools. (Note: chat-panel &ldquo;ok after retry&rdquo; chains are usually the LLM switching between API tools, NOT an MCP recovery.)
+                    </>
+                  ) : (
+                    <>
+                      Kill switch. When off, <code className="ag-seq-mono">close_mcp_list_tools</code> and <code className="ag-seq-mono">close_mcp_call</code> are filtered from the model&apos;s tool array and the dispatcher refuses any stale invocations. Use to clamp down if the model overuses fallback.
+                    </>
+                  )}
+                </span>
+              </span>
+            </label>
+            <button
+              type="submit"
+              className="plan-btn plan-btn-primary"
+              style={{
+                fontSize: 11,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                padding: "8px 14px",
+              }}
+            >
+              Save
+            </button>
+          </SettingsForm>
+
+          {table(mcpEnvRows)}
+        </div>
+
         <div className="cmk-stack-panel cmk-stack-panel--sage">
           <h2>Where these are used</h2>
           <ul className="muted" style={{ marginBottom: 0 }}>
@@ -323,6 +464,11 @@ export default async function SettingsPage() {
           <li>
             <strong>CLOSE_WEBHOOK_SIGNATURE_KEY</strong> — hex <code>signature_key</code> from your Close webhook subscription response;
             verifies HMAC on <code>/api/webhooks/close</code> (required in production; dev accepts unsigned POSTs if unset).
+          </li>
+          <li>
+            <strong>CLOSE_MCP_URL</strong> + <strong>CLOSE_MCP_AUTH_HEADER</strong> — JSON-RPC 2.0/HTTP endpoint for Close&apos;s
+            official MCP server, used by the chat agent&apos;s <code>close_mcp_list_tools</code> + <code>close_mcp_call</code> escape
+            hatch. Auth defaults to <code>Bearer ${`{CLOSE_API_KEY}`}</code> when <code>CLOSE_MCP_AUTH_HEADER</code> is blank.
           </li>
           <li><strong>CLICKUP_*</strong> — reserved.</li>
         </ul>

@@ -12,12 +12,16 @@ export function LeadSubNav({ leadId }: { leadId: string }) {
 
   const planActive = pathname === base || pathname === `${base}/`;
   const boxActive = pathname.startsWith(`${base}/box`);
+  const graphActive = pathname.startsWith(`${base}/graph`);
   const hbActive = pathname.startsWith(`${base}/heartbeat`);
 
   return (
     <nav className="lead-subnav" aria-label="Lead sections">
       <Link href={base} className={`lead-subnav-link${planActive ? " lead-subnav-link-active" : ""}`}>
         Plan
+      </Link>
+      <Link href={`${base}/graph`} className={`lead-subnav-link${graphActive ? " lead-subnav-link-active" : ""}`}>
+        Graph
       </Link>
       <Link href={`${base}/box`} className={`lead-subnav-link${boxActive ? " lead-subnav-link-active" : ""}`}>
         Box

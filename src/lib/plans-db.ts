@@ -178,6 +178,78 @@ export async function appendRequiredActionToPlanDay(
 }
 
 /**
+ * Edit a single touch in place (at a given day + touch index). Used by the
+ * day-card modal inline editor — operator changes channel / intent / draft
+ * without going through AI refinement. Bumps approval_status to needs_review
+ * since the operator just changed the contract.
+ */
+export async function editPlanDayTouch(
+  planId: string,
+  dayIndex: number,
+  touchIndex: number,
+  touch: import("./plan").PlannedTouchpoint
+): Promise<void> {
+  const sb = getSupabaseServer();
+  const { data: row, error: readErr } = await sb
+    .from("lead_plans")
+    .select("days")
+    .eq("id", planId)
+    .single();
+  if (readErr) throw new Error(`editPlanDayTouch read failed: ${readErr.message}`);
+  const days = ((row as { days: import("./plan").SevenDayPlanDay[] }).days ?? []).slice();
+  if (dayIndex < 0 || dayIndex >= days.length) {
+    throw new Error(`editPlanDayTouch: day index ${dayIndex} out of range (have ${days.length})`);
+  }
+  const d = days[dayIndex];
+  if (touchIndex < 0 || touchIndex >= d.required_actions.length) {
+    throw new Error(`editPlanDayTouch: touch index ${touchIndex} out of range (have ${d.required_actions.length})`);
+  }
+  const newActions = [...d.required_actions];
+  newActions[touchIndex] = touch;
+  days[dayIndex] = {
+    ...d,
+    required_actions: newActions,
+    approval_status: "needs_review",
+  };
+  const { error: writeErr } = await sb.from("lead_plans").update({ days }).eq("id", planId);
+  if (writeErr) throw new Error(`editPlanDayTouch write failed: ${writeErr.message}`);
+}
+
+/**
+ * Delete one touch from a day. Used by the day-card modal when the operator
+ * removes a planned action. Bumps approval_status to needs_review.
+ */
+export async function deletePlanDayTouch(
+  planId: string,
+  dayIndex: number,
+  touchIndex: number
+): Promise<void> {
+  const sb = getSupabaseServer();
+  const { data: row, error: readErr } = await sb
+    .from("lead_plans")
+    .select("days")
+    .eq("id", planId)
+    .single();
+  if (readErr) throw new Error(`deletePlanDayTouch read failed: ${readErr.message}`);
+  const days = ((row as { days: import("./plan").SevenDayPlanDay[] }).days ?? []).slice();
+  if (dayIndex < 0 || dayIndex >= days.length) {
+    throw new Error(`deletePlanDayTouch: day index ${dayIndex} out of range`);
+  }
+  const d = days[dayIndex];
+  if (touchIndex < 0 || touchIndex >= d.required_actions.length) {
+    throw new Error(`deletePlanDayTouch: touch index ${touchIndex} out of range`);
+  }
+  const newActions = d.required_actions.filter((_, i) => i !== touchIndex);
+  days[dayIndex] = {
+    ...d,
+    required_actions: newActions,
+    approval_status: "needs_review",
+  };
+  const { error: writeErr } = await sb.from("lead_plans").update({ days }).eq("id", planId);
+  if (writeErr) throw new Error(`deletePlanDayTouch write failed: ${writeErr.message}`);
+}
+
+/**
  * Replace one day in a plan's `days` array. Used by the per-day AI
  * refinement flow: the LLM regenerates a single day from the user's
  * instruction; everything else stays.

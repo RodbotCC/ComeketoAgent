@@ -4,8 +4,8 @@ import { useMemo, useState, useTransition } from "react";
 import { Modal } from "@/components/Modal";
 import { ContextMenu, type ContextMenuItem } from "@/components/ContextMenu";
 import { useToast } from "@/components/Toast";
-import { refinePlanDayAction, setDayStatusAction, addPlanDayTouchAction, type RefineDayState } from "./actions";
-import type { SevenDayPlanDay } from "@/lib/plan";
+import { refinePlanDayAction, setDayStatusAction, addPlanDayTouchAction, editPlanDayTouchAction, deletePlanDayTouchAction, type RefineDayState } from "./actions";
+import type { SevenDayPlanDay, PlannedTouchpoint } from "@/lib/plan";
 import { validateNepqVoice, hasBlockingViolation, type VoiceViolation } from "@/lib/nepq";
 import { lintOutboundDraft, draftLintHasBlocking, type DraftLintIssue } from "@/lib/draft-lint";
 import { emailDraftPlainToPreviewHtml } from "@/lib/email-draft-html";
@@ -17,6 +17,53 @@ const CHANNEL_GLYPH: Record<string, string> = {
   task: "▢",
 };
 
+const CHANNELS = ["sms", "email", "call", "task"] as const;
+type Channel = (typeof CHANNELS)[number];
+
+/**
+ * Pill-row channel picker — replaces the boring native <select>. Each chip
+ * uses the same channel color tokens as the rest of the plan UI so it reads
+ * as part of the family. Backed by a hidden input so the surrounding <form>
+ * action picks it up under `name`.
+ */
+function ChannelChips({ name, defaultValue }: { name: string; defaultValue: Channel }) {
+  const [value, setValue] = useState<Channel>(defaultValue);
+  return (
+    <>
+      <input type="hidden" name={name} value={value} />
+      <div className="plan-touch-chips" role="radiogroup" aria-label="Channel">
+        {CHANNELS.map((ch) => (
+          <button
+            key={ch}
+            type="button"
+            role="radio"
+            aria-checked={value === ch}
+            onClick={() => setValue(ch)}
+            className={`plan-touch-chip plan-touch-chip-${ch}${value === ch ? " on" : ""}`}
+          >
+            <span className="plan-touch-chip-glyph">{CHANNEL_GLYPH[ch]}</span>
+            {ch}
+          </button>
+        ))}
+      </div>
+    </>
+  );
+}
+
+/**
+ * Per-touch dry-run verdict from /api/lead/[id]/plan/simulate. Renders as
+ * an inline pill on each touch row so the operator can see what would fire
+ * before clicking Approve & run.
+ */
+export type TouchVerdictForCard = {
+  touch_index: number;
+  channel: PlannedTouchpoint["channel"];
+  intent: string;
+  fire: boolean;
+  skip_code: string | null;
+  reason: string | null;
+};
+
 type Props = {
   day: SevenDayPlanDay;
   dayIndex: number;
@@ -26,13 +73,16 @@ type Props = {
   goalSummary: string;
   /** When true, AI day refinements are blocked (§I3). */
   planStale?: boolean;
+  /** Per-touch dry-run verdicts (from the cockpit's Simulate button). */
+  verdicts?: TouchVerdictForCard[];
 };
 
-export function PlanDayCard({ day, dayIndex, tone, planId, leadId, goalSummary, planStale }: Props) {
+export function PlanDayCard({ day, dayIndex, tone, planId, leadId, goalSummary, planStale, verdicts }: Props) {
   const [open, setOpen] = useState(false);
   const [instruction, setInstruction] = useState("");
   const [state, setState] = useState<RefineDayState>({ ok: true });
   const [pending, startTransition] = useTransition();
+  const [editingTouch, setEditingTouch] = useState<number | null>(null);
   const toast = useToast();
 
   // NEPQ voice scan for every email/sms draft seed in this day.
@@ -164,25 +214,38 @@ export function PlanDayCard({ day, dayIndex, tone, planId, leadId, goalSummary, 
           </div>
         </div>
         <div className="plan-day-objective">{day.objective}</div>
-        {day.required_actions.map((a, i) => (
-          <div key={i} className="plan-action">
-            <span className={`plan-action-chip plan-action-chip-${a.channel}`}>
-              <span className="plan-action-glyph">{CHANNEL_GLYPH[a.channel] || "·"}</span>
-              {a.channel}
-            </span>
-            <div className="plan-action-body">
-              <div className="plan-action-intent">{a.intent}</div>
-              {a.draft_seed && <div className="plan-action-seed">{a.draft_seed}</div>}
-              {a.tasting_date && <div className="plan-action-tasting">tasting: {a.tasting_date}</div>}
-              {a.notes && <div className="plan-action-notes">{a.notes}</div>}
+        {day.required_actions.map((a, i) => {
+          const v = verdicts?.[i];
+          return (
+            <div key={i} className="plan-action">
+              <span className={`plan-action-chip plan-action-chip-${a.channel}`}>
+                <span className="plan-action-glyph">{CHANNEL_GLYPH[a.channel] || "·"}</span>
+                {a.channel}
+              </span>
+              <div className="plan-action-body">
+                <div className="plan-action-intent">
+                  {a.intent}
+                  {v && (
+                    <span
+                      className={`plan-verdict-pill ${v.fire ? "ok" : "skip"}`}
+                      title={v.reason ?? (v.fire ? "would fire" : v.skip_code ?? "would skip")}
+                    >
+                      {v.fire ? "would fire" : (v.skip_code ?? "skip").toLowerCase().replace(/_/g, " ")}
+                    </span>
+                  )}
+                </div>
+                {a.draft_seed && <div className="plan-action-seed">{a.draft_seed}</div>}
+                {a.tasting_date && <div className="plan-action-tasting">tasting: {a.tasting_date}</div>}
+                {a.notes && <div className="plan-action-notes">{a.notes}</div>}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
         <div className="plan-day-window">{day.send_window}</div>
       </div>
       </ContextMenu>
 
-      <Modal open={open} onClose={() => setOpen(false)} labelledBy={`day-modal-h-${day.day}`}>
+      <Modal open={open} onClose={() => setOpen(false)} labelledBy={`day-modal-h-${day.day}`} width="wide">
         <div className={`plan-day-modal plan-day-modal-${tone}`}>
           <header className="plan-day-modal-head">
             <span className="cme-eyebrow">day {day.day} of 7</span>
@@ -192,17 +255,147 @@ export function PlanDayCard({ day, dayIndex, tone, planId, leadId, goalSummary, 
             {goalSummary && <p className="plan-day-modal-context">Toward: {goalSummary}</p>}
           </header>
 
+          {/* Modal-header actions: approve from inside the modal too. */}
+          {!planStale && day.approval_status !== "sent" && day.approval_status !== "skipped" && (
+            <div style={{ padding: "10px 16px", borderTop: "0.5px solid var(--rule)", borderBottom: "0.5px solid var(--rule)", display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap", background: "var(--paper-2)" }}>
+              {day.approval_status !== "approved" && (
+                <button
+                  type="button"
+                  className="plan-btn plan-btn-primary"
+                  disabled={pending || dayHasBlocking}
+                  title={dayHasBlocking ? "Resolve voice violations before approving" : "Approve this day from the modal"}
+                  onClick={() => setStatus("approved")}
+                >
+                  {dayHasBlocking ? "Approve (blocked)" : "Approve day"}
+                </button>
+              )}
+              {day.approval_status === "approved" && (
+                <button type="button" className="plan-btn" disabled={pending} onClick={() => setStatus("needs_review")}>
+                  Move back to needs review
+                </button>
+              )}
+              <button type="button" className="plan-btn" disabled={pending} onClick={() => setStatus("sent")}>
+                Mark sent
+              </button>
+              <button type="button" className="plan-btn plan-btn-danger" disabled={pending} onClick={() => setStatus("skipped")}>
+                Skip this day
+              </button>
+              <span style={{ marginLeft: "auto", fontSize: 11, color: "var(--ink-faint)" }}>
+                status: <strong>{day.approval_status.replace(/_/g, " ")}</strong>
+              </span>
+            </div>
+          )}
+
           <div className="plan-day-modal-body">
             <section className="plan-day-modal-section">
               <h3 className="cme-eyebrow">Required actions</h3>
-              {day.required_actions.map((a, i) => (
+              {day.required_actions.map((a, i) =>
+                editingTouch === i ? (
+                  <form
+                    key={i}
+                    action={(fd) => {
+                      fd.set("plan_id", planId);
+                      fd.set("lead_id", leadId);
+                      fd.set("day_index", String(dayIndex));
+                      fd.set("touch_index", String(i));
+                      startTransition(async () => {
+                        try {
+                          await editPlanDayTouchAction(fd);
+                          setEditingTouch(null);
+                          toast.push("Touch updated", { tone: "success" });
+                        } catch (err) {
+                          toast.push(`Edit failed — ${err instanceof Error ? err.message : String(err)}`, { tone: "error", ttl: 4500 });
+                        }
+                      });
+                    }}
+                    className="plan-touch-form"
+                    style={{ marginBottom: 8 }}
+                  >
+                    <div className="plan-touch-form-row">
+                      <div className="plan-touch-field" style={{ flex: "0 0 auto" }}>
+                        <span className="plan-touch-field-label">Channel</span>
+                        <ChannelChips name="channel" defaultValue={(a.channel as Channel) || "sms"} />
+                      </div>
+                      <div className="plan-touch-field">
+                        <label className="plan-touch-field-label" htmlFor={`intent-edit-${dayIndex}-${i}`}>Intent (one line)</label>
+                        <input
+                          id={`intent-edit-${dayIndex}-${i}`}
+                          name="intent"
+                          className="plan-touch-input"
+                          defaultValue={a.intent}
+                          placeholder="What this touch is meant to do"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div className="plan-touch-field">
+                      <label className="plan-touch-field-label" htmlFor={`draft-edit-${dayIndex}-${i}`}>Draft body (optional — email/SMS)</label>
+                      <textarea
+                        id={`draft-edit-${dayIndex}-${i}`}
+                        name="draft_seed"
+                        className="plan-touch-input"
+                        rows={4}
+                        defaultValue={a.draft_seed || ""}
+                        placeholder="The actual body the operator/heartbeat will send"
+                        style={{ resize: "vertical" }}
+                      />
+                    </div>
+                    <div className="plan-touch-form-actions">
+                      <button type="submit" className="plan-btn plan-btn-primary" disabled={pending}>
+                        {pending ? "saving…" : "Save touch"}
+                      </button>
+                      <button type="button" className="plan-btn" onClick={() => setEditingTouch(null)} disabled={pending}>
+                        Cancel
+                      </button>
+                      <button
+                        type="button"
+                        className="plan-btn plan-btn-danger"
+                        disabled={pending}
+                        onClick={() => {
+                          if (!confirm(`Delete this ${a.channel} touch?`)) return;
+                          const fd = new FormData();
+                          fd.set("plan_id", planId);
+                          fd.set("lead_id", leadId);
+                          fd.set("day_index", String(dayIndex));
+                          fd.set("touch_index", String(i));
+                          startTransition(async () => {
+                            try {
+                              await deletePlanDayTouchAction(fd);
+                              setEditingTouch(null);
+                              toast.push("Touch deleted", { tone: "success" });
+                            } catch (err) {
+                              toast.push(`Delete failed — ${err instanceof Error ? err.message : String(err)}`, { tone: "error", ttl: 4500 });
+                            }
+                          });
+                        }}
+                        style={{ marginLeft: "auto" }}
+                      >
+                        Delete touch
+                      </button>
+                    </div>
+                  </form>
+                ) : (
                 <div key={i} className="plan-action">
                   <span className={`plan-action-chip plan-action-chip-${a.channel}`}>
                     <span className="plan-action-glyph">{CHANNEL_GLYPH[a.channel] || "·"}</span>
                     {a.channel}
                   </span>
                   <div className="plan-action-body">
-                    <div className="plan-action-intent">{a.intent}</div>
+                    <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 8 }}>
+                      <div className="plan-action-intent" style={{ flex: 1 }}>{a.intent}</div>
+                      {!planStale && day.approval_status !== "sent" && (
+                        <button
+                          type="button"
+                          className="plan-btn"
+                          style={{ fontSize: 10, padding: "2px 8px", flexShrink: 0 }}
+                          onClick={() => setEditingTouch(i)}
+                          disabled={pending}
+                          title="Edit this touch — change channel, intent, or draft text"
+                        >
+                          edit
+                        </button>
+                      )}
+                    </div>
                     {a.draft_seed && <div className="plan-action-seed">{a.draft_seed}</div>}
                     {a.channel === "email" && a.draft_seed && (
                       <div
@@ -268,35 +461,38 @@ export function PlanDayCard({ day, dayIndex, tone, planId, leadId, goalSummary, 
                   Appends to this calendar day and sets the day to <strong>needs review</strong>. The rolling
                   frequency cap can still skip a second SMS/email the same day — see heartbeat skip codes.
                 </p>
-                <form action={addPlanDayTouchAction} className="plan-add-touch-form">
+                <form action={addPlanDayTouchAction} className="plan-touch-form">
                   <input type="hidden" name="plan_id" value={planId} />
                   <input type="hidden" name="lead_id" value={leadId} />
                   <input type="hidden" name="day_index" value={String(dayIndex)} />
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: 10, alignItems: "flex-end", marginBottom: 10 }}>
-                    <label style={{ display: "flex", flexDirection: "column", gap: 4, fontSize: 11 }}>
-                      Channel
-                      <select name="channel" className="plan-horizon-input" defaultValue="sms">
-                        <option value="sms">sms</option>
-                        <option value="email">email</option>
-                        <option value="call">call</option>
-                        <option value="task">task</option>
-                      </select>
-                    </label>
-                    <label style={{ display: "flex", flexDirection: "column", gap: 4, fontSize: 11, flex: "1 1 160px" }}>
-                      Intent
+                  <div className="plan-touch-form-row">
+                    <div className="plan-touch-field" style={{ flex: "0 0 auto" }}>
+                      <span className="plan-touch-field-label">Channel</span>
+                      <ChannelChips name="channel" defaultValue="sms" />
+                    </div>
+                    <div className="plan-touch-field">
+                      <label className="plan-touch-field-label" htmlFor={`intent-add-${dayIndex}`}>Intent (one line)</label>
                       <input
+                        id={`intent-add-${dayIndex}`}
                         name="intent"
-                        className="plan-horizon-input"
-                        placeholder="One-line move (required)"
+                        className="plan-touch-input"
+                        placeholder="One-line move (e.g. 'soft SMS bump asking about timeline')"
                         required
                       />
-                    </label>
+                    </div>
                   </div>
-                  <label style={{ display: "flex", flexDirection: "column", gap: 4, fontSize: 11, width: "100%" }}>
-                    Draft seed (optional)
-                    <input name="draft_seed" className="plan-horizon-input" placeholder="For email/SMS body seed" />
-                  </label>
-                  <div style={{ marginTop: 12 }}>
+                  <div className="plan-touch-field">
+                    <label className="plan-touch-field-label" htmlFor={`draft-add-${dayIndex}`}>Draft body (optional)</label>
+                    <textarea
+                      id={`draft-add-${dayIndex}`}
+                      name="draft_seed"
+                      className="plan-touch-input"
+                      rows={3}
+                      placeholder="For email/SMS — the actual body to send"
+                      style={{ resize: "vertical" }}
+                    />
+                  </div>
+                  <div className="plan-touch-form-actions">
                     <button type="submit" className="plan-btn plan-btn-primary" disabled={pending}>
                       Add touch
                     </button>

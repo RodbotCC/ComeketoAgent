@@ -17,11 +17,14 @@ export function Modal({
   onClose,
   children,
   labelledBy,
+  width = "default",
 }: {
   open: boolean;
   onClose: () => void;
   children: ReactNode;
   labelledBy?: string;
+  /** "default" = 720px (most modals). "wide" = 960px (day editor + similar). */
+  width?: "default" | "wide";
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
   // Two-phase render so we can animate exit. `mounted` controls DOM presence;
@@ -76,7 +79,7 @@ export function Modal({
       aria-labelledby={labelledBy}
     >
       <div
-        className="cme-modal-card"
+        className={`cme-modal-card${width === "wide" ? " cme-modal-card-wide" : ""}`}
         data-exit={visible ? "false" : "true"}
         ref={cardRef}
       >

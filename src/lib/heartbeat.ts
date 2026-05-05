@@ -527,6 +527,169 @@ export async function runHeartbeatForPlan(
   return report;
 }
 
+// ─── Dry-run simulator: verdicts only, NO writes ─────────────────────────
+
+export type SimulatedTouchVerdict = {
+  touch_index: number;
+  channel: PlannedTouchpoint["channel"];
+  intent: string;
+  fire: boolean;
+  skip_code: string | null;
+  reason: string | null;
+};
+
+export type SimulatedDay = {
+  day_index: number;
+  day_number: number;
+  date: string;
+  is_today: boolean;
+  approval_status: SevenDayPlanDay["approval_status"];
+  verdicts: SimulatedTouchVerdict[];
+};
+
+export type SimulatedPlan = {
+  plan_id: string;
+  close_lead_id: string;
+  ran_at: string;
+  snapshot_match: boolean;
+  plan_was_stale: boolean;
+  current_snapshot_id: string;
+  plan_snapshot_id: string;
+  reply_gate_active: boolean;
+  ownership_status_skip: SkipCode | null;
+  lead_tz: string;
+  days: SimulatedDay[];
+  actions_eligible: number;
+  would_fire: number;
+  would_skip: number;
+  skip_breakdown: Record<string, number>;
+  duration_ms: number;
+};
+
+/**
+ * Pure read: walk the plan's days and emit per-touch verdicts using the
+ * same logic the heartbeat runner uses, but with NO side effects.
+ *
+ * - No Close API writes (executor branch never entered).
+ * - No Supabase writes (no heartbeat_runs insert, no plan-status update,
+ *   no execution_log entry).
+ * - Stale-plan check is computed and reported, but never persisted.
+ *
+ * Powers the "Simulate" button in the cockpit + lead page so the operator
+ * sees what would fire before clicking Approve & run.
+ */
+export async function simulatePlanForLead(leadId: string): Promise<SimulatedPlan | null> {
+  const startedAt = Date.now();
+  const sb = getSupabaseServer();
+  const settings = await getSettings();
+
+  const { data: row, error: readErr } = await sb
+    .from("lead_plans")
+    .select("*")
+    .eq("close_lead_id", leadId)
+    .order("generated_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+  if (readErr) throw new Error(`simulate: plan read failed: ${readErr.message}`);
+  if (!row) return null;
+
+  const plan = rowToPlan(row as Record<string, unknown>);
+  const box = await closeGetLeadFull(plan.close_lead_id);
+  const currentSnapshotId = snapshotIdForBox(box);
+  const snapshotMatch = currentSnapshotId === plan.based_on_snapshot_id;
+  const planWasStale = !snapshotMatch && (plan.status === "approved" || plan.status === "active");
+
+  const ownershipSkip = checkOwnershipAndStatus(box.lead, env.CLOSE_USER_ID_ANDRE);
+  const stopHits = detectStopSignal(box.activities);
+  const stopActive = stopHits.length > 0;
+  const replyActive = isReplyGateActive(box.activities);
+  const freqSkip = checkFrequencyCap(box.activities, new Date());
+  const hasContact = (box.lead.contacts?.length ?? 0) > 0;
+  const tzRes = resolveLeadTimezone(box.lead);
+
+  const codegen = codegenPlanForClose({ plan, box, andreUserId: env.CLOSE_USER_ID_ANDRE });
+  const now = new Date();
+
+  const days: SimulatedDay[] = [];
+  let would_fire = 0;
+  let would_skip = 0;
+  let actions_eligible = 0;
+  const skip_breakdown: Record<string, number> = {};
+
+  for (let idx = 0; idx < codegen.groups.length; idx++) {
+    const group = codegen.groups[idx];
+    const dayObj = plan.days[idx];
+    const today = isToday(group.date, now);
+    const verdicts: SimulatedTouchVerdict[] = [];
+
+    for (let ti = 0; ti < dayObj.required_actions.length; ti++) {
+      const req = dayObj.required_actions[ti];
+      const draft = req.draft_seed || req.intent || "";
+      const violations: VoiceViolation[] =
+        req.channel === "email" || req.channel === "sms" ? validateNepqVoice(draft) : [];
+      const voiceBlocked = hasBlockingViolation(violations);
+
+      // Force draft_only-equivalent semantics by passing approval_required:
+      // gates evaluate fully, but the function returns fire:true on success
+      // (which is what we want — "would fire if the operator hit run").
+      const verdict = verdictForAction({
+        channel: req.channel,
+        isTodayDay: today,
+        dayApproval: dayObj.approval_status,
+        ownershipSkip: snapshotMatch ? ownershipSkip : "STALE_BOX",
+        stopActive,
+        replyActive,
+        freqSkip,
+        hasContact,
+        inWindow: isInSendWindow(req.channel, now, tzRes.tz),
+        voiceBlocked,
+        executionMode: "approval_required",
+        soloOperator: settings.solo_operator,
+      });
+
+      actions_eligible += 1;
+      const tv: SimulatedTouchVerdict = verdict.fire
+        ? { touch_index: ti, channel: req.channel, intent: req.intent, fire: true, skip_code: null, reason: null }
+        : { touch_index: ti, channel: req.channel, intent: req.intent, fire: false, skip_code: verdict.skip_code, reason: verdict.reason };
+      verdicts.push(tv);
+      if (verdict.fire) {
+        would_fire += 1;
+      } else {
+        would_skip += 1;
+        skip_breakdown[verdict.skip_code] = (skip_breakdown[verdict.skip_code] ?? 0) + 1;
+      }
+    }
+
+    days.push({
+      day_index: idx,
+      day_number: group.day,
+      date: group.date,
+      is_today: today,
+      approval_status: dayObj.approval_status,
+      verdicts,
+    });
+  }
+
+  return {
+    plan_id: plan.plan_id,
+    close_lead_id: plan.close_lead_id,
+    ran_at: new Date(startedAt).toISOString(),
+    snapshot_match: snapshotMatch,
+    plan_was_stale: planWasStale,
+    current_snapshot_id: currentSnapshotId,
+    plan_snapshot_id: plan.based_on_snapshot_id,
+    reply_gate_active: replyActive,
+    ownership_status_skip: ownershipSkip,
+    lead_tz: tzRes.tz,
+    days,
+    actions_eligible,
+    would_fire,
+    would_skip,
+    skip_breakdown,
+    duration_ms: Date.now() - startedAt,
+  };
+}
+
 // ─── Sweep all eligible plans ─────────────────────────────────────────────
 
 export async function runHeartbeatSweep(

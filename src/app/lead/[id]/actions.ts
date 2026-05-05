@@ -11,6 +11,8 @@ import {
   replacePlanDays,
   setDayStatus,
   appendRequiredActionToPlanDay,
+  editPlanDayTouch,
+  deletePlanDayTouch,
 } from "@/lib/plans-db";
 import {
   generateSevenDayPlanForLead,
@@ -186,6 +188,58 @@ export async function addPlanDayTouchAction(formData: FormData) {
     close_lead_id: leadId,
     plan_id: planId,
     payload: { day_index: dayIndex, channel: ch },
+  });
+  revalidatePath(`/lead/${leadId}`, "layout");
+}
+
+export async function editPlanDayTouchAction(formData: FormData) {
+  await assertOperatorSession();
+  const planId = String(formData.get("plan_id") || "");
+  const leadId = String(formData.get("lead_id") || "");
+  const dayIndex = Number(formData.get("day_index") ?? -1);
+  const touchIndex = Number(formData.get("touch_index") ?? -1);
+  const channel = String(formData.get("channel") || "task");
+  const intent = String(formData.get("intent") || "").trim();
+  const draftSeed = String(formData.get("draft_seed") || "").trim();
+  if (!planId || !leadId || dayIndex < 0 || touchIndex < 0) {
+    throw new Error("plan_id, lead_id, day_index, touch_index required");
+  }
+  if (!intent) throw new Error("intent required");
+
+  const ch: PlannedTouchpoint["channel"] =
+    channel === "email" || channel === "sms" || channel === "call" || channel === "task"
+      ? channel
+      : "task";
+  const touch: PlannedTouchpoint = {
+    channel: ch,
+    intent,
+    ...(draftSeed ? { draft_seed: draftSeed } : {}),
+  };
+  await editPlanDayTouch(planId, dayIndex, touchIndex, touch);
+  void logExecution({
+    action_kind: "add_plan_day_touch",
+    close_lead_id: leadId,
+    plan_id: planId,
+    payload: { day_index: dayIndex, touch_index: touchIndex, channel: ch, edit: true },
+  });
+  revalidatePath(`/lead/${leadId}`, "layout");
+}
+
+export async function deletePlanDayTouchAction(formData: FormData) {
+  await assertOperatorSession();
+  const planId = String(formData.get("plan_id") || "");
+  const leadId = String(formData.get("lead_id") || "");
+  const dayIndex = Number(formData.get("day_index") ?? -1);
+  const touchIndex = Number(formData.get("touch_index") ?? -1);
+  if (!planId || !leadId || dayIndex < 0 || touchIndex < 0) {
+    throw new Error("plan_id, lead_id, day_index, touch_index required");
+  }
+  await deletePlanDayTouch(planId, dayIndex, touchIndex);
+  void logExecution({
+    action_kind: "add_plan_day_touch",
+    close_lead_id: leadId,
+    plan_id: planId,
+    payload: { day_index: dayIndex, touch_index: touchIndex, deleted: true },
   });
   revalidatePath(`/lead/${leadId}`, "layout");
 }
