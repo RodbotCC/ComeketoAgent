@@ -1,8 +1,6 @@
 {
-  "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
-  "latest_normalized_subject": "[✅ CATERING] You're in Kyle!",
-  "_type": "EmailThread",
-  "date_created": "2026-05-05T04:09:20.435000+00:00",
+  "id": "acti_4wAS7aRUxhspWIARggrFN408Yh3ROwcBhlSGCstIuLX",
+  "activity_at": "2026-05-05T04:09:20.435000+00:00",
   "latest_emails": [
     {
       "id": "acti_rqYeHBqq4tLIg7i1PWnpAC8XQgA9wHD9Mb5Q8WTW7tH",
@@ -53,30 +51,32 @@
       }
     }
   ],
-  "user_name": "Rhonna Ricafort",
-  "id": "acti_4wAS7aRUxhspWIARggrFN408Yh3ROwcBhlSGCstIuLX",
-  "users": [
-    "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo"
-  ],
-  "date_updated": "2026-05-05T04:09:29.713000+00:00",
+  "created_by": null,
   "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "user_name": "Rhonna Ricafort",
   "created_by_name": null,
-  "summary": null,
+  "date_created": "2026-05-05T04:09:20.435000+00:00",
+  "latest_normalized_subject": "[✅ CATERING] You're in Kyle!",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "_type": "EmailThread",
+  "n_emails": 1,
   "importance": {
     "type": "not_important",
     "reason": "automated-outbound"
   },
+  "date_updated": "2026-05-05T04:09:29.713000+00:00",
+  "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "summary": null,
+  "updated_by_name": "Rhonna Ricafort",
+  "users": [
+    "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo"
+  ],
   "contact_id": null,
-  "lead_id": "lead_R5QYRSr7QLjnOZGs2KpBN551SPNdcA8uoQfk6pyZQ2E",
   "participants": [
     {
       "email": "contact@comeketocatering.com",
       "name": "Rhonna Ricafort"
     }
   ],
-  "updated_by_name": "Rhonna Ricafort",
-  "n_emails": 1,
-  "activity_at": "2026-05-05T04:09:20.435000+00:00",
-  "created_by": null,
-  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq"
+  "lead_id": "lead_R5QYRSr7QLjnOZGs2KpBN551SPNdcA8uoQfk6pyZQ2E"
 }
