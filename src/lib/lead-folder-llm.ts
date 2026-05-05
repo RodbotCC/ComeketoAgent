@@ -15,8 +15,13 @@ import { getSettings } from "./settings";
 import { readLeadFile, writeLeadFile, findLeadFolderPath } from "./lead-folder";
 import { closeListLeadsByAssignee, type CloseLead } from "./close";
 import { isLeadInScope } from "./lead-folder-sweeper";
+import { getSalesPlaybook } from "./sales-playbook";
 
-const PROFILE_SYSTEM = `You are summarizing a Comeketo Catering lead for the sales operator (Andre). You read the verbatim communication history and produce a Markdown profile document.
+const PROFILE_SYSTEM = `${getSalesPlaybook({ tight: true })}
+
+---
+
+You are summarizing a Comeketo Catering lead for the sales operator (Andre). You read the verbatim communication history and produce a Markdown profile document. **Apply the Sales Playbook framework above** when shaping Win Angles, Risks, and NEPQ Openers — the openers MUST follow Mirror → Sounds-Like → Open-question structure and use the playbook's exact NEPQ progression idioms.
 
 Required sections, in this order:
 ## Snapshot
@@ -41,7 +46,11 @@ Voice rules:
 
 Output ONLY the Markdown body (the frontmatter is added by the caller).`;
 
-const DISCOVERY_SYSTEM = `You are extracting structured discovery facts from a Comeketo Catering lead's verbatim communication history.
+const DISCOVERY_SYSTEM = `${getSalesPlaybook({ tight: true })}
+
+---
+
+You are extracting structured discovery facts from a Comeketo Catering lead's verbatim communication history. The Sales Playbook above defines the NEPQ progression — your "Current quest" and "NEPQ ask" must reflect the right stage of that progression for this lead.
 
 The 9 canonical discovery slots:
 1. event_date — date of the event

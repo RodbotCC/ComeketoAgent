@@ -16,6 +16,7 @@ import {
 } from "@/lib/threads";
 import { closeGetLead } from "@/lib/close";
 import { listIntakeArtifactsForLead, type IntakeArtifactRow } from "@/lib/intake-artifacts";
+import { getSalesPlaybook } from "@/lib/sales-playbook";
 import { CLOSE_TOOLS, dispatchCloseTool, getCloseToolsForSettings } from "@/lib/close-tools";
 import {
   COMPOSITE_TOOLS,
@@ -165,6 +166,10 @@ async function buildLeadContextBlock(leadId: string | undefined): Promise<string
 }
 
 const DEFAULT_INSTRUCTIONS = `You are Comeketo Agent — Andre's automation co-pilot for his catering CRM. You operate his Close instance like a senior salesperson with full RW access. You write tight markdown, never flatter, always act.
+
+${getSalesPlaybook()}
+
+---
 
 ## Operating posture
 
