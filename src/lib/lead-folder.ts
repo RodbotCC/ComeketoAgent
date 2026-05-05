@@ -157,6 +157,77 @@ export async function writeLeadFile(
   throw lastErr ?? new Error("writeLeadFile: exhausted retries");
 }
 
+/** Flip `comms_dirty: true` in a lead's `00_meta.json`. Called by the Close
+ *  webhook handler so the next sweeper pass knows the lead has fresh data.
+ *  No-op (returns "no_folder") if the lead has no folder yet — the sweeper
+ *  creates the folder on its next tick anyway. Idempotent: writing
+ *  `comms_dirty: true` to a file that already has it is a content-unchanged
+ *  no-op once `writeLeadFile`'s diff sees identical content.
+ *
+ *  Errors are caught at the call site (webhook); this fn surfaces them
+ *  honestly so the caller can decide. */
+export async function markLeadCommsDirty(
+  leadId: string,
+): Promise<"flipped" | "already_dirty" | "no_folder"> {
+  const folder = await findLeadFolderPath(leadId);
+  if (!folder) return "no_folder";
+
+  const raw = await readLeadFile(leadId, "00_meta.json");
+  if (!raw) return "no_folder";
+
+  let meta: Record<string, unknown>;
+  try {
+    meta = JSON.parse(raw);
+  } catch {
+    return "no_folder";
+  }
+
+  if (meta.comms_dirty === true) return "already_dirty";
+
+  meta.comms_dirty = true;
+  meta.last_dirty_at = new Date().toISOString();
+
+  const name =
+    typeof meta.name === "string" && meta.name.length > 0
+      ? meta.name
+      : leadId;
+
+  await writeLeadFile(
+    leadId,
+    name,
+    "00_meta.json",
+    JSON.stringify(meta, null, 2) + "\n",
+    {
+      commitMessage: `webhook: ${name} comms dirty`,
+      state: folder.state,
+    },
+  );
+  return "flipped";
+}
+
+/** Strip the YAML frontmatter from a Markdown doc, returning just the body.
+ *  Used by the Discovery page to render LLM-generated profile/discovery prose
+ *  without exposing the bookkeeping fields. */
+export function stripFrontmatter(markdown: string): string {
+  if (!markdown.startsWith("---")) return markdown;
+  const end = markdown.indexOf("\n---", 3);
+  if (end === -1) return markdown;
+  return markdown.slice(end + 4).replace(/^\n+/, "");
+}
+
+/** Read `04_profile.md`'s body (frontmatter stripped). Returns null if the
+ *  lead has no folder yet or the file hasn't been generated. */
+export async function readLeadProfileBody(leadId: string): Promise<string | null> {
+  const raw = await readLeadFile(leadId, "04_profile.md");
+  return raw ? stripFrontmatter(raw) : null;
+}
+
+/** Read `06_discovery.md`'s body (frontmatter stripped). */
+export async function readLeadDiscoveryBody(leadId: string): Promise<string | null> {
+  const raw = await readLeadFile(leadId, "06_discovery.md");
+  return raw ? stripFrontmatter(raw) : null;
+}
+
 /** Snapshot every file in a lead's folder. Used by the sweeper (Atom 4) to
  *  diff rendered output against existing state and skip identical writes.
  *  Returns a Map keyed by relative path within the folder (e.g.

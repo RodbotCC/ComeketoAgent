@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useToast } from "@/components/Toast";
 import { OpenAiMediaLab } from "./OpenAiMediaLab";
 
-type Mode = "openai" | "supabase" | "github" | "close" | "close-mcp" | "lead-sweep";
+type Mode = "openai" | "supabase" | "github" | "close" | "close-mcp" | "lead-sweep" | "lead-regen";
 
 type TestResult = {
   ok: boolean;
@@ -45,6 +45,11 @@ const MODES: Array<{ key: Mode; title: string; description: string }> = [
     key: "lead-sweep",
     title: "Run lead sweep",
     description: "Hydrates every Andre-owned, in-progress lead from Close (incl. per-call transcripts) and writes per-lead Markdown folders to the leads-data branch. Idempotent — re-runs with no Close-side changes produce zero commits. Long-running: a full 50-lead sweep takes ~60-90s. Result pane shows {considered, in_scope, swept[], errors[]}. After it completes, browse github.com/RodbotCC/ComeketoAgent/tree/leads-data/_leads/active to see the folders materialize.",
+  },
+  {
+    key: "lead-regen",
+    title: "Regenerate lead docs (profile + discovery)",
+    description: "For every in-scope lead, regenerates 04_profile.md (operator-facing prose) and 06_discovery.md (slot table + current quest + NEPQ ask) via OpenAI from the lead's 01b_comms_verbatim.md. Skip-on-hash-match: if comms_content_hash hasn't changed since last regen, no LLM call fires. Run after a sweep so the verbatim file is fresh. Cost: at most 2 OpenAI calls per lead with new comms; zero for unchanged leads.",
   },
 ];
 

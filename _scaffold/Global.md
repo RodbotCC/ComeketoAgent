@@ -6,6 +6,27 @@ Running snapshot of project state. Tapped before & after every move.
 
 ## 2026-05-05
 
+- **after [per-lead memory as files — Atoms 8 + 9 + 10] — feature complete:** All 11 atoms done.
+  - **Atom 8** (additive): `/lead/[id]/discovery` reads `04_profile.md` + `06_discovery.md` and renders them as a new lavender panel. Original SQL surface untouched. New helpers: `stripFrontmatter`, `readLeadProfileBody`, `readLeadDiscoveryBody`.
+  - **Atom 9**: deprecated `lead_facts` migration moved to `supabase/_deprecated/` with a README explaining why + the safe DROP statement. SQL-reading code paths kept as defensive fallback (try/catch returns empty Map when table missing).
+  - **Atom 10**: CLAUDE.md gets a new "Per-lead memory architecture (locked 2026-05-05)" section codifying file-vs-table boundaries for future agents.
+  - **Suite 110/110 green; tsc clean.** Per-lead-memory feature is end-to-end complete in code: hydrate → render → write → cron + manual trigger → webhook dirty flip → LLM regen → page renders the result.
+  - **Pending real-world smoke**: Jake clicks "Run lead sweep" on `/test`, then "Regenerate lead docs", then opens `/lead/[id]/discovery` for one lead and sees the LLM panel populated. After that, push to main and ship to prod.
+  - Local tree state on `main`: 18 modified/new files since the last main push (the demo prep commit at `746feee`). Atoms 6-10 work uncommitted, ready to ship together when Jake says.
+
+- **after [per-lead memory as files — Atom 7: LLM regen]:** Done.
+  - New [`src/lib/lead-folder-llm.ts`](src/lib/lead-folder-llm.ts): `regenerateLeadProfile`, `regenerateLeadDiscovery`, `regenerateAllLeadDocs`. Skip-on-hash-match drives cost discipline.
+  - New test [`src/lib/lead-folder-llm.test.ts`](src/lib/lead-folder-llm.test.ts): 5 tests on the hash-extraction primitive.
+  - `/test` page mode 7 "Regenerate lead docs" + `testLeadRegen()` in `/api/test/route.ts`.
+  - **Suite 110/110 green; tsc clean.**
+  - Now ready for Atom 8: swap `/lead/[id]/discovery` and `/personal` from `lead_facts` Supabase queries to reading the new `06_discovery.md` files. Same visual surface; different data source.
+
+- **after [per-lead memory as files — Atom 6: webhook → comms_dirty flip]:** Wired. New helper [`markLeadCommsDirty`](src/lib/lead-folder.ts) (returns `"flipped" | "already_dirty" | "no_folder"` for honest logging) called from [`/api/webhooks/close/route.ts`](src/app/api/webhooks/close/route.ts) on any event with `lead_id`. Errors caught and logged but never break the webhook ack. tsc clean; 105/105.
+
+- **before [per-lead memory as files — Atom 6: webhook → comms_dirty flip]:** New helper `markLeadCommsDirty(leadId)` in lead-folder.ts; wire into `/api/webhooks/close` for any event with `lead_id`. Idempotent flip; folder absence = silent no-op. Latency budget is fine.
+
+- **after [ship everything to main — Andre demo prep]:** Pushed. `318a301..746feee main -> main`. Single commit covering all three streams (Atoms 0-5 lead-memory + workflow polish + lead-assets) plus the CLAUDE.md hard-rule addition about not dramatizing routine decisions. `leads-data` orphan branch already on origin from earlier push. Vercel rebuild kicked off; live site `comeketo-agent-ra8h.vercel.app` will reflect the new code in a minute or two. The 2-hour cron entry in `vercel.json` activates as soon as the deploy lands — first cron tick will be the smoke against real Close + GitHub. If something blows up, errors land in `/console` execution log + the cron's response JSON.
+
 - **before [ship everything to main — Andre demo prep]:** Jake authorized full push: lead-memory infra (Atoms 0-5, mine) + workflow polish (parallel agent) + lead-assets feature (parallel agent) + analytics/personal/globals.css tweaks. Single commit. tsc clean before push. `leads-data` already on origin from earlier. Vercel will rebuild on push to main and the cron entry will activate. Demo is happening soon — Jake wants to see prod state.
 
 - **after [per-lead memory as files — Atom 5: Vercel cron + manual `/test` button] — code phase:** Code complete; smoke pending Jake's push of `leads-data`.
@@ -467,3 +488,6 @@ limit 10;
 
 - **before [lead-scoped delegations subtab]** — 2026-05-05: Product direction: Lead sub-tabs should include a Delegations/Chat doorway that deep-links cockpit into Lead mode for that exact Close lead. Chat must consume URL seed and override local last-state when present.
 - **after [lead-scoped delegations subtab]** — 2026-05-05: Lead-scoped Delegations routing rule established: any lead surface can open `/chat?lead={lead_id}` to force Chat into lead mode for that Box. URL seed wins over localStorage layout state, and lead deep links start with a blank active thread so operators do not accidentally continue an old Delegations conversation under the wrong context.
+
+- **before [GPT lead research folder + prompt]** — 2026-05-05: New external-agent research lane. Repo will host a docs-only area for GPT agents to write Close lead research via GitHub MCP. Not a runtime source of truth yet. App ingestion comes after the research folder shape proves stable.
+- **after [GPT lead research folder + prompt]** — 2026-05-05: External-agent research lane exists at `lead-research/`. This is now the designated docs-only drop zone for ChatGPT agents using Close MCP + GitHub MCP to collect Andre lead dossiers. The app should not treat it as runtime state until a future ingestion step is intentionally designed.

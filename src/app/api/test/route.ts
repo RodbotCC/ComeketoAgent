@@ -13,6 +13,7 @@ import {
 } from "@/lib/close";
 import { closeMcpListTools, closeMcpStatus } from "@/lib/close-mcp";
 import { sweepActiveLeads } from "@/lib/lead-folder-sweeper";
+import { regenerateAllLeadDocs } from "@/lib/lead-folder-llm";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -20,7 +21,7 @@ export const dynamic = "force-dynamic";
  *  in a few seconds. 5-minute ceiling is the same we set on the cron route. */
 export const maxDuration = 300;
 
-type Mode = "openai" | "supabase" | "github" | "close" | "close-mcp" | "lead-sweep";
+type Mode = "openai" | "supabase" | "github" | "close" | "close-mcp" | "lead-sweep" | "lead-regen";
 
 async function testOpenAI() {
   if (!env.OPENAI_API_KEY) {
@@ -161,6 +162,26 @@ async function testLeadSweep() {
   };
 }
 
+async function testLeadRegen() {
+  const summary = await regenerateAllLeadDocs();
+  return {
+    considered: summary.considered,
+    in_scope: summary.in_scope,
+    started_at: summary.started_at,
+    finished_at: summary.finished_at,
+    profile: summary.profile,
+    discovery: summary.discovery,
+    error_count: summary.errors.length,
+    errors: summary.errors.slice(0, 10),
+    hint:
+      summary.in_scope === 0
+        ? "0 leads in scope — confirm CLOSE_USER_ID_ANDRE matches your active assignee."
+        : summary.profile.regenerated + summary.discovery.regenerated === 0
+        ? "All leads up to date (hash match on every file). Run lead sweep first if you expect new comms."
+        : undefined,
+  };
+}
+
 async function testClose() {
   const [workflows, templates, smsTemplates, leadStatuses, phones, webhooks] = await Promise.all([
     closeListWorkflows({ limit: 50 }),
@@ -198,9 +219,9 @@ export async function POST(req: Request) {
   }
 
   const mode = body.mode;
-  if (!mode || !["openai", "supabase", "github", "close", "close-mcp", "lead-sweep"].includes(mode)) {
+  if (!mode || !["openai", "supabase", "github", "close", "close-mcp", "lead-sweep", "lead-regen"].includes(mode)) {
     return NextResponse.json(
-      { ok: false, error: "mode must be one of: openai, supabase, github, close, close-mcp, lead-sweep" },
+      { ok: false, error: "mode must be one of: openai, supabase, github, close, close-mcp, lead-sweep, lead-regen" },
       { status: 400 }
     );
   }
@@ -217,7 +238,9 @@ export async function POST(req: Request) {
         ? await testClose()
         : mode === "close-mcp"
         ? await testCloseMcp()
-        : await testLeadSweep();
+        : mode === "lead-sweep"
+        ? await testLeadSweep()
+        : await testLeadRegen();
 
     return NextResponse.json({
       ok: true,

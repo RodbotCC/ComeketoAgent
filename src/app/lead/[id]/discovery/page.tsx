@@ -7,6 +7,10 @@ import { synthesizeQuest } from "@/lib/quest";
 import { PIPELINE_STAGES, type PipelineStageId } from "@/lib/discovery-map";
 import { DiscoverySlotEditor } from "./DiscoverySlotEditor";
 import { RunScanButton } from "./RunScanButton";
+import {
+  readLeadProfileBody,
+  readLeadDiscoveryBody,
+} from "@/lib/lead-folder";
 
 export const dynamic = "force-dynamic";
 
@@ -95,6 +99,14 @@ export default async function LeadDiscoveryPage({ params, searchParams = {} }: P
   const reachedAtById = new Map(score.stage.reached.map((r) => [r.id, r.reached_at]));
 
   const baseHref = `/lead/${params.id}/discovery`;
+
+  // File-backed LLM-generated content (Atom 7+8). Reads from leads-data branch
+  // via Octokit. Returns null when the sweeper hasn't created the folder yet
+  // OR when the LLM regen hasn't run for this lead.
+  const [profileBody, discoveryBody] = await Promise.all([
+    readLeadProfileBody(params.id).catch(() => null),
+    readLeadDiscoveryBody(params.id).catch(() => null),
+  ]);
 
   return (
     <main className="lead-main lead-main--tab scroll-hide">
@@ -407,6 +419,40 @@ export default async function LeadDiscoveryPage({ params, searchParams = {} }: P
                 </div>
               </>
             )}
+          </section>
+        )}
+
+        {/* ─── File-backed LLM docs (Atom 7) ───────────────────────── */}
+        {(profileBody || discoveryBody) && (
+          <section className="cmk-stack-panel cmk-stack-panel--lavender" style={{ marginTop: 24 }}>
+            <h2 className="cmk-stack-panel-title">📄 Profile &amp; Discovery — generated</h2>
+            <p className="muted" style={{ marginTop: 4, marginBottom: 12 }}>
+              From <code>04_profile.md</code> + <code>06_discovery.md</code> on the <code>leads-data</code> branch. Regenerated when the lead&apos;s comms change. Trigger from <Link href="/test">/test</Link> → &ldquo;Regenerate lead docs&rdquo;.
+            </p>
+            {profileBody && (
+              <details open>
+                <summary><strong>Profile</strong></summary>
+                <pre style={{ whiteSpace: "pre-wrap", fontFamily: "inherit", fontSize: "0.95em", lineHeight: 1.55, marginTop: 8 }}>
+                  {profileBody}
+                </pre>
+              </details>
+            )}
+            {discoveryBody && (
+              <details open style={{ marginTop: 16 }}>
+                <summary><strong>Discovery</strong></summary>
+                <pre style={{ whiteSpace: "pre-wrap", fontFamily: "inherit", fontSize: "0.95em", lineHeight: 1.55, marginTop: 8 }}>
+                  {discoveryBody}
+                </pre>
+              </details>
+            )}
+          </section>
+        )}
+        {!profileBody && !discoveryBody && (
+          <section className="cmk-stack-panel" style={{ marginTop: 24 }}>
+            <h2 className="cmk-stack-panel-title">📄 Profile &amp; Discovery — not yet generated</h2>
+            <p className="muted" style={{ marginTop: 4 }}>
+              Run a lead sweep, then regenerate lead docs from <Link href="/test">/test</Link>. The first time this lead&apos;s comms get processed, profile + discovery docs will appear here.
+            </p>
           </section>
         )}
       </div>

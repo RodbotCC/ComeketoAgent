@@ -7,6 +7,7 @@ import {
 } from "@/lib/close-webhook";
 import { logExecution, touchLeadActivity } from "@/lib/execution-audit";
 import { logStructured } from "@/lib/observability";
+import { markLeadCommsDirty } from "@/lib/lead-folder";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -60,6 +61,23 @@ export async function POST(req: Request) {
     });
     const lid = event.lead_id?.trim();
     if (lid) await touchLeadActivity(lid);
+    if (lid) {
+      try {
+        const flip = await markLeadCommsDirty(lid);
+        logStructured("info", "webhook.close", "lead-folder dirty flip", {
+          lead_id: lid,
+          result: flip,
+        });
+      } catch (e) {
+        // Folder write failure must not break the webhook ack — Close will
+        // retry the whole event otherwise. Sweeper will catch the lead on
+        // its next 2h tick regardless.
+        logStructured("warn", "webhook.close", "lead-folder dirty flip failed", {
+          lead_id: lid,
+          error: e instanceof Error ? e.message : String(e),
+        });
+      }
+    }
     void logExecution({
       action_kind: "webhook_ingest",
       close_lead_id: lid || null,
