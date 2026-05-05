@@ -6,6 +6,14 @@ Running snapshot of project state. Tapped before & after every move.
 
 ## 2026-05-05
 
+- **after [harness/ Phase 3+4+5 — ledger + plan mirror + audit ledgers]:** Done. The harness now CAPTURES every meaningful action.
+  - **`harness/ledger/YYYY-MM-DD.jsonl`** — every `logExecution` row mirrors here (Phase 3). Append-only, JSONL, greppable.
+  - **`harness/leads/{id}__{slug}/plan.json`** — every plan mutation (savePlan, approve, kill, pause, day status, refine, etc.) mirrors latest plan state here (Phase 4).
+  - **`harness/approvals/YYYY-MM.jsonl`** — every `logApprovalChange` row mirrors here (Phase 5, monthly partition).
+  - **`harness/heartbeat/YYYY-MM-DD/{run_id}.json`** — every heartbeat run snapshot writes one file here (Phase 5, per-run).
+  - All writes are fire-and-forget; failures log warn but never break Supabase. Phase 6 (drop dual-write Supabase inserts) deferred to overnight soak.
+  - Suite **120/120 green**; tsc clean.
+
 - **after [harness/ collapse — single-branch on main]:** Done.
   - `harness/` now lives on `main` alongside `src/`. Single branch, single mental model.
   - `src/lib/env.ts`: `GITHUB_LEADS_BRANCH` default flipped from `leads-data` → `main`.

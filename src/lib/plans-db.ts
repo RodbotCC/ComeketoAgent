@@ -8,6 +8,7 @@
 
 import { getSupabaseServer } from "./supabase";
 import type { SevenDayPlan, PlanStatus } from "./plan";
+import { mirrorPlanToFile } from "./lead-plan-fs";
 
 type Row = {
   id: string;
@@ -30,6 +31,23 @@ type Row = {
   killed_at: string | null;
   killed_reason: string | null;
 };
+
+/** Phase 4 helper: fetch the latest row after a mutation and mirror to
+ *  `harness/leads/.../plan.json`. Fire-and-forget — failures swallowed. */
+async function refreshAndMirrorPlan(planId: string): Promise<void> {
+  try {
+    const sb = getSupabaseServer();
+    const { data, error } = await sb
+      .from("lead_plans")
+      .select("*")
+      .eq("id", planId)
+      .maybeSingle();
+    if (error || !data) return;
+    void mirrorPlanToFile(rowToPlan(data as Row));
+  } catch {
+    // swallow — mirror is best-effort during dual-write phase
+  }
+}
 
 function rowToPlan(r: Row): SevenDayPlan & {
   approved_at?: string;
@@ -80,6 +98,7 @@ export async function savePlan(plan: SevenDayPlan): Promise<void> {
     approval_required: plan.approval_required,
   });
   if (error) throw new Error(`savePlan failed: ${error.message}`);
+  void mirrorPlanToFile(plan);
 }
 
 export async function getLatestPlanForLead(
@@ -142,6 +161,7 @@ export async function approvePlan(planId: string, approver: string): Promise<voi
     })
     .eq("id", planId);
   if (error) throw new Error(`approvePlan failed: ${error.message}`);
+  void refreshAndMirrorPlan(planId);
 }
 
 export async function killPlan(planId: string, reason: string): Promise<void> {
@@ -155,6 +175,7 @@ export async function killPlan(planId: string, reason: string): Promise<void> {
     })
     .eq("id", planId);
   if (error) throw new Error(`killPlan failed: ${error.message}`);
+  void refreshAndMirrorPlan(planId);
 }
 
 export async function pausePlan(planId: string): Promise<void> {
@@ -164,6 +185,7 @@ export async function pausePlan(planId: string): Promise<void> {
     .update({ status: "paused" })
     .eq("id", planId);
   if (error) throw new Error(`pausePlan failed: ${error.message}`);
+  void refreshAndMirrorPlan(planId);
 }
 
 /**
@@ -193,6 +215,7 @@ export async function appendRequiredActionToPlanDay(
   };
   const { error: writeErr } = await sb.from("lead_plans").update({ days }).eq("id", planId);
   if (writeErr) throw new Error(`appendRequiredActionToPlanDay write failed: ${writeErr.message}`);
+  void refreshAndMirrorPlan(planId);
 }
 
 /**
@@ -231,6 +254,7 @@ export async function editPlanDayTouch(
   };
   const { error: writeErr } = await sb.from("lead_plans").update({ days }).eq("id", planId);
   if (writeErr) throw new Error(`editPlanDayTouch write failed: ${writeErr.message}`);
+  void refreshAndMirrorPlan(planId);
 }
 
 /**
@@ -265,6 +289,7 @@ export async function deletePlanDayTouch(
   };
   const { error: writeErr } = await sb.from("lead_plans").update({ days }).eq("id", planId);
   if (writeErr) throw new Error(`deletePlanDayTouch write failed: ${writeErr.message}`);
+  void refreshAndMirrorPlan(planId);
 }
 
 /**
@@ -295,6 +320,7 @@ export async function updatePlanDay(
     .update({ days })
     .eq("id", planId);
   if (writeErr) throw new Error(`updatePlanDay write failed: ${writeErr.message}`);
+  void refreshAndMirrorPlan(planId);
 }
 
 export async function getPlanById(planId: string) {
@@ -316,6 +342,7 @@ export async function replacePlanDays(
   const sb = getSupabaseServer();
   const { error } = await sb.from("lead_plans").update({ days }).eq("id", planId);
   if (error) throw new Error(`replacePlanDays failed: ${error.message}`);
+  void refreshAndMirrorPlan(planId);
 }
 
 /** Update a single day's approval_status in place. */
@@ -338,6 +365,7 @@ export async function setDayStatus(
   days[dayIndex] = { ...days[dayIndex], approval_status: status };
   const { error: writeErr } = await sb.from("lead_plans").update({ days }).eq("id", planId);
   if (writeErr) throw new Error(`setDayStatus write failed: ${writeErr.message}`);
+  void refreshAndMirrorPlan(planId);
 }
 
 function planHasNeedsReviewDay(r: Row): boolean {

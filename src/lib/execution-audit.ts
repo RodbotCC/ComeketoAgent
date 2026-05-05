@@ -1,9 +1,17 @@
 /**
  * Single writer for execution_log + approval_audit (Guardrails §O, §I).
  * Failures are swallowed where noted so audit never blocks primary flows.
+ *
+ * Phase 3 of harness/ overhaul (2026-05-05): every write is also mirrored
+ * into `harness/ledger/YYYY-MM-DD.jsonl` (execution rows) or
+ * `harness/approvals/YYYY-MM.jsonl` (approval rows — wired in Phase 5).
+ * The ledger mirror is fire-and-forget; failures log a warning but never
+ * break the Supabase write. Phase 6 drops the Supabase side.
  */
 
 import { getSupabaseServer } from "./supabase";
+import { appendLedger } from "./harness-ledger";
+import { appendApprovalAudit } from "./harness-approvals";
 
 export const EXECUTION_LOG_KINDS = [
   "heartbeat_run",
@@ -50,6 +58,7 @@ export type LogExecutionInput = {
 };
 
 export async function logExecution(input: LogExecutionInput): Promise<void> {
+  // Dual-write: Supabase first (canonical during Phase 3), then ledger mirror.
   try {
     const sb = getSupabaseServer();
     const { error } = await sb.from("execution_log").insert({
@@ -69,6 +78,20 @@ export async function logExecution(input: LogExecutionInput): Promise<void> {
   } catch (e) {
     console.error("[execution-audit] insert exception", e);
   }
+
+  // Fire-and-forget ledger mirror. `appendLedger` swallows its own errors.
+  void appendLedger({
+    at: new Date().toISOString(),
+    action_kind: input.action_kind,
+    close_lead_id: input.close_lead_id ?? null,
+    plan_id: input.plan_id ?? null,
+    operator_id: input.operator_id ?? null,
+    payload: input.payload ?? null,
+    result: input.result ?? "ok",
+    skip_code: input.skip_code ?? null,
+    trace_id: input.trace_id ?? null,
+    snapshot_id_at_action: input.snapshot_id_at_action ?? null,
+  });
 }
 
 export type ApprovalAuditInput = {
@@ -82,6 +105,7 @@ export type ApprovalAuditInput = {
 };
 
 export async function logApprovalChange(input: ApprovalAuditInput): Promise<void> {
+  // Dual-write: Supabase first (canonical), then ledger mirror.
   try {
     const sb = getSupabaseServer();
     const { error } = await sb.from("approval_audit").insert({
@@ -99,6 +123,18 @@ export async function logApprovalChange(input: ApprovalAuditInput): Promise<void
   } catch (e) {
     console.error("[approval-audit] insert exception", e);
   }
+
+  // Fire-and-forget mirror to harness/approvals/YYYY-MM.jsonl.
+  void appendApprovalAudit({
+    at: new Date().toISOString(),
+    plan_id: input.plan_id,
+    day_index: input.day_index ?? null,
+    from_status: input.from_status,
+    to_status: input.to_status,
+    actor: input.actor ?? null,
+    reason: input.reason ?? null,
+    based_on_snapshot_id: input.based_on_snapshot_id ?? null,
+  });
 }
 
 export type ExecutionLogRow = {

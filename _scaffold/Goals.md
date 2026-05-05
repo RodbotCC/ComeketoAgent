@@ -6,6 +6,10 @@ Running ledger of what we're building toward. Tapped before & after every move.
 
 ## 2026-05-05
 
+- **after [harness/ Phase 3+4+5: ledger + plan mirror + audit ledgers]:** Done. **Phase 3** — new [`src/lib/harness-ledger.ts`](src/lib/harness-ledger.ts): `appendLedger`, `readLedgerDay`, `readRecentLedger`, `filterLedgerByLead`. Direct read-modify-write to `harness/ledger/YYYY-MM-DD.jsonl` via Octokit with SHA-retry × 3 (80/240/600ms). [`execution-audit.ts`](src/lib/execution-audit.ts) `logExecution` now dual-writes — Supabase first, then `void appendLedger(...)` (fire-and-forget). 10 tests in [`harness-ledger.test.ts`](src/lib/harness-ledger.test.ts) covering UTC date paths, JSONL parse robustness (skips blank lines + malformed lines), per-lead filter. **Phase 4** — new [`src/lib/lead-plan-fs.ts`](src/lib/lead-plan-fs.ts): `mirrorPlanToFile(plan)` writes `plan.json` to lead's harness folder via `writeLeadFile`. Wired into all 9 plan mutators in [`plans-db.ts`](src/lib/plans-db.ts) (savePlan, approvePlan, killPlan, pausePlan, appendRequiredActionToPlanDay, editPlanDayTouch, deletePlanDayTouch, updatePlanDay, replacePlanDays, setDayStatus). New helper `refreshAndMirrorPlan(planId)` for the mutators that don't have the full plan in scope. Supabase remains canonical during dual-write — Phase 6 flips. **Phase 5** — new [`src/lib/harness-approvals.ts`](src/lib/harness-approvals.ts): `appendApprovalAudit` writes to `harness/approvals/YYYY-MM.jsonl` (monthly partition). New [`src/lib/harness-heartbeat.ts`](src/lib/harness-heartbeat.ts): `writeHeartbeatRunSnapshot` writes one JSON file per run to `harness/heartbeat/YYYY-MM-DD/{run_id}.json`. Wired into both `heartbeat_runs` insert sites in [`heartbeat.ts`](src/lib/heartbeat.ts) (per-lead `runHeartbeatForPlan` + sweep `runHeartbeatForAll`). [`execution-audit.ts`](src/lib/execution-audit.ts) `logApprovalChange` now dual-writes via `appendApprovalAudit`. **Suite 120/120 green; tsc clean.** **Phase 6** (drop Supabase dual-writes — the lock-in) deferred to overnight soak per the plan; doing it the same session as the writers ship would couple the new infra's reliability to the old observability. After 24h of clean operation, Phase 6 is a small commit removing the Supabase insert lines.
+
+- **before [harness/ Phase 3+4+5: ledger dual-write + plan mirror + audit ledgers]:** Continuing the transfer per Jake. Phase 3: new `src/lib/harness-ledger.ts` writes every `logExecution` row to `harness/ledger/YYYY-MM-DD.jsonl` via Octokit (dual-write — Supabase still canonical). Phase 4: plans mirror to `harness/leads/{id}__{slug}/plan.json` after Supabase writes (file is read-replica for the chat agent; flipping canonicality deferred to Phase 6). Phase 5: `logApprovalChange` writes to `harness/approvals/YYYY-MM.jsonl`; heartbeat run snapshots write to `harness/heartbeat/YYYY-MM-DD/{run_id}.json`. Phase 6 (drop Supabase dual-writes) deferred to overnight soak — too risky to ship same session.
+
 - **after [harness/ collapse to single-branch]:** Done. `harness/` now lives on `main` alongside `src/`. `GITHUB_LEADS_BRANCH` defaults to `main` (was `leads-data`). `.vercelignore` excludes `harness/` from deploy bundle. CLAUDE.md + `harness/README.md` + `harness/leads/README.md` updated to drop "parallel histories" framing. Tests updated for new branch default. **Suite 110/110 green; tsc clean.** Pending Jake: (1) set Vercel "Ignored Build Step" command to `git diff --quiet HEAD^ HEAD -- ':!harness'` so cron sweep commits don't rebuild; (2) optional `git push origin --delete leads-data` after this commit lands on origin.
 
 - **before [harness/ collapse to single-branch]:** Per Jake — two-branch architecture was creating cognitive friction. Pulling `harness/` from `leads-data` onto `main`. Vercel rebuild concern handled via Vercel "Ignored Build Step" command — skips builds when only `harness/**` changed. Single branch, single mental model. ~30 min.
@@ -498,3 +502,30 @@ Running ledger of what we're building toward. Tapped before & after every move.
 
 - **before [Andre-only Leads index cleanup]** — 2026-05-05: Remove the owner segmented control from `/leads` so the Lead Box index is Andre's working universe by default. Preserve search/status filtering. Do not remove backend owner guards elsewhere.
 - **after [Andre-only Leads index cleanup]** — 2026-05-05: Done. `/leads` no longer renders or honors the Andre/Jake/All/Practice segmented owner switch. The page shows the full Close lead list by default, with total/shown counts plus search and status filtering. Typecheck ✅, build ✅.
+
+- **stocktake [pre-demo polish queue]** — 2026-05-05: Jake did a full surface-by-surface friction audit. Catalog of the bugs/nags/placeholder pages lives in [Problems.md](Problems.md) under the matching `stocktake [surface-by-surface friction audit]` entry. Goals.md tracks the prioritized work order. **Not all queued for execution yet** — this is taking stock so nothing slips before the boss meeting.
+
+  **P0 — destructive button hygiene (one bad misclick = bad day)**
+  - Plan page action row: cluster verbs (constructive | regenerative | destructive); Kill needs distance + weight; remove the inline regenerate-form that lives two pixels from Kill.
+  - Modal: `Rewrite plan` (nukes 7 days) sits at sibling weight to `Rewrite day` (nukes 1). Demote Rewrite plan visually OR add a half-beat of friction.
+
+  **P1 — naming collisions + broken empty states (confuses new operators)**
+  - Restraint metric collides across scopes (lead-level last 10 heartbeats vs player-level last 30d across all leads). Rename the player-level one — `Discipline · 30d` is the leading candidate.
+  - Personal/Overview "Restraint · 30d" shows lonely "—" while siblings show numbers. Reads as broken. Use `0%` / `n/a` / dimmed default.
+  - Plan page has THREE Approve buttons with different blast radius. Pick one primary, demote the others.
+
+  **P2 — placeholder pages**
+  - **Graph page rebuild (greenfield).** Currently the Plan page in smaller font + simulator chips bolted on. The simulator output IS the graph: which days fire, which gate, why each gate gated. Toggle assumptions to re-simulate. Decide what "Graph" means as a concept (Plan = artifact, Graph = behavior).
+  - Numbered circles on Graph redundant with day labels (`01 02 03…` next to `DAY 1 DAY 2 DAY 3…`). Drop one numbering.
+  - Plan page polish (after the action-row hygiene from P0). "Plan is stale" should be a soft yellow strip across the top of the cycle plan card, not a sentence floating between button clusters.
+
+  **P3 — compression + cosmetics**
+  - Box atomization: activity column becomes a lead-level rail; left side atomizes.
+  - Slash-command palette: meta vs action divider (`/help /new /clear /rerun /rail` = meta; `/lead /heartbeat /today /morning` = action). Currently flat-listed.
+  - 🟢 emoji in "🟢 SCORE tag distribution" header → CSS dot. Self-betrayal — Jake hates emojis.
+  - Channel icons in Proposals card footers: filled vs outline (or tiny dot for "fired") to disambiguate "will touch" vs "already fired".
+  - Trailhead-card status-pill asymmetry: pick one — dominant-status-wins-with-hover OR always-show-breakdown. Apply globally.
+  - Write-actions need different visual register from read surfaces. "Enroll in Workflow (Close write)" guardrail copy is doing real safety work but looks identical to reads.
+  - Day Modal: cluster navigation (Graph / Lead) separately from decision row (Approve / Needs review / Mark sent / Skip).
+
+  **🌐 Top-right nav revitalization** — already underway. Tier 1 = global, Tier 2 = lead. Banked.

@@ -6,6 +6,8 @@ Running ledger of blockers, bugs, friction, anything broken. Tapped before & aft
 
 ## 2026-05-05
 
+- **after [harness/ Phase 3+4+5]:** Done. 120/120 green. Watch items: (a) **Lossy ledger writes during Vercel function shutdown** — `void appendLedger(...)` is fire-and-forget; if the request returns before Octokit completes, Vercel kills the write. Acceptable during dual-write (Supabase has truth). (b) **`refreshAndMirrorPlan` does an extra Supabase read** after each plan mutation (~50ms). Could be optimized via `.select()` chain. Not blocking. (c) **Commit volume on `harness/`** — peak ~500-1000 commits/day. Vercel ignoreCommand handles build skip; GitHub rate limit 5000/hr = no problem. (d) **First-run sweep populates LATEST plan only**. Older plans stay in Supabase. (e) **`heartbeat_runs.id`** now passed explicitly so file paths match. (f) **Phase 6 NOT done** — Supabase still canonical reads. After 24h clean operation, Phase 6 = remove Supabase insert lines.
+
 - **after [harness/ collapse]:** Clean. tsc + 110/110 tests green. Watch items: (a) **Vercel ignoreCommand is a manual step** — until Jake sets it in the dashboard, cron sweep commits will trigger rebuilds. Not catastrophic but wastes Vercel build minutes. (b) **The collapse commit ITSELF will rebuild Vercel** (correct — code changed, env defaults changed). (c) **`leads-data` branch on origin** — leaving it for now since main has the same content; Jake can `git push origin --delete leads-data` once he confirms main has everything. The branch is harmless if left in place. (d) **Dual-probe fallback in `findLeadFolderPath`** still searches `_leads/` legacy path — harmless on main (no `_leads/` exists there), can be cleaned up once we verify no orphaned writes exist. (e) **Local `.vercel/` cache** may need a `vercel pull` refresh after env changes; Jake will see this if he runs `vercel dev` locally.
 
 - **before [harness/ collapse]:** Risks. (a) **Vercel rebuilds once on this collapse commit** — that's correct, since code+env changes ship together. After that, ignoreCommand should skip harness-only commits. (b) **Manual Vercel dashboard step** — the ignoreCommand can't be set from CLI in our setup. Jake has to paste the command into Vercel → Settings → Git → "Ignored Build Step." If he forgets, every cron sweep will trigger a rebuild. Provide the exact command. (c) **Branch deletion** — `git push origin --delete leads-data` is destructive but reversible (we have the commits in main now). Do this LAST after main has the harness merged. (d) **Octokit calls already work against main** because env reads `GITHUB_LEADS_BRANCH` with default to be flipped from `leads-data` → `main`. (e) **Dual-probe fallback in `findLeadFolderPath`** still searches `_leads/` legacy path; harmless on main (no `_leads/` exists there), eventual cleanup. (f) **Local working tree** will gain the full harness on disk after pull — fine since main was clean of harness/ before this. (g) **`.gitignore` change** — currently `_leads/` is gitignored on main; need to make sure `harness/` is NOT gitignored or the merge will be invisible.
@@ -423,3 +425,46 @@ Running ledger of blockers, bugs, friction, anything broken. Tapped before & aft
 
 - **before [Andre-only Leads index cleanup]** — 2026-05-05: UX bug: `/leads` makes the operator choose between Andre/Jake/All/Practice, but the product is now Andre-centered. The owner switch also creates empty "Andre 0" views while All has leads, which reads broken.
 - **after [Andre-only Leads index cleanup]** — 2026-05-05: Owner-switch confusion closed on the Leads index. Watch item: row-level owner badges still show actual Close owner metadata when present; that preserves truth from Close without letting the operator switch the whole page into a dead/irrelevant owner view.
+
+- **stocktake [surface-by-surface friction audit]** — 2026-05-05: Jake's full audit of every operator-facing surface, captured here so nothing gets lost. Not all queued for execution — see Goals.md for the prioritized P0–P3 work order. Catalog by surface:
+
+  **🟢 PROPOSALS (the lobby) — ship-grade, two micro-nags**
+  1. Status pill asymmetry on cards — Trailhead card stacks "1 needs review / 5 approved / 1 sent" while every other card has the single "7 needs review" pill. Decide: dominant-status-wins-with-hover OR always-show-breakdown. Apply globally.
+  2. Card footer channel icons — ambiguous: are they "channels this sequence WILL touch" or "channels that have ALREADY fired"? New operator can't tell. One-glyph differentiator (filled vs outline, or a tiny dot for "fired") would settle it.
+
+  **🟡 LEAD · PLAN — placeholder-ish**
+  1. **THREE different "Approve" buttons on one screen.** "Approve & run" + "Approve all" (top strip), "Approve" (bottom action row). Each has a different blast radius. New operator has to learn by getting burned. Pick a primary, demote the others.
+  2. Action row is a clown car — `[Approve][Regenerate as][7][days][Regenerate][Preview Close actions][Kill]`. Three verbs, one inline form, one preview-of-what, and Kill living two pixels from a number input. Cluster by verb: constructive | regenerative | destructive. Kill needs distance and weight.
+  3. "Plan is stale" warning is whispering — sentence floating between two button clusters. If the plan is actually stale, that's a soft yellow strip across the top of the cycle plan card, not a footnote.
+
+  **🔴 LEAD · GRAPH — placeholder, treat as greenfield**
+  1. It's not actually graphing anything — currently the Plan page in a smaller font with simulator chips bolted on. The simulator output is the most interesting thing on the page and it's a one-line summary. **THAT'S THE GRAPH.** Show which days fire, which days gate, why each gate gated, let assumptions toggle to re-simulate.
+  2. Numbered circles redundant with day labels — "01 02 03..." next to "DAY 1 DAY 2 DAY 3...". One numbering must die.
+  3. Decide what "Graph" means as a concept. Plan = the artifact. Graph = the BEHAVIOR (gates, conditions, branches). Right now confused about which it is.
+
+  **🟢 LEAD · BOX — intentionally sparse, compression pass coming**
+  1. Compression — already flagged. Activity column probably survives as a lead-level rail. Left side atomizes into natural homes.
+  2. Write actions need different visual register — "Enroll in Workflow (Close write)" guardrail copy is doing real safety work but visually identical to read surfaces. Writes-to-external-systems should LOOK different.
+
+  **🟢 LEAD · DELEGATIONS (chat) — stellar, two known issues**
+  1. Slash-command palette wants meta-vs-action divider — `/help /new /clear /rerun /rail` = META; `/lead /heartbeat /today /morning` = ACTION. Currently flat-listed. Will be a wall by command #15. Full rework coming — banked.
+  2. (No second issue. The page is good.)
+
+  **🟡 LEAD · DISCOVERY (the NEPQ scoreboard) — thesis locked, finishing work remains**
+  1. **"Restraint" collides with itself across scopes.** Lead level: "of last 10 heartbeats for this lead." Player level: "of last 30 days across all leads." Same word, different denominator, different unit. Rename the player-level one ("Discipline · 30d" or "System restraint · 30d").
+  2. Overview card has a lonely "—" — Restraint · 30D shows "—" while siblings show numbers. Reads as broken, not empty. Use 0%, n/a, or a dimmed default. "—" is the worst empty state.
+  3. 🟢 emoji in section header — "🟢 SCORE tag distribution" mixes an emoji into publication-grade typography. Swap for CSS dot. Self-betrayal — Jake hates emojis.
+  4. (Note, not fix) Map empty state is doing GREAT work. Don't lose the "0% known · quest 0/4" progress chip when filled in. The chip IS the XP bar.
+
+  **🟢 LEAD MODAL (Day cockpit) — best surface in the app, two nags**
+  1. Action row mixes decisions and navigation — Approve / Needs review / Mark sent / Skip = DECISIONS; Graph / Lead = NAVIGATION. Six buttons, equal weight, two different jobs. Cluster the navigation separately. Lighter weight, maybe up by the title, maybe a divider.
+  2. **"Rewrite day" vs "Rewrite plan" sibling-weight.** Rewrite plan nukes 7 days of work. Rewrite day nukes 1. Equal-weight black/white buttons. Misclick at 11pm files a postmortem. Rewrite plan needs a half-beat more friction OR demoted to secondary visual weight.
+
+  **🌐 GLOBAL · TOP-RIGHT NAV — already revitalizing, banked**
+  Tier 1 = global actions. Tier 2 = lead actions.
+
+  **Priority order (mirrored to Goals.md):**
+  - **P0** destructive button hygiene — Plan page action row · Modal Rewrite-plan-vs-Rewrite-day. (One bad misclick = bad day.)
+  - **P1** naming collisions + broken empty states — Restraint rename · lonely "—" on Overview · three-Approves hierarchy on Plan page.
+  - **P2** placeholder pages — Graph page rebuild · Plan page polish.
+  - **P3** compression + cosmetics — Box atomization · slash-command rework · 🟢→CSS dot · channel-icon disambiguation · Trailhead-card pill asymmetry · write-action visual register.

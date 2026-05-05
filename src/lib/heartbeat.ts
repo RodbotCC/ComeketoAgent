@@ -45,6 +45,7 @@ import { validateNepqVoice, hasBlockingViolation, type VoiceViolation } from "./
 import { setDayStatus } from "./plans-db";
 import { resolveLeadTimezone, type TimezoneResolution } from "./timezone";
 import { randomUUID } from "crypto";
+import { writeHeartbeatRunSnapshot } from "./harness-heartbeat";
 import { logExecution } from "./execution-audit";
 
 export type ExecutionMode =
@@ -490,7 +491,10 @@ export async function runHeartbeatForPlan(
   };
 
   // Persist the run for audit.
+  const runId = (globalThis.crypto?.randomUUID?.() ?? `hb_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`);
+  const runAt = new Date().toISOString();
   await sb.from("heartbeat_runs").insert({
+    id: runId,
     scope: "lead",
     plan_id: plan.plan_id,
     close_lead_id: plan.close_lead_id,
@@ -503,6 +507,24 @@ export async function runHeartbeatForPlan(
     report: days,
     duration_ms: report.duration_ms,
     trigger,
+  });
+  // Phase 5 mirror — fire-and-forget.
+  void writeHeartbeatRunSnapshot({
+    run_id: runId,
+    at: runAt,
+    scope: "lead",
+    plan_id: plan.plan_id,
+    close_lead_id: plan.close_lead_id,
+    snapshot_match: snapshotMatch,
+    plan_was_stale: planWasStale,
+    actions_eligible,
+    actions_fired,
+    actions_skipped,
+    skip_breakdown,
+    report: days,
+    duration_ms: report.duration_ms,
+    trigger,
+    trace_id: traceId ?? null,
   });
 
   void logExecution({
@@ -744,21 +766,38 @@ export async function runHeartbeatSweep(
     actions_skipped: r.actions_skipped,
     skip_breakdown: r.skip_breakdown,
   }));
+  const sweepRunId = (globalThis.crypto?.randomUUID?.() ?? `hb_sweep_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`);
+  const sweepRunAt = new Date().toISOString();
+  const sweepReport = {
+    trace_id: traceId,
+    sweep_duration_ms: Date.now() - sweepStarted,
+    plan_count: runs.length,
+    error_count: errors.length,
+    errors,
+    lead_summaries,
+  };
   await sb.from("heartbeat_runs").insert({
+    id: sweepRunId,
     scope: "all",
     actions_eligible: totalEligible,
     actions_fired: totalFired,
     actions_skipped: totalSkipped,
     skip_breakdown: breakdown,
-    report: {
-      trace_id: traceId,
-      sweep_duration_ms: Date.now() - sweepStarted,
-      plan_count: runs.length,
-      error_count: errors.length,
-      errors,
-      lead_summaries,
-    },
+    report: sweepReport,
     trigger,
+  });
+  void writeHeartbeatRunSnapshot({
+    run_id: sweepRunId,
+    at: sweepRunAt,
+    scope: "all",
+    actions_eligible: totalEligible,
+    actions_fired: totalFired,
+    actions_skipped: totalSkipped,
+    skip_breakdown: breakdown,
+    report: sweepReport,
+    duration_ms: Date.now() - sweepStarted,
+    trigger,
+    trace_id: traceId,
   });
 
   return { runs, errors, trace_id: traceId };
