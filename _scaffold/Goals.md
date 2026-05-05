@@ -535,3 +535,5 @@ Running ledger of what we're building toward. Tapped before & after every move.
   - Day Modal: cluster navigation (Graph / Lead) separately from decision row (Approve / Needs review / Mark sent / Skip).
 
   **🌐 Top-right nav revitalization** — already underway. Tier 1 = global, Tier 2 = lead. Banked.
+
+- 2026-05-05 — before/after [push to GitHub+Vercel]: ship workbench overlay improvements (single-day focus + msg preview + loading) to live site.

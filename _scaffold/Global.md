@@ -528,3 +528,5 @@ limit 10;
 
 - **before [Andre-only Leads index cleanup]** — 2026-05-05: Leads index direction: no more Jake/Andre owner switcher on the primary list. The app should present Andre's lead universe and let operators filter by status/search instead.
 - **after [Andre-only Leads index cleanup]** — 2026-05-05: Leads index UX rule updated in code: `/leads` is a single universe view, not an owner-mode selector. Owner-specific enforcement remains in downstream execution/guardrail surfaces; this change only removes the top-level list switcher.
+
+- **before [push everything to GitHub + Vercel]:** 1 unpushed local commit (`e785d94 Workbench overlay: single-day focus + message preview + better loading`). Tree clean. Pushing main → origin will trigger Vercel build (assuming workbench overlay change is outside `harness/` — it is, it's `src/`).

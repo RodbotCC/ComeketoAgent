@@ -470,3 +470,5 @@ Running ledger of blockers, bugs, friction, anything broken. Tapped before & aft
   - **P1** naming collisions + broken empty states — Restraint rename · lonely "—" on Overview · three-Approves hierarchy on Plan page.
   - **P2** placeholder pages — Graph page rebuild · Plan page polish.
   - **P3** compression + cosmetics — Box atomization · slash-command rework · 🟢→CSS dot · channel-icon disambiguation · Trailhead-card pill asymmetry · write-action visual register.
+
+- 2026-05-05 — before/after [push to GitHub+Vercel]: no known blockers; push is routine.
