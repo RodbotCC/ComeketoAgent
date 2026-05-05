@@ -44,7 +44,7 @@ const MODES: Array<{ key: Mode; title: string; description: string }> = [
   {
     key: "lead-sweep",
     title: "Run lead sweep",
-    description: "Hydrates every Andre-owned, in-progress lead from Close (incl. per-call transcripts) and writes per-lead Markdown folders to the leads-data branch. Idempotent — re-runs with no Close-side changes produce zero commits. Long-running: a full 50-lead sweep takes ~60-90s. Result pane shows {considered, in_scope, swept[], errors[]}. After it completes, browse github.com/RodbotCC/ComeketoAgent/tree/leads-data/_leads/active to see the folders materialize.",
+    description: "Hydrates every Andre-owned, in-progress lead from Close (incl. per-call transcripts) and writes per-lead Markdown folders to the leads-data branch. Idempotent — re-runs with no Close-side changes produce zero commits. Long-running: a full 50-lead sweep takes ~60-90s. Result pane shows {considered, in_scope, swept[], errors[]}. After it completes, browse github.com/RodbotCC/ComeketoAgent/tree/leads-data/harness/leads/active to see the folders materialize.",
   },
   {
     key: "lead-regen",

@@ -8,6 +8,12 @@ const REPO_OWNER = env.GITHUB_LEADS_OWNER || "RodbotCC";
 const REPO_NAME = env.GITHUB_LEADS_REPO || "ComeketoAgent";
 const REPO_BRANCH = env.GITHUB_LEADS_BRANCH || "leads-data";
 
+/** Canonical root for per-lead folders (Phase 2 of the harness/ overhaul,
+ *  2026-05-05). Was `_leads/`. The transitional fallback below still probes
+ *  `_leads/` if a lead's folder isn't yet under `harness/leads/`. */
+const LEADS_ROOT = "harness/leads";
+const LEGACY_LEADS_ROOT = "_leads";
+
 const RETRY_DELAYS_MS = [50, 150, 400];
 
 /**
@@ -39,39 +45,55 @@ export function leadFolderPath(
   name: string,
   state: LeadFolderState = "active",
 ): string {
-  return `_leads/${state}/${leadId}__${slugify(name)}`;
+  return `${LEADS_ROOT}/${state}/${leadId}__${slugify(name)}`;
 }
 
 /** Locate an existing lead folder by id, scanning active then archive. Returns
- *  null if no folder exists yet (brand-new lead). */
+ *  null if no folder exists yet (brand-new lead).
+ *
+ *  Phase 2 transitional behavior (2026-05-05): probes `harness/leads/` first;
+ *  if not found, falls back to `_leads/` (the pre-rename root). The fallback
+ *  is removed one phase after the rename ships. */
 export async function findLeadFolderPath(
   leadId: string,
 ): Promise<{ path: string; state: LeadFolderState } | null> {
   const octo = getOctokit();
-  for (const state of ["active", "archive"] as const) {
-    try {
-      const r = await octo.rest.repos.getContent({
-        owner: REPO_OWNER,
-        repo: REPO_NAME,
-        path: `_leads/${state}`,
-        ref: REPO_BRANCH,
-      });
-      const items = Array.isArray(r.data) ? r.data : [r.data];
-      const match = items.find(
-        (it) =>
-          it &&
-          typeof it === "object" &&
-          "type" in it &&
-          it.type === "dir" &&
-          "name" in it &&
-          typeof it.name === "string" &&
-          it.name.startsWith(`${leadId}__`),
-      );
-      if (match && "path" in match && typeof match.path === "string") {
-        return { path: match.path, state };
+  // Probe canonical root first, then legacy. Each root is searched in
+  // active → archive order.
+  for (const root of [LEADS_ROOT, LEGACY_LEADS_ROOT] as const) {
+    for (const state of ["active", "archive"] as const) {
+      try {
+        const r = await octo.rest.repos.getContent({
+          owner: REPO_OWNER,
+          repo: REPO_NAME,
+          path: `${root}/${state}`,
+          ref: REPO_BRANCH,
+        });
+        const items = Array.isArray(r.data) ? r.data : [r.data];
+        const match = items.find(
+          (it) =>
+            it &&
+            typeof it === "object" &&
+            "type" in it &&
+            it.type === "dir" &&
+            "name" in it &&
+            typeof it.name === "string" &&
+            it.name.startsWith(`${leadId}__`),
+        );
+        if (match && "path" in match && typeof match.path === "string") {
+          if (root === LEGACY_LEADS_ROOT) {
+            // One-time signal that something is still living under the
+            // legacy path. Operationally fine; sweeper will write to
+            // canonical on next pass.
+            console.warn(
+              `[lead-folder] lead ${leadId} found under legacy ${LEGACY_LEADS_ROOT}/ root; will be migrated on next sweep`,
+            );
+          }
+          return { path: match.path, state };
+        }
+      } catch (e: unknown) {
+        if (statusOf(e) !== 404) throw e;
       }
-    } catch (e: unknown) {
-      if (statusOf(e) !== 404) throw e;
     }
   }
   return null;

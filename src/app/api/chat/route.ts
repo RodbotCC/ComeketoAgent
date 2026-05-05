@@ -15,7 +15,7 @@ import {
   type Message,
 } from "@/lib/threads";
 import { closeGetLead } from "@/lib/close";
-import { listIntakeArtifactsForLead, type IntakeArtifactRow } from "@/lib/intake-artifacts";
+import { loadIntakeArtifactsWithText, type IntakeArtifactRow } from "@/lib/intake-artifacts";
 import { getSalesPlaybook } from "@/lib/sales-playbook";
 import { CLOSE_TOOLS, dispatchCloseTool, getCloseToolsForSettings } from "@/lib/close-tools";
 import {
@@ -153,7 +153,7 @@ async function buildLeadContextBlock(leadId: string | undefined): Promise<string
 
     let intakeBlock = "";
     try {
-      const artifacts = await listIntakeArtifactsForLead(leadId, 10);
+      const artifacts = await loadIntakeArtifactsWithText(leadId, 10);
       intakeBlock = fmtIntakeBlock(artifacts);
     } catch {
       intakeBlock = "";

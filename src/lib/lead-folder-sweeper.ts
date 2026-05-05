@@ -10,7 +10,7 @@ import { env } from "./env";
 const CONCURRENCY = 3;
 
 /** Status labels we treat as terminal (lead is done; folder belongs in
- *  `_leads/archive/`, not `_leads/active/`). Match Andre's Close org's
+ *  `harness/leads/archive/`, not `harness/leads/active/`). Match Andre's Close org's
  *  emoji-prefixed labels. The exact strings are confirmed at first sweep
  *  smoke; if a label drifts, sweep simply doesn't filter that label out
  *  (over-includes, harmless). */

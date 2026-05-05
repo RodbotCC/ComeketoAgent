@@ -112,22 +112,12 @@ export function LeadIntakeBoard({ leadId, artifacts, downloadError }: Props) {
           );
           return;
         }
+        // Phase 1 of harness/ overhaul: upload route extracts inline and
+        // writes directly to the file tree. The separate /api/intake/extract
+        // call is no longer needed; keeping a brief "extracting" frame for
+        // visual continuity then transitioning to done.
         if (j.artifact_id) {
           setPending((p) => p.map((it) => (it.id === tempId ? { ...it, stage: "extracting" } : it)));
-          const ctrl = new AbortController();
-          const timeout = setTimeout(() => ctrl.abort(), 30_000);
-          try {
-            await fetch("/api/intake/extract", {
-              method: "POST",
-              headers: { "content-type": "application/json" },
-              body: JSON.stringify({ artifact_id: j.artifact_id }),
-              signal: ctrl.signal,
-            });
-          } catch {
-            // extract may have completed server-side; refresh will surface it.
-          } finally {
-            clearTimeout(timeout);
-          }
         }
         setPending((p) => p.map((it) => (it.id === tempId ? { ...it, stage: "done" } : it)));
         // Drop the row 2s after refresh so the operator sees the success tick briefly.

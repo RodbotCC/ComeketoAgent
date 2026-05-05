@@ -46,25 +46,25 @@ describe("slugify", () => {
 describe("leadFolderPath", () => {
   it("composes the active path by default", () => {
     expect(leadFolderPath("lead_abc123", "Eliana Lopes")).toBe(
-      "_leads/active/lead_abc123__eliana-lopes",
+      "harness/leads/active/lead_abc123__eliana-lopes",
     );
   });
 
   it("respects the archive state", () => {
     expect(leadFolderPath("lead_abc123", "Eliana Lopes", "archive")).toBe(
-      "_leads/archive/lead_abc123__eliana-lopes",
+      "harness/leads/archive/lead_abc123__eliana-lopes",
     );
   });
 
   it("preserves lead_id prefix exactly so id-based lookups work", () => {
     const id = "lead_uePfZil6QF7XOYTzqMc90u6SRtXlyZEBZRjOgjaqAOT";
     const folder = leadFolderPath(id, "Eliana Lopes");
-    expect(folder.startsWith(`_leads/active/${id}__`)).toBe(true);
+    expect(folder.startsWith(`harness/leads/active/${id}__`)).toBe(true);
   });
 
   it("falls back to 'unnamed' slug rather than colliding when name is empty", () => {
     expect(leadFolderPath("lead_xyz", "")).toBe(
-      "_leads/active/lead_xyz__unnamed",
+      "harness/leads/active/lead_xyz__unnamed",
     );
   });
 });
