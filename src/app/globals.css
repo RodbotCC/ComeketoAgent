@@ -321,6 +321,223 @@
 .cmk-an-pill-ready   { background: color-mix(in oklab, var(--sky-deep) 18%, var(--card));  color: color-mix(in oklab, var(--sky-deep) 92%, var(--ink)); }
 .cmk-an-pill-missing { background: color-mix(in oklab, var(--peach-deep) 22%, var(--card)); color: color-mix(in oklab, var(--peach-deep) 92%, var(--ink)); }
 
+/* ── neutral bar tones for non-source-family charts ─────────────────── */
+.cmk-an-bar-sage     { background: color-mix(in oklab, var(--sage-deep) 70%, transparent); }
+.cmk-an-bar-sky      { background: color-mix(in oklab, var(--sky-deep) 70%, transparent); }
+.cmk-an-bar-peach    { background: color-mix(in oklab, var(--peach-deep) 70%, transparent); }
+.cmk-an-bar-lavender { background: color-mix(in oklab, var(--lavender-deep) 70%, transparent); }
+.cmk-an-bar-lemon    { background: color-mix(in oklab, var(--lemon-deep) 70%, transparent); }
+.cmk-an-bar-neutral  { background: color-mix(in oklab, var(--ink-soft) 35%, transparent); }
+
+/* ── empty-state for charts with missing/zero-row data ──────────────── */
+.cmk-an-empty {
+  padding: 14px 16px;
+  border: 1px dashed var(--rule);
+  border-radius: 6px;
+  font-size: 11.5px;
+  color: var(--ink-faint);
+  background: var(--paper-2);
+}
+
+/* ── pipeline funnel ────────────────────────────────────────────────── */
+.cmk-an-funnel {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.cmk-an-funnel-row {
+  display: grid;
+  grid-template-columns: minmax(180px, 1.2fr) minmax(140px, 3fr) minmax(110px, auto);
+  gap: 14px;
+  align-items: center;
+  padding: 9px 12px;
+  border-bottom: 0.5px solid var(--rule-soft);
+  font-size: 12px;
+  font-feature-settings: 'tnum';
+  opacity: 0;
+  transform: translateY(2px);
+  animation: cmk-an-card-in 0.4s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+.cmk-an-funnel-row:last-child { border-bottom: none; }
+.cmk-an-funnel-label-name { font-weight: 500; color: var(--ink); }
+.cmk-an-funnel-label-sub  { font-size: 9.5px; letter-spacing: 0.10em; text-transform: uppercase; color: var(--ink-faint); margin-top: 2px; }
+.cmk-an-funnel-bar-total    { background: color-mix(in oklab, var(--lemon-deep) 70%, transparent); }
+.cmk-an-funnel-bar-active   { background: color-mix(in oklab, var(--sky-deep) 70%, transparent); }
+.cmk-an-funnel-bar-won      { background: color-mix(in oklab, var(--sage-deep) 75%, transparent); }
+.cmk-an-funnel-bar-lost     { background: color-mix(in oklab, var(--ink-soft) 40%, transparent); }
+.cmk-an-funnel-stats {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  text-align: right;
+}
+.cmk-an-funnel-num { font-family: var(--serif); font-size: 16px; color: var(--ink); }
+.cmk-an-funnel-sub { font-size: 10.5px; color: var(--ink-soft); }
+.cmk-an-funnel-arrow {
+  font-size: 9.5px;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  padding-left: 14px;
+  margin: 2px 0;
+}
+
+/* ── win/loss 2-col grid ────────────────────────────────────────────── */
+.cmk-an-wl-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+@media (max-width: 900px) {
+  .cmk-an-wl-grid { grid-template-columns: 1fr; }
+}
+.cmk-an-wl-sub {
+  border: 0.5px solid var(--rule);
+  border-radius: 6px;
+  padding: 12px 14px 8px;
+  background: var(--card);
+}
+.cmk-an-wl-h3 {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0 0 8px;
+}
+.cmk-an-wl-row {
+  grid-template-columns: minmax(120px, 1.2fr) minmax(80px, 3fr) minmax(100px, auto);
+  font-size: 11.5px;
+}
+.cmk-an-subsection { margin-top: 14px; }
+
+/* ── revenue & growth ───────────────────────────────────────────────── */
+.cmk-an-rev-top {
+  display: grid;
+  grid-template-columns: minmax(200px, 1.2fr) minmax(0, 2.5fr);
+  gap: 12px;
+  align-items: stretch;
+}
+@media (max-width: 900px) {
+  .cmk-an-rev-top { grid-template-columns: 1fr; }
+}
+.cmk-an-rev-yoy { padding: 14px 16px 16px; }
+.cmk-an-rev-yoy-deltas {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+  font-size: 10.5px;
+  color: var(--ink-soft);
+  font-feature-settings: 'tnum';
+}
+.cmk-an-percentile-strip {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+}
+@media (max-width: 700px) {
+  .cmk-an-percentile-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.cmk-an-percentile-card { padding: 10px 12px; }
+.cmk-an-percentile-num { font-size: 18px; }
+
+/* ── monthly trend bars (vertical) ──────────────────────────────────── */
+.cmk-an-trend-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 96px;
+  padding: 6px 4px 0;
+  border-bottom: 0.5px solid var(--rule-soft);
+}
+.cmk-an-trend-col {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+.cmk-an-trend-bar-wrap {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.cmk-an-trend-bar {
+  width: 70%;
+  min-height: 1px;
+  background: color-mix(in oklab, var(--peach-deep) 60%, transparent);
+  border-radius: 3px 3px 0 0;
+  transform-origin: bottom center;
+  animation: cmk-an-trend-grow 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+@keyframes cmk-an-trend-grow {
+  from { transform: scaleY(0); }
+  to   { transform: scaleY(1); }
+}
+.cmk-an-trend-label {
+  font-size: 8.5px;
+  letter-spacing: 0.04em;
+  color: var(--ink-faint);
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* ── lead time urgency triptych ─────────────────────────────────────── */
+.cmk-an-urgency-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+@media (max-width: 700px) {
+  .cmk-an-urgency-strip { grid-template-columns: 1fr; }
+}
+
+/* ── cohort heatmap table ───────────────────────────────────────────── */
+.cmk-an-cohort-table-wrap {
+  overflow-x: auto;
+  border: 0.5px solid var(--rule);
+  border-radius: 6px;
+  background: var(--card);
+}
+.cmk-an-cohort-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 10.5px;
+  font-feature-settings: 'tnum';
+}
+.cmk-an-cohort-table th,
+.cmk-an-cohort-table td {
+  padding: 6px 10px;
+  text-align: right;
+  border-bottom: 0.5px solid var(--rule-soft);
+  white-space: nowrap;
+}
+.cmk-an-cohort-table th {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  font-weight: 500;
+  background: var(--paper-2);
+  text-align: right;
+}
+.cmk-an-cohort-table th:first-child,
+.cmk-an-cohort-table td:first-child { text-align: left; }
+.cmk-an-cohort-table tr:last-child td { border-bottom: none; }
+.cmk-an-cohort-cohort { font-weight: 500; color: var(--ink); }
+.cmk-an-cohort-num    { color: var(--ink-soft); }
+.cmk-an-cohort-cell   { color: var(--ink); font-family: var(--serif); }
+.cmk-an-cohort-empty  { color: var(--ink-faint); }
+
 /* ============ HERO MOTION (counter strip stagger + clock breathe) ============ */
 .hero-strip-item {
   opacity: 0;
