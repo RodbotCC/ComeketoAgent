@@ -4,9 +4,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 /**
- * IA under Leads: Plan (7-day), Graph (plan-as-graph + simulator), Box (profile +
- * activity), Delegations (lead-scoped chat), Discovery (slot map + journey score +
- * quest), Intake (lead-scoped uploads), Heartbeat (ops trace).
+ * IA under Leads: Plan (7-day with workbench overlay), Box (profile + activity),
+ * Delegations (lead-scoped chat), Discovery (slot map + journey score + quest),
+ * Intake (lead-scoped uploads), Heartbeat (ops trace).
  */
 export function LeadSubNav({ leadId }: { leadId: string }) {
   const pathname = usePathname() || "";
@@ -14,7 +14,6 @@ export function LeadSubNav({ leadId }: { leadId: string }) {
 
   const planActive = pathname === base || pathname === `${base}/`;
   const boxActive = pathname.startsWith(`${base}/box`);
-  const graphActive = pathname.startsWith(`${base}/graph`);
   const discoveryActive = pathname.startsWith(`${base}/discovery`);
   const intakeActive = pathname.startsWith(`${base}/intake`);
   const hbActive = pathname.startsWith(`${base}/heartbeat`);
@@ -23,9 +22,6 @@ export function LeadSubNav({ leadId }: { leadId: string }) {
     <nav className="lead-subnav" aria-label="Lead sections">
       <Link href={base} className={`lead-subnav-link${planActive ? " lead-subnav-link-active" : ""}`}>
         Plan
-      </Link>
-      <Link href={`${base}/graph`} className={`lead-subnav-link${graphActive ? " lead-subnav-link-active" : ""}`}>
-        Graph
       </Link>
       <Link href={`${base}/box`} className={`lead-subnav-link${boxActive ? " lead-subnav-link-active" : ""}`}>
         Box

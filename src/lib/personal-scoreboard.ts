@@ -211,24 +211,25 @@ export async function buildPersonalScoreboard(): Promise<
   let aggFires = 0;
   if (leadIds.length > 0) {
     try {
-      const sb = getSupabaseServer();
-      const { data: hbRows } = await sb
-        .from("heartbeat_runs")
-        .select("skip_breakdown, actions_fired, close_lead_id")
-        .gte("ran_at", since)
-        .in("close_lead_id", leadIds);
-      type Row = {
-        skip_breakdown: Record<string, number> | null;
-        actions_fired: number | null;
-      };
-      for (const r of (hbRows ?? []) as Row[]) {
+      // Phase 6: file-canonical via harness-heartbeat.
+      const { listRecentHeartbeatRuns } = await import("./harness-heartbeat");
+      const all = await listRecentHeartbeatRuns(5000, 30);
+      const sinceMs = new Date(since).getTime();
+      const leadSet = new Set(leadIds);
+      const hbRows = all.filter(
+        (r) =>
+          r.close_lead_id != null &&
+          leadSet.has(r.close_lead_id) &&
+          new Date(r.at).getTime() >= sinceMs,
+      );
+      for (const r of hbRows) {
         for (const [code, n] of Object.entries(r.skip_breakdown ?? {})) {
           aggSkips[code] = (aggSkips[code] ?? 0) + (n ?? 0);
         }
         aggFires += r.actions_fired ?? 0;
       }
     } catch {
-      // no heartbeat table or empty — leave zeros
+      // harness empty — leave zeros
     }
   }
   const restraint = computeRestraint({ skipBreakdown: aggSkips, fires: aggFires });

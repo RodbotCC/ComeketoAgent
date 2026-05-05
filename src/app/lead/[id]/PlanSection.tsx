@@ -1,14 +1,8 @@
-import {
-  generatePlanAction,
-  approvePlanAction,
-  killPlanAction,
-  pausePlanAction,
-} from "./actions";
+import { generatePlanAction } from "./actions";
 import type { SevenDayPlan } from "@/lib/plan";
 import type { IntakeArtifactRow } from "@/lib/intake-artifacts";
 import { PlanCardClient } from "./PlanCardClient";
 import { PlanDaysWorkbench } from "./PlanDaysWorkbench";
-import { CloseActionsPreview } from "./CloseActionsPreview";
 
 type PersistedPlan = SevenDayPlan & {
   approved_at?: string;
@@ -104,7 +98,6 @@ export function PlanSection({
   }
 
   const stale = plan.based_on_snapshot_id !== currentSnapshotId && plan.status !== "killed";
-  const isLocked = plan.status === "killed" || plan.status === "completed";
 
   return (
     <PlanCardClient
@@ -145,65 +138,17 @@ export function PlanSection({
         </div>
       </div>
 
+      {stale && (
+        <div className="plan-stale-banner" role="alert">
+          <strong>Plan is stale.</strong> Box snapshot has changed since plan generation — regenerate before sending or any draft will fire on outdated lead state.
+        </div>
+      )}
+
       <PlanDaysWorkbench
         plan={plan}
         leadName={leadName}
         intakeArtifacts={intakeArtifacts}
       />
-      {stale && (
-        <p className="plan-empty-msg" style={{ marginTop: 8, fontSize: 11 }}>
-          <strong>Plan is stale:</strong> Box snapshot has changed since plan generation. Regenerate before sending.
-        </p>
-      )}
-
-      {!isLocked && (
-        <div className="plan-actions">
-          {plan.status === "draft" && (
-            <form action={approvePlanAction} style={{ display: "inline" }}>
-              <input type="hidden" name="plan_id" value={plan.plan_id} />
-              <input type="hidden" name="lead_id" value={leadId} />
-              <button type="submit" className="plan-btn plan-btn-primary">Approve</button>
-            </form>
-          )}
-          {(plan.status === "approved" || plan.status === "active") && (
-            <form action={pausePlanAction} style={{ display: "inline" }}>
-              <input type="hidden" name="plan_id" value={plan.plan_id} />
-              <input type="hidden" name="lead_id" value={leadId} />
-              <button type="submit" className="plan-btn">Pause</button>
-            </form>
-          )}
-          <form action={generatePlanAction} style={{ display: "inline-flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
-            <input type="hidden" name="lead_id" value={leadId} />
-            <label className="plan-horizon-label plan-horizon-inline">
-              <span>Regenerate as</span>
-              <input
-                type="number"
-                name="horizon_days"
-                min={1}
-                max={180}
-                defaultValue={plan.days.length}
-                list={`plan-horizon-presets-regen-${leadId}`}
-                className="plan-horizon-input"
-              />
-              <span className="plan-horizon-suffix">days</span>
-            </label>
-            <datalist id={`plan-horizon-presets-regen-${leadId}`}>
-              {HORIZON_PRESETS.map((n) => (
-                <option key={n} value={n} />
-              ))}
-            </datalist>
-            <button type="submit" className="plan-btn">Regenerate</button>
-          </form>
-          <CloseActionsPreview planId={plan.plan_id} />
-          <form action={killPlanAction} style={{ display: "inline" }}>
-            <input type="hidden" name="plan_id" value={plan.plan_id} />
-            <input type="hidden" name="lead_id" value={leadId} />
-            <input type="hidden" name="reason" value="killed by operator" />
-            <button type="submit" className="plan-btn plan-btn-danger">Kill</button>
-          </form>
-        </div>
-      )}
-
     </div>
     </PlanCardClient>
   );

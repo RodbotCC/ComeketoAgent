@@ -312,11 +312,11 @@ export async function refineWholePlanAction(
     const r = await refineWholePlan(plan, instruction);
     if (!r.ok) return { ok: false, error: r.error };
 
-    // Replace days, plus update the top-level summary fields in one write.
-    const sb = getSupabaseServer();
-    const { error } = await sb
-      .from("lead_plans")
-      .update({
+    // Replace days + update the top-level summary fields. Phase 6: file-canonical.
+    try {
+      const { mutatePlan } = await import("@/lib/lead-plan-fs");
+      await mutatePlan(planId, (current) => ({
+        ...current,
         primary_goal: r.plan.primary_goal,
         goal_summary: r.plan.goal_summary,
         lead_state_summary: r.plan.lead_state_summary,
@@ -327,11 +327,12 @@ export async function refineWholePlanAction(
         stop_conditions: r.plan.stop_conditions,
         // Refining resets the plan to draft so it gets re-approved.
         status: "draft",
-        approved_at: null,
-        approved_by: null,
-      })
-      .eq("id", planId);
-    if (error) return { ok: false, error: `db update failed: ${error.message}` };
+        approved_at: undefined,
+        approved_by: undefined,
+      }));
+    } catch (e) {
+      return { ok: false, error: `plan write failed: ${e instanceof Error ? e.message : String(e)}` };
+    }
 
     void logExecution({
       action_kind: "refine_whole_plan",
@@ -543,17 +544,15 @@ export async function rejectApprovalQueueAction(formData: FormData) {
       ? { ...d, approval_status: "not_ready" as const }
       : d
   );
-  const sb = getSupabaseServer();
-  const { error } = await sb
-    .from("lead_plans")
-    .update({
-      days,
-      status: "draft",
-      approved_at: null,
-      approved_by: null,
-    })
-    .eq("id", planId);
-  if (error) throw new Error(`reject queue failed: ${error.message}`);
+  // Phase 6: file-canonical.
+  const { mutatePlan } = await import("@/lib/lead-plan-fs");
+  await mutatePlan(planId, (current) => ({
+    ...current,
+    days,
+    status: "draft",
+    approved_at: undefined,
+    approved_by: undefined,
+  }));
 
   void logApprovalChange({
     plan_id: planId,

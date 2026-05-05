@@ -11670,3 +11670,290 @@ select.cmk-field-panel {
   font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
   letter-spacing: 0.04em;
 }
+
+/* ===========================================================================
+ * PLAN DAY PAGER — single-day focus replaces the asymmetric 7-up grid.
+ * Chip rail at top, prev/next arrows flanking the active day card.
+ * ========================================================================= */
+
+.cmk-pdw-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 14px 0 10px;
+}
+.cmk-pdw-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: var(--card);
+  border: 0.5px solid var(--rule);
+  font: inherit;
+  font-size: 11px;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: background 120ms, border-color 120ms, color 120ms;
+}
+.cmk-pdw-chip:hover {
+  border-color: color-mix(in oklab, var(--ink) 22%, var(--rule));
+  color: var(--ink);
+}
+.cmk-pdw-chip.is-active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--card);
+  box-shadow: 0 1px 2px rgba(0,0,0,.10);
+}
+.cmk-pdw-chip-num {
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  letter-spacing: 0.04em;
+  font-size: 10.5px;
+}
+.cmk-pdw-chip-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ink-faint);
+  flex-shrink: 0;
+}
+.cmk-pdw-chip[data-status="needs_review"] .cmk-pdw-chip-dot {
+  background: color-mix(in oklab, var(--peach-deep) 80%, var(--ink));
+}
+.cmk-pdw-chip[data-status="approved"] .cmk-pdw-chip-dot,
+.cmk-pdw-chip[data-status="sent"] .cmk-pdw-chip-dot {
+  background: color-mix(in oklab, var(--sage-deep) 80%, var(--ink));
+}
+.cmk-pdw-chip[data-status="not_ready"] .cmk-pdw-chip-dot {
+  background: var(--ink-faint);
+}
+.cmk-pdw-chip[data-status="skipped"] .cmk-pdw-chip-dot {
+  background: color-mix(in oklab, var(--rose-deep) 70%, var(--ink-faint));
+}
+
+.cmk-pdw-pager {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr) 36px;
+  gap: 10px;
+  align-items: stretch;
+  margin-bottom: 10px;
+}
+.cmk-pdw-pager-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0.5px solid var(--rule);
+  background: var(--card);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--ink-soft);
+  transition: background 120ms, border-color 120ms, color 120ms;
+  font-family: inherit;
+}
+.cmk-pdw-pager-arrow:hover:not(:disabled) {
+  background: var(--paper);
+  color: var(--ink);
+  border-color: color-mix(in oklab, var(--ink) 22%, var(--rule));
+}
+.cmk-pdw-pager-arrow:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* Full-width tile variant — replaces the 220px-min grid card */
+.cmk-pdw-tile--full {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px 22px;
+  min-height: 200px;
+}
+.cmk-pdw-tile-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.cmk-pdw-tile-obj--full {
+  font-size: 18px;
+  line-height: 1.4;
+  -webkit-line-clamp: unset;
+  display: block;
+  overflow: visible;
+}
+.cmk-pdw-tile-touchlist {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.cmk-pdw-tile-touchlist li {
+  display: flex;
+  gap: 10px;
+  font-size: 12.5px;
+  color: var(--ink);
+}
+.cmk-pdw-tile-touchchan {
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  min-width: 56px;
+}
+.cmk-pdw-tile-touchintent {
+  flex: 1;
+  font-style: italic;
+  color: var(--ink);
+}
+.cmk-pdw-tile-touchmore {
+  font-size: 11px !important;
+  color: var(--ink-faint) !important;
+  font-style: italic;
+}
+.cmk-pdw-tile-cta {
+  margin-top: auto;
+  font-size: 11px;
+  color: var(--ink-faint);
+  text-align: right;
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 720px) {
+  .cmk-pdw-pager {
+    grid-template-columns: 32px minmax(0, 1fr) 32px;
+  }
+  .cmk-pdw-tile--full { padding: 14px 16px; }
+  .cmk-pdw-tile-obj--full { font-size: 15px; }
+}
+
+/* ─── Plan stale banner — soft yellow strip, not a footnote ──────────────── */
+.plan-stale-banner {
+  margin-top: 12px;
+  padding: 10px 14px;
+  background: color-mix(in oklab, var(--lemon, var(--ink)) 28%, var(--card));
+  border: 0.5px solid color-mix(in oklab, var(--lemon-deep, var(--ink)) 40%, var(--rule));
+  border-left: 3px solid color-mix(in oklab, var(--lemon-deep, var(--ink)) 70%, var(--ink));
+  border-radius: 6px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.plan-stale-banner strong {
+  color: var(--ink);
+}
+
+/* ─── Clustered plan-action row — verbs grouped, Kill isolated right ────── */
+.plan-actions--clustered {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px;
+  margin-top: 14px;
+  padding: 12px 16px;
+  background: var(--paper);
+  border-radius: 8px;
+  border: 0.5px solid var(--rule);
+}
+.plan-actions-cluster {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.plan-actions-cluster--regen {
+  padding-left: 18px;
+  border-left: 0.5px solid var(--rule);
+}
+.plan-actions-cluster--danger {
+  margin-left: auto;
+  padding-left: 18px;
+  border-left: 0.5px solid color-mix(in oklab, var(--rose-deep, var(--ink)) 22%, var(--rule));
+}
+/* Kill button — visual weight + distance */
+.plan-btn-kill {
+  font-weight: 500 !important;
+}
+
+/* ===========================================================================
+ * Plan FAB — secondary cluster (preview · regen-with-horizon · kill)
+ * Absorbs the deleted bottom action row so all plan ops live in one place.
+ * ========================================================================= */
+.plan-card-fab {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  max-width: calc(100% - 28px);
+  row-gap: 6px;
+}
+.plan-fab-divider {
+  width: 0;
+  height: 18px;
+  border-left: 0.5px solid var(--rule);
+  margin: 0 4px;
+}
+.plan-fab-divider--danger {
+  border-left-color: color-mix(in oklab, var(--rose-deep, var(--ink)) 28%, var(--rule));
+}
+
+.plan-fab-btn-secondary {
+  /* same chrome as plan-fab-btn, just a hint of disambiguation on hover */
+  font-weight: 400;
+}
+
+.plan-fab-regen-form {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.plan-fab-regen-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: var(--card);
+  border: 1px solid var(--rule);
+}
+.plan-fab-regen-eyebrow {
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.plan-fab-regen-input {
+  width: 32px;
+  padding: 0 2px;
+  font: inherit;
+  font-size: 11.5px;
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.plan-fab-regen-input:focus {
+  outline: none;
+  background: var(--paper);
+  border-radius: 4px;
+}
+.plan-fab-regen-suffix {
+  font-size: 10px;
+  color: var(--ink-faint);
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+}
+
+.plan-fab-btn-kill {
+  background: transparent;
+  color: color-mix(in oklab, var(--rose-deep, var(--ink)) 75%, var(--ink));
+  border-color: color-mix(in oklab, var(--rose-deep, var(--ink)) 30%, var(--rule));
+}
+.plan-fab-btn-kill:hover:not(:disabled) {
+  background: color-mix(in oklab, var(--rose-deep, var(--ink)) 14%, var(--card));
+  color: color-mix(in oklab, var(--rose-deep, var(--ink)) 90%, var(--ink));
+  border-color: color-mix(in oklab, var(--rose-deep, var(--ink)) 50%, var(--rule));
+}

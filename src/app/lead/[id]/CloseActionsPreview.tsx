@@ -19,7 +19,15 @@ const CHANNEL_GLYPH: Record<string, string> = {
   task: "▢",
 };
 
-export function CloseActionsPreview({ planId }: { planId: string }) {
+export function CloseActionsPreview({
+  planId,
+  buttonClassName = "plan-btn",
+  buttonLabel = "Preview Close actions",
+}: {
+  planId: string;
+  buttonClassName?: string;
+  buttonLabel?: string;
+}) {
   const [open, setOpen] = useState(false);
   const [preview, setPreview] = useState<CodegenResult | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -43,11 +51,11 @@ export function CloseActionsPreview({ planId }: { planId: string }) {
     <>
       <button
         type="button"
-        className="plan-btn"
+        className={buttonClassName}
         onClick={openModal}
         title="Planned Close operations derived from this plan and the current Box"
       >
-        Preview Close actions
+        {buttonLabel}
       </button>
 
       <Modal open={open} onClose={() => setOpen(false)} labelledBy="close-codegen-h">

@@ -12,9 +12,8 @@
  *   - No plan yet → "Generate plan" form (fires generatePlanAction)
  *   - Plan present → cards + a small heartbeat tile
  *
- * Simulator + graph navigation deliberately NOT here — those live on the
- * dedicated /lead/[id]/graph page. The cockpit is for chat-driven editing,
- * not visualization.
+ * Simulator + per-day editing live on the lead's Plan tab (workbench
+ * overlay). The cockpit is for chat-driven editing, not visualization.
  */
 import { useEffect, useState, useTransition } from "react";
 import Link from "next/link";
@@ -65,7 +64,7 @@ export function PlanDayStrip({ leadId, leadName }: { leadId: string; leadName: s
   }, [leadId]);
 
   // Cross-surface state sync: re-fetch when plan changes anywhere (lead page,
-  // chat tool call, graph page) AND when the tab regains focus. Prevents the
+  // chat tool call) AND when the tab regains focus. Prevents the
   // "I generated a plan elsewhere but cockpit still shows 'no plan yet'"
   // duplicate-create trap.
   useEffect(() => {
@@ -97,7 +96,7 @@ export function PlanDayStrip({ leadId, leadName }: { leadId: string; leadName: s
       try {
         await generatePlanAction(fd);
         await load();
-        // Notify other plan consumers (graph view in another tab, etc.)
+        // Notify other plan consumers (lead-page workbench in another tab, etc.)
         window.dispatchEvent(
           new CustomEvent("comeketo:plan-changed", { detail: { lead_id: leadId } })
         );
@@ -174,7 +173,7 @@ export function PlanDayStrip({ leadId, leadName }: { leadId: string; leadName: s
           {plan.days.length}-day cycle · {sentCount} sent
         </div>
         <div style={{ display: "flex", gap: 10, marginTop: 4, flexWrap: "wrap" }}>
-          <Link href={`/lead/${leadId}/graph`} className="cmk-lead-active-link" style={{ fontSize: 11 }}>
+          <Link href={`/lead/${leadId}`} className="cmk-lead-active-link" style={{ fontSize: 11 }}>
             edit plan →
           </Link>
           <Link href={`/lead/${leadId}/discovery`} className="cmk-lead-active-link" style={{ fontSize: 11 }}>

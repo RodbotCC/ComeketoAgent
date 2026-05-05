@@ -2790,9 +2790,9 @@ export function ChatLayout() {
 
         // Cross-surface plan-state sync: if the agent fired any plan-mutating
         // tool this turn, dispatch comeketo:plan-changed so the cockpit's
-        // PlanDayStrip + the /lead/[id]/graph view re-fetch instead of
-        // silently going stale (which would let the operator generate a
-        // duplicate plan from a UI showing 'no plan yet').
+        // PlanDayStrip re-fetches instead of silently going stale (which
+        // would let the operator generate a duplicate plan from a UI
+        // showing 'no plan yet').
         const toolGroups = (data.tools_used ?? []) as Array<{ calls?: Array<{ name?: string; args?: Record<string, unknown> }> }>;
         const PLAN_MUTATING = new Set([
           "generate_seven_day_plan",

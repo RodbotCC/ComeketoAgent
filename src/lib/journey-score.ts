@@ -22,7 +22,6 @@ import {
   type StageProgress,
 } from "./discovery-map";
 import { getLeadFacts } from "./lead-facts";
-import { getSupabaseServer } from "./supabase";
 
 // ─── Skip-code classification for the restraint score ────────────────────
 // The skip-code vocabulary in close.ts:741–766 IS the guardrail-discipline
@@ -196,20 +195,16 @@ export async function journeyScoreForLead(
 
   // Restraint over last 10 lead-scoped heartbeats. Aggregates skip_breakdown
   // and fires across runs so a single sweep doesn't dominate.
-  const sb = getSupabaseServer();
-  const { data: hbRows } = await sb
-    .from("heartbeat_runs")
-    .select("skip_breakdown, actions_fired")
-    .eq("close_lead_id", leadId)
-    .order("ran_at", { ascending: false })
-    .limit(10);
+  // Phase 6: file-canonical via harness-heartbeat.
+  const { listRecentHeartbeatRuns } = await import("./harness-heartbeat");
+  const allRecent = await listRecentHeartbeatRuns(500, 14);
+  const hbRows = allRecent
+    .filter((r) => r.close_lead_id === leadId)
+    .slice(0, 10);
 
   const aggregatedSkips: Record<string, number> = {};
   let aggregatedFires = 0;
-  for (const r of (hbRows ?? []) as Array<{
-    skip_breakdown: Record<string, number> | null;
-    actions_fired: number | null;
-  }>) {
+  for (const r of hbRows) {
     for (const [code, n] of Object.entries(r.skip_breakdown ?? {})) {
       aggregatedSkips[code] = (aggregatedSkips[code] ?? 0) + (n ?? 0);
     }

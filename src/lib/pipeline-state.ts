@@ -260,15 +260,20 @@ export async function pipelineStateForOwner(
     ? new Set(ownerLeads.map((l) => l.id))
     : null;
 
-  // 2) Active plans (draft + approved + active — heartbeat sweeps these too).
-  const { data: planRows, error: planErr } = await sb
-    .from("lead_plans")
-    .select("id, close_lead_id, cycle_started_at, status, days")
-    .in("status", ["draft", "approved", "active"]);
-  if (planErr) {
-    throw new Error(`pipelineStateForOwner plans read failed: ${planErr.message}`);
-  }
-  const allPlans = (planRows as PlanRow[]) ?? [];
+  // 2) Active plans (draft + approved + active). Phase 6: file-canonical.
+  const { listAllPlans } = await import("./lead-plan-fs");
+  const planFsRows = await listAllPlans({
+    state: "active",
+    filterStatus: ["draft", "approved", "active"],
+    limit: 500,
+  });
+  const allPlans: PlanRow[] = planFsRows.map((p) => ({
+    id: p.plan_id,
+    close_lead_id: p.close_lead_id,
+    cycle_started_at: p.cycle_started_at,
+    status: p.status,
+    days: p.days,
+  })) as PlanRow[];
   const scopedPlans =
     ownerLeadIds === null
       ? allPlans
@@ -278,19 +283,25 @@ export async function pipelineStateForOwner(
   const planWalk = walkPlansForToday(scopedPlans, nameMap, now);
 
   // 3) Heartbeat runs from last 24h, scope='lead' (sweep summaries excluded).
-  const since = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
-  const { data: hbRows, error: hbErr } = await sb
-    .from("heartbeat_runs")
-    .select("close_lead_id, ran_at, scope, skip_breakdown, report")
-    .eq("scope", "lead")
-    .gte("ran_at", since);
-  if (hbErr) {
-    throw new Error(`pipelineStateForOwner heartbeat read failed: ${hbErr.message}`);
-  }
+  // Phase 6: file-canonical via harness-heartbeat.
+  const sinceMs = Date.now() - 24 * 60 * 60 * 1000;
+  const { listRecentHeartbeatRuns } = await import("./harness-heartbeat");
+  const allHb = await listRecentHeartbeatRuns(2000, 2);
+  const hbRows = allHb
+    .filter(
+      (r) => r.scope === "lead" && new Date(r.at).getTime() >= sinceMs,
+    )
+    .map((r) => ({
+      close_lead_id: r.close_lead_id ?? null,
+      ran_at: r.at,
+      scope: r.scope,
+      skip_breakdown: r.skip_breakdown,
+      report: r.report,
+    }));
   const hbWalk = walkHeartbeatRuns(
-    (hbRows as HeartbeatRow[]) ?? [],
+    hbRows as HeartbeatRow[],
     nameMap,
-    ownerLeadIds
+    ownerLeadIds,
   );
 
   return {

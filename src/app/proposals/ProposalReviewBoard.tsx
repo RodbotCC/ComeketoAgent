@@ -566,16 +566,26 @@ export function ProposalWorkbench({
   plan,
   onClose,
   assetsSlot,
+  initialDayIndex,
 }: {
   plan: ProposalPlanItem;
   onClose: () => void;
   /** Optional render-prop slot for an asset picker (intake artifacts on Plan tab). */
   assetsSlot?: React.ReactNode;
+  /** When set, opens directly to this day instead of the first needs_review. */
+  initialDayIndex?: number;
 }) {
   const initialDay = useMemo(() => {
+    if (
+      typeof initialDayIndex === "number" &&
+      initialDayIndex >= 0 &&
+      initialDayIndex < plan.days.length
+    ) {
+      return initialDayIndex;
+    }
     const idx = plan.days.findIndex((d) => d.approval_status === "needs_review");
     return idx >= 0 ? idx : 0;
-  }, [plan.days]);
+  }, [plan.days, initialDayIndex]);
   const [activeDayIndex, setActiveDayIndex] = useState<number>(initialDay);
   const [activePanel, setActivePanel] = useState<ActivePanel>({ kind: "overview" });
 

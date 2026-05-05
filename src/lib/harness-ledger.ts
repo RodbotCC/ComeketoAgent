@@ -145,6 +145,52 @@ export function filterLedgerByLead(rows: LedgerRow[], leadId: string): LedgerRow
   return rows.filter((r) => r.close_lead_id === leadId);
 }
 
+/** Read recent rows globally (replaces Supabase listRecentExecutionGlobal). */
+export async function listExecutionGlobal(limit = 40): Promise<LedgerRow[]> {
+  return readRecentLedger(limit, 7);
+}
+
+/** Filter recent rows by lead. Replaces Supabase listRecentExecutionForLead. */
+export async function listExecutionForLead(
+  leadId: string,
+  limit = 50,
+): Promise<LedgerRow[]> {
+  const rows = await readRecentLedger(500, 14);
+  return filterLedgerByLead(rows, leadId).slice(0, limit);
+}
+
+/** Filter by action_kind. Replaces Supabase listExecutionByKind. */
+export async function listExecutionByKind(
+  kind: string,
+  limit = 60,
+): Promise<LedgerRow[]> {
+  const rows = await readRecentLedger(500, 14);
+  return rows.filter((r) => r.action_kind === kind).slice(0, limit);
+}
+
+/** Filter by trace_id. Replaces Supabase listExecutionByTraceId. */
+export async function listExecutionByTraceId(
+  traceId: string,
+  limit = 80,
+): Promise<LedgerRow[]> {
+  const rows = await readRecentLedger(500, 14);
+  return rows.filter((r) => r.trace_id === traceId).slice(0, limit);
+}
+
+/** Most-recent skip row for a plan (replaces Supabase
+ *  getLatestExecutionSkipForPlan). Used by heartbeat to detect repeated
+ *  skip patterns. */
+export async function getLatestSkipForPlan(
+  planId: string,
+): Promise<LedgerRow | null> {
+  const rows = await readRecentLedger(300, 7);
+  return (
+    rows.find(
+      (r) => r.plan_id === planId && r.skip_code != null && r.skip_code !== "",
+    ) ?? null
+  );
+}
+
 // ─── helpers ────────────────────────────────────────────────────────────────
 
 function ledgerPathForDate(d: Date): string {

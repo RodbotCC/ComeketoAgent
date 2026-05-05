@@ -73,14 +73,19 @@ Per-lead narrative content lives in **files** under `harness/`, not Supabase tab
 
 **Sweeper** (`src/lib/lead-folder-sweeper.ts`) runs every 2h via Vercel cron, plus manual trigger on `/test`. Idempotent — byte-diff means zero commits when nothing changed.
 
-**What stays in Supabase as auxiliary memory:**
+**What stays in Supabase as auxiliary memory (Phase 6 settled — 2026-05-05):**
 - `close_webhook_events` (transactional unique-index dedup on `event_id`).
 - `threads` + `messages` (chat cockpit history; per-token git commits would be absurd).
 - `lead_activity_touches` (single-row freshness signal updated 1000s of times per day).
 - Storage buckets for >1MB binaries.
+- `automation_drafts` and `lead_assets` (small surfaces; defer migration).
 
-**What moved to files:**
-- Per-lead profile, discovery slots, NEPQ openers, comms history, call transcripts, win angles, identity notes, intake artifacts.
+**What moved to files (file-canonical — no Supabase writes or reads):**
+- Per-lead profile, discovery, NEPQ openers, comms history, call transcripts, win angles, identity notes, intake artifacts.
+- Plans (`harness/leads/{id}__{slug}/plan.json`).
+- Execution log (`harness/ledger/YYYY-MM-DD.jsonl`).
+- Approval audit (`harness/approvals/YYYY-MM.jsonl`).
+- Heartbeat runs (`harness/heartbeat/YYYY-MM-DD/{run_id}.json`).
 
 **Don't add new Supabase tables for lead-scoped narrative content.** If a feature wants to attach prose, slots, or contextual data to a single lead, write a new file in that lead's folder. Reach for a table only when (a) cross-lead aggregation is the primary access pattern, (b) the data needs ACID transaction semantics, or (c) per-event commit thrash would dominate.
 

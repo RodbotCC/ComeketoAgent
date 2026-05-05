@@ -1,16 +1,29 @@
 /**
- * Single writer for execution_log + approval_audit (Guardrails §O, §I).
+ * Execution + approval audit (Guardrails §O, §I).
+ *
+ * Phase 6 of harness/ overhaul (2026-05-05): Supabase is OUT. Writes go
+ * directly to the harness file tree:
+ *   - execution_log → harness/ledger/YYYY-MM-DD.jsonl
+ *   - approval_audit → harness/approvals/YYYY-MM.jsonl
+ * Reads go through harness-ledger.ts and harness-approvals.ts respectively.
+ *
  * Failures are swallowed where noted so audit never blocks primary flows.
  *
- * Phase 3 of harness/ overhaul (2026-05-05): every write is also mirrored
- * into `harness/ledger/YYYY-MM-DD.jsonl` (execution rows) or
- * `harness/approvals/YYYY-MM.jsonl` (approval rows — wired in Phase 5).
- * The ledger mirror is fire-and-forget; failures log a warning but never
- * break the Supabase write. Phase 6 drops the Supabase side.
+ * `lead_activity_touches` (single-row freshness signal updated on every
+ * webhook) stays in Supabase as auxiliary memory — too high-frequency for
+ * git-backed storage.
  */
 
 import { getSupabaseServer } from "./supabase";
-import { appendLedger } from "./harness-ledger";
+import {
+  appendLedger,
+  listExecutionGlobal as ledgerListGlobal,
+  listExecutionForLead as ledgerListForLead,
+  listExecutionByKind as ledgerListByKind,
+  listExecutionByTraceId as ledgerListByTraceId,
+  getLatestSkipForPlan as ledgerGetLatestSkipForPlan,
+  type LedgerRow,
+} from "./harness-ledger";
 import { appendApprovalAudit } from "./harness-approvals";
 
 export const EXECUTION_LOG_KINDS = [
@@ -22,21 +35,21 @@ export const EXECUTION_LOG_KINDS = [
   "kill_plan",
   "pause_plan",
   "generate_plan",
-  "enroll_workflow",
-  "webhook_ingest",
-  "refine_plan_day",
-  "refine_whole_plan",
-  "day_status_change",
   "approve_run",
   "manual_heartbeat",
   "reject_plan_queue",
+  "enroll_workflow",
+  "publish_automation_draft",
   "intake_extract",
   "asset_library",
   "pause_subscription",
   "resume_subscription",
-  "publish_automation_draft",
   "add_plan_day_touch",
+  "webhook_ingest",
   "mcp_fallback",
+  "refine_plan_day",
+  "refine_whole_plan",
+  "day_status_change",
 ] as const;
 
 export type ExecutionLogKind = (typeof EXECUTION_LOG_KINDS)[number];
@@ -58,29 +71,8 @@ export type LogExecutionInput = {
 };
 
 export async function logExecution(input: LogExecutionInput): Promise<void> {
-  // Dual-write: Supabase first (canonical during Phase 3), then ledger mirror.
-  try {
-    const sb = getSupabaseServer();
-    const { error } = await sb.from("execution_log").insert({
-      action_kind: input.action_kind,
-      close_lead_id: input.close_lead_id ?? null,
-      plan_id: input.plan_id ?? null,
-      operator_id: input.operator_id ?? null,
-      payload: input.payload ?? null,
-      result: input.result ?? "ok",
-      skip_code: input.skip_code ?? null,
-      trace_id: input.trace_id ?? null,
-      snapshot_id_at_action: input.snapshot_id_at_action ?? null,
-    });
-    if (error) {
-      console.error("[execution-audit] insert failed", error.message);
-    }
-  } catch (e) {
-    console.error("[execution-audit] insert exception", e);
-  }
-
-  // Fire-and-forget ledger mirror. `appendLedger` swallows its own errors.
-  void appendLedger({
+  // Phase 6: file-canonical. Writes go directly to harness/ledger/.
+  await appendLedger({
     at: new Date().toISOString(),
     action_kind: input.action_kind,
     close_lead_id: input.close_lead_id ?? null,
@@ -105,27 +97,7 @@ export type ApprovalAuditInput = {
 };
 
 export async function logApprovalChange(input: ApprovalAuditInput): Promise<void> {
-  // Dual-write: Supabase first (canonical), then ledger mirror.
-  try {
-    const sb = getSupabaseServer();
-    const { error } = await sb.from("approval_audit").insert({
-      plan_id: input.plan_id,
-      day_index: input.day_index ?? null,
-      from_status: input.from_status,
-      to_status: input.to_status,
-      actor: input.actor ?? null,
-      reason: input.reason ?? null,
-      based_on_snapshot_id: input.based_on_snapshot_id ?? null,
-    });
-    if (error) {
-      console.error("[approval-audit] insert failed", error.message);
-    }
-  } catch (e) {
-    console.error("[approval-audit] insert exception", e);
-  }
-
-  // Fire-and-forget mirror to harness/approvals/YYYY-MM.jsonl.
-  void appendApprovalAudit({
+  await appendApprovalAudit({
     at: new Date().toISOString(),
     plan_id: input.plan_id,
     day_index: input.day_index ?? null,
@@ -137,6 +109,9 @@ export async function logApprovalChange(input: ApprovalAuditInput): Promise<void
   });
 }
 
+/** UI-facing row shape preserved across the migration. The harness ledger
+ *  emits `LedgerRow`s; this helper adapts them to the legacy shape so
+ *  callers (`/console`, briefing, lead activity) don't need to change. */
 export type ExecutionLogRow = {
   id: string;
   at: string;
@@ -150,80 +125,63 @@ export type ExecutionLogRow = {
   snapshot_id_at_action: string | null;
 };
 
+function rowFromLedger(r: LedgerRow): ExecutionLogRow {
+  return {
+    // The ledger has no id (JSONL is append-only and rows are content-keyed).
+    // Synthesize a stable-ish id from at + trace + kind so React keys work.
+    id: `${r.at}__${r.trace_id ?? "no-trace"}__${r.action_kind}`,
+    at: r.at,
+    action_kind: r.action_kind,
+    close_lead_id: r.close_lead_id ?? null,
+    plan_id: r.plan_id ?? null,
+    payload: r.payload ?? null,
+    result: r.result ?? "ok",
+    skip_code: r.skip_code ?? null,
+    trace_id: r.trace_id ?? null,
+    snapshot_id_at_action: r.snapshot_id_at_action ?? null,
+  };
+}
+
 export async function listRecentExecutionForLead(
   leadId: string,
-  limit = 12
+  limit = 12,
 ): Promise<ExecutionLogRow[]> {
-  const sb = getSupabaseServer();
-  const { data, error } = await sb
-    .from("execution_log")
-    .select(
-      "id, at, action_kind, close_lead_id, plan_id, payload, result, skip_code, trace_id, snapshot_id_at_action"
-    )
-    .eq("close_lead_id", leadId)
-    .order("at", { ascending: false })
-    .limit(limit);
-  if (error) throw new Error(`listRecentExecutionForLead: ${error.message}`);
-  return (data as ExecutionLogRow[]) ?? [];
+  const rows = await ledgerListForLead(leadId, limit);
+  return rows.map(rowFromLedger);
 }
 
-/** Org-wide recent execution log rows (operator console / demo tail). */
 export async function listRecentExecutionGlobal(limit = 40): Promise<ExecutionLogRow[]> {
-  const sb = getSupabaseServer();
-  const { data, error } = await sb
-    .from("execution_log")
-    .select(
-      "id, at, action_kind, close_lead_id, plan_id, payload, result, skip_code, trace_id, snapshot_id_at_action"
-    )
-    .order("at", { ascending: false })
-    .limit(limit);
-  if (error) throw new Error(`listRecentExecutionGlobal: ${error.message}`);
-  return (data as ExecutionLogRow[]) ?? [];
+  const rows = await ledgerListGlobal(limit);
+  return rows.map(rowFromLedger);
 }
 
-/** All recent log rows for a single action_kind (console kind filter). */
 export async function listExecutionByKind(
   kind: ExecutionLogKind,
-  limit = 80
+  limit = 80,
 ): Promise<ExecutionLogRow[]> {
-  const sb = getSupabaseServer();
-  const { data, error } = await sb
-    .from("execution_log")
-    .select(
-      "id, at, action_kind, close_lead_id, plan_id, payload, result, skip_code, trace_id, snapshot_id_at_action"
-    )
-    .eq("action_kind", kind)
-    .order("at", { ascending: false })
-    .limit(limit);
-  if (error) throw new Error(`listExecutionByKind: ${error.message}`);
-  return (data as ExecutionLogRow[]) ?? [];
+  const rows = await ledgerListByKind(kind, limit);
+  return rows.map(rowFromLedger);
 }
 
-/** All log rows for a delegations/chat trace_id (console deep-link). */
-export async function listExecutionByTraceId(traceId: string, limit = 80): Promise<ExecutionLogRow[]> {
+export async function listExecutionByTraceId(
+  traceId: string,
+  limit = 80,
+): Promise<ExecutionLogRow[]> {
   const tid = traceId.trim();
   if (!tid) return [];
-  const sb = getSupabaseServer();
-  const { data, error } = await sb
-    .from("execution_log")
-    .select(
-      "id, at, action_kind, close_lead_id, plan_id, payload, result, skip_code, trace_id, snapshot_id_at_action"
-    )
-    .eq("trace_id", tid)
-    .order("at", { ascending: false })
-    .limit(limit);
-  if (error) throw new Error(`listExecutionByTraceId: ${error.message}`);
-  return (data as ExecutionLogRow[]) ?? [];
+  const rows = await ledgerListByTraceId(tid, limit);
+  return rows.map(rowFromLedger);
 }
 
-/** Upsert lead freshness bump (webhook path). */
+/** Upsert lead freshness bump (webhook path). Stays in Supabase as
+ *  auxiliary memory — too high-frequency for git. */
 export async function touchLeadActivity(leadId: string): Promise<void> {
   if (!leadId?.trim()) return;
   try {
     const sb = getSupabaseServer();
     const { error } = await sb.from("lead_activity_touches").upsert(
       { lead_id: leadId.trim(), bumped_at: new Date().toISOString() },
-      { onConflict: "lead_id" }
+      { onConflict: "lead_id" },
     );
     if (error) {
       console.error("[lead_activity_touches] upsert failed", error.message);
@@ -246,19 +204,9 @@ export async function getLeadActivityBumpedAt(leadId: string): Promise<string | 
 
 /** Latest row with a skip_code for this plan (approvals queue / explainability). */
 export async function getLatestExecutionSkipForPlan(
-  planId: string
+  planId: string,
 ): Promise<{ skip_code: string; at: string } | null> {
-  const sb = getSupabaseServer();
-  const { data, error } = await sb
-    .from("execution_log")
-    .select("skip_code, at")
-    .eq("plan_id", planId)
-    .not("skip_code", "is", null)
-    .order("at", { ascending: false })
-    .limit(1)
-    .maybeSingle();
-  if (error || !data) return null;
-  const row = data as { skip_code?: string; at?: string };
-  if (!row.skip_code || !row.at) return null;
+  const row = await ledgerGetLatestSkipForPlan(planId);
+  if (!row || !row.skip_code || !row.at) return null;
   return { skip_code: row.skip_code, at: row.at };
 }

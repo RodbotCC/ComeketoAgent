@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   ProposalWorkbench,
   type ProposalPlanItem,
@@ -18,6 +18,22 @@ const STATUS_LABEL: Record<ApprovalStatus, string> = {
 };
 
 const DAY_TONES = ["lavender", "sky", "sage", "lemon", "peach", "rose", "blue"] as const;
+
+const STATUS_PRIORITY: ApprovalStatus[] = [
+  "needs_review",
+  "not_ready",
+  "approved",
+  "sent",
+  "skipped",
+];
+
+function pickInitialDayIndex(days: ProposalDayItem[]): number {
+  for (const status of STATUS_PRIORITY) {
+    const idx = days.findIndex((d) => d.approval_status === status);
+    if (idx !== -1) return idx;
+  }
+  return 0;
+}
 
 function summaryStatus(days: ProposalDayItem[]): ApprovalStatus {
   // Same priority order the proposals board uses.
@@ -159,32 +175,6 @@ function AssetsPanel({
   );
 }
 
-type TileProps = {
-  day: ProposalDayItem;
-  tone: string;
-  onOpen: () => void;
-};
-
-function DayTile({ day, tone, onOpen }: TileProps) {
-  return (
-    <button
-      type="button"
-      className={`cmk-pdw-tile cmk-pdw-tile-${tone}`}
-      data-status={day.approval_status}
-      onClick={onOpen}
-    >
-      <span className="cmk-pdw-tile-num">Day {day.day_number}</span>
-      <span className={`cmk-pdw-tile-status proposal-status-${day.approval_status}`}>
-        {STATUS_LABEL[day.approval_status]}
-      </span>
-      <p className="cmk-pdw-tile-obj">{day.objective || "(no objective)"}</p>
-      <span className="cmk-pdw-tile-touches">
-        {day.touches.length} {day.touches.length === 1 ? "touch" : "touches"}
-      </span>
-    </button>
-  );
-}
-
 export function PlanDaysWorkbench({
   plan,
   leadName,
@@ -194,29 +184,130 @@ export function PlanDaysWorkbench({
   leadName: string;
   intakeArtifacts: IntakeArtifactRow[];
 }) {
-  const [openDayIndex, setOpenDayIndex] = useState<number | null>(null);
   const proposalItem = useMemo(() => planToProposalPlanItem(plan, leadName), [plan, leadName]);
+  const days = proposalItem.days;
+  const dayCount = days.length;
 
-  // When the workbench opens, it auto-selects the first needs-review day. We
-  // pre-shift the active day by reordering — simpler: the workbench handles its
-  // own `initialDay`. We just open it.
+  // Active day in the pager (single-day focus). Default to the first
+  // needs-review (or not-ready) day so Andre lands on the actionable one.
+  // localStorage-keyed by plan_id so re-visits remember position.
+  const storageKey = `cmk:plan-pager:${plan.plan_id}`;
+  const [activeIdx, setActiveIdx] = useState<number>(() => pickInitialDayIndex(days));
+  const [openDayIndex, setOpenDayIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    try {
+      const raw = window.localStorage.getItem(storageKey);
+      if (raw == null) return;
+      const n = Number(raw);
+      if (Number.isFinite(n) && n >= 0 && n < dayCount) setActiveIdx(n);
+    } catch {
+      // ignore
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [storageKey, dayCount]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    try { window.localStorage.setItem(storageKey, String(activeIdx)); } catch {}
+  }, [storageKey, activeIdx]);
+
+  const active = days[activeIdx] ?? days[0];
+  const tone = DAY_TONES[activeIdx % DAY_TONES.length];
+
+  function go(delta: number) {
+    setActiveIdx((i) => Math.max(0, Math.min(dayCount - 1, i + delta)));
+  }
 
   return (
     <>
-      <div className="cmk-pdw-grid">
-        {proposalItem.days.map((d, idx) => (
-          <DayTile
-            key={`${plan.plan_id}-${idx}`}
-            day={d}
-            tone={DAY_TONES[idx % DAY_TONES.length]}
-            onOpen={() => setOpenDayIndex(idx)}
-          />
-        ))}
+      {/* Chip rail — always-visible day index with status-colored dots */}
+      <nav className="cmk-pdw-chips" aria-label="Plan day navigation">
+        {days.map((d, idx) => {
+          const isActive = idx === activeIdx;
+          return (
+            <button
+              key={`${plan.plan_id}-chip-${idx}`}
+              type="button"
+              className={`cmk-pdw-chip${isActive ? " is-active" : ""}`}
+              data-status={d.approval_status}
+              onClick={() => setActiveIdx(idx)}
+              title={`Day ${d.day_number} · ${STATUS_LABEL[d.approval_status]}`}
+            >
+              <span className="cmk-pdw-chip-dot" aria-hidden />
+              <span className="cmk-pdw-chip-num">Day {d.day_number}</span>
+            </button>
+          );
+        })}
+      </nav>
+
+      {/* Single-day pager — full-width tile with prev/next arrows */}
+      <div className="cmk-pdw-pager">
+        <button
+          type="button"
+          className="cmk-pdw-pager-arrow"
+          onClick={() => go(-1)}
+          disabled={activeIdx === 0}
+          aria-label="Previous day"
+        >
+          ◀
+        </button>
+
+        <button
+          type="button"
+          className={`cmk-pdw-tile cmk-pdw-tile-${tone} cmk-pdw-tile--full`}
+          data-status={active.approval_status}
+          onClick={() => setOpenDayIndex(activeIdx)}
+        >
+          <div className="cmk-pdw-tile-head">
+            <span className="cmk-pdw-tile-num">Day {active.day_number}</span>
+            <span
+              className={`cmk-pdw-tile-status proposal-status-${active.approval_status}`}
+            >
+              {STATUS_LABEL[active.approval_status]}
+            </span>
+            <span className="cmk-pdw-tile-touches">
+              {active.touches.length} {active.touches.length === 1 ? "touch" : "touches"}
+            </span>
+          </div>
+          <p className="cmk-pdw-tile-obj cmk-pdw-tile-obj--full">
+            {active.objective || "(no objective)"}
+          </p>
+          {active.touches.length > 0 && (
+            <ul className="cmk-pdw-tile-touchlist">
+              {active.touches.slice(0, 4).map((t, i) => (
+                <li key={i}>
+                  <span className="cmk-pdw-tile-touchchan">{t.channel}</span>
+                  <span className="cmk-pdw-tile-touchintent">{t.intent || "(no intent)"}</span>
+                </li>
+              ))}
+              {active.touches.length > 4 && (
+                <li className="cmk-pdw-tile-touchmore">
+                  +{active.touches.length - 4} more
+                </li>
+              )}
+            </ul>
+          )}
+          <span className="cmk-pdw-tile-cta">Click to edit day →</span>
+        </button>
+
+        <button
+          type="button"
+          className="cmk-pdw-pager-arrow"
+          onClick={() => go(1)}
+          disabled={activeIdx >= dayCount - 1}
+          aria-label="Next day"
+        >
+          ▶
+        </button>
       </div>
+
       {openDayIndex !== null && (
         <ProposalWorkbench
           plan={proposalItem}
           onClose={() => setOpenDayIndex(null)}
+          initialDayIndex={openDayIndex}
           assetsSlot={
             <AssetsPanel artifacts={intakeArtifacts} leadId={plan.close_lead_id} />
           }

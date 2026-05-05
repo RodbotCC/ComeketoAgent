@@ -42,7 +42,7 @@ import {
 } from "./plan";
 import { codegenPlanForClose } from "./plan-to-close";
 import { validateNepqVoice, hasBlockingViolation, type VoiceViolation } from "./nepq";
-import { setDayStatus } from "./plans-db";
+import { setDayStatus, getPlanById, pausePlan, getLatestPlanForLead } from "./plans-db";
 import { resolveLeadTimezone, type TimezoneResolution } from "./timezone";
 import { randomUUID } from "crypto";
 import { writeHeartbeatRunSnapshot } from "./harness-heartbeat";
@@ -288,14 +288,10 @@ export async function runHeartbeatForPlan(
   const sb = getSupabaseServer();
   const settings = await getSettings();
 
-  const { data: row, error: readErr } = await sb
-    .from("lead_plans")
-    .select("*")
-    .eq("id", planId)
-    .single();
-  if (readErr || !row) throw new Error(`heartbeat: plan ${planId} not found (${readErr?.message ?? ""})`);
-
-  const plan = rowToPlan(row as Record<string, unknown>);
+  // Phase 6: file-canonical plan lookup.
+  const fsplan = await getPlanById(planId);
+  if (!fsplan) throw new Error(`heartbeat: plan ${planId} not found`);
+  const plan = fsplan;
   const box = await closeGetLeadFull(plan.close_lead_id);
   const currentSnapshotId = snapshotIdForBox(box);
   const snapshotMatch = currentSnapshotId === plan.based_on_snapshot_id;
@@ -304,7 +300,7 @@ export async function runHeartbeatForPlan(
   let planWasStale = false;
   if (!snapshotMatch && (plan.status === "approved" || plan.status === "active")) {
     planWasStale = true;
-    await sb.from("lead_plans").update({ status: "paused" }).eq("id", plan.plan_id);
+    await pausePlan(plan.plan_id);
     void logExecution({
       action_kind: "plan_paused_stale",
       close_lead_id: plan.close_lead_id,
@@ -490,25 +486,9 @@ export async function runHeartbeatForPlan(
     duration_ms: Date.now() - startedAt,
   };
 
-  // Persist the run for audit.
+  // Persist the run for audit. Phase 6: file-canonical, no Supabase write.
   const runId = (globalThis.crypto?.randomUUID?.() ?? `hb_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`);
   const runAt = new Date().toISOString();
-  await sb.from("heartbeat_runs").insert({
-    id: runId,
-    scope: "lead",
-    plan_id: plan.plan_id,
-    close_lead_id: plan.close_lead_id,
-    snapshot_match: snapshotMatch,
-    plan_was_stale: planWasStale,
-    actions_eligible,
-    actions_fired,
-    actions_skipped,
-    skip_breakdown,
-    report: days,
-    duration_ms: report.duration_ms,
-    trigger,
-  });
-  // Phase 5 mirror — fire-and-forget.
   void writeHeartbeatRunSnapshot({
     run_id: runId,
     at: runAt,
@@ -605,17 +585,10 @@ export async function simulatePlanForLead(leadId: string): Promise<SimulatedPlan
   const sb = getSupabaseServer();
   const settings = await getSettings();
 
-  const { data: row, error: readErr } = await sb
-    .from("lead_plans")
-    .select("*")
-    .eq("close_lead_id", leadId)
-    .order("generated_at", { ascending: false })
-    .limit(1)
-    .maybeSingle();
-  if (readErr) throw new Error(`simulate: plan read failed: ${readErr.message}`);
-  if (!row) return null;
-
-  const plan = rowToPlan(row as Record<string, unknown>);
+  // Phase 6: file-canonical plan lookup.
+  const fsplan = await getLatestPlanForLead(leadId);
+  if (!fsplan) return null;
+  const plan = fsplan;
   const box = await closeGetLeadFull(plan.close_lead_id);
   const currentSnapshotId = snapshotIdForBox(box);
   const snapshotMatch = currentSnapshotId === plan.based_on_snapshot_id;
@@ -724,14 +697,14 @@ export async function runHeartbeatSweep(
 }> {
   const sweepStarted = Date.now();
   const traceId = randomUUID();
-  const sb = getSupabaseServer();
-  // Sweep approved + active + draft (draft so we still catch staleness).
-  const { data, error } = await sb
-    .from("lead_plans")
-    .select("id")
-    .in("status", ["draft", "approved", "active"]);
-  if (error) throw new Error(`heartbeat sweep read failed: ${error.message}`);
-  const ids = ((data as Array<{ id: string }>) ?? []).map((r) => r.id);
+  // Phase 6: file-canonical sweep of plans needing heartbeat attention.
+  const { listAllPlans } = await import("./lead-plan-fs");
+  const eligible = await listAllPlans({
+    state: "active",
+    filterStatus: ["draft", "approved", "active"],
+    limit: 500,
+  });
+  const ids = eligible.map((p) => p.plan_id);
 
   const runs: HeartbeatReport[] = [];
   const errors: Array<{ plan_id: string; error: string }> = [];
@@ -776,16 +749,7 @@ export async function runHeartbeatSweep(
     errors,
     lead_summaries,
   };
-  await sb.from("heartbeat_runs").insert({
-    id: sweepRunId,
-    scope: "all",
-    actions_eligible: totalEligible,
-    actions_fired: totalFired,
-    actions_skipped: totalSkipped,
-    skip_breakdown: breakdown,
-    report: sweepReport,
-    trigger,
-  });
+  // Phase 6: file-canonical, no Supabase write.
   void writeHeartbeatRunSnapshot({
     run_id: sweepRunId,
     at: sweepRunAt,
@@ -806,15 +770,21 @@ export async function runHeartbeatSweep(
 // ─── DB helpers for the UI ──────────────────────────────────────────────
 
 export async function getLatestHeartbeatForLead(leadId: string) {
-  const sb = getSupabaseServer();
-  const { data, error } = await sb
-    .from("heartbeat_runs")
-    .select("*")
-    .eq("close_lead_id", leadId)
-    .order("ran_at", { ascending: false })
-    .limit(1)
-    .maybeSingle();
-  if (error) throw new Error(`getLatestHeartbeatForLead failed: ${error.message}`);
+  // Phase 6: file-canonical via harness-heartbeat. Scan recent days for
+  // the latest run for this lead.
+  const { listRecentHeartbeatRuns } = await import("./harness-heartbeat");
+  const all = await listRecentHeartbeatRuns(500, 14);
+  const hit = all.find((r) => r.close_lead_id === leadId);
+  if (!hit) return null;
+  const data = {
+    ran_at: hit.at,
+    actions_eligible: hit.actions_eligible,
+    actions_fired: hit.actions_fired,
+    actions_skipped: hit.actions_skipped,
+    skip_breakdown: hit.skip_breakdown,
+    snapshot_match: hit.snapshot_match ?? false,
+    plan_was_stale: hit.plan_was_stale ?? false,
+  };
   return data as
     | (Record<string, unknown> & {
         ran_at: string;
@@ -847,32 +817,44 @@ export type HeartbeatRunRow = {
   trigger: "cron" | "manual" | "api";
 };
 
-/** List recent heartbeat runs (most recent first). */
+/** Adapt a harness HeartbeatRunSnapshot (file shape) to the legacy DB-row
+ *  shape so existing UI consumers don't need to change. */
+function snapToRow(s: import("./harness-heartbeat").HeartbeatRunSnapshot): HeartbeatRunRow {
+  return {
+    id: s.run_id,
+    ran_at: s.at,
+    scope: s.scope,
+    plan_id: s.plan_id ?? null,
+    close_lead_id: s.close_lead_id ?? null,
+    snapshot_match: s.snapshot_match ?? null,
+    plan_was_stale: s.plan_was_stale ?? null,
+    actions_eligible: s.actions_eligible,
+    actions_fired: s.actions_fired,
+    actions_skipped: s.actions_skipped,
+    skip_breakdown: s.skip_breakdown,
+    report: s.report,
+    duration_ms: s.duration_ms,
+    trigger: (s.trigger as HeartbeatRunRow["trigger"]) ?? "cron",
+  };
+}
+
+/** List recent heartbeat runs (most recent first). Phase 6: file-canonical. */
 export async function listRecentHeartbeats(
   opts: { limit?: number; scope?: HeartbeatRunRow["scope"] } = {}
 ): Promise<HeartbeatRunRow[]> {
-  const sb = getSupabaseServer();
-  let q = sb
-    .from("heartbeat_runs")
-    .select("*")
-    .order("ran_at", { ascending: false })
-    .limit(opts.limit ?? 50);
-  if (opts.scope) q = q.eq("scope", opts.scope);
-  const { data, error } = await q;
-  if (error) throw new Error(`listRecentHeartbeats failed: ${error.message}`);
-  return (data as HeartbeatRunRow[]) ?? [];
+  const { listRecentHeartbeatRuns } = await import("./harness-heartbeat");
+  const limit = opts.limit ?? 50;
+  const all = await listRecentHeartbeatRuns(limit * 2, 7);
+  let filtered = opts.scope ? all.filter((r) => r.scope === opts.scope) : all;
+  filtered = filtered.slice(0, limit);
+  return filtered.map(snapToRow);
 }
 
-/** Fetch a single heartbeat run by id. */
+/** Fetch a single heartbeat run by id. Phase 6: file-canonical. */
 export async function getHeartbeatRunById(id: string): Promise<HeartbeatRunRow | null> {
-  const sb = getSupabaseServer();
-  const { data, error } = await sb
-    .from("heartbeat_runs")
-    .select("*")
-    .eq("id", id)
-    .maybeSingle();
-  if (error) throw new Error(`getHeartbeatRunById failed: ${error.message}`);
-  return (data as HeartbeatRunRow) || null;
+  const { getHeartbeatRunByIdFromFiles } = await import("./harness-heartbeat");
+  const snap = await getHeartbeatRunByIdFromFiles(id);
+  return snap ? snapToRow(snap) : null;
 }
 
 /**
@@ -889,55 +871,7 @@ export async function aggregateLast24h(): Promise<{
   earliest_ran_at: string | null;
   latest_ran_at: string | null;
 }> {
-  const sb = getSupabaseServer();
-  const since = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
-  const { data, error } = await sb
-    .from("heartbeat_runs")
-    .select("scope, ran_at, actions_eligible, actions_fired, actions_skipped, skip_breakdown")
-    .gte("ran_at", since);
-  if (error) throw new Error(`aggregateLast24h failed: ${error.message}`);
-  const rows = (data as Array<Pick<HeartbeatRunRow,
-    "scope" | "ran_at" | "actions_eligible" | "actions_fired" | "actions_skipped" | "skip_breakdown"
-  >>) ?? [];
-
-  let leadRuns = 0;
-  let sweepSummaries = 0;
-  let elig = 0;
-  let fired = 0;
-  let skipped = 0;
-  const skipMap: Record<string, number> = {};
-  let earliest: string | null = null;
-  let latest: string | null = null;
-
-  for (const r of rows) {
-    if (r.scope === "all") {
-      sweepSummaries += 1;
-    } else {
-      leadRuns += 1;
-      elig += r.actions_eligible || 0;
-      fired += r.actions_fired || 0;
-      skipped += r.actions_skipped || 0;
-      for (const [code, n] of Object.entries(r.skip_breakdown || {})) {
-        skipMap[code] = (skipMap[code] || 0) + (n as number);
-      }
-    }
-    if (!earliest || r.ran_at < earliest) earliest = r.ran_at;
-    if (!latest || r.ran_at > latest) latest = r.ran_at;
-  }
-
-  const top_skip_codes = Object.entries(skipMap)
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 8)
-    .map(([code, count]) => ({ code, count }));
-
-  return {
-    sweep_summary_count: sweepSummaries,
-    lead_run_count: leadRuns,
-    total_actions_eligible: elig,
-    total_actions_fired: fired,
-    total_actions_skipped: skipped,
-    top_skip_codes,
-    earliest_ran_at: earliest,
-    latest_ran_at: latest,
-  };
+  // Phase 6: file-canonical via harness-heartbeat aggregator.
+  const { aggregateRecentHeartbeat } = await import("./harness-heartbeat");
+  return aggregateRecentHeartbeat(24);
 }

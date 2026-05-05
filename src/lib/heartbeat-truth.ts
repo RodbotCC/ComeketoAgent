@@ -16,7 +16,6 @@
  *
  * Pure read; no DB writes. Server-only (uses the service-role Supabase client).
  */
-import { getSupabaseServer } from "./supabase";
 import type { DayVerdict, ActionVerdict } from "./heartbeat";
 import type { PlannedTouchpoint } from "./plan";
 
@@ -95,17 +94,22 @@ function isDayVerdictArray(x: unknown): x is DayVerdict[] {
  *     action with `executed` present (each represents a real Close write).
  */
 export async function aggregateOperatorTruth(): Promise<HeartbeatTruthSummary> {
-  const sb = getSupabaseServer();
-  const since = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
-  const { data, error } = await sb
-    .from("heartbeat_runs")
-    .select(
-      "id, scope, ran_at, plan_id, close_lead_id, actions_eligible, actions_fired, actions_skipped, skip_breakdown, report"
-    )
-    .gte("ran_at", since)
-    .order("ran_at", { ascending: false });
-  if (error) throw new Error(`aggregateOperatorTruth failed: ${error.message}`);
-  const rows = (data as Array<Record<string, unknown>>) ?? [];
+  // Phase 6: file-canonical via harness-heartbeat.
+  const { listRecentHeartbeatRuns } = await import("./harness-heartbeat");
+  const sinceMs = Date.now() - 24 * 60 * 60 * 1000;
+  const all = await listRecentHeartbeatRuns(2000, 2);
+  const rows = all.filter((r) => new Date(r.at).getTime() >= sinceMs).map((r) => ({
+    id: r.run_id,
+    scope: r.scope,
+    ran_at: r.at,
+    plan_id: r.plan_id ?? null,
+    close_lead_id: r.close_lead_id ?? null,
+    actions_eligible: r.actions_eligible,
+    actions_fired: r.actions_fired,
+    actions_skipped: r.actions_skipped,
+    skip_breakdown: r.skip_breakdown,
+    report: r.report,
+  })) as Array<Record<string, unknown>>;
 
   let sweep_summary_count = 0;
   let lead_run_count = 0;

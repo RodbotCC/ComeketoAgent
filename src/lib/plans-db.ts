@@ -1,14 +1,28 @@
 /**
- * Lead-plan persistence (Supabase). Server-only.
+ * Lead-plan persistence — file-canonical (Phase 6 of harness/ overhaul, 2026-05-05).
  *
- * The DB row column shape mirrors lib/plan.ts SevenDayPlan. Reads round-trip
- * cleanly through SevenDayPlan; writes accept either a freshly-generated
- * SevenDayPlan or a status update.
+ * Plans live at `harness/leads/{lead_id}__{slug}/plan.json`. Reads and writes
+ * go through Octokit against `branch=GITHUB_LEADS_BRANCH`. Supabase
+ * `lead_plans` table is no longer used.
+ *
+ * Cross-plan operations (proposal review, count by status) iterate every
+ * lead's plan.json. At our volume (~50 leads) this is a few seconds per
+ * call worst case; callers cache where appropriate. If volume grows past
+ * a few hundred, rebuild a `harness/catalog/plans-active.json` rollup.
+ *
+ * The exported function signatures mirror the old Supabase-backed API so
+ * all UI consumers stay unchanged. The "Row" type is kept for back-compat
+ * — it now describes the shape returned by readers, derived from plan.json.
  */
 
-import { getSupabaseServer } from "./supabase";
 import type { SevenDayPlan, PlanStatus } from "./plan";
-import { mirrorPlanToFile } from "./lead-plan-fs";
+import {
+  mirrorPlanToFile,
+  readPlanFromFile,
+  listAllPlans,
+  getPlanByIdFromFiles,
+  mutatePlan,
+} from "./lead-plan-fs";
 
 type Row = {
   id: string;
@@ -32,29 +46,40 @@ type Row = {
   killed_reason: string | null;
 };
 
-/** Phase 4 helper: fetch the latest row after a mutation and mirror to
- *  `harness/leads/.../plan.json`. Fire-and-forget — failures swallowed. */
-async function refreshAndMirrorPlan(planId: string): Promise<void> {
-  try {
-    const sb = getSupabaseServer();
-    const { data, error } = await sb
-      .from("lead_plans")
-      .select("*")
-      .eq("id", planId)
-      .maybeSingle();
-    if (error || !data) return;
-    void mirrorPlanToFile(rowToPlan(data as Row));
-  } catch {
-    // swallow — mirror is best-effort during dual-write phase
-  }
-}
-
-function rowToPlan(r: Row): SevenDayPlan & {
+type PlanWithMeta = SevenDayPlan & {
   approved_at?: string;
   approved_by?: string;
   killed_at?: string;
   killed_reason?: string;
-} {
+};
+
+/** Adapter: a read PlanWithMeta into the legacy Row shape used by the queue
+ *  pages and a few internal helpers. */
+function planToRow(p: PlanWithMeta): Row {
+  return {
+    id: p.plan_id,
+    close_lead_id: p.close_lead_id,
+    cycle_started_at: p.cycle_started_at,
+    generated_at: p.generated_at,
+    based_on_snapshot_id: p.based_on_snapshot_id,
+    status: p.status,
+    primary_goal: p.primary_goal,
+    goal_summary: p.goal_summary,
+    lead_state_summary: p.lead_state_summary,
+    known_facts: p.known_facts,
+    unknowns: p.unknowns,
+    best_next_question: p.best_next_question,
+    days: p.days,
+    stop_conditions: p.stop_conditions,
+    approval_required: p.approval_required,
+    approved_at: p.approved_at ?? null,
+    approved_by: p.approved_by ?? null,
+    killed_at: p.killed_at ?? null,
+    killed_reason: p.killed_reason ?? null,
+  };
+}
+
+function rowToPlan(r: Row): PlanWithMeta {
   return {
     plan_id: r.id,
     close_lead_id: r.close_lead_id,
@@ -78,341 +103,227 @@ function rowToPlan(r: Row): SevenDayPlan & {
   };
 }
 
+void rowToPlan; // exported back-compat shape converter; kept for callers
+
 export async function savePlan(plan: SevenDayPlan): Promise<void> {
-  const sb = getSupabaseServer();
-  const { error } = await sb.from("lead_plans").insert({
-    id: plan.plan_id,
-    close_lead_id: plan.close_lead_id,
-    cycle_started_at: plan.cycle_started_at,
-    generated_at: plan.generated_at,
-    based_on_snapshot_id: plan.based_on_snapshot_id,
-    status: plan.status,
-    primary_goal: plan.primary_goal,
-    goal_summary: plan.goal_summary,
-    lead_state_summary: plan.lead_state_summary,
-    known_facts: plan.known_facts,
-    unknowns: plan.unknowns,
-    best_next_question: plan.best_next_question,
-    days: plan.days,
-    stop_conditions: plan.stop_conditions,
-    approval_required: plan.approval_required,
-  });
-  if (error) throw new Error(`savePlan failed: ${error.message}`);
-  void mirrorPlanToFile(plan);
+  await mirrorPlanToFile(plan as PlanWithMeta);
 }
 
 export async function getLatestPlanForLead(
-  leadId: string
-): Promise<ReturnType<typeof rowToPlan> | null> {
-  const sb = getSupabaseServer();
-  const { data, error } = await sb
-    .from("lead_plans")
-    .select("*")
-    .eq("close_lead_id", leadId)
-    .order("generated_at", { ascending: false })
-    .limit(1)
-    .maybeSingle();
-  if (error) throw new Error(`getLatestPlanForLead failed: ${error.message}`);
-  if (!data) return null;
-  return rowToPlan(data as Row);
+  leadId: string,
+): Promise<PlanWithMeta | null> {
+  return readPlanFromFile(leadId);
 }
 
 export async function listPlansForLead(
   leadId: string,
-  limit = 10
-): Promise<Array<ReturnType<typeof rowToPlan>>> {
-  const sb = getSupabaseServer();
-  const { data, error } = await sb
-    .from("lead_plans")
-    .select("*")
-    .eq("close_lead_id", leadId)
-    .order("generated_at", { ascending: false })
-    .limit(limit);
-  if (error) throw new Error(`listPlansForLead failed: ${error.message}`);
-  return ((data as Row[]) ?? []).map(rowToPlan);
+  _limit = 10,
+): Promise<PlanWithMeta[]> {
+  void _limit;
+  // Phase 6: only the current plan is mirrored to file. Historical plans
+  // live in Supabase if at all (orphaned). Return [latest] or [].
+  const latest = await readPlanFromFile(leadId);
+  return latest ? [latest] : [];
 }
 
-/**
- * Recent active plans for the Proposals workbench. This intentionally scans
- * plan JSON in app code because day/touch status lives inside `days`.
- */
+/** Recent active plans for the Proposals workbench. Iterates active lead
+ *  folders. */
 export async function listPlansForProposalReview(
-  limit = 80
-): Promise<Array<ReturnType<typeof rowToPlan>>> {
-  const sb = getSupabaseServer();
-  const { data, error } = await sb
-    .from("lead_plans")
-    .select("*")
-    .in("status", ["draft", "approved", "active", "paused"])
-    .order("generated_at", { ascending: false })
-    .limit(limit);
-  if (error) throw new Error(`listPlansForProposalReview failed: ${error.message}`);
-  return ((data as Row[]) ?? []).map(rowToPlan);
+  limit = 80,
+): Promise<PlanWithMeta[]> {
+  const all = await listAllPlans({
+    state: "active",
+    filterStatus: ["draft", "approved", "active", "paused"],
+    limit,
+  });
+  return all;
 }
 
-export async function approvePlan(planId: string, approver: string): Promise<void> {
-  const sb = getSupabaseServer();
-  const { error } = await sb
-    .from("lead_plans")
-    .update({
-      status: "approved",
-      approved_at: new Date().toISOString(),
-      approved_by: approver,
-    })
-    .eq("id", planId);
-  if (error) throw new Error(`approvePlan failed: ${error.message}`);
-  void refreshAndMirrorPlan(planId);
+export async function approvePlan(
+  planId: string,
+  approver: string,
+): Promise<void> {
+  await mutatePlan(planId, (p) => ({
+    ...p,
+    status: "approved" as PlanStatus,
+    approved_at: new Date().toISOString(),
+    approved_by: approver,
+  }));
 }
 
 export async function killPlan(planId: string, reason: string): Promise<void> {
-  const sb = getSupabaseServer();
-  const { error } = await sb
-    .from("lead_plans")
-    .update({
-      status: "killed",
-      killed_at: new Date().toISOString(),
-      killed_reason: reason || "(no reason)",
-    })
-    .eq("id", planId);
-  if (error) throw new Error(`killPlan failed: ${error.message}`);
-  void refreshAndMirrorPlan(planId);
+  await mutatePlan(planId, (p) => ({
+    ...p,
+    status: "killed" as PlanStatus,
+    killed_at: new Date().toISOString(),
+    killed_reason: reason || "(no reason)",
+  }));
 }
 
 export async function pausePlan(planId: string): Promise<void> {
-  const sb = getSupabaseServer();
-  const { error } = await sb
-    .from("lead_plans")
-    .update({ status: "paused" })
-    .eq("id", planId);
-  if (error) throw new Error(`pausePlan failed: ${error.message}`);
-  void refreshAndMirrorPlan(planId);
+  await mutatePlan(planId, (p) => ({
+    ...p,
+    status: "paused" as PlanStatus,
+  }));
 }
 
-/**
- * Append one `required_action` to a day. Sets `approval_status` to `needs_review` so multi-touch edits surface in the queue.
- */
 export async function appendRequiredActionToPlanDay(
   planId: string,
   dayIndex: number,
-  touch: import("./plan").PlannedTouchpoint
+  touch: import("./plan").PlannedTouchpoint,
 ): Promise<void> {
-  const sb = getSupabaseServer();
-  const { data: row, error: readErr } = await sb
-    .from("lead_plans")
-    .select("days")
-    .eq("id", planId)
-    .single();
-  if (readErr) throw new Error(`appendRequiredActionToPlanDay read failed: ${readErr.message}`);
-  const days = ((row as { days: import("./plan").SevenDayPlanDay[] }).days ?? []).slice();
-  if (dayIndex < 0 || dayIndex >= days.length) {
-    throw new Error(`appendRequiredActionToPlanDay: day index ${dayIndex} out of range (have ${days.length})`);
-  }
-  const d = days[dayIndex];
-  days[dayIndex] = {
-    ...d,
-    required_actions: [...d.required_actions, touch],
-    approval_status: "needs_review",
-  };
-  const { error: writeErr } = await sb.from("lead_plans").update({ days }).eq("id", planId);
-  if (writeErr) throw new Error(`appendRequiredActionToPlanDay write failed: ${writeErr.message}`);
-  void refreshAndMirrorPlan(planId);
+  await mutatePlan(planId, (p) => {
+    const days = p.days.slice();
+    if (dayIndex < 0 || dayIndex >= days.length) {
+      throw new Error(
+        `appendRequiredActionToPlanDay: day index ${dayIndex} out of range (have ${days.length})`,
+      );
+    }
+    const d = days[dayIndex]!;
+    days[dayIndex] = {
+      ...d,
+      required_actions: [...d.required_actions, touch],
+      approval_status: "needs_review",
+    };
+    return { ...p, days };
+  });
 }
 
-/**
- * Edit a single touch in place (at a given day + touch index). Used by the
- * day-card modal inline editor — operator changes channel / intent / draft
- * without going through AI refinement. Bumps approval_status to needs_review
- * since the operator just changed the contract.
- */
 export async function editPlanDayTouch(
   planId: string,
   dayIndex: number,
   touchIndex: number,
-  touch: import("./plan").PlannedTouchpoint
+  touch: import("./plan").PlannedTouchpoint,
 ): Promise<void> {
-  const sb = getSupabaseServer();
-  const { data: row, error: readErr } = await sb
-    .from("lead_plans")
-    .select("days")
-    .eq("id", planId)
-    .single();
-  if (readErr) throw new Error(`editPlanDayTouch read failed: ${readErr.message}`);
-  const days = ((row as { days: import("./plan").SevenDayPlanDay[] }).days ?? []).slice();
-  if (dayIndex < 0 || dayIndex >= days.length) {
-    throw new Error(`editPlanDayTouch: day index ${dayIndex} out of range (have ${days.length})`);
-  }
-  const d = days[dayIndex];
-  if (touchIndex < 0 || touchIndex >= d.required_actions.length) {
-    throw new Error(`editPlanDayTouch: touch index ${touchIndex} out of range (have ${d.required_actions.length})`);
-  }
-  const newActions = [...d.required_actions];
-  newActions[touchIndex] = touch;
-  days[dayIndex] = {
-    ...d,
-    required_actions: newActions,
-    approval_status: "needs_review",
-  };
-  const { error: writeErr } = await sb.from("lead_plans").update({ days }).eq("id", planId);
-  if (writeErr) throw new Error(`editPlanDayTouch write failed: ${writeErr.message}`);
-  void refreshAndMirrorPlan(planId);
+  await mutatePlan(planId, (p) => {
+    const days = p.days.slice();
+    if (dayIndex < 0 || dayIndex >= days.length) {
+      throw new Error(
+        `editPlanDayTouch: day index ${dayIndex} out of range (have ${days.length})`,
+      );
+    }
+    const d = days[dayIndex]!;
+    if (touchIndex < 0 || touchIndex >= d.required_actions.length) {
+      throw new Error(
+        `editPlanDayTouch: touch index ${touchIndex} out of range (have ${d.required_actions.length})`,
+      );
+    }
+    const newActions = [...d.required_actions];
+    newActions[touchIndex] = touch;
+    days[dayIndex] = {
+      ...d,
+      required_actions: newActions,
+      approval_status: "needs_review",
+    };
+    return { ...p, days };
+  });
 }
 
-/**
- * Delete one touch from a day. Used by the day-card modal when the operator
- * removes a planned action. Bumps approval_status to needs_review.
- */
 export async function deletePlanDayTouch(
   planId: string,
   dayIndex: number,
-  touchIndex: number
+  touchIndex: number,
 ): Promise<void> {
-  const sb = getSupabaseServer();
-  const { data: row, error: readErr } = await sb
-    .from("lead_plans")
-    .select("days")
-    .eq("id", planId)
-    .single();
-  if (readErr) throw new Error(`deletePlanDayTouch read failed: ${readErr.message}`);
-  const days = ((row as { days: import("./plan").SevenDayPlanDay[] }).days ?? []).slice();
-  if (dayIndex < 0 || dayIndex >= days.length) {
-    throw new Error(`deletePlanDayTouch: day index ${dayIndex} out of range`);
-  }
-  const d = days[dayIndex];
-  if (touchIndex < 0 || touchIndex >= d.required_actions.length) {
-    throw new Error(`deletePlanDayTouch: touch index ${touchIndex} out of range`);
-  }
-  const newActions = d.required_actions.filter((_, i) => i !== touchIndex);
-  days[dayIndex] = {
-    ...d,
-    required_actions: newActions,
-    approval_status: "needs_review",
-  };
-  const { error: writeErr } = await sb.from("lead_plans").update({ days }).eq("id", planId);
-  if (writeErr) throw new Error(`deletePlanDayTouch write failed: ${writeErr.message}`);
-  void refreshAndMirrorPlan(planId);
+  await mutatePlan(planId, (p) => {
+    const days = p.days.slice();
+    if (dayIndex < 0 || dayIndex >= days.length) {
+      throw new Error(`deletePlanDayTouch: day index ${dayIndex} out of range`);
+    }
+    const d = days[dayIndex]!;
+    if (touchIndex < 0 || touchIndex >= d.required_actions.length) {
+      throw new Error(`deletePlanDayTouch: touch index ${touchIndex} out of range`);
+    }
+    const newActions = d.required_actions.filter((_, i) => i !== touchIndex);
+    days[dayIndex] = {
+      ...d,
+      required_actions: newActions,
+      approval_status: "needs_review",
+    };
+    return { ...p, days };
+  });
 }
 
-/**
- * Replace one day in a plan's `days` array. Used by the per-day AI
- * refinement flow: the LLM regenerates a single day from the user's
- * instruction; everything else stays.
- */
 export async function updatePlanDay(
   planId: string,
   dayIndex: number,
-  newDay: import("./plan").SevenDayPlanDay
+  newDay: import("./plan").SevenDayPlanDay,
 ): Promise<void> {
-  const sb = getSupabaseServer();
-  // Read current days, splice in the new one, write back.
-  const { data: row, error: readErr } = await sb
-    .from("lead_plans")
-    .select("days")
-    .eq("id", planId)
-    .single();
-  if (readErr) throw new Error(`updatePlanDay read failed: ${readErr.message}`);
-  const days = ((row as { days: import("./plan").SevenDayPlanDay[] }).days ?? []).slice();
-  if (dayIndex < 0 || dayIndex >= days.length) {
-    throw new Error(`updatePlanDay: day index ${dayIndex} out of range (have ${days.length})`);
-  }
-  days[dayIndex] = newDay;
-  const { error: writeErr } = await sb
-    .from("lead_plans")
-    .update({ days })
-    .eq("id", planId);
-  if (writeErr) throw new Error(`updatePlanDay write failed: ${writeErr.message}`);
-  void refreshAndMirrorPlan(planId);
+  await mutatePlan(planId, (p) => {
+    const days = p.days.slice();
+    if (dayIndex < 0 || dayIndex >= days.length) {
+      throw new Error(
+        `updatePlanDay: day index ${dayIndex} out of range (have ${days.length})`,
+      );
+    }
+    days[dayIndex] = newDay;
+    return { ...p, days };
+  });
 }
 
-export async function getPlanById(planId: string) {
-  const sb = getSupabaseServer();
-  const { data, error } = await sb
-    .from("lead_plans")
-    .select("*")
-    .eq("id", planId)
-    .single();
-  if (error) throw new Error(`getPlanById failed: ${error.message}`);
-  return data;
+export async function getPlanById(
+  planId: string,
+): Promise<PlanWithMeta | null> {
+  return getPlanByIdFromFiles(planId);
 }
 
-/** Replace a plan's full days[] in one write (used by whole-plan refine). */
 export async function replacePlanDays(
   planId: string,
-  days: import("./plan").SevenDayPlanDay[]
+  days: import("./plan").SevenDayPlanDay[],
 ): Promise<void> {
-  const sb = getSupabaseServer();
-  const { error } = await sb.from("lead_plans").update({ days }).eq("id", planId);
-  if (error) throw new Error(`replacePlanDays failed: ${error.message}`);
-  void refreshAndMirrorPlan(planId);
+  await mutatePlan(planId, (p) => ({ ...p, days }));
 }
 
-/** Update a single day's approval_status in place. */
 export async function setDayStatus(
   planId: string,
   dayIndex: number,
-  status: import("./plan").ApprovalStatus
+  status: import("./plan").ApprovalStatus,
 ): Promise<void> {
-  const sb = getSupabaseServer();
-  const { data: row, error: readErr } = await sb
-    .from("lead_plans")
-    .select("days")
-    .eq("id", planId)
-    .single();
-  if (readErr) throw new Error(`setDayStatus read failed: ${readErr.message}`);
-  const days = ((row as { days: import("./plan").SevenDayPlanDay[] }).days ?? []).slice();
-  if (dayIndex < 0 || dayIndex >= days.length) {
-    throw new Error(`setDayStatus: day index ${dayIndex} out of range`);
-  }
-  days[dayIndex] = { ...days[dayIndex], approval_status: status };
-  const { error: writeErr } = await sb.from("lead_plans").update({ days }).eq("id", planId);
-  if (writeErr) throw new Error(`setDayStatus write failed: ${writeErr.message}`);
-  void refreshAndMirrorPlan(planId);
+  await mutatePlan(planId, (p) => {
+    const days = p.days.slice();
+    if (dayIndex < 0 || dayIndex >= days.length) {
+      throw new Error(`setDayStatus: day index ${dayIndex} out of range`);
+    }
+    days[dayIndex] = { ...days[dayIndex]!, approval_status: status };
+    return { ...p, days };
+  });
 }
 
-function planHasNeedsReviewDay(r: Row): boolean {
-  return (r.days || []).some((d) => d.approval_status === "needs_review");
+function planHasNeedsReviewDay(p: PlanWithMeta): boolean {
+  return (p.days || []).some((d) => d.approval_status === "needs_review");
 }
 
-/**
- * Recent plans that might contain `needs_review` days (same window as list/count queue).
- * Capped at 120 by generated_at — very old pending rows beyond the window won't appear in counts.
- */
-async function fetchPlansEligibleForReviewScan(): Promise<Row[]> {
-  const sb = getSupabaseServer();
-  const { data, error } = await sb
-    .from("lead_plans")
-    .select("*")
-    .in("status", ["draft", "approved", "active"])
-    .order("generated_at", { ascending: false })
-    .limit(120);
-  if (error) throw new Error(`fetchPlansEligibleForReviewScan failed: ${error.message}`);
-  return (data as Row[]) ?? [];
+async function fetchPlansEligibleForReviewScan(): Promise<PlanWithMeta[]> {
+  return listAllPlans({
+    state: "active",
+    filterStatus: ["draft", "approved", "active"],
+    limit: 120,
+  });
 }
 
-/** Count plans with at least one day in `needs_review` (within scan window). */
 export async function countPlansNeedingReview(): Promise<number> {
-  const rows = await fetchPlansEligibleForReviewScan();
-  return rows.filter(planHasNeedsReviewDay).length;
+  const plans = await fetchPlansEligibleForReviewScan();
+  return plans.filter(planHasNeedsReviewDay).length;
 }
 
 export async function countPlansWithStatus(status: PlanStatus): Promise<number> {
-  const sb = getSupabaseServer();
-  const { count, error } = await sb
-    .from("lead_plans")
-    .select("id", { count: "exact", head: true })
-    .eq("status", status);
-  if (error) throw new Error(`countPlansWithStatus failed: ${error.message}`);
-  return count ?? 0;
+  const plans = await listAllPlans({
+    state: "active",
+    filterStatus: [status],
+    limit: 1000,
+  });
+  return plans.length;
 }
 
-/** Plans with at least one day in needs_review (approval queue). */
+/** Plans with at least one day in needs_review (approval queue). Returns
+ *  Row shape for back-compat with existing UI consumers. */
 export async function listPlansNeedingReview(limit = 40): Promise<Row[]> {
-  const rows = await fetchPlansEligibleForReviewScan();
-  const filtered: Row[] = [];
-  for (const r of rows) {
-    if (planHasNeedsReviewDay(r)) {
-      filtered.push(r);
+  const plans = await fetchPlansEligibleForReviewScan();
+  const filtered: PlanWithMeta[] = [];
+  for (const p of plans) {
+    if (planHasNeedsReviewDay(p)) {
+      filtered.push(p);
       if (filtered.length >= limit) break;
     }
   }
-  return filtered;
+  return filtered.map(planToRow);
 }

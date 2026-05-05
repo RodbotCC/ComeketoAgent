@@ -8,9 +8,9 @@
  * with the new plan state. This beacon hashes the rendered plan and
  * dispatches `comeketo:plan-changed` on the window when the hash shifts.
  *
- * Listeners (cockpit's PlanDayStrip, /lead/[id]/graph PlanGraphView)
- * re-fetch on the event so they stay in sync with the lead page within
- * the same window — no tab-focus refresh needed.
+ * Listeners (cockpit's PlanDayStrip) re-fetch on the event so they stay
+ * in sync with the lead page within the same window — no tab-focus
+ * refresh needed.
  *
  * Renders nothing.
  */

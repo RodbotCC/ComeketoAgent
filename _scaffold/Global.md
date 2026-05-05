@@ -6,6 +6,8 @@ Running snapshot of project state. Tapped before & after every move.
 
 ## 2026-05-05
 
+- **before/after [delete /lead/[id]/graph sub-tab]:** Snapshot — Graph was a sub-tab on `/lead/[id]` that pre-dated the workbench overlay; now redundant + felt unprofessional. After — entire surface gone: `src/app/lead/[id]/graph/` directory + `PlanGraphView.tsx` deleted; LeadSubNav drops the Graph link; cockpit's `edit plan →` link in `PlanDayStrip` repointed to the lead's Plan page (where the workbench lives). Three stale comments mentioning the graph page rewritten in `PlanDayStrip.tsx`, `PlanPageBeacon.tsx`, `ChatPanel.tsx`. CSS classes orphaned (no JSX refs) but left in `globals.css` until next sweep. tsc clean.
+
 - **after [harness/ Phase 3+4+5 — ledger + plan mirror + audit ledgers]:** Done. The harness now CAPTURES every meaningful action.
   - **`harness/ledger/YYYY-MM-DD.jsonl`** — every `logExecution` row mirrors here (Phase 3). Append-only, JSONL, greppable.
   - **`harness/leads/{id}__{slug}/plan.json`** — every plan mutation (savePlan, approve, kill, pause, day status, refine, etc.) mirrors latest plan state here (Phase 4).

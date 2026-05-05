@@ -14,6 +14,7 @@ import {
   approveAndRunAction,
   type RefinePlanState,
 } from "./actions";
+import { CloseActionsPreview } from "./CloseActionsPreview";
 import {
   heartbeatReportHeadline,
   type ExecutionMode,
@@ -210,6 +211,47 @@ export function PlanCardClient({
           >
             Refine plan…
           </button>
+
+          {/* Secondary cluster — preview, regenerate-with-horizon. Pause /
+              status-flip Approve live in the right-click context menu. */}
+          <span className="plan-fab-divider" aria-hidden />
+          <CloseActionsPreview
+            planId={planId}
+            buttonClassName="plan-fab-btn plan-fab-btn-secondary"
+            buttonLabel="Preview Close"
+          />
+          <form
+            action={generatePlanAction}
+            className="plan-fab-regen-form"
+          >
+            <input type="hidden" name="lead_id" value={leadId} />
+            <label className="plan-fab-regen-label">
+              <span className="plan-fab-regen-eyebrow">regen as</span>
+              <input
+                type="number"
+                name="horizon_days"
+                min={1}
+                max={180}
+                defaultValue={planDayCount}
+                className="plan-fab-regen-input"
+                aria-label="Regenerate horizon in days"
+              />
+              <span className="plan-fab-regen-suffix">d</span>
+            </label>
+            <button type="submit" className="plan-fab-btn plan-fab-btn-secondary">
+              Regenerate
+            </button>
+          </form>
+
+          <span className="plan-fab-divider plan-fab-divider--danger" aria-hidden />
+          <form action={killPlanAction} style={{ display: "inline" }}>
+            <input type="hidden" name="plan_id" value={planId} />
+            <input type="hidden" name="lead_id" value={leadId} />
+            <input type="hidden" name="reason" value="killed by operator" />
+            <button type="submit" className="plan-fab-btn plan-fab-btn-kill">
+              Kill plan
+            </button>
+          </form>
         </div>
         {allDaysToast && (
           <div className="plan-card-toast">
