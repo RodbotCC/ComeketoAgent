@@ -6720,6 +6720,211 @@ select.cmk-field-panel {
   grid-template-columns: minmax(420px, 0.96fr) minmax(520px, 1.04fr);
   background: color-mix(in oklab, var(--paper) 72%, var(--card));
 }
+
+/* ─── Day pager (cmk-pwb-day-*) — single-row chip rail above body ─────── */
+.cmk-pwb-day-pager {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-bottom: 1px solid var(--rule);
+  background: color-mix(in oklab, var(--paper) 86%, var(--card));
+}
+.cmk-pwb-day-arrow {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--rule);
+  background: var(--card);
+  color: var(--ink-mid);
+  font-size: 11px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: all 120ms ease;
+}
+.cmk-pwb-day-arrow:hover:not(:disabled) {
+  background: var(--paper);
+  color: var(--ink);
+  border-color: var(--ink-faint);
+}
+.cmk-pwb-day-arrow:disabled { opacity: 0.35; cursor: default; }
+.cmk-pwb-day-chips {
+  display: flex;
+  gap: 6px;
+  flex: 1 1 auto;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+.cmk-pwb-day-chip {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 11px;
+  border-radius: 14px;
+  border: 1px solid var(--rule);
+  background: var(--card);
+  color: var(--ink-mid);
+  font-size: 11.5px;
+  cursor: pointer;
+  transition: all 140ms ease;
+}
+.cmk-pwb-day-chip:hover { border-color: var(--ink-faint); color: var(--ink); }
+.cmk-pwb-day-chip.is-active {
+  border-color: var(--ink);
+  color: var(--ink);
+  background: var(--paper);
+  box-shadow: 0 1px 0 var(--ink);
+}
+.cmk-pwb-day-chip-dot {
+  display: inline-block;
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--ink-faint);
+}
+.cmk-pwb-day-chip[data-status="needs_review"] .cmk-pwb-day-chip-dot { background: var(--peach-deep, #c99668); }
+.cmk-pwb-day-chip[data-status="approved"] .cmk-pwb-day-chip-dot { background: var(--sage-deep, #8fa078); }
+.cmk-pwb-day-chip[data-status="sent"] .cmk-pwb-day-chip-dot { background: var(--lavender-deep, #8c82a8); }
+.cmk-pwb-day-chip[data-status="skipped"] .cmk-pwb-day-chip-dot { background: var(--ink-faint); }
+.cmk-pwb-day-chip-num { font-weight: 500; }
+.cmk-pwb-day-chip-touches {
+  font-size: 10px;
+  color: var(--ink-soft);
+  background: color-mix(in oklab, var(--paper) 60%, var(--card));
+  border-radius: 8px;
+  padding: 1px 6px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── Touch preview (cmk-touch-preview-*) ────────────────────────────── */
+.cmk-touch-preview {
+  margin: 16px 0 12px;
+  padding: 16px 18px;
+  border-radius: 10px;
+  border: 1px solid var(--rule);
+  background: var(--card);
+}
+.cmk-touch-preview--email {
+  background: color-mix(in oklab, var(--paper) 90%, var(--sky-deep, #8fa9c0));
+  border-color: color-mix(in oklab, var(--rule) 60%, var(--sky-deep, #8fa9c0));
+}
+.cmk-touch-preview--sms {
+  background: color-mix(in oklab, var(--paper) 92%, var(--sage-deep, #8fa078));
+  border-color: color-mix(in oklab, var(--rule) 60%, var(--sage-deep, #8fa078));
+}
+.cmk-touch-preview--task {
+  background: color-mix(in oklab, var(--paper) 92%, var(--lemon-deep, #c9b850));
+  border-color: color-mix(in oklab, var(--rule) 60%, var(--lemon-deep, #c9b850));
+}
+.cmk-touch-preview-head {
+  display: flex; justify-content: space-between; align-items: baseline;
+  margin-bottom: 10px;
+  font-size: 11px;
+  color: var(--ink-soft);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.cmk-touch-preview-tag { font-weight: 600; }
+.cmk-touch-preview-meta { font-style: italic; text-transform: none; letter-spacing: 0; }
+.cmk-touch-preview-subject {
+  margin: 0 0 8px;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--ink);
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 6px;
+}
+.cmk-touch-preview-rich {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--ink);
+}
+.cmk-touch-preview-rich p { margin: 0 0 10px; }
+.cmk-touch-preview-rich p:last-child { margin-bottom: 0; }
+.cmk-touch-preview-rich a { color: var(--ink); text-decoration: underline; }
+.cmk-touch-preview-rich strong { font-weight: 600; }
+.cmk-touch-preview-bubble {
+  margin-top: 4px;
+  padding: 10px 14px;
+  border-radius: 14px 14px 14px 4px;
+  background: color-mix(in oklab, var(--card) 70%, var(--sage-deep, #8fa078));
+  color: var(--ink);
+  font-size: 13.5px;
+  line-height: 1.5;
+  max-width: 78%;
+}
+.cmk-touch-preview-task strong { display: block; font-size: 13.5px; margin-bottom: 4px; }
+.cmk-touch-preview-task p { margin: 0; font-size: 12.5px; color: var(--ink-mid); }
+
+.cmk-touch-preview-assets {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--rule);
+}
+.cmk-touch-preview-assets-head {
+  font-size: 11px;
+  color: var(--ink-soft);
+  letter-spacing: 0.03em;
+  margin-bottom: 6px;
+}
+.cmk-touch-preview-assets-hint {
+  margin-left: 6px;
+  font-style: italic;
+  color: var(--ink-faint);
+}
+.cmk-touch-preview-assets ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.cmk-touch-preview-assets li {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11.5px;
+  color: var(--ink-mid);
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: color-mix(in oklab, var(--paper) 85%, transparent);
+}
+.cmk-touch-preview-asset-name { font-family: var(--mono); }
+.cmk-touch-preview-asset-mime { font-style: italic; color: var(--ink-soft); }
+.cmk-touch-preview-asset-more { font-style: italic; color: var(--ink-soft); }
+
+.cmk-touch-edit-collapsible {
+  margin-top: 10px;
+  font-size: 12px;
+}
+.cmk-touch-edit-collapsible summary {
+  cursor: pointer;
+  font-size: 11px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  padding: 6px 0;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--rule);
+}
+.cmk-touch-edit-collapsible[open] summary { color: var(--ink); }
+
+/* ─── Action spinner (inline, in pending buttons) ─────────────────────── */
+.cmk-action-spinner {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  margin-right: 6px;
+  border-radius: 50%;
+  border: 1.5px solid currentColor;
+  border-top-color: transparent;
+  animation: cmk-action-spin 720ms linear infinite;
+  vertical-align: -1px;
+}
+@keyframes cmk-action-spin {
+  to { transform: rotate(360deg); }
+}
+
 .proposal-workbench-nav {
   min-height: 0;
   display: flex;

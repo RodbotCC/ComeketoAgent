@@ -168,6 +168,137 @@ function panelKey(panel: ActivePanel) {
   return panel.kind === "touch" ? `touch-${panel.touchIndex}` : panel.kind;
 }
 
+/** Tiny inline spinner used in pending action buttons. CSS only, no asset. */
+function ActionSpinner() {
+  return <span className="cmk-action-spinner" aria-hidden />;
+}
+
+/** Render a single touch as a faux-message preview so Andre sees what the
+ *  outbound will look like before approving. Email body uses simple Markdown-
+ *  ish rendering (paragraphs + bold + line breaks); SMS/task get bubble or
+ *  task-card chrome. */
+function TouchPreview({
+  touch,
+  leadName,
+  intakeArtifacts,
+}: {
+  touch: PlannedTouchpoint;
+  leadName: string;
+  intakeArtifacts?: IntakeArtifactRow[];
+}) {
+  const seed = (touch.draft_seed || "").trim();
+  const intent = (touch.intent || "").trim();
+
+  if (touch.channel === "email") {
+    return (
+      <div className="cmk-touch-preview cmk-touch-preview--email">
+        <div className="cmk-touch-preview-head">
+          <span className="cmk-touch-preview-tag">Preview · email</span>
+          <span className="cmk-touch-preview-meta">to {leadName || "lead"}</span>
+        </div>
+        <div className="cmk-touch-preview-body">
+          {intent && <p className="cmk-touch-preview-subject">{intent}</p>}
+          <div
+            className="cmk-touch-preview-rich"
+            dangerouslySetInnerHTML={{ __html: renderRichBody(seed) }}
+          />
+        </div>
+        {intakeArtifacts && intakeArtifacts.length > 0 && (
+          <AssetContextList artifacts={intakeArtifacts} channel="email" />
+        )}
+      </div>
+    );
+  }
+
+  if (touch.channel === "sms") {
+    return (
+      <div className="cmk-touch-preview cmk-touch-preview--sms">
+        <div className="cmk-touch-preview-head">
+          <span className="cmk-touch-preview-tag">Preview · SMS</span>
+          <span className="cmk-touch-preview-meta">to {leadName || "lead"}</span>
+        </div>
+        <div className="cmk-touch-preview-bubble">
+          {seed || <em>{intent || "(empty SMS)"}</em>}
+        </div>
+        {intakeArtifacts && intakeArtifacts.length > 0 && (
+          <AssetContextList artifacts={intakeArtifacts} channel="sms" />
+        )}
+      </div>
+    );
+  }
+
+  // task
+  return (
+    <div className="cmk-touch-preview cmk-touch-preview--task">
+      <div className="cmk-touch-preview-head">
+        <span className="cmk-touch-preview-tag">Preview · task for Andre</span>
+      </div>
+      <div className="cmk-touch-preview-task">
+        <strong>{intent || "(no task description)"}</strong>
+        {seed && <p>{seed}</p>}
+      </div>
+    </div>
+  );
+}
+
+/** Strip-down "rich text" renderer. Converts a plain-text draft to HTML
+ *  with paragraph breaks + simple `**bold**` + URLs as links. NOT a full
+ *  markdown parser — just enough so the preview reads as a real message. */
+function renderRichBody(text: string): string {
+  if (!text) return "<em>(empty draft)</em>";
+  const escaped = text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+  const linked = escaped.replace(
+    /(https?:\/\/[^\s<]+)/g,
+    '<a href="$1" target="_blank" rel="noreferrer">$1</a>',
+  );
+  const bolded = linked.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+  const paras = bolded
+    .split(/\n{2,}/)
+    .map((p) => `<p>${p.replace(/\n/g, "<br />")}</p>`)
+    .join("");
+  return paras;
+}
+
+function AssetContextList({
+  artifacts,
+  channel,
+}: {
+  artifacts: IntakeArtifactRow[];
+  channel: PlanChannel;
+}) {
+  if (artifacts.length === 0) return null;
+  return (
+    <div className="cmk-touch-preview-assets">
+      <div className="cmk-touch-preview-assets-head">
+        Context the agent has on this lead
+        {channel === "email" && (
+          <span className="cmk-touch-preview-assets-hint">
+            (referenced in draft if relevant)
+          </span>
+        )}
+      </div>
+      <ul>
+        {artifacts.slice(0, 8).map((a) => (
+          <li key={a.id}>
+            <span className="cmk-touch-preview-asset-name">{a.filename}</span>
+            <span className="cmk-touch-preview-asset-mime">
+              {a.mime || "file"}
+            </span>
+          </li>
+        ))}
+        {artifacts.length > 8 && (
+          <li className="cmk-touch-preview-asset-more">
+            +{artifacts.length - 8} more
+          </li>
+        )}
+      </ul>
+    </div>
+  );
+}
+
 function ChannelPicker({
   value,
   onChange,
@@ -269,7 +400,13 @@ function TouchEditForm({
           Cancel
         </button>
         <button type="submit" className="plan-btn plan-btn-primary" disabled={pending}>
-          {pending ? "Saving..." : "Save draft"}
+          {pending ? (
+            <>
+              <ActionSpinner /> Saving…
+            </>
+          ) : (
+            "Save draft"
+          )}
         </button>
       </div>
     </form>
@@ -318,7 +455,13 @@ function AddTouchPanel({
         placeholder="Optional draft body"
       />
       <button type="submit" className="plan-btn plan-btn-primary" disabled={pending}>
-        {pending ? "Adding..." : "Add touch"}
+        {pending ? (
+          <>
+            <ActionSpinner /> Adding…
+          </>
+        ) : (
+          "Add touch"
+        )}
       </button>
     </form>
   );
@@ -326,19 +469,23 @@ function AddTouchPanel({
 
 function RefinePanel({ item }: { item: ProposalReviewItem }) {
   const toast = useToast();
+  const [dayPending, startDay] = useTransition();
+  const [planPending, startPlan] = useTransition();
   return (
     <div className="proposal-refine-grid">
       <form
-        action={async (fd) => {
+        action={(fd) => {
           fd.set("plan_id", item.plan_id);
           fd.set("lead_id", item.lead_id);
           fd.set("day_index", String(item.day_index));
-          const result = await refinePlanDayAction({ ok: true }, fd);
-          if (!result.ok) {
-            toast.push(`Day rewrite failed — ${result.error ?? "unknown"}`, { tone: "error", ttl: 5000 });
-          } else {
-            toast.push("Day rewrite queued", { tone: "success" });
-          }
+          startDay(async () => {
+            const result = await refinePlanDayAction({ ok: true }, fd);
+            if (!result.ok) {
+              toast.push(`Day rewrite failed — ${result.error ?? "unknown"}`, { tone: "error", ttl: 5000 });
+            } else {
+              toast.push("Day rewrite queued", { tone: "success" });
+            }
+          });
         }}
         className="proposal-inline-form"
       >
@@ -349,21 +496,34 @@ function RefinePanel({ item }: { item: ProposalReviewItem }) {
           rows={4}
           placeholder="Make this less pushy, switch to SMS, ask a sharper question..."
           required
+          disabled={dayPending}
         />
-        <button type="submit" className="plan-btn plan-btn-primary">
-          Rewrite day
+        <button
+          type="submit"
+          className="plan-btn plan-btn-primary"
+          disabled={dayPending}
+        >
+          {dayPending ? (
+            <>
+              <ActionSpinner /> Rewriting day…
+            </>
+          ) : (
+            "Rewrite day"
+          )}
         </button>
       </form>
       <form
-        action={async (fd) => {
+        action={(fd) => {
           fd.set("plan_id", item.plan_id);
           fd.set("lead_id", item.lead_id);
-          const result = await refineWholePlanAction({ ok: true }, fd);
-          if (!result.ok) {
-            toast.push(`Plan rewrite failed — ${result.error ?? "unknown"}`, { tone: "error", ttl: 5000 });
-          } else {
-            toast.push("Plan rewrite queued", { tone: "success" });
-          }
+          startPlan(async () => {
+            const result = await refineWholePlanAction({ ok: true }, fd);
+            if (!result.ok) {
+              toast.push(`Plan rewrite failed — ${result.error ?? "unknown"}`, { tone: "error", ttl: 5000 });
+            } else {
+              toast.push("Plan rewrite queued", { tone: "success" });
+            }
+          });
         }}
         className="proposal-inline-form"
       >
@@ -374,9 +534,16 @@ function RefinePanel({ item }: { item: ProposalReviewItem }) {
           rows={4}
           placeholder="Change everything: calmer cadence, quote-first, call-first, restart the week..."
           required
+          disabled={planPending}
         />
-        <button type="submit" className="plan-btn">
-          Rewrite plan
+        <button type="submit" className="plan-btn" disabled={planPending}>
+          {planPending ? (
+            <>
+              <ActionSpinner /> Rewriting plan…
+            </>
+          ) : (
+            "Rewrite plan"
+          )}
         </button>
       </form>
     </div>
@@ -626,10 +793,14 @@ function WorkbenchPanel({
   item,
   activePanel,
   setActivePanel,
+  leadName,
+  intakeArtifacts,
 }: {
   item: ProposalReviewItem;
   activePanel: ActivePanel;
   setActivePanel: (panel: ActivePanel) => void;
+  leadName: string;
+  intakeArtifacts?: IntakeArtifactRow[];
 }) {
   const touch = activePanel.kind === "touch" ? item.touches[activePanel.touchIndex] : null;
   if (activePanel.kind === "touch" && touch) {
@@ -639,12 +810,20 @@ function WorkbenchPanel({
           <span>{touch.channel} touch</span>
           <small>Day {item.day_number}</small>
         </div>
-        <TouchEditForm
-          item={item}
+        <TouchPreview
           touch={touch}
-          touchIndex={activePanel.touchIndex}
-          onDone={() => setActivePanel({ kind: "overview" })}
+          leadName={leadName}
+          intakeArtifacts={intakeArtifacts}
         />
+        <details className="cmk-touch-edit-collapsible">
+          <summary>Edit draft</summary>
+          <TouchEditForm
+            item={item}
+            touch={touch}
+            touchIndex={activePanel.touchIndex}
+            onDone={() => setActivePanel({ kind: "overview" })}
+          />
+        </details>
       </section>
     );
   }
@@ -756,87 +935,126 @@ export function ProposalWorkbench({
           </button>
         </header>
 
-        <div className="proposal-workbench-body">
-          <nav className="proposal-workbench-nav" aria-label="Plan days">
+        {/* Single-row day pager — chips for jumping between days without
+            cluttering the overlay with all 7 sections at once. */}
+        <nav className="cmk-pwb-day-pager" aria-label="Plan day navigation">
+          <button
+            type="button"
+            className="cmk-pwb-day-arrow"
+            disabled={activeDayIndex === 0}
+            onClick={() => switchDay(Math.max(0, activeDayIndex - 1))}
+            aria-label="Previous day"
+          >
+            ◀
+          </button>
+          <div className="cmk-pwb-day-chips" role="tablist">
             {plan.days.map((d, i) => {
               const isActive = i === activeDayIndex;
               return (
-                <div
+                <button
                   key={d.day_index}
-                  className={`proposal-day-section${isActive ? " is-active" : ""}`}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  className={`cmk-pwb-day-chip${isActive ? " is-active" : ""}`}
+                  data-status={d.approval_status}
+                  onClick={() => switchDay(i)}
+                  title={`Day ${d.day_number} · ${STATUS_LABEL[d.approval_status]}`}
                 >
-                  <button
-                    type="button"
-                    className="proposal-day-row"
-                    data-active={isActive ? "true" : "false"}
-                    data-status={d.approval_status}
-                    onClick={() => switchDay(i)}
-                  >
-                    <span className="proposal-day-num">Day {d.day_number}</span>
-                    <span className={`proposal-status proposal-status-${d.approval_status}`}>
-                      {STATUS_LABEL[d.approval_status]}
-                    </span>
-                    <span className="proposal-day-touches">
-                      {d.touches.length} {d.touches.length === 1 ? "touch" : "touches"}
-                    </span>
-                  </button>
-                  {isActive && (
-                    <div className="proposal-day-panels">
-                      <button
-                        type="button"
-                        className="proposal-panel-tab"
-                        data-active={activeKey === "overview" ? "true" : "false"}
-                        onClick={() => setActivePanel({ kind: "overview" })}
-                      >
-                        <span className="proposal-panel-tab-kicker">overview</span>
-                        <strong>Status, approval, links</strong>
-                        <small>{STATUS_LABEL[d.approval_status]}</small>
-                      </button>
-                      {d.touches.map((touch, touchIndex) => (
-                        <button
-                          key={`${plan.plan_id}-${d.day_index}-${touchIndex}`}
-                          type="button"
-                          className="proposal-panel-tab"
-                          data-channel={touch.channel}
-                          data-active={activeKey === `touch-${touchIndex}` ? "true" : "false"}
-                          onClick={() => setActivePanel({ kind: "touch", touchIndex })}
-                        >
-                          <span className="proposal-panel-tab-kicker">
-                            {CHANNEL_GLYPH[touch.channel]} {touch.channel}
-                          </span>
-                          <strong>{shortText(touch.intent, "Untitled touch")}</strong>
-                          {touch.draft_seed && <small>{shortText(touch.draft_seed, "")}</small>}
-                        </button>
-                      ))}
-                      <button
-                        type="button"
-                        className="proposal-panel-tab proposal-panel-tab-add"
-                        data-active={activeKey === "add" ? "true" : "false"}
-                        onClick={() => setActivePanel({ kind: "add" })}
-                      >
-                        <span className="proposal-panel-tab-kicker">add touch</span>
-                        <strong>Add another move to this day</strong>
-                        <small>SMS, email, call, or task</small>
-                      </button>
-                      <button
-                        type="button"
-                        className="proposal-panel-tab proposal-panel-tab-rewrite"
-                        data-active={activeKey === "rewrite" ? "true" : "false"}
-                        onClick={() => setActivePanel({ kind: "rewrite" })}
-                      >
-                        <span className="proposal-panel-tab-kicker">regenerate</span>
-                        <strong>Change this day or the whole plan</strong>
-                        <small>Use plain English</small>
-                      </button>
-                    </div>
-                  )}
-                </div>
+                  <span className="cmk-pwb-day-chip-dot" aria-hidden />
+                  <span className="cmk-pwb-day-chip-num">Day {d.day_number}</span>
+                  <span className="cmk-pwb-day-chip-touches">
+                    {d.touches.length}
+                  </span>
+                </button>
               );
             })}
+          </div>
+          <button
+            type="button"
+            className="cmk-pwb-day-arrow"
+            disabled={activeDayIndex >= plan.days.length - 1}
+            onClick={() =>
+              switchDay(Math.min(plan.days.length - 1, activeDayIndex + 1))
+            }
+            aria-label="Next day"
+          >
+            ▶
+          </button>
+        </nav>
+
+        <div className="proposal-workbench-body">
+          <nav className="proposal-workbench-nav" aria-label={`Day ${day.day_number} panels`}>
+            {/* Active day only — no more all-7-days clutter */}
+            <div className="proposal-day-section is-active">
+              <div className="proposal-day-row" data-status={day.approval_status}>
+                <span className="proposal-day-num">Day {day.day_number}</span>
+                <span className={`proposal-status proposal-status-${day.approval_status}`}>
+                  {STATUS_LABEL[day.approval_status]}
+                </span>
+                <span className="proposal-day-touches">
+                  {day.touches.length} {day.touches.length === 1 ? "touch" : "touches"}
+                </span>
+              </div>
+              <div className="proposal-day-panels">
+                <button
+                  type="button"
+                  className="proposal-panel-tab"
+                  data-active={activeKey === "overview" ? "true" : "false"}
+                  onClick={() => setActivePanel({ kind: "overview" })}
+                >
+                  <span className="proposal-panel-tab-kicker">overview</span>
+                  <strong>Status, approval, links</strong>
+                  <small>{STATUS_LABEL[day.approval_status]}</small>
+                </button>
+                {day.touches.map((touch, touchIndex) => (
+                  <button
+                    key={`${plan.plan_id}-${day.day_index}-${touchIndex}`}
+                    type="button"
+                    className="proposal-panel-tab"
+                    data-channel={touch.channel}
+                    data-active={activeKey === `touch-${touchIndex}` ? "true" : "false"}
+                    onClick={() => setActivePanel({ kind: "touch", touchIndex })}
+                  >
+                    <span className="proposal-panel-tab-kicker">
+                      {CHANNEL_GLYPH[touch.channel]} {touch.channel}
+                    </span>
+                    <strong>{shortText(touch.intent, "Untitled touch")}</strong>
+                    {touch.draft_seed && <small>{shortText(touch.draft_seed, "")}</small>}
+                  </button>
+                ))}
+                <button
+                  type="button"
+                  className="proposal-panel-tab proposal-panel-tab-add"
+                  data-active={activeKey === "add" ? "true" : "false"}
+                  onClick={() => setActivePanel({ kind: "add" })}
+                >
+                  <span className="proposal-panel-tab-kicker">add touch</span>
+                  <strong>Add another move to this day</strong>
+                  <small>SMS, email, or task</small>
+                </button>
+                <button
+                  type="button"
+                  className="proposal-panel-tab proposal-panel-tab-rewrite"
+                  data-active={activeKey === "rewrite" ? "true" : "false"}
+                  onClick={() => setActivePanel({ kind: "rewrite" })}
+                >
+                  <span className="proposal-panel-tab-kicker">regenerate</span>
+                  <strong>Change this day or the whole plan</strong>
+                  <small>Use plain English</small>
+                </button>
+              </div>
+            </div>
           </nav>
 
           <div className="proposal-workbench-right">
-            <WorkbenchPanel item={item} activePanel={activePanel} setActivePanel={setActivePanel} />
+            <WorkbenchPanel
+              item={item}
+              activePanel={activePanel}
+              setActivePanel={setActivePanel}
+              leadName={plan.lead_name}
+              intakeArtifacts={intakeArtifacts}
+            />
             <AiChangePanel item={item} activePanel={activePanel} intakeArtifacts={intakeArtifacts} />
           </div>
         </div>
