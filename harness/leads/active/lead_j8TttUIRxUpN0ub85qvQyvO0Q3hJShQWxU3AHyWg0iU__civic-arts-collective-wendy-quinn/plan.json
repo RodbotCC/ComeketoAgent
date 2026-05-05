@@ -44,7 +44,7 @@
         }
       ],
       "send_window": "No send today; internal review only",
-      "approval_status": "approved"
+      "approval_status": "needs_review"
     },
     {
       "day": 2,
@@ -150,5 +150,5 @@
     }
   ],
   "approval_required": true,
-  "_mirror_at": "2026-05-05T16:33:25.634Z"
+  "_mirror_at": "2026-05-05T16:33:36.013Z"
 }
