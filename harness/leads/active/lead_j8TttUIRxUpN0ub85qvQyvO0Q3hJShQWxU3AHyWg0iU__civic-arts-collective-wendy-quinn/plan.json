@@ -58,7 +58,7 @@
         }
       ],
       "send_window": "11:00 AM - 4:00 PM lead-local time",
-      "approval_status": "approved"
+      "approval_status": "sent"
     },
     {
       "day": 3,
@@ -150,5 +150,5 @@
     }
   ],
   "approval_required": true,
-  "_mirror_at": "2026-05-05T16:35:42.584Z"
+  "_mirror_at": "2026-05-05T16:35:45.099Z"
 }
