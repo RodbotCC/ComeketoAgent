@@ -30,16 +30,22 @@
   "days": [
     {
       "day": 1,
-      "objective": "Give space after the clustered May 5 outreach and prepare a cleaner next move.",
+      "objective": "Create a clean pause after the May 5 cluster, verify whether Maya gave any signal in the thread, and set up a more thoughtful single-question follow-up for tomorrow.",
       "required_actions": [
         {
           "channel": "task",
-          "intent": "Review the May 5 email and three SMS touches, then hold outbound for the rest of today unless Maya replies first.",
-          "draft_seed": "No send today. Last touch was email plus repeated SMS on May 5, so the next live message should be a single, low-pressure question tomorrow.",
-          "notes": "Avoid another same-day outbound because the Box already shows heavy contact today."
+          "intent": "Audit the full May 5 thread and confirm there was no missed inbound, opt-out language, or delivery issue before any new outreach resumes.",
+          "draft_seed": "Review the 03:05, 13:39, and 14:12 SMS plus the 14:12 email. Confirm no reply from Maya, no unsubscribe language, and no internal notes that change tomorrow's approach.",
+          "notes": "This protects against pushing again after an already heavy contact day."
+        },
+        {
+          "channel": "task",
+          "intent": "Hold all proactive outbound to Maya today and queue one simple SMS question for day 2 only if no reply comes in first.",
+          "draft_seed": "No send today. If Maya stays silent, tomorrow's outreach should be a single SMS asking what she was hoping to figure out first when she looked into catering.",
+          "notes": "Keep the next live touch low-pressure, question-led, and limited to one channel."
         }
       ],
-      "send_window": "No outbound today; internal review during business hours.",
+      "send_window": "No outbound today; internal review and queue prep during business hours.",
       "approval_status": "needs_review"
     },
     {
@@ -142,5 +148,5 @@
     }
   ],
   "approval_required": true,
-  "_mirror_at": "2026-05-05T16:49:50.814Z"
+  "_mirror_at": "2026-05-05T16:50:17.278Z"
 }
