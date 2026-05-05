@@ -50,16 +50,16 @@
     },
     {
       "day": 2,
-      "objective": "Re-open gently on SMS with one specific question that invites context.",
+      "objective": "Re-open with a softer SMS that acknowledges the prior silence by keeping the ask easy and focused on Maya's priorities.",
       "required_actions": [
         {
           "channel": "sms",
-          "intent": "Ask what Maya was trying to solve when she looked into catering.",
-          "draft_seed": "Maya, when Trailhead Catering Guild looked into catering, what were you hoping to figure out first?",
-          "notes": "Keep it to one question. No link, no pitch."
+          "intent": "Ask a low-pressure discovery question about what Maya wanted to understand first, without assuming an active event.",
+          "draft_seed": "Maya, what were you hoping to figure out first when you looked into catering for Trailhead Catering Guild?",
+          "notes": "One question only. Keep it calm, specific, and easy to answer in a few words."
         }
       ],
-      "send_window": "SMS between 10:00 AM and 1:00 PM lead-local time.",
+      "send_window": "SMS between 10:00 AM and 12:00 PM lead-local time.",
       "approval_status": "needs_review"
     },
     {
@@ -148,5 +148,5 @@
     }
   ],
   "approval_required": true,
-  "_mirror_at": "2026-05-05T16:50:17.278Z"
+  "_mirror_at": "2026-05-05T16:51:35.256Z"
 }
