@@ -1,14 +1,33 @@
 /**
- * Pure text extraction from uploaded intake buffers.
+ * Text extraction from uploaded intake buffers.
  *
- * Lifted out of the old `src/app/api/intake/extract/route.ts` so the upload
- * route (Phase 1 of the harness/ overhaul) can extract inline and write the
- * result directly to the lead's folder, eliminating the two-call upload→extract
- * dance that previously routed through Supabase Storage.
+ * - Plain text / JSON / HTML / markdown → buffer.toString
+ * - PDF → pdf-parse (lazy-loaded to avoid its bare-import side-effect)
+ * - Image → OpenAI Vision via the Responses API ("extract every visible
+ *   word + describe what the image is showing for sales context")
+ * - Audio / video → still deferred (whisper for audio, frame extraction
+ *   for video — both larger lifts than this round needs)
  */
+
+import OpenAI from "openai";
+import { env } from "./env";
+import { getSettings } from "./settings";
 
 const TEXT_CAP = 50_000;
 export const SUMMARY_CAP = 600;
+/** OpenAI accepts ~20MB base64 images; we cap at 8MB inline to stay well
+ *  inside our route timeout budget when uploads come from Vercel. */
+const VISION_MAX_BYTES = 8 * 1024 * 1024;
+
+const VISION_INSTRUCTIONS = `You are reading an image uploaded as catering-lead intake. Andre (the sales operator) needs every actionable signal pulled out.
+
+Output PLAIN TEXT (no markdown, no headers, no JSON). Two short sections, separated by a blank line:
+
+(1) Every visible word, transcribed exactly as it appears. Receipts → line items, prices, totals, dates. Forms → field labels and values. Screenshots → all visible UI text. If the image is a sign or photo of an event venue, transcribe any text on signage, menus, names, etc.
+
+(2) One paragraph describing what the image is showing in sales-relevant terms. Mention venue type if visible (restaurant, backyard, hall), guest-count clues, event-style cues (formal, casual, themed), brands, dishes, decor that signals budget tier, or anything else useful for tailoring catering.
+
+If the image has no extractable signal at all (blank, corrupted, abstract pattern), say "[no extractable signal — {one-line description}]" and nothing else.`;
 
 export type ExtractionResult = {
   extracted_text: string | null;
@@ -97,16 +116,14 @@ export async function extractFromBuffer(
   }
 
   if (isImage(m, filename)) {
-    return {
-      extracted_text: null,
-      summary: `[image — extraction deferred to Phase 2 (Gemini) — ${filename}]`,
-    };
+    return await extractImageWithVision(buf, mime, filename);
   }
 
   if (isAudioVideo(m, filename)) {
+    // Audio (Whisper) + video (frame extraction) deferred — separate lift.
     return {
       extracted_text: null,
-      summary: `[audio/video — extraction deferred to Phase 2 (Gemini) — ${filename}]`,
+      summary: `[audio/video — transcription not yet wired — ${filename}]`,
     };
   }
 
@@ -114,4 +131,63 @@ export async function extractFromBuffer(
     extracted_text: null,
     summary: `[binary or unsupported type — ${m || "unknown"} — ${filename}]`,
   };
+}
+
+/** OpenAI Vision read of an image. Returns transcribed text + a sales-context
+ *  description in one call. Cheap and fast for typical screenshots/photos. */
+async function extractImageWithVision(
+  buf: Buffer,
+  mime: string | null,
+  filename: string,
+): Promise<ExtractionResult> {
+  if (!env.OPENAI_API_KEY) {
+    return {
+      extracted_text: null,
+      summary: `[image — OPENAI_API_KEY not set — ${filename}]`,
+    };
+  }
+  if (buf.byteLength > VISION_MAX_BYTES) {
+    return {
+      extracted_text: null,
+      summary: `[image too large for inline vision (${buf.byteLength} bytes; max ${VISION_MAX_BYTES}) — ${filename}]`,
+    };
+  }
+
+  const settings = await getSettings();
+  const client = new OpenAI({ apiKey: env.OPENAI_API_KEY });
+  const dataUrl = `data:${mime || "image/png"};base64,${buf.toString("base64")}`;
+
+  try {
+    const response = await client.responses.create({
+      model: settings.model,
+      instructions: VISION_INSTRUCTIONS,
+      input: [
+        {
+          role: "user",
+          content: [
+            { type: "input_text", text: `Filename: ${filename}` },
+            { type: "input_image", image_url: dataUrl, detail: "auto" },
+          ],
+        },
+      ],
+    });
+    const out = (response.output_text ?? "").trim();
+    if (!out) {
+      return {
+        extracted_text: null,
+        summary: `[image — vision returned empty — ${filename}]`,
+      };
+    }
+    const capped = out.length > TEXT_CAP ? out.slice(0, TEXT_CAP) : out;
+    return {
+      extracted_text: capped,
+      summary: capped.slice(0, SUMMARY_CAP),
+    };
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : String(e);
+    return {
+      extracted_text: null,
+      summary: `[image — vision failed: ${msg.slice(0, 200)} — ${filename}]`,
+    };
+  }
 }
