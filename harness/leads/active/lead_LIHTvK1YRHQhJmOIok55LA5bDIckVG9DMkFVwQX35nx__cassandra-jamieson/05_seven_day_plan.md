@@ -31,7 +31,7 @@
 
 - Objective: Lock a specific call time by answering her package-link request and proposing two concrete windows for Andre.
 - Send window: 9:00 AM – 7:00 PM lead-local time
-- Approval: needs_review
+- Approval: not_ready
 
 - SMS: Send package-link + propose 2 call time options for Andre
   Draft seed: Cassandra, thanks for replying. For your May 30 event, can Andre call you today or tomorrow? 1) today 4:30–6:00 PM 2) tomorrow 10:00–12:00 PM Also—do you want our package link for wedding-style service or general catering? Reply 1 or 2.
@@ -41,7 +41,7 @@
 
 - Objective: If she didn’t book Day 1, clarify guest count + dietary needs to make the call immediately useful.
 - Send window: 7:00 AM – 9:00 PM lead-local time
-- Approval: needs_review
+- Approval: not_ready
 
 - EMAIL: Ask 2 quick clarifying questions; offer to schedule Andre call
   Draft seed: Subject: Quick details for May 30 (then Andre can confirm packages)  Hi Cassandra,  Before Andre calls, can you share: 1) roughly how many guests? 2) any dietary restrictions or must-have meal types?  If it’s easier, tell me which works: today after 5 PM, or tomorrow late morning, and we’ll get Andre on the phone.
@@ -51,7 +51,7 @@
 
 - Objective: Use a short SMS to confirm the phone call purpose and reduce friction: confirm event type and preferred service style.
 - Send window: 9:00 AM – 7:00 PM lead-local time
-- Approval: needs_review
+- Approval: not_ready
 
 - SMS: Confirm event type + service style; ask for call confirmation
   Draft seed: Cassandra—quick one so Andre sends the right options: for May 30, is this wedding catering (RODS) or a different celebration? Also, would you prefer buffet or plated/family-style? Want Andre to call at 6:00 PM tonight or 11:00 AM tomorrow?
@@ -61,7 +61,7 @@
 
 - Objective: If no response, send a calendar-style scheduling task that asks Andre to call at a specific time (with user confirming).
 - Send window: 9:00 AM – 7:00 PM lead-local time
-- Approval: needs_review
+- Approval: not_ready
 
 - TASK: Call Cassandra Jamieson to schedule on Andre's calendar: propose 20-min call at 5:00 PM
   Draft seed: Task for Andre: Offer a 20-minute call to Cassandra on May 9 at 5:00 PM (lead-local) to confirm guest count, service style, and finalize the right package link.
@@ -74,7 +74,7 @@
 
 - Objective: Address objections implicitly by asking what matters most (price, variety, timing) and offer Andre call accordingly.
 - Send window: 7:00 AM – 9:00 PM lead-local time
-- Approval: needs_review
+- Approval: not_ready
 
 - EMAIL: NEPQ-style question: what matters most for her packages so Andre can tailor
   Draft seed: Subject: What matters most for your May 30 catering?  Hi Cassandra,  When you look at packages, what matters most for you? - staying within a budget - lots of menu variety - dietary-friendly options - service style (buffet vs plated)  If you tell me which one, I’ll have Andre call with the best-matching options. What time is best for that call?
@@ -84,7 +84,7 @@
 
 - Objective: If still not scheduled, send a final scheduling SMS with two near-term windows and a direct “reply with X” CTA.
 - Send window: 9:00 AM – 7:00 PM lead-local time
-- Approval: needs_review
+- Approval: not_ready
 
 - SMS: Final scheduling attempt: two windows + quick menu preference
   Draft seed: Cassandra, to make this easy: Andre can call either tomorrow at 12:30 PM or 3:30 PM. Which time should I lock in? Also, are you leaning more toward chicken/steak/seafood for the main?
@@ -94,7 +94,7 @@
 
 - Objective: Convert intent into action: ask for a direct yes/no to a scheduled call and remind her of the May 30 target date.
 - Send window: 9:00 AM – 7:00 PM lead-local time
-- Approval: needs_review
+- Approval: not_ready
 
 - SMS: Confirm call or ask to pause politely
   Draft seed: Cassandra—do you want Andre to call and finalize your May 30 package details? Reply “call me” and pick a time (choose 1: 10–12 or 2: 4–6), or reply “not now.”
