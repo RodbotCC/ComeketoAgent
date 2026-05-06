@@ -41,7 +41,7 @@
         }
       ],
       "send_window": "No outbound today; hold due to recent same-day SMS and email activity.",
-      "approval_status": "needs_review"
+      "approval_status": "not_ready"
     },
     {
       "day": 2,
@@ -55,7 +55,7 @@
         }
       ],
       "send_window": "SMS between 9:30 AM and 1:00 PM lead-local time.",
-      "approval_status": "needs_review"
+      "approval_status": "not_ready"
     },
     {
       "day": 3,
@@ -69,7 +69,7 @@
         }
       ],
       "send_window": "Email between 8:00 AM and 11:00 AM lead-local time.",
-      "approval_status": "needs_review"
+      "approval_status": "not_ready"
     },
     {
       "day": 4,
@@ -83,7 +83,7 @@
         }
       ],
       "send_window": "Internal task during business hours.",
-      "approval_status": "needs_review"
+      "approval_status": "not_ready"
     },
     {
       "day": 5,
@@ -97,7 +97,7 @@
         }
       ],
       "send_window": "SMS between 11:00 AM and 3:00 PM lead-local time.",
-      "approval_status": "needs_review"
+      "approval_status": "not_ready"
     },
     {
       "day": 6,
@@ -111,7 +111,7 @@
         }
       ],
       "send_window": "Internal task during business hours.",
-      "approval_status": "needs_review"
+      "approval_status": "not_ready"
     },
     {
       "day": 7,
@@ -125,7 +125,7 @@
         }
       ],
       "send_window": "Email between 2:00 PM and 5:00 PM lead-local time.",
-      "approval_status": "needs_review"
+      "approval_status": "not_ready"
     }
   ],
   "stop_conditions": [
@@ -143,5 +143,5 @@
     }
   ],
   "approval_required": true,
-  "_mirror_at": "2026-05-05T17:10:49.596Z"
+  "_mirror_at": "2026-05-06T07:10:18.222Z"
 }
