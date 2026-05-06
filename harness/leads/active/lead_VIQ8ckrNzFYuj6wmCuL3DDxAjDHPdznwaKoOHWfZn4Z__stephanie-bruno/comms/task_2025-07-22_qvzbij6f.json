@@ -1,0 +1,20 @@
+{
+  "date_created": "2025-07-22T17:38:11.869000+00:00",
+  "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "date_updated": "2025-07-22T17:48:19.753000+00:00",
+  "updated_by_name": "Andre Raw",
+  "users": [],
+  "_type": "TaskCompleted",
+  "user_name": "Andre Raw",
+  "task_assigned_to": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+  "task_id": "task_3iH7c0qfYQgIXqhY2aBk4sbfDKQqLp6ZN62WbY6oTIh",
+  "id": "acti_LoR0Odu11vYpazKo7CHTa7PAALZeCLLsrGdQvZbIJ6f",
+  "created_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "task_text": "[OOPS] Please add a task to your most recently updated lead",
+  "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "lead_id": "lead_VIQ8ckrNzFYuj6wmCuL3DDxAjDHPdznwaKoOHWfZn4Z",
+  "created_by_name": "Andre Raw",
+  "activity_at": "2025-07-22T17:38:11.869000+00:00",
+  "task_assigned_to_name": "Sales Team Event Consultant Team"
+}
