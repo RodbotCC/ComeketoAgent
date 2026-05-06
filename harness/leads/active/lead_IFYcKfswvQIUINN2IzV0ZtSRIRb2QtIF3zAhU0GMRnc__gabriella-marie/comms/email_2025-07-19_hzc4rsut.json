@@ -1,0 +1,115 @@
+{
+  "status": "sent",
+  "sequence_id": null,
+  "template_name": "*Tasting Event Party May 3rd*",
+  "followup_sequence_id": null,
+  "updated_by_name": "Andre Raw",
+  "bulk_email_action_id": null,
+  "thread_id": "acti_EGQ2W2uSQK7idgdIBlhauFNwq5kIs6Sq4kn8s9kfjtx",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "users": [],
+  "envelope": {
+    "date": "Sat, 19 Jul 2025 15:37:02 +0000",
+    "subject": "🍴 You're Invited! Join Our Special Tasting Event",
+    "from": [
+      {
+        "email": "team@comeketocatering.com",
+        "name": "Andre Raw"
+      }
+    ],
+    "sender": [
+      {
+        "email": "team@comeketocatering.com",
+        "name": "Andre Raw"
+      }
+    ],
+    "reply_to": [],
+    "to": [
+      {
+        "email": "g.m.saintonge@gmail.com",
+        "name": ""
+      }
+    ],
+    "cc": [],
+    "bcc": [],
+    "in_reply_to": null,
+    "message_id": "<175293942244.7.10325562150278608934@smtpgw.close.com>",
+    "is_autoreply": false
+  },
+  "opens": [
+    {
+      "opened_at": "2025-07-19T15:37:09.838000+00:00",
+      "opened_by": "g.m.saintonge@gmail.com",
+      "ip_address": "74.125.210.1",
+      "user_agent": "Mozilla/5.0 (Windows NT 5.1; rv:11.0) Gecko Firefox/11.0 (via ggpht.com GoogleImageProxy)"
+    }
+  ],
+  "_type": "Email",
+  "template_id": "tmpl_NCrYzcBc16pEG83Tvc00F01HoysukOjFw9j1wuJ5EtS",
+  "need_smtp_credentials": false,
+  "date_sent": "2025-07-19T15:37:02.297000+00:00",
+  "send_as_id": null,
+  "subject": "🍴 You're Invited! Join Our Special Tasting Event",
+  "date_scheduled": null,
+  "body_text": "Hey Gabriella,\n\n  \n\nWe’re excited to invite you to a special tasting experience — the perfect\nchance to explore our menu and find the best options for your event!\n\n  \n📅 **Date:** Saturday, July 26, **2025**  \n📍 **Venue:** 199 Main St, Fitchburg, MA 01420  \n⏰ **Time Slots:** 1:30 PM & 5:30 PM  \n  \n**Let me know what time works for you to join us.**\n\n  \nThe last tasting we had was a blast, and we can't wait to bring that same\nenergy to our next tasting. Check out some photos taken from our last\ntasting!![Untitled design.jpg](cid:218d-536e-bf9c)  \n  \n  \n\n  \n\n  \n  \n  \n  \n\\-----  \nRegards,\n\n**Andre Raw**  \n _​​_ Catering Event Coordinator\n\n📲 C: [(978) 235-3791](tel:19782353791)\n\n📲 W: [(978) 381-1212](tel:9783811212)  \n[Facebook](https://www.facebook.com/comeketocatering) | [Instagram](https://instagram.com/comeketocatering) | [Website](https://comeketocatering.com/)",
+  "created_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "has_reply": false,
+  "ai_draft": null,
+  "date_created": "2025-07-19T15:36:43.721000+00:00",
+  "contact_id": "cont_0C5EnU23MYUGVrRxjodEe3ny3IYhozroZvNGqJKbFVS",
+  "lead_id": "lead_IFYcKfswvQIUINN2IzV0ZtSRIRb2QtIF3zAhU0GMRnc",
+  "body_text_quoted": [
+    {
+      "expand": true,
+      "text": "Hey Gabriella,\n\n  \n\nWe’re excited to invite you to a special tasting experience — the perfect\nchance to explore our menu and find the best options for your event!\n\n  \n📅 **Date:** Saturday, July 26, **2025**  \n📍 **Venue:** 199 Main St, Fitchburg, MA 01420  \n⏰ **Time Slots:** 1:30 PM & 5:30 PM  \n  \n**Let me know what time works for you to join us.**\n\n  \nThe last tasting we had was a blast, and we can't wait to bring that same\nenergy to our next tasting. Check out some photos taken from our last\ntasting!![Untitled design.jpg](cid:218d-536e-bf9c)  \n  \n  \n\n  \n\n  \n  \n  \n  \n\\-----  \nRegards,\n\n**Andre Raw**  \n _​​_ Catering Event Coordinator\n\n📲 C: [(978) 235-3791](tel:19782353791)\n\n📲 W: [(978) 381-1212](tel:9783811212)  \n[Facebook](https://www.facebook.com/comeketocatering) | [Instagram](https://instagram.com/comeketocatering) | [Website](https://comeketocatering.com/)"
+    }
+  ],
+  "activity_at": "2025-07-19T15:37:02.297000+00:00",
+  "sequence_name": null,
+  "attachments": [
+    {
+      "size": 409589,
+      "content_type": "image/jpeg",
+      "filename": "Untitled design.jpg",
+      "content_id": "218d-536e-bf9c",
+      "inline_only": true,
+      "url": "https://app.close.com/go/file/persisted/orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq/activity.email/acti_2HfDLCfvnyiIuCyIgJ9jUCyq0Hg8ULJ6IjLHZC4rSut/34gW9qfVtoPbCfSsUiY6Rz/Untitleddesign.jpg/",
+      "thumbnail_url": "https://app.close.com/go/file/persisted/orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq/activity.email/acti_2HfDLCfvnyiIuCyIgJ9jUCyq0Hg8ULJ6IjLHZC4rSut/34gW9qfVtoPbCfSsUiY6Rz/Untitleddesign.jpg/thumbnail/"
+    }
+  ],
+  "in_reply_to_id": null,
+  "followup_sequence_delay": null,
+  "body_preview": "Hey Gabriella, We’re excited to invite you to a special tasting experience — the perfect\nchance to explore our menu and find the best options for your event! 📅 **Date:** Saturday, July 26, **2025** 📍 ",
+  "id": "acti_2HfDLCfvnyiIuCyIgJ9jUCyq0Hg8ULJ6IjLHZC4rSut",
+  "agent_action_reason": null,
+  "message_ids": [
+    "<175293942244.7.10325562150278608934@smtpgw.close.com>",
+    "<175293942244.7.15137456809691124943@smtpgw.close.com>"
+  ],
+  "body_html_quoted": [
+    {
+      "expand": true,
+      "html": "<div>Hey Gabriella,</div><div><br></div><div>We’re excited to invite you to a special tasting experience — the perfect chance to explore our menu and find the best options for your event!</div><div><br>📅 <strong>Date:</strong> Saturday, July 26, <strong>2025</strong><br>📍 <strong>Venue:</strong> 199 Main St, Fitchburg, MA 01420<br>⏰ <strong>Time Slots:</strong> 1:30 PM &amp; 5:30 PM <br><br><strong>Let me know what time works for you to join us.</strong></div><div><br>The last tasting we had was a blast, and we can't wait to bring that same energy to our next tasting. Check out some photos taken from our last tasting!<img alt=\"Untitled design.jpg\" src=\"cid:218d-536e-bf9c\"><br><br><br></div><br><div dir=\"ltr\"><div style=\"color:rgb(34,34,34)\"><div style='margin:8px 0px 0px;padding:0px;overflow-x:hidden;font-family:\"Google Sans\",Roboto,RobotoDraft,Helvetica,Arial,sans-serif'><div><div dir=\"ltr\"><div dir=\"ltr\"><div dir=\"ltr\"><div><div><div><br><br><br><br>-----<br>Regards,</div></div><div><div><strong>Andre Raw</strong><br><em><span style=\"font-size: large;\">​​</span></em>Catering Event Coordinator</div></div><div><div><span style=\"color: rgb(34, 34, 34)\">📲 </span>C: <a rel=\"noopener noreferrer\" target=\"_blank\" href=\"tel:19782353791\" style=\"color:rgb(17,85,204)\">(978) 235-3791</a></div></div><div><div>📲 W: <a rel=\"noopener noreferrer\" target=\"_blank\" href=\"tel:9783811212\" style=\"color:rgb(17,85,204)\">(978) 381-1212</a><br><a rel=\"noopener noreferrer\" target=\"_blank\" href=\"https://www.facebook.com/comeketocatering\" style=\"color:rgb(17,85,204)\">Facebook</a> | <a rel=\"noopener noreferrer\" target=\"_blank\" href=\"https://instagram.com/comeketocatering\" style=\"color:rgb(17,85,204)\">Instagram</a> | <a rel=\"noopener noreferrer\" target=\"_blank\" href=\"https://comeketocatering.com/\" style=\"color:rgb(17,85,204)\">Website</a></div></div></div></div></div></div><div><br></div><div><br></div></div></div><div style='font-family:\"Google Sans\",Roboto,RobotoDraft,Helvetica,Arial,sans-serif'><br></div></div></div>"
+    }
+  ],
+  "agent_config_id": null,
+  "direction": "outgoing",
+  "sender": "Andre Raw <team@comeketocatering.com>",
+  "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "cc": [],
+  "send_attempts": [],
+  "body_html": "<div>Hey Gabriella,</div><div><br></div><div>We’re excited to invite you to a special tasting experience — the perfect chance to explore our menu and find the best options for your event!</div><div><br>📅 <strong>Date:</strong> Saturday, July 26, <strong>2025</strong><br>📍 <strong>Venue:</strong> 199 Main St, Fitchburg, MA 01420<br>⏰ <strong>Time Slots:</strong> 1:30 PM &amp; 5:30 PM <br><br><strong>Let me know what time works for you to join us.</strong></div><div><br>The last tasting we had was a blast, and we can't wait to bring that same energy to our next tasting. Check out some photos taken from our last tasting!<img alt=\"Untitled design.jpg\" src=\"cid:218d-536e-bf9c\"><br><br><br></div><br><div dir=\"ltr\"><div style=\"color:rgb(34,34,34)\"><div style=\"margin:8px 0px 0px;padding:0px;overflow-x:hidden;font-family:&quot;Google Sans&quot;,Roboto,RobotoDraft,Helvetica,Arial,sans-serif\"><div><div dir=\"ltr\"><div dir=\"ltr\"><div dir=\"ltr\"><div><div><div><br><br><br><br>-----<br>Regards,</div></div><div><div><strong>Andre Raw</strong><br><em><span style=\"font-size: large;\">​​</span></em>Catering Event Coordinator</div></div><div><div><span style=\"color: rgb(34, 34, 34)\">📲&nbsp;</span>C:&nbsp;<a rel=\"noopener noreferrer\" target=\"_blank\" href=\"tel:19782353791\" style=\"color:rgb(17,85,204)\">(978) 235-3791</a></div></div><div><div>📲&nbsp;W:&nbsp;<a rel=\"noopener noreferrer\" target=\"_blank\" href=\"tel:9783811212\" style=\"color:rgb(17,85,204)\">(978) 381-1212</a><br><a rel=\"noopener noreferrer\" target=\"_blank\" href=\"https://www.facebook.com/comeketocatering\" style=\"color:rgb(17,85,204)\">Facebook</a>&nbsp;|&nbsp;<a rel=\"noopener noreferrer\" target=\"_blank\" href=\"https://instagram.com/comeketocatering\" style=\"color:rgb(17,85,204)\">Instagram</a>&nbsp;|&nbsp;<a rel=\"noopener noreferrer\" target=\"_blank\" href=\"https://comeketocatering.com/\" style=\"color:rgb(17,85,204)\">Website</a></div></div></div></div></div></div><div><br></div><div><br></div></div></div><div style=\"font-family:&quot;Google Sans&quot;,Roboto,RobotoDraft,Helvetica,Arial,sans-serif\"><br></div></div></div>",
+  "email_account_id": "emailacct_V698oi1uFg2nnhvbdLhaItEGsTdNCmlQUEla8QF32rZ",
+  "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "sequence_subscription_id": null,
+  "created_by_name": "Andre Raw",
+  "bcc": [],
+  "references": [],
+  "to": [
+    "g.m.saintonge@gmail.com"
+  ],
+  "user_name": "Andre Raw",
+  "followup_sequence_add_cc_bcc": false,
+  "date_updated": "2025-07-19T15:37:09.838000+00:00",
+  "opens_summary": "Opened by g.m.saintonge@gmail.com (2025-07-19)"
+}
