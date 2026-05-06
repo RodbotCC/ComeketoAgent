@@ -1,6 +1,7 @@
 {
-  "id": "acti_4wAS7aRUxhspWIARggrFN408Yh3ROwcBhlSGCstIuLX",
-  "activity_at": "2026-05-05T04:09:20.435000+00:00",
+  "_type": "EmailThread",
+  "latest_normalized_subject": "[✅ CATERING] You're in Kyle!",
+  "lead_id": "lead_R5QYRSr7QLjnOZGs2KpBN551SPNdcA8uoQfk6pyZQ2E",
   "latest_emails": [
     {
       "id": "acti_rqYeHBqq4tLIg7i1PWnpAC8XQgA9wHD9Mb5Q8WTW7tH",
@@ -51,32 +52,31 @@
       }
     }
   ],
-  "created_by": null,
-  "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
-  "user_name": "Rhonna Ricafort",
-  "created_by_name": null,
-  "date_created": "2026-05-05T04:09:20.435000+00:00",
-  "latest_normalized_subject": "[✅ CATERING] You're in Kyle!",
-  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
-  "_type": "EmailThread",
-  "n_emails": 1,
-  "importance": {
-    "type": "not_important",
-    "reason": "automated-outbound"
-  },
-  "date_updated": "2026-05-05T04:09:29.713000+00:00",
-  "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
-  "summary": null,
-  "updated_by_name": "Rhonna Ricafort",
-  "users": [
-    "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo"
-  ],
   "contact_id": null,
+  "activity_at": "2026-05-05T04:09:20.435000+00:00",
+  "summary": null,
+  "date_updated": "2026-05-05T04:09:29.713000+00:00",
   "participants": [
     {
       "email": "contact@comeketocatering.com",
       "name": "Rhonna Ricafort"
     }
   ],
-  "lead_id": "lead_R5QYRSr7QLjnOZGs2KpBN551SPNdcA8uoQfk6pyZQ2E"
+  "created_by": null,
+  "updated_by_name": "Rhonna Ricafort",
+  "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "user_name": "Rhonna Ricafort",
+  "importance": {
+    "type": "not_important",
+    "reason": "automated-outbound"
+  },
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "users": [
+    "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo"
+  ],
+  "id": "acti_4wAS7aRUxhspWIARggrFN408Yh3ROwcBhlSGCstIuLX",
+  "created_by_name": null,
+  "n_emails": 1,
+  "date_created": "2026-05-05T04:09:20.435000+00:00"
 }
