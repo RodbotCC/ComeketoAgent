@@ -1,0 +1,181 @@
+{
+  "addresses": [
+    {
+      "address_1": "",
+      "address_2": "",
+      "city": "Marlborough",
+      "country": "US",
+      "label": "business",
+      "state": "",
+      "zipcode": "01752"
+    }
+  ],
+  "contacts": [
+    {
+      "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "date_created": "2025-07-06T14:06:12.277000+00:00",
+      "date_updated": "2025-07-28T13:51:28.567000+00:00",
+      "display_name": "Gabriella Marie",
+      "emails": [
+        {
+          "email": "g.m.saintonge@gmail.com",
+          "is_unsubscribed": true,
+          "type": "direct"
+        }
+      ],
+      "id": "cont_0C5EnU23MYUGVrRxjodEe3ny3IYhozroZvNGqJKbFVS",
+      "integration_links": [
+        {
+          "name": "LinkedIn Search",
+          "url": "https://www.linkedin.com/search/results/people/?keywords=Gabriella%20Marie"
+        }
+      ],
+      "lead_id": "lead_IFYcKfswvQIUINN2IzV0ZtSRIRb2QtIF3zAhU0GMRnc",
+      "name": "Gabriella Marie",
+      "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+      "phones": [
+        {
+          "country": "US",
+          "phone": "+18435324523",
+          "phone_formatted": "+1 843-532-4523",
+          "type": "direct"
+        }
+      ],
+      "timezone": "America/New_York",
+      "timezone_source": "inferred_from_phone_number",
+      "title": "Plain Old Phone (best for SMS)",
+      "updated_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "urls": []
+    },
+    {
+      "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "date_created": "2025-07-06T14:06:23.360000+00:00",
+      "date_updated": "2025-07-06T14:06:23.360000+00:00",
+      "display_name": "Gabriella Marie",
+      "emails": [],
+      "id": "cont_qyPXdG1pVjexEYBA3FfjzGZoCY1ykCIZKMIILTqBQsQ",
+      "integration_links": [
+        {
+          "name": "LinkedIn Search",
+          "url": "https://www.linkedin.com/search/results/people/?keywords=Gabriella%20Marie"
+        }
+      ],
+      "lead_id": "lead_IFYcKfswvQIUINN2IzV0ZtSRIRb2QtIF3zAhU0GMRnc",
+      "name": "Gabriella Marie",
+      "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+      "phones": [
+        {
+          "country": "US",
+          "phone": "+18435324523",
+          "phone_formatted": "+1 843-532-4523",
+          "type": "mobile"
+        }
+      ],
+      "timezone": "America/New_York",
+      "timezone_source": "inferred_from_phone_number",
+      "title": "Facebook # (Best For Calls)",
+      "updated_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "urls": []
+    }
+  ],
+  "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+  "created_by_name": "Sales Team Event Consultant Team",
+  "custom": {
+    "00. 🪖 LEAD OWNER": "01. 😎 Andre",
+    "01. 🟢 SCORE": [
+      "05. 📍 Within immediate area"
+    ],
+    "02. ⚔︎ WORKFLOW WEAPONS": [
+      "5x5",
+      "✉️ FB Lead Form 1SMS 1EMAIL",
+      "🚫 Lost - Win back"
+    ],
+    "05. 👥 Franchise": "Comeketo",
+    "OLD Call Cadence( do not use for 7 touchpoit": [
+      "03. 📞📞📞 Call at 5pm onwards"
+    ],
+    "🏠 Zip Code": "01752",
+    "🥧Workflow-Thanksgiving-2025": "✅ Active"
+  },
+  "custom.cf_9vVeQH1oYtJbtdHoL9VPwGhNpuCzVCgi95p7MCasszj": [
+    "05. 📍 Within immediate area"
+  ],
+  "custom.cf_D5UBOd2gE25eQR0iRXj7eXMVWqKt6dU6LhweKERkE2r": [
+    "03. 📞📞📞 Call at 5pm onwards"
+  ],
+  "custom.cf_ZqYD0ISnnLHzqVnxz6nuM8wJErglSBO0HGE0C42iuYi": "✅ Active",
+  "custom.cf_l37qDcsFYbEZQJhRRrImt3cwFPY23IbG4kjLBJRN3GZ": [
+    "5x5",
+    "✉️ FB Lead Form 1SMS 1EMAIL",
+    "🚫 Lost - Win back"
+  ],
+  "custom.cf_pXTVEI1DdERiT91NKuWAndlV6WuS4n6ZG2334fBR4b8": "01752",
+  "custom.cf_vfo9P74IUYaftU7nCUQBxaSmGf69YCC1Bdwbz9w20lU": "Comeketo",
+  "custom.cf_xF8FLufgEx9bsijfRAfHhgIrPBQ5ajuohcazC7OtNmT": "01. 😎 Andre",
+  "date_created": "2025-07-06T14:06:12.255000+00:00",
+  "date_updated": "2026-05-05T20:43:59.749000+00:00",
+  "description": "Marlborough Zip: 01752\n45 mins drive from Kitchen \nPeople 30\nEvent Desc: Birthday\nEvent Date: 10/04\nCampaign Name:\n01. [CATER[ LF EVERGREEN - QUOTE",
+  "display_name": "Gabriella Marie",
+  "html_url": "https://app.close.com/lead/lead_IFYcKfswvQIUINN2IzV0ZtSRIRb2QtIF3zAhU0GMRnc/",
+  "id": "lead_IFYcKfswvQIUINN2IzV0ZtSRIRb2QtIF3zAhU0GMRnc",
+  "integration_links": [
+    {
+      "name": "Google Search",
+      "url": "https://google.com/search?q=Gabriella%20Marie"
+    }
+  ],
+  "name": "Gabriella Marie",
+  "opportunities": [
+    {
+      "annualized_expected_value": 0,
+      "annualized_value": 94500,
+      "attachments": [],
+      "confidence": 0,
+      "contact_id": "cont_0C5EnU23MYUGVrRxjodEe3ny3IYhozroZvNGqJKbFVS",
+      "contact_name": "Gabriella Marie",
+      "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "created_by_name": "Sales Team Event Consultant Team",
+      "custom.cf_3LZk8uGw0lIvPpNzOMvFn4WwiCXbI91X66Ujvt8UJPx": [
+        "NEEDS VENUE NAME"
+      ],
+      "custom.cf_fs7mrfN5x0M20CyoltczyVg8t0Xul5GFvkC4FNUKvY6": "Customer",
+      "custom.cf_ge7qOebiWpyPvuv7xkzNaYpM8PsmOeNvXasXFOtPXRt": [
+        "Facebook, Paid"
+      ],
+      "custom.cf_goMfyKkS7pFUhmo0xvrl1JvQv1KLaQkfoVo0j93dvhe": "Birthday",
+      "custom.cf_nQLULOLLmtUAh9OwcpJibPc5pQKIqpFOjdGSTwC9ePO": "30",
+      "date_created": "2025-07-06T14:06:17.176000+00:00",
+      "date_lost": "2025-07-26T18:28:53.060000+00:00",
+      "date_updated": "2026-05-05T20:43:59.776000+00:00",
+      "date_won": "2025-10-04",
+      "expected_value": 0,
+      "id": "oppo_ktyhUZzHmcm5zhgK9sgbBKC1CTi5rAmSQ56ao7lQMbV",
+      "integration_links": [],
+      "lead_id": "lead_IFYcKfswvQIUINN2IzV0ZtSRIRb2QtIF3zAhU0GMRnc",
+      "lead_name": "Gabriella Marie",
+      "note": "",
+      "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+      "pipeline_id": "pipe_4s7zfmoJhbc6jcU1aPvIDT",
+      "pipeline_name": "Sales",
+      "status_display_name": "Sales: 📵⛔️DO NOT CALL LIST 📵⛔️🙅‍♀️",
+      "status_id": "stat_67hPLsdjX3G7QhSIXmHWAXNOQz0w4Ka2YapnQwhSzLC",
+      "status_label": "📵⛔️DO NOT CALL LIST 📵⛔️🙅‍♀️",
+      "status_type": "lost",
+      "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+      "updated_by_name": "Rhonna Ricafort",
+      "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "user_name": "Andre Raw",
+      "value": 94500,
+      "value_currency": "USD",
+      "value_formatted": "$945",
+      "value_period": "one_time"
+    }
+  ],
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "status_id": "stat_X4X2dIPrVwMZDbSGxo1xCbkokk0mjPwaqpF5PjK80F3",
+  "status_label": "❌ Disqualified",
+  "tasks": [],
+  "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "updated_by_name": "Rhonna Ricafort",
+  "url": null
+}
