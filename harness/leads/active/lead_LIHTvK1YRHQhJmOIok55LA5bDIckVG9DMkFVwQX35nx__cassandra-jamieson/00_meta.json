@@ -9,9 +9,10 @@
     "smses": 7,
     "subscriptions": 2,
     "tasks": 0,
-    "threads": 2
+    "threads": 2,
+    "whatsapps": 0
   },
-  "last_sweep_at": "2026-05-05T20:06:46.670Z",
+  "last_sweep_at": "2026-05-06T10:00:36.350Z",
   "lead_id": "lead_LIHTvK1YRHQhJmOIok55LA5bDIckVG9DMkFVwQX35nx",
   "name": "Cassandra Jamieson",
   "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
