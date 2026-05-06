@@ -9,9 +9,10 @@
     "smses": 0,
     "subscriptions": 0,
     "tasks": 0,
-    "threads": 4
+    "threads": 4,
+    "whatsapps": 0
   },
-  "last_sweep_at": "2026-05-06T00:55:16.314Z",
+  "last_sweep_at": "2026-05-06T10:01:59.608Z",
   "lead_id": "lead_j5NSrW6fX4orwFt1OTZxgPydqrkTygrAOquuHBqWwlM",
   "name": "Sarah Broderick",
   "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
