@@ -1,0 +1,18 @@
+{
+  "topic_id": "general_reference",
+  "article_count": 1,
+  "articles": [
+    {
+      "slug": "close-ips",
+      "title": "Close IPs",
+      "url": "https://help.close.com/docs/close-ips",
+      "body_file": "close-help-docs/pages/close-ips.txt",
+      "excerpt": "The IPs used by Close API are not fixed. We have a stable list, but they (and will) change from time to time when we perform maintenance. You can see our IP list here . Since we use AWS, another option is to filter IP ranges for all AWS . You would want to filter for EC2 IPs in the \"us-west-2\" region.",
+      "keywords": [
+        "close",
+        "ips"
+      ],
+      "topic": "general_reference"
+    }
+  ]
+}

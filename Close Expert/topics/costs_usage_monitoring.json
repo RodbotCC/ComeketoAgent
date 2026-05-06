@@ -1,0 +1,141 @@
+{
+  "topic_id": "costs_usage_monitoring",
+  "article_count": 8,
+  "articles": [
+    {
+      "slug": "bring-your-own-carrier-byoc",
+      "title": "Bring Your Own Carrier (BYOC)",
+      "url": "https://help.close.com/docs/bring-your-own-carrier-byoc",
+      "body_file": "close-help-docs/pages/bring-your-own-carrier-byoc.txt",
+      "excerpt": "BYOC only works with VoIP phone numbers. You'll need to ask your VoIP provider if it's supported. Due to telephony regulations, BYOC is not available for Turkish numbers. BYOC is a way to keep your existing phone provider while receiving your inbound calls in Close. It's great alternative to porting your numbers . It also allows you to use Close in countries where we currently don't offer phone numbers (e.g. China or Russia). Incoming vs. outgoing calls BYOC does not impact\u2026",
+      "keywords": [
+        "carrier",
+        "bring",
+        "byoc",
+        "own"
+      ],
+      "topic": "costs_usage_monitoring"
+    },
+    {
+      "slug": "calling-and-sms-usage",
+      "title": "Variable Usage Costs (Calling, SMS, Phone Numbers, AI Tools)",
+      "url": "https://help.close.com/docs/calling-and-sms-usage",
+      "body_file": "close-help-docs/pages/calling-and-sms-usage.txt",
+      "excerpt": "Close has a number of features whose cost is based on how much you use them. Those include phone number rentals, calling, SMS, and certain AI tools. Whenever you make use of these features, a small amount of money is deducted from your usage credit balance. By default, calling and SMS are enabled for all users on any plan, as well as most AI features, but you can restrict the use of communication for specific users via Roles & Permissions . To view and manage your team's\u2026",
+      "keywords": [
+        "countries check twilio",
+        "calling calls",
+        "european eco",
+        "per twilio",
+        "in depth",
+        "variable",
+        "calling",
+        "numbers",
+        "costs",
+        "phone",
+        "tools",
+        "usage",
+        "sms"
+      ],
+      "topic": "costs_usage_monitoring"
+    },
+    {
+      "slug": "enabling-quality-of-service-qos",
+      "title": "Enabling Quality of Service (QoS)",
+      "url": "https://help.close.com/docs/enabling-quality-of-service-qos",
+      "body_file": "close-help-docs/pages/enabling-quality-of-service-qos.txt",
+      "excerpt": "QoS New to this section? Check out our series on how to debug network related call quality issues . What is QoS? QoS, or Quality of Service, is used to refer to ways in which your router can re-order (or drop) certain types of traffic on your network in order to meet a certain service level. Similar to a traffic light, QoS tells less important traffic to wait so the important traffic from your phone makes it through the intersection without delay. The most common use of QoS\u2026",
+      "keywords": [
+        "internet service provider",
+        "enabling",
+        "quality",
+        "service",
+        "qos"
+      ],
+      "topic": "costs_usage_monitoring"
+    },
+    {
+      "slug": "error-logs",
+      "title": "Console Error Logs",
+      "url": "https://help.close.com/docs/error-logs",
+      "body_file": "close-help-docs/pages/error-logs.txt",
+      "excerpt": "If you're experiencing issues with your Close application, error logs might help us in our debugging process where we'll have a better understanding of what went wrong, especially for issues we can't reproduce on our end. Extracting logs for the Desktop app Enable Logging The Close Desktop App includes a built-in logging feature to help capture detailed diagnostic information during troubleshooting. To log your issue: Open the main application menu . Go to Develop > Enable\u2026",
+      "keywords": [
+        "enable logging the close desktop app",
+        "enable logging",
+        "log file once",
+        "open config",
+        "log folder",
+        "console",
+        "error",
+        "logs"
+      ],
+      "topic": "costs_usage_monitoring"
+    },
+    {
+      "slug": "managing-your-usage-balance",
+      "title": "Managing your Usage balance",
+      "url": "https://help.close.com/docs/managing-your-usage-balance",
+      "body_file": "close-help-docs/pages/managing-your-usage-balance.txt",
+      "excerpt": "To see your current usage balance, go to \"Settings\" within Close, scroll down to \"Billing\", and then choose \"Usage\". The top section will show you the amount of usage in your billing month. Usage Overview Auto-Recharge Settings The middle section will show the remaining balance in your account and auto-recharge settings. This lets you know when you can expect a new charge to occur, based on the settings you've chosen in your Monthly Spending Limit. Make sure that your team\u2026",
+      "keywords": [
+        "adjusting monthly spending limit by",
+        "monthly spending limit",
+        "recharge settings the",
+        "usage overview auto",
+        "recharge settings",
+        "managing",
+        "balance",
+        "usage"
+      ],
+      "topic": "costs_usage_monitoring"
+    },
+    {
+      "slug": "migration-from-another-crm",
+      "title": "Migration from another CRM",
+      "url": "https://help.close.com/docs/migration-from-another-crm",
+      "body_file": "close-help-docs/pages/migration-from-another-crm.txt",
+      "excerpt": "Migration from another CRM Use the 'Import from a CRM' option in the Lead Importer if you need to migrate leads over from an existing CRM. Remember that only Close users with the Admin Role are allowed to initiate migration from an existing CRM. Our partner, Import2, powers imports from external CRMs. As long as you initialize the import from within Close, then in most cases, there will be no cost to you. Close Pro Tip: Initializing the CRM Import Only one Close user should\u2026",
+      "keywords": [
+        "close pro tip",
+        "lead importer",
+        "less annoying",
+        "import only",
+        "admin role",
+        "migration",
+        "another",
+        "crm"
+      ],
+      "topic": "costs_usage_monitoring"
+    },
+    {
+      "slug": "network-logs",
+      "title": "Network Logs",
+      "url": "https://help.close.com/docs/network-logs",
+      "body_file": "close-help-docs/pages/network-logs.txt",
+      "excerpt": "If you're experiencing performance issues with your Close application such as slow loading, network logs might help us in our debugging process where we'll have a better understanding of all the background network requests that are happening between your device and Close servers. Please refer to the video or follow the steps below to get the logs so you can send them over. Logs are packaged in a so-called .har file which will contain all the requests and responses we can\u2026",
+      "keywords": [
+        "inspect element",
+        "network",
+        "logs"
+      ],
+      "topic": "costs_usage_monitoring"
+    },
+    {
+      "slug": "secondary-organization",
+      "title": "Secondary organization",
+      "url": "https://help.close.com/docs/secondary-organization",
+      "body_file": "close-help-docs/pages/secondary-organization.txt",
+      "excerpt": "In Close, users can create additional Close organizations. These additional organizations can be used to help drive different parts of your business. As an example, a company might use multiple Close organizations for different divisions or parts of a business like applicant tracking or fundraising management. These Organizations can also be used as a sandbox for testing changes or imports. Each additional organization is completely separate from other organizations in\u2026",
+      "keywords": [
+        "these organizations",
+        "billing the growth",
+        "billing creating",
+        "organization",
+        "secondary",
+        "in close"
+      ],
+      "topic": "costs_usage_monitoring"
+    }
+  ]
+}

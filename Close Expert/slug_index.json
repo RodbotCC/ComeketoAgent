@@ -1,0 +1,2429 @@
+{
+  "slug_count": 208,
+  "slugs": [
+    {
+      "slug": "a2p-10dlc",
+      "title": "10DLC",
+      "topics": [
+        "sms_compliance",
+        "sms_messaging",
+        "troubleshooting"
+      ],
+      "body_file": "close-help-docs/pages/a2p-10dlc.txt",
+      "excerpt": "A2P 10DLC is a new messaging standard introduced by major US carriers that requires all companies sending A2P(Application to person) SMS traffic to be registered. This is the case regardless of whethe\u2026"
+    },
+    {
+      "slug": "a2p-10dlc-compliance-boost-with-ai",
+      "title": "A2P 10DLC Compliance boost with AI",
+      "topics": [
+        "sms_compliance",
+        "sms_messaging",
+        "email",
+        "reporting"
+      ],
+      "body_file": "close-help-docs/pages/a2p-10dlc-compliance-boost-with-ai.txt",
+      "excerpt": "A2P compliance Once your A2P 10DLC registration is approved, mobile carriers continue to keep an eye on your SMS traffic. If they spot activity that doesn\u2019t meet compliance guidelines, your messages m\u2026"
+    },
+    {
+      "slug": "a2p-10dlc-stay-compliant",
+      "title": "Stay A2P 10DLC Compliant",
+      "topics": [
+        "sms_compliance",
+        "sms_messaging",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/a2p-10dlc-stay-compliant.txt",
+      "excerpt": "Approved for A2P 10DLC - What's Next? Once your A2P 10DLC application has been approved, carriers will continue to monitor your SMS traffic. If you fail to follow guidelines, especially in those first\u2026"
+    },
+    {
+      "slug": "a2p-sms-registration-rejected",
+      "title": "A2P 10DLC - What to do when my A2P SMS registration is rejected?",
+      "topics": [
+        "sms_compliance",
+        "sms_messaging",
+        "email"
+      ],
+      "body_file": "close-help-docs/pages/a2p-sms-registration-rejected.txt",
+      "excerpt": "The A2P SMS registration is reviewed by independent third parties. If the registration is rejected it means it did not fulfill one or more points of the approval criteria that we mentioned in the prev\u2026"
+    },
+    {
+      "slug": "account-settings",
+      "title": "Account Settings",
+      "topics": [
+        "email",
+        "leads_contacts_crm_core",
+        "tasks_notes",
+        "account_users_roles",
+        "security_compliance_data",
+        "getting_started_onboarding"
+      ],
+      "body_file": "close-help-docs/pages/account-settings.txt",
+      "excerpt": "Profile & Two-Factor Authentication Set your name, country, login email address, and reset your password in your account settings. Your name will be associated with all of the activities you make to a\u2026"
+    },
+    {
+      "slug": "activity-comparison-report",
+      "title": "Activity Comparison Report",
+      "topics": [
+        "sms_messaging",
+        "calling_dialer",
+        "smart_views_search",
+        "reporting",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/activity-comparison-report.txt",
+      "excerpt": "The Activity Comparison report gives you a spreadsheet-like view of the performance of every team member. This makes it quick and easy to see how you or members of your team are contributing to the ov\u2026"
+    },
+    {
+      "slug": "activity-overview-report",
+      "title": "Activity Overview Report",
+      "topics": [
+        "smart_views_search",
+        "reporting"
+      ],
+      "body_file": "close-help-docs/pages/activity-overview-report.txt",
+      "excerpt": "The Activity Overview report shows activity metrics for a specific date range. It's the first report listed under the Reporting heading on the left sidebar. You can filter and customize the report by \u2026"
+    },
+    {
+      "slug": "activity-recorder",
+      "title": "Record bugs or errors in Close",
+      "topics": [
+        "reporting",
+        "tasks_notes",
+        "troubleshooting"
+      ],
+      "body_file": "close-help-docs/pages/activity-recorder.txt",
+      "excerpt": "Use our activity recorder to report any issues you find in Close. You can find it by heading to the question mark icon in the top right of the screen and clicking the record button and then submitting\u2026"
+    },
+    {
+      "slug": "adding-and-removing-users",
+      "title": "Managing users and cancellation",
+      "topics": [
+        "email",
+        "opportunities_pipeline",
+        "leads_contacts_crm_core",
+        "customization",
+        "tasks_notes",
+        "account_users_roles"
+      ],
+      "body_file": "close-help-docs/pages/adding-and-removing-users.txt",
+      "excerpt": "Adding Users to Close You can add users simply by sending them an invitation and selecting the role you'd like to assign. To invite users, click your name at the top left of the Close window - or clic\u2026"
+    },
+    {
+      "slug": "admin-account-role",
+      "title": "Admin user role",
+      "topics": [
+        "email",
+        "workflows_automation",
+        "integrations",
+        "smart_views_search",
+        "opportunities_pipeline",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/admin-account-role.txt",
+      "excerpt": "Admin user Each plan includes the predefined role shown below. This is a default role and may be assigned to any user, but may not be edited or modified. The Admin role must always exist with all perm\u2026"
+    },
+    {
+      "slug": "ai-enrich",
+      "title": "AI Enrich",
+      "topics": [
+        "leads_contacts_crm_core",
+        "playbooks_ai"
+      ],
+      "body_file": "close-help-docs/pages/ai-enrich.txt",
+      "excerpt": "AI Enrich is available on all Plans, but usage is charged separately. Usage is billed per enrichment run. Each run uses 5 credits (1 credit = $0.01), which equals $0.05 per run. AI Enrich helps you an\u2026"
+    },
+    {
+      "slug": "analysis-and-reporting",
+      "title": "Analysis and Reporting",
+      "topics": [
+        "reporting"
+      ],
+      "body_file": "close-help-docs/pages/analysis-and-reporting.txt",
+      "excerpt": "Analysis and Reporting What a company needs for its sales reporting will often depend on what stage of growth a company is in. If your company is in its earliest stages, you may be managing reporting \u2026"
+    },
+    {
+      "slug": "api-keys-oauth",
+      "title": "API keys & OAuth",
+      "topics": [
+        "integrations",
+        "tasks_notes",
+        "security_compliance_data"
+      ],
+      "body_file": "close-help-docs/pages/api-keys-oauth.txt",
+      "excerpt": "There are two main ways to authorize (connect) your Close organization to third-party applications or your own internal system: using API keys using OAuth access Both methods are designed to help you \u2026"
+    },
+    {
+      "slug": "automatically-set-opportunity-probability-based-on-pipeline-status",
+      "title": "Automatically set Opportunity Confidence based on pipeline status",
+      "topics": [
+        "workflows_automation",
+        "reporting",
+        "opportunities_pipeline"
+      ],
+      "body_file": "close-help-docs/pages/automatically-set-opportunity-probability-based-on-pipeline-status.txt",
+      "excerpt": "Overview Every time an Opportunity moves into a new status, you probably want its Confidence (the probability used to calculate your weighted pipeline value) to update automatically. For example, any \u2026"
+    },
+    {
+      "slug": "automating-actions",
+      "title": "Automating Close with Zapier",
+      "topics": [
+        "email",
+        "workflows_automation",
+        "leads_contacts_crm_core",
+        "tasks_notes"
+      ],
+      "body_file": "close-help-docs/pages/automating-actions.txt",
+      "excerpt": "In addition to integrating with other apps, you may want to automate specific actions within Close. For this reason, we allow you to link Close with itself in Zapier. Getting Started with Zapier To le\u2026"
+    },
+    {
+      "slug": "avoiding-lead-duplicates",
+      "title": "Avoiding Lead Duplicates",
+      "topics": [
+        "email",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/avoiding-lead-duplicates.txt",
+      "excerpt": "Using the lead importer, you can check for duplicate leads within the file being imported and also cross-check the leads on the file with existing leads in Close. After assigning the corresponding col\u2026"
+    },
+    {
+      "slug": "book-meeting-setup-guide",
+      "title": "Book a Meeting",
+      "topics": [
+        "meetings_scheduling",
+        "leads_contacts_crm_core",
+        "playbooks_ai"
+      ],
+      "body_file": "close-help-docs/pages/book-meeting-setup-guide.txt",
+      "excerpt": "Book meetings directly from a Lead page \u2014 no copy-pasting, no switching tabs. Close Scheduling creates the calendar event, sends the invite, and logs the meeting on the Lead automatically. You can als\u2026"
+    },
+    {
+      "slug": "bring-your-own-carrier-byoc",
+      "title": "Bring Your Own Carrier (BYOC)",
+      "topics": [
+        "calling_dialer",
+        "email",
+        "costs_usage_monitoring"
+      ],
+      "body_file": "close-help-docs/pages/bring-your-own-carrier-byoc.txt",
+      "excerpt": "BYOC only works with VoIP phone numbers. You'll need to ask your VoIP provider if it's supported. Due to telephony regulations, BYOC is not available for Turkish numbers. BYOC is a way to keep your ex\u2026"
+    },
+    {
+      "slug": "browser-notification-troubleshooting",
+      "title": "Browser Notification Troubleshooting",
+      "topics": [
+        "integrations",
+        "mobile_desktop",
+        "troubleshooting"
+      ],
+      "body_file": "close-help-docs/pages/browser-notification-troubleshooting.txt",
+      "excerpt": "Use this guide to troubleshoot potential issues causing you to not see incoming call notifications from your browser while using browser based calling in Close. For context, you should see a notificat\u2026"
+    },
+    {
+      "slug": "build-a-sales-process",
+      "title": "Build a Sales Process",
+      "topics": [
+        "reporting",
+        "leads_contacts_crm_core",
+        "getting_started_onboarding"
+      ],
+      "body_file": "close-help-docs/pages/build-a-sales-process.txt",
+      "excerpt": "What's a Sales Process? A sales process outlines repeatable steps that your sales team will take to convert a lead into a customer. It\u2019s a framework that provides structure to your reps, teaches them \u2026"
+    },
+    {
+      "slug": "calculating-your-call-answer-rate",
+      "title": "Calculating Your Call Answer Rate",
+      "topics": [
+        "calling_dialer",
+        "email",
+        "smart_views_search",
+        "reporting",
+        "leads_contacts_crm_core",
+        "customization"
+      ],
+      "body_file": "close-help-docs/pages/calculating-your-call-answer-rate.txt",
+      "excerpt": "Understanding your call answer rate is crucial for assessing the effectiveness of your sales outreach. Read on for some tips on calculating your answer rate using some of the features built into Close\u2026"
+    },
+    {
+      "slug": "calculations-in-smart-views",
+      "title": "Calculations in Smart Views",
+      "topics": [
+        "smart_views_search",
+        "leads_contacts_crm_core",
+        "customization"
+      ],
+      "body_file": "close-help-docs/pages/calculations-in-smart-views.txt",
+      "excerpt": "Smart View Column Calculations Smart View column calculations let you quickly summarize your data\u2014right inside Close . You can see totals, averages, percentages, and more at the bottom of any Search r\u2026"
+    },
+    {
+      "slug": "calendly",
+      "title": "Calendly",
+      "topics": [
+        "sms_messaging",
+        "email",
+        "meetings_scheduling",
+        "leads_contacts_crm_core",
+        "getting_started_onboarding"
+      ],
+      "body_file": "close-help-docs/pages/calendly.txt",
+      "excerpt": "Connect your Calendly account to insert your scheduling links into email and SMS communication with 1-click and create new Contacts when new bookings are made. Connect your Calendly account Users can \u2026"
+    },
+    {
+      "slug": "call-assistant",
+      "title": "Call Assistant",
+      "topics": [
+        "calling_dialer",
+        "email",
+        "leads_contacts_crm_core",
+        "playbooks_ai",
+        "tasks_notes"
+      ],
+      "body_file": "close-help-docs/pages/call-assistant.txt",
+      "excerpt": "Automatically transcribe and summarize any recorded calls in Close through our Call Assistant feature. When enabled, a full transcription and summary will be available to view shortly after any voicem\u2026"
+    },
+    {
+      "slug": "call-blocking-in-close",
+      "title": "Call Blocking in Close",
+      "topics": [
+        "sms_messaging",
+        "calling_dialer",
+        "email",
+        "leads_contacts_crm_core",
+        "getting_started_onboarding"
+      ],
+      "body_file": "close-help-docs/pages/call-blocking-in-close.txt",
+      "excerpt": "Close lets you block specific phone numbers directly from the app \u2014 no need to contact support. Once a number is blocked, the restriction applies across your entire organization , so all users are pro\u2026"
+    },
+    {
+      "slug": "call-coaching",
+      "title": "Call Coaching",
+      "topics": [
+        "calling_dialer",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/call-coaching.txt",
+      "excerpt": "Plan Limits This feature is only available on Scale and Enterprise (legacy) plans. Call Coaching allows users to Listen, Whisper, and Barge on in-progress calls. It can be used for new salesperson tra\u2026"
+    },
+    {
+      "slug": "call-quality-indicator-cqi",
+      "title": "Call Quality",
+      "topics": [
+        "calling_dialer",
+        "troubleshooting"
+      ],
+      "body_file": "close-help-docs/pages/call-quality-indicator-cqi.txt",
+      "excerpt": "The Call Quality Indicator (CQI) is a visual indicator that there may be an issue with your call audio quality. These issues are often the result of network quality or hardware problems. The Call Qual\u2026"
+    },
+    {
+      "slug": "call-reports",
+      "title": "Call Reports",
+      "topics": [
+        "calling_dialer",
+        "email",
+        "smart_views_search",
+        "reporting",
+        "leads_contacts_crm_core",
+        "playbooks_ai"
+      ],
+      "body_file": "close-help-docs/pages/call-reports.txt",
+      "excerpt": "A single, trustworthy view of calling performance for your team, so you can coach for real conversations and better connect rates. The Call Report brings dials, talk time, dispositions, outcomes, and \u2026"
+    },
+    {
+      "slug": "call-tasks",
+      "title": "Call Tasks",
+      "topics": [
+        "calling_dialer",
+        "email",
+        "workflows_automation",
+        "leads_contacts_crm_core",
+        "tasks_notes",
+        "getting_started_onboarding"
+      ],
+      "body_file": "close-help-docs/pages/call-tasks.txt",
+      "excerpt": "You can assign Call Tasks to yourself or a member of the team as a reminder to a call a Contact at a specific date and time. Call Tasks are similar and appear on Leads and the Inbox in the same place \u2026"
+    },
+    {
+      "slug": "calling-and-sms-usage",
+      "title": "Variable Usage Costs (Calling, SMS, Phone Numbers, AI Tools)",
+      "topics": [
+        "sms_messaging",
+        "calling_dialer",
+        "getting_started_onboarding",
+        "costs_usage_monitoring"
+      ],
+      "body_file": "close-help-docs/pages/calling-and-sms-usage.txt",
+      "excerpt": "Close has a number of features whose cost is based on how much you use them. Those include phone number rentals, calling, SMS, and certain AI tools. Whenever you make use of these features, a small am\u2026"
+    },
+    {
+      "slug": "calling-from-close",
+      "title": "Calling",
+      "topics": [
+        "calling_dialer",
+        "email",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/calling-from-close.txt",
+      "excerpt": "Calling is available on all Plans, but usage is charged separately. Usage is charged on a per-minute basis according to Twilio's Voice pricing. Learn more about how calls are calculated and charged in\u2026"
+    },
+    {
+      "slug": "chatgpt",
+      "title": "ChatGPT",
+      "topics": [
+        "email",
+        "meetings_scheduling",
+        "workflows_automation",
+        "leads_contacts_crm_core",
+        "customization",
+        "playbooks_ai"
+      ],
+      "body_file": "close-help-docs/pages/chatgpt.txt",
+      "excerpt": "Close GPT is being sunset soon. Going forward, we recommed using Close's official ChatGPT app . We're thrilled to introduce a powerful collaboration that combines the capabilities of Close with the AI\u2026"
+    },
+    {
+      "slug": "chloe",
+      "title": "Chloe",
+      "topics": [
+        "opportunities_pipeline",
+        "leads_contacts_crm_core",
+        "playbooks_ai"
+      ],
+      "body_file": "close-help-docs/pages/chloe.txt",
+      "excerpt": "Chloe is your built-in AI sales teammate. She makes and receives calls, runs qualification and discovery, and logs everything directly in Close so your team can focus on closing. Chloe is native to Cl\u2026"
+    },
+    {
+      "slug": "chloe-calls",
+      "title": "Using Chloe on Calls",
+      "topics": [
+        "workflows_automation",
+        "leads_contacts_crm_core",
+        "playbooks_ai"
+      ],
+      "body_file": "close-help-docs/pages/chloe-calls.txt",
+      "excerpt": "This article covers how to start using Chloe on real calls, what happens during and after a call, and how to review her activity. For setup and configuration, see Setup and Implementation . For instru\u2026"
+    },
+    {
+      "slug": "chloe-compliance",
+      "title": "Compliance",
+      "topics": [
+        "leads_contacts_crm_core",
+        "playbooks_ai"
+      ],
+      "body_file": "close-help-docs/pages/chloe-compliance.txt",
+      "excerpt": "Chloe makes automated AI voice calls on your behalf. Before deploying Chloe to real leads, it is important to understand your responsibilities and the legal framework that applies to AI-powered callin\u2026"
+    },
+    {
+      "slug": "chloe-faq",
+      "title": "FAQ & Troubleshooting",
+      "topics": [
+        "sms_messaging",
+        "calling_dialer",
+        "email",
+        "playbooks_ai",
+        "troubleshooting"
+      ],
+      "body_file": "close-help-docs/pages/chloe-faq.txt",
+      "excerpt": "General questions What is Chloe? Chloe is Close's built-in AI sales teammate. She makes and receives calls, runs qualification and discovery, and logs everything directly in Close. See our primary Chl\u2026"
+    },
+    {
+      "slug": "chloe-reporting",
+      "title": "Reporting",
+      "topics": [
+        "calling_dialer",
+        "email",
+        "reporting",
+        "leads_contacts_crm_core",
+        "playbooks_ai"
+      ],
+      "body_file": "close-help-docs/pages/chloe-reporting.txt",
+      "excerpt": "Chloe reporting is call reporting and outcome tracking. All reporting centers on what happened on each call and whether those calls are producing the right results across an Agent. Reporting happens a\u2026"
+    },
+    {
+      "slug": "chloe-use-cases",
+      "title": "Use Cases",
+      "topics": [
+        "workflows_automation",
+        "leads_contacts_crm_core",
+        "playbooks_ai",
+        "tasks_notes"
+      ],
+      "body_file": "close-help-docs/pages/chloe-use-cases.txt",
+      "excerpt": "When you\u2019re ready to iterate upon your Chloe Agent, some guidance may be helpful. This covers which use cases Chloe performs best at, which run mode to use, and which Skills to enable for each scenari\u2026"
+    },
+    {
+      "slug": "clearing-the-configuration-file",
+      "title": "Clearing the Configuration File",
+      "topics": [
+        "troubleshooting"
+      ],
+      "body_file": "close-help-docs/pages/clearing-the-configuration-file.txt",
+      "excerpt": "Clearing configuration file Mac In the Close Application Menu open Develop > Open Config/Log folder Quit the Close app Copy the config.json file over to your Desktop so you can send it over to support\u2026"
+    },
+    {
+      "slug": "close-ips",
+      "title": "Close IPs",
+      "topics": [
+        "general_reference"
+      ],
+      "body_file": "close-help-docs/pages/close-ips.txt",
+      "excerpt": "The IPs used by Close API are not fixed. We have a stable list, but they (and will) change from time to time when we perform maintenance. You can see our IP list here . Since we use AWS, another optio\u2026"
+    },
+    {
+      "slug": "close-mcp-tools",
+      "title": "Close MCP Tools",
+      "topics": [
+        "integrations"
+      ],
+      "body_file": "close-help-docs/pages/close-mcp-tools.txt",
+      "excerpt": "See full list here: https://developer.close.com/mcp/tools"
+    },
+    {
+      "slug": "close-mobile-app",
+      "title": "Close Mobile App",
+      "topics": [
+        "sms_messaging",
+        "email",
+        "reporting",
+        "leads_contacts_crm_core",
+        "tasks_notes",
+        "mobile_desktop"
+      ],
+      "body_file": "close-help-docs/pages/close-mobile-app.txt",
+      "excerpt": "The Close mobile app allows you to communicate with your prospects and customers easily, regardless of your location. After you download the Close app, your Leads will go wherever you go. Access your \u2026"
+    },
+    {
+      "slug": "communication",
+      "title": "Communication",
+      "topics": [
+        "leads_contacts_crm_core",
+        "getting_started_onboarding"
+      ],
+      "body_file": "close-help-docs/pages/communication.txt",
+      "excerpt": "Communication Increasing communications transparency within a business is one of the best ways to reduce friction and improve productivity. Your team being aware of what\u2019s going on inside your company\u2026"
+    },
+    {
+      "slug": "connect-your-email",
+      "title": "Connect your Email and Calendar",
+      "topics": [
+        "email",
+        "leads_contacts_crm_core",
+        "getting_started_onboarding"
+      ],
+      "body_file": "close-help-docs/pages/connect-your-email.txt",
+      "excerpt": "Close connects and sends from your own email server using SMTP and IMAP. By connecting your email account with Close, you can send emails within the app and Close will auto-log any email that appears \u2026"
+    },
+    {
+      "slug": "contacts",
+      "title": "Contacts",
+      "topics": [
+        "email",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/contacts.txt",
+      "excerpt": "A Contact is an object attached to a Lead. In a B2B (business-to-business) database, you will have Leads as Companies and Contacts as People that work for those Companies. In a B2C (business-to-consum\u2026"
+    },
+    {
+      "slug": "conversations",
+      "title": "Conversations",
+      "topics": [
+        "meetings_scheduling",
+        "leads_contacts_crm_core",
+        "tasks_notes"
+      ],
+      "body_file": "close-help-docs/pages/conversations.txt",
+      "excerpt": "Conversations View The Conversations View in Close allows you to quickly review any calls or meetings that happen in your organization, as well as see any currently ongoing calls or meetings. History \u2026"
+    },
+    {
+      "slug": "create-a-new-lead-once-a-calendly-meeting-is-booked",
+      "title": "Create a new Lead once a Calendly meeting is booked",
+      "topics": [
+        "email",
+        "meetings_scheduling",
+        "workflows_automation",
+        "integrations",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/create-a-new-lead-once-a-calendly-meeting-is-booked.txt",
+      "excerpt": "With the Close Calendly integration , you can sync your scheduling links into Close. If a new Lead books a meeting, the Lead is not automatically added to Close, you'll need an automation like Zapier \u2026"
+    },
+    {
+      "slug": "create-an-opportunity-when-a-lead-status-is-moved-to-qualified",
+      "title": "Create an Opportunity when Status is changed to Qualified",
+      "topics": [
+        "email",
+        "workflows_automation",
+        "integrations",
+        "opportunities_pipeline",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/create-an-opportunity-when-a-lead-status-is-moved-to-qualified.txt",
+      "excerpt": "Your lead generation team or process is the first step in closing deals, turning cold calls, email campaigns, social media ads, website forms, etc. into a Qualified Lead that your sales team should ma\u2026"
+    },
+    {
+      "slug": "create-oauth-apps",
+      "title": "Create OAuth Apps",
+      "topics": [
+        "integrations"
+      ],
+      "body_file": "close-help-docs/pages/create-oauth-apps.txt",
+      "excerpt": "See here - https://developer.close.com/integrations/create-an-oauth-app"
+    },
+    {
+      "slug": "creating-a-multi-channel-sales-workflow-in-close",
+      "title": "Creating a multi-channel sales workflow in Close",
+      "topics": [
+        "calling_dialer",
+        "email",
+        "workflows_automation",
+        "smart_views_search",
+        "leads_contacts_crm_core",
+        "tasks_notes"
+      ],
+      "body_file": "close-help-docs/pages/creating-a-multi-channel-sales-workflow-in-close.txt",
+      "excerpt": "A sales cycle is a collection of steps that salespeople take to turn a lead into a customer. That includes everything from prospecting to closing the sale (and sometimes even beyond closing). Sales cy\u2026"
+    },
+    {
+      "slug": "creating-smart-views",
+      "title": "Create a Smart View",
+      "topics": [
+        "calling_dialer",
+        "email",
+        "workflows_automation",
+        "smart_views_search",
+        "leads_contacts_crm_core",
+        "tasks_notes"
+      ],
+      "body_file": "close-help-docs/pages/creating-smart-views.txt",
+      "excerpt": "Smart Views are to Close what coffee is to a salesperson. You can get through your day without it, but why would you want to? Smart Views are: Powerful and effortless Dynamic Increase productivity Sma\u2026"
+    },
+    {
+      "slug": "creating-smart-views-for-calling",
+      "title": "Building a Calling Smart View",
+      "topics": [
+        "calling_dialer",
+        "smart_views_search",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/creating-smart-views-for-calling.txt",
+      "excerpt": "In order to use the power or predictive dialer effectively, the first step is to create a list of leads you know you need to call. Here are the basic concepts to consider when creating your calling Sm\u2026"
+    },
+    {
+      "slug": "creating-smart-views-for-calling-legacy",
+      "title": "Building a calling Smart View (Legacy)",
+      "topics": [
+        "calling_dialer",
+        "smart_views_search",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/creating-smart-views-for-calling-legacy.txt",
+      "excerpt": "New Lead Filtering We recently released a new version of our lead filtering/search. The following guides are for our legacy search. If your ui does not match, please see this guide for the new filteri\u2026"
+    },
+    {
+      "slug": "creating-smart-views-legacy",
+      "title": "Create a Smart View (Legacy)",
+      "topics": [
+        "email",
+        "smart_views_search",
+        "leads_contacts_crm_core",
+        "getting_started_onboarding"
+      ],
+      "body_file": "close-help-docs/pages/creating-smart-views-legacy.txt",
+      "excerpt": "New Lead Filtering We recently released a new version of our lead filtering/search. The following guide is for our legacy search. If your UI does not match, please see this guide for the new filtering\u2026"
+    },
+    {
+      "slug": "custom-activities",
+      "title": "Custom Activities",
+      "topics": [
+        "sms_messaging",
+        "email",
+        "workflows_automation",
+        "reporting",
+        "leads_contacts_crm_core",
+        "customization"
+      ],
+      "body_file": "close-help-docs/pages/custom-activities.txt",
+      "excerpt": "Custom Activities allow you to create a custom action type to record a specific type of activity. The most common examples include forms filled in by prospects, support tickets, call outcomes, invoice\u2026"
+    },
+    {
+      "slug": "custom-fields",
+      "title": "Custom Fields",
+      "topics": [
+        "email",
+        "opportunities_pipeline",
+        "leads_contacts_crm_core",
+        "customization",
+        "getting_started_onboarding"
+      ],
+      "body_file": "close-help-docs/pages/custom-fields.txt",
+      "excerpt": "Custom Fields in Close are flexible and can be used for many different purposes. They allow you to store attributes about your Leads and Contacts. You can store common attributes like industry/vertica\u2026"
+    },
+    {
+      "slug": "custom-objects",
+      "title": "Custom Objects",
+      "topics": [
+        "leads_contacts_crm_core",
+        "customization"
+      ],
+      "body_file": "close-help-docs/pages/custom-objects.txt",
+      "excerpt": "Close has three standard object types: Leads, Contacts, and Opportunities. While these are very versatile, you may need to record data that doesn't fit into these premade categories. This is where Cus\u2026"
+    },
+    {
+      "slug": "customer-support",
+      "title": "Customer Support Plans & Business Hours",
+      "topics": [
+        "email",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/customer-support.txt",
+      "excerpt": "Close is dedicated to providing you and your team with the best service and support you won't find anywhere else. Our small team is so knowledgeable and experienced, you'll often find your requests ha\u2026"
+    },
+    {
+      "slug": "data-security-and-privacy",
+      "title": "Data security and privacy",
+      "topics": [
+        "email",
+        "leads_contacts_crm_core",
+        "security_compliance_data",
+        "troubleshooting"
+      ],
+      "body_file": "close-help-docs/pages/data-security-and-privacy.txt",
+      "excerpt": "The security and privacy of your data is very important to us, and we have taken significant measures to protect it, through both technical and procedural processes. We will never share your data with\u2026"
+    },
+    {
+      "slug": "date-and-time-formats",
+      "title": "Date and Time Formats",
+      "topics": [
+        "integrations",
+        "tasks_notes"
+      ],
+      "body_file": "close-help-docs/pages/date-and-time-formats.txt",
+      "excerpt": "Date and Time Formats in Close depend on your System / Browser language settings. Close currently supports two formats - US and UK format: US format - 12/31/2022 1:30pm UK format - 31/12/2022 13:30 If\u2026"
+    },
+    {
+      "slug": "dedicated-email-servers",
+      "title": "Dedicated Email Servers",
+      "topics": [
+        "email",
+        "workflows_automation"
+      ],
+      "body_file": "close-help-docs/pages/dedicated-email-servers.txt",
+      "excerpt": "Why do I need a service like Mailgun or SendGrid? Email applications like Microsoft Outlook, Apple Mail, and Close make drafting, sending, and receiving email easy. Regardless of what app or service y\u2026"
+    },
+    {
+      "slug": "desktop-app",
+      "title": "Desktop App",
+      "topics": [
+        "mobile_desktop"
+      ],
+      "body_file": "close-help-docs/pages/desktop-app.txt",
+      "excerpt": "Downloading the Mac/Windows Application Download Close Here Once you\u2019ve installed the native application, simply log in with your Close username and password and you're ready to start Closing! Updatin\u2026"
+    },
+    {
+      "slug": "diagnosing-calling-problems",
+      "title": "Diagnosing Calling Problems",
+      "topics": [
+        "troubleshooting"
+      ],
+      "body_file": "close-help-docs/pages/diagnosing-calling-problems.txt",
+      "excerpt": "I sound \"choppy\" on the phone. This is usually caused by a weak network connection. Try out these tips for improving your connection: Use Ethernet instead of Wifi. If using Wifi, connect via 5 GHz ins\u2026"
+    },
+    {
+      "slug": "docusign",
+      "title": "Docusign",
+      "topics": [
+        "email",
+        "workflows_automation",
+        "integrations",
+        "opportunities_pipeline",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/docusign.txt",
+      "excerpt": "Create, send, and track documents from Opportunities and Lead objects within Close. This integration through Zapier will streamline document generation and help you to follow up on any outstanding dea\u2026"
+    },
+    {
+      "slug": "dripify",
+      "title": "Dripify",
+      "topics": [
+        "email",
+        "workflows_automation",
+        "integrations",
+        "reporting",
+        "opportunities_pipeline",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/dripify.txt",
+      "excerpt": "Integrating Close with Dripify Dripify is a LinkedIn automation and prospecting platform that helps users find and engage with their target audience on LinkedIn. It allows users to create a sales funn\u2026"
+    },
+    {
+      "slug": "edit-merge-delete-leads",
+      "title": "Editing, Merging, and Deleting Leads",
+      "topics": [
+        "email",
+        "smart_views_search",
+        "leads_contacts_crm_core",
+        "customization"
+      ],
+      "body_file": "close-help-docs/pages/edit-merge-delete-leads.txt",
+      "excerpt": "Edit Leads To make a change to a group of leads at once, first filter for those leads or go to an existing Smart View. All leads in your search or Smart View will be included in your bulk edit. Naviga\u2026"
+    },
+    {
+      "slug": "email-configuration",
+      "title": "Email configuration",
+      "topics": [
+        "email",
+        "integrations",
+        "leads_contacts_crm_core",
+        "getting_started_onboarding"
+      ],
+      "body_file": "close-help-docs/pages/email-configuration.txt",
+      "excerpt": "Close offers 2-way email integration, which allows you to send email from Close and automatically log the replies. Close will auto-log any email that appears in your Sent folder, even if it was sent f\u2026"
+    },
+    {
+      "slug": "email-deliverability",
+      "title": "Email Deliverability",
+      "topics": [
+        "email",
+        "reporting",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/email-deliverability.txt",
+      "excerpt": "Close relies on your email server for sending emails, meaning it follows the same guidelines and limitations as your provider. Mailbox providers use rules to ensure users receive relevant and desirabl\u2026"
+    },
+    {
+      "slug": "email-filtering",
+      "title": "Email Filtering",
+      "topics": [
+        "email",
+        "leads_contacts_crm_core",
+        "tasks_notes"
+      ],
+      "body_file": "close-help-docs/pages/email-filtering.txt",
+      "excerpt": "Close will automatically filter out any intra-organization emails. You can also filter out external email addresses or domains by request. Which emails are added in Close? Once you've hooked up your I\u2026"
+    },
+    {
+      "slug": "email-sending-limits",
+      "title": "Email Sending Limits",
+      "topics": [
+        "email",
+        "workflows_automation",
+        "troubleshooting"
+      ],
+      "body_file": "close-help-docs/pages/email-sending-limits.txt",
+      "excerpt": "Email Sending Limits are designed to prevent your email accounts from exceeding the sending thresholds set by your email providers. These limits not only safeguard your accounts from potential disconn\u2026"
+    },
+    {
+      "slug": "emailing",
+      "title": "Emailing",
+      "topics": [
+        "email",
+        "leads_contacts_crm_core",
+        "getting_started_onboarding"
+      ],
+      "body_file": "close-help-docs/pages/emailing.txt",
+      "excerpt": "As you begin using Close, we recommend you handle all of your customer communication through Close directly. In addition to always having relevant information at your fingertips, you\u2019ll take advantage\u2026"
+    },
+    {
+      "slug": "enabling-2fa",
+      "title": "Two-factor authentication (2FA)",
+      "topics": [
+        "sms_messaging",
+        "email",
+        "leads_contacts_crm_core",
+        "tasks_notes",
+        "account_users_roles",
+        "security_compliance_data"
+      ],
+      "body_file": "close-help-docs/pages/enabling-2fa.txt",
+      "excerpt": "Two-factor authentication (2FA) is a way of adding additional security to your account. 2FA requires you to enter an extra code when you log in or perform some account-sensitive action (e.g. changing \u2026"
+    },
+    {
+      "slug": "enabling-quality-of-service-qos",
+      "title": "Enabling Quality of Service (QoS)",
+      "topics": [
+        "calling_dialer",
+        "leads_contacts_crm_core",
+        "costs_usage_monitoring",
+        "troubleshooting"
+      ],
+      "body_file": "close-help-docs/pages/enabling-quality-of-service-qos.txt",
+      "excerpt": "QoS New to this section? Check out our series on how to debug network related call quality issues . What is QoS? QoS, or Quality of Service, is used to refer to ways in which your router can re-order \u2026"
+    },
+    {
+      "slug": "enforcing-required-fields-in-close-via-zapier",
+      "title": "Enforcing required fields in Close via Zapier",
+      "topics": [
+        "workflows_automation",
+        "opportunities_pipeline",
+        "leads_contacts_crm_core",
+        "customization"
+      ],
+      "body_file": "close-help-docs/pages/enforcing-required-fields-in-close-via-zapier.txt",
+      "excerpt": "Keep your users happy and your data clean with these simple Zaps Often times you may have a set of requirements for making specific changes to leads in Close. For example, you may require certain info\u2026"
+    },
+    {
+      "slug": "error-logs",
+      "title": "Console Error Logs",
+      "topics": [
+        "costs_usage_monitoring",
+        "troubleshooting"
+      ],
+      "body_file": "close-help-docs/pages/error-logs.txt",
+      "excerpt": "If you're experiencing issues with your Close application, error logs might help us in our debugging process where we'll have a better understanding of what went wrong, especially for issues we can't \u2026"
+    },
+    {
+      "slug": "eu-data-privacy-and-gdpr",
+      "title": "GDPR and EU data privacy",
+      "topics": [
+        "leads_contacts_crm_core",
+        "tasks_notes",
+        "security_compliance_data"
+      ],
+      "body_file": "close-help-docs/pages/eu-data-privacy-and-gdpr.txt",
+      "excerpt": "GDPR Overview Close has implemented processes and procedures to ensure we meet both our Data Controller and Data Processor obligations under the European Union\u2019s (EU) General Data Protection Regulatio\u2026"
+    },
+    {
+      "slug": "explorer",
+      "title": "Explorer",
+      "topics": [
+        "reporting",
+        "leads_contacts_crm_core",
+        "customization"
+      ],
+      "body_file": "close-help-docs/pages/explorer.txt",
+      "excerpt": "Do you have the right Plan? Explorer reporting is available only on the Scale or Enterprise (legacy) plan. Explorer is a data exploration tool to help you visualize your data, in graph form, in hundre\u2026"
+    },
+    {
+      "slug": "exporting-data",
+      "title": "Exporting data",
+      "topics": [
+        "sms_messaging",
+        "email",
+        "smart_views_search",
+        "leads_contacts_crm_core",
+        "customization",
+        "tasks_notes"
+      ],
+      "body_file": "close-help-docs/pages/exporting-data.txt",
+      "excerpt": "Exports We believe that you shouldn't be held captive by your own data. That's why we've made it extremely easy to export all or just part of your data in Close. Anytime you are looking at Leads in Se\u2026"
+    },
+    {
+      "slug": "facebook-lead-ads",
+      "title": "Facebook Lead Ads",
+      "topics": [
+        "email",
+        "workflows_automation",
+        "integrations",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/facebook-lead-ads.txt",
+      "excerpt": "Create a Close lead whenever a prospect signs up via Facebook Lead AdCreate a Close lead whenever a prospect signs up via Facebook Lead Ad Use this Zap Facebook Lead Ads are a specific type of Faceboo\u2026"
+    },
+    {
+      "slug": "find-ids-in-close",
+      "title": "Find IDs in Close",
+      "topics": [
+        "email",
+        "workflows_automation",
+        "opportunities_pipeline",
+        "leads_contacts_crm_core",
+        "customization"
+      ],
+      "body_file": "close-help-docs/pages/find-ids-in-close.txt",
+      "excerpt": "Whether you're setting up a Zapier flow or connecting to our API, you might need to find the following IDs in Close: User or Membership Lead Email Template Custom Field Lead or Opportunity Status Orga\u2026"
+    },
+    {
+      "slug": "finding-and-merging-duplicates",
+      "title": "Finding and Merging Duplicates",
+      "topics": [
+        "email",
+        "workflows_automation",
+        "reporting",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/finding-and-merging-duplicates.txt",
+      "excerpt": "Keeping your CRM clean is key to accurate reporting and a smooth sales workflow. Close does not currently have a built-in duplicate detection tool in the UI, but you can use our support tools to gener\u2026"
+    },
+    {
+      "slug": "forms",
+      "title": "Forms",
+      "topics": [
+        "email",
+        "workflows_automation",
+        "integrations",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/forms.txt",
+      "excerpt": "Forms feature lets you create and deploy web forms that capture data and send it directly into your CRM without needing any external tools or manual data entry. Forms can create new Leads, update exis\u2026"
+    },
+    {
+      "slug": "forwarding-email-to-close",
+      "title": "Forwarding email to Close",
+      "topics": [
+        "email",
+        "leads_contacts_crm_core",
+        "getting_started_onboarding"
+      ],
+      "body_file": "close-help-docs/pages/forwarding-email-to-close.txt",
+      "excerpt": "Create new leads and attach emails to existing leads via email forwarding The recommended way to sync emails with Close is to set up your IMAP account in the email settings. This will automatically at\u2026"
+    },
+    {
+      "slug": "forwarding-sms",
+      "title": "Creating additional SMS notifications for users",
+      "topics": [
+        "sms_messaging",
+        "calling_dialer",
+        "email",
+        "workflows_automation",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/forwarding-sms.txt",
+      "excerpt": "If you're a heavy user of SMS and not always logged into Close or want to respond quickly during non-business hours, you may want to set up an additional notification for any incoming SMS. This tutori\u2026"
+    },
+    {
+      "slug": "german-regulatory-documents",
+      "title": "German Regulatory Documents",
+      "topics": [
+        "calling_dialer",
+        "email",
+        "tasks_notes",
+        "security_compliance_data",
+        "getting_started_onboarding",
+        "troubleshooting"
+      ],
+      "body_file": "close-help-docs/pages/german-regulatory-documents.txt",
+      "excerpt": "As Twilio, our telephony service provider only supports phone numbers registered to businesses and not individuals, an excerpt from the commercial register (Handelsregisterauszug) is the only document\u2026"
+    },
+    {
+      "slug": "getaccept",
+      "title": "GetAccept",
+      "topics": [
+        "integrations",
+        "opportunities_pipeline",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/getaccept.txt",
+      "excerpt": "GetAccept is a sales enablement and contract management tool. Using our integration you can push contract ( Opportunity ) information directly from Close to GetAccept. GetAccept provides everything yo\u2026"
+    },
+    {
+      "slug": "google-forms",
+      "title": "Google Forms",
+      "topics": [
+        "workflows_automation",
+        "integrations",
+        "leads_contacts_crm_core",
+        "customization",
+        "tasks_notes"
+      ],
+      "body_file": "close-help-docs/pages/google-forms.txt",
+      "excerpt": "Is Google Forms part of your sales workflow? You can log responses filled in from your forms in Close as a note, custom field, custom activity etc. In this tutorial, we will Create a Google Form where\u2026"
+    },
+    {
+      "slug": "group-numbers",
+      "title": "Group Numbers",
+      "topics": [
+        "sms_messaging",
+        "calling_dialer",
+        "email",
+        "leads_contacts_crm_core",
+        "getting_started_onboarding"
+      ],
+      "body_file": "close-help-docs/pages/group-numbers.txt",
+      "excerpt": "A Group Phone Number (also known as a \"ring group\" or \"call group\") defines a phone number that, when dialed, rings a group of phones simultaneously, stopping when any one of them is picked up. This f\u2026"
+    },
+    {
+      "slug": "groups",
+      "title": "Groups",
+      "topics": [
+        "reporting",
+        "opportunities_pipeline",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/groups.txt",
+      "excerpt": "Availability This feature is only available on the Scale and Enterprise (legacy) plans Groups were made for managers who want to filter performance by groups of team members rather than the organizati\u2026"
+    },
+    {
+      "slug": "help-scout",
+      "title": "Help Scout",
+      "topics": [
+        "email",
+        "integrations",
+        "leads_contacts_crm_core",
+        "customization"
+      ],
+      "body_file": "close-help-docs/pages/help-scout.txt",
+      "excerpt": "Enabling the Close + Help Scout integration allows you and your team to bring Close Lead data straight into your Help Scout Tickets. Matching by customer email address, this integration lets you see a\u2026"
+    },
+    {
+      "slug": "helpdesk-integration",
+      "title": "Helpdesk integration",
+      "topics": [
+        "email",
+        "integrations"
+      ],
+      "body_file": "close-help-docs/pages/helpdesk-integration.txt",
+      "excerpt": "Display support emails in Close The beauty of Close's two-way email sync is that if your help desk software simply sends/receives from your support@ or help@ (or whatever) email account, those emails \u2026"
+    },
+    {
+      "slug": "how-do-i-create-a-parentchild-account-hierarchy",
+      "title": "Parent/Child Lead Hierarchy",
+      "topics": [
+        "integrations",
+        "leads_contacts_crm_core",
+        "customization"
+      ],
+      "body_file": "close-help-docs/pages/how-do-i-create-a-parentchild-account-hierarchy.txt",
+      "excerpt": "For many sales organizations, it can be strategically important to relate accounts together by a parent, or master account, and the child accounts that are associated underneath it. Whether you work w\u2026"
+    },
+    {
+      "slug": "how-to-download-the-close-desktop-app-beta",
+      "title": "How to Download the Close Desktop App Beta",
+      "topics": [
+        "mobile_desktop"
+      ],
+      "body_file": "close-help-docs/pages/how-to-download-the-close-desktop-app-beta.txt",
+      "excerpt": "Before we release a new version of our Close desktop app on both Mac and Windows, we put the app in a beta period to make sure everything is running smoothly. This guide will show you how to access th\u2026"
+    },
+    {
+      "slug": "how-to-reset-your-password",
+      "title": "Reset your password",
+      "topics": [
+        "email"
+      ],
+      "body_file": "close-help-docs/pages/how-to-reset-your-password.txt",
+      "excerpt": "Password reset Click this link to open your password reset page: https://app.close.com/forgot/ If prompted, you will need to select \"Web Version\" to open the page in your browser. A prompt similar to \u2026"
+    },
+    {
+      "slug": "hubspot-to-close-syncing-integration",
+      "title": "HubSpot to Close - Syncing Integration",
+      "topics": [
+        "sms_messaging",
+        "email",
+        "meetings_scheduling",
+        "integrations",
+        "leads_contacts_crm_core",
+        "customization"
+      ],
+      "body_file": "close-help-docs/pages/hubspot-to-close-syncing-integration.txt",
+      "excerpt": "Close and HubSpot Integration Integrating your Close and HubSpot databases can help streamline your data management and ensure that your sales and marketing teams have access to the most up-to-date in\u2026"
+    },
+    {
+      "slug": "importing-leads-from-file",
+      "title": "Importing Leads and Contacts from a file",
+      "topics": [
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/importing-leads-from-file.txt",
+      "excerpt": "There are several ways to bring your Lead data into Close. The first and most commonly used is Close's Lead Importer. Navigate to the Lead Importer by clicking your name in the upper right of Close, t\u2026"
+    },
+    {
+      "slug": "importing-opportunities-from-a-file",
+      "title": "Importing Opportunities from a file",
+      "topics": [
+        "email",
+        "reporting",
+        "opportunities_pipeline",
+        "leads_contacts_crm_core",
+        "tasks_notes"
+      ],
+      "body_file": "close-help-docs/pages/importing-opportunities-from-a-file.txt",
+      "excerpt": "You can import Opportunities from a file following the steps below. Go to the Importer You can do the following to bring your Leads into Close from a file: Upload via CSV by browsing that file on your\u2026"
+    },
+    {
+      "slug": "importing-other-data-into-close",
+      "title": "Importing Other Data into Close",
+      "topics": [
+        "email",
+        "leads_contacts_crm_core",
+        "tasks_notes"
+      ],
+      "body_file": "close-help-docs/pages/importing-other-data-into-close.txt",
+      "excerpt": "Close's native lead importer handles most standard data, but if you need to bring in notes, tasks, or call activities that aren't supported by the built-in importer, you can use the support tools belo\u2026"
+    },
+    {
+      "slug": "inbox",
+      "title": "Inbox",
+      "topics": [
+        "sms_messaging",
+        "calling_dialer",
+        "email",
+        "workflows_automation",
+        "leads_contacts_crm_core",
+        "tasks_notes"
+      ],
+      "body_file": "close-help-docs/pages/inbox.txt",
+      "excerpt": "The Close Inbox is a sales-focused view of all your inbound communication (emails, missed calls, voicemails) and open tasks/reminders for the day. The Inbox is a hub for everything you should react to\u2026"
+    },
+    {
+      "slug": "increase-call-connections",
+      "title": "Increase Call Connection Rates",
+      "topics": [
+        "calling_dialer",
+        "email",
+        "leads_contacts_crm_core",
+        "getting_started_onboarding",
+        "troubleshooting"
+      ],
+      "body_file": "close-help-docs/pages/increase-call-connections.txt",
+      "excerpt": "Robocalls and spam labeling are major issues in today's communication landscape. Being flagged as spam leads to a decline in trust and response rates when an unidentified phone number is calling, whic\u2026"
+    },
+    {
+      "slug": "initiating-calls-from-the-web-app",
+      "title": "Initiating calls from the web app",
+      "topics": [
+        "integrations",
+        "leads_contacts_crm_core",
+        "troubleshooting"
+      ],
+      "body_file": "close-help-docs/pages/initiating-calls-from-the-web-app.txt",
+      "excerpt": "There are several options to dial your leads: use the built-in calling feature on the desktop application, the mobile app, or your web browser. Download trouble? If you're working on Mac or Windows an\u2026"
+    },
+    {
+      "slug": "integration-links",
+      "title": "Integration links",
+      "topics": [
+        "email",
+        "integrations",
+        "opportunities_pipeline",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/integration-links.txt",
+      "excerpt": "Integration Links are a way to integrate other websites and systems with Close. You can use them to quickly jump to other websites and pass them data from your Leads, Contacts, and Opportunities. What\u2026"
+    },
+    {
+      "slug": "integrations",
+      "title": "Integrations",
+      "topics": [
+        "email",
+        "meetings_scheduling",
+        "workflows_automation",
+        "integrations"
+      ],
+      "body_file": "close-help-docs/pages/integrations.txt",
+      "excerpt": "Integrations Close has built-in integrations, such as our Meetings tool and email sync . We also have a Zoom integration to sync your recorded meetings, and Slack for remote teams. For tools that don'\u2026"
+    },
+    {
+      "slug": "integrations-with-close",
+      "title": "Integrations by type",
+      "topics": [
+        "workflows_automation",
+        "integrations",
+        "reporting",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/integrations-with-close.txt",
+      "excerpt": "Browse some of our most popular integrations here . If you don't see the integration you're looking for, you can create a custom integration with Zapier or our API . If you have any questions about in\u2026"
+    },
+    {
+      "slug": "keyboard-shortcuts",
+      "title": "Close app keyboard shortcuts",
+      "topics": [
+        "sms_messaging",
+        "calling_dialer",
+        "email",
+        "workflows_automation",
+        "smart_views_search",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/keyboard-shortcuts.txt",
+      "excerpt": "Keyboard Shortcuts Close comes with a set of keyboard shortcuts that can significantly improve your workflow efficiency. To see the list of keyboard shortcuts available, just hit the question mark but\u2026"
+    },
+    {
+      "slug": "knowledge-hub",
+      "title": "AI Knowledge Sources",
+      "topics": [
+        "workflows_automation",
+        "getting_started_onboarding"
+      ],
+      "body_file": "close-help-docs/pages/knowledge-hub.txt",
+      "excerpt": "Give Close AI the right context to personalize onboarding, draft higher\u2011quality content, and answer questions with more accuracy. The Knowledge Hub allows Admins to add and manage trusted knowledge so\u2026"
+    },
+    {
+      "slug": "lead-assignment",
+      "title": "Lead assignment",
+      "topics": [
+        "smart_views_search",
+        "leads_contacts_crm_core",
+        "customization"
+      ],
+      "body_file": "close-help-docs/pages/lead-assignment.txt",
+      "excerpt": "This guide will show you how to create user custom fields and various ways to handle lead assignment in Close. Lead Assignment Overview Lead assignment in Close is best handled through a custom field \u2026"
+    },
+    {
+      "slug": "lead-filtering",
+      "title": "Lead Filtering Tutorials",
+      "topics": [
+        "calling_dialer",
+        "email",
+        "workflows_automation",
+        "smart_views_search",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/lead-filtering.txt",
+      "excerpt": "Lead filtering is a powerful way to create search queries that dynamically impact which Leads appear in your view. Filtering can help you quickly find a Contact, identify which Leads need attention, b\u2026"
+    },
+    {
+      "slug": "lead-filtering-tips",
+      "title": "Lead Filtering Tips",
+      "topics": [
+        "smart_views_search",
+        "leads_contacts_crm_core",
+        "customization"
+      ],
+      "body_file": "close-help-docs/pages/lead-filtering-tips.txt",
+      "excerpt": "This article is a more detailed look at constructing search queries in Close. To start creating basic search queries right away, head over to the lead filtering overview help article. After reading th\u2026"
+    },
+    {
+      "slug": "lead-scoring",
+      "title": "Lead Scoring",
+      "topics": [
+        "workflows_automation",
+        "smart_views_search",
+        "leads_contacts_crm_core",
+        "customization"
+      ],
+      "body_file": "close-help-docs/pages/lead-scoring.txt",
+      "excerpt": "Whether your business is growing or you work with a high volume of leads, lead scoring will help you address the most important leads quickly and prioritize the rest. Check out our Ultimate Guide to L\u2026"
+    },
+    {
+      "slug": "lead-statuses",
+      "title": "Lead statuses",
+      "topics": [
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/lead-statuses.txt",
+      "excerpt": "There are many ways to set up Close for your unique organization or sales process. We recommend customizing some main areas within the tool before you begin to sell. Lead Statuses are one of the best \u2026"
+    },
+    {
+      "slug": "lead-visibility",
+      "title": "Lead Visibility",
+      "topics": [
+        "workflows_automation",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/lead-visibility.txt",
+      "excerpt": "Lead Visibility empowers you to control which Leads different users can see. This feature can help limit distractions and ensure your team focuses on Leads relevant to their roles. With Lead Visibilit\u2026"
+    },
+    {
+      "slug": "leadfuze",
+      "title": "LeadFuze",
+      "topics": [
+        "email",
+        "integrations",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/leadfuze.txt",
+      "excerpt": "LeadFuze enables you to search and add automatically any online profile as a Close lead. LeadFuze is a B2B lead generation software that allows you to search for prospects and automatically find their\u2026"
+    },
+    {
+      "slug": "leads",
+      "title": "Leads",
+      "topics": [
+        "leads_contacts_crm_core",
+        "customization",
+        "tasks_notes",
+        "getting_started_onboarding"
+      ],
+      "body_file": "close-help-docs/pages/leads.txt",
+      "excerpt": "Close is designed to collect all of your communication history with a Lead within one view, as well as allow you to communicate with your Leads in a number of different ways. Leads, Contacts, and Oppo\u2026"
+    },
+    {
+      "slug": "linkmatch",
+      "title": "LinkMatch",
+      "topics": [
+        "email",
+        "integrations",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/linkmatch.txt",
+      "excerpt": "LinkMatch enables you to add any LinkedIn profile as a Close lead with a single click. With LinkMatch you can see which people/organizations from LinkedIn are already in Close, view/edit Close leads w\u2026"
+    },
+    {
+      "slug": "mailchimp",
+      "title": "Mailchimp",
+      "topics": [
+        "email",
+        "workflows_automation",
+        "integrations",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/mailchimp.txt",
+      "excerpt": "Create new Close Lead from Mailchimp subscriber Use this Zap Mailchimp is most popular for its email marketing and automation used by thousands of companies. Chances are you are managing your email li\u2026"
+    },
+    {
+      "slug": "mailgun",
+      "title": "Mailgun",
+      "topics": [
+        "email",
+        "security_compliance_data",
+        "troubleshooting"
+      ],
+      "body_file": "close-help-docs/pages/mailgun.txt",
+      "excerpt": "Getting started Create your Mailgun account Create an account with Mailgun . Mailgun offers 5,000 free emails per month for 3 months on their lowest Flex plan. Beyond that, you'll need to pay for emai\u2026"
+    },
+    {
+      "slug": "managing-unsubscribe-requests",
+      "title": "Managing unsubscribe requests",
+      "topics": [
+        "email",
+        "workflows_automation",
+        "leads_contacts_crm_core",
+        "getting_started_onboarding"
+      ],
+      "body_file": "close-help-docs/pages/managing-unsubscribe-requests.txt",
+      "excerpt": "You can handle your unsubscribe requests directly within Close, making email management a breeze and providing a convenient way for leads to opt out of communications they no longer wish to receive. T\u2026"
+    },
+    {
+      "slug": "managing-your-usage-balance",
+      "title": "Managing your Usage balance",
+      "topics": [
+        "sms_messaging",
+        "costs_usage_monitoring"
+      ],
+      "body_file": "close-help-docs/pages/managing-your-usage-balance.txt",
+      "excerpt": "To see your current usage balance, go to \"Settings\" within Close, scroll down to \"Billing\", and then choose \"Usage\". The top section will show you the amount of usage in your billing month. Usage Over\u2026"
+    },
+    {
+      "slug": "marketing",
+      "title": "Marketing",
+      "topics": [
+        "integrations",
+        "opportunities_pipeline",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/marketing.txt",
+      "excerpt": "Marketing Let\u2019s face it, without a reliable source of new leads for your product or service, your business is dead in the water without consistent customer growth. That makes the lead generation ideas\u2026"
+    },
+    {
+      "slug": "mcp-server",
+      "title": "Close MCP Server",
+      "topics": [
+        "integrations",
+        "playbooks_ai"
+      ],
+      "body_file": "close-help-docs/pages/mcp-server.txt",
+      "excerpt": "Model Context Protocol (MCP) servers provide a standardized interface that allows any compatible AI model or agent to access your Close data in a simple and secure way. Below are instructions for addi\u2026"
+    },
+    {
+      "slug": "meetings",
+      "title": "Meeting Sync",
+      "topics": [
+        "meetings_scheduling",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/meetings.txt",
+      "excerpt": "Automatically sync meetings from Google Calendar and Office 365 Calendar. Today, salespeople juggle a half dozen tools just to start, run, and review their meetings--from the first demo to closing the\u2026"
+    },
+    {
+      "slug": "migration-from-another-crm",
+      "title": "Migration from another CRM",
+      "topics": [
+        "integrations",
+        "opportunities_pipeline",
+        "leads_contacts_crm_core",
+        "costs_usage_monitoring"
+      ],
+      "body_file": "close-help-docs/pages/migration-from-another-crm.txt",
+      "excerpt": "Migration from another CRM Use the 'Import from a CRM' option in the Lead Importer if you need to migrate leads over from an existing CRM. Remember that only Close users with the Admin Role are allowe\u2026"
+    },
+    {
+      "slug": "migration-from-pipedrive",
+      "title": "Migration from Pipedrive",
+      "topics": [
+        "email",
+        "leads_contacts_crm_core",
+        "customization",
+        "tasks_notes"
+      ],
+      "body_file": "close-help-docs/pages/migration-from-pipedrive.txt",
+      "excerpt": "Migrate Data from Pipedrive Our team can help you seamlessly transfer your data from Pipedrive to Close. Export Data from Pipedrive Begin by exporting your complete data set from Pipedrive under Tools\u2026"
+    },
+    {
+      "slug": "network-logs",
+      "title": "Network Logs",
+      "topics": [
+        "leads_contacts_crm_core",
+        "costs_usage_monitoring",
+        "troubleshooting"
+      ],
+      "body_file": "close-help-docs/pages/network-logs.txt",
+      "excerpt": "If you're experiencing performance issues with your Close application such as slow loading, network logs might help us in our debugging process where we'll have a better understanding of all the backg\u2026"
+    },
+    {
+      "slug": "new-assign-leads-to-users-via-round-robin",
+      "title": "Assign Leads to Users via Round-Robin",
+      "topics": [
+        "workflows_automation",
+        "integrations",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/new-assign-leads-to-users-via-round-robin.txt",
+      "excerpt": "There are two ways to set up round-robin lead assignment in Close: Robin and Zapier. Robin is a dedicated app built specifically for this purpose, while Zapier offers another approach. Both options ar\u2026"
+    },
+    {
+      "slug": "note-templates-and-summary-guidance",
+      "title": "Note Templates and Summary Guidance",
+      "topics": [
+        "leads_contacts_crm_core",
+        "customization",
+        "playbooks_ai",
+        "tasks_notes"
+      ],
+      "body_file": "close-help-docs/pages/note-templates-and-summary-guidance.txt",
+      "excerpt": "Playbooks give you two ways to control how calls are documented after they end. Note templates auto-generate a structured call note, and Summary guidance shapes how Close AI writes the call summary. B\u2026"
+    },
+    {
+      "slug": "notes",
+      "title": "Notes",
+      "topics": [
+        "reporting",
+        "leads_contacts_crm_core",
+        "customization",
+        "tasks_notes"
+      ],
+      "body_file": "close-help-docs/pages/notes.txt",
+      "excerpt": "Notes allow you to quickly insert an unstructured text note on the Lead activity panel. While Custom Activities , Call , and Meeting Notes are better suited for their respective contexts, simple text \u2026"
+    },
+    {
+      "slug": "notetaker",
+      "title": "Notetaker",
+      "topics": [
+        "meetings_scheduling",
+        "leads_contacts_crm_core",
+        "playbooks_ai",
+        "tasks_notes"
+      ],
+      "body_file": "close-help-docs/pages/notetaker.txt",
+      "excerpt": "Pricing Notetaker is currently in free beta. Close Notetaker automatically transcribes and summarizes your meetings, so you can focus on what really matters: your leads. Notetaker joins your meetings,\u2026"
+    },
+    {
+      "slug": "office365-connected-accounts",
+      "title": "Office365 connected accounts",
+      "topics": [
+        "email"
+      ],
+      "body_file": "close-help-docs/pages/office365-connected-accounts.txt",
+      "excerpt": "Email account disconnecting from Close If you've connected your Office365 mailbox to Close, you might try to send an email only to find out that your email account immediately disconnected and your em\u2026"
+    },
+    {
+      "slug": "onboarding-checklist-start-here",
+      "title": "Close Onboarding",
+      "topics": [
+        "email",
+        "workflows_automation",
+        "opportunities_pipeline",
+        "leads_contacts_crm_core",
+        "customization",
+        "playbooks_ai"
+      ],
+      "body_file": "close-help-docs/pages/onboarding-checklist-start-here.txt",
+      "excerpt": "\ud83d\udc4b Welcome to Your Close Onboarding Guide! Getting set up in Close is easier than ever with our interactive demos and videos \u2014step-by-step guides designed to help you explore and implement key features\u2026"
+    },
+    {
+      "slug": "open-source-acknowledgments",
+      "title": "Open Source Acknowledgments",
+      "topics": [
+        "security_compliance_data"
+      ],
+      "body_file": "close-help-docs/pages/open-source-acknowledgments.txt",
+      "excerpt": "Close loves open source. We publish a number of open source packages at https://github.com/closeio Learn more at https://making.close.com/ Here is a list of acknowledgments for some of the open source\u2026"
+    },
+    {
+      "slug": "opening-links-in-the-desktop-app",
+      "title": "Opening links in the Desktop App",
+      "topics": [
+        "email",
+        "integrations",
+        "leads_contacts_crm_core",
+        "mobile_desktop",
+        "troubleshooting"
+      ],
+      "body_file": "close-help-docs/pages/opening-links-in-the-desktop-app.txt",
+      "excerpt": "You can open Close directly in the Desktop app from links you share in email, Slack, docs, or other tools by using deep links. Who can use this Any Close user with the Desktop app installed and update\u2026"
+    },
+    {
+      "slug": "opportunities",
+      "title": "Opportunities",
+      "topics": [
+        "opportunities_pipeline",
+        "leads_contacts_crm_core",
+        "customization"
+      ],
+      "body_file": "close-help-docs/pages/opportunities.txt",
+      "excerpt": "Create a New Opportunity You can create a new Opportunity directly from the Lead page. Go to Leads page > click on any lead > click on the + button next to Opportunities section on the left. Opportuni\u2026"
+    },
+    {
+      "slug": "opportunities-report",
+      "title": "Opportunities List View",
+      "topics": [
+        "smart_views_search",
+        "reporting",
+        "opportunities_pipeline",
+        "leads_contacts_crm_core",
+        "customization",
+        "tasks_notes"
+      ],
+      "body_file": "close-help-docs/pages/opportunities-report.txt",
+      "excerpt": "While Close tracks a number of data points, our philosophy on reporting is to make that data as actionable for your sales team as possible. To that end, our reporting focuses on a sales rep\u2019s created \u2026"
+    },
+    {
+      "slug": "opportunity-funnels-report",
+      "title": "Opportunity Funnels Report",
+      "topics": [
+        "reporting",
+        "opportunities_pipeline"
+      ],
+      "body_file": "close-help-docs/pages/opportunity-funnels-report.txt",
+      "excerpt": "The Opportunity Funnels report helps you keep track of your Opportunities with an in-depth look into how your Opportunities perform over a given time range. This report will show aggregated metrics fo\u2026"
+    },
+    {
+      "slug": "opportunity-pipeline-view",
+      "title": "Opportunity Pipeline View",
+      "topics": [
+        "reporting",
+        "opportunities_pipeline",
+        "leads_contacts_crm_core",
+        "customization",
+        "tasks_notes"
+      ],
+      "body_file": "close-help-docs/pages/opportunity-pipeline-view.txt",
+      "excerpt": "The Pipeline View is one of the simplest, yet most actionable reporting tools for sales teams. It addresses both the needs of an individual sales rep, as well as sales managers, VPs and CEOs to easily\u2026"
+    },
+    {
+      "slug": "opportunity-statuses",
+      "title": "Opportunity Pipelines & Statuses",
+      "topics": [
+        "reporting",
+        "opportunities_pipeline",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/opportunity-statuses.txt",
+      "excerpt": "Defining Opportunity Pipelines & Statuses Opportunity Pipelines are used to define the particular funnel deals can go through. Opportunity Statuses are used to describe each stage a pending deal can g\u2026"
+    },
+    {
+      "slug": "organizational-tools",
+      "title": "Organizational Tools",
+      "topics": [
+        "integrations",
+        "getting_started_onboarding"
+      ],
+      "body_file": "close-help-docs/pages/organizational-tools.txt",
+      "excerpt": "Organizational Tools Project plans have a knack for getting disorganized as soon as you go to work on them. Organizing your team's work can reduce mental clutter and increase productivity. Close has a\u2026"
+    },
+    {
+      "slug": "other-ways-to-get-your-data-into-close",
+      "title": "Other ways to get your data into Close",
+      "topics": [
+        "email",
+        "meetings_scheduling",
+        "integrations",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/other-ways-to-get-your-data-into-close.txt",
+      "excerpt": "Detect Potential Contacts from your Connected Account You need to have a connected email account for this feature to work. You can access it in the top right corner of the 'Inbox' section or by clicki\u2026"
+    },
+    {
+      "slug": "outcomes",
+      "title": "Outcomes",
+      "topics": [
+        "meetings_scheduling",
+        "reporting",
+        "leads_contacts_crm_core",
+        "tasks_notes",
+        "getting_started_onboarding"
+      ],
+      "body_file": "close-help-docs/pages/outcomes.txt",
+      "excerpt": "Call and Meeting Outcomes Call and Meeting Outcomes help you track and categorize the results of your calls and meetings, giving you better insights into your sales activities and performance. Overvie\u2026"
+    },
+    {
+      "slug": "perform-an-action-when-a-workflow-ends",
+      "title": "Perform an action when a Workflow ends",
+      "topics": [
+        "email",
+        "workflows_automation",
+        "integrations",
+        "leads_contacts_crm_core",
+        "customization"
+      ],
+      "body_file": "close-help-docs/pages/perform-an-action-when-a-workflow-ends.txt",
+      "excerpt": "Let's say you've created the perfect email workflow to send to qualified leads but they don't convert during your expected sales cycle. That's ok - sales is all about the follow-up. Don't sit around a\u2026"
+    },
+    {
+      "slug": "plans-and-billing",
+      "title": "Plans and Billing",
+      "topics": [
+        "sms_messaging",
+        "calling_dialer",
+        "email",
+        "leads_contacts_crm_core",
+        "account_users_roles",
+        "troubleshooting"
+      ],
+      "body_file": "close-help-docs/pages/plans-and-billing.txt",
+      "excerpt": "Billing Schedule, Plan, and Users Your Close account is billed according to these three aspects of your subscription: Your Billing Schedule - You can pay for Close on a monthly or annual basis. Your T\u2026"
+    },
+    {
+      "slug": "playbooks",
+      "title": "Playbooks",
+      "topics": [
+        "leads_contacts_crm_core",
+        "customization",
+        "playbooks_ai",
+        "tasks_notes"
+      ],
+      "body_file": "close-help-docs/pages/playbooks.txt",
+      "excerpt": "Playbooks are currently in free beta. Reach out to support@close.com for more info. Playbooks give your team a shared framework for how to run specific types of conversations, whether that's a discove\u2026"
+    },
+    {
+      "slug": "playbooks-and-chloe",
+      "title": "Playbooks and Chloe",
+      "topics": [
+        "leads_contacts_crm_core",
+        "customization",
+        "playbooks_ai"
+      ],
+      "body_file": "close-help-docs/pages/playbooks-and-chloe.txt",
+      "excerpt": "Playbooks and Chloe - Close\u2019s AI voice agent - work closely together. When Chloe makes a call, she uses a Playbook to define what she captures, how she documents the conversation, and what Outcomes sh\u2026"
+    },
+    {
+      "slug": "porting-your-number",
+      "title": "Porting your number",
+      "topics": [
+        "calling_dialer",
+        "email"
+      ],
+      "body_file": "close-help-docs/pages/porting-your-number.txt",
+      "excerpt": "By default, our provider supports the porting of US and Canadian numbers. If you'd like to port a number from another country, please reach out to support@close.com to see if we can port the number. M\u2026"
+    },
+    {
+      "slug": "power-predictive-dialing",
+      "title": "Power & Predictive Dialing",
+      "topics": [
+        "calling_dialer",
+        "workflows_automation",
+        "smart_views_search",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/power-predictive-dialing.txt",
+      "excerpt": "Power Dialer A power dialer is a piece of automated telephone technology that dials a phone number right after a call is completed. The power dialer will call the following contact on the list as soon\u2026"
+    },
+    {
+      "slug": "premium-phone-numbers",
+      "title": "Premium Phone Numbers",
+      "topics": [
+        "calling_dialer",
+        "email",
+        "leads_contacts_crm_core",
+        "customization"
+      ],
+      "body_file": "close-help-docs/pages/premium-phone-numbers.txt",
+      "excerpt": "Close has combined two non-negotiables for modern businesses: a CRM and a business phone system. With Premium Phone Numbers, you can automatically route calls to specific team members using data from \u2026"
+    },
+    {
+      "slug": "prompt-training",
+      "title": "Prompt Training",
+      "topics": [
+        "leads_contacts_crm_core",
+        "playbooks_ai"
+      ],
+      "body_file": "close-help-docs/pages/prompt-training.txt",
+      "excerpt": "Teach Chloe what good looks like for your business: who she's calling, why she's calling, what to ask, how to handle what comes up, and what to do at the end. Each Agent has its own prompt, so you can\u2026"
+    },
+    {
+      "slug": "prospecting",
+      "title": "Prospecting",
+      "topics": [
+        "email",
+        "integrations",
+        "opportunities_pipeline",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/prospecting.txt",
+      "excerpt": "Prospecting Prospecting is the initial stage of the sales process. It is the activity of turning a prospect (a target who may not know who you are) into an opportunity. Once you have an opportunity, y\u2026"
+    },
+    {
+      "slug": "pull-webform-answers-into-close-custom-activity",
+      "title": "Pull Webform Answers Into Close Custom Activity",
+      "topics": [
+        "meetings_scheduling",
+        "workflows_automation",
+        "integrations",
+        "leads_contacts_crm_core",
+        "customization",
+        "tasks_notes"
+      ],
+      "body_file": "close-help-docs/pages/pull-webform-answers-into-close-custom-activity.txt",
+      "excerpt": "This Zap will pull a lead's answers from your webform into a Custom Activity in Close, allowing you to: Filter your leads using common answers Review answers directly on the lead's page What you'll ne\u2026"
+    },
+    {
+      "slug": "quick-start-importing-leads",
+      "title": "Import Data into Close",
+      "topics": [
+        "smart_views_search",
+        "leads_contacts_crm_core",
+        "getting_started_onboarding"
+      ],
+      "body_file": "close-help-docs/pages/quick-start-importing-leads.txt",
+      "excerpt": "Let's get started by importing leads into your Close account. Which most accurately describes your current situation? Please choose one: \ud83d\udcc4 I track my leads in a spreadsheet \ud83d\udd04 I have been using a diffe\u2026"
+    },
+    {
+      "slug": "recording-touchpoints-using-codes",
+      "title": "Recording touchpoints using #codes",
+      "topics": [
+        "calling_dialer",
+        "email",
+        "workflows_automation",
+        "reporting",
+        "leads_contacts_crm_core",
+        "customization"
+      ],
+      "body_file": "close-help-docs/pages/recording-touchpoints-using-codes.txt",
+      "excerpt": "Generally, your pre- and post- sales processes will have a few key touchpoints or activities you may want to record. This guide will cover a few different ways to track these events in Close. Here's a\u2026"
+    },
+    {
+      "slug": "regulatory-bundle",
+      "title": "Regulatory Bundles",
+      "topics": [
+        "sms_compliance",
+        "calling_dialer",
+        "email"
+      ],
+      "body_file": "close-help-docs/pages/regulatory-bundle.txt",
+      "excerpt": "Provisioning phone numbers in most countries require registration due to local telephony laws. These regulations often require providing identity documentation to carriers or a local enforcement agenc\u2026"
+    },
+    {
+      "slug": "reinstalling-the-close-app",
+      "title": "Reinstalling the Close app",
+      "topics": [
+        "tasks_notes",
+        "mobile_desktop",
+        "troubleshooting"
+      ],
+      "body_file": "close-help-docs/pages/reinstalling-the-close-app.txt",
+      "excerpt": "If you need to reinstall your Close desktop app, please follow the instructions below as simply moving the Close app into the trash isn't sufficient for thorough reinstall. The difference between foll\u2026"
+    },
+    {
+      "slug": "reporting",
+      "title": "Reports",
+      "topics": [
+        "email",
+        "reporting",
+        "opportunities_pipeline",
+        "leads_contacts_crm_core",
+        "getting_started_onboarding"
+      ],
+      "body_file": "close-help-docs/pages/reporting.txt",
+      "excerpt": "Close more deals with actionable insights Pull the most significant growth levers with our customizable, flexible reporting: from projections to leaderboards and every KPI in between. Close has severa\u2026"
+    },
+    {
+      "slug": "reporting-call-quality-issues",
+      "title": "Reporting call quality issues",
+      "topics": [
+        "calling_dialer",
+        "email",
+        "reporting",
+        "troubleshooting"
+      ],
+      "body_file": "close-help-docs/pages/reporting-call-quality-issues.txt",
+      "excerpt": "Reporting calls Our goal is to make sure that every call you make through Close is perfect. To make that goal a reality, we need your feedback \u2013 both good and bad. After every call you make (or answer\u2026"
+    },
+    {
+      "slug": "requirements-for-bulk-email-senders",
+      "title": "Requirements for bulk email senders",
+      "topics": [
+        "email",
+        "tasks_notes"
+      ],
+      "body_file": "close-help-docs/pages/requirements-for-bulk-email-senders.txt",
+      "excerpt": "In 2024 Google and Yahoo anounced they'll enforce the following requirements for bulk email senders. The requirements are not new; they were already best practices for a while now. They are being enfo\u2026"
+    },
+    {
+      "slug": "restarting-the-close-app",
+      "title": "Restarting the Close app",
+      "topics": [
+        "mobile_desktop"
+      ],
+      "body_file": "close-help-docs/pages/restarting-the-close-app.txt",
+      "excerpt": "If you need to restart the Close desktop app for any reason, please follow the instructions below as just clicking on the X button isn't enough to fully restart the app. Mac 1. Go to Close in the top-\u2026"
+    },
+    {
+      "slug": "restricted-user-role",
+      "title": "Restricted User role",
+      "topics": [
+        "sms_messaging",
+        "calling_dialer",
+        "email",
+        "leads_contacts_crm_core",
+        "tasks_notes",
+        "account_users_roles"
+      ],
+      "body_file": "close-help-docs/pages/restricted-user-role.txt",
+      "excerpt": "Restricted User Each plan includes the predefined role below. The Restricted User role is a default role and may be assigned to any user. However, it may not be edited or modified. Restricted Users do\u2026"
+    },
+    {
+      "slug": "roles-permissions",
+      "title": "Roles & Permissions",
+      "topics": [
+        "account_users_roles"
+      ],
+      "body_file": "close-help-docs/pages/roles-permissions.txt",
+      "excerpt": "Transparency and Productivity We believe that transparency promotes productivity. That is why everything you do within Close is visible to everyone on your team. That being said, we also know that spe\u2026"
+    },
+    {
+      "slug": "savvycal",
+      "title": "SavvyCal",
+      "topics": [
+        "email",
+        "meetings_scheduling",
+        "integrations",
+        "reporting",
+        "leads_contacts_crm_core",
+        "customization"
+      ],
+      "body_file": "close-help-docs/pages/savvycal.txt",
+      "excerpt": "Easily integrate your booking software with your CRM using the native SavvyCal + Close integration. Automatically create and update your Close Contacts when a prospect books a meeting with your team. \u2026"
+    },
+    {
+      "slug": "scheduling-links",
+      "title": "Scheduling Links",
+      "topics": [
+        "email",
+        "meetings_scheduling",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/scheduling-links.txt",
+      "excerpt": "Close offers the ability to save and send meeting links directly to Leads. Sales representatives can quickly book a follow-up call with an Account Executive while on the phone with a Lead without ever\u2026"
+    },
+    {
+      "slug": "script-installation-setup",
+      "title": "Script installation & setup",
+      "topics": [
+        "email",
+        "reporting",
+        "leads_contacts_crm_core",
+        "tasks_notes"
+      ],
+      "body_file": "close-help-docs/pages/script-installation-setup.txt",
+      "excerpt": "Instructions on how to install and set up the environment for running Close scripts Almost anything that can be done in the Close application by the end-user can be done via the Close API (Application\u2026"
+    },
+    {
+      "slug": "search-and-smart-views",
+      "title": "Lead Filtering and Smart Views",
+      "topics": [
+        "calling_dialer",
+        "email",
+        "workflows_automation",
+        "smart_views_search",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/search-and-smart-views.txt",
+      "excerpt": "Smart Views exist for proactive outreach to Leads matching specific criteria. They are saved searches and can be kept private, shared with your entire organization, or specific team members. All Smart\u2026"
+    },
+    {
+      "slug": "search-and-smart-views-legacy",
+      "title": "Search and Smart Views (Legacy)",
+      "topics": [
+        "calling_dialer",
+        "email",
+        "workflows_automation",
+        "smart_views_search",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/search-and-smart-views-legacy.txt",
+      "excerpt": "New Lead Filtering We released a new version of our lead filtering/search. The following guides are for our legacy search. If your UI does not match, please see this guide for the new filtering instru\u2026"
+    },
+    {
+      "slug": "searching-guide-combined-queries",
+      "title": "Searching tips combined queries (Legacy)",
+      "topics": [
+        "smart_views_search",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/searching-guide-combined-queries.txt",
+      "excerpt": "New Lead Filtering We recently released a new version of our lead filtering/search. The following guides are for our legacy search. If your UI does not match, please see this guide for the new filteri\u2026"
+    },
+    {
+      "slug": "searching-guide-single-queries",
+      "title": "Searching tips single queries (Legacy)",
+      "topics": [
+        "smart_views_search",
+        "leads_contacts_crm_core",
+        "tasks_notes"
+      ],
+      "body_file": "close-help-docs/pages/searching-guide-single-queries.txt",
+      "excerpt": "New Lead Filtering We recently released a new version of our lead filtering/search. The following guides are for our legacy search. If your UI does not match, please see this guide for the new filteri\u2026"
+    },
+    {
+      "slug": "secondary-organization",
+      "title": "Secondary organization",
+      "topics": [
+        "leads_contacts_crm_core",
+        "costs_usage_monitoring"
+      ],
+      "body_file": "close-help-docs/pages/secondary-organization.txt",
+      "excerpt": "In Close, users can create additional Close organizations. These additional organizations can be used to help drive different parts of your business. As an example, a company might use multiple Close \u2026"
+    },
+    {
+      "slug": "security-vulnerability-disclosure-policy",
+      "title": "Security Vulnerability Disclosure Policy",
+      "topics": [
+        "email",
+        "reporting",
+        "security_compliance_data"
+      ],
+      "body_file": "close-help-docs/pages/security-vulnerability-disclosure-policy.txt",
+      "excerpt": "For general details of data security & privacy at Close, see this page . Reporting a Security Vulnerability If you believe you have found a security vulnerability in Close, please email us details to \u2026"
+    },
+    {
+      "slug": "segment",
+      "title": "Segment",
+      "topics": [
+        "email",
+        "workflows_automation",
+        "integrations",
+        "leads_contacts_crm_core",
+        "customization"
+      ],
+      "body_file": "close-help-docs/pages/segment.txt",
+      "excerpt": "Segment simplifies the process of collecting data, allowing you to spend more time using that data and less time trying to collect it. For example, you can use Segment to track when a potential custom\u2026"
+    },
+    {
+      "slug": "sendgrid",
+      "title": "SendGrid",
+      "topics": [
+        "email"
+      ],
+      "body_file": "close-help-docs/pages/sendgrid.txt",
+      "excerpt": "Getting started Create your SendGrid account Create an account with SendGrid . SendGrid offers 40,000 emails for 30 days, then 100 emails/day. Beyond that, you'll need to upgrade to a $14.95/mo plan t\u2026"
+    },
+    {
+      "slug": "sent-email-report",
+      "title": "Sent Email Report",
+      "topics": [
+        "email",
+        "reporting",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/sent-email-report.txt",
+      "excerpt": "Plan limitations This report is only available under our Growth and Scale plans The Sent Email Report provides a breakdown of the number of Emails you've sent and the number/percentage of Opens and Re\u2026"
+    },
+    {
+      "slug": "set-up-outbound-email-without-inbound-email-tracking",
+      "title": "Set up outbound email without inbound email tracking",
+      "topics": [
+        "email",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/set-up-outbound-email-without-inbound-email-tracking.txt",
+      "excerpt": "Close uses your email's SMTP settings to send any outgoing emails. Setting up outbound email allows you to send emails from within Close, but you can still track other emails you send with another ema\u2026"
+    },
+    {
+      "slug": "setting-up-calling",
+      "title": "Calling Setup",
+      "topics": [
+        "integrations",
+        "leads_contacts_crm_core",
+        "troubleshooting"
+      ],
+      "body_file": "close-help-docs/pages/setting-up-calling.txt",
+      "excerpt": "Calling Setup in Close To make calls, you can download our Mac/Windows application, use our mobile app, or make calls straight from your browser. Mac/Windows Desktop app Download Close Desktop app her\u2026"
+    },
+    {
+      "slug": "setup-implementation",
+      "title": "Setup & Implementation",
+      "topics": [
+        "meetings_scheduling",
+        "leads_contacts_crm_core",
+        "playbooks_ai",
+        "getting_started_onboarding"
+      ],
+      "body_file": "close-help-docs/pages/setup-implementation.txt",
+      "excerpt": "Plan Availability Chloe is available on the Growth and Scale plans. Chloe is accessed from the left sidebar of Close by Admins, Super Users, and any custom roles with the Manage Customizations permiss\u2026"
+    },
+    {
+      "slug": "simpletexting",
+      "title": "SimpleTexting",
+      "topics": [
+        "sms_messaging",
+        "email",
+        "workflows_automation",
+        "integrations",
+        "leads_contacts_crm_core",
+        "tasks_notes"
+      ],
+      "body_file": "close-help-docs/pages/simpletexting.txt",
+      "excerpt": "Send MMS through SimpleTexting and get alerted in Close when a contact replies with an MMS. Create a task in Close after receiving an MMS in SimpleTexting Use this Zap SimpleTexting allows you to send\u2026"
+    },
+    {
+      "slug": "simplify-workflows-with-automated-senders",
+      "title": "Simplify Your Workflows with Automated Senders",
+      "topics": [
+        "workflows_automation",
+        "leads_contacts_crm_core",
+        "customization",
+        "getting_started_onboarding"
+      ],
+      "body_file": "close-help-docs/pages/simplify-workflows-with-automated-senders.txt",
+      "excerpt": "Within Workflows, you can automate the sender of each step. By customizing the sender, you can create dynamic and automated workflows without manual enrollment or complex external setups, leaving more\u2026"
+    },
+    {
+      "slug": "single-sign-on-sso-with-google",
+      "title": "Single Sign On (SSO) with Google",
+      "topics": [
+        "email",
+        "tasks_notes",
+        "account_users_roles",
+        "security_compliance_data"
+      ],
+      "body_file": "close-help-docs/pages/single-sign-on-sso-with-google.txt",
+      "excerpt": "Google Single Sign-On allows you to sign in seamlessly with your Google account, eliminating the hassle of remembering another password. It enhances security and streamlines the task of managing user \u2026"
+    },
+    {
+      "slug": "slack",
+      "title": "Slack",
+      "topics": [
+        "workflows_automation",
+        "integrations",
+        "opportunities_pipeline",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/slack.txt",
+      "excerpt": "Connect Slack and Close in order to notify your team of important updates in your sales pipeline. Using our Zapier integration for Slack you can quickly and easily message channels or particular team \u2026"
+    },
+    {
+      "slug": "smart-view-tips-and-suggestions",
+      "title": "Avoiding Lead Rot and Consolidating Smart Views",
+      "topics": [
+        "workflows_automation",
+        "smart_views_search",
+        "reporting",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/smart-view-tips-and-suggestions.txt",
+      "excerpt": "Here are a couple of tried-and-true tips to use with Smart Views that can help you stay on top of promising Opportunities, and streamline your overall workflow in Close. Show deal and lead rot based o\u2026"
+    },
+    {
+      "slug": "smart-views-for-bulk-email-and-worfklows",
+      "title": "Bulk Email and Email Sequence Smart View Tips",
+      "topics": [
+        "email",
+        "workflows_automation",
+        "smart_views_search",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/smart-views-for-bulk-email-and-worfklows.txt",
+      "excerpt": "If you're using bulk email and/or workflows with email steps, here are some tips for setting up your Smart Views. Step 1: Create the base Smart View for anyone eligible to receive the message If you'r\u2026"
+    },
+    {
+      "slug": "smart-views-for-bulk-email-and-workflows-legacy",
+      "title": "Bulk email and email sequence Smart View tips (Legacy)",
+      "topics": [
+        "email",
+        "workflows_automation",
+        "smart_views_search",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/smart-views-for-bulk-email-and-workflows-legacy.txt",
+      "excerpt": "New Lead Filtering We recently released a new version of our lead filtering/search. The following guides are for our legacy search. If your ui does not match, please see this guide for the new filteri\u2026"
+    },
+    {
+      "slug": "sms-and-mms",
+      "title": "SMS and MMS",
+      "topics": [
+        "sms_messaging",
+        "calling_dialer",
+        "email",
+        "integrations",
+        "leads_contacts_crm_core",
+        "getting_started_onboarding"
+      ],
+      "body_file": "close-help-docs/pages/sms-and-mms.txt",
+      "excerpt": "Like calling and email, SMS communication is built directly into Close. SMS can be an effective tool to increase response rates with prospects, e.g. by texting them meeting reminders and follow-ups. P\u2026"
+    },
+    {
+      "slug": "sms-deliverability",
+      "title": "SMS Deliverability",
+      "topics": [
+        "sms_messaging",
+        "email",
+        "reporting"
+      ],
+      "body_file": "close-help-docs/pages/sms-deliverability.txt",
+      "excerpt": "SMS in Close may not deliver for a number of different reasons. Most commonly this would be when you are trying to send an SMS to a number that is not SMS-enabled (such as a landline), or if your cont\u2026"
+    },
+    {
+      "slug": "spell-check",
+      "title": "Spell check",
+      "topics": [
+        "email",
+        "tasks_notes",
+        "keyboard_ux"
+      ],
+      "body_file": "close-help-docs/pages/spell-check.txt",
+      "excerpt": "With the built-in spell checker for Close desktop app , you can ensure that your emails and notes are mistake-free. Spell check will work on both Windows and Mac. Spell check is multilingual, which me\u2026"
+    },
+    {
+      "slug": "status-change-report",
+      "title": "Status Change Report",
+      "topics": [
+        "reporting",
+        "opportunities_pipeline",
+        "leads_contacts_crm_core",
+        "tasks_notes"
+      ],
+      "body_file": "close-help-docs/pages/status-change-report.txt",
+      "excerpt": "The Status Change report tracks the movement of both Leads and Opportunities from Status to Status through your sales funnel. It gives you the number of Leads in each previous status and shows where t\u2026"
+    },
+    {
+      "slug": "steps-to-uploading-leads-into-close",
+      "title": "Steps To Import Your Data Successfully",
+      "topics": [
+        "email",
+        "smart_views_search",
+        "opportunities_pipeline",
+        "leads_contacts_crm_core",
+        "customization"
+      ],
+      "body_file": "close-help-docs/pages/steps-to-uploading-leads-into-close.txt",
+      "excerpt": "The top tips and common mistakes to keep in mind when importing your data. Close is the most powerful when your data lives in the right places. Having a good understanding of the data importing proces\u2026"
+    },
+    {
+      "slug": "super-user-role",
+      "title": "Super User role",
+      "topics": [
+        "sms_messaging",
+        "calling_dialer",
+        "email",
+        "workflows_automation",
+        "integrations",
+        "smart_views_search"
+      ],
+      "body_file": "close-help-docs/pages/super-user-role.txt",
+      "excerpt": "Super User Each plan includes the predefined role shown below. This is a default role and may be assigned to any user, but may not be edited or modified. Super Users can do everything a User can, plus\u2026"
+    },
+    {
+      "slug": "system-requirements-supported-browsers",
+      "title": "Supported Devices and Browsers",
+      "topics": [
+        "integrations",
+        "mobile_desktop"
+      ],
+      "body_file": "close-help-docs/pages/system-requirements-supported-browsers.txt",
+      "excerpt": "Supported Operating Systems OS X 13 (Ventura) or higher Windows 10 or later Technical Requirements RAM: At least 8 GB. (depending on how may apps re used at the same time, more might be required) Web-\u2026"
+    },
+    {
+      "slug": "tasks",
+      "title": "Tasks",
+      "topics": [
+        "email",
+        "workflows_automation",
+        "leads_contacts_crm_core",
+        "tasks_notes",
+        "getting_started_onboarding"
+      ],
+      "body_file": "close-help-docs/pages/tasks.txt",
+      "excerpt": "In Close, you can set Tasks for yourself or other team members within any lead. Tasks are best used when noting a unique action that is not in your normal workflow or for reaching out to another team \u2026"
+    },
+    {
+      "slug": "tasks-not-syncing-with-google-calendar",
+      "title": "Tasks not syncing with Google Calendar",
+      "topics": [
+        "meetings_scheduling",
+        "workflows_automation",
+        "tasks_notes",
+        "security_compliance_data",
+        "troubleshooting"
+      ],
+      "body_file": "close-help-docs/pages/tasks-not-syncing-with-google-calendar.txt",
+      "excerpt": "Why Can\u2019t I See My Close Tasks in Google Calendar? If you previously subscribed to your Close Tasks Calendar via Google Calendar, you may have noticed that your tasks are no longer syncing. This is be\u2026"
+    },
+    {
+      "slug": "troubleshooting-headset-issues",
+      "title": "Troubleshooting headset issues",
+      "topics": [
+        "sms_messaging",
+        "calling_dialer",
+        "troubleshooting"
+      ],
+      "body_file": "close-help-docs/pages/troubleshooting-headset-issues.txt",
+      "excerpt": "Close cannot access microphone Common reasons for this include: Another application or browser tab is using your microphone already. Check for other browser tabs (Google Hangout, Skype Web, appear.in,\u2026"
+    },
+    {
+      "slug": "updating-existing-leads-and-contacts",
+      "title": "Updating existing Leads and Contacts",
+      "topics": [
+        "leads_contacts_crm_core",
+        "customization"
+      ],
+      "body_file": "close-help-docs/pages/updating-existing-leads-and-contacts.txt",
+      "excerpt": "In addition to creating new Leads, you can use the Lead Importer to update existing Leads and Contacts. (Need a refresher on how to use the Importer? Check out the main article here . After uploading \u2026"
+    },
+    {
+      "slug": "user-role",
+      "title": "User role",
+      "topics": [
+        "sms_messaging",
+        "calling_dialer",
+        "email",
+        "leads_contacts_crm_core",
+        "tasks_notes",
+        "account_users_roles"
+      ],
+      "body_file": "close-help-docs/pages/user-role.txt",
+      "excerpt": "User Each plan includes the predefined role shown below. This is a default role and may be assigned to any user, but may not be edited or modified. Users can do everything Restricted Users can, plus a\u2026"
+    },
+    {
+      "slug": "using-playbooks-on-calls",
+      "title": "Using Playbooks on Calls",
+      "topics": [
+        "meetings_scheduling",
+        "leads_contacts_crm_core",
+        "customization",
+        "playbooks_ai",
+        "tasks_notes"
+      ],
+      "body_file": "close-help-docs/pages/using-playbooks-on-calls.txt",
+      "excerpt": "Once Playbooks are set up, reps can apply them to calls and meetings directly from the call record. This article covers the rep experience, from applying a Playbook mid-call to reviewing what Close ca\u2026"
+    },
+    {
+      "slug": "using-the-power-dialer",
+      "title": "Using the Power Dialer",
+      "topics": [
+        "calling_dialer",
+        "smart_views_search",
+        "leads_contacts_crm_core",
+        "tasks_notes"
+      ],
+      "body_file": "close-help-docs/pages/using-the-power-dialer.txt",
+      "excerpt": "The best way to call a large number of Leads quickly is by using the Power Dialer. The Dialer will call through a Smart View without you having to manually click into each Lead to call. Starting a Pow\u2026"
+    },
+    {
+      "slug": "using-the-predictive-dialer",
+      "title": "Using the Predictive Dialer",
+      "topics": [
+        "calling_dialer",
+        "smart_views_search"
+      ],
+      "body_file": "close-help-docs/pages/using-the-predictive-dialer.txt",
+      "excerpt": "What is a predictive dialer? If you're not sure what a predictive dialer is and whether you should use it, check out our in-depth post here . You'll get a clear understanding of the pros and cons of p\u2026"
+    },
+    {
+      "slug": "using-workflows-for-newsletters",
+      "title": "Using Workflows for Newsletters",
+      "topics": [
+        "email",
+        "workflows_automation",
+        "integrations",
+        "smart_views_search",
+        "reporting",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/using-workflows-for-newsletters.txt",
+      "excerpt": "Creating Email Newsletters with Workflows: A Salesperson's Guide Integrating Workflows into your email newsletter strategy allows you to automate, personalize, and optimize your outreach. Workflows al\u2026"
+    },
+    {
+      "slug": "whatsapp",
+      "title": "WhatsApp",
+      "topics": [
+        "whatsapp",
+        "integrations",
+        "smart_views_search",
+        "leads_contacts_crm_core",
+        "getting_started_onboarding"
+      ],
+      "body_file": "close-help-docs/pages/whatsapp.txt",
+      "excerpt": "Reach your contacts on WhatsApp directly within Close, without switching apps. Using an Integration Link, your team can get in touch with your leads through WhatsApp with just one click. Under Setting\u2026"
+    },
+    {
+      "slug": "which-ip-addresses-need-access-to-my-smtpimap-server",
+      "title": "Which IP addresses need access to my SMTP/IMAP server?",
+      "topics": [
+        "email"
+      ],
+      "body_file": "close-help-docs/pages/which-ip-addresses-need-access-to-my-smtpimap-server.txt",
+      "excerpt": "Most email server configurations will not need to care about IP addresses. However, if you are in a corporate/IT environment where you can only give specific IP addresses access to your SMTP/IMAP emai\u2026"
+    },
+    {
+      "slug": "windows-screen-issue",
+      "title": "Windows Screen Issue",
+      "topics": [
+        "integrations",
+        "tasks_notes",
+        "troubleshooting"
+      ],
+      "body_file": "close-help-docs/pages/windows-screen-issue.txt",
+      "excerpt": "If the app is running but not visible in an active window in Windows (but still visible in the taskbar), the likely reason is that the Close app is open & running, but is just outside the visible area\u2026"
+    },
+    {
+      "slug": "workflow-reporting",
+      "title": "Sequence Overview & Reporting",
+      "topics": [
+        "email",
+        "workflows_automation",
+        "reporting",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/workflow-reporting.txt",
+      "excerpt": "Once your Workflows are set up and Leads have been enrolled, you'll want to check to see how your Workflow is being received. Workflow Overview After you\u2019ve created and deployed a Workflow, you\u2019ll fir\u2026"
+    },
+    {
+      "slug": "workflow-steps",
+      "title": "Workflow Steps",
+      "topics": [
+        "sms_messaging",
+        "email",
+        "workflows_automation",
+        "opportunities_pipeline",
+        "leads_contacts_crm_core",
+        "tasks_notes"
+      ],
+      "body_file": "close-help-docs/pages/workflow-steps.txt",
+      "excerpt": "Steps are the individual actions that take place within a Workflow. This includes sending email or SMS, updating Leads, creating Opportunities, or assigning Tasks. Here is a list of the current availa\u2026"
+    },
+    {
+      "slug": "workflows",
+      "title": "Workflows",
+      "topics": [
+        "sms_messaging",
+        "calling_dialer",
+        "email",
+        "workflows_automation",
+        "opportunities_pipeline",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/workflows.txt",
+      "excerpt": "Plan limits Workflows are only available on the Growth and Scale plans. Workflows can be used to automate tasks and outreach. There are endless possibilities of what you can automate, but the most com\u2026"
+    },
+    {
+      "slug": "zapier",
+      "title": "Zapier",
+      "topics": [
+        "workflows_automation",
+        "integrations",
+        "leads_contacts_crm_core"
+      ],
+      "body_file": "close-help-docs/pages/zapier.txt",
+      "excerpt": "Zapier is a third-party automation platform that allows you to connect the different tools in your data stack to share data in custom ways that may not be available through direct integration. Zapier \u2026"
+    },
+    {
+      "slug": "zapier-api-keys-to-oauth",
+      "title": "Zapier (API keys to OAuth)",
+      "topics": [
+        "workflows_automation",
+        "integrations"
+      ],
+      "body_file": "close-help-docs/pages/zapier-api-keys-to-oauth.txt",
+      "excerpt": "Who Should Read This Article Please be aware that this article is intended for those who created Zaps powered by Close before June 22, 2023. If your Zaps were created after this date, the contents of \u2026"
+    },
+    {
+      "slug": "zoom",
+      "title": "Zoom",
+      "topics": [
+        "email",
+        "meetings_scheduling",
+        "leads_contacts_crm_core",
+        "playbooks_ai",
+        "tasks_notes"
+      ],
+      "body_file": "close-help-docs/pages/zoom.txt",
+      "excerpt": "Connect your Zoom account to Close to work with Zoom meetings and to use Close Notetaker on Zoom calls. Zoom Cloud Recordings linked to synced calendar events will also be pulled into Close. If the sy\u2026"
+    }
+  ]
+}

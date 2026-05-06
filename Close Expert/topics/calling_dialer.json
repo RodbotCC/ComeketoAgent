@@ -1,0 +1,774 @@
+{
+  "topic_id": "calling_dialer",
+  "article_count": 42,
+  "articles": [
+    {
+      "slug": "activity-comparison-report",
+      "title": "Activity Comparison Report",
+      "url": "https://help.close.com/docs/activity-comparison-report",
+      "body_file": "close-help-docs/pages/activity-comparison-report.txt",
+      "excerpt": "The Activity Comparison report gives you a spreadsheet-like view of the performance of every team member. This makes it quick and easy to see how you or members of your team are contributing to the overall results. The Activity Comparison Report lets you compare multiple users across multiple metrics. Filtering You can filter the report by date range, user, and Smart View. You can also select a comparison date range to see the percent change in each metric between the two\u2026",
+      "keywords": [
+        "activity comparison report",
+        "activity overview report",
+        "activity comparison",
+        "exporting you",
+        "filtering you",
+        "team members",
+        "saving once",
+        "sorting you",
+        "comparison",
+        "smart view",
+        "activity",
+        "report"
+      ],
+      "topic": "calling_dialer"
+    },
+    {
+      "slug": "bring-your-own-carrier-byoc",
+      "title": "Bring Your Own Carrier (BYOC)",
+      "url": "https://help.close.com/docs/bring-your-own-carrier-byoc",
+      "body_file": "close-help-docs/pages/bring-your-own-carrier-byoc.txt",
+      "excerpt": "BYOC only works with VoIP phone numbers. You'll need to ask your VoIP provider if it's supported. Due to telephony regulations, BYOC is not available for Turkish numbers. BYOC is a way to keep your existing phone provider while receiving your inbound calls in Close. It's great alternative to porting your numbers . It also allows you to use Close in countries where we currently don't offer phone numbers (e.g. China or Russia). Incoming vs. outgoing calls BYOC does not impact\u2026",
+      "keywords": [
+        "carrier",
+        "bring",
+        "byoc",
+        "own"
+      ],
+      "topic": "calling_dialer"
+    },
+    {
+      "slug": "calculating-your-call-answer-rate",
+      "title": "Calculating Your Call Answer Rate",
+      "url": "https://help.close.com/docs/calculating-your-call-answer-rate",
+      "body_file": "close-help-docs/pages/calculating-your-call-answer-rate.txt",
+      "excerpt": "Understanding your call answer rate is crucial for assessing the effectiveness of your sales outreach. Read on for some tips on calculating your answer rate using some of the features built into Close. Utilizing Smart Views Longer call durations often indicate that a live conversation occurred. To leverage this, you can create Smart Views based on your Call Duration. Navigate to the Leads tab and set up a Smart View to filter for calls created \"today.\" Then, create another\u2026",
+      "keywords": [
+        "utilizing smart views longer",
+        "activity overview report",
+        "custom activities for",
+        "custom activities",
+        "average duration",
+        "call disposition",
+        "custom activity",
+        "outbound calls",
+        "call duration",
+        "calculating",
+        "smart views",
+        "smart view",
+        "answer",
+        "call",
+        "rate"
+      ],
+      "topic": "calling_dialer"
+    },
+    {
+      "slug": "call-assistant",
+      "title": "Call Assistant",
+      "url": "https://help.close.com/docs/call-assistant",
+      "body_file": "close-help-docs/pages/call-assistant.txt",
+      "excerpt": "Automatically transcribe and summarize any recorded calls in Close through our Call Assistant feature. When enabled, a full transcription and summary will be available to view shortly after any voicemail (regardless of duration) and any recorded call that's over 30 seconds long. Summaries are meant to provide you with a high-level understanding of the topics discussed on the call. Dive into the transcription to review exactly what was said on the call. Transcriptions Call\u2026",
+      "keywords": [
+        "searching transcriptions transcriptions",
+        "transcriptions call assistant",
+        "summaries call assistant",
+        "call assistant",
+        "assistant",
+        "call"
+      ],
+      "topic": "calling_dialer"
+    },
+    {
+      "slug": "call-blocking-in-close",
+      "title": "Call Blocking in Close",
+      "url": "https://help.close.com/docs/call-blocking-in-close",
+      "body_file": "close-help-docs/pages/call-blocking-in-close.txt",
+      "excerpt": "Close lets you block specific phone numbers directly from the app \u2014 no need to contact support. Once a number is blocked, the restriction applies across your entire organization , so all users are protected automatically. You can also independently toggle the blocking of anonymous callers (callers with a hidden or unknown caller ID) from the same settings page. This feature is available on all Close plans and accessible to all users . Set up call blocking Go to Settings \u2192\u2026",
+      "keywords": [
+        "direction what happens outbound",
+        "blocked numbers enter",
+        "number is blocked",
+        "what happens when",
+        "blocked numbers",
+        "blocking",
+        "close",
+        "call"
+      ],
+      "topic": "calling_dialer"
+    },
+    {
+      "slug": "call-coaching",
+      "title": "Call Coaching",
+      "url": "https://help.close.com/docs/call-coaching",
+      "body_file": "close-help-docs/pages/call-coaching.txt",
+      "excerpt": "Plan Limits This feature is only available on Scale and Enterprise (legacy) plans. Call Coaching allows users to Listen, Whisper, and Barge on in-progress calls. It can be used for new salesperson training, mentoring, or assisting with complex sales. Limits The call coaching feature will only work in outbound calls made from Close while using your Internal Close numbers. Up to ~100 people can participate in the same outbound call. Multiple coaches can be whispering/barging\u2026",
+      "keywords": [
+        "plan limits this",
+        "team management",
+        "internal close",
+        "call coaching",
+        "limits the",
+        "coaching",
+        "call"
+      ],
+      "topic": "calling_dialer"
+    },
+    {
+      "slug": "call-quality-indicator-cqi",
+      "title": "Call Quality",
+      "url": "https://help.close.com/docs/call-quality-indicator-cqi",
+      "body_file": "close-help-docs/pages/call-quality-indicator-cqi.txt",
+      "excerpt": "The Call Quality Indicator (CQI) is a visual indicator that there may be an issue with your call audio quality. These issues are often the result of network quality or hardware problems. The Call Quality Indicator shows possible issues with the headset and Internet connection. When the CQI appears Seeing the CQI doesn\u2019t necessarily mean that the person you are calling is having trouble hearing you, but it can be an early indicator that there is an issue with your network\u2026",
+      "keywords": [
+        "high packet loss this",
+        "high jitter this",
+        "indicator",
+        "quality",
+        "call",
+        "cqi"
+      ],
+      "topic": "calling_dialer"
+    },
+    {
+      "slug": "call-reports",
+      "title": "Call Reports",
+      "url": "https://help.close.com/docs/call-reports",
+      "body_file": "close-help-docs/pages/call-reports.txt",
+      "excerpt": "A single, trustworthy view of calling performance for your team, so you can coach for real conversations and better connect rates. The Call Report brings dials, talk time, dispositions, outcomes, and unique leads dialed into one place. Use it to understand activity quality versus volume and spot which numbers get picked up versus blocked. Works across human reps and Chloe Trend and distribution charts for quality coaching Filters for Smart Views, users, numbers, durations,\u2026",
+      "keywords": [
+        "call outcomes",
+        "chloe trend",
+        "smart views",
+        "report in",
+        "reports",
+        "call"
+      ],
+      "topic": "calling_dialer"
+    },
+    {
+      "slug": "call-tasks",
+      "title": "Call Tasks",
+      "url": "https://help.close.com/docs/call-tasks",
+      "body_file": "close-help-docs/pages/call-tasks.txt",
+      "excerpt": "You can assign Call Tasks to yourself or a member of the team as a reminder to a call a Contact at a specific date and time. Call Tasks are similar and appear on Leads and the Inbox in the same place as Tasks , but there are a few differences: Call Tasks must have an associated Contact. When created using Workflows (via the Call step ), Call Tasks can be assigned to a Group. Close will automatically mark Call Tasks complete when there is a Call between the associated\u2026",
+      "keywords": [
+        "ignore workflow communication schedule",
+        "creating call tasks call tasks",
+        "communication schedule",
+        "blackout dates",
+        "call tasks",
+        "call task",
+        "tasks",
+        "call"
+      ],
+      "topic": "calling_dialer"
+    },
+    {
+      "slug": "calling-and-sms-usage",
+      "title": "Variable Usage Costs (Calling, SMS, Phone Numbers, AI Tools)",
+      "url": "https://help.close.com/docs/calling-and-sms-usage",
+      "body_file": "close-help-docs/pages/calling-and-sms-usage.txt",
+      "excerpt": "Close has a number of features whose cost is based on how much you use them. Those include phone number rentals, calling, SMS, and certain AI tools. Whenever you make use of these features, a small amount of money is deducted from your usage credit balance. By default, calling and SMS are enabled for all users on any plan, as well as most AI features, but you can restrict the use of communication for specific users via Roles & Permissions . To view and manage your team's\u2026",
+      "keywords": [
+        "countries check twilio",
+        "calling calls",
+        "european eco",
+        "per twilio",
+        "in depth",
+        "variable",
+        "calling",
+        "numbers",
+        "costs",
+        "phone",
+        "tools",
+        "usage",
+        "sms"
+      ],
+      "topic": "calling_dialer"
+    },
+    {
+      "slug": "calling-from-close",
+      "title": "Calling",
+      "url": "https://help.close.com/docs/calling-from-close",
+      "body_file": "close-help-docs/pages/calling-from-close.txt",
+      "excerpt": "Calling is available on all Plans, but usage is charged separately. Usage is charged on a per-minute basis according to Twilio's Voice pricing. Learn more about how calls are calculated and charged in Close. The Phone Popover Using the popover you can: See your outgoing Caller-ID number and change it if you have multiple numbers associated with your account Adjust your Call recording preference Manage and test your headset and microphone settings Manually dial any phone\u2026",
+      "keywords": [
+        "system default it",
+        "system default",
+        "sound output",
+        "calling",
+        "lead to",
+        "close"
+      ],
+      "topic": "calling_dialer"
+    },
+    {
+      "slug": "chloe-faq",
+      "title": "FAQ & Troubleshooting",
+      "url": "https://help.close.com/docs/chloe-faq",
+      "body_file": "close-help-docs/pages/chloe-faq.txt",
+      "excerpt": "General questions What is Chloe? Chloe is Close's built-in AI sales teammate. She makes and receives calls, runs qualification and discovery, and logs everything directly in Close. See our primary Chloe page for a full overview. Which plans include Chloe? Chloe is available on the Growth and Scale plans. Is Chloe free? Chloe is free for eligible Growth and Scale organizations during the open beta period. After beta, Chloe voice calls will use AI credits included with your\u2026",
+      "keywords": [
+        "manage customizations",
+        "send scheduling link",
+        "troubleshooting",
+        "super users",
+        "does chloe",
+        "can chloe",
+        "is chloe",
+        "chloe",
+        "faq"
+      ],
+      "topic": "calling_dialer"
+    },
+    {
+      "slug": "chloe-reporting",
+      "title": "Reporting",
+      "url": "https://help.close.com/docs/chloe-reporting",
+      "body_file": "close-help-docs/pages/chloe-reporting.txt",
+      "excerpt": "Chloe reporting is call reporting and outcome tracking. All reporting centers on what happened on each call and whether those calls are producing the right results across an Agent. Reporting happens at two levels: Per-call \u2013 what happened on a specific call, logged on the lead record Per-Agent \u2013 how a given Agent is performing overall, visible from the Calls and Performance tabs Where Chloe activity appears in Close On the lead record After every Chloe call, Close logs the\u2026",
+      "keywords": [
+        "agent answered",
+        "using chloe",
+        "where chloe",
+        "reporting",
+        "close on",
+        "chloe"
+      ],
+      "topic": "calling_dialer"
+    },
+    {
+      "slug": "creating-a-multi-channel-sales-workflow-in-close",
+      "title": "Creating a multi-channel sales workflow in Close",
+      "url": "https://help.close.com/docs/creating-a-multi-channel-sales-workflow-in-close",
+      "body_file": "close-help-docs/pages/creating-a-multi-channel-sales-workflow-in-close.txt",
+      "excerpt": "A sales cycle is a collection of steps that salespeople take to turn a lead into a customer. That includes everything from prospecting to closing the sale (and sometimes even beyond closing). Sales cycles vary between companies and industries, but they usually have a similar sequence of steps. Close is designed to make sales communication quick, easy and effective. You can easily build out unique sales workflows using our dynamic Workflows , Smart Views , and Dialers .\u2026",
+      "keywords": [
+        "actionable guide",
+        "sales cycles are",
+        "close pro tip",
+        "cold prospect",
+        "smart views",
+        "send messa",
+        "warm lead",
+        "call day",
+        "creating",
+        "workflow",
+        "channel",
+        "close",
+        "multi",
+        "sales"
+      ],
+      "topic": "calling_dialer"
+    },
+    {
+      "slug": "creating-smart-views",
+      "title": "Create a Smart View",
+      "url": "https://help.close.com/docs/creating-smart-views",
+      "body_file": "close-help-docs/pages/creating-smart-views.txt",
+      "excerpt": "Smart Views are to Close what coffee is to a salesperson. You can get through your day without it, but why would you want to? Smart Views are: Powerful and effortless Dynamic Increase productivity Smart Views are saved Lead Filters that give you 1-click access to your favorite searches anywhere in Close. Smart Views tell sales reps who to follow up with and when to follow up without the need to create endless tasks and reminders. They allow you to translate your current\u2026",
+      "keywords": [
+        "activity filter save",
+        "dynamic increase",
+        "smart view lead",
+        "smart views you",
+        "lead filters",
+        "smart views",
+        "smart view",
+        "creating",
+        "create",
+        "smart",
+        "views",
+        "view"
+      ],
+      "topic": "calling_dialer"
+    },
+    {
+      "slug": "creating-smart-views-for-calling",
+      "title": "Building a Calling Smart View",
+      "url": "https://help.close.com/docs/creating-smart-views-for-calling",
+      "body_file": "close-help-docs/pages/creating-smart-views-for-calling.txt",
+      "excerpt": "In order to use the power or predictive dialer effectively, the first step is to create a list of leads you know you need to call. Here are the basic concepts to consider when creating your calling Smart Views. What's the goal? Your goal in creating a great calling Smart View is to make sure you don't have to think about two key questions: Should I call this person? What should I say? Step 1: Specify particular lead statuses If you're using lead statuses effectively, a good\u2026",
+      "keywords": [
+        "smart views",
+        "add filter",
+        "smart view",
+        "building",
+        "creating",
+        "calling",
+        "smart",
+        "views",
+        "view"
+      ],
+      "topic": "calling_dialer"
+    },
+    {
+      "slug": "creating-smart-views-for-calling-legacy",
+      "title": "Building a calling Smart View (Legacy)",
+      "url": "https://help.close.com/docs/creating-smart-views-for-calling-legacy",
+      "body_file": "close-help-docs/pages/creating-smart-views-for-calling-legacy.txt",
+      "excerpt": "New Lead Filtering We recently released a new version of our lead filtering/search. The following guides are for our legacy search. If your ui does not match, please see this guide for the new filtering instructions. In order to use the power or predictive dialer effectively, the first step is to create a list of leads you know you need to call. Here are the basic concepts to consider when creating your calling Smart Views. What's the goal? Your goal in creating a great\u2026",
+      "keywords": [
+        "new lead filtering we",
+        "smart views",
+        "smart view",
+        "trial now",
+        "building",
+        "creating",
+        "calling",
+        "legacy",
+        "smart",
+        "views",
+        "view"
+      ],
+      "topic": "calling_dialer"
+    },
+    {
+      "slug": "enabling-quality-of-service-qos",
+      "title": "Enabling Quality of Service (QoS)",
+      "url": "https://help.close.com/docs/enabling-quality-of-service-qos",
+      "body_file": "close-help-docs/pages/enabling-quality-of-service-qos.txt",
+      "excerpt": "QoS New to this section? Check out our series on how to debug network related call quality issues . What is QoS? QoS, or Quality of Service, is used to refer to ways in which your router can re-order (or drop) certain types of traffic on your network in order to meet a certain service level. Similar to a traffic light, QoS tells less important traffic to wait so the important traffic from your phone makes it through the intersection without delay. The most common use of QoS\u2026",
+      "keywords": [
+        "internet service provider",
+        "enabling",
+        "quality",
+        "service",
+        "qos"
+      ],
+      "topic": "calling_dialer"
+    },
+    {
+      "slug": "forwarding-sms",
+      "title": "Creating additional SMS notifications for users",
+      "url": "https://help.close.com/docs/forwarding-sms",
+      "body_file": "close-help-docs/pages/forwarding-sms.txt",
+      "excerpt": "If you're a heavy user of SMS and not always logged into Close or want to respond quickly during non-business hours, you may want to set up an additional notification for any incoming SMS. This tutorial will cover the basis of setting up some additional notification types. What you'll need A Zapier account allowing for multi-step Zaps A Close account A Google Spreadsheet (if you want to forward SMS to a cellphone) Step 1: Setting up your Zapier trigger To set up this Zap,\u2026",
+      "keywords": [
+        "google spreadsheet",
+        "new inbox item",
+        "notifications",
+        "additional",
+        "forwarding",
+        "under type",
+        "creating",
+        "users",
+        "sms"
+      ],
+      "topic": "calling_dialer"
+    },
+    {
+      "slug": "german-regulatory-documents",
+      "title": "German Regulatory Documents",
+      "url": "https://help.close.com/docs/german-regulatory-documents",
+      "body_file": "close-help-docs/pages/german-regulatory-documents.txt",
+      "excerpt": "As Twilio, our telephony service provider only supports phone numbers registered to businesses and not individuals, an excerpt from the commercial register (Handelsregisterauszug) is the only document that can be used to register numbers in Germany. Please note that the document's date of issue has to be less than 3 months. For Sole traders that don't have a commercial register (Handelsregisterauszug), you will need to submit: Trade license (\u2018Gewerbeanmeldung\u2019,\u2026",
+      "keywords": [
+        "business registration number",
+        "new regulatory bundle choose",
+        "number notification letter",
+        "freier beruf finanzamt",
+        "regulatory bundles",
+        "business name in",
+        "sole traders",
+        "number type",
+        "regulatory",
+        "as twilio",
+        "documents",
+        "user type",
+        "for sole",
+        "german"
+      ],
+      "topic": "calling_dialer"
+    },
+    {
+      "slug": "group-numbers",
+      "title": "Group Numbers",
+      "url": "https://help.close.com/docs/group-numbers",
+      "body_file": "close-help-docs/pages/group-numbers.txt",
+      "excerpt": "A Group Phone Number (also known as a \"ring group\" or \"call group\") defines a phone number that, when dialed, rings a group of phones simultaneously, stopping when any one of them is picked up. This feature can be a great tool if your team has a shared inbound phone number, such as a toll-free number routed to all of your sales reps. Add a Group Number To set up your first Group Number, navigate to Settings > Communication > Phone & Voicemail , then \" + New Number. \"\u2026",
+      "keywords": [
+        "group voicemail inbox",
+        "editing membership",
+        "group numbers when",
+        "group phone number",
+        "voicemail greeting",
+        "group numbers in",
+        "group number to",
+        "group number",
+        "missed calls",
+        "missed call",
+        "new number",
+        "numbers",
+        "group"
+      ],
+      "topic": "calling_dialer"
+    },
+    {
+      "slug": "inbox",
+      "title": "Inbox",
+      "url": "https://help.close.com/docs/inbox",
+      "body_file": "close-help-docs/pages/inbox.txt",
+      "excerpt": "The Close Inbox is a sales-focused view of all your inbound communication (emails, missed calls, voicemails) and open tasks/reminders for the day. The Inbox is a hub for everything you should react to and be reminded of. It's your hub for notifications and Tasks, and should be considered a to-do list. The goal for your Inbox is to help keep you on track in your workflow, with each item actionable. Your sales team should be able to work exclusively from their Close inbox.\u2026",
+      "keywords": [
+        "due tasks opportunities",
+        "potential contacts to",
+        "missed calls inbound",
+        "inbound emails",
+        "inbox"
+      ],
+      "topic": "calling_dialer"
+    },
+    {
+      "slug": "increase-call-connections",
+      "title": "Increase Call Connection Rates",
+      "url": "https://help.close.com/docs/increase-call-connections",
+      "body_file": "close-help-docs/pages/increase-call-connections.txt",
+      "excerpt": "Robocalls and spam labeling are major issues in today's communication landscape. Being flagged as spam leads to a decline in trust and response rates when an unidentified phone number is calling, which cut down on answer rates. Registering your phone number is a crucial step to reducing your chances of spam labeling, boosting your phone number's reputation, and ensuring your calls are correctly identified. This can be done with SHAKEN/STIR and Voice Integrity with Close.\u2026",
+      "keywords": [
+        "voice integrity",
+        "united states",
+        "connections",
+        "connection",
+        "increase",
+        "rates",
+        "call"
+      ],
+      "topic": "calling_dialer"
+    },
+    {
+      "slug": "keyboard-shortcuts",
+      "title": "Close app keyboard shortcuts",
+      "url": "https://help.close.com/docs/keyboard-shortcuts",
+      "body_file": "close-help-docs/pages/keyboard-shortcuts.txt",
+      "excerpt": "Keyboard Shortcuts Close comes with a set of keyboard shortcuts that can significantly improve your workflow efficiency. To see the list of keyboard shortcuts available, just hit the question mark button ? on your keyboard from any page and you'll see a pop-up window listing them all. Close app keyboard shortcut list for Mac OS On any page Mac shortcut Windows shortcut Action ? ? Show keyboard shortcuts \u2318 Shift F Ctrl Shift F Focus the search input \u2318 Shift L Ctrl Shift L\u2026",
+      "keywords": [
+        "keyboard shortcuts close",
+        "enter ctrl enter submit",
+        "ctrl shift",
+        "dialer mac",
+        "shortcuts",
+        "keyboard",
+        "close",
+        "app"
+      ],
+      "topic": "calling_dialer"
+    },
+    {
+      "slug": "lead-filtering",
+      "title": "Lead Filtering Tutorials",
+      "url": "https://help.close.com/docs/lead-filtering",
+      "body_file": "close-help-docs/pages/lead-filtering.txt",
+      "excerpt": "Lead filtering is a powerful way to create search queries that dynamically impact which Leads appear in your view. Filtering can help you quickly find a Contact, identify which Leads need attention, build calling and emailing workflows for your sales team, and much more. The possibilities are endless. Think of Lead Filtering as building a series of criteria that help users locate important lists of Leads and Contacts. For example, you can create Filters to find leads that\u2026",
+      "keywords": [
+        "lead filtering",
+        "basic filters",
+        "smart views",
+        "filtering",
+        "tutorials",
+        "lead"
+      ],
+      "topic": "calling_dialer"
+    },
+    {
+      "slug": "plans-and-billing",
+      "title": "Plans and Billing",
+      "url": "https://help.close.com/docs/plans-and-billing",
+      "body_file": "close-help-docs/pages/plans-and-billing.txt",
+      "excerpt": "Billing Schedule, Plan, and Users Your Close account is billed according to these three aspects of your subscription: Your Billing Schedule - You can pay for Close on a monthly or annual basis. Your Team's Plan - You can review or change your team's Plan on the Plan page within your Organization settings. See Close's Plans & Pricing. Number of Users - You can invite, remove, or edit a User on the Team Management page within your Organization settings. Telephony Usage\u2026",
+      "keywords": [
+        "telephony usage calling",
+        "your billing schedule",
+        "billing schedule",
+        "users your close",
+        "team management",
+        "payment method",
+        "under settings",
+        "pricing page",
+        "close plans",
+        "pricing you",
+        "see close",
+        "your team",
+        "billing",
+        "plans"
+      ],
+      "topic": "calling_dialer"
+    },
+    {
+      "slug": "porting-your-number",
+      "title": "Porting your number",
+      "url": "https://help.close.com/docs/porting-your-number",
+      "body_file": "close-help-docs/pages/porting-your-number.txt",
+      "excerpt": "By default, our provider supports the porting of US and Canadian numbers. If you'd like to port a number from another country, please reach out to support@close.com to see if we can port the number. Make sure to include the country name, full number, and a number type (local/mobile/toll-free). Porting a number into Close will stop service of that number with your existing provider. Make sure this does not interfere with any contracts you may have tied to that number or\u2026",
+      "keywords": [
+        "twilio console",
+        "close twilio",
+        "your twilio",
+        "porting",
+        "number"
+      ],
+      "topic": "calling_dialer"
+    },
+    {
+      "slug": "power-predictive-dialing",
+      "title": "Power & Predictive Dialing",
+      "url": "https://help.close.com/docs/power-predictive-dialing",
+      "body_file": "close-help-docs/pages/power-predictive-dialing.txt",
+      "excerpt": "Power Dialer A power dialer is a piece of automated telephone technology that dials a phone number right after a call is completed. The power dialer will call the following contact on the list as soon as the caller finishes the previous call. Power dialing makes your team efficient because they don't have to spend time figuring out which number to call next. Plus, your sales team won't be wasting time manually dialing numbers\u2014the software does it for them. When a power\u2026",
+      "keywords": [
+        "sales operations manager",
+        "sarah haselkorn",
+        "predictive dia",
+        "power dialer",
+        "predictive",
+        "smart view",
+        "dialing",
+        "power"
+      ],
+      "topic": "calling_dialer"
+    },
+    {
+      "slug": "premium-phone-numbers",
+      "title": "Premium Phone Numbers",
+      "url": "https://help.close.com/docs/premium-phone-numbers",
+      "body_file": "close-help-docs/pages/premium-phone-numbers.txt",
+      "excerpt": "Close has combined two non-negotiables for modern businesses: a CRM and a business phone system. With Premium Phone Numbers, you can automatically route calls to specific team members using data from Close, such as directing them to the Lead Owner, and distribute new leads among sales reps to ensure fair coverage. Brand-new leads can also route themselves through a phone menu, providing a streamlined experience. Creating Premium Phone Numbers Under Settings > Phone &\u2026",
+      "keywords": [
+        "with premium phone numbers",
+        "lead status routing you",
+        "premium phone number",
+        "qualified leads",
+        "premium number",
+        "success group",
+        "support group",
+        "group number",
+        "sales group",
+        "lead owner",
+        "phone menu",
+        "numbers",
+        "premium",
+        "phone"
+      ],
+      "topic": "calling_dialer"
+    },
+    {
+      "slug": "recording-touchpoints-using-codes",
+      "title": "Recording touchpoints using #codes",
+      "url": "https://help.close.com/docs/recording-touchpoints-using-codes",
+      "body_file": "close-help-docs/pages/recording-touchpoints-using-codes.txt",
+      "excerpt": "Generally, your pre- and post- sales processes will have a few key touchpoints or activities you may want to record. This guide will cover a few different ways to track these events in Close. Here's an example of some pre- and post- sales touchpoints that we'll cover: Pre-Sales Reach a gatekeeper Reach a decision maker Connect on LinkedIn Send some swag Give a demo Post-Sales Have an onboarding call Run a QBR or check-in call Recording touchpoints and/or events with #codes\u2026",
+      "keywords": [
+        "sales reach",
+        "touchpoints",
+        "sales have",
+        "recording",
+        "codes",
+        "using"
+      ],
+      "topic": "calling_dialer"
+    },
+    {
+      "slug": "regulatory-bundle",
+      "title": "Regulatory Bundles",
+      "url": "https://help.close.com/docs/regulatory-bundle",
+      "body_file": "close-help-docs/pages/regulatory-bundle.txt",
+      "excerpt": "Provisioning phone numbers in most countries require registration due to local telephony laws. These regulations often require providing identity documentation to carriers or a local enforcement agency. The documents vary from country to country and also depend on the type of phone number you want to rent and whether you'll be using the phone number as a business or as an individual. A set of documents required to register a phone number is referred to as a Regulatory\u2026",
+      "keywords": [
+        "twilio phone number regulations",
+        "regulatory bundle",
+        "regulatory",
+        "bundles",
+        "bundle"
+      ],
+      "topic": "calling_dialer"
+    },
+    {
+      "slug": "reporting-call-quality-issues",
+      "title": "Reporting call quality issues",
+      "url": "https://help.close.com/docs/reporting-call-quality-issues",
+      "body_file": "close-help-docs/pages/reporting-call-quality-issues.txt",
+      "excerpt": "Reporting calls Our goal is to make sure that every call you make through Close is perfect. To make that goal a reality, we need your feedback \u2013 both good and bad. After every call you make (or answer), you have the option to report an issue by clicking into the menu within the call log. From there, you'll be able to add additional details about your experience. Tell us what went wrong during the call by selecting all the pre-defined issues that match your case. Then, use\u2026",
+      "keywords": [
+        "reporting",
+        "quality",
+        "issues",
+        "call"
+      ],
+      "topic": "calling_dialer"
+    },
+    {
+      "slug": "restricted-user-role",
+      "title": "Restricted User role",
+      "url": "https://help.close.com/docs/restricted-user-role",
+      "body_file": "close-help-docs/pages/restricted-user-role.txt",
+      "excerpt": "Restricted User Each plan includes the predefined role below. The Restricted User role is a default role and may be assigned to any user. However, it may not be edited or modified. Restricted Users do not have access to many Close features. Restricted Users can use Close for core work, including managing their own records and communication. They can also delete their own opportunities, tasks, and activities. Restricted Users cannot do higher-risk or admin-style actions\u2026",
+      "keywords": [
+        "restricted user each",
+        "restricted users",
+        "restricted",
+        "role",
+        "user"
+      ],
+      "topic": "calling_dialer"
+    },
+    {
+      "slug": "search-and-smart-views",
+      "title": "Lead Filtering and Smart Views",
+      "url": "https://help.close.com/docs/search-and-smart-views",
+      "body_file": "close-help-docs/pages/search-and-smart-views.txt",
+      "excerpt": "Smart Views exist for proactive outreach to Leads matching specific criteria. They are saved searches and can be kept private, shared with your entire organization, or specific team members. All Smart Views are composed of search queries that dynamically impact which Leads appear in your Smart View. Using Lead Filtering and Smart Views, you can easily create a \u201clist\u201d of precisely the right Leads you need to reach out to at any given time. You can then prioritize the list\u2026",
+      "keywords": [
+        "using lead filtering",
+        "lead filtering one",
+        "all smart views",
+        "smart views",
+        "smart view",
+        "filtering",
+        "search",
+        "smart",
+        "views",
+        "lead"
+      ],
+      "topic": "calling_dialer"
+    },
+    {
+      "slug": "search-and-smart-views-legacy",
+      "title": "Search and Smart Views (Legacy)",
+      "url": "https://help.close.com/docs/search-and-smart-views-legacy",
+      "body_file": "close-help-docs/pages/search-and-smart-views-legacy.txt",
+      "excerpt": "New Lead Filtering We released a new version of our lead filtering/search. The following guides are for our legacy search. If your UI does not match, please see this guide for the new filtering instructions. Smart Views exist for proactive outreach to Leads matching specific criteria. They are saved searches and can be kept private, shared with your entire organization, or specific team members. All Smart Views are composed of search queries that dynamically impact which\u2026",
+      "keywords": [
+        "new lead filtering we",
+        "overview using search",
+        "all smart views",
+        "smart views",
+        "search one",
+        "smart view",
+        "legacy",
+        "search",
+        "smart",
+        "views"
+      ],
+      "topic": "calling_dialer"
+    },
+    {
+      "slug": "sms-and-mms",
+      "title": "SMS and MMS",
+      "url": "https://help.close.com/docs/sms-and-mms",
+      "body_file": "close-help-docs/pages/sms-and-mms.txt",
+      "excerpt": "Like calling and email, SMS communication is built directly into Close. SMS can be an effective tool to increase response rates with prospects, e.g. by texting them meeting reminders and follow-ups. Prerequisites - SMS-enabled phone number Before you can send SMS in Close, you need to have an internal (Close-issued) SMS-enabled phone number that matches the country you're trying to send SMS to. That means in order to send SMS to the US or Canadian numbers, you need to have\u2026",
+      "keywords": [
+        "phone number",
+        "send later",
+        "mms",
+        "sms"
+      ],
+      "topic": "calling_dialer"
+    },
+    {
+      "slug": "super-user-role",
+      "title": "Super User role",
+      "url": "https://help.close.com/docs/super-user-role",
+      "body_file": "close-help-docs/pages/super-user-role.txt",
+      "excerpt": "Super User Each plan includes the predefined role shown below. This is a default role and may be assigned to any user, but may not be edited or modified. Super Users can do everything a User can, plus manage common admin settings like: Customizations (for example: statuses, custom fields, integration links, etc) Group phone numbers Team Smart Views Export lead or opportunity data to a CSV or JSON file. Bulk edit and bulk delete Send Bulk Email or manage Bulk Workflow\u2026",
+      "keywords": [
+        "bulk workflow subscriptions",
+        "team smart views export",
+        "send bulk email",
+        "super user each",
+        "super users",
+        "sales ops",
+        "super",
+        "role",
+        "user"
+      ],
+      "topic": "calling_dialer"
+    },
+    {
+      "slug": "troubleshooting-headset-issues",
+      "title": "Troubleshooting headset issues",
+      "url": "https://help.close.com/docs/troubleshooting-headset-issues",
+      "body_file": "close-help-docs/pages/troubleshooting-headset-issues.txt",
+      "excerpt": "Close cannot access microphone Common reasons for this include: Another application or browser tab is using your microphone already. Check for other browser tabs (Google Hangout, Skype Web, appear.in, etc.) that could be using your microphone. Your anti-virus software is protecting an audio stream coming from sound recording devices. (If you are a Kaspersky customer, please check out this link .) Your microphone is disconnected and your computer has no built-in microphone.\u2026",
+      "keywords": [
+        "troubleshooting",
+        "google hangout",
+        "phone settings",
+        "windows vista",
+        "click start",
+        "skype web",
+        "headset",
+        "issues"
+      ],
+      "topic": "calling_dialer"
+    },
+    {
+      "slug": "user-role",
+      "title": "User role",
+      "url": "https://help.close.com/docs/user-role",
+      "body_file": "close-help-docs/pages/user-role.txt",
+      "excerpt": "User Each plan includes the predefined role shown below. This is a default role and may be assigned to any user, but may not be edited or modified. Users can do everything Restricted Users can, plus additional bulk and lead-management actions, including: Bulk import Bulk email Delete leads Merge leads Manage or delete other users\u2019 opportunities, tasks, and activities (where enabled by the role) Call, send SMS, and use the Dialer. Users cannot manage organization-level\u2026",
+      "keywords": [
+        "restricted users",
+        "user each",
+        "role",
+        "user"
+      ],
+      "topic": "calling_dialer"
+    },
+    {
+      "slug": "using-the-power-dialer",
+      "title": "Using the Power Dialer",
+      "url": "https://help.close.com/docs/using-the-power-dialer",
+      "body_file": "close-help-docs/pages/using-the-power-dialer.txt",
+      "excerpt": "The best way to call a large number of Leads quickly is by using the Power Dialer. The Dialer will call through a Smart View without you having to manually click into each Lead to call. Starting a Power Dialer Session To start a Dialer session, you\u2019ll first want to build the list of Leads that you intend to call. You\u2019ll need to first build a Smart View that contains the right leads to call . Once you have the list ready, select the Call button at the top and your Power\u2026",
+      "keywords": [
+        "smart view the power dialer",
+        "power dialer session to",
+        "plan limitations solo",
+        "call assistant",
+        "power dialer",
+        "smart view",
+        "dialer",
+        "power",
+        "using"
+      ],
+      "topic": "calling_dialer"
+    },
+    {
+      "slug": "using-the-predictive-dialer",
+      "title": "Using the Predictive Dialer",
+      "url": "https://help.close.com/docs/using-the-predictive-dialer",
+      "body_file": "close-help-docs/pages/using-the-predictive-dialer.txt",
+      "excerpt": "What is a predictive dialer? If you're not sure what a predictive dialer is and whether you should use it, check out our in-depth post here . You'll get a clear understanding of the pros and cons of predictive dialing and decide whether it fits in with parts of your sales process. If you're still unsure - just reach out to success@close.com and we'll be happy to assist you! Setting up predictive calling Once you've made the decision to turn on predictive dialing, here's how\u2026",
+      "keywords": [
+        "under dialer options",
+        "dialer options the",
+        "predictive calling",
+        "close protip",
+        "group caller",
+        "predictive",
+        "smart view",
+        "dialer",
+        "using"
+      ],
+      "topic": "calling_dialer"
+    },
+    {
+      "slug": "workflows",
+      "title": "Workflows",
+      "url": "https://help.close.com/docs/workflows",
+      "body_file": "close-help-docs/pages/workflows.txt",
+      "excerpt": "Plan limits Workflows are only available on the Growth and Scale plans. Workflows can be used to automate tasks and outreach. There are endless possibilities of what you can automate, but the most common use cases are: Automatically update Leads when an Opportunity is won. Randomly assign a new Lead to a team member and automate a scheduled sequence of email, SMS, task, and/or call tasks to the assigned team member. Create an Opportunity when a Custom Activity is published\u2026",
+      "keywords": [
+        "workflow glossary workflows",
+        "custom activity",
+        "each workflow",
+        "workflow goal",
+        "workflows"
+      ],
+      "topic": "calling_dialer"
+    }
+  ]
+}

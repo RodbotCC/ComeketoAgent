@@ -1,0 +1,149 @@
+{
+  "topic_id": "account_users_roles",
+  "article_count": 8,
+  "articles": [
+    {
+      "slug": "account-settings",
+      "title": "Account Settings",
+      "url": "https://help.close.com/docs/account-settings",
+      "body_file": "close-help-docs/pages/account-settings.txt",
+      "excerpt": "Profile & Two-Factor Authentication Set your name, country, login email address, and reset your password in your account settings. Your name will be associated with all of the activities you make to a lead, such as any lead communication, writing Notes, and creating Tasks . Country Settings The country selected in your settings will affect the phone numbers you dial. The country code associated with your selected country will be automatically added to each phone number to\u2026",
+      "keywords": [
+        "factor authentication set",
+        "factor authentication two",
+        "country settings the",
+        "connected account",
+        "account settings",
+        "settings",
+        "account"
+      ],
+      "topic": "account_users_roles"
+    },
+    {
+      "slug": "adding-and-removing-users",
+      "title": "Managing users and cancellation",
+      "url": "https://help.close.com/docs/adding-and-removing-users",
+      "body_file": "close-help-docs/pages/adding-and-removing-users.txt",
+      "excerpt": "Adding Users to Close You can add users simply by sending them an invitation and selecting the role you'd like to assign. To invite users, click your name at the top left of the Close window - or click Settings and then select Team Management to manage the member list. What role should I use? Before adding users, we recommend reading about roles and permissions . Removing Users from Close If you're an Admin of your Account, you can head to Settings > Team Management to add\u2026",
+      "keywords": [
+        "team management",
+        "removing users",
+        "adding users",
+        "cancellation",
+        "custom field",
+        "close you",
+        "close if",
+        "managing",
+        "removing",
+        "adding",
+        "users"
+      ],
+      "topic": "account_users_roles"
+    },
+    {
+      "slug": "enabling-2fa",
+      "title": "Two-factor authentication (2FA)",
+      "url": "https://help.close.com/docs/enabling-2fa",
+      "body_file": "close-help-docs/pages/enabling-2fa.txt",
+      "excerpt": "Two-factor authentication (2FA) is a way of adding additional security to your account. 2FA requires you to enter an extra code when you log in or perform some account-sensitive action (e.g. changing your password). The code is generated from an application on your computer or mobile phone. Just want to reset your password? Learn how to do so here . Setting up 2FA To enable 2FA for your account you will need an application that manages 2FA codes, such as Google\u2026",
+      "keywords": [
+        "google authenticator",
+        "account settings",
+        "authentication",
+        "enabling",
+        "factor",
+        "2fa",
+        "two"
+      ],
+      "topic": "account_users_roles"
+    },
+    {
+      "slug": "plans-and-billing",
+      "title": "Plans and Billing",
+      "url": "https://help.close.com/docs/plans-and-billing",
+      "body_file": "close-help-docs/pages/plans-and-billing.txt",
+      "excerpt": "Billing Schedule, Plan, and Users Your Close account is billed according to these three aspects of your subscription: Your Billing Schedule - You can pay for Close on a monthly or annual basis. Your Team's Plan - You can review or change your team's Plan on the Plan page within your Organization settings. See Close's Plans & Pricing. Number of Users - You can invite, remove, or edit a User on the Team Management page within your Organization settings. Telephony Usage\u2026",
+      "keywords": [
+        "telephony usage calling",
+        "your billing schedule",
+        "billing schedule",
+        "users your close",
+        "team management",
+        "payment method",
+        "under settings",
+        "pricing page",
+        "close plans",
+        "pricing you",
+        "see close",
+        "your team",
+        "billing",
+        "plans"
+      ],
+      "topic": "account_users_roles"
+    },
+    {
+      "slug": "restricted-user-role",
+      "title": "Restricted User role",
+      "url": "https://help.close.com/docs/restricted-user-role",
+      "body_file": "close-help-docs/pages/restricted-user-role.txt",
+      "excerpt": "Restricted User Each plan includes the predefined role below. The Restricted User role is a default role and may be assigned to any user. However, it may not be edited or modified. Restricted Users do not have access to many Close features. Restricted Users can use Close for core work, including managing their own records and communication. They can also delete their own opportunities, tasks, and activities. Restricted Users cannot do higher-risk or admin-style actions\u2026",
+      "keywords": [
+        "restricted user each",
+        "restricted users",
+        "restricted",
+        "role",
+        "user"
+      ],
+      "topic": "account_users_roles"
+    },
+    {
+      "slug": "roles-permissions",
+      "title": "Roles & Permissions",
+      "url": "https://help.close.com/docs/roles-permissions",
+      "body_file": "close-help-docs/pages/roles-permissions.txt",
+      "excerpt": "Transparency and Productivity We believe that transparency promotes productivity. That is why everything you do within Close is visible to everyone on your team. That being said, we also know that specific actions like managing customizations, bulk editing, and bulk deleting information in the system should understandably be off-limits for some users. The Roles & Permissions tab relates directly to a user's accessibility within Close. You can create Roles that limit or\u2026",
+      "keywords": [
+        "scale custom roles",
+        "restricted users",
+        "productivity we",
+        "manage groups",
+        "permissions",
+        "scale plan",
+        "what roles",
+        "roles"
+      ],
+      "topic": "account_users_roles"
+    },
+    {
+      "slug": "single-sign-on-sso-with-google",
+      "title": "Single Sign On (SSO) with Google",
+      "url": "https://help.close.com/docs/single-sign-on-sso-with-google",
+      "body_file": "close-help-docs/pages/single-sign-on-sso-with-google.txt",
+      "excerpt": "Google Single Sign-On allows you to sign in seamlessly with your Google account, eliminating the hassle of remembering another password. It enhances security and streamlines the task of managing user access within your organization. Instead of using a regular email/password combination you can sign up and log in Close using Sign Up with Google / Log in with Google . Regardless of the way you'll sign up/log into Close, make sure to enable 2FA on your account. Other SSO\u2026",
+      "keywords": [
+        "google single sign",
+        "set password",
+        "sign up",
+        "google",
+        "single",
+        "sign",
+        "sso"
+      ],
+      "topic": "account_users_roles"
+    },
+    {
+      "slug": "user-role",
+      "title": "User role",
+      "url": "https://help.close.com/docs/user-role",
+      "body_file": "close-help-docs/pages/user-role.txt",
+      "excerpt": "User Each plan includes the predefined role shown below. This is a default role and may be assigned to any user, but may not be edited or modified. Users can do everything Restricted Users can, plus additional bulk and lead-management actions, including: Bulk import Bulk email Delete leads Merge leads Manage or delete other users\u2019 opportunities, tasks, and activities (where enabled by the role) Call, send SMS, and use the Dialer. Users cannot manage organization-level\u2026",
+      "keywords": [
+        "restricted users",
+        "user each",
+        "role",
+        "user"
+      ],
+      "topic": "account_users_roles"
+    }
+  ]
+}

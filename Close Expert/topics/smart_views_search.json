@@ -1,0 +1,695 @@
+{
+  "topic_id": "smart_views_search",
+  "article_count": 34,
+  "articles": [
+    {
+      "slug": "activity-comparison-report",
+      "title": "Activity Comparison Report",
+      "url": "https://help.close.com/docs/activity-comparison-report",
+      "body_file": "close-help-docs/pages/activity-comparison-report.txt",
+      "excerpt": "The Activity Comparison report gives you a spreadsheet-like view of the performance of every team member. This makes it quick and easy to see how you or members of your team are contributing to the overall results. The Activity Comparison Report lets you compare multiple users across multiple metrics. Filtering You can filter the report by date range, user, and Smart View. You can also select a comparison date range to see the percent change in each metric between the two\u2026",
+      "keywords": [
+        "activity comparison report",
+        "activity overview report",
+        "activity comparison",
+        "exporting you",
+        "filtering you",
+        "team members",
+        "saving once",
+        "sorting you",
+        "comparison",
+        "smart view",
+        "activity",
+        "report"
+      ],
+      "topic": "smart_views_search"
+    },
+    {
+      "slug": "activity-overview-report",
+      "title": "Activity Overview Report",
+      "url": "https://help.close.com/docs/activity-overview-report",
+      "body_file": "close-help-docs/pages/activity-overview-report.txt",
+      "excerpt": "The Activity Overview report shows activity metrics for a specific date range. It's the first report listed under the Reporting heading on the left sidebar. You can filter and customize the report by Smart View, Users, time frame, and dozens of different activity metrics. Filtering the report By Smart View At the top right of the page, you can filter your Activity Overview Report by any of your Smart Views. Browse all of your Smart Views or use the search box at the top to\u2026",
+      "keywords": [
+        "activity overview report",
+        "by smart view at",
+        "smart views",
+        "smart view",
+        "activity",
+        "all time",
+        "overview",
+        "report"
+      ],
+      "topic": "smart_views_search"
+    },
+    {
+      "slug": "admin-account-role",
+      "title": "Admin user role",
+      "url": "https://help.close.com/docs/admin-account-role",
+      "body_file": "close-help-docs/pages/admin-account-role.txt",
+      "excerpt": "Admin user Each plan includes the predefined role shown below. This is a default role and may be assigned to any user, but may not be edited or modified. The Admin role must always exist with all permissions enabled. This is the only role that has billing access. Admins can: Manage Users, Billing, & Roles/Permissions Manage Customizations - create/update/delete statuses, Custom Fields, Integration Links, organization name, currency, etc. Manage Group Phone Numbers. Manage\u2026",
+      "keywords": [
+        "permissions manage customizations",
+        "bulk workflow subscriptions",
+        "manage group phone numbers",
+        "manage team smart views",
+        "integration links",
+        "send bulk email",
+        "custom fields",
+        "manage users",
+        "merge leads",
+        "bulk edit",
+        "account",
+        "admin",
+        "role",
+        "user"
+      ],
+      "topic": "smart_views_search"
+    },
+    {
+      "slug": "calculating-your-call-answer-rate",
+      "title": "Calculating Your Call Answer Rate",
+      "url": "https://help.close.com/docs/calculating-your-call-answer-rate",
+      "body_file": "close-help-docs/pages/calculating-your-call-answer-rate.txt",
+      "excerpt": "Understanding your call answer rate is crucial for assessing the effectiveness of your sales outreach. Read on for some tips on calculating your answer rate using some of the features built into Close. Utilizing Smart Views Longer call durations often indicate that a live conversation occurred. To leverage this, you can create Smart Views based on your Call Duration. Navigate to the Leads tab and set up a Smart View to filter for calls created \"today.\" Then, create another\u2026",
+      "keywords": [
+        "utilizing smart views longer",
+        "activity overview report",
+        "custom activities for",
+        "custom activities",
+        "average duration",
+        "call disposition",
+        "custom activity",
+        "outbound calls",
+        "call duration",
+        "calculating",
+        "smart views",
+        "smart view",
+        "answer",
+        "call",
+        "rate"
+      ],
+      "topic": "smart_views_search"
+    },
+    {
+      "slug": "calculations-in-smart-views",
+      "title": "Calculations in Smart Views",
+      "url": "https://help.close.com/docs/calculations-in-smart-views",
+      "body_file": "close-help-docs/pages/calculations-in-smart-views.txt",
+      "excerpt": "Smart View Column Calculations Smart View column calculations let you quickly summarize your data\u2014right inside Close . You can see totals, averages, percentages, and more at the bottom of any Search result or Smart View column, without exporting to a spreadsheet. Once added, calculations are saved with the Smart View, so anyone you share it with will see the same results. How Column Calculations Work At the bottom of a supported column, you\u2019ll see a Calculation option. Open\u2026",
+      "keywords": [
+        "how column calculations work at",
+        "why use column calculations",
+        "click calculation choose",
+        "smart view scroll",
+        "calculations",
+        "smart view",
+        "smart",
+        "views"
+      ],
+      "topic": "smart_views_search"
+    },
+    {
+      "slug": "call-reports",
+      "title": "Call Reports",
+      "url": "https://help.close.com/docs/call-reports",
+      "body_file": "close-help-docs/pages/call-reports.txt",
+      "excerpt": "A single, trustworthy view of calling performance for your team, so you can coach for real conversations and better connect rates. The Call Report brings dials, talk time, dispositions, outcomes, and unique leads dialed into one place. Use it to understand activity quality versus volume and spot which numbers get picked up versus blocked. Works across human reps and Chloe Trend and distribution charts for quality coaching Filters for Smart Views, users, numbers, durations,\u2026",
+      "keywords": [
+        "call outcomes",
+        "chloe trend",
+        "smart views",
+        "report in",
+        "reports",
+        "call"
+      ],
+      "topic": "smart_views_search"
+    },
+    {
+      "slug": "creating-a-multi-channel-sales-workflow-in-close",
+      "title": "Creating a multi-channel sales workflow in Close",
+      "url": "https://help.close.com/docs/creating-a-multi-channel-sales-workflow-in-close",
+      "body_file": "close-help-docs/pages/creating-a-multi-channel-sales-workflow-in-close.txt",
+      "excerpt": "A sales cycle is a collection of steps that salespeople take to turn a lead into a customer. That includes everything from prospecting to closing the sale (and sometimes even beyond closing). Sales cycles vary between companies and industries, but they usually have a similar sequence of steps. Close is designed to make sales communication quick, easy and effective. You can easily build out unique sales workflows using our dynamic Workflows , Smart Views , and Dialers .\u2026",
+      "keywords": [
+        "actionable guide",
+        "sales cycles are",
+        "close pro tip",
+        "cold prospect",
+        "smart views",
+        "send messa",
+        "warm lead",
+        "call day",
+        "creating",
+        "workflow",
+        "channel",
+        "close",
+        "multi",
+        "sales"
+      ],
+      "topic": "smart_views_search"
+    },
+    {
+      "slug": "creating-smart-views",
+      "title": "Create a Smart View",
+      "url": "https://help.close.com/docs/creating-smart-views",
+      "body_file": "close-help-docs/pages/creating-smart-views.txt",
+      "excerpt": "Smart Views are to Close what coffee is to a salesperson. You can get through your day without it, but why would you want to? Smart Views are: Powerful and effortless Dynamic Increase productivity Smart Views are saved Lead Filters that give you 1-click access to your favorite searches anywhere in Close. Smart Views tell sales reps who to follow up with and when to follow up without the need to create endless tasks and reminders. They allow you to translate your current\u2026",
+      "keywords": [
+        "activity filter save",
+        "dynamic increase",
+        "smart view lead",
+        "smart views you",
+        "lead filters",
+        "smart views",
+        "smart view",
+        "creating",
+        "create",
+        "smart",
+        "views",
+        "view"
+      ],
+      "topic": "smart_views_search"
+    },
+    {
+      "slug": "creating-smart-views-for-calling",
+      "title": "Building a Calling Smart View",
+      "url": "https://help.close.com/docs/creating-smart-views-for-calling",
+      "body_file": "close-help-docs/pages/creating-smart-views-for-calling.txt",
+      "excerpt": "In order to use the power or predictive dialer effectively, the first step is to create a list of leads you know you need to call. Here are the basic concepts to consider when creating your calling Smart Views. What's the goal? Your goal in creating a great calling Smart View is to make sure you don't have to think about two key questions: Should I call this person? What should I say? Step 1: Specify particular lead statuses If you're using lead statuses effectively, a good\u2026",
+      "keywords": [
+        "smart views",
+        "add filter",
+        "smart view",
+        "building",
+        "creating",
+        "calling",
+        "smart",
+        "views",
+        "view"
+      ],
+      "topic": "smart_views_search"
+    },
+    {
+      "slug": "creating-smart-views-for-calling-legacy",
+      "title": "Building a calling Smart View (Legacy)",
+      "url": "https://help.close.com/docs/creating-smart-views-for-calling-legacy",
+      "body_file": "close-help-docs/pages/creating-smart-views-for-calling-legacy.txt",
+      "excerpt": "New Lead Filtering We recently released a new version of our lead filtering/search. The following guides are for our legacy search. If your ui does not match, please see this guide for the new filtering instructions. In order to use the power or predictive dialer effectively, the first step is to create a list of leads you know you need to call. Here are the basic concepts to consider when creating your calling Smart Views. What's the goal? Your goal in creating a great\u2026",
+      "keywords": [
+        "new lead filtering we",
+        "smart views",
+        "smart view",
+        "trial now",
+        "building",
+        "creating",
+        "calling",
+        "legacy",
+        "smart",
+        "views",
+        "view"
+      ],
+      "topic": "smart_views_search"
+    },
+    {
+      "slug": "creating-smart-views-legacy",
+      "title": "Create a Smart View (Legacy)",
+      "url": "https://help.close.com/docs/creating-smart-views-legacy",
+      "body_file": "close-help-docs/pages/creating-smart-views-legacy.txt",
+      "excerpt": "New Lead Filtering We recently released a new version of our lead filtering/search. The following guide is for our legacy search. If your UI does not match, please see this guide for the new filtering instructions. Now that the Leads are in your account, let\u2019s jump to the next step \u2014 filtering the Leads into a dynamic list. Know which Leads to reach out to at any given time. Using Smart Views will dramatically accelerate your sales process. To watch the previous video on\u2026",
+      "keywords": [
+        "lead search smart views",
+        "new lead filtering we",
+        "narrow your results",
+        "using smart views",
+        "smart view",
+        "creating",
+        "create",
+        "legacy",
+        "smart",
+        "views",
+        "view"
+      ],
+      "topic": "smart_views_search"
+    },
+    {
+      "slug": "edit-merge-delete-leads",
+      "title": "Editing, Merging, and Deleting Leads",
+      "url": "https://help.close.com/docs/edit-merge-delete-leads",
+      "body_file": "close-help-docs/pages/edit-merge-delete-leads.txt",
+      "excerpt": "Edit Leads To make a change to a group of leads at once, first filter for those leads or go to an existing Smart View. All leads in your search or Smart View will be included in your bulk edit. Navigate to the menu in the upper-right, select Bulk Edit , then select the bulk action type from any of the following: Update lead status Update a lead custom field Clear a lead custom field Delete the leads Apply your changes, and confirm. You will receive an confirmation email\u2026",
+      "keywords": [
+        "deleting leads deleting",
+        "merge leads in",
+        "edit leads to",
+        "select delete",
+        "select merge",
+        "smart view",
+        "bulk edit",
+        "deleting",
+        "editing",
+        "merging",
+        "delete",
+        "leads",
+        "merge",
+        "edit"
+      ],
+      "topic": "smart_views_search"
+    },
+    {
+      "slug": "exporting-data",
+      "title": "Exporting data",
+      "url": "https://help.close.com/docs/exporting-data",
+      "body_file": "close-help-docs/pages/exporting-data.txt",
+      "excerpt": "Exports We believe that you shouldn't be held captive by your own data. That's why we've made it extremely easy to export all or just part of your data in Close. Anytime you are looking at Leads in Search, you can use the ... > Export button. Clicking it will let you choose a type and a format of the exported data. You can export all of your leads or first narrow down your search results by using a search query. You need to choose which type of export you want (Leads,\u2026",
+      "keywords": [
+        "contacts smart view",
+        "leads smart view",
+        "export formats",
+        "exports we",
+        "smart view",
+        "exporting",
+        "leads you",
+        "data"
+      ],
+      "topic": "smart_views_search"
+    },
+    {
+      "slug": "keyboard-shortcuts",
+      "title": "Close app keyboard shortcuts",
+      "url": "https://help.close.com/docs/keyboard-shortcuts",
+      "body_file": "close-help-docs/pages/keyboard-shortcuts.txt",
+      "excerpt": "Keyboard Shortcuts Close comes with a set of keyboard shortcuts that can significantly improve your workflow efficiency. To see the list of keyboard shortcuts available, just hit the question mark button ? on your keyboard from any page and you'll see a pop-up window listing them all. Close app keyboard shortcut list for Mac OS On any page Mac shortcut Windows shortcut Action ? ? Show keyboard shortcuts \u2318 Shift F Ctrl Shift F Focus the search input \u2318 Shift L Ctrl Shift L\u2026",
+      "keywords": [
+        "keyboard shortcuts close",
+        "enter ctrl enter submit",
+        "ctrl shift",
+        "dialer mac",
+        "shortcuts",
+        "keyboard",
+        "close",
+        "app"
+      ],
+      "topic": "smart_views_search"
+    },
+    {
+      "slug": "lead-assignment",
+      "title": "Lead assignment",
+      "url": "https://help.close.com/docs/lead-assignment",
+      "body_file": "close-help-docs/pages/lead-assignment.txt",
+      "excerpt": "This guide will show you how to create user custom fields and various ways to handle lead assignment in Close. Lead Assignment Overview Lead assignment in Close is best handled through a custom field that is added to each lead with the team member that currently owns that lead. The Lead Owner custom field shows that Bruce is assigned to this lead. Once leads are assigned in Close, your team will have a quick way to identify which member of your team owns that lead. User\u2026",
+      "keywords": [
+        "lead assignment overview lead",
+        "smart views once",
+        "assignment",
+        "user type",
+        "in close",
+        "lead"
+      ],
+      "topic": "smart_views_search"
+    },
+    {
+      "slug": "lead-filtering",
+      "title": "Lead Filtering Tutorials",
+      "url": "https://help.close.com/docs/lead-filtering",
+      "body_file": "close-help-docs/pages/lead-filtering.txt",
+      "excerpt": "Lead filtering is a powerful way to create search queries that dynamically impact which Leads appear in your view. Filtering can help you quickly find a Contact, identify which Leads need attention, build calling and emailing workflows for your sales team, and much more. The possibilities are endless. Think of Lead Filtering as building a series of criteria that help users locate important lists of Leads and Contacts. For example, you can create Filters to find leads that\u2026",
+      "keywords": [
+        "lead filtering",
+        "basic filters",
+        "smart views",
+        "filtering",
+        "tutorials",
+        "lead"
+      ],
+      "topic": "smart_views_search"
+    },
+    {
+      "slug": "lead-filtering-tips",
+      "title": "Lead Filtering Tips",
+      "url": "https://help.close.com/docs/lead-filtering-tips",
+      "body_file": "close-help-docs/pages/lead-filtering-tips.txt",
+      "excerpt": "This article is a more detailed look at constructing search queries in Close. To start creating basic search queries right away, head over to the lead filtering overview help article. After reading this, check out our article on how to Create a Smart View . Single queries You can add filters to find Leads that have a certain status, were updated within a specific time period, have a Custom Field added, etc. To add a new filter, click the + Add Filter button that will open\u2026",
+      "keywords": [
+        "match operator",
+        "custom field",
+        "add filter",
+        "smart view",
+        "filtering",
+        "lead",
+        "tips"
+      ],
+      "topic": "smart_views_search"
+    },
+    {
+      "slug": "lead-scoring",
+      "title": "Lead Scoring",
+      "url": "https://help.close.com/docs/lead-scoring",
+      "body_file": "close-help-docs/pages/lead-scoring.txt",
+      "excerpt": "Whether your business is growing or you work with a high volume of leads, lead scoring will help you address the most important leads quickly and prioritize the rest. Check out our Ultimate Guide to Lead Scoring here on the Close blog for an even more in-depth look at how to score leads, regardless of the CRM you\u2019re using. For learning about lead scoring in Close, fear not\u2014you\u2019re still in the right place. In this article, we\u2019ll walk you through lead scoring in Close by\u2026",
+      "keywords": [
+        "industry location job",
+        "custom activities",
+        "source funding",
+        "ultimate guide",
+        "custom fields",
+        "lead scoring",
+        "smart view",
+        "our blog",
+        "scoring",
+        "lead"
+      ],
+      "topic": "smart_views_search"
+    },
+    {
+      "slug": "opportunities-report",
+      "title": "Opportunities List View",
+      "url": "https://help.close.com/docs/opportunities-report",
+      "body_file": "close-help-docs/pages/opportunities-report.txt",
+      "excerpt": "While Close tracks a number of data points, our philosophy on reporting is to make that data as actionable for your sales team as possible. To that end, our reporting focuses on a sales rep\u2019s created Opportunities, their Activity, and the movement of Leads through the sales funnel. The Opportunities List gives you a powerful, flexible view of every opportunity in your organization. Use it to manage your pipeline, prioritize follow-ups, run quick calculations, and share key\u2026",
+      "keywords": [
+        "opportunities list you",
+        "opportunities list",
+        "opportunities use",
+        "pipeline owner",
+        "opportunities",
+        "notes custom",
+        "while close",
+        "report",
+        "list",
+        "view"
+      ],
+      "topic": "smart_views_search"
+    },
+    {
+      "slug": "power-predictive-dialing",
+      "title": "Power & Predictive Dialing",
+      "url": "https://help.close.com/docs/power-predictive-dialing",
+      "body_file": "close-help-docs/pages/power-predictive-dialing.txt",
+      "excerpt": "Power Dialer A power dialer is a piece of automated telephone technology that dials a phone number right after a call is completed. The power dialer will call the following contact on the list as soon as the caller finishes the previous call. Power dialing makes your team efficient because they don't have to spend time figuring out which number to call next. Plus, your sales team won't be wasting time manually dialing numbers\u2014the software does it for them. When a power\u2026",
+      "keywords": [
+        "sales operations manager",
+        "sarah haselkorn",
+        "predictive dia",
+        "power dialer",
+        "predictive",
+        "smart view",
+        "dialing",
+        "power"
+      ],
+      "topic": "smart_views_search"
+    },
+    {
+      "slug": "quick-start-importing-leads",
+      "title": "Import Data into Close",
+      "url": "https://help.close.com/docs/quick-start-importing-leads",
+      "body_file": "close-help-docs/pages/quick-start-importing-leads.txt",
+      "excerpt": "Let's get started by importing leads into your Close account. Which most accurately describes your current situation? Please choose one: \ud83d\udcc4 I track my leads in a spreadsheet \ud83d\udd04 I have been using a different CRM \ud83d\ude14 I do not track my leads Importing from a spreadsheet We've made it easy to import your leads from an existing spreadsheet. Lead Importer Use the lead importer to upload a CSV or XLS file. Click on your profile (top left), and from the dropdown, choose \u201cImport Data\u201d.\u2026",
+      "keywords": [
+        "assign columns after",
+        "lead importer click",
+        "lead importer use",
+        "smart views need",
+        "leads imported",
+        "help center",
+        "import data",
+        "quick start",
+        "smart views",
+        "importing",
+        "import",
+        "close",
+        "leads",
+        "quick",
+        "start",
+        "data",
+        "into"
+      ],
+      "topic": "smart_views_search"
+    },
+    {
+      "slug": "search-and-smart-views",
+      "title": "Lead Filtering and Smart Views",
+      "url": "https://help.close.com/docs/search-and-smart-views",
+      "body_file": "close-help-docs/pages/search-and-smart-views.txt",
+      "excerpt": "Smart Views exist for proactive outreach to Leads matching specific criteria. They are saved searches and can be kept private, shared with your entire organization, or specific team members. All Smart Views are composed of search queries that dynamically impact which Leads appear in your Smart View. Using Lead Filtering and Smart Views, you can easily create a \u201clist\u201d of precisely the right Leads you need to reach out to at any given time. You can then prioritize the list\u2026",
+      "keywords": [
+        "using lead filtering",
+        "lead filtering one",
+        "all smart views",
+        "smart views",
+        "smart view",
+        "filtering",
+        "search",
+        "smart",
+        "views",
+        "lead"
+      ],
+      "topic": "smart_views_search"
+    },
+    {
+      "slug": "search-and-smart-views-legacy",
+      "title": "Search and Smart Views (Legacy)",
+      "url": "https://help.close.com/docs/search-and-smart-views-legacy",
+      "body_file": "close-help-docs/pages/search-and-smart-views-legacy.txt",
+      "excerpt": "New Lead Filtering We released a new version of our lead filtering/search. The following guides are for our legacy search. If your UI does not match, please see this guide for the new filtering instructions. Smart Views exist for proactive outreach to Leads matching specific criteria. They are saved searches and can be kept private, shared with your entire organization, or specific team members. All Smart Views are composed of search queries that dynamically impact which\u2026",
+      "keywords": [
+        "new lead filtering we",
+        "overview using search",
+        "all smart views",
+        "smart views",
+        "search one",
+        "smart view",
+        "legacy",
+        "search",
+        "smart",
+        "views"
+      ],
+      "topic": "smart_views_search"
+    },
+    {
+      "slug": "searching-guide-combined-queries",
+      "title": "Searching tips combined queries (Legacy)",
+      "url": "https://help.close.com/docs/searching-guide-combined-queries",
+      "body_file": "close-help-docs/pages/searching-guide-combined-queries.txt",
+      "excerpt": "New Lead Filtering We recently released a new version of our lead filtering/search. The following guides are for our legacy search. If your UI does not match, please see this guide for the new filtering instructions. This article is an in-depth look at searching using multiple terms; make sure you\u2019ve brushed up on your single query search knowledge beforehand. If you are just getting started, start here first . Operators (\"AND\", \"OR\", \"NOT\") When searching for leads that\u2026",
+      "keywords": [
+        "new lead filtering we",
+        "san francisco",
+        "san francis",
+        "searching",
+        "combined",
+        "new york",
+        "queries",
+        "legacy",
+        "guide",
+        "tips"
+      ],
+      "topic": "smart_views_search"
+    },
+    {
+      "slug": "searching-guide-single-queries",
+      "title": "Searching tips single queries (Legacy)",
+      "url": "https://help.close.com/docs/searching-guide-single-queries",
+      "body_file": "close-help-docs/pages/searching-guide-single-queries.txt",
+      "excerpt": "New Lead Filtering We recently released a new version of our lead filtering/search. The following guides are for our legacy search. If your UI does not match, please see this guide for the new filtering instructions. This article is a more detailed look at constructing single search queries in Close. To start creating basic search queries right away, head over to the search overview help article. After reading this, check out our article on combining queries . Full text\u2026",
+      "keywords": [
+        "new lead filtering we",
+        "searching",
+        "queries",
+        "legacy",
+        "single",
+        "guide",
+        "tips"
+      ],
+      "topic": "smart_views_search"
+    },
+    {
+      "slug": "smart-view-tips-and-suggestions",
+      "title": "Avoiding Lead Rot and Consolidating Smart Views",
+      "url": "https://help.close.com/docs/smart-view-tips-and-suggestions",
+      "body_file": "close-help-docs/pages/smart-view-tips-and-suggestions.txt",
+      "excerpt": "Here are a couple of tried-and-true tips to use with Smart Views that can help you stay on top of promising Opportunities, and streamline your overall workflow in Close. Show deal and lead rot based on Status Change dates Oftentimes in sales, you may lose momentum with a lead or on a deal, and not realize it until your chances for success are far behind you. Thankfully, it's easy to create Smart Views that show you leads that might be slipping away before it's too late. For\u2026",
+      "keywords": [
+        "close pro tip",
+        "consolidating",
+        "sent proposal",
+        "status change",
+        "smart views",
+        "suggestions",
+        "smart view",
+        "avoiding",
+        "smart",
+        "views",
+        "lead",
+        "tips",
+        "view",
+        "rot"
+      ],
+      "topic": "smart_views_search"
+    },
+    {
+      "slug": "smart-views-for-bulk-email-and-worfklows",
+      "title": "Bulk Email and Email Sequence Smart View Tips",
+      "url": "https://help.close.com/docs/smart-views-for-bulk-email-and-worfklows",
+      "body_file": "close-help-docs/pages/smart-views-for-bulk-email-and-worfklows.txt",
+      "excerpt": "If you're using bulk email and/or workflows with email steps, here are some tips for setting up your Smart Views. Step 1: Create the base Smart View for anyone eligible to receive the message If you're using lead statuses effectively, a good place to start with this Smart View is to specify which statuses should be included in the Smart View. Let's start simple by only using one lead status. For example, let's say you only want to send your workflow email steps to any leads\u2026",
+      "keywords": [
+        "smart views",
+        "smart view",
+        "worfklows",
+        "sequence",
+        "email",
+        "smart",
+        "views",
+        "bulk",
+        "tips",
+        "view"
+      ],
+      "topic": "smart_views_search"
+    },
+    {
+      "slug": "smart-views-for-bulk-email-and-workflows-legacy",
+      "title": "Bulk email and email sequence Smart View tips (Legacy)",
+      "url": "https://help.close.com/docs/smart-views-for-bulk-email-and-workflows-legacy",
+      "body_file": "close-help-docs/pages/smart-views-for-bulk-email-and-workflows-legacy.txt",
+      "excerpt": "New Lead Filtering We recently released a new version of our lead filtering/search. The following guides are for our legacy search. If your ui does not match, please see this guide for the new filtering instructions. If you're using bulk email and/or email sequences, here are some tips for setting up your Smart Views. Step 1: Create the base Smart View for anyone eligible to receive the message If you're using lead statuses effectively, a good place to start with this Smart\u2026",
+      "keywords": [
+        "new lead filtering we",
+        "potential now",
+        "smart views",
+        "smart view",
+        "workflows",
+        "sequence",
+        "legacy",
+        "email",
+        "smart",
+        "views",
+        "bulk",
+        "tips",
+        "view"
+      ],
+      "topic": "smart_views_search"
+    },
+    {
+      "slug": "steps-to-uploading-leads-into-close",
+      "title": "Steps To Import Your Data Successfully",
+      "url": "https://help.close.com/docs/steps-to-uploading-leads-into-close",
+      "body_file": "close-help-docs/pages/steps-to-uploading-leads-into-close.txt",
+      "excerpt": "The top tips and common mistakes to keep in mind when importing your data. Close is the most powerful when your data lives in the right places. Having a good understanding of the data importing process will allow for easy searching, powerful Smart Views, and the ability to automate as your team grows. Here are the essential steps to take and the common mistakes to avoid when importing your Leads into Close. 1. Understand the Different Types of Data Fields The first step is\u2026",
+      "keywords": [
+        "close standard field",
+        "standard fields when",
+        "custom fields these",
+        "data fields the",
+        "different types",
+        "standard fields",
+        "custom fields",
+        "custom field",
+        "successfully",
+        "smart views",
+        "uploading",
+        "import",
+        "close",
+        "leads",
+        "steps",
+        "data",
+        "into"
+      ],
+      "topic": "smart_views_search"
+    },
+    {
+      "slug": "super-user-role",
+      "title": "Super User role",
+      "url": "https://help.close.com/docs/super-user-role",
+      "body_file": "close-help-docs/pages/super-user-role.txt",
+      "excerpt": "Super User Each plan includes the predefined role shown below. This is a default role and may be assigned to any user, but may not be edited or modified. Super Users can do everything a User can, plus manage common admin settings like: Customizations (for example: statuses, custom fields, integration links, etc) Group phone numbers Team Smart Views Export lead or opportunity data to a CSV or JSON file. Bulk edit and bulk delete Send Bulk Email or manage Bulk Workflow\u2026",
+      "keywords": [
+        "bulk workflow subscriptions",
+        "team smart views export",
+        "send bulk email",
+        "super user each",
+        "super users",
+        "sales ops",
+        "super",
+        "role",
+        "user"
+      ],
+      "topic": "smart_views_search"
+    },
+    {
+      "slug": "using-the-power-dialer",
+      "title": "Using the Power Dialer",
+      "url": "https://help.close.com/docs/using-the-power-dialer",
+      "body_file": "close-help-docs/pages/using-the-power-dialer.txt",
+      "excerpt": "The best way to call a large number of Leads quickly is by using the Power Dialer. The Dialer will call through a Smart View without you having to manually click into each Lead to call. Starting a Power Dialer Session To start a Dialer session, you\u2019ll first want to build the list of Leads that you intend to call. You\u2019ll need to first build a Smart View that contains the right leads to call . Once you have the list ready, select the Call button at the top and your Power\u2026",
+      "keywords": [
+        "smart view the power dialer",
+        "power dialer session to",
+        "plan limitations solo",
+        "call assistant",
+        "power dialer",
+        "smart view",
+        "dialer",
+        "power",
+        "using"
+      ],
+      "topic": "smart_views_search"
+    },
+    {
+      "slug": "using-the-predictive-dialer",
+      "title": "Using the Predictive Dialer",
+      "url": "https://help.close.com/docs/using-the-predictive-dialer",
+      "body_file": "close-help-docs/pages/using-the-predictive-dialer.txt",
+      "excerpt": "What is a predictive dialer? If you're not sure what a predictive dialer is and whether you should use it, check out our in-depth post here . You'll get a clear understanding of the pros and cons of predictive dialing and decide whether it fits in with parts of your sales process. If you're still unsure - just reach out to success@close.com and we'll be happy to assist you! Setting up predictive calling Once you've made the decision to turn on predictive dialing, here's how\u2026",
+      "keywords": [
+        "under dialer options",
+        "dialer options the",
+        "predictive calling",
+        "close protip",
+        "group caller",
+        "predictive",
+        "smart view",
+        "dialer",
+        "using"
+      ],
+      "topic": "smart_views_search"
+    },
+    {
+      "slug": "using-workflows-for-newsletters",
+      "title": "Using Workflows for Newsletters",
+      "url": "https://help.close.com/docs/using-workflows-for-newsletters",
+      "body_file": "close-help-docs/pages/using-workflows-for-newsletters.txt",
+      "excerpt": "Creating Email Newsletters with Workflows: A Salesperson's Guide Integrating Workflows into your email newsletter strategy allows you to automate, personalize, and optimize your outreach. Workflows allow you to automate a series of actions\u2014such as sending emails, scheduling follow-ups, or assigning tasks\u2014based on specific enrollment triggers or manual enrollments. Workflows can be customized to match your sales process, allowing you to tailor each step to specific lead\u2026",
+      "keywords": [
+        "define your newsletter goals before",
+        "guide integrating workflows",
+        "creating email newsletters",
+        "sent email report",
+        "newsletters",
+        "smart views",
+        "workflows",
+        "using"
+      ],
+      "topic": "smart_views_search"
+    },
+    {
+      "slug": "whatsapp",
+      "title": "WhatsApp",
+      "url": "https://help.close.com/docs/whatsapp",
+      "body_file": "close-help-docs/pages/whatsapp.txt",
+      "excerpt": "Reach your contacts on WhatsApp directly within Close, without switching apps. Using an Integration Link, your team can get in touch with your leads through WhatsApp with just one click. Under Settings > Integration Links , make sure the WhatsApp option is enabled under Standard Links : Once enabled, contacts with a phone number registered with WhatsApp can be reached directly from the lead page by clicking on the WhatsApp icon: If a WhatsApp account cannot be found with\u2026",
+      "keywords": [
+        "automatic lead creation",
+        "integration links",
+        "integration link",
+        "standard links",
+        "under settings",
+        "filtering you",
+        "business app",
+        "smart views",
+        "whatsapp"
+      ],
+      "topic": "smart_views_search"
+    }
+  ]
+}

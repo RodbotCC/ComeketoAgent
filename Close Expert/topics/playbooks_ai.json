@@ -1,0 +1,359 @@
+{
+  "topic_id": "playbooks_ai",
+  "article_count": 21,
+  "articles": [
+    {
+      "slug": "ai-enrich",
+      "title": "AI Enrich",
+      "url": "https://help.close.com/docs/ai-enrich",
+      "body_file": "close-help-docs/pages/ai-enrich.txt",
+      "excerpt": "AI Enrich is available on all Plans, but usage is charged separately. Usage is billed per enrichment run. Each run uses 5 credits (1 credit = $0.01), which equals $0.05 per run. AI Enrich helps you and your team save time by automating data entry and enriching your records directly within Close. Instead of spending valuable time searching for information like company size, industry, or LinkedIn URLs, you can use AI to find and fill in this data for you. Understanding AI\u2026",
+      "keywords": [
+        "industry size",
+        "key benefits",
+        "enrich save",
+        "enrich"
+      ],
+      "topic": "playbooks_ai"
+    },
+    {
+      "slug": "book-meeting-setup-guide",
+      "title": "Book a Meeting",
+      "url": "https://help.close.com/docs/book-meeting-setup-guide",
+      "body_file": "close-help-docs/pages/book-meeting-setup-guide.txt",
+      "excerpt": "Book meetings directly from a Lead page \u2014 no copy-pasting, no switching tabs. Close Scheduling creates the calendar event, sends the invite, and logs the meeting on the Lead automatically. You can also let Chloe book meetings on your behalf during live calls. What you can do with Close Scheduling Book from a Lead page \u2014 open the Book a Meeting modal from any Lead, pick a time that works, and Close creates the calendar event and sends the contact their invite. Let Chloe book\u2026",
+      "keywords": [
+        "enable close scheduling",
+        "close scheduling book",
+        "close scheduling",
+        "event management",
+        "scheduling zoom",
+        "google meet",
+        "setup step",
+        "let chloe",
+        "meeting",
+        "guide",
+        "setup",
+        "book"
+      ],
+      "topic": "playbooks_ai"
+    },
+    {
+      "slug": "call-assistant",
+      "title": "Call Assistant",
+      "url": "https://help.close.com/docs/call-assistant",
+      "body_file": "close-help-docs/pages/call-assistant.txt",
+      "excerpt": "Automatically transcribe and summarize any recorded calls in Close through our Call Assistant feature. When enabled, a full transcription and summary will be available to view shortly after any voicemail (regardless of duration) and any recorded call that's over 30 seconds long. Summaries are meant to provide you with a high-level understanding of the topics discussed on the call. Dive into the transcription to review exactly what was said on the call. Transcriptions Call\u2026",
+      "keywords": [
+        "searching transcriptions transcriptions",
+        "transcriptions call assistant",
+        "summaries call assistant",
+        "call assistant",
+        "assistant",
+        "call"
+      ],
+      "topic": "playbooks_ai"
+    },
+    {
+      "slug": "call-reports",
+      "title": "Call Reports",
+      "url": "https://help.close.com/docs/call-reports",
+      "body_file": "close-help-docs/pages/call-reports.txt",
+      "excerpt": "A single, trustworthy view of calling performance for your team, so you can coach for real conversations and better connect rates. The Call Report brings dials, talk time, dispositions, outcomes, and unique leads dialed into one place. Use it to understand activity quality versus volume and spot which numbers get picked up versus blocked. Works across human reps and Chloe Trend and distribution charts for quality coaching Filters for Smart Views, users, numbers, durations,\u2026",
+      "keywords": [
+        "call outcomes",
+        "chloe trend",
+        "smart views",
+        "report in",
+        "reports",
+        "call"
+      ],
+      "topic": "playbooks_ai"
+    },
+    {
+      "slug": "chatgpt",
+      "title": "ChatGPT",
+      "url": "https://help.close.com/docs/chatgpt",
+      "body_file": "close-help-docs/pages/chatgpt.txt",
+      "excerpt": "Close GPT is being sunset soon. Going forward, we recommed using Close's official ChatGPT app . We're thrilled to introduce a powerful collaboration that combines the capabilities of Close with the AI brilliance of ChatGPT. You and your team can further streamline your workflows, see lightning-fast insights, and take advantage of automated email drafting. Getting Started with the ChatGPT Plugin Login or Sign Up: Head to your ChatGPT account . If you don't have an account,\u2026",
+      "keywords": [
+        "activity summarization",
+        "getting started",
+        "plugin login",
+        "chatgpt",
+        "sign up"
+      ],
+      "topic": "playbooks_ai"
+    },
+    {
+      "slug": "chloe",
+      "title": "Chloe",
+      "url": "https://help.close.com/docs/chloe",
+      "body_file": "close-help-docs/pages/chloe.txt",
+      "excerpt": "Chloe is your built-in AI sales teammate. She makes and receives calls, runs qualification and discovery, and logs everything directly in Close so your team can focus on closing. Chloe is native to Close, with full access to your leads, contacts, conversation history, and details of your business. What Chloe does Chloe works over voice. Her primary job is Lead Engagement - engaging leads instantly through outbound and inbound calls, running structured conversations, and\u2026",
+      "keywords": [
+        "lead engagement",
+        "what chloe",
+        "an agent",
+        "chloe"
+      ],
+      "topic": "playbooks_ai"
+    },
+    {
+      "slug": "chloe-calls",
+      "title": "Using Chloe on Calls",
+      "url": "https://help.close.com/docs/chloe-calls",
+      "body_file": "close-help-docs/pages/chloe-calls.txt",
+      "excerpt": "This article covers how to start using Chloe on real calls, what happens during and after a call, and how to review her activity. For setup and configuration, see Setup and Implementation . For instructions on refining how Chloe handles calls, see Prompt Training . How to start calls with Chloe Always test your calls before starting. Run a Test Call from the Agent editor at least once to confirm your prompt and tone sound right before deploying to real leads. Workflows Use\u2026",
+      "keywords": [
+        "prompt training",
+        "workflows use",
+        "chloe always",
+        "test call",
+        "calls",
+        "chloe",
+        "using"
+      ],
+      "topic": "playbooks_ai"
+    },
+    {
+      "slug": "chloe-compliance",
+      "title": "Compliance",
+      "url": "https://help.close.com/docs/chloe-compliance",
+      "body_file": "close-help-docs/pages/chloe-compliance.txt",
+      "excerpt": "Chloe makes automated AI voice calls on your behalf. Before deploying Chloe to real leads, it is important to understand your responsibilities and the legal framework that applies to AI-powered calling. This section is informational only and does not constitute legal advice. Laws governing AI voice calls, call recording, and telemarketing vary by jurisdiction and change frequently. Consult your legal team to confirm your obligations before using Chloe. What Close does AI\u2026",
+      "keywords": [
+        "compliance",
+        "what close",
+        "chloe"
+      ],
+      "topic": "playbooks_ai"
+    },
+    {
+      "slug": "chloe-faq",
+      "title": "FAQ & Troubleshooting",
+      "url": "https://help.close.com/docs/chloe-faq",
+      "body_file": "close-help-docs/pages/chloe-faq.txt",
+      "excerpt": "General questions What is Chloe? Chloe is Close's built-in AI sales teammate. She makes and receives calls, runs qualification and discovery, and logs everything directly in Close. See our primary Chloe page for a full overview. Which plans include Chloe? Chloe is available on the Growth and Scale plans. Is Chloe free? Chloe is free for eligible Growth and Scale organizations during the open beta period. After beta, Chloe voice calls will use AI credits included with your\u2026",
+      "keywords": [
+        "manage customizations",
+        "send scheduling link",
+        "troubleshooting",
+        "super users",
+        "does chloe",
+        "can chloe",
+        "is chloe",
+        "chloe",
+        "faq"
+      ],
+      "topic": "playbooks_ai"
+    },
+    {
+      "slug": "chloe-reporting",
+      "title": "Reporting",
+      "url": "https://help.close.com/docs/chloe-reporting",
+      "body_file": "close-help-docs/pages/chloe-reporting.txt",
+      "excerpt": "Chloe reporting is call reporting and outcome tracking. All reporting centers on what happened on each call and whether those calls are producing the right results across an Agent. Reporting happens at two levels: Per-call \u2013 what happened on a specific call, logged on the lead record Per-Agent \u2013 how a given Agent is performing overall, visible from the Calls and Performance tabs Where Chloe activity appears in Close On the lead record After every Chloe call, Close logs the\u2026",
+      "keywords": [
+        "agent answered",
+        "using chloe",
+        "where chloe",
+        "reporting",
+        "close on",
+        "chloe"
+      ],
+      "topic": "playbooks_ai"
+    },
+    {
+      "slug": "chloe-use-cases",
+      "title": "Use Cases",
+      "url": "https://help.close.com/docs/chloe-use-cases",
+      "body_file": "close-help-docs/pages/chloe-use-cases.txt",
+      "excerpt": "When you\u2019re ready to iterate upon your Chloe Agent, some guidance may be helpful. This covers which use cases Chloe performs best at, which run mode to use, and which Skills to enable for each scenario. For setup and configuration, see Setup and Implementation . For prompt guidance, see Prompt Training . What Chloe is best at Chloe performs best when calling warm or known-interest leads where the goal is qualification, routing, reminders, or reactivation. She is most\u2026",
+      "keywords": [
+        "recommended skills",
+        "prompt training",
+        "see compliance",
+        "chloe agent",
+        "what chloe",
+        "cases",
+        "chloe"
+      ],
+      "topic": "playbooks_ai"
+    },
+    {
+      "slug": "mcp-server",
+      "title": "Close MCP Server",
+      "url": "https://help.close.com/docs/mcp-server",
+      "body_file": "close-help-docs/pages/mcp-server.txt",
+      "excerpt": "Model Context Protocol (MCP) servers provide a standardized interface that allows any compatible AI model or agent to access your Close data in a simple and secure way. Below are instructions for adding Close\u2019s MCP server to commonly used clients. Accessing Close\u2019s Remote MCP Server The MCP server URL is https://mcp.close.com/mcp and has \u201cHTTP Streamable\u201d and \u201cOAuth 2.0 Dynamic Client Registration (DCR)\u201d support. We recommend accessing the MCP server via OAuth 2.0 using a\u2026",
+      "keywords": [
+        "dynamic client registration",
+        "model context protocol",
+        "accessing close",
+        "server the",
+        "your close",
+        "server",
+        "close",
+        "mcp"
+      ],
+      "topic": "playbooks_ai"
+    },
+    {
+      "slug": "note-templates-and-summary-guidance",
+      "title": "Note Templates and Summary Guidance",
+      "url": "https://help.close.com/docs/note-templates-and-summary-guidance",
+      "body_file": "close-help-docs/pages/note-templates-and-summary-guidance.txt",
+      "excerpt": "Playbooks give you two ways to control how calls are documented after they end. Note templates auto-generate a structured call note, and Summary guidance shapes how Close AI writes the call summary. Both are optional, but together they make your call records significantly more useful. Note templates A note template is a pre-formatted structure that automatically populates as a call note on the lead or contact record after a call ends. Instead of reps writing notes from\u2026",
+      "keywords": [
+        "playbook open",
+        "template tags",
+        "templates",
+        "guidance",
+        "save you",
+        "summary",
+        "note"
+      ],
+      "topic": "playbooks_ai"
+    },
+    {
+      "slug": "notetaker",
+      "title": "Notetaker",
+      "url": "https://help.close.com/docs/notetaker",
+      "body_file": "close-help-docs/pages/notetaker.txt",
+      "excerpt": "Pricing Notetaker is currently in free beta. Close Notetaker automatically transcribes and summarizes your meetings, so you can focus on what really matters: your leads. Notetaker joins your meetings, takes notes for you, and adds summaries and transcripts directly to the lead's timeline. Notetaker can: Auto-join scheduled meetings, even if you're not the organizer. Arrive 2 minutes early. Record meetings even if you\u2019re absent (as long as Notetaker is let in). Transcribe\u2026",
+      "keywords": [
+        "demo notetaker enabling notetaker set",
+        "using notetaker the notetaker",
+        "zoom permissions due",
+        "pricing notetaker",
+        "close notetaker",
+        "notetaker"
+      ],
+      "topic": "playbooks_ai"
+    },
+    {
+      "slug": "onboarding-checklist-start-here",
+      "title": "Close Onboarding",
+      "url": "https://help.close.com/docs/onboarding-checklist-start-here",
+      "body_file": "close-help-docs/pages/onboarding-checklist-start-here.txt",
+      "excerpt": "\ud83d\udc4b Welcome to Your Close Onboarding Guide! Getting set up in Close is easier than ever with our interactive demos and videos \u2014step-by-step guides designed to help you explore and implement key features quickly. \ud83d\udd39 How to use these demos: For the best experience, we recommend opening Close in one window and the interactive demo or video in another. This way, you can follow along in real-time and complete each step directly in your Close account. \ud83d\ude80 Ready to get started? Select\u2026",
+      "keywords": [
+        "your close onboarding guide",
+        "sales playbook builder",
+        "sales playmaker before",
+        "onboarding",
+        "checklist",
+        "close got",
+        "close",
+        "start",
+        "here"
+      ],
+      "topic": "playbooks_ai"
+    },
+    {
+      "slug": "playbooks",
+      "title": "Playbooks",
+      "url": "https://help.close.com/docs/playbooks",
+      "body_file": "close-help-docs/pages/playbooks.txt",
+      "excerpt": "Playbooks are currently in free beta. Reach out to support@close.com for more info. Playbooks give your team a shared framework for how to run specific types of conversations, whether that's a discovery call, a demo, a follow-up, or an onboarding check-in. Pair them with Outcomes to track what happened on each call, and use them with Close AI to generate structured summaries and automatically capture key data points. What is a Playbook? A Playbook is a reusable conversation\u2026",
+      "keywords": [
+        "setting up playbooks playbooks",
+        "manage customizations",
+        "callback requested",
+        "demo scheduled",
+        "not interested",
+        "budget range",
+        "playbooks",
+        "team size"
+      ],
+      "topic": "playbooks_ai"
+    },
+    {
+      "slug": "playbooks-and-chloe",
+      "title": "Playbooks and Chloe",
+      "url": "https://help.close.com/docs/playbooks-and-chloe",
+      "body_file": "close-help-docs/pages/playbooks-and-chloe.txt",
+      "excerpt": "Playbooks and Chloe - Close\u2019s AI voice agent - work closely together. When Chloe makes a call, she uses a Playbook to define what she captures, how she documents the conversation, and what Outcomes she can assign. This article explains how the two features connect. How Chloe uses Playbooks Every Chloe Job is automatically linked to a Playbook. The Playbook controls: Outcomes: the results Chloe can assign to a call after the conversation ends Summary guidance: how Chloe\u2019s\u2026",
+      "keywords": [
+        "playbooks every chloe job",
+        "chloe playbooks can",
+        "chloe job will",
+        "playbooks when",
+        "when chloe",
+        "chloe job",
+        "how chloe",
+        "playbooks",
+        "chloe"
+      ],
+      "topic": "playbooks_ai"
+    },
+    {
+      "slug": "prompt-training",
+      "title": "Prompt Training",
+      "url": "https://help.close.com/docs/prompt-training",
+      "body_file": "close-help-docs/pages/prompt-training.txt",
+      "excerpt": "Teach Chloe what good looks like for your business: who she's calling, why she's calling, what to ask, how to handle what comes up, and what to do at the end. Each Agent has its own prompt, so you can define different behavior for different scenarios, such as inbound trial qualification vs. outbound reactivation. To edit a Agent\u2019s prompt, select Chloe from the left sidebar, open the Agent, and go to the Instructions tab. Use the left menu chat to adjust Chloe\u2019s\u2026",
+      "keywords": [
+        "user instructions",
+        "company details",
+        "teach chloe",
+        "each agent",
+        "training",
+        "prompt"
+      ],
+      "topic": "playbooks_ai"
+    },
+    {
+      "slug": "setup-implementation",
+      "title": "Setup & Implementation",
+      "url": "https://help.close.com/docs/setup-implementation",
+      "body_file": "close-help-docs/pages/setup-implementation.txt",
+      "excerpt": "Plan Availability Chloe is available on the Growth and Scale plans. Chloe is accessed from the left sidebar of Close by Admins, Super Users, and any custom roles with the Manage Customizations permission. The first time this page is accessed, you\u2019ll be prompted to set up Chloe. This covers everything from teaching Chloe about your business to running a Test Call before deploying her to real leads. After the setup is fully complete, you\u2019ll create and manage Agents, configure\u2026",
+      "keywords": [
+        "plan availability chloe",
+        "manage customizations",
+        "test call reviewing",
+        "chloe setup chloe",
+        "implementation",
+        "super users",
+        "test call",
+        "setup"
+      ],
+      "topic": "playbooks_ai"
+    },
+    {
+      "slug": "using-playbooks-on-calls",
+      "title": "Using Playbooks on Calls",
+      "url": "https://help.close.com/docs/using-playbooks-on-calls",
+      "body_file": "close-help-docs/pages/using-playbooks-on-calls.txt",
+      "excerpt": "Once Playbooks are set up, reps can apply them to calls and meetings directly from the call record. This article covers the rep experience, from applying a Playbook mid-call to reviewing what Close captured after the call ends. Applying a Playbook to a call Playbooks can be applied to a call before, during, or after the conversation. Open the call record in Close Find the Playbook field on the call Select the relevant Playbook from the dropdown Once a Playbook is applied:\u2026",
+      "keywords": [
+        "outcome outcomes",
+        "close find",
+        "playbooks",
+        "calls",
+        "using"
+      ],
+      "topic": "playbooks_ai"
+    },
+    {
+      "slug": "zoom",
+      "title": "Zoom",
+      "url": "https://help.close.com/docs/zoom",
+      "body_file": "close-help-docs/pages/zoom.txt",
+      "excerpt": "Connect your Zoom account to Close to work with Zoom meetings and to use Close Notetaker on Zoom calls. Zoom Cloud Recordings linked to synced calendar events will also be pulled into Close. If the synced Meeting has an associated Zoom link in the event details, we will pull in its recording on the Lead Page. Zoom + Close helps with: Zoom meetings in Close: When your calendar is synced, upcoming meetings can appear in Close so you can see meeting details and join quickly.\u2026",
+      "keywords": [
+        "enable close notetaker head",
+        "zoom cloud recordings",
+        "close notetaker",
+        "for google meet",
+        "microsoft teams",
+        "setup step",
+        "lead page",
+        "zoom"
+      ],
+      "topic": "playbooks_ai"
+    }
+  ]
+}

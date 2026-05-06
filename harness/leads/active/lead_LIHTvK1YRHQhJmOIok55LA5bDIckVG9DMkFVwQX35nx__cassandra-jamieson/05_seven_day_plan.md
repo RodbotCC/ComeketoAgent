@@ -1,106 +1,172 @@
-# Cassandra Jamieson — Seven-Day Plan
+# Cassandra Jamieson — Seven-Day Call Plan
 
-- Plan ID: `plan_n29q26ve`
-- Status: draft
-- Goal: scheduled_call
-- Generated: 2026-05-05T20:12:52.459Z
-- Snapshot: snap_rsyrg3_16
+- Lead: Cassandra Jamieson
+- Close lead ID: `lead_LIHTvK1YRHQhJmOIok55LA5bDIckVG9DMkFVwQX35nx`
+- Status: draft for Andre review
+- Primary objective: get Andre on a short phone call with Cassandra to confirm venue, format, and headcount for the May 30 graduation party for 25.
+- Strategy: Cassandra is responsive — she replied to SMS three times within 25 minutes of landing. The next move is not more volume; it is for Andre to read her actual SMS replies and respond to her last message directly. Then collect the one CRM-flagged blocker: **venue name**.
 
-## Known Facts
+## Current State
 
-- Lead name is Cassandra Jamieson.
-- Event date is May 30 (custom field cf_FV2xBkviv7BAQZkkjUf8NUOc3fOpPTObMy5lVxZbyiP).
-- Lead is tagged as “RODS WEDDING & FACELESS” and “VIDEO RODS WEDDING & FACELESS.”
-- Cassandra asked for packages/meal description (inbound SMS at 17:45).
-- Cassandra asked for a link to packages (inbound SMS at 17:29).
-- Andre sent an email titled “Understanding Our Catering Service Types” at 18:50.
-- Andre asked for the best time of day to give Cassandra a call (outbound SMS at 17:27).
-- Cassandra responded “Got it. Thanks” (inbound SMS at 17:48).
+Cassandra came in from a Facebook lead ad (`[CATER] LF EVERGREEN - QUOTE`) on May 5 asking for "more catering info" for a graduation party on May 30, 2026 for 25 people. Within an hour of landing, Andre's flow sent the welcome email (opened twice), tried two outbound calls back-to-back at 17:43, and sent a cluster of outbound SMS. Cassandra replied via SMS three separate times — at 17:29, 17:45, and 17:48 — but the actual reply text is not in our captured raw substrate yet. That is the main blocker on writing a precise next message.
 
-## Unknowns
+The opportunity record explicitly flags `NEEDS VENUE NAME` and sits at 20% confidence on $15,760 expected value. Phone is on file (+1 617-987-5638). The May 30 date is roughly 24 days out, so the cadence is not in panic mode — but it is also not the moment to keep blasting outreach without reading her replies.
 
-- Her event location/city and venue details for May 30.
-- Guest count and serving style (plated, buffet, family-style).
-- Any dietary restrictions or preferred cuisine/meal types.
-- Whether she wants a wedding package specifically vs general catering for the May 30 event.
-- A specific time window today/tomorrow that works for a call with Andre.
+The fastest path is: read her three inbound SMS messages, reply to the most recent one, and collect the venue.
 
-## Days
+## Day 1 — Operator Task: Read Cassandra's SMS Thread, Then Reply
 
-### Day 1
+- Channel: operator task → SMS
+- Send window: business hours, today
+- Approval status: needs review
+- Objective: Andre opens the SMS conversation in Close, reads what Cassandra actually said in her three replies, and answers her latest message directly. No automated send.
 
-- Objective: Lock a specific call time by answering her package-link request and proposing two concrete windows for Andre.
-- Send window: 9:00 AM – 7:00 PM lead-local time
-- Approval: not_ready
+**Task for Andre**
 
-- SMS: Send package-link + propose 2 call time options for Andre
-  Draft seed: Cassandra, thanks for replying. For your May 30 event, can Andre call you today or tomorrow? 1) today 4:30–6:00 PM 2) tomorrow 10:00–12:00 PM Also—do you want our package link for wedding-style service or general catering? Reply 1 or 2.
-  Notes: SMS is appropriate since her last inbound was an SMS and she asked for packages.
+Open the SMS thread for Cassandra Jamieson in Close. Three inbound SMS messages came in on May 5 at 17:29, 17:45, and 17:48. Read all three before sending anything. The next message we send has to acknowledge what she actually asked or said — otherwise it will look like the system is just blasting and not listening.
 
-### Day 2
+After reading, reply to her last message with a short SMS along these lines (adjust to whatever she actually said):
 
-- Objective: If she didn’t book Day 1, clarify guest count + dietary needs to make the call immediately useful.
-- Send window: 7:00 AM – 9:00 PM lead-local time
-- Approval: not_ready
+> Hi Cassandra — Andre here from Comeketo. Sorry I missed you earlier. Quick question for the May 30 graduation party for 25: where is it being held (venue or address)? Once I have that I can tell you straight up whether we can do it well, and what the cleanest package looks like.
 
-- EMAIL: Ask 2 quick clarifying questions; offer to schedule Andre call
-  Draft seed: Subject: Quick details for May 30 (then Andre can confirm packages)  Hi Cassandra,  Before Andre calls, can you share: 1) roughly how many guests? 2) any dietary restrictions or must-have meal types?  If it’s easier, tell me which works: today after 5 PM, or tomorrow late morning, and we’ll get Andre on the phone.
-  Notes: This answers her “packages/meals” question without sending repetitive info since email was already sent today.
+If her replies already gave a venue, address, or time, skip the venue ask and instead reply to whatever she actually surfaced.
 
-### Day 3
+**Andre note**
 
-- Objective: Use a short SMS to confirm the phone call purpose and reduce friction: confirm event type and preferred service style.
-- Send window: 9:00 AM – 7:00 PM lead-local time
-- Approval: not_ready
+Do not send a fresh promo email or another generic "ready to help!" message. Cassandra has already engaged. The next touch must reference her actual words. The whole point of this lead today is to switch from broadcast mode to a one-to-one conversation.
 
-- SMS: Confirm event type + service style; ask for call confirmation
-  Draft seed: Cassandra—quick one so Andre sends the right options: for May 30, is this wedding catering (RODS) or a different celebration? Also, would you prefer buffet or plated/family-style? Want Andre to call at 6:00 PM tonight or 11:00 AM tomorrow?
-  Notes: Keeps the thread conversational; asks for booking with two options.
+## Day 2 — If She Confirms Venue: Offer Two Specific Call Windows
 
-### Day 4
+- Channel: SMS
+- Send window: morning, business hours
+- Approval status: not ready
+- Objective: convert venue-confirmation reply into a booked phone call with Andre.
 
-- Objective: If no response, send a calendar-style scheduling task that asks Andre to call at a specific time (with user confirming).
-- Send window: 9:00 AM – 7:00 PM lead-local time
-- Approval: not_ready
+**Draft**
 
-- TASK: Call Cassandra Jamieson to schedule on Andre's calendar: propose 20-min call at 5:00 PM
-  Draft seed: Task for Andre: Offer a 20-minute call to Cassandra on May 9 at 5:00 PM (lead-local) to confirm guest count, service style, and finalize the right package link.
-  Notes: Agent cannot call directly; task is Andre outreach once Cassandra agrees via message.
-- SMS: Ask Cassandra to confirm the proposed time and reply with guest count
-  Draft seed: Cassandra, does a 20-minute call with Andre work at 5:00 PM? Reply “yes” or suggest another time. And what guest count are you planning for May 30?
-  Notes: Second touch same day uses SMS after the task seed; distinct intent (time confirmation + guest count).
+Hi Cassandra — got the venue, thanks. Quick call to lock in the format for May 30? I have time today between 2-3 PM or tomorrow between 11 AM-12 PM. Which works better?
 
-### Day 5
+— Andre / Comeketo
 
-- Objective: Address objections implicitly by asking what matters most (price, variety, timing) and offer Andre call accordingly.
-- Send window: 7:00 AM – 9:00 PM lead-local time
-- Approval: not_ready
+**Andre note**
 
-- EMAIL: NEPQ-style question: what matters most for her packages so Andre can tailor
-  Draft seed: Subject: What matters most for your May 30 catering?  Hi Cassandra,  When you look at packages, what matters most for you? - staying within a budget - lots of menu variety - dietary-friendly options - service style (buffet vs plated)  If you tell me which one, I’ll have Andre call with the best-matching options. What time is best for that call?
-  Notes: Prepares for a scheduled call by narrowing decision criteria.
+Two narrow windows is intentional. A single "when's good for you?" puts the work on her. Two specific options makes it a yes/no on either window.
 
-### Day 6
+## Day 3 — If No Venue Yet: NEPQ Fit Question Via SMS
 
-- Objective: If still not scheduled, send a final scheduling SMS with two near-term windows and a direct “reply with X” CTA.
-- Send window: 9:00 AM – 7:00 PM lead-local time
-- Approval: not_ready
+- Channel: SMS
+- Send window: late morning
+- Approval status: not ready
+- Objective: find out what kind of food experience she's actually picturing for a graduation party, before we keep pushing churrasco.
 
-- SMS: Final scheduling attempt: two windows + quick menu preference
-  Draft seed: Cassandra, to make this easy: Andre can call either tomorrow at 12:30 PM or 3:30 PM. Which time should I lock in? Also, are you leaning more toward chicken/steak/seafood for the main?
-  Notes: Short and specific; aims to get a scheduling confirmation.
+**Draft**
 
-### Day 7
+Hi Cassandra — one quick thing while you're sorting out the venue. For a graduation party for 25, are you picturing more of a casual buffet/drop-off vibe, or a Brazilian BBQ-style setup with food managed on-site? Either is fine — I just want to make sure I'm pointing you at the right package.
 
-- Objective: Convert intent into action: ask for a direct yes/no to a scheduled call and remind her of the May 30 target date.
-- Send window: 9:00 AM – 7:00 PM lead-local time
-- Approval: not_ready
+— Andre
 
-- SMS: Confirm call or ask to pause politely
-  Draft seed: Cassandra—do you want Andre to call and finalize your May 30 package details? Reply “call me” and pick a time (choose 1: 10–12 or 2: 4–6), or reply “not now.”
-  Notes: Includes an explicit choice to encourage response.
+**Andre note**
+
+The original outreach pushed a "Brazilian BBQ Option" video. We don't yet know if that matches her mental picture for a graduation party. This is the cleanest NEPQ move — it asks whether the implicit pitch matches her vision before we keep building around it.
+
+## Day 4 — Email Recap For The Decision Maker
+
+- Channel: email
+- Send window: business hours
+- Approval status: not ready
+- Objective: provide a single email Cassandra can forward to whoever else is involved in the decision (parent, partner, etc.).
+
+**Draft**
+
+Subject: Comeketo for your May 30 graduation party — one-page recap
+
+Hi Cassandra,
+
+Putting everything in one place in case you need to share with anyone else who's helping plan:
+
+- **Date:** May 30, 2026
+- **Headcount:** 25 guests
+- **Style options:** drop-off / casual buffet, OR Brazilian BBQ-style with on-site service
+- **Still needed from your side:** venue name + address, food-ready time, and which style fits
+
+If you can text me the venue and time, I can have a real proposal ready before our call.
+
+— Andre / Comeketo
+
+**Andre note**
+
+We don't actually know if Cassandra is the sole decision-maker or just the info gatherer (flagged as a risk in `07_andre_alerts.md`). This email is structured so it's forwardable. Do not include another video or marketing PDF.
+
+## Day 5 — Operator Task: Second Call Attempt At A Different Time
+
+- Channel: operator task → call
+- Send window: mid-day or early evening (NOT 5:43 PM like the first attempts)
+- Approval status: not ready
+- Objective: actually connect on the phone. The first attempts were both at 17:43 within seconds of each other and didn't connect.
+
+**Task for Andre**
+
+Call +1 617-987-5638. Pick a time of day different from May 5's 17:43 attempts — try mid-morning (10-11 AM) or early afternoon (1-2 PM). If voicemail, leave a 15-second message:
+
+> Hi Cassandra, this is Andre from Comeketo. I wanted to make sure you got my SMS about your May 30 graduation party for 25. If you can shoot me back the venue and a good time to chat, I can have everything ready for you. Thanks.
+
+If she picks up, the goal is a 10-minute conversation: confirm venue, confirm guest count, confirm what kind of food experience she pictures, agree on a serve time. Take notes directly into Close.
+
+**Andre note**
+
+Two back-to-back call attempts at 17:43 is a sign of urgency from our side, not a connection strategy. Different time of day, single attempt, real voicemail.
+
+## Day 6 — Gentle Re-engage Via SMS
+
+- Channel: SMS
+- Send window: late morning
+- Approval status: not ready
+- Objective: respectful pressure release that gives her permission to step back if she's gone quiet.
+
+**Draft**
+
+Hi Cassandra — your party is about 17 days out. I don't want to keep nudging you if you've already decided to go another direction. If you still want help with the May 30 graduation, just send me the venue and a good time to call. If not, no worries — I'll close it out.
+
+— Andre
+
+**Andre note**
+
+This is the same respectful pressure-release move used in Sarah's plan. It tends to work — buyers who are still interested but distracted often reply when given permission to say no.
+
+## Day 7 — Close The Loop
+
+- Channel: email
+- Send window: business hours
+- Approval status: not ready
+- Objective: either get the call booked or mark Cassandra as cooling so cadence stops.
+
+**Draft**
+
+Subject: Should I close out the May 30 inquiry?
+
+Hi Cassandra,
+
+I don't want to crowd your inbox.
+
+Should I close this out on our side, or would you still like Comeketo to help with the May 30 graduation party for 25?
+
+If yes, send me the venue and a good number/time to call, and I'll have everything ready for our conversation.
+
+— Andre / Comeketo
+
+**Andre note**
+
+If she opens this and still doesn't reply, stop active outreach. The lead is not dead — it just shouldn't keep draining attention without a real signal.
 
 ## Stop Conditions
 
-- Inbound message contains stop/opt-out keywords (e.g., “stop”, “remove me”, “not interested”): kill
-- Lead schedules a phone call with Andre (confirmed time in SMS/email response): pause
+- Cassandra confirms venue + agrees to a call window: pause cadence, create same-day call task for Andre.
+- Cassandra confirms venue but no call yet: shift to building the actual quote/BEO and propose two call windows.
+- Cassandra picks "drop-off" over "Brazilian BBQ": route toward a simpler casual-buffet package; do not keep pushing churrasco.
+- Cassandra says budget is the issue: do not defend the $15,760 ballpark; ask what number she had in mind, then either fit-or-folder.
+- Cassandra says she already booked someone else: stop outreach and mark the opportunity lost.
+- Any inbound message arrives mid-cycle: pause the planned cadence and route Andre to read + reply manually before resuming.
+
+## Best Next Question
+
+What does the venue look like for the May 30 graduation party — venue name, address, food-ready time — and does the Brazilian BBQ direction match the feel you want, or are you picturing something more casual?

@@ -31,7 +31,19 @@ const TERMINAL_STATUS_LABELS = new Set([
   "✅ Won",
   "🔴 Lost",
   "🔴 Not Interested",
+  "❌ Disqualified",
 ]);
+
+/** Opportunity status fragments that mean this lead is no longer a fresh
+ *  prospect — past customer, do-not-call, or lost. The Comeketo Agent's job is
+ *  to convert NEW inbound leads into phone calls with Andre, not to nurture
+ *  archived customers or re-engage do-not-call entries. Match by substring
+ *  (case-insensitive) because the labels carry decorative emoji prefixes. */
+const TERMINAL_OPP_STATUS_FRAGMENTS = [
+  "archived catering customer",
+  "lost catering customer",
+  "do not call list",
+];
 
 export type SweepLeadResult = {
   lead_id: string;
@@ -123,11 +135,23 @@ export function isLeadInScope(lead: CloseLead): boolean {
   return true;
 }
 
-/** True when the lead's status_label says the lifecycle is over. */
+/** True when the lead's status_label OR any of its opportunity statuses
+ *  indicate the lifecycle is over. Catches both top-level lead disqualifies
+ *  and operationally-terminal opportunity flags (archived customer, do not
+ *  call, lost customer) that Comeketo uses to mark "do not run a fresh
+ *  outreach cycle on this lead." */
 function isTerminalStatus(lead: CloseLead): boolean {
-  return !!(
-    lead.status_label && TERMINAL_STATUS_LABELS.has(lead.status_label)
-  );
+  if (lead.status_label && TERMINAL_STATUS_LABELS.has(lead.status_label)) {
+    return true;
+  }
+  const opps = (lead as unknown as { opportunities?: Array<{ status_label?: string }> }).opportunities ?? [];
+  for (const opp of opps) {
+    const label = (opp.status_label ?? "").toLowerCase();
+    if (TERMINAL_OPP_STATUS_FRAGMENTS.some((frag) => label.includes(frag))) {
+      return true;
+    }
+  }
+  return false;
 }
 
 /**

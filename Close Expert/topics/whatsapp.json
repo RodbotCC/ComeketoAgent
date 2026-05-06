@@ -1,0 +1,25 @@
+{
+  "topic_id": "whatsapp",
+  "article_count": 1,
+  "articles": [
+    {
+      "slug": "whatsapp",
+      "title": "WhatsApp",
+      "url": "https://help.close.com/docs/whatsapp",
+      "body_file": "close-help-docs/pages/whatsapp.txt",
+      "excerpt": "Reach your contacts on WhatsApp directly within Close, without switching apps. Using an Integration Link, your team can get in touch with your leads through WhatsApp with just one click. Under Settings > Integration Links , make sure the WhatsApp option is enabled under Standard Links : Once enabled, contacts with a phone number registered with WhatsApp can be reached directly from the lead page by clicking on the WhatsApp icon: If a WhatsApp account cannot be found with\u2026",
+      "keywords": [
+        "automatic lead creation",
+        "integration links",
+        "integration link",
+        "standard links",
+        "under settings",
+        "filtering you",
+        "business app",
+        "smart views",
+        "whatsapp"
+      ],
+      "topic": "whatsapp"
+    }
+  ]
+}

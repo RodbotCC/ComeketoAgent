@@ -1,0 +1,154 @@
+{
+  "topic_id": "mobile_desktop",
+  "article_count": 8,
+  "articles": [
+    {
+      "slug": "browser-notification-troubleshooting",
+      "title": "Browser Notification Troubleshooting",
+      "url": "https://help.close.com/docs/browser-notification-troubleshooting",
+      "body_file": "close-help-docs/pages/browser-notification-troubleshooting.txt",
+      "excerpt": "Use this guide to troubleshoot potential issues causing you to not see incoming call notifications from your browser while using browser based calling in Close. For context, you should see a notification similar to the one displayed below when receiving a call in Close while you have an active Close browser tab. If you're not seeing these notifications, follow the steps below to troubleshoot: Step 1: Ensure you have an active browser tab with Close loaded when receiving\u2026",
+      "keywords": [
+        "troubleshooting",
+        "desktop app if",
+        "phone settings",
+        "confirm close",
+        "notification",
+        "browser"
+      ],
+      "topic": "mobile_desktop"
+    },
+    {
+      "slug": "close-mobile-app",
+      "title": "Close Mobile App",
+      "url": "https://help.close.com/docs/close-mobile-app",
+      "body_file": "close-help-docs/pages/close-mobile-app.txt",
+      "excerpt": "The Close mobile app allows you to communicate with your prospects and customers easily, regardless of your location. After you download the Close app, your Leads will go wherever you go. Access your Inbox while on the go Quickly email, call, and send SMS to customers Add tasks, notes, and opportunities Add or edit lead data from anywhere View reports to see insights on your leads With our mobile app, you can stay connected and responsive no matter where you are. Download\u2026",
+      "keywords": [
+        "calling outbound calls to",
+        "on android download",
+        "getting around on",
+        "mobile app on",
+        "google play",
+        "app store",
+        "mobile",
+        "close",
+        "app"
+      ],
+      "topic": "mobile_desktop"
+    },
+    {
+      "slug": "desktop-app",
+      "title": "Desktop App",
+      "url": "https://help.close.com/docs/desktop-app",
+      "body_file": "close-help-docs/pages/desktop-app.txt",
+      "excerpt": "Downloading the Mac/Windows Application Download Close Here Once you\u2019ve installed the native application, simply log in with your Close username and password and you're ready to start Closing! Updating Your Close App Update your Close App to take advantage of the latest features. Mac Open your Close app. Click on the name Close in the Menu bar at the top left of the screen. Click Check for Updates. Click Download and Install if there is an available update. Apps Downloaded\u2026",
+      "keywords": [
+        "apps downloaded from app store if",
+        "updating your close app update",
+        "in microsoft store",
+        "microsoft store",
+        "click download",
+        "close select",
+        "click check",
+        "windows to",
+        "app store",
+        "close app",
+        "in finder",
+        "mac open",
+        "desktop",
+        "app"
+      ],
+      "topic": "mobile_desktop"
+    },
+    {
+      "slug": "how-to-download-the-close-desktop-app-beta",
+      "title": "How to Download the Close Desktop App Beta",
+      "url": "https://help.close.com/docs/how-to-download-the-close-desktop-app-beta",
+      "body_file": "close-help-docs/pages/how-to-download-the-close-desktop-app-beta.txt",
+      "excerpt": "Before we release a new version of our Close desktop app on both Mac and Windows, we put the app in a beta period to make sure everything is running smoothly. This guide will show you how to access the Close desktop app beta channel to help us test out new versions of the app before they're released to the public. Before following these instructions, make sure you have the Close desktop app installed on your computer. Download the Beta Version on Mac Open the Close desktop\u2026",
+      "keywords": [
+        "beta version",
+        "windows open",
+        "press ctrl",
+        "download",
+        "mac open",
+        "desktop",
+        "close",
+        "beta",
+        "app"
+      ],
+      "topic": "mobile_desktop"
+    },
+    {
+      "slug": "opening-links-in-the-desktop-app",
+      "title": "Opening links in the Desktop App",
+      "url": "https://help.close.com/docs/opening-links-in-the-desktop-app",
+      "body_file": "close-help-docs/pages/opening-links-in-the-desktop-app.txt",
+      "excerpt": "You can open Close directly in the Desktop app from links you share in email, Slack, docs, or other tools by using deep links. Who can use this Any Close user with the Desktop app installed and updated in macOS or Windows. Option 1: Open web links in the Desktop app If you prefer to keep using normal https links, you can tell Close to open them in the Desktop app. In the Close web app, open the account menu Click Open in Mac/Windows App Ensure to check 'Always allow\u2026",
+      "keywords": [
+        "troubleshooting quick",
+        "windows app ensure",
+        "command prompt",
+        "close desktop",
+        "open terminal",
+        "click open",
+        "any close",
+        "open run",
+        "desktop",
+        "opening",
+        "links",
+        "app"
+      ],
+      "topic": "mobile_desktop"
+    },
+    {
+      "slug": "reinstalling-the-close-app",
+      "title": "Reinstalling the Close app",
+      "url": "https://help.close.com/docs/reinstalling-the-close-app",
+      "body_file": "close-help-docs/pages/reinstalling-the-close-app.txt",
+      "excerpt": "If you need to reinstall your Close desktop app, please follow the instructions below as simply moving the Close app into the trash isn't sufficient for thorough reinstall. The difference between following these instructions and just dragging an application to the trash is that these instructions will clear key files required for a fresh restart, whereas dragging apps to the trash will miss this. No Close data will be lost during this process. Clearing cookie/session/cache\u2026",
+      "keywords": [
+        "inspect element tab",
+        "reinstalling",
+        "no close",
+        "close",
+        "app"
+      ],
+      "topic": "mobile_desktop"
+    },
+    {
+      "slug": "restarting-the-close-app",
+      "title": "Restarting the Close app",
+      "url": "https://help.close.com/docs/restarting-the-close-app",
+      "body_file": "close-help-docs/pages/restarting-the-close-app.txt",
+      "excerpt": "If you need to restart the Close desktop app for any reason, please follow the instructions below as just clicking on the X button isn't enough to fully restart the app. Mac 1. Go to Close in the top-left and click on Quit Close or press Command + Q . 2. Open the app again. Windows 1. Press Alt on your keyboard to show the menu bar at the top 2. Click on File > Exit 3. Open the app again",
+      "keywords": [
+        "quit close",
+        "restarting",
+        "press alt",
+        "close",
+        "app"
+      ],
+      "topic": "mobile_desktop"
+    },
+    {
+      "slug": "system-requirements-supported-browsers",
+      "title": "Supported Devices and Browsers",
+      "url": "https://help.close.com/docs/system-requirements-supported-browsers",
+      "body_file": "close-help-docs/pages/system-requirements-supported-browsers.txt",
+      "excerpt": "Supported Operating Systems OS X 13 (Ventura) or higher Windows 10 or later Technical Requirements RAM: At least 8 GB. (depending on how may apps re used at the same time, more might be required) Web-based Calling Requirements Supported browsers: Safari Chrome Opera Firefox Brave Edge Web-based dialing will work on the latest two versions of each browser. Keep your browsers updated to the newest version for the best experience.",
+      "keywords": [
+        "calling requirements supported",
+        "supported operating systems",
+        "technical requirements",
+        "requirements",
+        "supported",
+        "browsers",
+        "devices",
+        "system"
+      ],
+      "topic": "mobile_desktop"
+    }
+  ]
+}

@@ -1,0 +1,509 @@
+{
+  "topic_id": "getting_started_onboarding",
+  "article_count": 28,
+  "articles": [
+    {
+      "slug": "account-settings",
+      "title": "Account Settings",
+      "url": "https://help.close.com/docs/account-settings",
+      "body_file": "close-help-docs/pages/account-settings.txt",
+      "excerpt": "Profile & Two-Factor Authentication Set your name, country, login email address, and reset your password in your account settings. Your name will be associated with all of the activities you make to a lead, such as any lead communication, writing Notes, and creating Tasks . Country Settings The country selected in your settings will affect the phone numbers you dial. The country code associated with your selected country will be automatically added to each phone number to\u2026",
+      "keywords": [
+        "factor authentication set",
+        "factor authentication two",
+        "country settings the",
+        "connected account",
+        "account settings",
+        "settings",
+        "account"
+      ],
+      "topic": "getting_started_onboarding"
+    },
+    {
+      "slug": "build-a-sales-process",
+      "title": "Build a Sales Process",
+      "url": "https://help.close.com/docs/build-a-sales-process",
+      "body_file": "close-help-docs/pages/build-a-sales-process.txt",
+      "excerpt": "What's a Sales Process? A sales process outlines repeatable steps that your sales team will take to convert a lead into a customer. It\u2019s a framework that provides structure to your reps, teaches them how to sell, and provides enough metrics for you to monitor their success. Using a sales process boosts your revenue and creates a predictable and positive customer experience. Why Build a Sales Process? Increased Productivity Disorganization kills productivity. Your team might\u2026",
+      "keywords": [
+        "increased productivity disorganization",
+        "faster onboarding for",
+        "new york yankees",
+        "sales process",
+        "needed high",
+        "why build",
+        "process",
+        "build",
+        "sales"
+      ],
+      "topic": "getting_started_onboarding"
+    },
+    {
+      "slug": "calendly",
+      "title": "Calendly",
+      "url": "https://help.close.com/docs/calendly",
+      "body_file": "close-help-docs/pages/calendly.txt",
+      "excerpt": "Connect your Calendly account to insert your scheduling links into email and SMS communication with 1-click and create new Contacts when new bookings are made. Connect your Calendly account Users can add their Calendly account by going to Settings > Accounts & Apps and selecting Calendly from the list of options. Once connected, all of the Calendly Event Types (aka \u201cbooking links\u201d) available to the connected Calendly account will be added to Scheduling Links and will appear\u2026",
+      "keywords": [
+        "calendly event types",
+        "connected account",
+        "scheduling links",
+        "event types",
+        "calendly"
+      ],
+      "topic": "getting_started_onboarding"
+    },
+    {
+      "slug": "call-blocking-in-close",
+      "title": "Call Blocking in Close",
+      "url": "https://help.close.com/docs/call-blocking-in-close",
+      "body_file": "close-help-docs/pages/call-blocking-in-close.txt",
+      "excerpt": "Close lets you block specific phone numbers directly from the app \u2014 no need to contact support. Once a number is blocked, the restriction applies across your entire organization , so all users are protected automatically. You can also independently toggle the blocking of anonymous callers (callers with a hidden or unknown caller ID) from the same settings page. This feature is available on all Close plans and accessible to all users . Set up call blocking Go to Settings \u2192\u2026",
+      "keywords": [
+        "direction what happens outbound",
+        "blocked numbers enter",
+        "number is blocked",
+        "what happens when",
+        "blocked numbers",
+        "blocking",
+        "close",
+        "call"
+      ],
+      "topic": "getting_started_onboarding"
+    },
+    {
+      "slug": "call-tasks",
+      "title": "Call Tasks",
+      "url": "https://help.close.com/docs/call-tasks",
+      "body_file": "close-help-docs/pages/call-tasks.txt",
+      "excerpt": "You can assign Call Tasks to yourself or a member of the team as a reminder to a call a Contact at a specific date and time. Call Tasks are similar and appear on Leads and the Inbox in the same place as Tasks , but there are a few differences: Call Tasks must have an associated Contact. When created using Workflows (via the Call step ), Call Tasks can be assigned to a Group. Close will automatically mark Call Tasks complete when there is a Call between the associated\u2026",
+      "keywords": [
+        "ignore workflow communication schedule",
+        "creating call tasks call tasks",
+        "communication schedule",
+        "blackout dates",
+        "call tasks",
+        "call task",
+        "tasks",
+        "call"
+      ],
+      "topic": "getting_started_onboarding"
+    },
+    {
+      "slug": "calling-and-sms-usage",
+      "title": "Variable Usage Costs (Calling, SMS, Phone Numbers, AI Tools)",
+      "url": "https://help.close.com/docs/calling-and-sms-usage",
+      "body_file": "close-help-docs/pages/calling-and-sms-usage.txt",
+      "excerpt": "Close has a number of features whose cost is based on how much you use them. Those include phone number rentals, calling, SMS, and certain AI tools. Whenever you make use of these features, a small amount of money is deducted from your usage credit balance. By default, calling and SMS are enabled for all users on any plan, as well as most AI features, but you can restrict the use of communication for specific users via Roles & Permissions . To view and manage your team's\u2026",
+      "keywords": [
+        "countries check twilio",
+        "calling calls",
+        "european eco",
+        "per twilio",
+        "in depth",
+        "variable",
+        "calling",
+        "numbers",
+        "costs",
+        "phone",
+        "tools",
+        "usage",
+        "sms"
+      ],
+      "topic": "getting_started_onboarding"
+    },
+    {
+      "slug": "communication",
+      "title": "Communication",
+      "url": "https://help.close.com/docs/communication",
+      "body_file": "close-help-docs/pages/communication.txt",
+      "excerpt": "Communication Increasing communications transparency within a business is one of the best ways to reduce friction and improve productivity. Your team being aware of what\u2019s going on inside your company enables them to better pull together towards your collective goals. Whether it's internal communications between team members, or external communications platforms that help you message important information or documents or solve problems with your customers or prospects,\u2026",
+      "keywords": [
+        "communication increasing",
+        "communication"
+      ],
+      "topic": "getting_started_onboarding"
+    },
+    {
+      "slug": "connect-your-email",
+      "title": "Connect your Email and Calendar",
+      "url": "https://help.close.com/docs/connect-your-email",
+      "body_file": "close-help-docs/pages/connect-your-email.txt",
+      "excerpt": "Close connects and sends from your own email server using SMTP and IMAP. By connecting your email account with Close, you can send emails within the app and Close will auto-log any email that appears in your Sent folder -- regardless of how it was sent. Configuring Your Email Sync Close automatically syncs all email communication between you and any Contact in Close. To configure your email sync in Close, head to Settings > Accounts & Apps . If your email is a Gmail/Google\u2026",
+      "keywords": [
+        "configuring your email sync close",
+        "add email account",
+        "shared inbox you",
+        "custom email",
+        "google apps",
+        "calendar",
+        "connect",
+        "email"
+      ],
+      "topic": "getting_started_onboarding"
+    },
+    {
+      "slug": "creating-smart-views-legacy",
+      "title": "Create a Smart View (Legacy)",
+      "url": "https://help.close.com/docs/creating-smart-views-legacy",
+      "body_file": "close-help-docs/pages/creating-smart-views-legacy.txt",
+      "excerpt": "New Lead Filtering We recently released a new version of our lead filtering/search. The following guide is for our legacy search. If your UI does not match, please see this guide for the new filtering instructions. Now that the Leads are in your account, let\u2019s jump to the next step \u2014 filtering the Leads into a dynamic list. Know which Leads to reach out to at any given time. Using Smart Views will dramatically accelerate your sales process. To watch the previous video on\u2026",
+      "keywords": [
+        "lead search smart views",
+        "new lead filtering we",
+        "narrow your results",
+        "using smart views",
+        "smart view",
+        "creating",
+        "create",
+        "legacy",
+        "smart",
+        "views",
+        "view"
+      ],
+      "topic": "getting_started_onboarding"
+    },
+    {
+      "slug": "custom-fields",
+      "title": "Custom Fields",
+      "url": "https://help.close.com/docs/custom-fields",
+      "body_file": "close-help-docs/pages/custom-fields.txt",
+      "excerpt": "Custom Fields in Close are flexible and can be used for many different purposes. They allow you to store attributes about your Leads and Contacts. You can store common attributes like industry/vertical, company size, or timezone; setup our user type custom field to assign Leads to specific reps; unsubscribe a contact from future communications, or sync your internal database to pull in data that could be relevant during a sales call. Exact use cases depend on what you are\u2026",
+      "keywords": [
+        "custom activities opportunity",
+        "custom field types there",
+        "custom activities",
+        "custom activity",
+        "custom fields",
+        "custom",
+        "fields"
+      ],
+      "topic": "getting_started_onboarding"
+    },
+    {
+      "slug": "email-configuration",
+      "title": "Email configuration",
+      "url": "https://help.close.com/docs/email-configuration",
+      "body_file": "close-help-docs/pages/email-configuration.txt",
+      "excerpt": "Close offers 2-way email integration, which allows you to send email from Close and automatically log the replies. Close will auto-log any email that appears in your Sent folder, even if it was sent from Gmail or your mobile phone, and emails sent from Close will automatically appear in your Sent folder. By connecting your email account with Close (via IMAP/SMTP), Close will begin to automatically track email threads with any contacts you have in your organization. The\u2026",
+      "keywords": [
+        "configuration",
+        "close inbox",
+        "your close",
+        "email"
+      ],
+      "topic": "getting_started_onboarding"
+    },
+    {
+      "slug": "emailing",
+      "title": "Emailing",
+      "url": "https://help.close.com/docs/emailing",
+      "body_file": "close-help-docs/pages/emailing.txt",
+      "excerpt": "As you begin using Close, we recommend you handle all of your customer communication through Close directly. In addition to always having relevant information at your fingertips, you\u2019ll take advantage of the critical features of the platform. Here\u2019s an introduction to emailing in Close: To send an email to a Lead, click on the email icon found at the top of their Lead page. This will default to sending an email to the Primary Contact (first-listed Contact on the Lead). To\u2026",
+      "keywords": [
+        "email syncing the",
+        "primary contact",
+        "close inbox",
+        "emailing"
+      ],
+      "topic": "getting_started_onboarding"
+    },
+    {
+      "slug": "forwarding-email-to-close",
+      "title": "Forwarding email to Close",
+      "url": "https://help.close.com/docs/forwarding-email-to-close",
+      "body_file": "close-help-docs/pages/forwarding-email-to-close.txt",
+      "excerpt": "Create new leads and attach emails to existing leads via email forwarding The recommended way to sync emails with Close is to set up your IMAP account in the email settings. This will automatically attach incoming and outgoing emails to existing leads. However, you may want to create new leads from your email client or you may not want to link your IMAP account. For these scenarios, every organization in Close comes with a secret email address which you can use to create\u2026",
+      "keywords": [
+        "secret address",
+        "forwarding",
+        "close",
+        "email"
+      ],
+      "topic": "getting_started_onboarding"
+    },
+    {
+      "slug": "german-regulatory-documents",
+      "title": "German Regulatory Documents",
+      "url": "https://help.close.com/docs/german-regulatory-documents",
+      "body_file": "close-help-docs/pages/german-regulatory-documents.txt",
+      "excerpt": "As Twilio, our telephony service provider only supports phone numbers registered to businesses and not individuals, an excerpt from the commercial register (Handelsregisterauszug) is the only document that can be used to register numbers in Germany. Please note that the document's date of issue has to be less than 3 months. For Sole traders that don't have a commercial register (Handelsregisterauszug), you will need to submit: Trade license (\u2018Gewerbeanmeldung\u2019,\u2026",
+      "keywords": [
+        "business registration number",
+        "new regulatory bundle choose",
+        "number notification letter",
+        "freier beruf finanzamt",
+        "regulatory bundles",
+        "business name in",
+        "sole traders",
+        "number type",
+        "regulatory",
+        "as twilio",
+        "documents",
+        "user type",
+        "for sole",
+        "german"
+      ],
+      "topic": "getting_started_onboarding"
+    },
+    {
+      "slug": "group-numbers",
+      "title": "Group Numbers",
+      "url": "https://help.close.com/docs/group-numbers",
+      "body_file": "close-help-docs/pages/group-numbers.txt",
+      "excerpt": "A Group Phone Number (also known as a \"ring group\" or \"call group\") defines a phone number that, when dialed, rings a group of phones simultaneously, stopping when any one of them is picked up. This feature can be a great tool if your team has a shared inbound phone number, such as a toll-free number routed to all of your sales reps. Add a Group Number To set up your first Group Number, navigate to Settings > Communication > Phone & Voicemail , then \" + New Number. \"\u2026",
+      "keywords": [
+        "group voicemail inbox",
+        "editing membership",
+        "group numbers when",
+        "group phone number",
+        "voicemail greeting",
+        "group numbers in",
+        "group number to",
+        "group number",
+        "missed calls",
+        "missed call",
+        "new number",
+        "numbers",
+        "group"
+      ],
+      "topic": "getting_started_onboarding"
+    },
+    {
+      "slug": "increase-call-connections",
+      "title": "Increase Call Connection Rates",
+      "url": "https://help.close.com/docs/increase-call-connections",
+      "body_file": "close-help-docs/pages/increase-call-connections.txt",
+      "excerpt": "Robocalls and spam labeling are major issues in today's communication landscape. Being flagged as spam leads to a decline in trust and response rates when an unidentified phone number is calling, which cut down on answer rates. Registering your phone number is a crucial step to reducing your chances of spam labeling, boosting your phone number's reputation, and ensuring your calls are correctly identified. This can be done with SHAKEN/STIR and Voice Integrity with Close.\u2026",
+      "keywords": [
+        "voice integrity",
+        "united states",
+        "connections",
+        "connection",
+        "increase",
+        "rates",
+        "call"
+      ],
+      "topic": "getting_started_onboarding"
+    },
+    {
+      "slug": "knowledge-hub",
+      "title": "AI Knowledge Sources",
+      "url": "https://help.close.com/docs/knowledge-hub",
+      "body_file": "close-help-docs/pages/knowledge-hub.txt",
+      "excerpt": "Give Close AI the right context to personalize onboarding, draft higher\u2011quality content, and answer questions with more accuracy. The Knowledge Hub allows Admins to add and manage trusted knowledge sources for your organization, starting with your public website. Within your settings is an area where you add sources that Close can read and index for AI usage. Close will crawl key public pages and keep them indexed for faster, more relevant results across AI features. This\u2026",
+      "keywords": [
+        "knowledge source you",
+        "knowledge sources",
+        "smarter workflows",
+        "knowledge source",
+        "from settings",
+        "give close",
+        "knowledge",
+        "sources",
+        "hub"
+      ],
+      "topic": "getting_started_onboarding"
+    },
+    {
+      "slug": "leads",
+      "title": "Leads",
+      "url": "https://help.close.com/docs/leads",
+      "body_file": "close-help-docs/pages/leads.txt",
+      "excerpt": "Close is designed to collect all of your communication history with a Lead within one view, as well as allow you to communicate with your Leads in a number of different ways. Leads, Contacts, and Opportunities By default, Close imports Companies as \"Leads.\" The individuals at that company are seen as \"Contacts,\" and if you are in the process of selling something to that Lead, we track that through \"Opportunities\". B2B If you are a B2B business, your Leads will be Companies\u2026",
+      "keywords": [
+        "lead summaries lead summaries",
+        "custom fields on",
+        "opportunities by",
+        "leads"
+      ],
+      "topic": "getting_started_onboarding"
+    },
+    {
+      "slug": "managing-unsubscribe-requests",
+      "title": "Managing unsubscribe requests",
+      "url": "https://help.close.com/docs/managing-unsubscribe-requests",
+      "body_file": "close-help-docs/pages/managing-unsubscribe-requests.txt",
+      "excerpt": "You can handle your unsubscribe requests directly within Close, making email management a breeze and providing a convenient way for leads to opt out of communications they no longer wish to receive. This guide will cover how to manage your unsubscribe requests and decode what it looks like from a lead's point of view. Plan Limitations Managing Unsubscribe Requests is not available on the Solo , Essentials and Base (legacy) plans. Enabling Automatic Unsubscribe By default,\u2026",
+      "keywords": [
+        "enabling automatic unsubscribe by",
+        "unsubscribe link",
+        "email signature",
+        "bulk emails",
+        "unsubscribe",
+        "managing",
+        "new link",
+        "requests"
+      ],
+      "topic": "getting_started_onboarding"
+    },
+    {
+      "slug": "organizational-tools",
+      "title": "Organizational Tools",
+      "url": "https://help.close.com/docs/organizational-tools",
+      "body_file": "close-help-docs/pages/organizational-tools.txt",
+      "excerpt": "Organizational Tools Project plans have a knack for getting disorganized as soon as you go to work on them. Organizing your team's work can reduce mental clutter and increase productivity. Close has a number of integrations with organizational and planning software that will boost efficiency and help you make the most of your resources.",
+      "keywords": [
+        "organizational tools project",
+        "organizational",
+        "tools"
+      ],
+      "topic": "getting_started_onboarding"
+    },
+    {
+      "slug": "outcomes",
+      "title": "Outcomes",
+      "url": "https://help.close.com/docs/outcomes",
+      "body_file": "close-help-docs/pages/outcomes.txt",
+      "excerpt": "Call and Meeting Outcomes Call and Meeting Outcomes help you track and categorize the results of your calls and meetings, giving you better insights into your sales activities and performance. Overview Outcomes represent the result of a connected call or a completed meeting. They help you understand what happened during your conversations and provide valuable data for reporting and analysis. Key Benefits: Track the effectiveness of your calls and meetings Generate more\u2026",
+      "keywords": [
+        "managing outcomes creating outcomes go",
+        "getting started availability call",
+        "defining outcomes use",
+        "meeting outcomes call",
+        "set outcomes during",
+        "overview outcomes",
+        "meeting outcomes",
+        "setting outcomes",
+        "best practices",
+        "outcomes click",
+        "key benefits",
+        "add outcome",
+        "calls when",
+        "outcomes"
+      ],
+      "topic": "getting_started_onboarding"
+    },
+    {
+      "slug": "quick-start-importing-leads",
+      "title": "Import Data into Close",
+      "url": "https://help.close.com/docs/quick-start-importing-leads",
+      "body_file": "close-help-docs/pages/quick-start-importing-leads.txt",
+      "excerpt": "Let's get started by importing leads into your Close account. Which most accurately describes your current situation? Please choose one: \ud83d\udcc4 I track my leads in a spreadsheet \ud83d\udd04 I have been using a different CRM \ud83d\ude14 I do not track my leads Importing from a spreadsheet We've made it easy to import your leads from an existing spreadsheet. Lead Importer Use the lead importer to upload a CSV or XLS file. Click on your profile (top left), and from the dropdown, choose \u201cImport Data\u201d.\u2026",
+      "keywords": [
+        "assign columns after",
+        "lead importer click",
+        "lead importer use",
+        "smart views need",
+        "leads imported",
+        "help center",
+        "import data",
+        "quick start",
+        "smart views",
+        "importing",
+        "import",
+        "close",
+        "leads",
+        "quick",
+        "start",
+        "data",
+        "into"
+      ],
+      "topic": "getting_started_onboarding"
+    },
+    {
+      "slug": "reporting",
+      "title": "Reports",
+      "url": "https://help.close.com/docs/reporting",
+      "body_file": "close-help-docs/pages/reporting.txt",
+      "excerpt": "Close more deals with actionable insights Pull the most significant growth levers with our customizable, flexible reporting: from projections to leaderboards and every KPI in between. Close has several different reports based on the metrics that need to be tracked. Sales Team Activity Tracking Activity Comparison Compare time-based reports. How did you perform in Q1 this year vs. Q4 last year? Close gives you all the answers you need at any given time, both for individual\u2026",
+      "keywords": [
+        "activity overview act",
+        "sent email understand",
+        "status change see",
+        "reporting",
+        "reports"
+      ],
+      "topic": "getting_started_onboarding"
+    },
+    {
+      "slug": "setup-implementation",
+      "title": "Setup & Implementation",
+      "url": "https://help.close.com/docs/setup-implementation",
+      "body_file": "close-help-docs/pages/setup-implementation.txt",
+      "excerpt": "Plan Availability Chloe is available on the Growth and Scale plans. Chloe is accessed from the left sidebar of Close by Admins, Super Users, and any custom roles with the Manage Customizations permission. The first time this page is accessed, you\u2019ll be prompted to set up Chloe. This covers everything from teaching Chloe about your business to running a Test Call before deploying her to real leads. After the setup is fully complete, you\u2019ll create and manage Agents, configure\u2026",
+      "keywords": [
+        "plan availability chloe",
+        "manage customizations",
+        "test call reviewing",
+        "chloe setup chloe",
+        "implementation",
+        "super users",
+        "test call",
+        "setup"
+      ],
+      "topic": "getting_started_onboarding"
+    },
+    {
+      "slug": "simplify-workflows-with-automated-senders",
+      "title": "Simplify Your Workflows with Automated Senders",
+      "url": "https://help.close.com/docs/simplify-workflows-with-automated-senders",
+      "body_file": "close-help-docs/pages/simplify-workflows-with-automated-senders.txt",
+      "excerpt": "Within Workflows, you can automate the sender of each step. By customizing the sender, you can create dynamic and automated workflows without manual enrollment or complex external setups, leaving more room for following up with your Leads and driving engagement. How it works By default, all steps within a Workflow will be set to send from the User who creates the Workflow subscription. However, we understand that different scenarios may call for different senders - that's\u2026",
+      "keywords": [
+        "automated workflows",
+        "advanced settings",
+        "within workflows",
+        "team management",
+        "custom field",
+        "super users",
+        "automated",
+        "workflows",
+        "simplify",
+        "send as",
+        "senders"
+      ],
+      "topic": "getting_started_onboarding"
+    },
+    {
+      "slug": "sms-and-mms",
+      "title": "SMS and MMS",
+      "url": "https://help.close.com/docs/sms-and-mms",
+      "body_file": "close-help-docs/pages/sms-and-mms.txt",
+      "excerpt": "Like calling and email, SMS communication is built directly into Close. SMS can be an effective tool to increase response rates with prospects, e.g. by texting them meeting reminders and follow-ups. Prerequisites - SMS-enabled phone number Before you can send SMS in Close, you need to have an internal (Close-issued) SMS-enabled phone number that matches the country you're trying to send SMS to. That means in order to send SMS to the US or Canadian numbers, you need to have\u2026",
+      "keywords": [
+        "phone number",
+        "send later",
+        "mms",
+        "sms"
+      ],
+      "topic": "getting_started_onboarding"
+    },
+    {
+      "slug": "tasks",
+      "title": "Tasks",
+      "url": "https://help.close.com/docs/tasks",
+      "body_file": "close-help-docs/pages/tasks.txt",
+      "excerpt": "In Close, you can set Tasks for yourself or other team members within any lead. Tasks are best used when noting a unique action that is not in your normal workflow or for reaching out to another team member for help (share an update, provide support, reach out to a Contact within a Lead, etc). Creating and Assigning Tasks You can create a Task for yourself or someone else on your team by going into any lead and clicking \"add\" to the right of the \"Tasks\" section located\u2026",
+      "keywords": [
+        "assigning tasks you",
+        "all leads inbox",
+        "view all tasks",
+        "high priority",
+        "delete tasks",
+        "in close",
+        "tasks"
+      ],
+      "topic": "getting_started_onboarding"
+    },
+    {
+      "slug": "whatsapp",
+      "title": "WhatsApp",
+      "url": "https://help.close.com/docs/whatsapp",
+      "body_file": "close-help-docs/pages/whatsapp.txt",
+      "excerpt": "Reach your contacts on WhatsApp directly within Close, without switching apps. Using an Integration Link, your team can get in touch with your leads through WhatsApp with just one click. Under Settings > Integration Links , make sure the WhatsApp option is enabled under Standard Links : Once enabled, contacts with a phone number registered with WhatsApp can be reached directly from the lead page by clicking on the WhatsApp icon: If a WhatsApp account cannot be found with\u2026",
+      "keywords": [
+        "automatic lead creation",
+        "integration links",
+        "integration link",
+        "standard links",
+        "under settings",
+        "filtering you",
+        "business app",
+        "smart views",
+        "whatsapp"
+      ],
+      "topic": "getting_started_onboarding"
+    }
+  ]
+}

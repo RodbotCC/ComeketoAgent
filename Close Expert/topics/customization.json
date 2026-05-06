@@ -1,0 +1,760 @@
+{
+  "topic_id": "customization",
+  "article_count": 39,
+  "articles": [
+    {
+      "slug": "adding-and-removing-users",
+      "title": "Managing users and cancellation",
+      "url": "https://help.close.com/docs/adding-and-removing-users",
+      "body_file": "close-help-docs/pages/adding-and-removing-users.txt",
+      "excerpt": "Adding Users to Close You can add users simply by sending them an invitation and selecting the role you'd like to assign. To invite users, click your name at the top left of the Close window - or click Settings and then select Team Management to manage the member list. What role should I use? Before adding users, we recommend reading about roles and permissions . Removing Users from Close If you're an Admin of your Account, you can head to Settings > Team Management to add\u2026",
+      "keywords": [
+        "team management",
+        "removing users",
+        "adding users",
+        "cancellation",
+        "custom field",
+        "close you",
+        "close if",
+        "managing",
+        "removing",
+        "adding",
+        "users"
+      ],
+      "topic": "customization"
+    },
+    {
+      "slug": "calculating-your-call-answer-rate",
+      "title": "Calculating Your Call Answer Rate",
+      "url": "https://help.close.com/docs/calculating-your-call-answer-rate",
+      "body_file": "close-help-docs/pages/calculating-your-call-answer-rate.txt",
+      "excerpt": "Understanding your call answer rate is crucial for assessing the effectiveness of your sales outreach. Read on for some tips on calculating your answer rate using some of the features built into Close. Utilizing Smart Views Longer call durations often indicate that a live conversation occurred. To leverage this, you can create Smart Views based on your Call Duration. Navigate to the Leads tab and set up a Smart View to filter for calls created \"today.\" Then, create another\u2026",
+      "keywords": [
+        "utilizing smart views longer",
+        "activity overview report",
+        "custom activities for",
+        "custom activities",
+        "average duration",
+        "call disposition",
+        "custom activity",
+        "outbound calls",
+        "call duration",
+        "calculating",
+        "smart views",
+        "smart view",
+        "answer",
+        "call",
+        "rate"
+      ],
+      "topic": "customization"
+    },
+    {
+      "slug": "calculations-in-smart-views",
+      "title": "Calculations in Smart Views",
+      "url": "https://help.close.com/docs/calculations-in-smart-views",
+      "body_file": "close-help-docs/pages/calculations-in-smart-views.txt",
+      "excerpt": "Smart View Column Calculations Smart View column calculations let you quickly summarize your data\u2014right inside Close . You can see totals, averages, percentages, and more at the bottom of any Search result or Smart View column, without exporting to a spreadsheet. Once added, calculations are saved with the Smart View, so anyone you share it with will see the same results. How Column Calculations Work At the bottom of a supported column, you\u2019ll see a Calculation option. Open\u2026",
+      "keywords": [
+        "how column calculations work at",
+        "why use column calculations",
+        "click calculation choose",
+        "smart view scroll",
+        "calculations",
+        "smart view",
+        "smart",
+        "views"
+      ],
+      "topic": "customization"
+    },
+    {
+      "slug": "chatgpt",
+      "title": "ChatGPT",
+      "url": "https://help.close.com/docs/chatgpt",
+      "body_file": "close-help-docs/pages/chatgpt.txt",
+      "excerpt": "Close GPT is being sunset soon. Going forward, we recommed using Close's official ChatGPT app . We're thrilled to introduce a powerful collaboration that combines the capabilities of Close with the AI brilliance of ChatGPT. You and your team can further streamline your workflows, see lightning-fast insights, and take advantage of automated email drafting. Getting Started with the ChatGPT Plugin Login or Sign Up: Head to your ChatGPT account . If you don't have an account,\u2026",
+      "keywords": [
+        "activity summarization",
+        "getting started",
+        "plugin login",
+        "chatgpt",
+        "sign up"
+      ],
+      "topic": "customization"
+    },
+    {
+      "slug": "custom-activities",
+      "title": "Custom Activities",
+      "url": "https://help.close.com/docs/custom-activities",
+      "body_file": "close-help-docs/pages/custom-activities.txt",
+      "excerpt": "Custom Activities allow you to create a custom action type to record a specific type of activity. The most common examples include forms filled in by prospects, support tickets, call outcomes, invoice/payment items, and various structured notes such as call playbooks. Plan Limitations Custom Activities are not available on the Solo , Essentials and Base (legacy) plans. In our examples below, we'll use a Custimer Onboarding checklist Custom Activity for reference. Customer\u2026",
+      "keywords": [
+        "plan limitations custom activities",
+        "sales qualifying call onboarding",
+        "customer onboarding checklist",
+        "custom activity type before",
+        "custom activity type",
+        "custimer onboarding",
+        "custom activities",
+        "custom activity",
+        "inbound form",
+        "feedback to",
+        "activities",
+        "new custo",
+        "custom"
+      ],
+      "topic": "customization"
+    },
+    {
+      "slug": "custom-fields",
+      "title": "Custom Fields",
+      "url": "https://help.close.com/docs/custom-fields",
+      "body_file": "close-help-docs/pages/custom-fields.txt",
+      "excerpt": "Custom Fields in Close are flexible and can be used for many different purposes. They allow you to store attributes about your Leads and Contacts. You can store common attributes like industry/vertical, company size, or timezone; setup our user type custom field to assign Leads to specific reps; unsubscribe a contact from future communications, or sync your internal database to pull in data that could be relevant during a sales call. Exact use cases depend on what you are\u2026",
+      "keywords": [
+        "custom activities opportunity",
+        "custom field types there",
+        "custom activities",
+        "custom activity",
+        "custom fields",
+        "custom",
+        "fields"
+      ],
+      "topic": "customization"
+    },
+    {
+      "slug": "custom-objects",
+      "title": "Custom Objects",
+      "url": "https://help.close.com/docs/custom-objects",
+      "body_file": "close-help-docs/pages/custom-objects.txt",
+      "excerpt": "Close has three standard object types: Leads, Contacts, and Opportunities. While these are very versatile, you may need to record data that doesn't fit into these premade categories. This is where Custom Objects come in. Custom Objects allow you to store data in a flexible and structured way. Common examples we can use here would be real estate properties, subscription packages, insurance policies, and physical products. In our samples below, we'll use a Real Estate\u2026",
+      "keywords": [
+        "plan limits custom objects",
+        "custom object similarly",
+        "real estate property",
+        "custom object type",
+        "custom activities",
+        "custom objects",
+        "new custo",
+        "objects",
+        "custom"
+      ],
+      "topic": "customization"
+    },
+    {
+      "slug": "edit-merge-delete-leads",
+      "title": "Editing, Merging, and Deleting Leads",
+      "url": "https://help.close.com/docs/edit-merge-delete-leads",
+      "body_file": "close-help-docs/pages/edit-merge-delete-leads.txt",
+      "excerpt": "Edit Leads To make a change to a group of leads at once, first filter for those leads or go to an existing Smart View. All leads in your search or Smart View will be included in your bulk edit. Navigate to the menu in the upper-right, select Bulk Edit , then select the bulk action type from any of the following: Update lead status Update a lead custom field Clear a lead custom field Delete the leads Apply your changes, and confirm. You will receive an confirmation email\u2026",
+      "keywords": [
+        "deleting leads deleting",
+        "merge leads in",
+        "edit leads to",
+        "select delete",
+        "select merge",
+        "smart view",
+        "bulk edit",
+        "deleting",
+        "editing",
+        "merging",
+        "delete",
+        "leads",
+        "merge",
+        "edit"
+      ],
+      "topic": "customization"
+    },
+    {
+      "slug": "enforcing-required-fields-in-close-via-zapier",
+      "title": "Enforcing required fields in Close via Zapier",
+      "url": "https://help.close.com/docs/enforcing-required-fields-in-close-via-zapier",
+      "body_file": "close-help-docs/pages/enforcing-required-fields-in-close-via-zapier.txt",
+      "excerpt": "Keep your users happy and your data clean with these simple Zaps Often times you may have a set of requirements for making specific changes to leads in Close. For example, you may require certain information be collected before changing a leads status or creating an opportunity. This guide will show you how you can enforce those requirements within Close using Zapier. What you'll need A Zapier account allowing for multi-step Zaps A Close account Step 1: Setting up your\u2026",
+      "keywords": [
+        "buying process",
+        "zaps often",
+        "enforcing",
+        "team size",
+        "required",
+        "fields",
+        "zapier",
+        "close"
+      ],
+      "topic": "customization"
+    },
+    {
+      "slug": "explorer",
+      "title": "Explorer",
+      "url": "https://help.close.com/docs/explorer",
+      "body_file": "close-help-docs/pages/explorer.txt",
+      "excerpt": "Do you have the right Plan? Explorer reporting is available only on the Scale or Enterprise (legacy) plan. Explorer is a data exploration tool to help you visualize your data, in graph form, in hundreds of new and useful ways. You can quickly create line graphs and bar charts based on whichever parts of your sales data you care about. You choose a metric for the vertical y-axis, a field for the horizontal x-axis, along with any applicable filters, and we'll bring you a\u2026",
+      "keywords": [
+        "only certain custom fields",
+        "close product help",
+        "explorer in",
+        "explorer"
+      ],
+      "topic": "customization"
+    },
+    {
+      "slug": "exporting-data",
+      "title": "Exporting data",
+      "url": "https://help.close.com/docs/exporting-data",
+      "body_file": "close-help-docs/pages/exporting-data.txt",
+      "excerpt": "Exports We believe that you shouldn't be held captive by your own data. That's why we've made it extremely easy to export all or just part of your data in Close. Anytime you are looking at Leads in Search, you can use the ... > Export button. Clicking it will let you choose a type and a format of the exported data. You can export all of your leads or first narrow down your search results by using a search query. You need to choose which type of export you want (Leads,\u2026",
+      "keywords": [
+        "contacts smart view",
+        "leads smart view",
+        "export formats",
+        "exports we",
+        "smart view",
+        "exporting",
+        "leads you",
+        "data"
+      ],
+      "topic": "customization"
+    },
+    {
+      "slug": "find-ids-in-close",
+      "title": "Find IDs in Close",
+      "url": "https://help.close.com/docs/find-ids-in-close",
+      "body_file": "close-help-docs/pages/find-ids-in-close.txt",
+      "excerpt": "Whether you're setting up a Zapier flow or connecting to our API, you might need to find the following IDs in Close: User or Membership Lead Email Template Custom Field Lead or Opportunity Status Organization User ID To find a User or Membership ID, go to your Settings > Team Management . Find the user for which you need the ID. Click the three dots to the right of the user name and select the ID you would like to copy to your keyboard. Lead ID To find a Lead ID in your\u2026",
+      "keywords": [
+        "opportunity status organization user",
+        "opportunity custom field",
+        "opportunity status",
+        "email templates",
+        "team management",
+        "email template",
+        "custom fields",
+        "custom field",
+        "close",
+        "find",
+        "ids"
+      ],
+      "topic": "customization"
+    },
+    {
+      "slug": "google-forms",
+      "title": "Google Forms",
+      "url": "https://help.close.com/docs/google-forms",
+      "body_file": "close-help-docs/pages/google-forms.txt",
+      "excerpt": "Is Google Forms part of your sales workflow? You can log responses filled in from your forms in Close as a note, custom field, custom activity etc. In this tutorial, we will Create a Google Form where answers will be added to a Google Spreadsheet create an integration link for easy form filling from a lead page set up Zapier integration to automatically add our answers in a form of a note What you\u2019ll need A Google account to access Google Forms A Close account and your API\u2026",
+      "keywords": [
+        "google forms create",
+        "google spreadsheet",
+        "google form first",
+        "is google forms",
+        "google forms",
+        "google sheet",
+        "google form",
+        "google",
+        "forms"
+      ],
+      "topic": "customization"
+    },
+    {
+      "slug": "help-scout",
+      "title": "Help Scout",
+      "url": "https://help.close.com/docs/help-scout",
+      "body_file": "close-help-docs/pages/help-scout.txt",
+      "excerpt": "Enabling the Close + Help Scout integration allows you and your team to bring Close Lead data straight into your Help Scout Tickets. Matching by customer email address, this integration lets you see a customer's Lead Status, Lead Owner, Company Description, and many other custom fields directly in Help Scout. Additionally, you'll have the ability to create a new lead in Close if a lead matching the customer's email address cannot be found. How to Install the Close + Help\u2026",
+      "keywords": [
+        "help scout integration navigate",
+        "company description",
+        "help scout tickets",
+        "developer choose",
+        "integration once",
+        "lead status",
+        "close lead",
+        "help scout",
+        "lead owner",
+        "scout",
+        "help"
+      ],
+      "topic": "customization"
+    },
+    {
+      "slug": "how-do-i-create-a-parentchild-account-hierarchy",
+      "title": "Parent/Child Lead Hierarchy",
+      "url": "https://help.close.com/docs/how-do-i-create-a-parentchild-account-hierarchy",
+      "body_file": "close-help-docs/pages/how-do-i-create-a-parentchild-account-hierarchy.txt",
+      "excerpt": "For many sales organizations, it can be strategically important to relate accounts together by a parent, or master account, and the child accounts that are associated underneath it. Whether you work with franchises, distributors, school branches, or affiliates, this functionality allows you to navigate between related companies quickly and easily. To create parent-child relationships in Close, we use custom fields and integration links . We'll first implement a solution\u2026",
+      "keywords": [
+        "parent account lead custom field first",
+        "add lead custom field",
+        "parent account",
+        "custom fields",
+        "custom field",
+        "parent/child",
+        "parentchild",
+        "hierarchy",
+        "account",
+        "create",
+        "lead"
+      ],
+      "topic": "customization"
+    },
+    {
+      "slug": "hubspot-to-close-syncing-integration",
+      "title": "HubSpot to Close - Syncing Integration",
+      "url": "https://help.close.com/docs/hubspot-to-close-syncing-integration",
+      "body_file": "close-help-docs/pages/hubspot-to-close-syncing-integration.txt",
+      "excerpt": "Close and HubSpot Integration Integrating your Close and HubSpot databases can help streamline your data management and ensure that your sales and marketing teams have access to the most up-to-date information. This article will provide a comprehensive overview of the Close and HubSpot integration , including what it can and can't do, how to set it up, and troubleshooting tips. What the Integration Can and Can't Do The integration was created and is managed by HubSpot, and\u2026",
+      "keywords": [
+        "integration integrating",
+        "data you want with",
+        "custom activities",
+        "app marketplace",
+        "integration can",
+        "custom objects",
+        "syncing only",
+        "integration",
+        "hubspot",
+        "syncing",
+        "do the",
+        "close"
+      ],
+      "topic": "customization"
+    },
+    {
+      "slug": "lead-assignment",
+      "title": "Lead assignment",
+      "url": "https://help.close.com/docs/lead-assignment",
+      "body_file": "close-help-docs/pages/lead-assignment.txt",
+      "excerpt": "This guide will show you how to create user custom fields and various ways to handle lead assignment in Close. Lead Assignment Overview Lead assignment in Close is best handled through a custom field that is added to each lead with the team member that currently owns that lead. The Lead Owner custom field shows that Bruce is assigned to this lead. Once leads are assigned in Close, your team will have a quick way to identify which member of your team owns that lead. User\u2026",
+      "keywords": [
+        "lead assignment overview lead",
+        "smart views once",
+        "assignment",
+        "user type",
+        "in close",
+        "lead"
+      ],
+      "topic": "customization"
+    },
+    {
+      "slug": "lead-filtering-tips",
+      "title": "Lead Filtering Tips",
+      "url": "https://help.close.com/docs/lead-filtering-tips",
+      "body_file": "close-help-docs/pages/lead-filtering-tips.txt",
+      "excerpt": "This article is a more detailed look at constructing search queries in Close. To start creating basic search queries right away, head over to the lead filtering overview help article. After reading this, check out our article on how to Create a Smart View . Single queries You can add filters to find Leads that have a certain status, were updated within a specific time period, have a Custom Field added, etc. To add a new filter, click the + Add Filter button that will open\u2026",
+      "keywords": [
+        "match operator",
+        "custom field",
+        "add filter",
+        "smart view",
+        "filtering",
+        "lead",
+        "tips"
+      ],
+      "topic": "customization"
+    },
+    {
+      "slug": "lead-scoring",
+      "title": "Lead Scoring",
+      "url": "https://help.close.com/docs/lead-scoring",
+      "body_file": "close-help-docs/pages/lead-scoring.txt",
+      "excerpt": "Whether your business is growing or you work with a high volume of leads, lead scoring will help you address the most important leads quickly and prioritize the rest. Check out our Ultimate Guide to Lead Scoring here on the Close blog for an even more in-depth look at how to score leads, regardless of the CRM you\u2019re using. For learning about lead scoring in Close, fear not\u2014you\u2019re still in the right place. In this article, we\u2019ll walk you through lead scoring in Close by\u2026",
+      "keywords": [
+        "industry location job",
+        "custom activities",
+        "source funding",
+        "ultimate guide",
+        "custom fields",
+        "lead scoring",
+        "smart view",
+        "our blog",
+        "scoring",
+        "lead"
+      ],
+      "topic": "customization"
+    },
+    {
+      "slug": "leads",
+      "title": "Leads",
+      "url": "https://help.close.com/docs/leads",
+      "body_file": "close-help-docs/pages/leads.txt",
+      "excerpt": "Close is designed to collect all of your communication history with a Lead within one view, as well as allow you to communicate with your Leads in a number of different ways. Leads, Contacts, and Opportunities By default, Close imports Companies as \"Leads.\" The individuals at that company are seen as \"Contacts,\" and if you are in the process of selling something to that Lead, we track that through \"Opportunities\". B2B If you are a B2B business, your Leads will be Companies\u2026",
+      "keywords": [
+        "lead summaries lead summaries",
+        "custom fields on",
+        "opportunities by",
+        "leads"
+      ],
+      "topic": "customization"
+    },
+    {
+      "slug": "migration-from-pipedrive",
+      "title": "Migration from Pipedrive",
+      "url": "https://help.close.com/docs/migration-from-pipedrive",
+      "body_file": "close-help-docs/pages/migration-from-pipedrive.txt",
+      "excerpt": "Migrate Data from Pipedrive Our team can help you seamlessly transfer your data from Pipedrive to Close. Export Data from Pipedrive Begin by exporting your complete data set from Pipedrive under Tools and apps > Export data. Select the CSV file type and the export data type, then click Export -- you'll want to run this once for each of Leads, Deals, Organizations, People, Activities and Notes. When the export is finished, click the download icon to download the file. Send\u2026",
+      "keywords": [
+        "notes incomplete task activities",
+        "customer relationship how",
+        "opportunities notes",
+        "pipedrive begin",
+        "contacts deals",
+        "close pro tip",
+        "lead statuses",
+        "pipedrive our",
+        "leads people",
+        "migrate data",
+        "export data",
+        "close send",
+        "migration",
+        "pipedrive",
+        "what data",
+        "in close"
+      ],
+      "topic": "customization"
+    },
+    {
+      "slug": "note-templates-and-summary-guidance",
+      "title": "Note Templates and Summary Guidance",
+      "url": "https://help.close.com/docs/note-templates-and-summary-guidance",
+      "body_file": "close-help-docs/pages/note-templates-and-summary-guidance.txt",
+      "excerpt": "Playbooks give you two ways to control how calls are documented after they end. Note templates auto-generate a structured call note, and Summary guidance shapes how Close AI writes the call summary. Both are optional, but together they make your call records significantly more useful. Note templates A note template is a pre-formatted structure that automatically populates as a call note on the lead or contact record after a call ends. Instead of reps writing notes from\u2026",
+      "keywords": [
+        "playbook open",
+        "template tags",
+        "templates",
+        "guidance",
+        "save you",
+        "summary",
+        "note"
+      ],
+      "topic": "customization"
+    },
+    {
+      "slug": "notes",
+      "title": "Notes",
+      "url": "https://help.close.com/docs/notes",
+      "body_file": "close-help-docs/pages/notes.txt",
+      "excerpt": "Notes allow you to quickly insert an unstructured text note on the Lead activity panel. While Custom Activities , Call , and Meeting Notes are better suited for their respective contexts, simple text notes can also be a useful tool. Here's an example of what a Note looks like in-app: Example Note Notes behave like any other default activity in Close - you can create, edit, search/filter, and report on them. You can also add them via our API if you want to integrate Close\u2026",
+      "keywords": [
+        "while custom activities",
+        "editing notes notes",
+        "example note notes",
+        "meeting notes",
+        "note notes",
+        "notes"
+      ],
+      "topic": "customization"
+    },
+    {
+      "slug": "onboarding-checklist-start-here",
+      "title": "Close Onboarding",
+      "url": "https://help.close.com/docs/onboarding-checklist-start-here",
+      "body_file": "close-help-docs/pages/onboarding-checklist-start-here.txt",
+      "excerpt": "\ud83d\udc4b Welcome to Your Close Onboarding Guide! Getting set up in Close is easier than ever with our interactive demos and videos \u2014step-by-step guides designed to help you explore and implement key features quickly. \ud83d\udd39 How to use these demos: For the best experience, we recommend opening Close in one window and the interactive demo or video in another. This way, you can follow along in real-time and complete each step directly in your Close account. \ud83d\ude80 Ready to get started? Select\u2026",
+      "keywords": [
+        "your close onboarding guide",
+        "sales playbook builder",
+        "sales playmaker before",
+        "onboarding",
+        "checklist",
+        "close got",
+        "close",
+        "start",
+        "here"
+      ],
+      "topic": "customization"
+    },
+    {
+      "slug": "opportunities",
+      "title": "Opportunities",
+      "url": "https://help.close.com/docs/opportunities",
+      "body_file": "close-help-docs/pages/opportunities.txt",
+      "excerpt": "Create a New Opportunity You can create a new Opportunity directly from the Lead page. Go to Leads page > click on any lead > click on the + button next to Opportunities section on the left. Opportunities add value to a Lead and can be assigned to specific Contacts on your Leads. You can add Custom Fields to each Opportunity as well. Opportunity Lead Limits In Close, there is a 1000 Opportunity limit per Lead. Opportunity Fields Meanings Status: Defaults are 'Demo\u2026",
+      "keywords": [
+        "opportunity fields meanings status",
+        "opportunity lead limits in close",
+        "organization settings",
+        "opportunity statuses",
+        "new opportunity you",
+        "opportunities list",
+        "estimated close",
+        "demo completed",
+        "expected value",
+        "contract sent",
+        "custom fields",
+        "opportunities",
+        "pipeline view",
+        "proposal sent"
+      ],
+      "topic": "customization"
+    },
+    {
+      "slug": "opportunities-report",
+      "title": "Opportunities List View",
+      "url": "https://help.close.com/docs/opportunities-report",
+      "body_file": "close-help-docs/pages/opportunities-report.txt",
+      "excerpt": "While Close tracks a number of data points, our philosophy on reporting is to make that data as actionable for your sales team as possible. To that end, our reporting focuses on a sales rep\u2019s created Opportunities, their Activity, and the movement of Leads through the sales funnel. The Opportunities List gives you a powerful, flexible view of every opportunity in your organization. Use it to manage your pipeline, prioritize follow-ups, run quick calculations, and share key\u2026",
+      "keywords": [
+        "opportunities list you",
+        "opportunities list",
+        "opportunities use",
+        "pipeline owner",
+        "opportunities",
+        "notes custom",
+        "while close",
+        "report",
+        "list",
+        "view"
+      ],
+      "topic": "customization"
+    },
+    {
+      "slug": "opportunity-pipeline-view",
+      "title": "Opportunity Pipeline View",
+      "url": "https://help.close.com/docs/opportunity-pipeline-view",
+      "body_file": "close-help-docs/pages/opportunity-pipeline-view.txt",
+      "excerpt": "The Pipeline View is one of the simplest, yet most actionable reporting tools for sales teams. It addresses both the needs of an individual sales rep, as well as sales managers, VPs and CEOs to easily forecast and prioritize deals. Easily drag an Opportunity from one stage to another, filter, sort, save, and share this report. There are plenty of options to help you customize your experience. Using the Pipeline View Every Opportunity created on a Lead in Close can be seen\u2026",
+      "keywords": [
+        "pipeline view every opportunity",
+        "lost opportunities",
+        "opportunity notes",
+        "pipeline view by",
+        "custom fields",
+        "pipeline view",
+        "opportunity",
+        "close you",
+        "pipeline",
+        "view"
+      ],
+      "topic": "customization"
+    },
+    {
+      "slug": "perform-an-action-when-a-workflow-ends",
+      "title": "Perform an action when a Workflow ends",
+      "url": "https://help.close.com/docs/perform-an-action-when-a-workflow-ends",
+      "body_file": "close-help-docs/pages/perform-an-action-when-a-workflow-ends.txt",
+      "excerpt": "Let's say you've created the perfect email workflow to send to qualified leads but they don't convert during your expected sales cycle. That's ok - sales is all about the follow-up. Don't sit around and wait for them to respond to an old email. Instead, take our advice and create a killer long-term follow-up workflow and improve your follow-up hustle. The Close Sales team send their first Workflow to trials which includes three emails over the course of the 14-day period.\u2026",
+      "keywords": [
+        "additional action steps here",
+        "custom field",
+        "lead status",
+        "update lead",
+        "workflow",
+        "perform",
+        "pro tip",
+        "action",
+        "ends"
+      ],
+      "topic": "customization"
+    },
+    {
+      "slug": "playbooks",
+      "title": "Playbooks",
+      "url": "https://help.close.com/docs/playbooks",
+      "body_file": "close-help-docs/pages/playbooks.txt",
+      "excerpt": "Playbooks are currently in free beta. Reach out to support@close.com for more info. Playbooks give your team a shared framework for how to run specific types of conversations, whether that's a discovery call, a demo, a follow-up, or an onboarding check-in. Pair them with Outcomes to track what happened on each call, and use them with Close AI to generate structured summaries and automatically capture key data points. What is a Playbook? A Playbook is a reusable conversation\u2026",
+      "keywords": [
+        "setting up playbooks playbooks",
+        "manage customizations",
+        "callback requested",
+        "demo scheduled",
+        "not interested",
+        "budget range",
+        "playbooks",
+        "team size"
+      ],
+      "topic": "customization"
+    },
+    {
+      "slug": "playbooks-and-chloe",
+      "title": "Playbooks and Chloe",
+      "url": "https://help.close.com/docs/playbooks-and-chloe",
+      "body_file": "close-help-docs/pages/playbooks-and-chloe.txt",
+      "excerpt": "Playbooks and Chloe - Close\u2019s AI voice agent - work closely together. When Chloe makes a call, she uses a Playbook to define what she captures, how she documents the conversation, and what Outcomes she can assign. This article explains how the two features connect. How Chloe uses Playbooks Every Chloe Job is automatically linked to a Playbook. The Playbook controls: Outcomes: the results Chloe can assign to a call after the conversation ends Summary guidance: how Chloe\u2019s\u2026",
+      "keywords": [
+        "playbooks every chloe job",
+        "chloe playbooks can",
+        "chloe job will",
+        "playbooks when",
+        "when chloe",
+        "chloe job",
+        "how chloe",
+        "playbooks",
+        "chloe"
+      ],
+      "topic": "customization"
+    },
+    {
+      "slug": "premium-phone-numbers",
+      "title": "Premium Phone Numbers",
+      "url": "https://help.close.com/docs/premium-phone-numbers",
+      "body_file": "close-help-docs/pages/premium-phone-numbers.txt",
+      "excerpt": "Close has combined two non-negotiables for modern businesses: a CRM and a business phone system. With Premium Phone Numbers, you can automatically route calls to specific team members using data from Close, such as directing them to the Lead Owner, and distribute new leads among sales reps to ensure fair coverage. Brand-new leads can also route themselves through a phone menu, providing a streamlined experience. Creating Premium Phone Numbers Under Settings > Phone &\u2026",
+      "keywords": [
+        "with premium phone numbers",
+        "lead status routing you",
+        "premium phone number",
+        "qualified leads",
+        "premium number",
+        "success group",
+        "support group",
+        "group number",
+        "sales group",
+        "lead owner",
+        "phone menu",
+        "numbers",
+        "premium",
+        "phone"
+      ],
+      "topic": "customization"
+    },
+    {
+      "slug": "pull-webform-answers-into-close-custom-activity",
+      "title": "Pull Webform Answers Into Close Custom Activity",
+      "url": "https://help.close.com/docs/pull-webform-answers-into-close-custom-activity",
+      "body_file": "close-help-docs/pages/pull-webform-answers-into-close-custom-activity.txt",
+      "excerpt": "This Zap will pull a lead's answers from your webform into a Custom Activity in Close, allowing you to: Filter your leads using common answers Review answers directly on the lead's page What you'll need To set up this Zap, you'll need the following: A Zapier account that allows for multi-step Zaps; A webform tool that integrates with Zapier (see next step for more details); A Close account of the Basic , Professional , or Business plan ( Starter plan won't work as it\u2026",
+      "keywords": [
+        "custom activity before",
+        "custom activities",
+        "custom activity",
+        "zapier please",
+        "google form",
+        "activity",
+        "answers",
+        "webform",
+        "custom",
+        "close",
+        "into",
+        "pull"
+      ],
+      "topic": "customization"
+    },
+    {
+      "slug": "recording-touchpoints-using-codes",
+      "title": "Recording touchpoints using #codes",
+      "url": "https://help.close.com/docs/recording-touchpoints-using-codes",
+      "body_file": "close-help-docs/pages/recording-touchpoints-using-codes.txt",
+      "excerpt": "Generally, your pre- and post- sales processes will have a few key touchpoints or activities you may want to record. This guide will cover a few different ways to track these events in Close. Here's an example of some pre- and post- sales touchpoints that we'll cover: Pre-Sales Reach a gatekeeper Reach a decision maker Connect on LinkedIn Send some swag Give a demo Post-Sales Have an onboarding call Run a QBR or check-in call Recording touchpoints and/or events with #codes\u2026",
+      "keywords": [
+        "sales reach",
+        "touchpoints",
+        "sales have",
+        "recording",
+        "codes",
+        "using"
+      ],
+      "topic": "customization"
+    },
+    {
+      "slug": "savvycal",
+      "title": "SavvyCal",
+      "url": "https://help.close.com/docs/savvycal",
+      "body_file": "close-help-docs/pages/savvycal.txt",
+      "excerpt": "Easily integrate your booking software with your CRM using the native SavvyCal + Close integration. Automatically create and update your Close Contacts when a prospect books a meeting with your team. Increase the number of demos for your team when you embed your SavvyCal booking directly on your website. SavvyCal also allows you to automate round robin routing, set up team scheduling, add teammates on the fly, and more. Try SavvyCal for a month for free! Get a free month of\u2026",
+      "keywords": [
+        "custom activity",
+        "close contacts",
+        "savvycal"
+      ],
+      "topic": "customization"
+    },
+    {
+      "slug": "segment",
+      "title": "Segment",
+      "url": "https://help.close.com/docs/segment",
+      "body_file": "close-help-docs/pages/segment.txt",
+      "excerpt": "Segment simplifies the process of collecting data, allowing you to spend more time using that data and less time trying to collect it. For example, you can use Segment to track when a potential customer visits your website or signs up for your newsletter, bringing that information directly into Close (explore many other data sources). This integration will allow you to Create/Update Leads and Contacts with the information your customers provide on your data source. Getting\u2026",
+      "keywords": [
+        "getting started you",
+        "lead custom field",
+        "custom fields",
+        "custom field",
+        "update leads",
+        "your close",
+        "segment"
+      ],
+      "topic": "customization"
+    },
+    {
+      "slug": "simplify-workflows-with-automated-senders",
+      "title": "Simplify Your Workflows with Automated Senders",
+      "url": "https://help.close.com/docs/simplify-workflows-with-automated-senders",
+      "body_file": "close-help-docs/pages/simplify-workflows-with-automated-senders.txt",
+      "excerpt": "Within Workflows, you can automate the sender of each step. By customizing the sender, you can create dynamic and automated workflows without manual enrollment or complex external setups, leaving more room for following up with your Leads and driving engagement. How it works By default, all steps within a Workflow will be set to send from the User who creates the Workflow subscription. However, we understand that different scenarios may call for different senders - that's\u2026",
+      "keywords": [
+        "automated workflows",
+        "advanced settings",
+        "within workflows",
+        "team management",
+        "custom field",
+        "super users",
+        "automated",
+        "workflows",
+        "simplify",
+        "send as",
+        "senders"
+      ],
+      "topic": "customization"
+    },
+    {
+      "slug": "steps-to-uploading-leads-into-close",
+      "title": "Steps To Import Your Data Successfully",
+      "url": "https://help.close.com/docs/steps-to-uploading-leads-into-close",
+      "body_file": "close-help-docs/pages/steps-to-uploading-leads-into-close.txt",
+      "excerpt": "The top tips and common mistakes to keep in mind when importing your data. Close is the most powerful when your data lives in the right places. Having a good understanding of the data importing process will allow for easy searching, powerful Smart Views, and the ability to automate as your team grows. Here are the essential steps to take and the common mistakes to avoid when importing your Leads into Close. 1. Understand the Different Types of Data Fields The first step is\u2026",
+      "keywords": [
+        "close standard field",
+        "standard fields when",
+        "custom fields these",
+        "data fields the",
+        "different types",
+        "standard fields",
+        "custom fields",
+        "custom field",
+        "successfully",
+        "smart views",
+        "uploading",
+        "import",
+        "close",
+        "leads",
+        "steps",
+        "data",
+        "into"
+      ],
+      "topic": "customization"
+    },
+    {
+      "slug": "updating-existing-leads-and-contacts",
+      "title": "Updating existing Leads and Contacts",
+      "url": "https://help.close.com/docs/updating-existing-leads-and-contacts",
+      "body_file": "close-help-docs/pages/updating-existing-leads-and-contacts.txt",
+      "excerpt": "In addition to creating new Leads, you can use the Lead Importer to update existing Leads and Contacts. (Need a refresher on how to use the Importer? Check out the main article here . After uploading your spreadsheet and assigning each of your spreadsheet columns to a field in Close, you'll be able to customize your update on the Importer's Options page: Using the Options page to customize your update Close field to compare You'll need to choose a comparison field. Make\u2026",
+      "keywords": [
+        "lead importer",
+        "company name",
+        "custom field",
+        "replace lea",
+        "contacts",
+        "existing",
+        "updating",
+        "leads"
+      ],
+      "topic": "customization"
+    },
+    {
+      "slug": "using-playbooks-on-calls",
+      "title": "Using Playbooks on Calls",
+      "url": "https://help.close.com/docs/using-playbooks-on-calls",
+      "body_file": "close-help-docs/pages/using-playbooks-on-calls.txt",
+      "excerpt": "Once Playbooks are set up, reps can apply them to calls and meetings directly from the call record. This article covers the rep experience, from applying a Playbook mid-call to reviewing what Close captured after the call ends. Applying a Playbook to a call Playbooks can be applied to a call before, during, or after the conversation. Open the call record in Close Find the Playbook field on the call Select the relevant Playbook from the dropdown Once a Playbook is applied:\u2026",
+      "keywords": [
+        "outcome outcomes",
+        "close find",
+        "playbooks",
+        "calls",
+        "using"
+      ],
+      "topic": "customization"
+    }
+  ]
+}

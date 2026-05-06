@@ -16,6 +16,7 @@ import { env } from "./env";
 import { getSettings, clampPlanHorizonDays } from "./settings";
 import { closeGetLeadFull, type CloseActivity, type CloseLeadFull } from "./close";
 import { savePlan } from "./plans-db";
+import { PLANNER_REASONING_RULES } from "./planner-reasoning-rules";
 
 // ─── Types ────────────────────────────────────────────────────────────────
 
@@ -133,6 +134,8 @@ function buildGenerateSystemPrompt(horizonDays: number): string {
   return `You are the Cycle Plan composer for Comeketo Agent.
 
 You compose a tailored ${n}-calendar-day plan to move a single catering lead toward a SCHEDULED PHONE CALL with Andre. You are NOT a generic nurture sequence. You read the lead's full Box (profile + activity feed + workflow enrollments) and write a real plan that respects what has already happened.
+
+${PLANNER_REASONING_RULES}
 
 ## Voice (NEPQ-style — ALWAYS)
 - Ask, don't pitch.
@@ -406,6 +409,8 @@ export async function generateSevenDayPlanForLead(
 function buildRefineDaySystem(totalDays: number): string {
   return `You revise ONE day of an existing ${totalDays}-calendar-day Comeketo cycle plan based on the operator's refinement instruction.
 
+${PLANNER_REASONING_RULES}
+
 Voice: same NEPQ rules — ask, don't pitch; specific to the lead; no "checking in" / "touching base" / "circle back" / "I hope this finds you well"; max one exclamation point; designed to get a reply.
 
 You will receive:
@@ -525,6 +530,8 @@ export async function refinePlanDay(
 function buildRefineWholePlanSystem(horizonDays: number): string {
   const n = horizonDays;
   return `You revise an existing ${n}-calendar-day Comeketo cycle plan based on the operator's refinement instruction.
+
+${PLANNER_REASONING_RULES}
 
 You will receive:
 1. The CURRENT plan (all ${n} day buckets).

@@ -1,0 +1,655 @@
+{
+  "topic_id": "reporting",
+  "article_count": 37,
+  "articles": [
+    {
+      "slug": "a2p-10dlc-compliance-boost-with-ai",
+      "title": "A2P 10DLC Compliance boost with AI",
+      "url": "https://help.close.com/docs/a2p-10dlc-compliance-boost-with-ai",
+      "body_file": "close-help-docs/pages/a2p-10dlc-compliance-boost-with-ai.txt",
+      "excerpt": "A2P compliance Once your A2P 10DLC registration is approved, mobile carriers continue to keep an eye on your SMS traffic. If they spot activity that doesn\u2019t meet compliance guidelines, your messages may be filtered or blocked from being delivered. In cases of repeated non-compliance, Close may suspend SMS sending capabilities. You can find more details in this article that outlines the relevant guidelines. Even legitimate senders can occasionally get caught by carrier\u2026",
+      "keywords": [
+        "connect claude",
+        "compliance",
+        "10dlc",
+        "boost",
+        "a2p",
+        "dlc"
+      ],
+      "topic": "reporting"
+    },
+    {
+      "slug": "activity-comparison-report",
+      "title": "Activity Comparison Report",
+      "url": "https://help.close.com/docs/activity-comparison-report",
+      "body_file": "close-help-docs/pages/activity-comparison-report.txt",
+      "excerpt": "The Activity Comparison report gives you a spreadsheet-like view of the performance of every team member. This makes it quick and easy to see how you or members of your team are contributing to the overall results. The Activity Comparison Report lets you compare multiple users across multiple metrics. Filtering You can filter the report by date range, user, and Smart View. You can also select a comparison date range to see the percent change in each metric between the two\u2026",
+      "keywords": [
+        "activity comparison report",
+        "activity overview report",
+        "activity comparison",
+        "exporting you",
+        "filtering you",
+        "team members",
+        "saving once",
+        "sorting you",
+        "comparison",
+        "smart view",
+        "activity",
+        "report"
+      ],
+      "topic": "reporting"
+    },
+    {
+      "slug": "activity-overview-report",
+      "title": "Activity Overview Report",
+      "url": "https://help.close.com/docs/activity-overview-report",
+      "body_file": "close-help-docs/pages/activity-overview-report.txt",
+      "excerpt": "The Activity Overview report shows activity metrics for a specific date range. It's the first report listed under the Reporting heading on the left sidebar. You can filter and customize the report by Smart View, Users, time frame, and dozens of different activity metrics. Filtering the report By Smart View At the top right of the page, you can filter your Activity Overview Report by any of your Smart Views. Browse all of your Smart Views or use the search box at the top to\u2026",
+      "keywords": [
+        "activity overview report",
+        "by smart view at",
+        "smart views",
+        "smart view",
+        "activity",
+        "all time",
+        "overview",
+        "report"
+      ],
+      "topic": "reporting"
+    },
+    {
+      "slug": "activity-recorder",
+      "title": "Record bugs or errors in Close",
+      "url": "https://help.close.com/docs/activity-recorder",
+      "body_file": "close-help-docs/pages/activity-recorder.txt",
+      "excerpt": "Use our activity recorder to report any issues you find in Close. You can find it by heading to the question mark icon in the top right of the screen and clicking the record button and then submitting it to us at Support so we can troubleshoot for you. This is not a typical screen recorder: This tool only records your screen and activities in Close (and some background information that is useful for us). If you change to other apps/windows, they will not be visible at all\u2026",
+      "keywords": [
+        "activity",
+        "recorder",
+        "errors",
+        "record",
+        "close",
+        "bugs"
+      ],
+      "topic": "reporting"
+    },
+    {
+      "slug": "analysis-and-reporting",
+      "title": "Analysis and Reporting",
+      "url": "https://help.close.com/docs/analysis-and-reporting",
+      "body_file": "close-help-docs/pages/analysis-and-reporting.txt",
+      "excerpt": "Analysis and Reporting What a company needs for its sales reporting will often depend on what stage of growth a company is in. If your company is in its earliest stages, you may be managing reporting with excel sheets or an even simpler method of tracking and reporting\u2014it might be a sheet of paper with the number of calls you made today. Or a whiteboarded list of the deals you're working to close. At this stage, using a simple tool like Close that comes with out-of-the-box\u2026",
+      "keywords": [
+        "reporting what",
+        "reporting",
+        "analysis"
+      ],
+      "topic": "reporting"
+    },
+    {
+      "slug": "automatically-set-opportunity-probability-based-on-pipeline-status",
+      "title": "Automatically set Opportunity Confidence based on pipeline status",
+      "url": "https://help.close.com/docs/automatically-set-opportunity-probability-based-on-pipeline-status",
+      "body_file": "close-help-docs/pages/automatically-set-opportunity-probability-based-on-pipeline-status.txt",
+      "excerpt": "Overview Every time an Opportunity moves into a new status, you probably want its Confidence (the probability used to calculate your weighted pipeline value) to update automatically. For example, any deal that reaches Negotiations should jump to 80% \u2014 no manual edits required. Close makes this easy with Workflows . What you'll be able to do Once this is set up, Close will automatically update an Opportunity's Confidence percentage the moment it moves into a specific status.\u2026",
+      "keywords": [
+        "workflows permission",
+        "expected value",
+        "overview every",
+        "automatically",
+        "workflows if",
+        "opportunity",
+        "probability",
+        "confidence",
+        "in close",
+        "pipeline",
+        "status",
+        "based"
+      ],
+      "topic": "reporting"
+    },
+    {
+      "slug": "build-a-sales-process",
+      "title": "Build a Sales Process",
+      "url": "https://help.close.com/docs/build-a-sales-process",
+      "body_file": "close-help-docs/pages/build-a-sales-process.txt",
+      "excerpt": "What's a Sales Process? A sales process outlines repeatable steps that your sales team will take to convert a lead into a customer. It\u2019s a framework that provides structure to your reps, teaches them how to sell, and provides enough metrics for you to monitor their success. Using a sales process boosts your revenue and creates a predictable and positive customer experience. Why Build a Sales Process? Increased Productivity Disorganization kills productivity. Your team might\u2026",
+      "keywords": [
+        "increased productivity disorganization",
+        "faster onboarding for",
+        "new york yankees",
+        "sales process",
+        "needed high",
+        "why build",
+        "process",
+        "build",
+        "sales"
+      ],
+      "topic": "reporting"
+    },
+    {
+      "slug": "calculating-your-call-answer-rate",
+      "title": "Calculating Your Call Answer Rate",
+      "url": "https://help.close.com/docs/calculating-your-call-answer-rate",
+      "body_file": "close-help-docs/pages/calculating-your-call-answer-rate.txt",
+      "excerpt": "Understanding your call answer rate is crucial for assessing the effectiveness of your sales outreach. Read on for some tips on calculating your answer rate using some of the features built into Close. Utilizing Smart Views Longer call durations often indicate that a live conversation occurred. To leverage this, you can create Smart Views based on your Call Duration. Navigate to the Leads tab and set up a Smart View to filter for calls created \"today.\" Then, create another\u2026",
+      "keywords": [
+        "utilizing smart views longer",
+        "activity overview report",
+        "custom activities for",
+        "custom activities",
+        "average duration",
+        "call disposition",
+        "custom activity",
+        "outbound calls",
+        "call duration",
+        "calculating",
+        "smart views",
+        "smart view",
+        "answer",
+        "call",
+        "rate"
+      ],
+      "topic": "reporting"
+    },
+    {
+      "slug": "call-reports",
+      "title": "Call Reports",
+      "url": "https://help.close.com/docs/call-reports",
+      "body_file": "close-help-docs/pages/call-reports.txt",
+      "excerpt": "A single, trustworthy view of calling performance for your team, so you can coach for real conversations and better connect rates. The Call Report brings dials, talk time, dispositions, outcomes, and unique leads dialed into one place. Use it to understand activity quality versus volume and spot which numbers get picked up versus blocked. Works across human reps and Chloe Trend and distribution charts for quality coaching Filters for Smart Views, users, numbers, durations,\u2026",
+      "keywords": [
+        "call outcomes",
+        "chloe trend",
+        "smart views",
+        "report in",
+        "reports",
+        "call"
+      ],
+      "topic": "reporting"
+    },
+    {
+      "slug": "chloe-reporting",
+      "title": "Reporting",
+      "url": "https://help.close.com/docs/chloe-reporting",
+      "body_file": "close-help-docs/pages/chloe-reporting.txt",
+      "excerpt": "Chloe reporting is call reporting and outcome tracking. All reporting centers on what happened on each call and whether those calls are producing the right results across an Agent. Reporting happens at two levels: Per-call \u2013 what happened on a specific call, logged on the lead record Per-Agent \u2013 how a given Agent is performing overall, visible from the Calls and Performance tabs Where Chloe activity appears in Close On the lead record After every Chloe call, Close logs the\u2026",
+      "keywords": [
+        "agent answered",
+        "using chloe",
+        "where chloe",
+        "reporting",
+        "close on",
+        "chloe"
+      ],
+      "topic": "reporting"
+    },
+    {
+      "slug": "close-mobile-app",
+      "title": "Close Mobile App",
+      "url": "https://help.close.com/docs/close-mobile-app",
+      "body_file": "close-help-docs/pages/close-mobile-app.txt",
+      "excerpt": "The Close mobile app allows you to communicate with your prospects and customers easily, regardless of your location. After you download the Close app, your Leads will go wherever you go. Access your Inbox while on the go Quickly email, call, and send SMS to customers Add tasks, notes, and opportunities Add or edit lead data from anywhere View reports to see insights on your leads With our mobile app, you can stay connected and responsive no matter where you are. Download\u2026",
+      "keywords": [
+        "calling outbound calls to",
+        "on android download",
+        "getting around on",
+        "mobile app on",
+        "google play",
+        "app store",
+        "mobile",
+        "close",
+        "app"
+      ],
+      "topic": "reporting"
+    },
+    {
+      "slug": "custom-activities",
+      "title": "Custom Activities",
+      "url": "https://help.close.com/docs/custom-activities",
+      "body_file": "close-help-docs/pages/custom-activities.txt",
+      "excerpt": "Custom Activities allow you to create a custom action type to record a specific type of activity. The most common examples include forms filled in by prospects, support tickets, call outcomes, invoice/payment items, and various structured notes such as call playbooks. Plan Limitations Custom Activities are not available on the Solo , Essentials and Base (legacy) plans. In our examples below, we'll use a Custimer Onboarding checklist Custom Activity for reference. Customer\u2026",
+      "keywords": [
+        "plan limitations custom activities",
+        "sales qualifying call onboarding",
+        "customer onboarding checklist",
+        "custom activity type before",
+        "custom activity type",
+        "custimer onboarding",
+        "custom activities",
+        "custom activity",
+        "inbound form",
+        "feedback to",
+        "activities",
+        "new custo",
+        "custom"
+      ],
+      "topic": "reporting"
+    },
+    {
+      "slug": "dripify",
+      "title": "Dripify",
+      "url": "https://help.close.com/docs/dripify",
+      "body_file": "close-help-docs/pages/dripify.txt",
+      "excerpt": "Integrating Close with Dripify Dripify is a LinkedIn automation and prospecting platform that helps users find and engage with their target audience on LinkedIn. It allows users to create a sales funnel with automated LinkedIn actions and conditions, such as sending connection requests, messages, and endorsements, as well as following and liking prospects' profiles. Dripify also includes advanced analytics and a smart inbox to help users manage their campaigns and respond\u2026",
+      "keywords": [
+        "integrating close",
+        "dripify dripify",
+        "dripify"
+      ],
+      "topic": "reporting"
+    },
+    {
+      "slug": "email-deliverability",
+      "title": "Email Deliverability",
+      "url": "https://help.close.com/docs/email-deliverability",
+      "body_file": "close-help-docs/pages/email-deliverability.txt",
+      "excerpt": "Close relies on your email server for sending emails, meaning it follows the same guidelines and limitations as your provider. Mailbox providers use rules to ensure users receive relevant and desirable emails. By following email best practices, you can improve your chances of reaching your audience and maintaining a healthy domain reputation. Learn some tips and tricks for sending sales emails and getting responses Email Deliverability Cold Email Response Rates Email\u2026",
+      "keywords": [
+        "avoid spam filters more",
+        "deliverability",
+        "email"
+      ],
+      "topic": "reporting"
+    },
+    {
+      "slug": "explorer",
+      "title": "Explorer",
+      "url": "https://help.close.com/docs/explorer",
+      "body_file": "close-help-docs/pages/explorer.txt",
+      "excerpt": "Do you have the right Plan? Explorer reporting is available only on the Scale or Enterprise (legacy) plan. Explorer is a data exploration tool to help you visualize your data, in graph form, in hundreds of new and useful ways. You can quickly create line graphs and bar charts based on whichever parts of your sales data you care about. You choose a metric for the vertical y-axis, a field for the horizontal x-axis, along with any applicable filters, and we'll bring you a\u2026",
+      "keywords": [
+        "only certain custom fields",
+        "close product help",
+        "explorer in",
+        "explorer"
+      ],
+      "topic": "reporting"
+    },
+    {
+      "slug": "finding-and-merging-duplicates",
+      "title": "Finding and Merging Duplicates",
+      "url": "https://help.close.com/docs/finding-and-merging-duplicates",
+      "body_file": "close-help-docs/pages/finding-and-merging-duplicates.txt",
+      "excerpt": "Keeping your CRM clean is key to accurate reporting and a smooth sales workflow. Close does not currently have a built-in duplicate detection tool in the UI, but you can use our support tools to generate a duplicate report yourself, then our support team will carry out a free, one-time deduplication merge on your behalf. How the Process Works Generate your API Key : In Close, go to Settings \u2192 Developer \u2192 API Keys and click + New API Key . Copy the key, you'll need it in the\u2026",
+      "keywords": [
+        "available support tools choose",
+        "process works generate",
+        "contact close support",
+        "duplicates",
+        "in close",
+        "finding",
+        "merging"
+      ],
+      "topic": "reporting"
+    },
+    {
+      "slug": "groups",
+      "title": "Groups",
+      "url": "https://help.close.com/docs/groups",
+      "body_file": "close-help-docs/pages/groups.txt",
+      "excerpt": "Availability This feature is only available on the Scale and Enterprise (legacy) plans Groups were made for managers who want to filter performance by groups of team members rather than the organization as a whole. Create saved groups of users to monitor your sales team\u2019s Pipeline, report on their activities, search Leads by Group activity, and more. Creating a Group You can access Groups by going to Settings > Team Management and then choosing the Groups tab. Select the\u2026",
+      "keywords": [
+        "availability this",
+        "removing members",
+        "team management",
+        "add members",
+        "group once",
+        "groups you",
+        "sales team",
+        "group you",
+        "new group",
+        "groups"
+      ],
+      "topic": "reporting"
+    },
+    {
+      "slug": "importing-opportunities-from-a-file",
+      "title": "Importing Opportunities from a file",
+      "url": "https://help.close.com/docs/importing-opportunities-from-a-file",
+      "body_file": "close-help-docs/pages/importing-opportunities-from-a-file.txt",
+      "excerpt": "You can import Opportunities from a file following the steps below. Go to the Importer You can do the following to bring your Leads into Close from a file: Upload via CSV by browsing that file on your computer Dragging and dropping a file onto the Lead Importer\u2019s landing page Copy and paste directly from your spreadsheet Format your import file Make sure the first row in your spreadsheet is a header row (e.g., a row containing column names). It has to contain one column\u2026",
+      "keywords": [
+        "lead importer",
+        "opportunities",
+        "date created",
+        "importer you",
+        "importing",
+        "lead name",
+        "user make",
+        "date won",
+        "file"
+      ],
+      "topic": "reporting"
+    },
+    {
+      "slug": "integrations-with-close",
+      "title": "Integrations by type",
+      "url": "https://help.close.com/docs/integrations-with-close",
+      "body_file": "close-help-docs/pages/integrations-with-close.txt",
+      "excerpt": "Browse some of our most popular integrations here . If you don't see the integration you're looking for, you can create a custom integration with Zapier or our API . If you have any questions about integrations, reach out to our support team at any time. Integrations by Type: General integrations Zapier - push your data between hundreds of popular web services. Start here . Integrate.io - integrate, transform and process data from more than 100 data stores and SaaS\u2026",
+      "keywords": [
+        "google analytics",
+        "facebook ads",
+        "integrations",
+        "help scout",
+        "help sc",
+        "close",
+        "type"
+      ],
+      "topic": "reporting"
+    },
+    {
+      "slug": "notes",
+      "title": "Notes",
+      "url": "https://help.close.com/docs/notes",
+      "body_file": "close-help-docs/pages/notes.txt",
+      "excerpt": "Notes allow you to quickly insert an unstructured text note on the Lead activity panel. While Custom Activities , Call , and Meeting Notes are better suited for their respective contexts, simple text notes can also be a useful tool. Here's an example of what a Note looks like in-app: Example Note Notes behave like any other default activity in Close - you can create, edit, search/filter, and report on them. You can also add them via our API if you want to integrate Close\u2026",
+      "keywords": [
+        "while custom activities",
+        "editing notes notes",
+        "example note notes",
+        "meeting notes",
+        "note notes",
+        "notes"
+      ],
+      "topic": "reporting"
+    },
+    {
+      "slug": "opportunities-report",
+      "title": "Opportunities List View",
+      "url": "https://help.close.com/docs/opportunities-report",
+      "body_file": "close-help-docs/pages/opportunities-report.txt",
+      "excerpt": "While Close tracks a number of data points, our philosophy on reporting is to make that data as actionable for your sales team as possible. To that end, our reporting focuses on a sales rep\u2019s created Opportunities, their Activity, and the movement of Leads through the sales funnel. The Opportunities List gives you a powerful, flexible view of every opportunity in your organization. Use it to manage your pipeline, prioritize follow-ups, run quick calculations, and share key\u2026",
+      "keywords": [
+        "opportunities list you",
+        "opportunities list",
+        "opportunities use",
+        "pipeline owner",
+        "opportunities",
+        "notes custom",
+        "while close",
+        "report",
+        "list",
+        "view"
+      ],
+      "topic": "reporting"
+    },
+    {
+      "slug": "opportunity-funnels-report",
+      "title": "Opportunity Funnels Report",
+      "url": "https://help.close.com/docs/opportunity-funnels-report",
+      "body_file": "close-help-docs/pages/opportunity-funnels-report.txt",
+      "excerpt": "The Opportunity Funnels report helps you keep track of your Opportunities with an in-depth look into how your Opportunities perform over a given time range. This report will show aggregated metrics for the overall performance and specific details about stages in your sales pipeline, along with a visualization that shows how Opportunities progress in that pipeline. This report has different filtering options to narrow down the type of Opportunity you want to look into, based\u2026",
+      "keywords": [
+        "your win rate",
+        "opportunity",
+        "was created",
+        "was active",
+        "funnels",
+        "report"
+      ],
+      "topic": "reporting"
+    },
+    {
+      "slug": "opportunity-pipeline-view",
+      "title": "Opportunity Pipeline View",
+      "url": "https://help.close.com/docs/opportunity-pipeline-view",
+      "body_file": "close-help-docs/pages/opportunity-pipeline-view.txt",
+      "excerpt": "The Pipeline View is one of the simplest, yet most actionable reporting tools for sales teams. It addresses both the needs of an individual sales rep, as well as sales managers, VPs and CEOs to easily forecast and prioritize deals. Easily drag an Opportunity from one stage to another, filter, sort, save, and share this report. There are plenty of options to help you customize your experience. Using the Pipeline View Every Opportunity created on a Lead in Close can be seen\u2026",
+      "keywords": [
+        "pipeline view every opportunity",
+        "lost opportunities",
+        "opportunity notes",
+        "pipeline view by",
+        "custom fields",
+        "pipeline view",
+        "opportunity",
+        "close you",
+        "pipeline",
+        "view"
+      ],
+      "topic": "reporting"
+    },
+    {
+      "slug": "opportunity-statuses",
+      "title": "Opportunity Pipelines & Statuses",
+      "url": "https://help.close.com/docs/opportunity-statuses",
+      "body_file": "close-help-docs/pages/opportunity-statuses.txt",
+      "excerpt": "Defining Opportunity Pipelines & Statuses Opportunity Pipelines are used to define the particular funnel deals can go through. Opportunity Statuses are used to describe each stage a pending deal can go through within a specific Pipeline. Here is a common example of a Pipeline that identifies various stages in a sales process: Demo Completed: Indicating that a product/service demo has been conducted for the Lead. Proposal Sent: Indicating that a proposal has been sent to the\u2026",
+      "keywords": [
+        "defining opportunity pipelines",
+        "statuses opportunity pipelines",
+        "marking opportunities",
+        "opportunity statuses",
+        "demo completed",
+        "contract sent",
+        "proposal sent",
+        "lead status",
+        "opportunity",
+        "pipelines",
+        "statuses"
+      ],
+      "topic": "reporting"
+    },
+    {
+      "slug": "outcomes",
+      "title": "Outcomes",
+      "url": "https://help.close.com/docs/outcomes",
+      "body_file": "close-help-docs/pages/outcomes.txt",
+      "excerpt": "Call and Meeting Outcomes Call and Meeting Outcomes help you track and categorize the results of your calls and meetings, giving you better insights into your sales activities and performance. Overview Outcomes represent the result of a connected call or a completed meeting. They help you understand what happened during your conversations and provide valuable data for reporting and analysis. Key Benefits: Track the effectiveness of your calls and meetings Generate more\u2026",
+      "keywords": [
+        "managing outcomes creating outcomes go",
+        "getting started availability call",
+        "defining outcomes use",
+        "meeting outcomes call",
+        "set outcomes during",
+        "overview outcomes",
+        "meeting outcomes",
+        "setting outcomes",
+        "best practices",
+        "outcomes click",
+        "key benefits",
+        "add outcome",
+        "calls when",
+        "outcomes"
+      ],
+      "topic": "reporting"
+    },
+    {
+      "slug": "recording-touchpoints-using-codes",
+      "title": "Recording touchpoints using #codes",
+      "url": "https://help.close.com/docs/recording-touchpoints-using-codes",
+      "body_file": "close-help-docs/pages/recording-touchpoints-using-codes.txt",
+      "excerpt": "Generally, your pre- and post- sales processes will have a few key touchpoints or activities you may want to record. This guide will cover a few different ways to track these events in Close. Here's an example of some pre- and post- sales touchpoints that we'll cover: Pre-Sales Reach a gatekeeper Reach a decision maker Connect on LinkedIn Send some swag Give a demo Post-Sales Have an onboarding call Run a QBR or check-in call Recording touchpoints and/or events with #codes\u2026",
+      "keywords": [
+        "sales reach",
+        "touchpoints",
+        "sales have",
+        "recording",
+        "codes",
+        "using"
+      ],
+      "topic": "reporting"
+    },
+    {
+      "slug": "reporting",
+      "title": "Reports",
+      "url": "https://help.close.com/docs/reporting",
+      "body_file": "close-help-docs/pages/reporting.txt",
+      "excerpt": "Close more deals with actionable insights Pull the most significant growth levers with our customizable, flexible reporting: from projections to leaderboards and every KPI in between. Close has several different reports based on the metrics that need to be tracked. Sales Team Activity Tracking Activity Comparison Compare time-based reports. How did you perform in Q1 this year vs. Q4 last year? Close gives you all the answers you need at any given time, both for individual\u2026",
+      "keywords": [
+        "activity overview act",
+        "sent email understand",
+        "status change see",
+        "reporting",
+        "reports"
+      ],
+      "topic": "reporting"
+    },
+    {
+      "slug": "reporting-call-quality-issues",
+      "title": "Reporting call quality issues",
+      "url": "https://help.close.com/docs/reporting-call-quality-issues",
+      "body_file": "close-help-docs/pages/reporting-call-quality-issues.txt",
+      "excerpt": "Reporting calls Our goal is to make sure that every call you make through Close is perfect. To make that goal a reality, we need your feedback \u2013 both good and bad. After every call you make (or answer), you have the option to report an issue by clicking into the menu within the call log. From there, you'll be able to add additional details about your experience. Tell us what went wrong during the call by selecting all the pre-defined issues that match your case. Then, use\u2026",
+      "keywords": [
+        "reporting",
+        "quality",
+        "issues",
+        "call"
+      ],
+      "topic": "reporting"
+    },
+    {
+      "slug": "savvycal",
+      "title": "SavvyCal",
+      "url": "https://help.close.com/docs/savvycal",
+      "body_file": "close-help-docs/pages/savvycal.txt",
+      "excerpt": "Easily integrate your booking software with your CRM using the native SavvyCal + Close integration. Automatically create and update your Close Contacts when a prospect books a meeting with your team. Increase the number of demos for your team when you embed your SavvyCal booking directly on your website. SavvyCal also allows you to automate round robin routing, set up team scheduling, add teammates on the fly, and more. Try SavvyCal for a month for free! Get a free month of\u2026",
+      "keywords": [
+        "custom activity",
+        "close contacts",
+        "savvycal"
+      ],
+      "topic": "reporting"
+    },
+    {
+      "slug": "script-installation-setup",
+      "title": "Script installation & setup",
+      "url": "https://help.close.com/docs/script-installation-setup",
+      "body_file": "close-help-docs/pages/script-installation-setup.txt",
+      "excerpt": "Instructions on how to install and set up the environment for running Close scripts Almost anything that can be done in the Close application by the end-user can be done via the Close API (Application Programming Interface) as well \u2013 for example, send an email, create reports, add notes, search leads, etc. API is simply a way of interacting with Close using the programming language, instead of using mouse & keyboard. Here at Close, we use the Python programming language.\u2026",
+      "keywords": [
+        "application programming interface",
+        "installation",
+        "using python",
+        "script",
+        "setup"
+      ],
+      "topic": "reporting"
+    },
+    {
+      "slug": "security-vulnerability-disclosure-policy",
+      "title": "Security Vulnerability Disclosure Policy",
+      "url": "https://help.close.com/docs/security-vulnerability-disclosure-policy",
+      "body_file": "close-help-docs/pages/security-vulnerability-disclosure-policy.txt",
+      "excerpt": "For general details of data security & privacy at Close, see this page . Reporting a Security Vulnerability If you believe you have found a security vulnerability in Close, please email us details to security@close.com. Please include the following details with your report: Description of and potential impact of the vulnerability. A detailed description of the steps required to reproduce the vulnerability (POC scripts, screenshots, screen captures, etc.).",
+      "keywords": [
+        "security vulnerability if",
+        "vulnerability",
+        "disclosure",
+        "security",
+        "policy"
+      ],
+      "topic": "reporting"
+    },
+    {
+      "slug": "sent-email-report",
+      "title": "Sent Email Report",
+      "url": "https://help.close.com/docs/sent-email-report",
+      "body_file": "close-help-docs/pages/sent-email-report.txt",
+      "excerpt": "Plan limitations This report is only available under our Growth and Scale plans The Sent Email Report provides a breakdown of the number of Emails you've sent and the number/percentage of Opens and Responses. The report separates the metrics out for total emails and for any Email Templates you've used. Click on any number to search Close for the Leads that match the criteria chosen. This report can help you conduct A/B testing of subject lines and content with your Email\u2026",
+      "keywords": [
+        "email templates",
+        "sent email",
+        "report",
+        "email",
+        "sent"
+      ],
+      "topic": "reporting"
+    },
+    {
+      "slug": "smart-view-tips-and-suggestions",
+      "title": "Avoiding Lead Rot and Consolidating Smart Views",
+      "url": "https://help.close.com/docs/smart-view-tips-and-suggestions",
+      "body_file": "close-help-docs/pages/smart-view-tips-and-suggestions.txt",
+      "excerpt": "Here are a couple of tried-and-true tips to use with Smart Views that can help you stay on top of promising Opportunities, and streamline your overall workflow in Close. Show deal and lead rot based on Status Change dates Oftentimes in sales, you may lose momentum with a lead or on a deal, and not realize it until your chances for success are far behind you. Thankfully, it's easy to create Smart Views that show you leads that might be slipping away before it's too late. For\u2026",
+      "keywords": [
+        "close pro tip",
+        "consolidating",
+        "sent proposal",
+        "status change",
+        "smart views",
+        "suggestions",
+        "smart view",
+        "avoiding",
+        "smart",
+        "views",
+        "lead",
+        "tips",
+        "view",
+        "rot"
+      ],
+      "topic": "reporting"
+    },
+    {
+      "slug": "sms-deliverability",
+      "title": "SMS Deliverability",
+      "url": "https://help.close.com/docs/sms-deliverability",
+      "body_file": "close-help-docs/pages/sms-deliverability.txt",
+      "excerpt": "SMS in Close may not deliver for a number of different reasons. Most commonly this would be when you are trying to send an SMS to a number that is not SMS-enabled (such as a landline), or if your content was marked as spam by the receiving phone carrier. You will notice an error on the SMS activity if our provider Twilio is letting us know that the message was undelivered. By hovering your cursor over the error message, you will see the reason why it was undelivered. Below\u2026",
+      "keywords": [
+        "carrier violation",
+        "message delivery",
+        "deliverability",
+        "sms"
+      ],
+      "topic": "reporting"
+    },
+    {
+      "slug": "status-change-report",
+      "title": "Status Change Report",
+      "url": "https://help.close.com/docs/status-change-report",
+      "body_file": "close-help-docs/pages/status-change-report.txt",
+      "excerpt": "The Status Change report tracks the movement of both Leads and Opportunities from Status to Status through your sales funnel. It gives you the number of Leads in each previous status and shows where those Leads went in a given time period. With the data given, you can also calculate (outside of Close) what the conversion percentage is for each of your Statuses. To see more detail, you can click on any number to see the related search results. You can also click the arrow\u2026",
+      "keywords": [
+        "status change report read",
+        "opportunity status",
+        "potential status",
+        "change",
+        "report",
+        "status"
+      ],
+      "topic": "reporting"
+    },
+    {
+      "slug": "using-workflows-for-newsletters",
+      "title": "Using Workflows for Newsletters",
+      "url": "https://help.close.com/docs/using-workflows-for-newsletters",
+      "body_file": "close-help-docs/pages/using-workflows-for-newsletters.txt",
+      "excerpt": "Creating Email Newsletters with Workflows: A Salesperson's Guide Integrating Workflows into your email newsletter strategy allows you to automate, personalize, and optimize your outreach. Workflows allow you to automate a series of actions\u2014such as sending emails, scheduling follow-ups, or assigning tasks\u2014based on specific enrollment triggers or manual enrollments. Workflows can be customized to match your sales process, allowing you to tailor each step to specific lead\u2026",
+      "keywords": [
+        "define your newsletter goals before",
+        "guide integrating workflows",
+        "creating email newsletters",
+        "sent email report",
+        "newsletters",
+        "smart views",
+        "workflows",
+        "using"
+      ],
+      "topic": "reporting"
+    },
+    {
+      "slug": "workflow-reporting",
+      "title": "Sequence Overview & Reporting",
+      "url": "https://help.close.com/docs/workflow-reporting",
+      "body_file": "close-help-docs/pages/workflow-reporting.txt",
+      "excerpt": "Once your Workflows are set up and Leads have been enrolled, you'll want to check to see how your Workflow is being received. Workflow Overview After you\u2019ve created and deployed a Workflow, you\u2019ll first see general stats on the main Workflow page. These stats give a quick overview of where the sequence is in its lifecycle and how it\u2019s performing. You\u2019ll see the following metrics: Active : the number of active Contacts in this Workflow (excluding any bounces or errors)\u2026",
+      "keywords": [
+        "workflow avg response time",
+        "workflow overview after",
+        "workflow these",
+        "response rate",
+        "bounce rate",
+        "reporting",
+        "overview",
+        "sequence",
+        "workflow"
+      ],
+      "topic": "reporting"
+    }
+  ]
+}

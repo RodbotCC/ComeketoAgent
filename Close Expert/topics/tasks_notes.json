@@ -1,0 +1,896 @@
+{
+  "topic_id": "tasks_notes",
+  "article_count": 49,
+  "articles": [
+    {
+      "slug": "account-settings",
+      "title": "Account Settings",
+      "url": "https://help.close.com/docs/account-settings",
+      "body_file": "close-help-docs/pages/account-settings.txt",
+      "excerpt": "Profile & Two-Factor Authentication Set your name, country, login email address, and reset your password in your account settings. Your name will be associated with all of the activities you make to a lead, such as any lead communication, writing Notes, and creating Tasks . Country Settings The country selected in your settings will affect the phone numbers you dial. The country code associated with your selected country will be automatically added to each phone number to\u2026",
+      "keywords": [
+        "factor authentication set",
+        "factor authentication two",
+        "country settings the",
+        "connected account",
+        "account settings",
+        "settings",
+        "account"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "activity-recorder",
+      "title": "Record bugs or errors in Close",
+      "url": "https://help.close.com/docs/activity-recorder",
+      "body_file": "close-help-docs/pages/activity-recorder.txt",
+      "excerpt": "Use our activity recorder to report any issues you find in Close. You can find it by heading to the question mark icon in the top right of the screen and clicking the record button and then submitting it to us at Support so we can troubleshoot for you. This is not a typical screen recorder: This tool only records your screen and activities in Close (and some background information that is useful for us). If you change to other apps/windows, they will not be visible at all\u2026",
+      "keywords": [
+        "activity",
+        "recorder",
+        "errors",
+        "record",
+        "close",
+        "bugs"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "adding-and-removing-users",
+      "title": "Managing users and cancellation",
+      "url": "https://help.close.com/docs/adding-and-removing-users",
+      "body_file": "close-help-docs/pages/adding-and-removing-users.txt",
+      "excerpt": "Adding Users to Close You can add users simply by sending them an invitation and selecting the role you'd like to assign. To invite users, click your name at the top left of the Close window - or click Settings and then select Team Management to manage the member list. What role should I use? Before adding users, we recommend reading about roles and permissions . Removing Users from Close If you're an Admin of your Account, you can head to Settings > Team Management to add\u2026",
+      "keywords": [
+        "team management",
+        "removing users",
+        "adding users",
+        "cancellation",
+        "custom field",
+        "close you",
+        "close if",
+        "managing",
+        "removing",
+        "adding",
+        "users"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "api-keys-oauth",
+      "title": "API keys & OAuth",
+      "url": "https://help.close.com/docs/api-keys-oauth",
+      "body_file": "close-help-docs/pages/api-keys-oauth.txt",
+      "excerpt": "There are two main ways to authorize (connect) your Close organization to third-party applications or your own internal system: using API keys using OAuth access Both methods are designed to help you automate and sync your sales process with other platforms while maintaining high levels of security and data privacy. Whether a third-party app uses an API key or OAuth to connect to Close depends on how the app's developers decided to set it up. API keys An API key is a secret\u2026",
+      "keywords": [
+        "oauth",
+        "keys",
+        "api"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "automating-actions",
+      "title": "Automating Close with Zapier",
+      "url": "https://help.close.com/docs/automating-actions",
+      "body_file": "close-help-docs/pages/automating-actions.txt",
+      "excerpt": "In addition to integrating with other apps, you may want to automate specific actions within Close. For this reason, we allow you to link Close with itself in Zapier. Getting Started with Zapier To learn more about why do we use Zapier, how to get started, and how to set up your first Zap take a look into our Zapier article . Become an Expert Check out Zapier's Getting Started Guide for more in-depth training on Zapier. How are our customers using Zapier today? While there\u2026",
+      "keywords": [
+        "email sequence creating",
+        "getting started guide",
+        "getting started",
+        "email sequence",
+        "expert check",
+        "close pause",
+        "lead status",
+        "automating",
+        "zapier to",
+        "actions",
+        "zapier",
+        "close"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "call-assistant",
+      "title": "Call Assistant",
+      "url": "https://help.close.com/docs/call-assistant",
+      "body_file": "close-help-docs/pages/call-assistant.txt",
+      "excerpt": "Automatically transcribe and summarize any recorded calls in Close through our Call Assistant feature. When enabled, a full transcription and summary will be available to view shortly after any voicemail (regardless of duration) and any recorded call that's over 30 seconds long. Summaries are meant to provide you with a high-level understanding of the topics discussed on the call. Dive into the transcription to review exactly what was said on the call. Transcriptions Call\u2026",
+      "keywords": [
+        "searching transcriptions transcriptions",
+        "transcriptions call assistant",
+        "summaries call assistant",
+        "call assistant",
+        "assistant",
+        "call"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "call-tasks",
+      "title": "Call Tasks",
+      "url": "https://help.close.com/docs/call-tasks",
+      "body_file": "close-help-docs/pages/call-tasks.txt",
+      "excerpt": "You can assign Call Tasks to yourself or a member of the team as a reminder to a call a Contact at a specific date and time. Call Tasks are similar and appear on Leads and the Inbox in the same place as Tasks , but there are a few differences: Call Tasks must have an associated Contact. When created using Workflows (via the Call step ), Call Tasks can be assigned to a Group. Close will automatically mark Call Tasks complete when there is a Call between the associated\u2026",
+      "keywords": [
+        "ignore workflow communication schedule",
+        "creating call tasks call tasks",
+        "communication schedule",
+        "blackout dates",
+        "call tasks",
+        "call task",
+        "tasks",
+        "call"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "chloe-use-cases",
+      "title": "Use Cases",
+      "url": "https://help.close.com/docs/chloe-use-cases",
+      "body_file": "close-help-docs/pages/chloe-use-cases.txt",
+      "excerpt": "When you\u2019re ready to iterate upon your Chloe Agent, some guidance may be helpful. This covers which use cases Chloe performs best at, which run mode to use, and which Skills to enable for each scenario. For setup and configuration, see Setup and Implementation . For prompt guidance, see Prompt Training . What Chloe is best at Chloe performs best when calling warm or known-interest leads where the goal is qualification, routing, reminders, or reactivation. She is most\u2026",
+      "keywords": [
+        "recommended skills",
+        "prompt training",
+        "see compliance",
+        "chloe agent",
+        "what chloe",
+        "cases",
+        "chloe"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "close-mobile-app",
+      "title": "Close Mobile App",
+      "url": "https://help.close.com/docs/close-mobile-app",
+      "body_file": "close-help-docs/pages/close-mobile-app.txt",
+      "excerpt": "The Close mobile app allows you to communicate with your prospects and customers easily, regardless of your location. After you download the Close app, your Leads will go wherever you go. Access your Inbox while on the go Quickly email, call, and send SMS to customers Add tasks, notes, and opportunities Add or edit lead data from anywhere View reports to see insights on your leads With our mobile app, you can stay connected and responsive no matter where you are. Download\u2026",
+      "keywords": [
+        "calling outbound calls to",
+        "on android download",
+        "getting around on",
+        "mobile app on",
+        "google play",
+        "app store",
+        "mobile",
+        "close",
+        "app"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "conversations",
+      "title": "Conversations",
+      "url": "https://help.close.com/docs/conversations",
+      "body_file": "close-help-docs/pages/conversations.txt",
+      "excerpt": "Conversations View The Conversations View in Close allows you to quickly review any calls or meetings that happen in your organization, as well as see any currently ongoing calls or meetings. History When you first load conversations you'll see your History view. This contains any completed calls or meetings in your organization. We default you to showing you recorded calls over 2 minutes, but you can easily change these filters based on your goals. Keyword and Phrase\u2026",
+      "keywords": [
+        "conversations",
+        "phrase search",
+        "history when",
+        "match all",
+        "match any"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "creating-a-multi-channel-sales-workflow-in-close",
+      "title": "Creating a multi-channel sales workflow in Close",
+      "url": "https://help.close.com/docs/creating-a-multi-channel-sales-workflow-in-close",
+      "body_file": "close-help-docs/pages/creating-a-multi-channel-sales-workflow-in-close.txt",
+      "excerpt": "A sales cycle is a collection of steps that salespeople take to turn a lead into a customer. That includes everything from prospecting to closing the sale (and sometimes even beyond closing). Sales cycles vary between companies and industries, but they usually have a similar sequence of steps. Close is designed to make sales communication quick, easy and effective. You can easily build out unique sales workflows using our dynamic Workflows , Smart Views , and Dialers .\u2026",
+      "keywords": [
+        "actionable guide",
+        "sales cycles are",
+        "close pro tip",
+        "cold prospect",
+        "smart views",
+        "send messa",
+        "warm lead",
+        "call day",
+        "creating",
+        "workflow",
+        "channel",
+        "close",
+        "multi",
+        "sales"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "creating-smart-views",
+      "title": "Create a Smart View",
+      "url": "https://help.close.com/docs/creating-smart-views",
+      "body_file": "close-help-docs/pages/creating-smart-views.txt",
+      "excerpt": "Smart Views are to Close what coffee is to a salesperson. You can get through your day without it, but why would you want to? Smart Views are: Powerful and effortless Dynamic Increase productivity Smart Views are saved Lead Filters that give you 1-click access to your favorite searches anywhere in Close. Smart Views tell sales reps who to follow up with and when to follow up without the need to create endless tasks and reminders. They allow you to translate your current\u2026",
+      "keywords": [
+        "activity filter save",
+        "dynamic increase",
+        "smart view lead",
+        "smart views you",
+        "lead filters",
+        "smart views",
+        "smart view",
+        "creating",
+        "create",
+        "smart",
+        "views",
+        "view"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "date-and-time-formats",
+      "title": "Date and Time Formats",
+      "url": "https://help.close.com/docs/date-and-time-formats",
+      "body_file": "close-help-docs/pages/date-and-time-formats.txt",
+      "excerpt": "Date and Time Formats in Close depend on your System / Browser language settings. Close currently supports two formats - US and UK format: US format - 12/31/2022 1:30pm UK format - 31/12/2022 13:30 If you're using a Close desktop app, you will need to adjust your System (Windows or macOS) settings, while if you use a web app at https://app.close.com you will need to adjust your Browser (Chrome, Edge, Firefox, etc.) settings. Desktop app macOS Go to your System Preferences >\u2026",
+      "keywords": [
+        "preferred languages",
+        "system preferences",
+        "system settings",
+        "united states",
+        "time formats",
+        "formats",
+        "date",
+        "time"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "email-filtering",
+      "title": "Email Filtering",
+      "url": "https://help.close.com/docs/email-filtering",
+      "body_file": "close-help-docs/pages/email-filtering.txt",
+      "excerpt": "Close will automatically filter out any intra-organization emails. You can also filter out external email addresses or domains by request. Which emails are added in Close? Once you've hooked up your IMAP account to Close, it will start automatically linking sent & received emails to the appropriate leads & contacts in your organization, even if those emails were sent outside of Close. Which emails are synced? Close attaches any incoming and outgoing emails to a lead where a\u2026",
+      "keywords": [
+        "filtering",
+        "email"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "enabling-2fa",
+      "title": "Two-factor authentication (2FA)",
+      "url": "https://help.close.com/docs/enabling-2fa",
+      "body_file": "close-help-docs/pages/enabling-2fa.txt",
+      "excerpt": "Two-factor authentication (2FA) is a way of adding additional security to your account. 2FA requires you to enter an extra code when you log in or perform some account-sensitive action (e.g. changing your password). The code is generated from an application on your computer or mobile phone. Just want to reset your password? Learn how to do so here . Setting up 2FA To enable 2FA for your account you will need an application that manages 2FA codes, such as Google\u2026",
+      "keywords": [
+        "google authenticator",
+        "account settings",
+        "authentication",
+        "enabling",
+        "factor",
+        "2fa",
+        "two"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "eu-data-privacy-and-gdpr",
+      "title": "GDPR and EU data privacy",
+      "url": "https://help.close.com/docs/eu-data-privacy-and-gdpr",
+      "body_file": "close-help-docs/pages/eu-data-privacy-and-gdpr.txt",
+      "excerpt": "GDPR Overview Close has implemented processes and procedures to ensure we meet both our Data Controller and Data Processor obligations under the European Union\u2019s (EU) General Data Protection Regulation (GDPR). To determine our readiness for GDPR, Close conducted a risk-based gap analysis of current capabilities and validated the assessment with an independent, third-party, GDPR expert - Ken Baylor. Our gap analysis, Cybersecurity Policy, Acceptable Use Policy, and Incident\u2026",
+      "keywords": [
+        "general data protection regulation",
+        "chief cybersecurity officer",
+        "incident response policy",
+        "acceptable use policy",
+        "cybersecurity policy",
+        "data privacy officer",
+        "data controller",
+        "data processor",
+        "european union",
+        "overview close",
+        "security close",
+        "data subject",
+        "ken baylor",
+        "privacy",
+        "data",
+        "gdpr"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "exporting-data",
+      "title": "Exporting data",
+      "url": "https://help.close.com/docs/exporting-data",
+      "body_file": "close-help-docs/pages/exporting-data.txt",
+      "excerpt": "Exports We believe that you shouldn't be held captive by your own data. That's why we've made it extremely easy to export all or just part of your data in Close. Anytime you are looking at Leads in Search, you can use the ... > Export button. Clicking it will let you choose a type and a format of the exported data. You can export all of your leads or first narrow down your search results by using a search query. You need to choose which type of export you want (Leads,\u2026",
+      "keywords": [
+        "contacts smart view",
+        "leads smart view",
+        "export formats",
+        "exports we",
+        "smart view",
+        "exporting",
+        "leads you",
+        "data"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "german-regulatory-documents",
+      "title": "German Regulatory Documents",
+      "url": "https://help.close.com/docs/german-regulatory-documents",
+      "body_file": "close-help-docs/pages/german-regulatory-documents.txt",
+      "excerpt": "As Twilio, our telephony service provider only supports phone numbers registered to businesses and not individuals, an excerpt from the commercial register (Handelsregisterauszug) is the only document that can be used to register numbers in Germany. Please note that the document's date of issue has to be less than 3 months. For Sole traders that don't have a commercial register (Handelsregisterauszug), you will need to submit: Trade license (\u2018Gewerbeanmeldung\u2019,\u2026",
+      "keywords": [
+        "business registration number",
+        "new regulatory bundle choose",
+        "number notification letter",
+        "freier beruf finanzamt",
+        "regulatory bundles",
+        "business name in",
+        "sole traders",
+        "number type",
+        "regulatory",
+        "as twilio",
+        "documents",
+        "user type",
+        "for sole",
+        "german"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "google-forms",
+      "title": "Google Forms",
+      "url": "https://help.close.com/docs/google-forms",
+      "body_file": "close-help-docs/pages/google-forms.txt",
+      "excerpt": "Is Google Forms part of your sales workflow? You can log responses filled in from your forms in Close as a note, custom field, custom activity etc. In this tutorial, we will Create a Google Form where answers will be added to a Google Spreadsheet create an integration link for easy form filling from a lead page set up Zapier integration to automatically add our answers in a form of a note What you\u2019ll need A Google account to access Google Forms A Close account and your API\u2026",
+      "keywords": [
+        "google forms create",
+        "google spreadsheet",
+        "google form first",
+        "is google forms",
+        "google forms",
+        "google sheet",
+        "google form",
+        "google",
+        "forms"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "importing-opportunities-from-a-file",
+      "title": "Importing Opportunities from a file",
+      "url": "https://help.close.com/docs/importing-opportunities-from-a-file",
+      "body_file": "close-help-docs/pages/importing-opportunities-from-a-file.txt",
+      "excerpt": "You can import Opportunities from a file following the steps below. Go to the Importer You can do the following to bring your Leads into Close from a file: Upload via CSV by browsing that file on your computer Dragging and dropping a file onto the Lead Importer\u2019s landing page Copy and paste directly from your spreadsheet Format your import file Make sure the first row in your spreadsheet is a header row (e.g., a row containing column names). It has to contain one column\u2026",
+      "keywords": [
+        "lead importer",
+        "opportunities",
+        "date created",
+        "importer you",
+        "importing",
+        "lead name",
+        "user make",
+        "date won",
+        "file"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "importing-other-data-into-close",
+      "title": "Importing Other Data into Close",
+      "url": "https://help.close.com/docs/importing-other-data-into-close",
+      "body_file": "close-help-docs/pages/importing-other-data-into-close.txt",
+      "excerpt": "Close's native lead importer handles most standard data, but if you need to bring in notes, tasks, or call activities that aren't supported by the built-in importer, you can use the support tools below. Each tool accepts a CSV file and maps your data to the correct records in Close. \ud83d\udca1 All tools on this page require a Close API Key. Go to Settings \u2192 Developer \u2192 API Keys and click + New API Key to generate one before getting started. Importing Notes Notes in Close are\u2026",
+      "keywords": [
+        "import notes attach notes",
+        "column description lead",
+        "column reference your",
+        "importing notes notes",
+        "importing",
+        "open tool",
+        "close",
+        "other",
+        "data",
+        "into"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "inbox",
+      "title": "Inbox",
+      "url": "https://help.close.com/docs/inbox",
+      "body_file": "close-help-docs/pages/inbox.txt",
+      "excerpt": "The Close Inbox is a sales-focused view of all your inbound communication (emails, missed calls, voicemails) and open tasks/reminders for the day. The Inbox is a hub for everything you should react to and be reminded of. It's your hub for notifications and Tasks, and should be considered a to-do list. The goal for your Inbox is to help keep you on track in your workflow, with each item actionable. Your sales team should be able to work exclusively from their Close inbox.\u2026",
+      "keywords": [
+        "due tasks opportunities",
+        "potential contacts to",
+        "missed calls inbound",
+        "inbound emails",
+        "inbox"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "leads",
+      "title": "Leads",
+      "url": "https://help.close.com/docs/leads",
+      "body_file": "close-help-docs/pages/leads.txt",
+      "excerpt": "Close is designed to collect all of your communication history with a Lead within one view, as well as allow you to communicate with your Leads in a number of different ways. Leads, Contacts, and Opportunities By default, Close imports Companies as \"Leads.\" The individuals at that company are seen as \"Contacts,\" and if you are in the process of selling something to that Lead, we track that through \"Opportunities\". B2B If you are a B2B business, your Leads will be Companies\u2026",
+      "keywords": [
+        "lead summaries lead summaries",
+        "custom fields on",
+        "opportunities by",
+        "leads"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "migration-from-pipedrive",
+      "title": "Migration from Pipedrive",
+      "url": "https://help.close.com/docs/migration-from-pipedrive",
+      "body_file": "close-help-docs/pages/migration-from-pipedrive.txt",
+      "excerpt": "Migrate Data from Pipedrive Our team can help you seamlessly transfer your data from Pipedrive to Close. Export Data from Pipedrive Begin by exporting your complete data set from Pipedrive under Tools and apps > Export data. Select the CSV file type and the export data type, then click Export -- you'll want to run this once for each of Leads, Deals, Organizations, People, Activities and Notes. When the export is finished, click the download icon to download the file. Send\u2026",
+      "keywords": [
+        "notes incomplete task activities",
+        "customer relationship how",
+        "opportunities notes",
+        "pipedrive begin",
+        "contacts deals",
+        "close pro tip",
+        "lead statuses",
+        "pipedrive our",
+        "leads people",
+        "migrate data",
+        "export data",
+        "close send",
+        "migration",
+        "pipedrive",
+        "what data",
+        "in close"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "note-templates-and-summary-guidance",
+      "title": "Note Templates and Summary Guidance",
+      "url": "https://help.close.com/docs/note-templates-and-summary-guidance",
+      "body_file": "close-help-docs/pages/note-templates-and-summary-guidance.txt",
+      "excerpt": "Playbooks give you two ways to control how calls are documented after they end. Note templates auto-generate a structured call note, and Summary guidance shapes how Close AI writes the call summary. Both are optional, but together they make your call records significantly more useful. Note templates A note template is a pre-formatted structure that automatically populates as a call note on the lead or contact record after a call ends. Instead of reps writing notes from\u2026",
+      "keywords": [
+        "playbook open",
+        "template tags",
+        "templates",
+        "guidance",
+        "save you",
+        "summary",
+        "note"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "notes",
+      "title": "Notes",
+      "url": "https://help.close.com/docs/notes",
+      "body_file": "close-help-docs/pages/notes.txt",
+      "excerpt": "Notes allow you to quickly insert an unstructured text note on the Lead activity panel. While Custom Activities , Call , and Meeting Notes are better suited for their respective contexts, simple text notes can also be a useful tool. Here's an example of what a Note looks like in-app: Example Note Notes behave like any other default activity in Close - you can create, edit, search/filter, and report on them. You can also add them via our API if you want to integrate Close\u2026",
+      "keywords": [
+        "while custom activities",
+        "editing notes notes",
+        "example note notes",
+        "meeting notes",
+        "note notes",
+        "notes"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "notetaker",
+      "title": "Notetaker",
+      "url": "https://help.close.com/docs/notetaker",
+      "body_file": "close-help-docs/pages/notetaker.txt",
+      "excerpt": "Pricing Notetaker is currently in free beta. Close Notetaker automatically transcribes and summarizes your meetings, so you can focus on what really matters: your leads. Notetaker joins your meetings, takes notes for you, and adds summaries and transcripts directly to the lead's timeline. Notetaker can: Auto-join scheduled meetings, even if you're not the organizer. Arrive 2 minutes early. Record meetings even if you\u2019re absent (as long as Notetaker is let in). Transcribe\u2026",
+      "keywords": [
+        "demo notetaker enabling notetaker set",
+        "using notetaker the notetaker",
+        "zoom permissions due",
+        "pricing notetaker",
+        "close notetaker",
+        "notetaker"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "opportunities-report",
+      "title": "Opportunities List View",
+      "url": "https://help.close.com/docs/opportunities-report",
+      "body_file": "close-help-docs/pages/opportunities-report.txt",
+      "excerpt": "While Close tracks a number of data points, our philosophy on reporting is to make that data as actionable for your sales team as possible. To that end, our reporting focuses on a sales rep\u2019s created Opportunities, their Activity, and the movement of Leads through the sales funnel. The Opportunities List gives you a powerful, flexible view of every opportunity in your organization. Use it to manage your pipeline, prioritize follow-ups, run quick calculations, and share key\u2026",
+      "keywords": [
+        "opportunities list you",
+        "opportunities list",
+        "opportunities use",
+        "pipeline owner",
+        "opportunities",
+        "notes custom",
+        "while close",
+        "report",
+        "list",
+        "view"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "opportunity-pipeline-view",
+      "title": "Opportunity Pipeline View",
+      "url": "https://help.close.com/docs/opportunity-pipeline-view",
+      "body_file": "close-help-docs/pages/opportunity-pipeline-view.txt",
+      "excerpt": "The Pipeline View is one of the simplest, yet most actionable reporting tools for sales teams. It addresses both the needs of an individual sales rep, as well as sales managers, VPs and CEOs to easily forecast and prioritize deals. Easily drag an Opportunity from one stage to another, filter, sort, save, and share this report. There are plenty of options to help you customize your experience. Using the Pipeline View Every Opportunity created on a Lead in Close can be seen\u2026",
+      "keywords": [
+        "pipeline view every opportunity",
+        "lost opportunities",
+        "opportunity notes",
+        "pipeline view by",
+        "custom fields",
+        "pipeline view",
+        "opportunity",
+        "close you",
+        "pipeline",
+        "view"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "outcomes",
+      "title": "Outcomes",
+      "url": "https://help.close.com/docs/outcomes",
+      "body_file": "close-help-docs/pages/outcomes.txt",
+      "excerpt": "Call and Meeting Outcomes Call and Meeting Outcomes help you track and categorize the results of your calls and meetings, giving you better insights into your sales activities and performance. Overview Outcomes represent the result of a connected call or a completed meeting. They help you understand what happened during your conversations and provide valuable data for reporting and analysis. Key Benefits: Track the effectiveness of your calls and meetings Generate more\u2026",
+      "keywords": [
+        "managing outcomes creating outcomes go",
+        "getting started availability call",
+        "defining outcomes use",
+        "meeting outcomes call",
+        "set outcomes during",
+        "overview outcomes",
+        "meeting outcomes",
+        "setting outcomes",
+        "best practices",
+        "outcomes click",
+        "key benefits",
+        "add outcome",
+        "calls when",
+        "outcomes"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "playbooks",
+      "title": "Playbooks",
+      "url": "https://help.close.com/docs/playbooks",
+      "body_file": "close-help-docs/pages/playbooks.txt",
+      "excerpt": "Playbooks are currently in free beta. Reach out to support@close.com for more info. Playbooks give your team a shared framework for how to run specific types of conversations, whether that's a discovery call, a demo, a follow-up, or an onboarding check-in. Pair them with Outcomes to track what happened on each call, and use them with Close AI to generate structured summaries and automatically capture key data points. What is a Playbook? A Playbook is a reusable conversation\u2026",
+      "keywords": [
+        "setting up playbooks playbooks",
+        "manage customizations",
+        "callback requested",
+        "demo scheduled",
+        "not interested",
+        "budget range",
+        "playbooks",
+        "team size"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "pull-webform-answers-into-close-custom-activity",
+      "title": "Pull Webform Answers Into Close Custom Activity",
+      "url": "https://help.close.com/docs/pull-webform-answers-into-close-custom-activity",
+      "body_file": "close-help-docs/pages/pull-webform-answers-into-close-custom-activity.txt",
+      "excerpt": "This Zap will pull a lead's answers from your webform into a Custom Activity in Close, allowing you to: Filter your leads using common answers Review answers directly on the lead's page What you'll need To set up this Zap, you'll need the following: A Zapier account that allows for multi-step Zaps; A webform tool that integrates with Zapier (see next step for more details); A Close account of the Basic , Professional , or Business plan ( Starter plan won't work as it\u2026",
+      "keywords": [
+        "custom activity before",
+        "custom activities",
+        "custom activity",
+        "zapier please",
+        "google form",
+        "activity",
+        "answers",
+        "webform",
+        "custom",
+        "close",
+        "into",
+        "pull"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "reinstalling-the-close-app",
+      "title": "Reinstalling the Close app",
+      "url": "https://help.close.com/docs/reinstalling-the-close-app",
+      "body_file": "close-help-docs/pages/reinstalling-the-close-app.txt",
+      "excerpt": "If you need to reinstall your Close desktop app, please follow the instructions below as simply moving the Close app into the trash isn't sufficient for thorough reinstall. The difference between following these instructions and just dragging an application to the trash is that these instructions will clear key files required for a fresh restart, whereas dragging apps to the trash will miss this. No Close data will be lost during this process. Clearing cookie/session/cache\u2026",
+      "keywords": [
+        "inspect element tab",
+        "reinstalling",
+        "no close",
+        "close",
+        "app"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "requirements-for-bulk-email-senders",
+      "title": "Requirements for bulk email senders",
+      "url": "https://help.close.com/docs/requirements-for-bulk-email-senders",
+      "body_file": "close-help-docs/pages/requirements-for-bulk-email-senders.txt",
+      "excerpt": "In 2024 Google and Yahoo anounced they'll enforce the following requirements for bulk email senders. The requirements are not new; they were already best practices for a while now. They are being enforced to prevent recipients from getting spam and harmful messages, and also to protect email senders from getting spoofed and getting their domains abused. The aim is to have a better user experience by delivering only wanted and safe emails. What makes me a bulk email sender?\u2026",
+      "keywords": [
+        "bulk senders",
+        "requirements",
+        "senders",
+        "email",
+        "bulk"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "restricted-user-role",
+      "title": "Restricted User role",
+      "url": "https://help.close.com/docs/restricted-user-role",
+      "body_file": "close-help-docs/pages/restricted-user-role.txt",
+      "excerpt": "Restricted User Each plan includes the predefined role below. The Restricted User role is a default role and may be assigned to any user. However, it may not be edited or modified. Restricted Users do not have access to many Close features. Restricted Users can use Close for core work, including managing their own records and communication. They can also delete their own opportunities, tasks, and activities. Restricted Users cannot do higher-risk or admin-style actions\u2026",
+      "keywords": [
+        "restricted user each",
+        "restricted users",
+        "restricted",
+        "role",
+        "user"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "script-installation-setup",
+      "title": "Script installation & setup",
+      "url": "https://help.close.com/docs/script-installation-setup",
+      "body_file": "close-help-docs/pages/script-installation-setup.txt",
+      "excerpt": "Instructions on how to install and set up the environment for running Close scripts Almost anything that can be done in the Close application by the end-user can be done via the Close API (Application Programming Interface) as well \u2013 for example, send an email, create reports, add notes, search leads, etc. API is simply a way of interacting with Close using the programming language, instead of using mouse & keyboard. Here at Close, we use the Python programming language.\u2026",
+      "keywords": [
+        "application programming interface",
+        "installation",
+        "using python",
+        "script",
+        "setup"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "searching-guide-single-queries",
+      "title": "Searching tips single queries (Legacy)",
+      "url": "https://help.close.com/docs/searching-guide-single-queries",
+      "body_file": "close-help-docs/pages/searching-guide-single-queries.txt",
+      "excerpt": "New Lead Filtering We recently released a new version of our lead filtering/search. The following guides are for our legacy search. If your UI does not match, please see this guide for the new filtering instructions. This article is a more detailed look at constructing single search queries in Close. To start creating basic search queries right away, head over to the search overview help article. After reading this, check out our article on combining queries . Full text\u2026",
+      "keywords": [
+        "new lead filtering we",
+        "searching",
+        "queries",
+        "legacy",
+        "single",
+        "guide",
+        "tips"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "simpletexting",
+      "title": "SimpleTexting",
+      "url": "https://help.close.com/docs/simpletexting",
+      "body_file": "close-help-docs/pages/simpletexting.txt",
+      "excerpt": "Send MMS through SimpleTexting and get alerted in Close when a contact replies with an MMS. Create a task in Close after receiving an MMS in SimpleTexting Use this Zap SimpleTexting allows you to send SMS and MMS directly from your cellphone number or from phone number you'll rend with SimpleTexting. Don't miss a single MMS reply by getting alerted directly in Close. If you're using your Close phone number to text from SimpleTexting, you'll need to disable the SMS\u2026",
+      "keywords": [
+        "custom webhook",
+        "simpletexting",
+        "webhook start",
+        "setup step"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "single-sign-on-sso-with-google",
+      "title": "Single Sign On (SSO) with Google",
+      "url": "https://help.close.com/docs/single-sign-on-sso-with-google",
+      "body_file": "close-help-docs/pages/single-sign-on-sso-with-google.txt",
+      "excerpt": "Google Single Sign-On allows you to sign in seamlessly with your Google account, eliminating the hassle of remembering another password. It enhances security and streamlines the task of managing user access within your organization. Instead of using a regular email/password combination you can sign up and log in Close using Sign Up with Google / Log in with Google . Regardless of the way you'll sign up/log into Close, make sure to enable 2FA on your account. Other SSO\u2026",
+      "keywords": [
+        "google single sign",
+        "set password",
+        "sign up",
+        "google",
+        "single",
+        "sign",
+        "sso"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "spell-check",
+      "title": "Spell check",
+      "url": "https://help.close.com/docs/spell-check",
+      "body_file": "close-help-docs/pages/spell-check.txt",
+      "excerpt": "With the built-in spell checker for Close desktop app , you can ensure that your emails and notes are mistake-free. Spell check will work on both Windows and Mac. Spell check is multilingual, which means you can select more than one language at once, and Close will check for errors across multiple languages. Windows On Windows, press Alt key to bring up the menu bar, and then you can find the spell check settings under Edit > Spell Checker Languages(s) where you can toggle\u2026",
+      "keywords": [
+        "spell checker languages",
+        "windows on windows",
+        "system settings",
+        "input sources",
+        "mac on mac",
+        "close see",
+        "check",
+        "spell"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "status-change-report",
+      "title": "Status Change Report",
+      "url": "https://help.close.com/docs/status-change-report",
+      "body_file": "close-help-docs/pages/status-change-report.txt",
+      "excerpt": "The Status Change report tracks the movement of both Leads and Opportunities from Status to Status through your sales funnel. It gives you the number of Leads in each previous status and shows where those Leads went in a given time period. With the data given, you can also calculate (outside of Close) what the conversion percentage is for each of your Statuses. To see more detail, you can click on any number to see the related search results. You can also click the arrow\u2026",
+      "keywords": [
+        "status change report read",
+        "opportunity status",
+        "potential status",
+        "change",
+        "report",
+        "status"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "tasks",
+      "title": "Tasks",
+      "url": "https://help.close.com/docs/tasks",
+      "body_file": "close-help-docs/pages/tasks.txt",
+      "excerpt": "In Close, you can set Tasks for yourself or other team members within any lead. Tasks are best used when noting a unique action that is not in your normal workflow or for reaching out to another team member for help (share an update, provide support, reach out to a Contact within a Lead, etc). Creating and Assigning Tasks You can create a Task for yourself or someone else on your team by going into any lead and clicking \"add\" to the right of the \"Tasks\" section located\u2026",
+      "keywords": [
+        "assigning tasks you",
+        "all leads inbox",
+        "view all tasks",
+        "high priority",
+        "delete tasks",
+        "in close",
+        "tasks"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "tasks-not-syncing-with-google-calendar",
+      "title": "Tasks not syncing with Google Calendar",
+      "url": "https://help.close.com/docs/tasks-not-syncing-with-google-calendar",
+      "body_file": "close-help-docs/pages/tasks-not-syncing-with-google-calendar.txt",
+      "excerpt": "Why Can\u2019t I See My Close Tasks in Google Calendar? If you previously subscribed to your Close Tasks Calendar via Google Calendar, you may have noticed that your tasks are no longer syncing. This is because Close has sunset this feature due to security concerns. While discussions are ongoing about implementing a more secure solution in the future, you can use Zapier as a workaround to sync your Close Tasks with Google Calendar. How to Sync Close Tasks with Google Calendar\u2026",
+      "keywords": [
+        "google calendar using zapier zapier",
+        "select create detailed event",
+        "zapier click create zap",
+        "close tasks calendar",
+        "google calendar in",
+        "see my close tasks",
+        "sync close tasks",
+        "google calendar",
+        "select new task",
+        "zapier account",
+        "if you haven",
+        "close tasks",
+        "calendar",
+        "syncing",
+        "why can",
+        "google",
+        "set up",
+        "tasks"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "user-role",
+      "title": "User role",
+      "url": "https://help.close.com/docs/user-role",
+      "body_file": "close-help-docs/pages/user-role.txt",
+      "excerpt": "User Each plan includes the predefined role shown below. This is a default role and may be assigned to any user, but may not be edited or modified. Users can do everything Restricted Users can, plus additional bulk and lead-management actions, including: Bulk import Bulk email Delete leads Merge leads Manage or delete other users\u2019 opportunities, tasks, and activities (where enabled by the role) Call, send SMS, and use the Dialer. Users cannot manage organization-level\u2026",
+      "keywords": [
+        "restricted users",
+        "user each",
+        "role",
+        "user"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "using-playbooks-on-calls",
+      "title": "Using Playbooks on Calls",
+      "url": "https://help.close.com/docs/using-playbooks-on-calls",
+      "body_file": "close-help-docs/pages/using-playbooks-on-calls.txt",
+      "excerpt": "Once Playbooks are set up, reps can apply them to calls and meetings directly from the call record. This article covers the rep experience, from applying a Playbook mid-call to reviewing what Close captured after the call ends. Applying a Playbook to a call Playbooks can be applied to a call before, during, or after the conversation. Open the call record in Close Find the Playbook field on the call Select the relevant Playbook from the dropdown Once a Playbook is applied:\u2026",
+      "keywords": [
+        "outcome outcomes",
+        "close find",
+        "playbooks",
+        "calls",
+        "using"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "using-the-power-dialer",
+      "title": "Using the Power Dialer",
+      "url": "https://help.close.com/docs/using-the-power-dialer",
+      "body_file": "close-help-docs/pages/using-the-power-dialer.txt",
+      "excerpt": "The best way to call a large number of Leads quickly is by using the Power Dialer. The Dialer will call through a Smart View without you having to manually click into each Lead to call. Starting a Power Dialer Session To start a Dialer session, you\u2019ll first want to build the list of Leads that you intend to call. You\u2019ll need to first build a Smart View that contains the right leads to call . Once you have the list ready, select the Call button at the top and your Power\u2026",
+      "keywords": [
+        "smart view the power dialer",
+        "power dialer session to",
+        "plan limitations solo",
+        "call assistant",
+        "power dialer",
+        "smart view",
+        "dialer",
+        "power",
+        "using"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "windows-screen-issue",
+      "title": "Windows Screen Issue",
+      "url": "https://help.close.com/docs/windows-screen-issue",
+      "body_file": "close-help-docs/pages/windows-screen-issue.txt",
+      "excerpt": "If the app is running but not visible in an active window in Windows (but still visible in the taskbar), the likely reason is that the Close app is open & running, but is just outside the visible area of the screen. Primary Fix Try to drag an app window to the side in Windows to trigger automatic resizing. This will show the apps that are open on the opposite side, which should include Close. Find Close app and click it to set it at a side to side view with the first app.\u2026",
+      "keywords": [
+        "resolution trick windows",
+        "secondary fixes if",
+        "primary fix try",
+        "find close",
+        "windows",
+        "screen",
+        "issue"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "workflow-steps",
+      "title": "Workflow Steps",
+      "url": "https://help.close.com/docs/workflow-steps",
+      "body_file": "close-help-docs/pages/workflow-steps.txt",
+      "excerpt": "Steps are the individual actions that take place within a Workflow. This includes sending email or SMS, updating Leads, creating Opportunities, or assigning Tasks. Here is a list of the current available Workflow steps: Step Type Email Communication Call Communication SMS Communication Assign User Operational Task Operational Create Opportunity Operational Update Lead Operational Update Opportunity Operational Filter Operational Adding or Removing Steps to a Workflow To add\u2026",
+      "keywords": [
+        "active workflow when",
+        "removing steps",
+        "updating steps",
+        "step delay if",
+        "workflow run",
+        "workflow to",
+        "add step",
+        "workflow",
+        "steps"
+      ],
+      "topic": "tasks_notes"
+    },
+    {
+      "slug": "zoom",
+      "title": "Zoom",
+      "url": "https://help.close.com/docs/zoom",
+      "body_file": "close-help-docs/pages/zoom.txt",
+      "excerpt": "Connect your Zoom account to Close to work with Zoom meetings and to use Close Notetaker on Zoom calls. Zoom Cloud Recordings linked to synced calendar events will also be pulled into Close. If the synced Meeting has an associated Zoom link in the event details, we will pull in its recording on the Lead Page. Zoom + Close helps with: Zoom meetings in Close: When your calendar is synced, upcoming meetings can appear in Close so you can see meeting details and join quickly.\u2026",
+      "keywords": [
+        "enable close notetaker head",
+        "zoom cloud recordings",
+        "close notetaker",
+        "for google meet",
+        "microsoft teams",
+        "setup step",
+        "lead page",
+        "zoom"
+      ],
+      "topic": "tasks_notes"
+    }
+  ]
+}

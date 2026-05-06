@@ -1,0 +1,349 @@
+{
+  "topic_id": "meetings_scheduling",
+  "article_count": 18,
+  "articles": [
+    {
+      "slug": "book-meeting-setup-guide",
+      "title": "Book a Meeting",
+      "url": "https://help.close.com/docs/book-meeting-setup-guide",
+      "body_file": "close-help-docs/pages/book-meeting-setup-guide.txt",
+      "excerpt": "Book meetings directly from a Lead page \u2014 no copy-pasting, no switching tabs. Close Scheduling creates the calendar event, sends the invite, and logs the meeting on the Lead automatically. You can also let Chloe book meetings on your behalf during live calls. What you can do with Close Scheduling Book from a Lead page \u2014 open the Book a Meeting modal from any Lead, pick a time that works, and Close creates the calendar event and sends the contact their invite. Let Chloe book\u2026",
+      "keywords": [
+        "enable close scheduling",
+        "close scheduling book",
+        "close scheduling",
+        "event management",
+        "scheduling zoom",
+        "google meet",
+        "setup step",
+        "let chloe",
+        "meeting",
+        "guide",
+        "setup",
+        "book"
+      ],
+      "topic": "meetings_scheduling"
+    },
+    {
+      "slug": "calendly",
+      "title": "Calendly",
+      "url": "https://help.close.com/docs/calendly",
+      "body_file": "close-help-docs/pages/calendly.txt",
+      "excerpt": "Connect your Calendly account to insert your scheduling links into email and SMS communication with 1-click and create new Contacts when new bookings are made. Connect your Calendly account Users can add their Calendly account by going to Settings > Accounts & Apps and selecting Calendly from the list of options. Once connected, all of the Calendly Event Types (aka \u201cbooking links\u201d) available to the connected Calendly account will be added to Scheduling Links and will appear\u2026",
+      "keywords": [
+        "calendly event types",
+        "connected account",
+        "scheduling links",
+        "event types",
+        "calendly"
+      ],
+      "topic": "meetings_scheduling"
+    },
+    {
+      "slug": "chatgpt",
+      "title": "ChatGPT",
+      "url": "https://help.close.com/docs/chatgpt",
+      "body_file": "close-help-docs/pages/chatgpt.txt",
+      "excerpt": "Close GPT is being sunset soon. Going forward, we recommed using Close's official ChatGPT app . We're thrilled to introduce a powerful collaboration that combines the capabilities of Close with the AI brilliance of ChatGPT. You and your team can further streamline your workflows, see lightning-fast insights, and take advantage of automated email drafting. Getting Started with the ChatGPT Plugin Login or Sign Up: Head to your ChatGPT account . If you don't have an account,\u2026",
+      "keywords": [
+        "activity summarization",
+        "getting started",
+        "plugin login",
+        "chatgpt",
+        "sign up"
+      ],
+      "topic": "meetings_scheduling"
+    },
+    {
+      "slug": "conversations",
+      "title": "Conversations",
+      "url": "https://help.close.com/docs/conversations",
+      "body_file": "close-help-docs/pages/conversations.txt",
+      "excerpt": "Conversations View The Conversations View in Close allows you to quickly review any calls or meetings that happen in your organization, as well as see any currently ongoing calls or meetings. History When you first load conversations you'll see your History view. This contains any completed calls or meetings in your organization. We default you to showing you recorded calls over 2 minutes, but you can easily change these filters based on your goals. Keyword and Phrase\u2026",
+      "keywords": [
+        "conversations",
+        "phrase search",
+        "history when",
+        "match all",
+        "match any"
+      ],
+      "topic": "meetings_scheduling"
+    },
+    {
+      "slug": "create-a-new-lead-once-a-calendly-meeting-is-booked",
+      "title": "Create a new Lead once a Calendly meeting is booked",
+      "url": "https://help.close.com/docs/create-a-new-lead-once-a-calendly-meeting-is-booked",
+      "body_file": "close-help-docs/pages/create-a-new-lead-once-a-calendly-meeting-is-booked.txt",
+      "excerpt": "With the Close Calendly integration , you can sync your scheduling links into Close. If a new Lead books a meeting, the Lead is not automatically added to Close, you'll need an automation like Zapier to create the Lead. Here\u2019s what you\u2019ll need A Zapier account that allows for multi-step Zaps Calendly account Close account Creating your Zap Login to Zapier and select Create . If you never used Zapier here are some tutorials on how to create Zaps. Step 1: Select your Trigger\u2026",
+      "keywords": [
+        "trigger select calendly",
+        "invitee created",
+        "close calendly",
+        "trigger event",
+        "zaps calendly",
+        "select close",
+        "find lead",
+        "zap login",
+        "calendly",
+        "meeting",
+        "booked",
+        "create",
+        "lead",
+        "once"
+      ],
+      "topic": "meetings_scheduling"
+    },
+    {
+      "slug": "hubspot-to-close-syncing-integration",
+      "title": "HubSpot to Close - Syncing Integration",
+      "url": "https://help.close.com/docs/hubspot-to-close-syncing-integration",
+      "body_file": "close-help-docs/pages/hubspot-to-close-syncing-integration.txt",
+      "excerpt": "Close and HubSpot Integration Integrating your Close and HubSpot databases can help streamline your data management and ensure that your sales and marketing teams have access to the most up-to-date information. This article will provide a comprehensive overview of the Close and HubSpot integration , including what it can and can't do, how to set it up, and troubleshooting tips. What the Integration Can and Can't Do The integration was created and is managed by HubSpot, and\u2026",
+      "keywords": [
+        "integration integrating",
+        "data you want with",
+        "custom activities",
+        "app marketplace",
+        "integration can",
+        "custom objects",
+        "syncing only",
+        "integration",
+        "hubspot",
+        "syncing",
+        "do the",
+        "close"
+      ],
+      "topic": "meetings_scheduling"
+    },
+    {
+      "slug": "integrations",
+      "title": "Integrations",
+      "url": "https://help.close.com/docs/integrations",
+      "body_file": "close-help-docs/pages/integrations.txt",
+      "excerpt": "Integrations Close has built-in integrations, such as our Meetings tool and email sync . We also have a Zoom integration to sync your recorded meetings, and Slack for remote teams. For tools that don't have a native integration with Close, we can still help. Using your OAuth Key or API Key, your Organization can connect other apps with Close using integration tools such as Zapier or Make. Explore our comprehensive guides to learn how to leverage these integrations and get\u2026",
+      "keywords": [
+        "integrations indie stack the",
+        "integrations close",
+        "integrations",
+        "best apps",
+        "our blog"
+      ],
+      "topic": "meetings_scheduling"
+    },
+    {
+      "slug": "meetings",
+      "title": "Meeting Sync",
+      "url": "https://help.close.com/docs/meetings",
+      "body_file": "close-help-docs/pages/meetings.txt",
+      "excerpt": "Automatically sync meetings from Google Calendar and Office 365 Calendar. Today, salespeople juggle a half dozen tools just to start, run, and review their meetings--from the first demo to closing the deal. We thought running those meetings should be as easy as making a call in Close, so we launched Meetings. With Meetings, scheduled meetings with Contacts can automatically be pulled into Close. If you allow access from your Google or Microsoft accounts, Close can search\u2026",
+      "keywords": [
+        "google calendar to",
+        "google calendar",
+        "under settings",
+        "with meetings",
+        "calendar you",
+        "meetings",
+        "meeting",
+        "sync"
+      ],
+      "topic": "meetings_scheduling"
+    },
+    {
+      "slug": "notetaker",
+      "title": "Notetaker",
+      "url": "https://help.close.com/docs/notetaker",
+      "body_file": "close-help-docs/pages/notetaker.txt",
+      "excerpt": "Pricing Notetaker is currently in free beta. Close Notetaker automatically transcribes and summarizes your meetings, so you can focus on what really matters: your leads. Notetaker joins your meetings, takes notes for you, and adds summaries and transcripts directly to the lead's timeline. Notetaker can: Auto-join scheduled meetings, even if you're not the organizer. Arrive 2 minutes early. Record meetings even if you\u2019re absent (as long as Notetaker is let in). Transcribe\u2026",
+      "keywords": [
+        "demo notetaker enabling notetaker set",
+        "using notetaker the notetaker",
+        "zoom permissions due",
+        "pricing notetaker",
+        "close notetaker",
+        "notetaker"
+      ],
+      "topic": "meetings_scheduling"
+    },
+    {
+      "slug": "other-ways-to-get-your-data-into-close",
+      "title": "Other ways to get your data into Close",
+      "url": "https://help.close.com/docs/other-ways-to-get-your-data-into-close",
+      "body_file": "close-help-docs/pages/other-ways-to-get-your-data-into-close.txt",
+      "excerpt": "Detect Potential Contacts from your Connected Account You need to have a connected email account for this feature to work. You can access it in the top right corner of the 'Inbox' section or by clicking the '+' button next to 'Leads.' In the 'Inbox' section In the 'New Lead' popup window Click the button, and you'll get a list of recommended Contacts. If you're happy with the list, you can import right away, or you can click 'Edit List,' and you can deselect Contacts you'd\u2026",
+      "keywords": [
+        "detect potential contacts",
+        "connected account you",
+        "potential contact",
+        "from calendly",
+        "event types",
+        "edit list",
+        "new lead",
+        "close",
+        "other",
+        "data",
+        "into",
+        "ways"
+      ],
+      "topic": "meetings_scheduling"
+    },
+    {
+      "slug": "outcomes",
+      "title": "Outcomes",
+      "url": "https://help.close.com/docs/outcomes",
+      "body_file": "close-help-docs/pages/outcomes.txt",
+      "excerpt": "Call and Meeting Outcomes Call and Meeting Outcomes help you track and categorize the results of your calls and meetings, giving you better insights into your sales activities and performance. Overview Outcomes represent the result of a connected call or a completed meeting. They help you understand what happened during your conversations and provide valuable data for reporting and analysis. Key Benefits: Track the effectiveness of your calls and meetings Generate more\u2026",
+      "keywords": [
+        "managing outcomes creating outcomes go",
+        "getting started availability call",
+        "defining outcomes use",
+        "meeting outcomes call",
+        "set outcomes during",
+        "overview outcomes",
+        "meeting outcomes",
+        "setting outcomes",
+        "best practices",
+        "outcomes click",
+        "key benefits",
+        "add outcome",
+        "calls when",
+        "outcomes"
+      ],
+      "topic": "meetings_scheduling"
+    },
+    {
+      "slug": "pull-webform-answers-into-close-custom-activity",
+      "title": "Pull Webform Answers Into Close Custom Activity",
+      "url": "https://help.close.com/docs/pull-webform-answers-into-close-custom-activity",
+      "body_file": "close-help-docs/pages/pull-webform-answers-into-close-custom-activity.txt",
+      "excerpt": "This Zap will pull a lead's answers from your webform into a Custom Activity in Close, allowing you to: Filter your leads using common answers Review answers directly on the lead's page What you'll need To set up this Zap, you'll need the following: A Zapier account that allows for multi-step Zaps; A webform tool that integrates with Zapier (see next step for more details); A Close account of the Basic , Professional , or Business plan ( Starter plan won't work as it\u2026",
+      "keywords": [
+        "custom activity before",
+        "custom activities",
+        "custom activity",
+        "zapier please",
+        "google form",
+        "activity",
+        "answers",
+        "webform",
+        "custom",
+        "close",
+        "into",
+        "pull"
+      ],
+      "topic": "meetings_scheduling"
+    },
+    {
+      "slug": "savvycal",
+      "title": "SavvyCal",
+      "url": "https://help.close.com/docs/savvycal",
+      "body_file": "close-help-docs/pages/savvycal.txt",
+      "excerpt": "Easily integrate your booking software with your CRM using the native SavvyCal + Close integration. Automatically create and update your Close Contacts when a prospect books a meeting with your team. Increase the number of demos for your team when you embed your SavvyCal booking directly on your website. SavvyCal also allows you to automate round robin routing, set up team scheduling, add teammates on the fly, and more. Try SavvyCal for a month for free! Get a free month of\u2026",
+      "keywords": [
+        "custom activity",
+        "close contacts",
+        "savvycal"
+      ],
+      "topic": "meetings_scheduling"
+    },
+    {
+      "slug": "scheduling-links",
+      "title": "Scheduling Links",
+      "url": "https://help.close.com/docs/scheduling-links",
+      "body_file": "close-help-docs/pages/scheduling-links.txt",
+      "excerpt": "Close offers the ability to save and send meeting links directly to Leads. Sales representatives can quickly book a follow-up call with an Account Executive while on the phone with a Lead without ever leaving Close. Creating Scheduling Links You can manually add unique scheduling links to your Close account, which will be specific to your user and organization membership. Navigate to the Scheduling Links page under Settings > Scheduling Links . Under the My Links tab, you\u2026",
+      "keywords": [
+        "creating scheduling links you",
+        "using scheduling links",
+        "qualification call",
+        "account executive",
+        "scheduling links",
+        "scheduling link",
+        "template tags",
+        "template tag",
+        "scheduling",
+        "my links",
+        "links"
+      ],
+      "topic": "meetings_scheduling"
+    },
+    {
+      "slug": "setup-implementation",
+      "title": "Setup & Implementation",
+      "url": "https://help.close.com/docs/setup-implementation",
+      "body_file": "close-help-docs/pages/setup-implementation.txt",
+      "excerpt": "Plan Availability Chloe is available on the Growth and Scale plans. Chloe is accessed from the left sidebar of Close by Admins, Super Users, and any custom roles with the Manage Customizations permission. The first time this page is accessed, you\u2019ll be prompted to set up Chloe. This covers everything from teaching Chloe about your business to running a Test Call before deploying her to real leads. After the setup is fully complete, you\u2019ll create and manage Agents, configure\u2026",
+      "keywords": [
+        "plan availability chloe",
+        "manage customizations",
+        "test call reviewing",
+        "chloe setup chloe",
+        "implementation",
+        "super users",
+        "test call",
+        "setup"
+      ],
+      "topic": "meetings_scheduling"
+    },
+    {
+      "slug": "tasks-not-syncing-with-google-calendar",
+      "title": "Tasks not syncing with Google Calendar",
+      "url": "https://help.close.com/docs/tasks-not-syncing-with-google-calendar",
+      "body_file": "close-help-docs/pages/tasks-not-syncing-with-google-calendar.txt",
+      "excerpt": "Why Can\u2019t I See My Close Tasks in Google Calendar? If you previously subscribed to your Close Tasks Calendar via Google Calendar, you may have noticed that your tasks are no longer syncing. This is because Close has sunset this feature due to security concerns. While discussions are ongoing about implementing a more secure solution in the future, you can use Zapier as a workaround to sync your Close Tasks with Google Calendar. How to Sync Close Tasks with Google Calendar\u2026",
+      "keywords": [
+        "google calendar using zapier zapier",
+        "select create detailed event",
+        "zapier click create zap",
+        "close tasks calendar",
+        "google calendar in",
+        "see my close tasks",
+        "sync close tasks",
+        "google calendar",
+        "select new task",
+        "zapier account",
+        "if you haven",
+        "close tasks",
+        "calendar",
+        "syncing",
+        "why can",
+        "google",
+        "set up",
+        "tasks"
+      ],
+      "topic": "meetings_scheduling"
+    },
+    {
+      "slug": "using-playbooks-on-calls",
+      "title": "Using Playbooks on Calls",
+      "url": "https://help.close.com/docs/using-playbooks-on-calls",
+      "body_file": "close-help-docs/pages/using-playbooks-on-calls.txt",
+      "excerpt": "Once Playbooks are set up, reps can apply them to calls and meetings directly from the call record. This article covers the rep experience, from applying a Playbook mid-call to reviewing what Close captured after the call ends. Applying a Playbook to a call Playbooks can be applied to a call before, during, or after the conversation. Open the call record in Close Find the Playbook field on the call Select the relevant Playbook from the dropdown Once a Playbook is applied:\u2026",
+      "keywords": [
+        "outcome outcomes",
+        "close find",
+        "playbooks",
+        "calls",
+        "using"
+      ],
+      "topic": "meetings_scheduling"
+    },
+    {
+      "slug": "zoom",
+      "title": "Zoom",
+      "url": "https://help.close.com/docs/zoom",
+      "body_file": "close-help-docs/pages/zoom.txt",
+      "excerpt": "Connect your Zoom account to Close to work with Zoom meetings and to use Close Notetaker on Zoom calls. Zoom Cloud Recordings linked to synced calendar events will also be pulled into Close. If the synced Meeting has an associated Zoom link in the event details, we will pull in its recording on the Lead Page. Zoom + Close helps with: Zoom meetings in Close: When your calendar is synced, upcoming meetings can appear in Close so you can see meeting details and join quickly.\u2026",
+      "keywords": [
+        "enable close notetaker head",
+        "zoom cloud recordings",
+        "close notetaker",
+        "for google meet",
+        "microsoft teams",
+        "setup step",
+        "lead page",
+        "zoom"
+      ],
+      "topic": "meetings_scheduling"
+    }
+  ]
+}

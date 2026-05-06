@@ -1,113 +1,181 @@
-# Kyle Melo — Seven-Day Plan
+# Kyle Melo — Seven-Day Call Plan
 
-- Plan ID: `plan_rrrc9vkl`
-- Status: draft
-- Goal: scheduled_call
-- Generated: 2026-05-05T19:10:40.141Z
-- Snapshot: snap_vsh29v_12
+- Lead: Kyle Melo
+- Close lead ID: `lead_R5QYRSr7QLjnOZGs2KpBN551SPNdcA8uoQfk6pyZQ2E`
+- Status: draft for Andre review
+- Primary objective: get Andre on a 15-minute discovery call with Kyle to lock the venue and the shape of the wedding day for 30 guests on August 8, 2026.
+- Strategy: Kyle replied via SMS at 11:09 AM the morning after his form fill, but the content of his reply is not in our captured raw substrate. Andre's two-call attempt at 13:21 didn't connect. The next move is to read what Kyle actually said on SMS, reply on the same channel, and use the breathing room of an August event to do real discovery instead of urgency-pressuring a 3-month-out wedding.
 
-## Known Facts
+## Current State
 
-- Lead name is Kyle Melo.
-- Kyle's phone number is +16174809931.
-- Kyle's email is kylemelo1999@gmail.com.
-- The event type is Wedding.
-- The event date is 2026-08-08.
-- Kyle came in from a Facebook Ads lead form.
-- An outbound SMS asked for the best time of day to call.
-- Kyle replied by SMS on 2026-05-05 at 11:09: "Any time in the morning."
-- Two outbound call attempts were made on 2026-05-05 at 13:21.
-- An email titled "Comeketo´s Interactive Menu" was sent on 2026-05-05 at 13:22.
-- A note says live chat started on 2026-05-05 at 10:06 AM.
-- The lead is already in active workflows and should not be re-enrolled into the same sequence.
+Kyle came in from a Facebook lead ad on May 5 at 01:58 UTC (about 9:58 PM Boston time) for a wedding for 30 guests on August 8, 2026. The form captured event date, headcount, and event type — that's more than most FB leads give us. The standard sequence fired: welcome email, two outbound SMS in two minutes, a sequence follow-up email an hour later. Kyle opened the welcome email twice.
 
-## Unknowns
+The next morning at 11:09 UTC (7:09 AM Boston — early riser), Kyle sent **one inbound SMS**. The message content is not in our captured raw substrate yet. Two hours later, Andre attempted two outbound calls four seconds apart at 13:21 (9:21 AM Boston). No connection logged. A follow-up email went out a minute after that.
 
-- What specific morning time works best for Kyle for a call with Andre.
-- Guest count.
-- Venue or service location.
-- Budget range.
-- Preferred service style for the wedding.
-- Whether Kyle is the decision-maker or coordinating with a partner/family.
-- Whether he reviewed the interactive menu email.
+The lead has phone (`+1 617-480-9931`) and email (`kylemelo1999@gmail.com`). The CRM flags `NEEDS VENUE NAME`. Opportunity sits at 20% confidence, status `Prospect`. Event is 3 months out — plenty of time.
 
-## Days
+The fastest path is: read his SMS, reply on SMS, and reframe this as a 30-person wedding worth doing intentionally rather than a small event we have to apologize for.
 
-### Day 1
+## Day 1 — Operator Task: Read Kyle's SMS, Then Reply
 
-- Objective: Convert Kyle's broad morning availability into a specific call time.
-- Send window: SMS between 9:00 AM and 12:00 PM lead-local time
-- Approval: not_ready
+- Channel: operator task → SMS
+- Send window: business hours, today
+- Approval status: needs review
+- Objective: Andre opens Kyle's SMS thread in Close, reads the inbound message from May 5 at 11:09, and replies to him on the same channel in human voice.
 
-- SMS: Ask Kyle to choose a specific morning time for a phone call with Andre
-  Draft seed: Kyle, you mentioned mornings work. What time tomorrow morning is easiest for a quick call with Andre about your 8/8 wedding?
-  Notes: Last meaningful inbound was SMS, so lean SMS next. Keep it specific and easy to answer.
+**Task for Andre**
 
-### Day 2
+Open the SMS thread for Kyle Melo. There is one inbound message from May 5 at 11:09 UTC (`acti_wVvtdcoZAFzlsp5wmV3LWFQZJgPWpvmC3GakE2CBzLo`). Read it before replying — what we say next has to acknowledge whatever he actually wrote.
 
-- Objective: If Kyle replies with a time, create a call task; if not, use email to lower friction and offer a simple choice.
-- Send window: Email between 7:30 AM and 10:30 AM lead-local time
-- Approval: not_ready
+If his message asked a specific question, answer that first. Then, if venue isn't already mentioned, end with one short ask:
 
-- TASK: Call Kyle Melo at the time he selects to confirm needs and move toward a quote
-  Draft seed: If Kyle replies with a morning time, Andre calls then and asks about guest count, venue, and what matters most for the wedding meal.
-  Notes: Only execute if Kyle responds with a specific time. No telephony channel allowed, so use task.
-- EMAIL: Offer a simple scheduling choice tied to Kyle's stated morning preference
-  Draft seed: Subject: Quick call for your wedding  Kyle, you mentioned mornings are best. Would a quick call tomorrow morning or the next morning be easier for you?
-  Notes: Use only if no confirmed call time has been set by send time. Distinct intent from day 1 SMS.
+> Hey Kyle — Andre from Comeketo. Got your text. For the August 8 wedding for 30, where is it being held? Once I know the venue I can give you a real read on what's doable. Happy to jump on a quick call when you have 15 minutes too.
 
-### Day 3
+If he already said where the venue is, skip the venue ask and propose a 15-minute call window directly.
 
-- Objective: Clarify one planning detail that naturally leads into a phone conversation.
-- Send window: SMS between 10:00 AM and 1:00 PM lead-local time
-- Approval: not_ready
+**Andre note**
 
-- SMS: Ask one concrete event-planning question to re-open conversation and support scheduling
-  Draft seed: For your 8/8 wedding, what are you planning around most right now — guest count, menu style, or budget?
-  Notes: NEPQ-style question to get a reply without pushing. If he answers, pivot to booking the call.
+Two things to avoid. First, do not pitch Brazilian BBQ — the welcome email already pushed the video, and Kyle hasn't said anything about wanting it specifically. He came in for "wedding catering," not "Brazilian wedding catering." Second, do not apologize for the 30-person size or talk about minimums. A 30-person wedding is intentional for many couples (close family, intimate format) and the right move is to position Comeketo as the kind of caterer who takes that seriously.
 
-### Day 4
+## Day 2 — If Venue Confirmed: Two Specific Call Windows
 
-- Objective: Have Andre manually review the Box and prepare a tailored call approach based on any new engagement.
-- Send window: Task for completion between 9:00 AM and 4:00 PM lead-local time
-- Approval: not_ready
+- Channel: SMS
+- Send window: morning, business hours
+- Approval status: not ready
+- Objective: convert venue confirmation into a booked phone call this week.
 
-- TASK: Review Kyle Melo's live chat, email opens/replies, and SMS history before next outreach
-  Draft seed: Check whether Kyle engaged with the interactive menu or live chat details, then prepare one tailored question for his wedding priorities before the next touch.
-  Notes: Keeps the day active without over-messaging and respects frequency caps.
+**Draft**
 
-### Day 5
+Kyle — got the venue, thanks. Want to do a quick 15-minute call to talk through service style and what the day looks like? I have time today between 11 AM-12 PM or tomorrow 2-3 PM. Either work?
 
-- Objective: Re-engage with a low-pressure question that makes the call feel useful, not salesy.
-- Send window: Email between 8:00 AM and 11:00 AM lead-local time
-- Approval: not_ready
+— Andre / Comeketo
 
-- EMAIL: Ask a decision-framing question linked to his wedding plans
-  Draft seed: Subject: For your 8/8 wedding  Kyle, when you picture the food side of the wedding, what do you want to make sure goes right?
-  Notes: Short, calm, and designed to invite a real response. If he replies, move to scheduling a call.
+**Andre note**
 
-### Day 6
+Two narrow windows on purpose. Open-ended "when's good?" puts the work on him. Two specific options is yes/no on either window.
 
-- Objective: Make one final SMS attempt this cycle to secure a yes/no on a morning call.
-- Send window: SMS between 9:30 AM and 12:00 PM lead-local time
-- Approval: not_ready
+## Day 3 — If No Venue Yet: Reframe Around The Smaller Wedding
 
-- SMS: Ask for permission to hold a short morning call window with Andre
-  Draft seed: Would it be easier if I had Andre hold a short morning slot for you, or would you rather text a couple details first?
-  Notes: Gives Kyle control and two easy paths forward.
+- Channel: email
+- Send window: business hours
+- Approval status: not ready
+- Objective: open the door for Kyle to share what kind of wedding he's actually picturing, especially for 30 guests where the format choice is the defining decision.
 
-### Day 7
+**Draft**
 
-- Objective: Close the cycle with an internal next-step decision based on responsiveness.
-- Send window: Task for completion between 10:00 AM and 5:00 PM lead-local time
-- Approval: not_ready
+Subject: 30-person wedding — let's get the format right
 
-- TASK: Assess response pattern and decide whether to continue toward scheduled call or downgrade to longer-term re-engagement
-  Draft seed: If Kyle has replied, schedule/confirm the call with Andre. If silent, note that he stated mornings work, summarize all touches this week, and queue a later re-engagement instead of adding another outbound today.
-  Notes: Avoids unnecessary outbound while preserving context for the next cycle.
+Hi Kyle,
+
+Wanted to send a quick note before we go any further on August 8.
+
+A wedding for 30 is one of my favorite formats to work on — it's intimate enough that the food can actually be great instead of just feeding a banquet, but it does mean the format choice matters more than for a 150-person wedding.
+
+Two things would help me give you a real read:
+
+1. Where is it happening? (Backyard, restaurant private room, small venue, etc. — even just the city is useful for now.)
+2. What are you picturing — plated/served sit-down, family-style on the table, station-style buffet, or something more casual?
+
+If you'd rather just chat, send me a phone window and I'll call.
+
+— Andre / Comeketo
+
+**Andre note**
+
+The "one of my favorite formats" line is true and earns its place — small weddings really are easier to do well, and saying so reframes the conversation away from "do you have minimums?" anxiety. Do not include packages or pricing in this email. Just the two questions.
+
+## Day 4 — Voicemail At A Different Time
+
+- Channel: operator task → call
+- Send window: late morning or early afternoon (NOT 13:21 like the first attempts)
+- Approval status: not ready
+- Objective: actually connect on the phone, OR leave a real voicemail Kyle has a reason to return.
+
+**Task for Andre**
+
+Call +1 617-480-9931 once. Pick a time of day different from the May 5 attempts at 13:21 (which is 9:21 AM Boston — possibly mid-commute or in a meeting). Try mid-morning around 10 AM Boston, or early afternoon around 1 PM.
+
+If voicemail, leave 15 seconds:
+
+> Hi Kyle, this is Andre from Comeketo Catering. Wanted to talk through your August 8 wedding for 30 — venue, format, and what you're picturing. Shoot me a text at this number when you have a minute, or I'll catch you on email. No rush.
+
+If he picks up, the goal is 15 minutes of real discovery: venue, service style, dietary considerations, decision process (is anyone else helping plan?), what he's seen from other caterers and what felt off. Take notes directly into Close.
+
+**Andre note**
+
+Two back-to-back call attempts within 4 seconds is auto-dialer pattern, not connection strategy. Single call + voicemail + different time of day is what actually works.
+
+## Day 5 — NEPQ "What Does The Day Look Like?" Question
+
+- Channel: SMS
+- Send window: late morning
+- Approval status: not ready
+- Objective: get Kyle to describe the wedding in his own words. The answer surfaces service style, dietary, decision process — without us having to ask three separate questions.
+
+**Draft**
+
+Kyle — one quick text. Forget catering for a sec. What do you actually want the August 8 day to feel like? Sit-down dinner, more relaxed buffet, backyard family-style, something else? Once I know what the day is supposed to feel like, the catering piece is easy.
+
+— Andre
+
+**Andre note**
+
+This is the strongest NEPQ move available. It does not pitch anything. It asks about *his vision*, which most engaged buyers will answer because they've already been thinking about it. The catering format falls out of the answer naturally.
+
+## Day 6 — Forwardable Email For The Other Half
+
+- Channel: email
+- Send window: business hours
+- Approval status: not ready
+- Objective: provide an email Kyle can forward to a partner / family member who's also helping plan, in case decision-making isn't solo.
+
+**Draft**
+
+Subject: Comeketo for the August 8 wedding — quick recap
+
+Hi Kyle,
+
+Putting everything in one place in case you want to share with anyone else who's helping plan:
+
+- **Date:** August 8, 2026
+- **Headcount:** 30 guests
+- **Style:** still being figured out (sit-down, buffet, family-style — all on the table)
+- **What's helpful from your side:** venue or city, and a phone window for a quick call
+
+If you can text me where it's happening and roughly what kind of feel you're going for, I can put together a real proposal you can both look at.
+
+— Andre / Comeketo Catering
+
+**Andre note**
+
+We don't know if Kyle is the sole decision-maker. This email is structured to be forwardable. Keep it factual — no pricing, no packages.
+
+## Day 7 — Pressure Release / Close The Loop
+
+- Channel: SMS
+- Send window: late morning
+- Approval status: not ready
+- Objective: either get a call booked or mark Kyle as cooling so cadence stops; gracefully.
+
+**Draft**
+
+Kyle — I don't want to keep texting if catering's just not the priority right now. If you still want help with August 8, send me the venue and a good phone window. If you've already booked someone else or paused planning, no worries — just let me know and I'll close the file. Either is fine.
+
+— Andre
+
+**Andre note**
+
+If he opens this and still doesn't reply, stop active outreach. The August date gives plenty of room — if he comes back in 3 weeks, the lead is still warm. Don't drain attention now.
 
 ## Stop Conditions
 
-- Kyle asks to stop, unsubscribe, or says he is no longer interested: kill
-- Kyle replies with a specific call time or explicitly agrees to speak with Andre: pause
-- Kyle asks a direct question about pricing, menu, guest count, or availability: surface
+- Kyle confirms venue + agrees to a call window: pause cadence; create same-day call task for Andre.
+- Kyle says "we want sit-down" or "we want family-style": route the next plan around that format; build a real proposal around it before the next touch.
+- Kyle says budget is the issue: do not defend pricing; ask what he had in mind, then either fit-or-folder.
+- Kyle says he already booked someone else: stop outreach, mark opportunity lost.
+- Kyle reveals a partner / parent is the decision-maker: pivot the next email to be forwardable; offer to include them on a call.
+- Any inbound message arrives mid-cycle: pause planned cadence, route Andre to read + reply manually before resuming.
+
+## Best Next Question
+
+What does August 8 actually look like — venue, format, and what you want the day to feel like — so I can put together a proposal that fits the wedding instead of the other way around?

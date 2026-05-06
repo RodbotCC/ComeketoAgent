@@ -1,0 +1,1083 @@
+{
+  "topic_id": "workflows_automation",
+  "article_count": 57,
+  "articles": [
+    {
+      "slug": "admin-account-role",
+      "title": "Admin user role",
+      "url": "https://help.close.com/docs/admin-account-role",
+      "body_file": "close-help-docs/pages/admin-account-role.txt",
+      "excerpt": "Admin user Each plan includes the predefined role shown below. This is a default role and may be assigned to any user, but may not be edited or modified. The Admin role must always exist with all permissions enabled. This is the only role that has billing access. Admins can: Manage Users, Billing, & Roles/Permissions Manage Customizations - create/update/delete statuses, Custom Fields, Integration Links, organization name, currency, etc. Manage Group Phone Numbers. Manage\u2026",
+      "keywords": [
+        "permissions manage customizations",
+        "bulk workflow subscriptions",
+        "manage group phone numbers",
+        "manage team smart views",
+        "integration links",
+        "send bulk email",
+        "custom fields",
+        "manage users",
+        "merge leads",
+        "bulk edit",
+        "account",
+        "admin",
+        "role",
+        "user"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "automatically-set-opportunity-probability-based-on-pipeline-status",
+      "title": "Automatically set Opportunity Confidence based on pipeline status",
+      "url": "https://help.close.com/docs/automatically-set-opportunity-probability-based-on-pipeline-status",
+      "body_file": "close-help-docs/pages/automatically-set-opportunity-probability-based-on-pipeline-status.txt",
+      "excerpt": "Overview Every time an Opportunity moves into a new status, you probably want its Confidence (the probability used to calculate your weighted pipeline value) to update automatically. For example, any deal that reaches Negotiations should jump to 80% \u2014 no manual edits required. Close makes this easy with Workflows . What you'll be able to do Once this is set up, Close will automatically update an Opportunity's Confidence percentage the moment it moves into a specific status.\u2026",
+      "keywords": [
+        "workflows permission",
+        "expected value",
+        "overview every",
+        "automatically",
+        "workflows if",
+        "opportunity",
+        "probability",
+        "confidence",
+        "in close",
+        "pipeline",
+        "status",
+        "based"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "automating-actions",
+      "title": "Automating Close with Zapier",
+      "url": "https://help.close.com/docs/automating-actions",
+      "body_file": "close-help-docs/pages/automating-actions.txt",
+      "excerpt": "In addition to integrating with other apps, you may want to automate specific actions within Close. For this reason, we allow you to link Close with itself in Zapier. Getting Started with Zapier To learn more about why do we use Zapier, how to get started, and how to set up your first Zap take a look into our Zapier article . Become an Expert Check out Zapier's Getting Started Guide for more in-depth training on Zapier. How are our customers using Zapier today? While there\u2026",
+      "keywords": [
+        "email sequence creating",
+        "getting started guide",
+        "getting started",
+        "email sequence",
+        "expert check",
+        "close pause",
+        "lead status",
+        "automating",
+        "zapier to",
+        "actions",
+        "zapier",
+        "close"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "call-tasks",
+      "title": "Call Tasks",
+      "url": "https://help.close.com/docs/call-tasks",
+      "body_file": "close-help-docs/pages/call-tasks.txt",
+      "excerpt": "You can assign Call Tasks to yourself or a member of the team as a reminder to a call a Contact at a specific date and time. Call Tasks are similar and appear on Leads and the Inbox in the same place as Tasks , but there are a few differences: Call Tasks must have an associated Contact. When created using Workflows (via the Call step ), Call Tasks can be assigned to a Group. Close will automatically mark Call Tasks complete when there is a Call between the associated\u2026",
+      "keywords": [
+        "ignore workflow communication schedule",
+        "creating call tasks call tasks",
+        "communication schedule",
+        "blackout dates",
+        "call tasks",
+        "call task",
+        "tasks",
+        "call"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "chatgpt",
+      "title": "ChatGPT",
+      "url": "https://help.close.com/docs/chatgpt",
+      "body_file": "close-help-docs/pages/chatgpt.txt",
+      "excerpt": "Close GPT is being sunset soon. Going forward, we recommed using Close's official ChatGPT app . We're thrilled to introduce a powerful collaboration that combines the capabilities of Close with the AI brilliance of ChatGPT. You and your team can further streamline your workflows, see lightning-fast insights, and take advantage of automated email drafting. Getting Started with the ChatGPT Plugin Login or Sign Up: Head to your ChatGPT account . If you don't have an account,\u2026",
+      "keywords": [
+        "activity summarization",
+        "getting started",
+        "plugin login",
+        "chatgpt",
+        "sign up"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "chloe-calls",
+      "title": "Using Chloe on Calls",
+      "url": "https://help.close.com/docs/chloe-calls",
+      "body_file": "close-help-docs/pages/chloe-calls.txt",
+      "excerpt": "This article covers how to start using Chloe on real calls, what happens during and after a call, and how to review her activity. For setup and configuration, see Setup and Implementation . For instructions on refining how Chloe handles calls, see Prompt Training . How to start calls with Chloe Always test your calls before starting. Run a Test Call from the Agent editor at least once to confirm your prompt and tone sound right before deploying to real leads. Workflows Use\u2026",
+      "keywords": [
+        "prompt training",
+        "workflows use",
+        "chloe always",
+        "test call",
+        "calls",
+        "chloe",
+        "using"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "chloe-use-cases",
+      "title": "Use Cases",
+      "url": "https://help.close.com/docs/chloe-use-cases",
+      "body_file": "close-help-docs/pages/chloe-use-cases.txt",
+      "excerpt": "When you\u2019re ready to iterate upon your Chloe Agent, some guidance may be helpful. This covers which use cases Chloe performs best at, which run mode to use, and which Skills to enable for each scenario. For setup and configuration, see Setup and Implementation . For prompt guidance, see Prompt Training . What Chloe is best at Chloe performs best when calling warm or known-interest leads where the goal is qualification, routing, reminders, or reactivation. She is most\u2026",
+      "keywords": [
+        "recommended skills",
+        "prompt training",
+        "see compliance",
+        "chloe agent",
+        "what chloe",
+        "cases",
+        "chloe"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "create-a-new-lead-once-a-calendly-meeting-is-booked",
+      "title": "Create a new Lead once a Calendly meeting is booked",
+      "url": "https://help.close.com/docs/create-a-new-lead-once-a-calendly-meeting-is-booked",
+      "body_file": "close-help-docs/pages/create-a-new-lead-once-a-calendly-meeting-is-booked.txt",
+      "excerpt": "With the Close Calendly integration , you can sync your scheduling links into Close. If a new Lead books a meeting, the Lead is not automatically added to Close, you'll need an automation like Zapier to create the Lead. Here\u2019s what you\u2019ll need A Zapier account that allows for multi-step Zaps Calendly account Close account Creating your Zap Login to Zapier and select Create . If you never used Zapier here are some tutorials on how to create Zaps. Step 1: Select your Trigger\u2026",
+      "keywords": [
+        "trigger select calendly",
+        "invitee created",
+        "close calendly",
+        "trigger event",
+        "zaps calendly",
+        "select close",
+        "find lead",
+        "zap login",
+        "calendly",
+        "meeting",
+        "booked",
+        "create",
+        "lead",
+        "once"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "create-an-opportunity-when-a-lead-status-is-moved-to-qualified",
+      "title": "Create an Opportunity when Status is changed to Qualified",
+      "url": "https://help.close.com/docs/create-an-opportunity-when-a-lead-status-is-moved-to-qualified",
+      "body_file": "close-help-docs/pages/create-an-opportunity-when-a-lead-status-is-moved-to-qualified.txt",
+      "excerpt": "Your lead generation team or process is the first step in closing deals, turning cold calls, email campaigns, social media ads, website forms, etc. into a Qualified Lead that your sales team should make sure to follow up on. After all this work, every qualified lead generated by your team should get an Opportunity created! You want to make sure they enter your sales pipeline and not get lost. In this article, we will help you set up a Zap to auto-create an Opportunity for\u2026",
+      "keywords": [
+        "qualified lead",
+        "opportunity",
+        "new status",
+        "qualified",
+        "new lead",
+        "changed",
+        "create",
+        "status",
+        "moved",
+        "lead"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "creating-a-multi-channel-sales-workflow-in-close",
+      "title": "Creating a multi-channel sales workflow in Close",
+      "url": "https://help.close.com/docs/creating-a-multi-channel-sales-workflow-in-close",
+      "body_file": "close-help-docs/pages/creating-a-multi-channel-sales-workflow-in-close.txt",
+      "excerpt": "A sales cycle is a collection of steps that salespeople take to turn a lead into a customer. That includes everything from prospecting to closing the sale (and sometimes even beyond closing). Sales cycles vary between companies and industries, but they usually have a similar sequence of steps. Close is designed to make sales communication quick, easy and effective. You can easily build out unique sales workflows using our dynamic Workflows , Smart Views , and Dialers .\u2026",
+      "keywords": [
+        "actionable guide",
+        "sales cycles are",
+        "close pro tip",
+        "cold prospect",
+        "smart views",
+        "send messa",
+        "warm lead",
+        "call day",
+        "creating",
+        "workflow",
+        "channel",
+        "close",
+        "multi",
+        "sales"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "creating-smart-views",
+      "title": "Create a Smart View",
+      "url": "https://help.close.com/docs/creating-smart-views",
+      "body_file": "close-help-docs/pages/creating-smart-views.txt",
+      "excerpt": "Smart Views are to Close what coffee is to a salesperson. You can get through your day without it, but why would you want to? Smart Views are: Powerful and effortless Dynamic Increase productivity Smart Views are saved Lead Filters that give you 1-click access to your favorite searches anywhere in Close. Smart Views tell sales reps who to follow up with and when to follow up without the need to create endless tasks and reminders. They allow you to translate your current\u2026",
+      "keywords": [
+        "activity filter save",
+        "dynamic increase",
+        "smart view lead",
+        "smart views you",
+        "lead filters",
+        "smart views",
+        "smart view",
+        "creating",
+        "create",
+        "smart",
+        "views",
+        "view"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "custom-activities",
+      "title": "Custom Activities",
+      "url": "https://help.close.com/docs/custom-activities",
+      "body_file": "close-help-docs/pages/custom-activities.txt",
+      "excerpt": "Custom Activities allow you to create a custom action type to record a specific type of activity. The most common examples include forms filled in by prospects, support tickets, call outcomes, invoice/payment items, and various structured notes such as call playbooks. Plan Limitations Custom Activities are not available on the Solo , Essentials and Base (legacy) plans. In our examples below, we'll use a Custimer Onboarding checklist Custom Activity for reference. Customer\u2026",
+      "keywords": [
+        "plan limitations custom activities",
+        "sales qualifying call onboarding",
+        "customer onboarding checklist",
+        "custom activity type before",
+        "custom activity type",
+        "custimer onboarding",
+        "custom activities",
+        "custom activity",
+        "inbound form",
+        "feedback to",
+        "activities",
+        "new custo",
+        "custom"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "dedicated-email-servers",
+      "title": "Dedicated Email Servers",
+      "url": "https://help.close.com/docs/dedicated-email-servers",
+      "body_file": "close-help-docs/pages/dedicated-email-servers.txt",
+      "excerpt": "Why do I need a service like Mailgun or SendGrid? Email applications like Microsoft Outlook, Apple Mail, and Close make drafting, sending, and receiving email easy. Regardless of what app or service you're using, all of the sending and receiving actions happen on your email server - and every email server has a limit on how many messages it will allow you to send each day. Depending on the maximum outbound email limit of your email server, if that threshold is reached, your\u2026",
+      "keywords": [
+        "limits although mailgun",
+        "microsoft outlook",
+        "apple mail",
+        "dedicated",
+        "servers",
+        "email"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "docusign",
+      "title": "Docusign",
+      "url": "https://help.close.com/docs/docusign",
+      "body_file": "close-help-docs/pages/docusign.txt",
+      "excerpt": "Create, send, and track documents from Opportunities and Lead objects within Close. This integration through Zapier will streamline document generation and help you to follow up on any outstanding deals. You have the option of having the zap triggered by actions in Close or by actions in Docusign. See the two zap templates below and see which best meets your needs. What you'll need A Close account and your API key A Zapier account A Docusign account Automatically generate\u2026",
+      "keywords": [
+        "request signatures",
+        "setup start",
+        "docusign"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "dripify",
+      "title": "Dripify",
+      "url": "https://help.close.com/docs/dripify",
+      "body_file": "close-help-docs/pages/dripify.txt",
+      "excerpt": "Integrating Close with Dripify Dripify is a LinkedIn automation and prospecting platform that helps users find and engage with their target audience on LinkedIn. It allows users to create a sales funnel with automated LinkedIn actions and conditions, such as sending connection requests, messages, and endorsements, as well as following and liking prospects' profiles. Dripify also includes advanced analytics and a smart inbox to help users manage their campaigns and respond\u2026",
+      "keywords": [
+        "integrating close",
+        "dripify dripify",
+        "dripify"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "email-sending-limits",
+      "title": "Email Sending Limits",
+      "url": "https://help.close.com/docs/email-sending-limits",
+      "body_file": "close-help-docs/pages/email-sending-limits.txt",
+      "excerpt": "Email Sending Limits are designed to prevent your email accounts from exceeding the sending thresholds set by your email providers. These limits not only safeguard your accounts from potential disconnection from Close and interrupting your email sending, but also help maintain your sender reputation and avoid spam-related issues. Want to learn more? Check out the Close Blog! Gmail Sending Limits Cold Email Tips Cold Email Follow-up Plan Setting Up Your Limits By default,\u2026",
+      "keywords": [
+        "plan setting up your limits by",
+        "email sending limits",
+        "organization admins",
+        "connected accounts",
+        "connected account",
+        "sending limits",
+        "close blog",
+        "sending",
+        "limits",
+        "email"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "enforcing-required-fields-in-close-via-zapier",
+      "title": "Enforcing required fields in Close via Zapier",
+      "url": "https://help.close.com/docs/enforcing-required-fields-in-close-via-zapier",
+      "body_file": "close-help-docs/pages/enforcing-required-fields-in-close-via-zapier.txt",
+      "excerpt": "Keep your users happy and your data clean with these simple Zaps Often times you may have a set of requirements for making specific changes to leads in Close. For example, you may require certain information be collected before changing a leads status or creating an opportunity. This guide will show you how you can enforce those requirements within Close using Zapier. What you'll need A Zapier account allowing for multi-step Zaps A Close account Step 1: Setting up your\u2026",
+      "keywords": [
+        "buying process",
+        "zaps often",
+        "enforcing",
+        "team size",
+        "required",
+        "fields",
+        "zapier",
+        "close"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "facebook-lead-ads",
+      "title": "Facebook Lead Ads",
+      "url": "https://help.close.com/docs/facebook-lead-ads",
+      "body_file": "close-help-docs/pages/facebook-lead-ads.txt",
+      "excerpt": "Create a Close lead whenever a prospect signs up via Facebook Lead AdCreate a Close lead whenever a prospect signs up via Facebook Lead Ad Use this Zap Facebook Lead Ads are a specific type of Facebook Ads where a prospect can simply tap your ad and a form pops up \u2013 it's already pre-populated with their Facebook contact information and ready to be sent directly to you. Instead of checking on new leads inside Facebook, you can use the following Zap to create a lead in Close\u2026",
+      "keywords": [
+        "zap facebook lead ads",
+        "facebook lead ad use",
+        "facebook lead ads in",
+        "facebook lead ad",
+        "facebook lead",
+        "facebook ads",
+        "facebook ad",
+        "premium app",
+        "setup start",
+        "facebook",
+        "new lead",
+        "lead",
+        "ads"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "find-ids-in-close",
+      "title": "Find IDs in Close",
+      "url": "https://help.close.com/docs/find-ids-in-close",
+      "body_file": "close-help-docs/pages/find-ids-in-close.txt",
+      "excerpt": "Whether you're setting up a Zapier flow or connecting to our API, you might need to find the following IDs in Close: User or Membership Lead Email Template Custom Field Lead or Opportunity Status Organization User ID To find a User or Membership ID, go to your Settings > Team Management . Find the user for which you need the ID. Click the three dots to the right of the user name and select the ID you would like to copy to your keyboard. Lead ID To find a Lead ID in your\u2026",
+      "keywords": [
+        "opportunity status organization user",
+        "opportunity custom field",
+        "opportunity status",
+        "email templates",
+        "team management",
+        "email template",
+        "custom fields",
+        "custom field",
+        "close",
+        "find",
+        "ids"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "finding-and-merging-duplicates",
+      "title": "Finding and Merging Duplicates",
+      "url": "https://help.close.com/docs/finding-and-merging-duplicates",
+      "body_file": "close-help-docs/pages/finding-and-merging-duplicates.txt",
+      "excerpt": "Keeping your CRM clean is key to accurate reporting and a smooth sales workflow. Close does not currently have a built-in duplicate detection tool in the UI, but you can use our support tools to generate a duplicate report yourself, then our support team will carry out a free, one-time deduplication merge on your behalf. How the Process Works Generate your API Key : In Close, go to Settings \u2192 Developer \u2192 API Keys and click + New API Key . Copy the key, you'll need it in the\u2026",
+      "keywords": [
+        "available support tools choose",
+        "process works generate",
+        "contact close support",
+        "duplicates",
+        "in close",
+        "finding",
+        "merging"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "forms",
+      "title": "Forms",
+      "url": "https://help.close.com/docs/forms",
+      "body_file": "close-help-docs/pages/forms.txt",
+      "excerpt": "Forms feature lets you create and deploy web forms that capture data and send it directly into your CRM without needing any external tools or manual data entry. Forms can create new Leads, update existing records, and trigger automation right when a visitor submits a response. Forms are ideal for capturing inbound inquiries, contact requests, landing page submissions, demo requests, newsletter signups, and more \u2014 all straight into Close. Each Form you build generates an\u2026",
+      "keywords": [
+        "your form the fields",
+        "adding fields",
+        "new form go",
+        "each form",
+        "new form",
+        "forms"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "forwarding-sms",
+      "title": "Creating additional SMS notifications for users",
+      "url": "https://help.close.com/docs/forwarding-sms",
+      "body_file": "close-help-docs/pages/forwarding-sms.txt",
+      "excerpt": "If you're a heavy user of SMS and not always logged into Close or want to respond quickly during non-business hours, you may want to set up an additional notification for any incoming SMS. This tutorial will cover the basis of setting up some additional notification types. What you'll need A Zapier account allowing for multi-step Zaps A Close account A Google Spreadsheet (if you want to forward SMS to a cellphone) Step 1: Setting up your Zapier trigger To set up this Zap,\u2026",
+      "keywords": [
+        "google spreadsheet",
+        "new inbox item",
+        "notifications",
+        "additional",
+        "forwarding",
+        "under type",
+        "creating",
+        "users",
+        "sms"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "google-forms",
+      "title": "Google Forms",
+      "url": "https://help.close.com/docs/google-forms",
+      "body_file": "close-help-docs/pages/google-forms.txt",
+      "excerpt": "Is Google Forms part of your sales workflow? You can log responses filled in from your forms in Close as a note, custom field, custom activity etc. In this tutorial, we will Create a Google Form where answers will be added to a Google Spreadsheet create an integration link for easy form filling from a lead page set up Zapier integration to automatically add our answers in a form of a note What you\u2019ll need A Google account to access Google Forms A Close account and your API\u2026",
+      "keywords": [
+        "google forms create",
+        "google spreadsheet",
+        "google form first",
+        "is google forms",
+        "google forms",
+        "google sheet",
+        "google form",
+        "google",
+        "forms"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "inbox",
+      "title": "Inbox",
+      "url": "https://help.close.com/docs/inbox",
+      "body_file": "close-help-docs/pages/inbox.txt",
+      "excerpt": "The Close Inbox is a sales-focused view of all your inbound communication (emails, missed calls, voicemails) and open tasks/reminders for the day. The Inbox is a hub for everything you should react to and be reminded of. It's your hub for notifications and Tasks, and should be considered a to-do list. The goal for your Inbox is to help keep you on track in your workflow, with each item actionable. Your sales team should be able to work exclusively from their Close inbox.\u2026",
+      "keywords": [
+        "due tasks opportunities",
+        "potential contacts to",
+        "missed calls inbound",
+        "inbound emails",
+        "inbox"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "integrations",
+      "title": "Integrations",
+      "url": "https://help.close.com/docs/integrations",
+      "body_file": "close-help-docs/pages/integrations.txt",
+      "excerpt": "Integrations Close has built-in integrations, such as our Meetings tool and email sync . We also have a Zoom integration to sync your recorded meetings, and Slack for remote teams. For tools that don't have a native integration with Close, we can still help. Using your OAuth Key or API Key, your Organization can connect other apps with Close using integration tools such as Zapier or Make. Explore our comprehensive guides to learn how to leverage these integrations and get\u2026",
+      "keywords": [
+        "integrations indie stack the",
+        "integrations close",
+        "integrations",
+        "best apps",
+        "our blog"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "integrations-with-close",
+      "title": "Integrations by type",
+      "url": "https://help.close.com/docs/integrations-with-close",
+      "body_file": "close-help-docs/pages/integrations-with-close.txt",
+      "excerpt": "Browse some of our most popular integrations here . If you don't see the integration you're looking for, you can create a custom integration with Zapier or our API . If you have any questions about integrations, reach out to our support team at any time. Integrations by Type: General integrations Zapier - push your data between hundreds of popular web services. Start here . Integrate.io - integrate, transform and process data from more than 100 data stores and SaaS\u2026",
+      "keywords": [
+        "google analytics",
+        "facebook ads",
+        "integrations",
+        "help scout",
+        "help sc",
+        "close",
+        "type"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "keyboard-shortcuts",
+      "title": "Close app keyboard shortcuts",
+      "url": "https://help.close.com/docs/keyboard-shortcuts",
+      "body_file": "close-help-docs/pages/keyboard-shortcuts.txt",
+      "excerpt": "Keyboard Shortcuts Close comes with a set of keyboard shortcuts that can significantly improve your workflow efficiency. To see the list of keyboard shortcuts available, just hit the question mark button ? on your keyboard from any page and you'll see a pop-up window listing them all. Close app keyboard shortcut list for Mac OS On any page Mac shortcut Windows shortcut Action ? ? Show keyboard shortcuts \u2318 Shift F Ctrl Shift F Focus the search input \u2318 Shift L Ctrl Shift L\u2026",
+      "keywords": [
+        "keyboard shortcuts close",
+        "enter ctrl enter submit",
+        "ctrl shift",
+        "dialer mac",
+        "shortcuts",
+        "keyboard",
+        "close",
+        "app"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "knowledge-hub",
+      "title": "AI Knowledge Sources",
+      "url": "https://help.close.com/docs/knowledge-hub",
+      "body_file": "close-help-docs/pages/knowledge-hub.txt",
+      "excerpt": "Give Close AI the right context to personalize onboarding, draft higher\u2011quality content, and answer questions with more accuracy. The Knowledge Hub allows Admins to add and manage trusted knowledge sources for your organization, starting with your public website. Within your settings is an area where you add sources that Close can read and index for AI usage. Close will crawl key public pages and keep them indexed for faster, more relevant results across AI features. This\u2026",
+      "keywords": [
+        "knowledge source you",
+        "knowledge sources",
+        "smarter workflows",
+        "knowledge source",
+        "from settings",
+        "give close",
+        "knowledge",
+        "sources",
+        "hub"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "lead-filtering",
+      "title": "Lead Filtering Tutorials",
+      "url": "https://help.close.com/docs/lead-filtering",
+      "body_file": "close-help-docs/pages/lead-filtering.txt",
+      "excerpt": "Lead filtering is a powerful way to create search queries that dynamically impact which Leads appear in your view. Filtering can help you quickly find a Contact, identify which Leads need attention, build calling and emailing workflows for your sales team, and much more. The possibilities are endless. Think of Lead Filtering as building a series of criteria that help users locate important lists of Leads and Contacts. For example, you can create Filters to find leads that\u2026",
+      "keywords": [
+        "lead filtering",
+        "basic filters",
+        "smart views",
+        "filtering",
+        "tutorials",
+        "lead"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "lead-scoring",
+      "title": "Lead Scoring",
+      "url": "https://help.close.com/docs/lead-scoring",
+      "body_file": "close-help-docs/pages/lead-scoring.txt",
+      "excerpt": "Whether your business is growing or you work with a high volume of leads, lead scoring will help you address the most important leads quickly and prioritize the rest. Check out our Ultimate Guide to Lead Scoring here on the Close blog for an even more in-depth look at how to score leads, regardless of the CRM you\u2019re using. For learning about lead scoring in Close, fear not\u2014you\u2019re still in the right place. In this article, we\u2019ll walk you through lead scoring in Close by\u2026",
+      "keywords": [
+        "industry location job",
+        "custom activities",
+        "source funding",
+        "ultimate guide",
+        "custom fields",
+        "lead scoring",
+        "smart view",
+        "our blog",
+        "scoring",
+        "lead"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "lead-visibility",
+      "title": "Lead Visibility",
+      "url": "https://help.close.com/docs/lead-visibility",
+      "body_file": "close-help-docs/pages/lead-visibility.txt",
+      "excerpt": "Lead Visibility empowers you to control which Leads different users can see. This feature can help limit distractions and ensure your team focuses on Leads relevant to their roles. With Lead Visibility, you can curtail data concerns, enhance team focus, safeguard sensitive conversations, and maintain privacy. Let's explore how Lead Visibility works and how you can leverage it effectively. Plan Requirements Lead Visibility is available on our Scale plan, and our (legacy)\u2026",
+      "keywords": [
+        "setting up lead visibility roles to",
+        "plan requirements lead visibility",
+        "with lead visibility",
+        "limited visibility",
+        "lead visibility",
+        "lead owner",
+        "visibility",
+        "lead"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "mailchimp",
+      "title": "Mailchimp",
+      "url": "https://help.close.com/docs/mailchimp",
+      "body_file": "close-help-docs/pages/mailchimp.txt",
+      "excerpt": "Create new Close Lead from Mailchimp subscriber Use this Zap Mailchimp is most popular for its email marketing and automation used by thousands of companies. Chances are you are managing your email lists through Mailchimp as well. If that is the case, you can use the following Zap to create a lead in Close whenever you have a new subscriber in Mailchimp. What you\u2019ll need A Close account and your API key A Zapier account (free one works as well with just two steps) How the\u2026",
+      "keywords": [
+        "zapier click continue",
+        "mailchimp start",
+        "new subscriber",
+        "mailchimp for",
+        "zap mailchimp",
+        "zapier when",
+        "close lead",
+        "setup step",
+        "mailchimp"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "managing-unsubscribe-requests",
+      "title": "Managing unsubscribe requests",
+      "url": "https://help.close.com/docs/managing-unsubscribe-requests",
+      "body_file": "close-help-docs/pages/managing-unsubscribe-requests.txt",
+      "excerpt": "You can handle your unsubscribe requests directly within Close, making email management a breeze and providing a convenient way for leads to opt out of communications they no longer wish to receive. This guide will cover how to manage your unsubscribe requests and decode what it looks like from a lead's point of view. Plan Limitations Managing Unsubscribe Requests is not available on the Solo , Essentials and Base (legacy) plans. Enabling Automatic Unsubscribe By default,\u2026",
+      "keywords": [
+        "enabling automatic unsubscribe by",
+        "unsubscribe link",
+        "email signature",
+        "bulk emails",
+        "unsubscribe",
+        "managing",
+        "new link",
+        "requests"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "new-assign-leads-to-users-via-round-robin",
+      "title": "Assign Leads to Users via Round-Robin",
+      "url": "https://help.close.com/docs/new-assign-leads-to-users-via-round-robin",
+      "body_file": "close-help-docs/pages/new-assign-leads-to-users-via-round-robin.txt",
+      "excerpt": "There are two ways to set up round-robin lead assignment in Close: Robin and Zapier. Robin is a dedicated app built specifically for this purpose, while Zapier offers another approach. Both options are explained here. What is Robin? Robin is a round-robin lead assignment tool built for Close . It automatically distributes new leads across your team in a fair, ordered rotation with no manual assignment required. You define who gets leads (Groups) and which leads to watch\u2026",
+      "keywords": [
+        "close authorize robin",
+        "lead lists these",
+        "click sign",
+        "lead lists",
+        "robin go",
+        "assign",
+        "leads",
+        "robin",
+        "round",
+        "users"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "onboarding-checklist-start-here",
+      "title": "Close Onboarding",
+      "url": "https://help.close.com/docs/onboarding-checklist-start-here",
+      "body_file": "close-help-docs/pages/onboarding-checklist-start-here.txt",
+      "excerpt": "\ud83d\udc4b Welcome to Your Close Onboarding Guide! Getting set up in Close is easier than ever with our interactive demos and videos \u2014step-by-step guides designed to help you explore and implement key features quickly. \ud83d\udd39 How to use these demos: For the best experience, we recommend opening Close in one window and the interactive demo or video in another. This way, you can follow along in real-time and complete each step directly in your Close account. \ud83d\ude80 Ready to get started? Select\u2026",
+      "keywords": [
+        "your close onboarding guide",
+        "sales playbook builder",
+        "sales playmaker before",
+        "onboarding",
+        "checklist",
+        "close got",
+        "close",
+        "start",
+        "here"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "perform-an-action-when-a-workflow-ends",
+      "title": "Perform an action when a Workflow ends",
+      "url": "https://help.close.com/docs/perform-an-action-when-a-workflow-ends",
+      "body_file": "close-help-docs/pages/perform-an-action-when-a-workflow-ends.txt",
+      "excerpt": "Let's say you've created the perfect email workflow to send to qualified leads but they don't convert during your expected sales cycle. That's ok - sales is all about the follow-up. Don't sit around and wait for them to respond to an old email. Instead, take our advice and create a killer long-term follow-up workflow and improve your follow-up hustle. The Close Sales team send their first Workflow to trials which includes three emails over the course of the 14-day period.\u2026",
+      "keywords": [
+        "additional action steps here",
+        "custom field",
+        "lead status",
+        "update lead",
+        "workflow",
+        "perform",
+        "pro tip",
+        "action",
+        "ends"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "power-predictive-dialing",
+      "title": "Power & Predictive Dialing",
+      "url": "https://help.close.com/docs/power-predictive-dialing",
+      "body_file": "close-help-docs/pages/power-predictive-dialing.txt",
+      "excerpt": "Power Dialer A power dialer is a piece of automated telephone technology that dials a phone number right after a call is completed. The power dialer will call the following contact on the list as soon as the caller finishes the previous call. Power dialing makes your team efficient because they don't have to spend time figuring out which number to call next. Plus, your sales team won't be wasting time manually dialing numbers\u2014the software does it for them. When a power\u2026",
+      "keywords": [
+        "sales operations manager",
+        "sarah haselkorn",
+        "predictive dia",
+        "power dialer",
+        "predictive",
+        "smart view",
+        "dialing",
+        "power"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "pull-webform-answers-into-close-custom-activity",
+      "title": "Pull Webform Answers Into Close Custom Activity",
+      "url": "https://help.close.com/docs/pull-webform-answers-into-close-custom-activity",
+      "body_file": "close-help-docs/pages/pull-webform-answers-into-close-custom-activity.txt",
+      "excerpt": "This Zap will pull a lead's answers from your webform into a Custom Activity in Close, allowing you to: Filter your leads using common answers Review answers directly on the lead's page What you'll need To set up this Zap, you'll need the following: A Zapier account that allows for multi-step Zaps; A webform tool that integrates with Zapier (see next step for more details); A Close account of the Basic , Professional , or Business plan ( Starter plan won't work as it\u2026",
+      "keywords": [
+        "custom activity before",
+        "custom activities",
+        "custom activity",
+        "zapier please",
+        "google form",
+        "activity",
+        "answers",
+        "webform",
+        "custom",
+        "close",
+        "into",
+        "pull"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "recording-touchpoints-using-codes",
+      "title": "Recording touchpoints using #codes",
+      "url": "https://help.close.com/docs/recording-touchpoints-using-codes",
+      "body_file": "close-help-docs/pages/recording-touchpoints-using-codes.txt",
+      "excerpt": "Generally, your pre- and post- sales processes will have a few key touchpoints or activities you may want to record. This guide will cover a few different ways to track these events in Close. Here's an example of some pre- and post- sales touchpoints that we'll cover: Pre-Sales Reach a gatekeeper Reach a decision maker Connect on LinkedIn Send some swag Give a demo Post-Sales Have an onboarding call Run a QBR or check-in call Recording touchpoints and/or events with #codes\u2026",
+      "keywords": [
+        "sales reach",
+        "touchpoints",
+        "sales have",
+        "recording",
+        "codes",
+        "using"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "search-and-smart-views",
+      "title": "Lead Filtering and Smart Views",
+      "url": "https://help.close.com/docs/search-and-smart-views",
+      "body_file": "close-help-docs/pages/search-and-smart-views.txt",
+      "excerpt": "Smart Views exist for proactive outreach to Leads matching specific criteria. They are saved searches and can be kept private, shared with your entire organization, or specific team members. All Smart Views are composed of search queries that dynamically impact which Leads appear in your Smart View. Using Lead Filtering and Smart Views, you can easily create a \u201clist\u201d of precisely the right Leads you need to reach out to at any given time. You can then prioritize the list\u2026",
+      "keywords": [
+        "using lead filtering",
+        "lead filtering one",
+        "all smart views",
+        "smart views",
+        "smart view",
+        "filtering",
+        "search",
+        "smart",
+        "views",
+        "lead"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "search-and-smart-views-legacy",
+      "title": "Search and Smart Views (Legacy)",
+      "url": "https://help.close.com/docs/search-and-smart-views-legacy",
+      "body_file": "close-help-docs/pages/search-and-smart-views-legacy.txt",
+      "excerpt": "New Lead Filtering We released a new version of our lead filtering/search. The following guides are for our legacy search. If your UI does not match, please see this guide for the new filtering instructions. Smart Views exist for proactive outreach to Leads matching specific criteria. They are saved searches and can be kept private, shared with your entire organization, or specific team members. All Smart Views are composed of search queries that dynamically impact which\u2026",
+      "keywords": [
+        "new lead filtering we",
+        "overview using search",
+        "all smart views",
+        "smart views",
+        "search one",
+        "smart view",
+        "legacy",
+        "search",
+        "smart",
+        "views"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "segment",
+      "title": "Segment",
+      "url": "https://help.close.com/docs/segment",
+      "body_file": "close-help-docs/pages/segment.txt",
+      "excerpt": "Segment simplifies the process of collecting data, allowing you to spend more time using that data and less time trying to collect it. For example, you can use Segment to track when a potential customer visits your website or signs up for your newsletter, bringing that information directly into Close (explore many other data sources). This integration will allow you to Create/Update Leads and Contacts with the information your customers provide on your data source. Getting\u2026",
+      "keywords": [
+        "getting started you",
+        "lead custom field",
+        "custom fields",
+        "custom field",
+        "update leads",
+        "your close",
+        "segment"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "simpletexting",
+      "title": "SimpleTexting",
+      "url": "https://help.close.com/docs/simpletexting",
+      "body_file": "close-help-docs/pages/simpletexting.txt",
+      "excerpt": "Send MMS through SimpleTexting and get alerted in Close when a contact replies with an MMS. Create a task in Close after receiving an MMS in SimpleTexting Use this Zap SimpleTexting allows you to send SMS and MMS directly from your cellphone number or from phone number you'll rend with SimpleTexting. Don't miss a single MMS reply by getting alerted directly in Close. If you're using your Close phone number to text from SimpleTexting, you'll need to disable the SMS\u2026",
+      "keywords": [
+        "custom webhook",
+        "simpletexting",
+        "webhook start",
+        "setup step"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "simplify-workflows-with-automated-senders",
+      "title": "Simplify Your Workflows with Automated Senders",
+      "url": "https://help.close.com/docs/simplify-workflows-with-automated-senders",
+      "body_file": "close-help-docs/pages/simplify-workflows-with-automated-senders.txt",
+      "excerpt": "Within Workflows, you can automate the sender of each step. By customizing the sender, you can create dynamic and automated workflows without manual enrollment or complex external setups, leaving more room for following up with your Leads and driving engagement. How it works By default, all steps within a Workflow will be set to send from the User who creates the Workflow subscription. However, we understand that different scenarios may call for different senders - that's\u2026",
+      "keywords": [
+        "automated workflows",
+        "advanced settings",
+        "within workflows",
+        "team management",
+        "custom field",
+        "super users",
+        "automated",
+        "workflows",
+        "simplify",
+        "send as",
+        "senders"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "slack",
+      "title": "Slack",
+      "url": "https://help.close.com/docs/slack",
+      "body_file": "close-help-docs/pages/slack.txt",
+      "excerpt": "Connect Slack and Close in order to notify your team of important updates in your sales pipeline. Using our Zapier integration for Slack you can quickly and easily message channels or particular team members about new leads, won opportunities, or any number of other events within Close. In this example, we\u2019ll show you how to message the rest of your team in Slack when a deal has been marked won in Close. What you'll need A Close account and your API key A Zapier account A\u2026",
+      "keywords": [
+        "send channel message",
+        "new opportunity",
+        "new status type",
+        "choose account",
+        "connect slack",
+        "action event",
+        "setup step",
+        "slack now",
+        "close in",
+        "slack"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "smart-view-tips-and-suggestions",
+      "title": "Avoiding Lead Rot and Consolidating Smart Views",
+      "url": "https://help.close.com/docs/smart-view-tips-and-suggestions",
+      "body_file": "close-help-docs/pages/smart-view-tips-and-suggestions.txt",
+      "excerpt": "Here are a couple of tried-and-true tips to use with Smart Views that can help you stay on top of promising Opportunities, and streamline your overall workflow in Close. Show deal and lead rot based on Status Change dates Oftentimes in sales, you may lose momentum with a lead or on a deal, and not realize it until your chances for success are far behind you. Thankfully, it's easy to create Smart Views that show you leads that might be slipping away before it's too late. For\u2026",
+      "keywords": [
+        "close pro tip",
+        "consolidating",
+        "sent proposal",
+        "status change",
+        "smart views",
+        "suggestions",
+        "smart view",
+        "avoiding",
+        "smart",
+        "views",
+        "lead",
+        "tips",
+        "view",
+        "rot"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "smart-views-for-bulk-email-and-worfklows",
+      "title": "Bulk Email and Email Sequence Smart View Tips",
+      "url": "https://help.close.com/docs/smart-views-for-bulk-email-and-worfklows",
+      "body_file": "close-help-docs/pages/smart-views-for-bulk-email-and-worfklows.txt",
+      "excerpt": "If you're using bulk email and/or workflows with email steps, here are some tips for setting up your Smart Views. Step 1: Create the base Smart View for anyone eligible to receive the message If you're using lead statuses effectively, a good place to start with this Smart View is to specify which statuses should be included in the Smart View. Let's start simple by only using one lead status. For example, let's say you only want to send your workflow email steps to any leads\u2026",
+      "keywords": [
+        "smart views",
+        "smart view",
+        "worfklows",
+        "sequence",
+        "email",
+        "smart",
+        "views",
+        "bulk",
+        "tips",
+        "view"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "smart-views-for-bulk-email-and-workflows-legacy",
+      "title": "Bulk email and email sequence Smart View tips (Legacy)",
+      "url": "https://help.close.com/docs/smart-views-for-bulk-email-and-workflows-legacy",
+      "body_file": "close-help-docs/pages/smart-views-for-bulk-email-and-workflows-legacy.txt",
+      "excerpt": "New Lead Filtering We recently released a new version of our lead filtering/search. The following guides are for our legacy search. If your ui does not match, please see this guide for the new filtering instructions. If you're using bulk email and/or email sequences, here are some tips for setting up your Smart Views. Step 1: Create the base Smart View for anyone eligible to receive the message If you're using lead statuses effectively, a good place to start with this Smart\u2026",
+      "keywords": [
+        "new lead filtering we",
+        "potential now",
+        "smart views",
+        "smart view",
+        "workflows",
+        "sequence",
+        "legacy",
+        "email",
+        "smart",
+        "views",
+        "bulk",
+        "tips",
+        "view"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "super-user-role",
+      "title": "Super User role",
+      "url": "https://help.close.com/docs/super-user-role",
+      "body_file": "close-help-docs/pages/super-user-role.txt",
+      "excerpt": "Super User Each plan includes the predefined role shown below. This is a default role and may be assigned to any user, but may not be edited or modified. Super Users can do everything a User can, plus manage common admin settings like: Customizations (for example: statuses, custom fields, integration links, etc) Group phone numbers Team Smart Views Export lead or opportunity data to a CSV or JSON file. Bulk edit and bulk delete Send Bulk Email or manage Bulk Workflow\u2026",
+      "keywords": [
+        "bulk workflow subscriptions",
+        "team smart views export",
+        "send bulk email",
+        "super user each",
+        "super users",
+        "sales ops",
+        "super",
+        "role",
+        "user"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "tasks",
+      "title": "Tasks",
+      "url": "https://help.close.com/docs/tasks",
+      "body_file": "close-help-docs/pages/tasks.txt",
+      "excerpt": "In Close, you can set Tasks for yourself or other team members within any lead. Tasks are best used when noting a unique action that is not in your normal workflow or for reaching out to another team member for help (share an update, provide support, reach out to a Contact within a Lead, etc). Creating and Assigning Tasks You can create a Task for yourself or someone else on your team by going into any lead and clicking \"add\" to the right of the \"Tasks\" section located\u2026",
+      "keywords": [
+        "assigning tasks you",
+        "all leads inbox",
+        "view all tasks",
+        "high priority",
+        "delete tasks",
+        "in close",
+        "tasks"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "tasks-not-syncing-with-google-calendar",
+      "title": "Tasks not syncing with Google Calendar",
+      "url": "https://help.close.com/docs/tasks-not-syncing-with-google-calendar",
+      "body_file": "close-help-docs/pages/tasks-not-syncing-with-google-calendar.txt",
+      "excerpt": "Why Can\u2019t I See My Close Tasks in Google Calendar? If you previously subscribed to your Close Tasks Calendar via Google Calendar, you may have noticed that your tasks are no longer syncing. This is because Close has sunset this feature due to security concerns. While discussions are ongoing about implementing a more secure solution in the future, you can use Zapier as a workaround to sync your Close Tasks with Google Calendar. How to Sync Close Tasks with Google Calendar\u2026",
+      "keywords": [
+        "google calendar using zapier zapier",
+        "select create detailed event",
+        "zapier click create zap",
+        "close tasks calendar",
+        "google calendar in",
+        "see my close tasks",
+        "sync close tasks",
+        "google calendar",
+        "select new task",
+        "zapier account",
+        "if you haven",
+        "close tasks",
+        "calendar",
+        "syncing",
+        "why can",
+        "google",
+        "set up",
+        "tasks"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "using-workflows-for-newsletters",
+      "title": "Using Workflows for Newsletters",
+      "url": "https://help.close.com/docs/using-workflows-for-newsletters",
+      "body_file": "close-help-docs/pages/using-workflows-for-newsletters.txt",
+      "excerpt": "Creating Email Newsletters with Workflows: A Salesperson's Guide Integrating Workflows into your email newsletter strategy allows you to automate, personalize, and optimize your outreach. Workflows allow you to automate a series of actions\u2014such as sending emails, scheduling follow-ups, or assigning tasks\u2014based on specific enrollment triggers or manual enrollments. Workflows can be customized to match your sales process, allowing you to tailor each step to specific lead\u2026",
+      "keywords": [
+        "define your newsletter goals before",
+        "guide integrating workflows",
+        "creating email newsletters",
+        "sent email report",
+        "newsletters",
+        "smart views",
+        "workflows",
+        "using"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "workflow-reporting",
+      "title": "Sequence Overview & Reporting",
+      "url": "https://help.close.com/docs/workflow-reporting",
+      "body_file": "close-help-docs/pages/workflow-reporting.txt",
+      "excerpt": "Once your Workflows are set up and Leads have been enrolled, you'll want to check to see how your Workflow is being received. Workflow Overview After you\u2019ve created and deployed a Workflow, you\u2019ll first see general stats on the main Workflow page. These stats give a quick overview of where the sequence is in its lifecycle and how it\u2019s performing. You\u2019ll see the following metrics: Active : the number of active Contacts in this Workflow (excluding any bounces or errors)\u2026",
+      "keywords": [
+        "workflow avg response time",
+        "workflow overview after",
+        "workflow these",
+        "response rate",
+        "bounce rate",
+        "reporting",
+        "overview",
+        "sequence",
+        "workflow"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "workflow-steps",
+      "title": "Workflow Steps",
+      "url": "https://help.close.com/docs/workflow-steps",
+      "body_file": "close-help-docs/pages/workflow-steps.txt",
+      "excerpt": "Steps are the individual actions that take place within a Workflow. This includes sending email or SMS, updating Leads, creating Opportunities, or assigning Tasks. Here is a list of the current available Workflow steps: Step Type Email Communication Call Communication SMS Communication Assign User Operational Task Operational Create Opportunity Operational Update Lead Operational Update Opportunity Operational Filter Operational Adding or Removing Steps to a Workflow To add\u2026",
+      "keywords": [
+        "active workflow when",
+        "removing steps",
+        "updating steps",
+        "step delay if",
+        "workflow run",
+        "workflow to",
+        "add step",
+        "workflow",
+        "steps"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "workflows",
+      "title": "Workflows",
+      "url": "https://help.close.com/docs/workflows",
+      "body_file": "close-help-docs/pages/workflows.txt",
+      "excerpt": "Plan limits Workflows are only available on the Growth and Scale plans. Workflows can be used to automate tasks and outreach. There are endless possibilities of what you can automate, but the most common use cases are: Automatically update Leads when an Opportunity is won. Randomly assign a new Lead to a team member and automate a scheduled sequence of email, SMS, task, and/or call tasks to the assigned team member. Create an Opportunity when a Custom Activity is published\u2026",
+      "keywords": [
+        "workflow glossary workflows",
+        "custom activity",
+        "each workflow",
+        "workflow goal",
+        "workflows"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "zapier",
+      "title": "Zapier",
+      "url": "https://help.close.com/docs/zapier",
+      "body_file": "close-help-docs/pages/zapier.txt",
+      "excerpt": "Zapier is a third-party automation platform that allows you to connect the different tools in your data stack to share data in custom ways that may not be available through direct integration. Zapier basically allows you to build out processes that you want to happen repetitively - like, \u201cwhen something new happens in X, then do Y\u201d, every time. Why do we use it? We use Zapier at Close to give our customers more flexibility with the tools they can connect to Close and to\u2026",
+      "keywords": [
+        "getting started",
+        "zapier when",
+        "each zap",
+        "zapier"
+      ],
+      "topic": "workflows_automation"
+    },
+    {
+      "slug": "zapier-api-keys-to-oauth",
+      "title": "Zapier (API keys to OAuth)",
+      "url": "https://help.close.com/docs/zapier-api-keys-to-oauth",
+      "body_file": "close-help-docs/pages/zapier-api-keys-to-oauth.txt",
+      "excerpt": "Who Should Read This Article Please be aware that this article is intended for those who created Zaps powered by Close before June 22, 2023. If your Zaps were created after this date, the contents of this article will not be relevant to your situation. On the 22nd of June, 2023, we released a new version of our Zapier Close integration, where we implemented a new way of connecting your Zapier account to Close. Whereas previously you had to create and copy/paste API keys,\u2026",
+      "keywords": [
+        "who should read this article please",
+        "see authentication",
+        "zapier close",
+        "zapier",
+        "oauth",
+        "keys",
+        "api"
+      ],
+      "topic": "workflows_automation"
+    }
+  ]
+}

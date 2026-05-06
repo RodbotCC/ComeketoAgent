@@ -1,0 +1,534 @@
+{
+  "topic_id": "opportunities_pipeline",
+  "article_count": 29,
+  "articles": [
+    {
+      "slug": "adding-and-removing-users",
+      "title": "Managing users and cancellation",
+      "url": "https://help.close.com/docs/adding-and-removing-users",
+      "body_file": "close-help-docs/pages/adding-and-removing-users.txt",
+      "excerpt": "Adding Users to Close You can add users simply by sending them an invitation and selecting the role you'd like to assign. To invite users, click your name at the top left of the Close window - or click Settings and then select Team Management to manage the member list. What role should I use? Before adding users, we recommend reading about roles and permissions . Removing Users from Close If you're an Admin of your Account, you can head to Settings > Team Management to add\u2026",
+      "keywords": [
+        "team management",
+        "removing users",
+        "adding users",
+        "cancellation",
+        "custom field",
+        "close you",
+        "close if",
+        "managing",
+        "removing",
+        "adding",
+        "users"
+      ],
+      "topic": "opportunities_pipeline"
+    },
+    {
+      "slug": "admin-account-role",
+      "title": "Admin user role",
+      "url": "https://help.close.com/docs/admin-account-role",
+      "body_file": "close-help-docs/pages/admin-account-role.txt",
+      "excerpt": "Admin user Each plan includes the predefined role shown below. This is a default role and may be assigned to any user, but may not be edited or modified. The Admin role must always exist with all permissions enabled. This is the only role that has billing access. Admins can: Manage Users, Billing, & Roles/Permissions Manage Customizations - create/update/delete statuses, Custom Fields, Integration Links, organization name, currency, etc. Manage Group Phone Numbers. Manage\u2026",
+      "keywords": [
+        "permissions manage customizations",
+        "bulk workflow subscriptions",
+        "manage group phone numbers",
+        "manage team smart views",
+        "integration links",
+        "send bulk email",
+        "custom fields",
+        "manage users",
+        "merge leads",
+        "bulk edit",
+        "account",
+        "admin",
+        "role",
+        "user"
+      ],
+      "topic": "opportunities_pipeline"
+    },
+    {
+      "slug": "automatically-set-opportunity-probability-based-on-pipeline-status",
+      "title": "Automatically set Opportunity Confidence based on pipeline status",
+      "url": "https://help.close.com/docs/automatically-set-opportunity-probability-based-on-pipeline-status",
+      "body_file": "close-help-docs/pages/automatically-set-opportunity-probability-based-on-pipeline-status.txt",
+      "excerpt": "Overview Every time an Opportunity moves into a new status, you probably want its Confidence (the probability used to calculate your weighted pipeline value) to update automatically. For example, any deal that reaches Negotiations should jump to 80% \u2014 no manual edits required. Close makes this easy with Workflows . What you'll be able to do Once this is set up, Close will automatically update an Opportunity's Confidence percentage the moment it moves into a specific status.\u2026",
+      "keywords": [
+        "workflows permission",
+        "expected value",
+        "overview every",
+        "automatically",
+        "workflows if",
+        "opportunity",
+        "probability",
+        "confidence",
+        "in close",
+        "pipeline",
+        "status",
+        "based"
+      ],
+      "topic": "opportunities_pipeline"
+    },
+    {
+      "slug": "chloe",
+      "title": "Chloe",
+      "url": "https://help.close.com/docs/chloe",
+      "body_file": "close-help-docs/pages/chloe.txt",
+      "excerpt": "Chloe is your built-in AI sales teammate. She makes and receives calls, runs qualification and discovery, and logs everything directly in Close so your team can focus on closing. Chloe is native to Close, with full access to your leads, contacts, conversation history, and details of your business. What Chloe does Chloe works over voice. Her primary job is Lead Engagement - engaging leads instantly through outbound and inbound calls, running structured conversations, and\u2026",
+      "keywords": [
+        "lead engagement",
+        "what chloe",
+        "an agent",
+        "chloe"
+      ],
+      "topic": "opportunities_pipeline"
+    },
+    {
+      "slug": "create-an-opportunity-when-a-lead-status-is-moved-to-qualified",
+      "title": "Create an Opportunity when Status is changed to Qualified",
+      "url": "https://help.close.com/docs/create-an-opportunity-when-a-lead-status-is-moved-to-qualified",
+      "body_file": "close-help-docs/pages/create-an-opportunity-when-a-lead-status-is-moved-to-qualified.txt",
+      "excerpt": "Your lead generation team or process is the first step in closing deals, turning cold calls, email campaigns, social media ads, website forms, etc. into a Qualified Lead that your sales team should make sure to follow up on. After all this work, every qualified lead generated by your team should get an Opportunity created! You want to make sure they enter your sales pipeline and not get lost. In this article, we will help you set up a Zap to auto-create an Opportunity for\u2026",
+      "keywords": [
+        "qualified lead",
+        "opportunity",
+        "new status",
+        "qualified",
+        "new lead",
+        "changed",
+        "create",
+        "status",
+        "moved",
+        "lead"
+      ],
+      "topic": "opportunities_pipeline"
+    },
+    {
+      "slug": "custom-fields",
+      "title": "Custom Fields",
+      "url": "https://help.close.com/docs/custom-fields",
+      "body_file": "close-help-docs/pages/custom-fields.txt",
+      "excerpt": "Custom Fields in Close are flexible and can be used for many different purposes. They allow you to store attributes about your Leads and Contacts. You can store common attributes like industry/vertical, company size, or timezone; setup our user type custom field to assign Leads to specific reps; unsubscribe a contact from future communications, or sync your internal database to pull in data that could be relevant during a sales call. Exact use cases depend on what you are\u2026",
+      "keywords": [
+        "custom activities opportunity",
+        "custom field types there",
+        "custom activities",
+        "custom activity",
+        "custom fields",
+        "custom",
+        "fields"
+      ],
+      "topic": "opportunities_pipeline"
+    },
+    {
+      "slug": "docusign",
+      "title": "Docusign",
+      "url": "https://help.close.com/docs/docusign",
+      "body_file": "close-help-docs/pages/docusign.txt",
+      "excerpt": "Create, send, and track documents from Opportunities and Lead objects within Close. This integration through Zapier will streamline document generation and help you to follow up on any outstanding deals. You have the option of having the zap triggered by actions in Close or by actions in Docusign. See the two zap templates below and see which best meets your needs. What you'll need A Close account and your API key A Zapier account A Docusign account Automatically generate\u2026",
+      "keywords": [
+        "request signatures",
+        "setup start",
+        "docusign"
+      ],
+      "topic": "opportunities_pipeline"
+    },
+    {
+      "slug": "dripify",
+      "title": "Dripify",
+      "url": "https://help.close.com/docs/dripify",
+      "body_file": "close-help-docs/pages/dripify.txt",
+      "excerpt": "Integrating Close with Dripify Dripify is a LinkedIn automation and prospecting platform that helps users find and engage with their target audience on LinkedIn. It allows users to create a sales funnel with automated LinkedIn actions and conditions, such as sending connection requests, messages, and endorsements, as well as following and liking prospects' profiles. Dripify also includes advanced analytics and a smart inbox to help users manage their campaigns and respond\u2026",
+      "keywords": [
+        "integrating close",
+        "dripify dripify",
+        "dripify"
+      ],
+      "topic": "opportunities_pipeline"
+    },
+    {
+      "slug": "enforcing-required-fields-in-close-via-zapier",
+      "title": "Enforcing required fields in Close via Zapier",
+      "url": "https://help.close.com/docs/enforcing-required-fields-in-close-via-zapier",
+      "body_file": "close-help-docs/pages/enforcing-required-fields-in-close-via-zapier.txt",
+      "excerpt": "Keep your users happy and your data clean with these simple Zaps Often times you may have a set of requirements for making specific changes to leads in Close. For example, you may require certain information be collected before changing a leads status or creating an opportunity. This guide will show you how you can enforce those requirements within Close using Zapier. What you'll need A Zapier account allowing for multi-step Zaps A Close account Step 1: Setting up your\u2026",
+      "keywords": [
+        "buying process",
+        "zaps often",
+        "enforcing",
+        "team size",
+        "required",
+        "fields",
+        "zapier",
+        "close"
+      ],
+      "topic": "opportunities_pipeline"
+    },
+    {
+      "slug": "find-ids-in-close",
+      "title": "Find IDs in Close",
+      "url": "https://help.close.com/docs/find-ids-in-close",
+      "body_file": "close-help-docs/pages/find-ids-in-close.txt",
+      "excerpt": "Whether you're setting up a Zapier flow or connecting to our API, you might need to find the following IDs in Close: User or Membership Lead Email Template Custom Field Lead or Opportunity Status Organization User ID To find a User or Membership ID, go to your Settings > Team Management . Find the user for which you need the ID. Click the three dots to the right of the user name and select the ID you would like to copy to your keyboard. Lead ID To find a Lead ID in your\u2026",
+      "keywords": [
+        "opportunity status organization user",
+        "opportunity custom field",
+        "opportunity status",
+        "email templates",
+        "team management",
+        "email template",
+        "custom fields",
+        "custom field",
+        "close",
+        "find",
+        "ids"
+      ],
+      "topic": "opportunities_pipeline"
+    },
+    {
+      "slug": "getaccept",
+      "title": "GetAccept",
+      "url": "https://help.close.com/docs/getaccept",
+      "body_file": "close-help-docs/pages/getaccept.txt",
+      "excerpt": "GetAccept is a sales enablement and contract management tool. Using our integration you can push contract ( Opportunity ) information directly from Close to GetAccept. GetAccept provides everything you need to build sales collateral from Close - sales reps can create quotes, proposals, contracts, and receive electronic signatures. What you'll need A Close account and your API key A GetAccept Pro license How the integration works Instead of copy/pasting Close lead and\u2026",
+      "keywords": [
+        "connect connecting close",
+        "save entering close",
+        "setup enable close",
+        "connected close",
+        "getaccept"
+      ],
+      "topic": "opportunities_pipeline"
+    },
+    {
+      "slug": "groups",
+      "title": "Groups",
+      "url": "https://help.close.com/docs/groups",
+      "body_file": "close-help-docs/pages/groups.txt",
+      "excerpt": "Availability This feature is only available on the Scale and Enterprise (legacy) plans Groups were made for managers who want to filter performance by groups of team members rather than the organization as a whole. Create saved groups of users to monitor your sales team\u2019s Pipeline, report on their activities, search Leads by Group activity, and more. Creating a Group You can access Groups by going to Settings > Team Management and then choosing the Groups tab. Select the\u2026",
+      "keywords": [
+        "availability this",
+        "removing members",
+        "team management",
+        "add members",
+        "group once",
+        "groups you",
+        "sales team",
+        "group you",
+        "new group",
+        "groups"
+      ],
+      "topic": "opportunities_pipeline"
+    },
+    {
+      "slug": "importing-opportunities-from-a-file",
+      "title": "Importing Opportunities from a file",
+      "url": "https://help.close.com/docs/importing-opportunities-from-a-file",
+      "body_file": "close-help-docs/pages/importing-opportunities-from-a-file.txt",
+      "excerpt": "You can import Opportunities from a file following the steps below. Go to the Importer You can do the following to bring your Leads into Close from a file: Upload via CSV by browsing that file on your computer Dragging and dropping a file onto the Lead Importer\u2019s landing page Copy and paste directly from your spreadsheet Format your import file Make sure the first row in your spreadsheet is a header row (e.g., a row containing column names). It has to contain one column\u2026",
+      "keywords": [
+        "lead importer",
+        "opportunities",
+        "date created",
+        "importer you",
+        "importing",
+        "lead name",
+        "user make",
+        "date won",
+        "file"
+      ],
+      "topic": "opportunities_pipeline"
+    },
+    {
+      "slug": "integration-links",
+      "title": "Integration links",
+      "url": "https://help.close.com/docs/integration-links",
+      "body_file": "close-help-docs/pages/integration-links.txt",
+      "excerpt": "Integration Links are a way to integrate other websites and systems with Close. You can use them to quickly jump to other websites and pass them data from your Leads, Contacts, and Opportunities. What if I want to find my Contacts' social media profiles easily? How do I easily send Opportunity data from a lead to my sales documentation tool? How do I look up a Contact\u2019s email in my internal database with one click? Set up an Integration Link. Creating Integration Links You\u2026",
+      "keywords": [
+        "creating integration links you",
+        "integration links",
+        "integration link",
+        "integration",
+        "these links",
+        "close lead",
+        "links"
+      ],
+      "topic": "opportunities_pipeline"
+    },
+    {
+      "slug": "marketing",
+      "title": "Marketing",
+      "url": "https://help.close.com/docs/marketing",
+      "body_file": "close-help-docs/pages/marketing.txt",
+      "excerpt": "Marketing Let\u2019s face it, without a reliable source of new leads for your product or service, your business is dead in the water without consistent customer growth. That makes the lead generation ideas and strategies you choose to pursue today, incredibly important to the future of your company. Marketing and sales teams spend so much time and financial resources on lead generation\u2014from creating in-depth blog content, to launching ad campaigns, prospecting on LinkedIn,\u2026",
+      "keywords": [
+        "marketing let",
+        "marketing"
+      ],
+      "topic": "opportunities_pipeline"
+    },
+    {
+      "slug": "migration-from-another-crm",
+      "title": "Migration from another CRM",
+      "url": "https://help.close.com/docs/migration-from-another-crm",
+      "body_file": "close-help-docs/pages/migration-from-another-crm.txt",
+      "excerpt": "Migration from another CRM Use the 'Import from a CRM' option in the Lead Importer if you need to migrate leads over from an existing CRM. Remember that only Close users with the Admin Role are allowed to initiate migration from an existing CRM. Our partner, Import2, powers imports from external CRMs. As long as you initialize the import from within Close, then in most cases, there will be no cost to you. Close Pro Tip: Initializing the CRM Import Only one Close user should\u2026",
+      "keywords": [
+        "close pro tip",
+        "lead importer",
+        "less annoying",
+        "import only",
+        "admin role",
+        "migration",
+        "another",
+        "crm"
+      ],
+      "topic": "opportunities_pipeline"
+    },
+    {
+      "slug": "onboarding-checklist-start-here",
+      "title": "Close Onboarding",
+      "url": "https://help.close.com/docs/onboarding-checklist-start-here",
+      "body_file": "close-help-docs/pages/onboarding-checklist-start-here.txt",
+      "excerpt": "\ud83d\udc4b Welcome to Your Close Onboarding Guide! Getting set up in Close is easier than ever with our interactive demos and videos \u2014step-by-step guides designed to help you explore and implement key features quickly. \ud83d\udd39 How to use these demos: For the best experience, we recommend opening Close in one window and the interactive demo or video in another. This way, you can follow along in real-time and complete each step directly in your Close account. \ud83d\ude80 Ready to get started? Select\u2026",
+      "keywords": [
+        "your close onboarding guide",
+        "sales playbook builder",
+        "sales playmaker before",
+        "onboarding",
+        "checklist",
+        "close got",
+        "close",
+        "start",
+        "here"
+      ],
+      "topic": "opportunities_pipeline"
+    },
+    {
+      "slug": "opportunities",
+      "title": "Opportunities",
+      "url": "https://help.close.com/docs/opportunities",
+      "body_file": "close-help-docs/pages/opportunities.txt",
+      "excerpt": "Create a New Opportunity You can create a new Opportunity directly from the Lead page. Go to Leads page > click on any lead > click on the + button next to Opportunities section on the left. Opportunities add value to a Lead and can be assigned to specific Contacts on your Leads. You can add Custom Fields to each Opportunity as well. Opportunity Lead Limits In Close, there is a 1000 Opportunity limit per Lead. Opportunity Fields Meanings Status: Defaults are 'Demo\u2026",
+      "keywords": [
+        "opportunity fields meanings status",
+        "opportunity lead limits in close",
+        "organization settings",
+        "opportunity statuses",
+        "new opportunity you",
+        "opportunities list",
+        "estimated close",
+        "demo completed",
+        "expected value",
+        "contract sent",
+        "custom fields",
+        "opportunities",
+        "pipeline view",
+        "proposal sent"
+      ],
+      "topic": "opportunities_pipeline"
+    },
+    {
+      "slug": "opportunities-report",
+      "title": "Opportunities List View",
+      "url": "https://help.close.com/docs/opportunities-report",
+      "body_file": "close-help-docs/pages/opportunities-report.txt",
+      "excerpt": "While Close tracks a number of data points, our philosophy on reporting is to make that data as actionable for your sales team as possible. To that end, our reporting focuses on a sales rep\u2019s created Opportunities, their Activity, and the movement of Leads through the sales funnel. The Opportunities List gives you a powerful, flexible view of every opportunity in your organization. Use it to manage your pipeline, prioritize follow-ups, run quick calculations, and share key\u2026",
+      "keywords": [
+        "opportunities list you",
+        "opportunities list",
+        "opportunities use",
+        "pipeline owner",
+        "opportunities",
+        "notes custom",
+        "while close",
+        "report",
+        "list",
+        "view"
+      ],
+      "topic": "opportunities_pipeline"
+    },
+    {
+      "slug": "opportunity-funnels-report",
+      "title": "Opportunity Funnels Report",
+      "url": "https://help.close.com/docs/opportunity-funnels-report",
+      "body_file": "close-help-docs/pages/opportunity-funnels-report.txt",
+      "excerpt": "The Opportunity Funnels report helps you keep track of your Opportunities with an in-depth look into how your Opportunities perform over a given time range. This report will show aggregated metrics for the overall performance and specific details about stages in your sales pipeline, along with a visualization that shows how Opportunities progress in that pipeline. This report has different filtering options to narrow down the type of Opportunity you want to look into, based\u2026",
+      "keywords": [
+        "your win rate",
+        "opportunity",
+        "was created",
+        "was active",
+        "funnels",
+        "report"
+      ],
+      "topic": "opportunities_pipeline"
+    },
+    {
+      "slug": "opportunity-pipeline-view",
+      "title": "Opportunity Pipeline View",
+      "url": "https://help.close.com/docs/opportunity-pipeline-view",
+      "body_file": "close-help-docs/pages/opportunity-pipeline-view.txt",
+      "excerpt": "The Pipeline View is one of the simplest, yet most actionable reporting tools for sales teams. It addresses both the needs of an individual sales rep, as well as sales managers, VPs and CEOs to easily forecast and prioritize deals. Easily drag an Opportunity from one stage to another, filter, sort, save, and share this report. There are plenty of options to help you customize your experience. Using the Pipeline View Every Opportunity created on a Lead in Close can be seen\u2026",
+      "keywords": [
+        "pipeline view every opportunity",
+        "lost opportunities",
+        "opportunity notes",
+        "pipeline view by",
+        "custom fields",
+        "pipeline view",
+        "opportunity",
+        "close you",
+        "pipeline",
+        "view"
+      ],
+      "topic": "opportunities_pipeline"
+    },
+    {
+      "slug": "opportunity-statuses",
+      "title": "Opportunity Pipelines & Statuses",
+      "url": "https://help.close.com/docs/opportunity-statuses",
+      "body_file": "close-help-docs/pages/opportunity-statuses.txt",
+      "excerpt": "Defining Opportunity Pipelines & Statuses Opportunity Pipelines are used to define the particular funnel deals can go through. Opportunity Statuses are used to describe each stage a pending deal can go through within a specific Pipeline. Here is a common example of a Pipeline that identifies various stages in a sales process: Demo Completed: Indicating that a product/service demo has been conducted for the Lead. Proposal Sent: Indicating that a proposal has been sent to the\u2026",
+      "keywords": [
+        "defining opportunity pipelines",
+        "statuses opportunity pipelines",
+        "marking opportunities",
+        "opportunity statuses",
+        "demo completed",
+        "contract sent",
+        "proposal sent",
+        "lead status",
+        "opportunity",
+        "pipelines",
+        "statuses"
+      ],
+      "topic": "opportunities_pipeline"
+    },
+    {
+      "slug": "prospecting",
+      "title": "Prospecting",
+      "url": "https://help.close.com/docs/prospecting",
+      "body_file": "close-help-docs/pages/prospecting.txt",
+      "excerpt": "Prospecting Prospecting is the initial stage of the sales process. It is the activity of turning a prospect (a target who may not know who you are) into an opportunity. Once you have an opportunity, you can turn them into customers. Sales prospecting is the act of sales reps reaching out to leads in the hope of creating sales opportunities. Prospecting can refer to marketing tactics, cold calls, email campaigns, and other ways to nurture leads. It also encompasses\u2026",
+      "keywords": [
+        "prospecting prospecting",
+        "prospecting"
+      ],
+      "topic": "opportunities_pipeline"
+    },
+    {
+      "slug": "reporting",
+      "title": "Reports",
+      "url": "https://help.close.com/docs/reporting",
+      "body_file": "close-help-docs/pages/reporting.txt",
+      "excerpt": "Close more deals with actionable insights Pull the most significant growth levers with our customizable, flexible reporting: from projections to leaderboards and every KPI in between. Close has several different reports based on the metrics that need to be tracked. Sales Team Activity Tracking Activity Comparison Compare time-based reports. How did you perform in Q1 this year vs. Q4 last year? Close gives you all the answers you need at any given time, both for individual\u2026",
+      "keywords": [
+        "activity overview act",
+        "sent email understand",
+        "status change see",
+        "reporting",
+        "reports"
+      ],
+      "topic": "opportunities_pipeline"
+    },
+    {
+      "slug": "slack",
+      "title": "Slack",
+      "url": "https://help.close.com/docs/slack",
+      "body_file": "close-help-docs/pages/slack.txt",
+      "excerpt": "Connect Slack and Close in order to notify your team of important updates in your sales pipeline. Using our Zapier integration for Slack you can quickly and easily message channels or particular team members about new leads, won opportunities, or any number of other events within Close. In this example, we\u2019ll show you how to message the rest of your team in Slack when a deal has been marked won in Close. What you'll need A Close account and your API key A Zapier account A\u2026",
+      "keywords": [
+        "send channel message",
+        "new opportunity",
+        "new status type",
+        "choose account",
+        "connect slack",
+        "action event",
+        "setup step",
+        "slack now",
+        "close in",
+        "slack"
+      ],
+      "topic": "opportunities_pipeline"
+    },
+    {
+      "slug": "status-change-report",
+      "title": "Status Change Report",
+      "url": "https://help.close.com/docs/status-change-report",
+      "body_file": "close-help-docs/pages/status-change-report.txt",
+      "excerpt": "The Status Change report tracks the movement of both Leads and Opportunities from Status to Status through your sales funnel. It gives you the number of Leads in each previous status and shows where those Leads went in a given time period. With the data given, you can also calculate (outside of Close) what the conversion percentage is for each of your Statuses. To see more detail, you can click on any number to see the related search results. You can also click the arrow\u2026",
+      "keywords": [
+        "status change report read",
+        "opportunity status",
+        "potential status",
+        "change",
+        "report",
+        "status"
+      ],
+      "topic": "opportunities_pipeline"
+    },
+    {
+      "slug": "steps-to-uploading-leads-into-close",
+      "title": "Steps To Import Your Data Successfully",
+      "url": "https://help.close.com/docs/steps-to-uploading-leads-into-close",
+      "body_file": "close-help-docs/pages/steps-to-uploading-leads-into-close.txt",
+      "excerpt": "The top tips and common mistakes to keep in mind when importing your data. Close is the most powerful when your data lives in the right places. Having a good understanding of the data importing process will allow for easy searching, powerful Smart Views, and the ability to automate as your team grows. Here are the essential steps to take and the common mistakes to avoid when importing your Leads into Close. 1. Understand the Different Types of Data Fields The first step is\u2026",
+      "keywords": [
+        "close standard field",
+        "standard fields when",
+        "custom fields these",
+        "data fields the",
+        "different types",
+        "standard fields",
+        "custom fields",
+        "custom field",
+        "successfully",
+        "smart views",
+        "uploading",
+        "import",
+        "close",
+        "leads",
+        "steps",
+        "data",
+        "into"
+      ],
+      "topic": "opportunities_pipeline"
+    },
+    {
+      "slug": "workflow-steps",
+      "title": "Workflow Steps",
+      "url": "https://help.close.com/docs/workflow-steps",
+      "body_file": "close-help-docs/pages/workflow-steps.txt",
+      "excerpt": "Steps are the individual actions that take place within a Workflow. This includes sending email or SMS, updating Leads, creating Opportunities, or assigning Tasks. Here is a list of the current available Workflow steps: Step Type Email Communication Call Communication SMS Communication Assign User Operational Task Operational Create Opportunity Operational Update Lead Operational Update Opportunity Operational Filter Operational Adding or Removing Steps to a Workflow To add\u2026",
+      "keywords": [
+        "active workflow when",
+        "removing steps",
+        "updating steps",
+        "step delay if",
+        "workflow run",
+        "workflow to",
+        "add step",
+        "workflow",
+        "steps"
+      ],
+      "topic": "opportunities_pipeline"
+    },
+    {
+      "slug": "workflows",
+      "title": "Workflows",
+      "url": "https://help.close.com/docs/workflows",
+      "body_file": "close-help-docs/pages/workflows.txt",
+      "excerpt": "Plan limits Workflows are only available on the Growth and Scale plans. Workflows can be used to automate tasks and outreach. There are endless possibilities of what you can automate, but the most common use cases are: Automatically update Leads when an Opportunity is won. Randomly assign a new Lead to a team member and automate a scheduled sequence of email, SMS, task, and/or call tasks to the assigned team member. Create an Opportunity when a Custom Activity is published\u2026",
+      "keywords": [
+        "workflow glossary workflows",
+        "custom activity",
+        "each workflow",
+        "workflow goal",
+        "workflows"
+      ],
+      "topic": "opportunities_pipeline"
+    }
+  ]
+}

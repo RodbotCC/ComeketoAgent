@@ -1,0 +1,523 @@
+{
+  "topic_id": "sms_messaging",
+  "article_count": 29,
+  "articles": [
+    {
+      "slug": "a2p-10dlc",
+      "title": "10DLC",
+      "url": "https://help.close.com/docs/a2p-10dlc",
+      "body_file": "close-help-docs/pages/a2p-10dlc.txt",
+      "excerpt": "A2P 10DLC is a new messaging standard introduced by major US carriers that requires all companies sending A2P(Application to person) SMS traffic to be registered. This is the case regardless of whether you are sending a bulk sales campaign or you just use SMS for occasional transactional messages. This only applies to companies messaging in the US and US territories using 10-digit long code phone numbers (like your Close phone numbers). It allows businesses to send\u2026",
+      "keywords": [
+        "10dlc",
+        "a2p",
+        "dlc"
+      ],
+      "topic": "sms_messaging"
+    },
+    {
+      "slug": "a2p-10dlc-compliance-boost-with-ai",
+      "title": "A2P 10DLC Compliance boost with AI",
+      "url": "https://help.close.com/docs/a2p-10dlc-compliance-boost-with-ai",
+      "body_file": "close-help-docs/pages/a2p-10dlc-compliance-boost-with-ai.txt",
+      "excerpt": "A2P compliance Once your A2P 10DLC registration is approved, mobile carriers continue to keep an eye on your SMS traffic. If they spot activity that doesn\u2019t meet compliance guidelines, your messages may be filtered or blocked from being delivered. In cases of repeated non-compliance, Close may suspend SMS sending capabilities. You can find more details in this article that outlines the relevant guidelines. Even legitimate senders can occasionally get caught by carrier\u2026",
+      "keywords": [
+        "connect claude",
+        "compliance",
+        "10dlc",
+        "boost",
+        "a2p",
+        "dlc"
+      ],
+      "topic": "sms_messaging"
+    },
+    {
+      "slug": "a2p-10dlc-stay-compliant",
+      "title": "Stay A2P 10DLC Compliant",
+      "url": "https://help.close.com/docs/a2p-10dlc-stay-compliant",
+      "body_file": "close-help-docs/pages/a2p-10dlc-stay-compliant.txt",
+      "excerpt": "Approved for A2P 10DLC - What's Next? Once your A2P 10DLC application has been approved, carriers will continue to monitor your SMS traffic. If you fail to follow guidelines, especially in those first messages, carriers will randomly filter other messages across your account (not necessarily the first lead that had the violation) until you fully comply. Repeat offenders may have to their SMS capabilities in Close suspended, and non-compliance fees may apply. Read further\u2026",
+      "keywords": [
+        "compliant",
+        "10dlc",
+        "stay",
+        "a2p",
+        "dlc"
+      ],
+      "topic": "sms_messaging"
+    },
+    {
+      "slug": "a2p-sms-registration-rejected",
+      "title": "A2P 10DLC - What to do when my A2P SMS registration is rejected?",
+      "url": "https://help.close.com/docs/a2p-sms-registration-rejected",
+      "body_file": "close-help-docs/pages/a2p-sms-registration-rejected.txt",
+      "excerpt": "The A2P SMS registration is reviewed by independent third parties. If the registration is rejected it means it did not fulfill one or more points of the approval criteria that we mentioned in the previous article. Below we listed the most common rejection reasons and how to correct them. Rejected Brand Your A2P \u201cBrand\u201d in your company. A rejected brand means your business data cannot be verified because there is a mismatch between your business registration number and legal\u2026",
+      "keywords": [
+        "canadian business number",
+        "rejected brand your",
+        "close support",
+        "registration",
+        "rejected",
+        "a2p",
+        "dlc",
+        "sms"
+      ],
+      "topic": "sms_messaging"
+    },
+    {
+      "slug": "activity-comparison-report",
+      "title": "Activity Comparison Report",
+      "url": "https://help.close.com/docs/activity-comparison-report",
+      "body_file": "close-help-docs/pages/activity-comparison-report.txt",
+      "excerpt": "The Activity Comparison report gives you a spreadsheet-like view of the performance of every team member. This makes it quick and easy to see how you or members of your team are contributing to the overall results. The Activity Comparison Report lets you compare multiple users across multiple metrics. Filtering You can filter the report by date range, user, and Smart View. You can also select a comparison date range to see the percent change in each metric between the two\u2026",
+      "keywords": [
+        "activity comparison report",
+        "activity overview report",
+        "activity comparison",
+        "exporting you",
+        "filtering you",
+        "team members",
+        "saving once",
+        "sorting you",
+        "comparison",
+        "smart view",
+        "activity",
+        "report"
+      ],
+      "topic": "sms_messaging"
+    },
+    {
+      "slug": "calendly",
+      "title": "Calendly",
+      "url": "https://help.close.com/docs/calendly",
+      "body_file": "close-help-docs/pages/calendly.txt",
+      "excerpt": "Connect your Calendly account to insert your scheduling links into email and SMS communication with 1-click and create new Contacts when new bookings are made. Connect your Calendly account Users can add their Calendly account by going to Settings > Accounts & Apps and selecting Calendly from the list of options. Once connected, all of the Calendly Event Types (aka \u201cbooking links\u201d) available to the connected Calendly account will be added to Scheduling Links and will appear\u2026",
+      "keywords": [
+        "calendly event types",
+        "connected account",
+        "scheduling links",
+        "event types",
+        "calendly"
+      ],
+      "topic": "sms_messaging"
+    },
+    {
+      "slug": "call-blocking-in-close",
+      "title": "Call Blocking in Close",
+      "url": "https://help.close.com/docs/call-blocking-in-close",
+      "body_file": "close-help-docs/pages/call-blocking-in-close.txt",
+      "excerpt": "Close lets you block specific phone numbers directly from the app \u2014 no need to contact support. Once a number is blocked, the restriction applies across your entire organization , so all users are protected automatically. You can also independently toggle the blocking of anonymous callers (callers with a hidden or unknown caller ID) from the same settings page. This feature is available on all Close plans and accessible to all users . Set up call blocking Go to Settings \u2192\u2026",
+      "keywords": [
+        "direction what happens outbound",
+        "blocked numbers enter",
+        "number is blocked",
+        "what happens when",
+        "blocked numbers",
+        "blocking",
+        "close",
+        "call"
+      ],
+      "topic": "sms_messaging"
+    },
+    {
+      "slug": "calling-and-sms-usage",
+      "title": "Variable Usage Costs (Calling, SMS, Phone Numbers, AI Tools)",
+      "url": "https://help.close.com/docs/calling-and-sms-usage",
+      "body_file": "close-help-docs/pages/calling-and-sms-usage.txt",
+      "excerpt": "Close has a number of features whose cost is based on how much you use them. Those include phone number rentals, calling, SMS, and certain AI tools. Whenever you make use of these features, a small amount of money is deducted from your usage credit balance. By default, calling and SMS are enabled for all users on any plan, as well as most AI features, but you can restrict the use of communication for specific users via Roles & Permissions . To view and manage your team's\u2026",
+      "keywords": [
+        "countries check twilio",
+        "calling calls",
+        "european eco",
+        "per twilio",
+        "in depth",
+        "variable",
+        "calling",
+        "numbers",
+        "costs",
+        "phone",
+        "tools",
+        "usage",
+        "sms"
+      ],
+      "topic": "sms_messaging"
+    },
+    {
+      "slug": "chloe-faq",
+      "title": "FAQ & Troubleshooting",
+      "url": "https://help.close.com/docs/chloe-faq",
+      "body_file": "close-help-docs/pages/chloe-faq.txt",
+      "excerpt": "General questions What is Chloe? Chloe is Close's built-in AI sales teammate. She makes and receives calls, runs qualification and discovery, and logs everything directly in Close. See our primary Chloe page for a full overview. Which plans include Chloe? Chloe is available on the Growth and Scale plans. Is Chloe free? Chloe is free for eligible Growth and Scale organizations during the open beta period. After beta, Chloe voice calls will use AI credits included with your\u2026",
+      "keywords": [
+        "manage customizations",
+        "send scheduling link",
+        "troubleshooting",
+        "super users",
+        "does chloe",
+        "can chloe",
+        "is chloe",
+        "chloe",
+        "faq"
+      ],
+      "topic": "sms_messaging"
+    },
+    {
+      "slug": "close-mobile-app",
+      "title": "Close Mobile App",
+      "url": "https://help.close.com/docs/close-mobile-app",
+      "body_file": "close-help-docs/pages/close-mobile-app.txt",
+      "excerpt": "The Close mobile app allows you to communicate with your prospects and customers easily, regardless of your location. After you download the Close app, your Leads will go wherever you go. Access your Inbox while on the go Quickly email, call, and send SMS to customers Add tasks, notes, and opportunities Add or edit lead data from anywhere View reports to see insights on your leads With our mobile app, you can stay connected and responsive no matter where you are. Download\u2026",
+      "keywords": [
+        "calling outbound calls to",
+        "on android download",
+        "getting around on",
+        "mobile app on",
+        "google play",
+        "app store",
+        "mobile",
+        "close",
+        "app"
+      ],
+      "topic": "sms_messaging"
+    },
+    {
+      "slug": "custom-activities",
+      "title": "Custom Activities",
+      "url": "https://help.close.com/docs/custom-activities",
+      "body_file": "close-help-docs/pages/custom-activities.txt",
+      "excerpt": "Custom Activities allow you to create a custom action type to record a specific type of activity. The most common examples include forms filled in by prospects, support tickets, call outcomes, invoice/payment items, and various structured notes such as call playbooks. Plan Limitations Custom Activities are not available on the Solo , Essentials and Base (legacy) plans. In our examples below, we'll use a Custimer Onboarding checklist Custom Activity for reference. Customer\u2026",
+      "keywords": [
+        "plan limitations custom activities",
+        "sales qualifying call onboarding",
+        "customer onboarding checklist",
+        "custom activity type before",
+        "custom activity type",
+        "custimer onboarding",
+        "custom activities",
+        "custom activity",
+        "inbound form",
+        "feedback to",
+        "activities",
+        "new custo",
+        "custom"
+      ],
+      "topic": "sms_messaging"
+    },
+    {
+      "slug": "enabling-2fa",
+      "title": "Two-factor authentication (2FA)",
+      "url": "https://help.close.com/docs/enabling-2fa",
+      "body_file": "close-help-docs/pages/enabling-2fa.txt",
+      "excerpt": "Two-factor authentication (2FA) is a way of adding additional security to your account. 2FA requires you to enter an extra code when you log in or perform some account-sensitive action (e.g. changing your password). The code is generated from an application on your computer or mobile phone. Just want to reset your password? Learn how to do so here . Setting up 2FA To enable 2FA for your account you will need an application that manages 2FA codes, such as Google\u2026",
+      "keywords": [
+        "google authenticator",
+        "account settings",
+        "authentication",
+        "enabling",
+        "factor",
+        "2fa",
+        "two"
+      ],
+      "topic": "sms_messaging"
+    },
+    {
+      "slug": "exporting-data",
+      "title": "Exporting data",
+      "url": "https://help.close.com/docs/exporting-data",
+      "body_file": "close-help-docs/pages/exporting-data.txt",
+      "excerpt": "Exports We believe that you shouldn't be held captive by your own data. That's why we've made it extremely easy to export all or just part of your data in Close. Anytime you are looking at Leads in Search, you can use the ... > Export button. Clicking it will let you choose a type and a format of the exported data. You can export all of your leads or first narrow down your search results by using a search query. You need to choose which type of export you want (Leads,\u2026",
+      "keywords": [
+        "contacts smart view",
+        "leads smart view",
+        "export formats",
+        "exports we",
+        "smart view",
+        "exporting",
+        "leads you",
+        "data"
+      ],
+      "topic": "sms_messaging"
+    },
+    {
+      "slug": "forwarding-sms",
+      "title": "Creating additional SMS notifications for users",
+      "url": "https://help.close.com/docs/forwarding-sms",
+      "body_file": "close-help-docs/pages/forwarding-sms.txt",
+      "excerpt": "If you're a heavy user of SMS and not always logged into Close or want to respond quickly during non-business hours, you may want to set up an additional notification for any incoming SMS. This tutorial will cover the basis of setting up some additional notification types. What you'll need A Zapier account allowing for multi-step Zaps A Close account A Google Spreadsheet (if you want to forward SMS to a cellphone) Step 1: Setting up your Zapier trigger To set up this Zap,\u2026",
+      "keywords": [
+        "google spreadsheet",
+        "new inbox item",
+        "notifications",
+        "additional",
+        "forwarding",
+        "under type",
+        "creating",
+        "users",
+        "sms"
+      ],
+      "topic": "sms_messaging"
+    },
+    {
+      "slug": "group-numbers",
+      "title": "Group Numbers",
+      "url": "https://help.close.com/docs/group-numbers",
+      "body_file": "close-help-docs/pages/group-numbers.txt",
+      "excerpt": "A Group Phone Number (also known as a \"ring group\" or \"call group\") defines a phone number that, when dialed, rings a group of phones simultaneously, stopping when any one of them is picked up. This feature can be a great tool if your team has a shared inbound phone number, such as a toll-free number routed to all of your sales reps. Add a Group Number To set up your first Group Number, navigate to Settings > Communication > Phone & Voicemail , then \" + New Number. \"\u2026",
+      "keywords": [
+        "group voicemail inbox",
+        "editing membership",
+        "group numbers when",
+        "group phone number",
+        "voicemail greeting",
+        "group numbers in",
+        "group number to",
+        "group number",
+        "missed calls",
+        "missed call",
+        "new number",
+        "numbers",
+        "group"
+      ],
+      "topic": "sms_messaging"
+    },
+    {
+      "slug": "hubspot-to-close-syncing-integration",
+      "title": "HubSpot to Close - Syncing Integration",
+      "url": "https://help.close.com/docs/hubspot-to-close-syncing-integration",
+      "body_file": "close-help-docs/pages/hubspot-to-close-syncing-integration.txt",
+      "excerpt": "Close and HubSpot Integration Integrating your Close and HubSpot databases can help streamline your data management and ensure that your sales and marketing teams have access to the most up-to-date information. This article will provide a comprehensive overview of the Close and HubSpot integration , including what it can and can't do, how to set it up, and troubleshooting tips. What the Integration Can and Can't Do The integration was created and is managed by HubSpot, and\u2026",
+      "keywords": [
+        "integration integrating",
+        "data you want with",
+        "custom activities",
+        "app marketplace",
+        "integration can",
+        "custom objects",
+        "syncing only",
+        "integration",
+        "hubspot",
+        "syncing",
+        "do the",
+        "close"
+      ],
+      "topic": "sms_messaging"
+    },
+    {
+      "slug": "inbox",
+      "title": "Inbox",
+      "url": "https://help.close.com/docs/inbox",
+      "body_file": "close-help-docs/pages/inbox.txt",
+      "excerpt": "The Close Inbox is a sales-focused view of all your inbound communication (emails, missed calls, voicemails) and open tasks/reminders for the day. The Inbox is a hub for everything you should react to and be reminded of. It's your hub for notifications and Tasks, and should be considered a to-do list. The goal for your Inbox is to help keep you on track in your workflow, with each item actionable. Your sales team should be able to work exclusively from their Close inbox.\u2026",
+      "keywords": [
+        "due tasks opportunities",
+        "potential contacts to",
+        "missed calls inbound",
+        "inbound emails",
+        "inbox"
+      ],
+      "topic": "sms_messaging"
+    },
+    {
+      "slug": "keyboard-shortcuts",
+      "title": "Close app keyboard shortcuts",
+      "url": "https://help.close.com/docs/keyboard-shortcuts",
+      "body_file": "close-help-docs/pages/keyboard-shortcuts.txt",
+      "excerpt": "Keyboard Shortcuts Close comes with a set of keyboard shortcuts that can significantly improve your workflow efficiency. To see the list of keyboard shortcuts available, just hit the question mark button ? on your keyboard from any page and you'll see a pop-up window listing them all. Close app keyboard shortcut list for Mac OS On any page Mac shortcut Windows shortcut Action ? ? Show keyboard shortcuts \u2318 Shift F Ctrl Shift F Focus the search input \u2318 Shift L Ctrl Shift L\u2026",
+      "keywords": [
+        "keyboard shortcuts close",
+        "enter ctrl enter submit",
+        "ctrl shift",
+        "dialer mac",
+        "shortcuts",
+        "keyboard",
+        "close",
+        "app"
+      ],
+      "topic": "sms_messaging"
+    },
+    {
+      "slug": "managing-your-usage-balance",
+      "title": "Managing your Usage balance",
+      "url": "https://help.close.com/docs/managing-your-usage-balance",
+      "body_file": "close-help-docs/pages/managing-your-usage-balance.txt",
+      "excerpt": "To see your current usage balance, go to \"Settings\" within Close, scroll down to \"Billing\", and then choose \"Usage\". The top section will show you the amount of usage in your billing month. Usage Overview Auto-Recharge Settings The middle section will show the remaining balance in your account and auto-recharge settings. This lets you know when you can expect a new charge to occur, based on the settings you've chosen in your Monthly Spending Limit. Make sure that your team\u2026",
+      "keywords": [
+        "adjusting monthly spending limit by",
+        "monthly spending limit",
+        "recharge settings the",
+        "usage overview auto",
+        "recharge settings",
+        "managing",
+        "balance",
+        "usage"
+      ],
+      "topic": "sms_messaging"
+    },
+    {
+      "slug": "plans-and-billing",
+      "title": "Plans and Billing",
+      "url": "https://help.close.com/docs/plans-and-billing",
+      "body_file": "close-help-docs/pages/plans-and-billing.txt",
+      "excerpt": "Billing Schedule, Plan, and Users Your Close account is billed according to these three aspects of your subscription: Your Billing Schedule - You can pay for Close on a monthly or annual basis. Your Team's Plan - You can review or change your team's Plan on the Plan page within your Organization settings. See Close's Plans & Pricing. Number of Users - You can invite, remove, or edit a User on the Team Management page within your Organization settings. Telephony Usage\u2026",
+      "keywords": [
+        "telephony usage calling",
+        "your billing schedule",
+        "billing schedule",
+        "users your close",
+        "team management",
+        "payment method",
+        "under settings",
+        "pricing page",
+        "close plans",
+        "pricing you",
+        "see close",
+        "your team",
+        "billing",
+        "plans"
+      ],
+      "topic": "sms_messaging"
+    },
+    {
+      "slug": "restricted-user-role",
+      "title": "Restricted User role",
+      "url": "https://help.close.com/docs/restricted-user-role",
+      "body_file": "close-help-docs/pages/restricted-user-role.txt",
+      "excerpt": "Restricted User Each plan includes the predefined role below. The Restricted User role is a default role and may be assigned to any user. However, it may not be edited or modified. Restricted Users do not have access to many Close features. Restricted Users can use Close for core work, including managing their own records and communication. They can also delete their own opportunities, tasks, and activities. Restricted Users cannot do higher-risk or admin-style actions\u2026",
+      "keywords": [
+        "restricted user each",
+        "restricted users",
+        "restricted",
+        "role",
+        "user"
+      ],
+      "topic": "sms_messaging"
+    },
+    {
+      "slug": "simpletexting",
+      "title": "SimpleTexting",
+      "url": "https://help.close.com/docs/simpletexting",
+      "body_file": "close-help-docs/pages/simpletexting.txt",
+      "excerpt": "Send MMS through SimpleTexting and get alerted in Close when a contact replies with an MMS. Create a task in Close after receiving an MMS in SimpleTexting Use this Zap SimpleTexting allows you to send SMS and MMS directly from your cellphone number or from phone number you'll rend with SimpleTexting. Don't miss a single MMS reply by getting alerted directly in Close. If you're using your Close phone number to text from SimpleTexting, you'll need to disable the SMS\u2026",
+      "keywords": [
+        "custom webhook",
+        "simpletexting",
+        "webhook start",
+        "setup step"
+      ],
+      "topic": "sms_messaging"
+    },
+    {
+      "slug": "sms-and-mms",
+      "title": "SMS and MMS",
+      "url": "https://help.close.com/docs/sms-and-mms",
+      "body_file": "close-help-docs/pages/sms-and-mms.txt",
+      "excerpt": "Like calling and email, SMS communication is built directly into Close. SMS can be an effective tool to increase response rates with prospects, e.g. by texting them meeting reminders and follow-ups. Prerequisites - SMS-enabled phone number Before you can send SMS in Close, you need to have an internal (Close-issued) SMS-enabled phone number that matches the country you're trying to send SMS to. That means in order to send SMS to the US or Canadian numbers, you need to have\u2026",
+      "keywords": [
+        "phone number",
+        "send later",
+        "mms",
+        "sms"
+      ],
+      "topic": "sms_messaging"
+    },
+    {
+      "slug": "sms-deliverability",
+      "title": "SMS Deliverability",
+      "url": "https://help.close.com/docs/sms-deliverability",
+      "body_file": "close-help-docs/pages/sms-deliverability.txt",
+      "excerpt": "SMS in Close may not deliver for a number of different reasons. Most commonly this would be when you are trying to send an SMS to a number that is not SMS-enabled (such as a landline), or if your content was marked as spam by the receiving phone carrier. You will notice an error on the SMS activity if our provider Twilio is letting us know that the message was undelivered. By hovering your cursor over the error message, you will see the reason why it was undelivered. Below\u2026",
+      "keywords": [
+        "carrier violation",
+        "message delivery",
+        "deliverability",
+        "sms"
+      ],
+      "topic": "sms_messaging"
+    },
+    {
+      "slug": "super-user-role",
+      "title": "Super User role",
+      "url": "https://help.close.com/docs/super-user-role",
+      "body_file": "close-help-docs/pages/super-user-role.txt",
+      "excerpt": "Super User Each plan includes the predefined role shown below. This is a default role and may be assigned to any user, but may not be edited or modified. Super Users can do everything a User can, plus manage common admin settings like: Customizations (for example: statuses, custom fields, integration links, etc) Group phone numbers Team Smart Views Export lead or opportunity data to a CSV or JSON file. Bulk edit and bulk delete Send Bulk Email or manage Bulk Workflow\u2026",
+      "keywords": [
+        "bulk workflow subscriptions",
+        "team smart views export",
+        "send bulk email",
+        "super user each",
+        "super users",
+        "sales ops",
+        "super",
+        "role",
+        "user"
+      ],
+      "topic": "sms_messaging"
+    },
+    {
+      "slug": "troubleshooting-headset-issues",
+      "title": "Troubleshooting headset issues",
+      "url": "https://help.close.com/docs/troubleshooting-headset-issues",
+      "body_file": "close-help-docs/pages/troubleshooting-headset-issues.txt",
+      "excerpt": "Close cannot access microphone Common reasons for this include: Another application or browser tab is using your microphone already. Check for other browser tabs (Google Hangout, Skype Web, appear.in, etc.) that could be using your microphone. Your anti-virus software is protecting an audio stream coming from sound recording devices. (If you are a Kaspersky customer, please check out this link .) Your microphone is disconnected and your computer has no built-in microphone.\u2026",
+      "keywords": [
+        "troubleshooting",
+        "google hangout",
+        "phone settings",
+        "windows vista",
+        "click start",
+        "skype web",
+        "headset",
+        "issues"
+      ],
+      "topic": "sms_messaging"
+    },
+    {
+      "slug": "user-role",
+      "title": "User role",
+      "url": "https://help.close.com/docs/user-role",
+      "body_file": "close-help-docs/pages/user-role.txt",
+      "excerpt": "User Each plan includes the predefined role shown below. This is a default role and may be assigned to any user, but may not be edited or modified. Users can do everything Restricted Users can, plus additional bulk and lead-management actions, including: Bulk import Bulk email Delete leads Merge leads Manage or delete other users\u2019 opportunities, tasks, and activities (where enabled by the role) Call, send SMS, and use the Dialer. Users cannot manage organization-level\u2026",
+      "keywords": [
+        "restricted users",
+        "user each",
+        "role",
+        "user"
+      ],
+      "topic": "sms_messaging"
+    },
+    {
+      "slug": "workflow-steps",
+      "title": "Workflow Steps",
+      "url": "https://help.close.com/docs/workflow-steps",
+      "body_file": "close-help-docs/pages/workflow-steps.txt",
+      "excerpt": "Steps are the individual actions that take place within a Workflow. This includes sending email or SMS, updating Leads, creating Opportunities, or assigning Tasks. Here is a list of the current available Workflow steps: Step Type Email Communication Call Communication SMS Communication Assign User Operational Task Operational Create Opportunity Operational Update Lead Operational Update Opportunity Operational Filter Operational Adding or Removing Steps to a Workflow To add\u2026",
+      "keywords": [
+        "active workflow when",
+        "removing steps",
+        "updating steps",
+        "step delay if",
+        "workflow run",
+        "workflow to",
+        "add step",
+        "workflow",
+        "steps"
+      ],
+      "topic": "sms_messaging"
+    },
+    {
+      "slug": "workflows",
+      "title": "Workflows",
+      "url": "https://help.close.com/docs/workflows",
+      "body_file": "close-help-docs/pages/workflows.txt",
+      "excerpt": "Plan limits Workflows are only available on the Growth and Scale plans. Workflows can be used to automate tasks and outreach. There are endless possibilities of what you can automate, but the most common use cases are: Automatically update Leads when an Opportunity is won. Randomly assign a new Lead to a team member and automate a scheduled sequence of email, SMS, task, and/or call tasks to the assigned team member. Create an Opportunity when a Custom Activity is published\u2026",
+      "keywords": [
+        "workflow glossary workflows",
+        "custom activity",
+        "each workflow",
+        "workflow goal",
+        "workflows"
+      ],
+      "topic": "sms_messaging"
+    }
+  ]
+}

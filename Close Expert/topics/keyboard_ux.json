@@ -1,0 +1,24 @@
+{
+  "topic_id": "keyboard_ux",
+  "article_count": 1,
+  "articles": [
+    {
+      "slug": "spell-check",
+      "title": "Spell check",
+      "url": "https://help.close.com/docs/spell-check",
+      "body_file": "close-help-docs/pages/spell-check.txt",
+      "excerpt": "With the built-in spell checker for Close desktop app , you can ensure that your emails and notes are mistake-free. Spell check will work on both Windows and Mac. Spell check is multilingual, which means you can select more than one language at once, and Close will check for errors across multiple languages. Windows On Windows, press Alt key to bring up the menu bar, and then you can find the spell check settings under Edit > Spell Checker Languages(s) where you can toggle\u2026",
+      "keywords": [
+        "spell checker languages",
+        "windows on windows",
+        "system settings",
+        "input sources",
+        "mac on mac",
+        "close see",
+        "check",
+        "spell"
+      ],
+      "topic": "keyboard_ux"
+    }
+  ]
+}

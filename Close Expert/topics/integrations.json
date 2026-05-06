@@ -1,0 +1,848 @@
+{
+  "topic_id": "integrations",
+  "article_count": 49,
+  "articles": [
+    {
+      "slug": "admin-account-role",
+      "title": "Admin user role",
+      "url": "https://help.close.com/docs/admin-account-role",
+      "body_file": "close-help-docs/pages/admin-account-role.txt",
+      "excerpt": "Admin user Each plan includes the predefined role shown below. This is a default role and may be assigned to any user, but may not be edited or modified. The Admin role must always exist with all permissions enabled. This is the only role that has billing access. Admins can: Manage Users, Billing, & Roles/Permissions Manage Customizations - create/update/delete statuses, Custom Fields, Integration Links, organization name, currency, etc. Manage Group Phone Numbers. Manage\u2026",
+      "keywords": [
+        "permissions manage customizations",
+        "bulk workflow subscriptions",
+        "manage group phone numbers",
+        "manage team smart views",
+        "integration links",
+        "send bulk email",
+        "custom fields",
+        "manage users",
+        "merge leads",
+        "bulk edit",
+        "account",
+        "admin",
+        "role",
+        "user"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "api-keys-oauth",
+      "title": "API keys & OAuth",
+      "url": "https://help.close.com/docs/api-keys-oauth",
+      "body_file": "close-help-docs/pages/api-keys-oauth.txt",
+      "excerpt": "There are two main ways to authorize (connect) your Close organization to third-party applications or your own internal system: using API keys using OAuth access Both methods are designed to help you automate and sync your sales process with other platforms while maintaining high levels of security and data privacy. Whether a third-party app uses an API key or OAuth to connect to Close depends on how the app's developers decided to set it up. API keys An API key is a secret\u2026",
+      "keywords": [
+        "oauth",
+        "keys",
+        "api"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "browser-notification-troubleshooting",
+      "title": "Browser Notification Troubleshooting",
+      "url": "https://help.close.com/docs/browser-notification-troubleshooting",
+      "body_file": "close-help-docs/pages/browser-notification-troubleshooting.txt",
+      "excerpt": "Use this guide to troubleshoot potential issues causing you to not see incoming call notifications from your browser while using browser based calling in Close. For context, you should see a notification similar to the one displayed below when receiving a call in Close while you have an active Close browser tab. If you're not seeing these notifications, follow the steps below to troubleshoot: Step 1: Ensure you have an active browser tab with Close loaded when receiving\u2026",
+      "keywords": [
+        "troubleshooting",
+        "desktop app if",
+        "phone settings",
+        "confirm close",
+        "notification",
+        "browser"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "close-mcp-tools",
+      "title": "Close MCP Tools",
+      "url": "https://help.close.com/docs/close-mcp-tools",
+      "body_file": "close-help-docs/pages/close-mcp-tools.txt",
+      "excerpt": "See full list here: https://developer.close.com/mcp/tools",
+      "keywords": [
+        "close",
+        "tools",
+        "mcp"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "create-a-new-lead-once-a-calendly-meeting-is-booked",
+      "title": "Create a new Lead once a Calendly meeting is booked",
+      "url": "https://help.close.com/docs/create-a-new-lead-once-a-calendly-meeting-is-booked",
+      "body_file": "close-help-docs/pages/create-a-new-lead-once-a-calendly-meeting-is-booked.txt",
+      "excerpt": "With the Close Calendly integration , you can sync your scheduling links into Close. If a new Lead books a meeting, the Lead is not automatically added to Close, you'll need an automation like Zapier to create the Lead. Here\u2019s what you\u2019ll need A Zapier account that allows for multi-step Zaps Calendly account Close account Creating your Zap Login to Zapier and select Create . If you never used Zapier here are some tutorials on how to create Zaps. Step 1: Select your Trigger\u2026",
+      "keywords": [
+        "trigger select calendly",
+        "invitee created",
+        "close calendly",
+        "trigger event",
+        "zaps calendly",
+        "select close",
+        "find lead",
+        "zap login",
+        "calendly",
+        "meeting",
+        "booked",
+        "create",
+        "lead",
+        "once"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "create-an-opportunity-when-a-lead-status-is-moved-to-qualified",
+      "title": "Create an Opportunity when Status is changed to Qualified",
+      "url": "https://help.close.com/docs/create-an-opportunity-when-a-lead-status-is-moved-to-qualified",
+      "body_file": "close-help-docs/pages/create-an-opportunity-when-a-lead-status-is-moved-to-qualified.txt",
+      "excerpt": "Your lead generation team or process is the first step in closing deals, turning cold calls, email campaigns, social media ads, website forms, etc. into a Qualified Lead that your sales team should make sure to follow up on. After all this work, every qualified lead generated by your team should get an Opportunity created! You want to make sure they enter your sales pipeline and not get lost. In this article, we will help you set up a Zap to auto-create an Opportunity for\u2026",
+      "keywords": [
+        "qualified lead",
+        "opportunity",
+        "new status",
+        "qualified",
+        "new lead",
+        "changed",
+        "create",
+        "status",
+        "moved",
+        "lead"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "create-oauth-apps",
+      "title": "Create OAuth Apps",
+      "url": "https://help.close.com/docs/create-oauth-apps",
+      "body_file": "close-help-docs/pages/create-oauth-apps.txt",
+      "excerpt": "See here - https://developer.close.com/integrations/create-an-oauth-app",
+      "keywords": [
+        "create",
+        "oauth",
+        "apps"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "date-and-time-formats",
+      "title": "Date and Time Formats",
+      "url": "https://help.close.com/docs/date-and-time-formats",
+      "body_file": "close-help-docs/pages/date-and-time-formats.txt",
+      "excerpt": "Date and Time Formats in Close depend on your System / Browser language settings. Close currently supports two formats - US and UK format: US format - 12/31/2022 1:30pm UK format - 31/12/2022 13:30 If you're using a Close desktop app, you will need to adjust your System (Windows or macOS) settings, while if you use a web app at https://app.close.com you will need to adjust your Browser (Chrome, Edge, Firefox, etc.) settings. Desktop app macOS Go to your System Preferences >\u2026",
+      "keywords": [
+        "preferred languages",
+        "system preferences",
+        "system settings",
+        "united states",
+        "time formats",
+        "formats",
+        "date",
+        "time"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "docusign",
+      "title": "Docusign",
+      "url": "https://help.close.com/docs/docusign",
+      "body_file": "close-help-docs/pages/docusign.txt",
+      "excerpt": "Create, send, and track documents from Opportunities and Lead objects within Close. This integration through Zapier will streamline document generation and help you to follow up on any outstanding deals. You have the option of having the zap triggered by actions in Close or by actions in Docusign. See the two zap templates below and see which best meets your needs. What you'll need A Close account and your API key A Zapier account A Docusign account Automatically generate\u2026",
+      "keywords": [
+        "request signatures",
+        "setup start",
+        "docusign"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "dripify",
+      "title": "Dripify",
+      "url": "https://help.close.com/docs/dripify",
+      "body_file": "close-help-docs/pages/dripify.txt",
+      "excerpt": "Integrating Close with Dripify Dripify is a LinkedIn automation and prospecting platform that helps users find and engage with their target audience on LinkedIn. It allows users to create a sales funnel with automated LinkedIn actions and conditions, such as sending connection requests, messages, and endorsements, as well as following and liking prospects' profiles. Dripify also includes advanced analytics and a smart inbox to help users manage their campaigns and respond\u2026",
+      "keywords": [
+        "integrating close",
+        "dripify dripify",
+        "dripify"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "email-configuration",
+      "title": "Email configuration",
+      "url": "https://help.close.com/docs/email-configuration",
+      "body_file": "close-help-docs/pages/email-configuration.txt",
+      "excerpt": "Close offers 2-way email integration, which allows you to send email from Close and automatically log the replies. Close will auto-log any email that appears in your Sent folder, even if it was sent from Gmail or your mobile phone, and emails sent from Close will automatically appear in your Sent folder. By connecting your email account with Close (via IMAP/SMTP), Close will begin to automatically track email threads with any contacts you have in your organization. The\u2026",
+      "keywords": [
+        "configuration",
+        "close inbox",
+        "your close",
+        "email"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "facebook-lead-ads",
+      "title": "Facebook Lead Ads",
+      "url": "https://help.close.com/docs/facebook-lead-ads",
+      "body_file": "close-help-docs/pages/facebook-lead-ads.txt",
+      "excerpt": "Create a Close lead whenever a prospect signs up via Facebook Lead AdCreate a Close lead whenever a prospect signs up via Facebook Lead Ad Use this Zap Facebook Lead Ads are a specific type of Facebook Ads where a prospect can simply tap your ad and a form pops up \u2013 it's already pre-populated with their Facebook contact information and ready to be sent directly to you. Instead of checking on new leads inside Facebook, you can use the following Zap to create a lead in Close\u2026",
+      "keywords": [
+        "zap facebook lead ads",
+        "facebook lead ad use",
+        "facebook lead ads in",
+        "facebook lead ad",
+        "facebook lead",
+        "facebook ads",
+        "facebook ad",
+        "premium app",
+        "setup start",
+        "facebook",
+        "new lead",
+        "lead",
+        "ads"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "forms",
+      "title": "Forms",
+      "url": "https://help.close.com/docs/forms",
+      "body_file": "close-help-docs/pages/forms.txt",
+      "excerpt": "Forms feature lets you create and deploy web forms that capture data and send it directly into your CRM without needing any external tools or manual data entry. Forms can create new Leads, update existing records, and trigger automation right when a visitor submits a response. Forms are ideal for capturing inbound inquiries, contact requests, landing page submissions, demo requests, newsletter signups, and more \u2014 all straight into Close. Each Form you build generates an\u2026",
+      "keywords": [
+        "your form the fields",
+        "adding fields",
+        "new form go",
+        "each form",
+        "new form",
+        "forms"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "getaccept",
+      "title": "GetAccept",
+      "url": "https://help.close.com/docs/getaccept",
+      "body_file": "close-help-docs/pages/getaccept.txt",
+      "excerpt": "GetAccept is a sales enablement and contract management tool. Using our integration you can push contract ( Opportunity ) information directly from Close to GetAccept. GetAccept provides everything you need to build sales collateral from Close - sales reps can create quotes, proposals, contracts, and receive electronic signatures. What you'll need A Close account and your API key A GetAccept Pro license How the integration works Instead of copy/pasting Close lead and\u2026",
+      "keywords": [
+        "connect connecting close",
+        "save entering close",
+        "setup enable close",
+        "connected close",
+        "getaccept"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "google-forms",
+      "title": "Google Forms",
+      "url": "https://help.close.com/docs/google-forms",
+      "body_file": "close-help-docs/pages/google-forms.txt",
+      "excerpt": "Is Google Forms part of your sales workflow? You can log responses filled in from your forms in Close as a note, custom field, custom activity etc. In this tutorial, we will Create a Google Form where answers will be added to a Google Spreadsheet create an integration link for easy form filling from a lead page set up Zapier integration to automatically add our answers in a form of a note What you\u2019ll need A Google account to access Google Forms A Close account and your API\u2026",
+      "keywords": [
+        "google forms create",
+        "google spreadsheet",
+        "google form first",
+        "is google forms",
+        "google forms",
+        "google sheet",
+        "google form",
+        "google",
+        "forms"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "help-scout",
+      "title": "Help Scout",
+      "url": "https://help.close.com/docs/help-scout",
+      "body_file": "close-help-docs/pages/help-scout.txt",
+      "excerpt": "Enabling the Close + Help Scout integration allows you and your team to bring Close Lead data straight into your Help Scout Tickets. Matching by customer email address, this integration lets you see a customer's Lead Status, Lead Owner, Company Description, and many other custom fields directly in Help Scout. Additionally, you'll have the ability to create a new lead in Close if a lead matching the customer's email address cannot be found. How to Install the Close + Help\u2026",
+      "keywords": [
+        "help scout integration navigate",
+        "company description",
+        "help scout tickets",
+        "developer choose",
+        "integration once",
+        "lead status",
+        "close lead",
+        "help scout",
+        "lead owner",
+        "scout",
+        "help"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "helpdesk-integration",
+      "title": "Helpdesk integration",
+      "url": "https://help.close.com/docs/helpdesk-integration",
+      "body_file": "close-help-docs/pages/helpdesk-integration.txt",
+      "excerpt": "Display support emails in Close The beauty of Close's two-way email sync is that if your help desk software simply sends/receives from your support@ or help@ (or whatever) email account, those emails can automatically show up in Close. The trick in Close is to simply set up a virtual Close user (called \"CompanyName Support\" or similar) with that support email address and then set up their IMAP/SMTP credentials in Close. This \"email-based integration\" should always work for\u2026",
+      "keywords": [
+        "google apps",
+        "integration",
+        "help scout",
+        "close the",
+        "help desk",
+        "helpdesk"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "how-do-i-create-a-parentchild-account-hierarchy",
+      "title": "Parent/Child Lead Hierarchy",
+      "url": "https://help.close.com/docs/how-do-i-create-a-parentchild-account-hierarchy",
+      "body_file": "close-help-docs/pages/how-do-i-create-a-parentchild-account-hierarchy.txt",
+      "excerpt": "For many sales organizations, it can be strategically important to relate accounts together by a parent, or master account, and the child accounts that are associated underneath it. Whether you work with franchises, distributors, school branches, or affiliates, this functionality allows you to navigate between related companies quickly and easily. To create parent-child relationships in Close, we use custom fields and integration links . We'll first implement a solution\u2026",
+      "keywords": [
+        "parent account lead custom field first",
+        "add lead custom field",
+        "parent account",
+        "custom fields",
+        "custom field",
+        "parent/child",
+        "parentchild",
+        "hierarchy",
+        "account",
+        "create",
+        "lead"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "hubspot-to-close-syncing-integration",
+      "title": "HubSpot to Close - Syncing Integration",
+      "url": "https://help.close.com/docs/hubspot-to-close-syncing-integration",
+      "body_file": "close-help-docs/pages/hubspot-to-close-syncing-integration.txt",
+      "excerpt": "Close and HubSpot Integration Integrating your Close and HubSpot databases can help streamline your data management and ensure that your sales and marketing teams have access to the most up-to-date information. This article will provide a comprehensive overview of the Close and HubSpot integration , including what it can and can't do, how to set it up, and troubleshooting tips. What the Integration Can and Can't Do The integration was created and is managed by HubSpot, and\u2026",
+      "keywords": [
+        "integration integrating",
+        "data you want with",
+        "custom activities",
+        "app marketplace",
+        "integration can",
+        "custom objects",
+        "syncing only",
+        "integration",
+        "hubspot",
+        "syncing",
+        "do the",
+        "close"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "initiating-calls-from-the-web-app",
+      "title": "Initiating calls from the web app",
+      "url": "https://help.close.com/docs/initiating-calls-from-the-web-app",
+      "body_file": "close-help-docs/pages/initiating-calls-from-the-web-app.txt",
+      "excerpt": "There are several options to dial your leads: use the built-in calling feature on the desktop application, the mobile app, or your web browser. Download trouble? If you're working on Mac or Windows and are having issues downloading or opening the Close desktop app, send a message over to our support team . Initiating calls on an external phone system Clicking the Call button or a phone number from a web browser will give you a modal window like this: Web app call modal\u2026",
+      "keywords": [
+        "google voice chrome extension",
+        "chromebook install",
+        "google voice",
+        "initiating",
+        "calls",
+        "app",
+        "web"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "integration-links",
+      "title": "Integration links",
+      "url": "https://help.close.com/docs/integration-links",
+      "body_file": "close-help-docs/pages/integration-links.txt",
+      "excerpt": "Integration Links are a way to integrate other websites and systems with Close. You can use them to quickly jump to other websites and pass them data from your Leads, Contacts, and Opportunities. What if I want to find my Contacts' social media profiles easily? How do I easily send Opportunity data from a lead to my sales documentation tool? How do I look up a Contact\u2019s email in my internal database with one click? Set up an Integration Link. Creating Integration Links You\u2026",
+      "keywords": [
+        "creating integration links you",
+        "integration links",
+        "integration link",
+        "integration",
+        "these links",
+        "close lead",
+        "links"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "integrations",
+      "title": "Integrations",
+      "url": "https://help.close.com/docs/integrations",
+      "body_file": "close-help-docs/pages/integrations.txt",
+      "excerpt": "Integrations Close has built-in integrations, such as our Meetings tool and email sync . We also have a Zoom integration to sync your recorded meetings, and Slack for remote teams. For tools that don't have a native integration with Close, we can still help. Using your OAuth Key or API Key, your Organization can connect other apps with Close using integration tools such as Zapier or Make. Explore our comprehensive guides to learn how to leverage these integrations and get\u2026",
+      "keywords": [
+        "integrations indie stack the",
+        "integrations close",
+        "integrations",
+        "best apps",
+        "our blog"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "integrations-with-close",
+      "title": "Integrations by type",
+      "url": "https://help.close.com/docs/integrations-with-close",
+      "body_file": "close-help-docs/pages/integrations-with-close.txt",
+      "excerpt": "Browse some of our most popular integrations here . If you don't see the integration you're looking for, you can create a custom integration with Zapier or our API . If you have any questions about integrations, reach out to our support team at any time. Integrations by Type: General integrations Zapier - push your data between hundreds of popular web services. Start here . Integrate.io - integrate, transform and process data from more than 100 data stores and SaaS\u2026",
+      "keywords": [
+        "google analytics",
+        "facebook ads",
+        "integrations",
+        "help scout",
+        "help sc",
+        "close",
+        "type"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "leadfuze",
+      "title": "LeadFuze",
+      "url": "https://help.close.com/docs/leadfuze",
+      "body_file": "close-help-docs/pages/leadfuze.txt",
+      "excerpt": "LeadFuze enables you to search and add automatically any online profile as a Close lead. LeadFuze is a B2B lead generation software that allows you to search for prospects and automatically find their emails, domains, and social media profiles. You already know that sending cold emails can be a great way to initiate sales conversations with potential customers. LeadFuze uses a 5-step validation process to find your ideal customers online, contact information, and all. When\u2026",
+      "keywords": [
+        "setup enable close",
+        "leadfuze"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "linkmatch",
+      "title": "LinkMatch",
+      "url": "https://help.close.com/docs/linkmatch",
+      "body_file": "close-help-docs/pages/linkmatch.txt",
+      "excerpt": "LinkMatch enables you to add any LinkedIn profile as a Close lead with a single click. With LinkMatch you can see which people/organizations from LinkedIn are already in Close, view/edit Close leads without leaving LinkedIn, save LinkedIn profiles as leads into Close, and it will even keep track of LinkedIn profile changes and offer you to update those changes into Close. What you'll need A Close account and your API key A LinkMatch license for Close integration (they offer\u2026",
+      "keywords": [
+        "setup download",
+        "enter close",
+        "linkmatch"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "mailchimp",
+      "title": "Mailchimp",
+      "url": "https://help.close.com/docs/mailchimp",
+      "body_file": "close-help-docs/pages/mailchimp.txt",
+      "excerpt": "Create new Close Lead from Mailchimp subscriber Use this Zap Mailchimp is most popular for its email marketing and automation used by thousands of companies. Chances are you are managing your email lists through Mailchimp as well. If that is the case, you can use the following Zap to create a lead in Close whenever you have a new subscriber in Mailchimp. What you\u2019ll need A Close account and your API key A Zapier account (free one works as well with just two steps) How the\u2026",
+      "keywords": [
+        "zapier click continue",
+        "mailchimp start",
+        "new subscriber",
+        "mailchimp for",
+        "zap mailchimp",
+        "zapier when",
+        "close lead",
+        "setup step",
+        "mailchimp"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "marketing",
+      "title": "Marketing",
+      "url": "https://help.close.com/docs/marketing",
+      "body_file": "close-help-docs/pages/marketing.txt",
+      "excerpt": "Marketing Let\u2019s face it, without a reliable source of new leads for your product or service, your business is dead in the water without consistent customer growth. That makes the lead generation ideas and strategies you choose to pursue today, incredibly important to the future of your company. Marketing and sales teams spend so much time and financial resources on lead generation\u2014from creating in-depth blog content, to launching ad campaigns, prospecting on LinkedIn,\u2026",
+      "keywords": [
+        "marketing let",
+        "marketing"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "mcp-server",
+      "title": "Close MCP Server",
+      "url": "https://help.close.com/docs/mcp-server",
+      "body_file": "close-help-docs/pages/mcp-server.txt",
+      "excerpt": "Model Context Protocol (MCP) servers provide a standardized interface that allows any compatible AI model or agent to access your Close data in a simple and secure way. Below are instructions for adding Close\u2019s MCP server to commonly used clients. Accessing Close\u2019s Remote MCP Server The MCP server URL is https://mcp.close.com/mcp and has \u201cHTTP Streamable\u201d and \u201cOAuth 2.0 Dynamic Client Registration (DCR)\u201d support. We recommend accessing the MCP server via OAuth 2.0 using a\u2026",
+      "keywords": [
+        "dynamic client registration",
+        "model context protocol",
+        "accessing close",
+        "server the",
+        "your close",
+        "server",
+        "close",
+        "mcp"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "migration-from-another-crm",
+      "title": "Migration from another CRM",
+      "url": "https://help.close.com/docs/migration-from-another-crm",
+      "body_file": "close-help-docs/pages/migration-from-another-crm.txt",
+      "excerpt": "Migration from another CRM Use the 'Import from a CRM' option in the Lead Importer if you need to migrate leads over from an existing CRM. Remember that only Close users with the Admin Role are allowed to initiate migration from an existing CRM. Our partner, Import2, powers imports from external CRMs. As long as you initialize the import from within Close, then in most cases, there will be no cost to you. Close Pro Tip: Initializing the CRM Import Only one Close user should\u2026",
+      "keywords": [
+        "close pro tip",
+        "lead importer",
+        "less annoying",
+        "import only",
+        "admin role",
+        "migration",
+        "another",
+        "crm"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "new-assign-leads-to-users-via-round-robin",
+      "title": "Assign Leads to Users via Round-Robin",
+      "url": "https://help.close.com/docs/new-assign-leads-to-users-via-round-robin",
+      "body_file": "close-help-docs/pages/new-assign-leads-to-users-via-round-robin.txt",
+      "excerpt": "There are two ways to set up round-robin lead assignment in Close: Robin and Zapier. Robin is a dedicated app built specifically for this purpose, while Zapier offers another approach. Both options are explained here. What is Robin? Robin is a round-robin lead assignment tool built for Close . It automatically distributes new leads across your team in a fair, ordered rotation with no manual assignment required. You define who gets leads (Groups) and which leads to watch\u2026",
+      "keywords": [
+        "close authorize robin",
+        "lead lists these",
+        "click sign",
+        "lead lists",
+        "robin go",
+        "assign",
+        "leads",
+        "robin",
+        "round",
+        "users"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "opening-links-in-the-desktop-app",
+      "title": "Opening links in the Desktop App",
+      "url": "https://help.close.com/docs/opening-links-in-the-desktop-app",
+      "body_file": "close-help-docs/pages/opening-links-in-the-desktop-app.txt",
+      "excerpt": "You can open Close directly in the Desktop app from links you share in email, Slack, docs, or other tools by using deep links. Who can use this Any Close user with the Desktop app installed and updated in macOS or Windows. Option 1: Open web links in the Desktop app If you prefer to keep using normal https links, you can tell Close to open them in the Desktop app. In the Close web app, open the account menu Click Open in Mac/Windows App Ensure to check 'Always allow\u2026",
+      "keywords": [
+        "troubleshooting quick",
+        "windows app ensure",
+        "command prompt",
+        "close desktop",
+        "open terminal",
+        "click open",
+        "any close",
+        "open run",
+        "desktop",
+        "opening",
+        "links",
+        "app"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "organizational-tools",
+      "title": "Organizational Tools",
+      "url": "https://help.close.com/docs/organizational-tools",
+      "body_file": "close-help-docs/pages/organizational-tools.txt",
+      "excerpt": "Organizational Tools Project plans have a knack for getting disorganized as soon as you go to work on them. Organizing your team's work can reduce mental clutter and increase productivity. Close has a number of integrations with organizational and planning software that will boost efficiency and help you make the most of your resources.",
+      "keywords": [
+        "organizational tools project",
+        "organizational",
+        "tools"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "other-ways-to-get-your-data-into-close",
+      "title": "Other ways to get your data into Close",
+      "url": "https://help.close.com/docs/other-ways-to-get-your-data-into-close",
+      "body_file": "close-help-docs/pages/other-ways-to-get-your-data-into-close.txt",
+      "excerpt": "Detect Potential Contacts from your Connected Account You need to have a connected email account for this feature to work. You can access it in the top right corner of the 'Inbox' section or by clicking the '+' button next to 'Leads.' In the 'Inbox' section In the 'New Lead' popup window Click the button, and you'll get a list of recommended Contacts. If you're happy with the list, you can import right away, or you can click 'Edit List,' and you can deselect Contacts you'd\u2026",
+      "keywords": [
+        "detect potential contacts",
+        "connected account you",
+        "potential contact",
+        "from calendly",
+        "event types",
+        "edit list",
+        "new lead",
+        "close",
+        "other",
+        "data",
+        "into",
+        "ways"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "perform-an-action-when-a-workflow-ends",
+      "title": "Perform an action when a Workflow ends",
+      "url": "https://help.close.com/docs/perform-an-action-when-a-workflow-ends",
+      "body_file": "close-help-docs/pages/perform-an-action-when-a-workflow-ends.txt",
+      "excerpt": "Let's say you've created the perfect email workflow to send to qualified leads but they don't convert during your expected sales cycle. That's ok - sales is all about the follow-up. Don't sit around and wait for them to respond to an old email. Instead, take our advice and create a killer long-term follow-up workflow and improve your follow-up hustle. The Close Sales team send their first Workflow to trials which includes three emails over the course of the 14-day period.\u2026",
+      "keywords": [
+        "additional action steps here",
+        "custom field",
+        "lead status",
+        "update lead",
+        "workflow",
+        "perform",
+        "pro tip",
+        "action",
+        "ends"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "prospecting",
+      "title": "Prospecting",
+      "url": "https://help.close.com/docs/prospecting",
+      "body_file": "close-help-docs/pages/prospecting.txt",
+      "excerpt": "Prospecting Prospecting is the initial stage of the sales process. It is the activity of turning a prospect (a target who may not know who you are) into an opportunity. Once you have an opportunity, you can turn them into customers. Sales prospecting is the act of sales reps reaching out to leads in the hope of creating sales opportunities. Prospecting can refer to marketing tactics, cold calls, email campaigns, and other ways to nurture leads. It also encompasses\u2026",
+      "keywords": [
+        "prospecting prospecting",
+        "prospecting"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "pull-webform-answers-into-close-custom-activity",
+      "title": "Pull Webform Answers Into Close Custom Activity",
+      "url": "https://help.close.com/docs/pull-webform-answers-into-close-custom-activity",
+      "body_file": "close-help-docs/pages/pull-webform-answers-into-close-custom-activity.txt",
+      "excerpt": "This Zap will pull a lead's answers from your webform into a Custom Activity in Close, allowing you to: Filter your leads using common answers Review answers directly on the lead's page What you'll need To set up this Zap, you'll need the following: A Zapier account that allows for multi-step Zaps; A webform tool that integrates with Zapier (see next step for more details); A Close account of the Basic , Professional , or Business plan ( Starter plan won't work as it\u2026",
+      "keywords": [
+        "custom activity before",
+        "custom activities",
+        "custom activity",
+        "zapier please",
+        "google form",
+        "activity",
+        "answers",
+        "webform",
+        "custom",
+        "close",
+        "into",
+        "pull"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "savvycal",
+      "title": "SavvyCal",
+      "url": "https://help.close.com/docs/savvycal",
+      "body_file": "close-help-docs/pages/savvycal.txt",
+      "excerpt": "Easily integrate your booking software with your CRM using the native SavvyCal + Close integration. Automatically create and update your Close Contacts when a prospect books a meeting with your team. Increase the number of demos for your team when you embed your SavvyCal booking directly on your website. SavvyCal also allows you to automate round robin routing, set up team scheduling, add teammates on the fly, and more. Try SavvyCal for a month for free! Get a free month of\u2026",
+      "keywords": [
+        "custom activity",
+        "close contacts",
+        "savvycal"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "segment",
+      "title": "Segment",
+      "url": "https://help.close.com/docs/segment",
+      "body_file": "close-help-docs/pages/segment.txt",
+      "excerpt": "Segment simplifies the process of collecting data, allowing you to spend more time using that data and less time trying to collect it. For example, you can use Segment to track when a potential customer visits your website or signs up for your newsletter, bringing that information directly into Close (explore many other data sources). This integration will allow you to Create/Update Leads and Contacts with the information your customers provide on your data source. Getting\u2026",
+      "keywords": [
+        "getting started you",
+        "lead custom field",
+        "custom fields",
+        "custom field",
+        "update leads",
+        "your close",
+        "segment"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "setting-up-calling",
+      "title": "Calling Setup",
+      "url": "https://help.close.com/docs/setting-up-calling",
+      "body_file": "close-help-docs/pages/setting-up-calling.txt",
+      "excerpt": "Calling Setup in Close To make calls, you can download our Mac/Windows application, use our mobile app, or make calls straight from your browser. Mac/Windows Desktop app Download Close Desktop app here Once you\u2019ve installed the desktop application, simply log in with your Close account you've set up earlier. Calling from Web Browser We support the two latest versions of Safari, Chrome, Opera, Firefox, Brave, and Edge. Make sure your browser is updated to the newest version\u2026",
+      "keywords": [
+        "under notifications settings",
+        "download close desktop",
+        "grant permission",
+        "windows desktop",
+        "web browser we",
+        "calling setup",
+        "close to",
+        "calling",
+        "setting",
+        "setup"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "simpletexting",
+      "title": "SimpleTexting",
+      "url": "https://help.close.com/docs/simpletexting",
+      "body_file": "close-help-docs/pages/simpletexting.txt",
+      "excerpt": "Send MMS through SimpleTexting and get alerted in Close when a contact replies with an MMS. Create a task in Close after receiving an MMS in SimpleTexting Use this Zap SimpleTexting allows you to send SMS and MMS directly from your cellphone number or from phone number you'll rend with SimpleTexting. Don't miss a single MMS reply by getting alerted directly in Close. If you're using your Close phone number to text from SimpleTexting, you'll need to disable the SMS\u2026",
+      "keywords": [
+        "custom webhook",
+        "simpletexting",
+        "webhook start",
+        "setup step"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "slack",
+      "title": "Slack",
+      "url": "https://help.close.com/docs/slack",
+      "body_file": "close-help-docs/pages/slack.txt",
+      "excerpt": "Connect Slack and Close in order to notify your team of important updates in your sales pipeline. Using our Zapier integration for Slack you can quickly and easily message channels or particular team members about new leads, won opportunities, or any number of other events within Close. In this example, we\u2019ll show you how to message the rest of your team in Slack when a deal has been marked won in Close. What you'll need A Close account and your API key A Zapier account A\u2026",
+      "keywords": [
+        "send channel message",
+        "new opportunity",
+        "new status type",
+        "choose account",
+        "connect slack",
+        "action event",
+        "setup step",
+        "slack now",
+        "close in",
+        "slack"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "sms-and-mms",
+      "title": "SMS and MMS",
+      "url": "https://help.close.com/docs/sms-and-mms",
+      "body_file": "close-help-docs/pages/sms-and-mms.txt",
+      "excerpt": "Like calling and email, SMS communication is built directly into Close. SMS can be an effective tool to increase response rates with prospects, e.g. by texting them meeting reminders and follow-ups. Prerequisites - SMS-enabled phone number Before you can send SMS in Close, you need to have an internal (Close-issued) SMS-enabled phone number that matches the country you're trying to send SMS to. That means in order to send SMS to the US or Canadian numbers, you need to have\u2026",
+      "keywords": [
+        "phone number",
+        "send later",
+        "mms",
+        "sms"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "super-user-role",
+      "title": "Super User role",
+      "url": "https://help.close.com/docs/super-user-role",
+      "body_file": "close-help-docs/pages/super-user-role.txt",
+      "excerpt": "Super User Each plan includes the predefined role shown below. This is a default role and may be assigned to any user, but may not be edited or modified. Super Users can do everything a User can, plus manage common admin settings like: Customizations (for example: statuses, custom fields, integration links, etc) Group phone numbers Team Smart Views Export lead or opportunity data to a CSV or JSON file. Bulk edit and bulk delete Send Bulk Email or manage Bulk Workflow\u2026",
+      "keywords": [
+        "bulk workflow subscriptions",
+        "team smart views export",
+        "send bulk email",
+        "super user each",
+        "super users",
+        "sales ops",
+        "super",
+        "role",
+        "user"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "system-requirements-supported-browsers",
+      "title": "Supported Devices and Browsers",
+      "url": "https://help.close.com/docs/system-requirements-supported-browsers",
+      "body_file": "close-help-docs/pages/system-requirements-supported-browsers.txt",
+      "excerpt": "Supported Operating Systems OS X 13 (Ventura) or higher Windows 10 or later Technical Requirements RAM: At least 8 GB. (depending on how may apps re used at the same time, more might be required) Web-based Calling Requirements Supported browsers: Safari Chrome Opera Firefox Brave Edge Web-based dialing will work on the latest two versions of each browser. Keep your browsers updated to the newest version for the best experience.",
+      "keywords": [
+        "calling requirements supported",
+        "supported operating systems",
+        "technical requirements",
+        "requirements",
+        "supported",
+        "browsers",
+        "devices",
+        "system"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "using-workflows-for-newsletters",
+      "title": "Using Workflows for Newsletters",
+      "url": "https://help.close.com/docs/using-workflows-for-newsletters",
+      "body_file": "close-help-docs/pages/using-workflows-for-newsletters.txt",
+      "excerpt": "Creating Email Newsletters with Workflows: A Salesperson's Guide Integrating Workflows into your email newsletter strategy allows you to automate, personalize, and optimize your outreach. Workflows allow you to automate a series of actions\u2014such as sending emails, scheduling follow-ups, or assigning tasks\u2014based on specific enrollment triggers or manual enrollments. Workflows can be customized to match your sales process, allowing you to tailor each step to specific lead\u2026",
+      "keywords": [
+        "define your newsletter goals before",
+        "guide integrating workflows",
+        "creating email newsletters",
+        "sent email report",
+        "newsletters",
+        "smart views",
+        "workflows",
+        "using"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "whatsapp",
+      "title": "WhatsApp",
+      "url": "https://help.close.com/docs/whatsapp",
+      "body_file": "close-help-docs/pages/whatsapp.txt",
+      "excerpt": "Reach your contacts on WhatsApp directly within Close, without switching apps. Using an Integration Link, your team can get in touch with your leads through WhatsApp with just one click. Under Settings > Integration Links , make sure the WhatsApp option is enabled under Standard Links : Once enabled, contacts with a phone number registered with WhatsApp can be reached directly from the lead page by clicking on the WhatsApp icon: If a WhatsApp account cannot be found with\u2026",
+      "keywords": [
+        "automatic lead creation",
+        "integration links",
+        "integration link",
+        "standard links",
+        "under settings",
+        "filtering you",
+        "business app",
+        "smart views",
+        "whatsapp"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "windows-screen-issue",
+      "title": "Windows Screen Issue",
+      "url": "https://help.close.com/docs/windows-screen-issue",
+      "body_file": "close-help-docs/pages/windows-screen-issue.txt",
+      "excerpt": "If the app is running but not visible in an active window in Windows (but still visible in the taskbar), the likely reason is that the Close app is open & running, but is just outside the visible area of the screen. Primary Fix Try to drag an app window to the side in Windows to trigger automatic resizing. This will show the apps that are open on the opposite side, which should include Close. Find Close app and click it to set it at a side to side view with the first app.\u2026",
+      "keywords": [
+        "resolution trick windows",
+        "secondary fixes if",
+        "primary fix try",
+        "find close",
+        "windows",
+        "screen",
+        "issue"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "zapier",
+      "title": "Zapier",
+      "url": "https://help.close.com/docs/zapier",
+      "body_file": "close-help-docs/pages/zapier.txt",
+      "excerpt": "Zapier is a third-party automation platform that allows you to connect the different tools in your data stack to share data in custom ways that may not be available through direct integration. Zapier basically allows you to build out processes that you want to happen repetitively - like, \u201cwhen something new happens in X, then do Y\u201d, every time. Why do we use it? We use Zapier at Close to give our customers more flexibility with the tools they can connect to Close and to\u2026",
+      "keywords": [
+        "getting started",
+        "zapier when",
+        "each zap",
+        "zapier"
+      ],
+      "topic": "integrations"
+    },
+    {
+      "slug": "zapier-api-keys-to-oauth",
+      "title": "Zapier (API keys to OAuth)",
+      "url": "https://help.close.com/docs/zapier-api-keys-to-oauth",
+      "body_file": "close-help-docs/pages/zapier-api-keys-to-oauth.txt",
+      "excerpt": "Who Should Read This Article Please be aware that this article is intended for those who created Zaps powered by Close before June 22, 2023. If your Zaps were created after this date, the contents of this article will not be relevant to your situation. On the 22nd of June, 2023, we released a new version of our Zapier Close integration, where we implemented a new way of connecting your Zapier account to Close. Whereas previously you had to create and copy/paste API keys,\u2026",
+      "keywords": [
+        "who should read this article please",
+        "see authentication",
+        "zapier close",
+        "zapier",
+        "oauth",
+        "keys",
+        "api"
+      ],
+      "topic": "integrations"
+    }
+  ]
+}

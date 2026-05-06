@@ -1,0 +1,35 @@
+{
+  "close-crm-ai-context": {
+    "ROUTER.json": "start here",
+    "slug_index.json": "flat lookup by slug + topics",
+    "tree.json": "directory overview",
+    "topics": {
+      "account_users_roles.json": "8 articles",
+      "calling_dialer.json": "42 articles",
+      "costs_usage_monitoring.json": "8 articles",
+      "customization.json": "39 articles",
+      "email.json": "109 articles",
+      "general_reference.json": "1 articles",
+      "getting_started_onboarding.json": "28 articles",
+      "integrations.json": "49 articles",
+      "keyboard_ux.json": "1 articles",
+      "leads_contacts_crm_core.json": "152 articles",
+      "meetings_scheduling.json": "18 articles",
+      "mobile_desktop.json": "8 articles",
+      "opportunities_pipeline.json": "29 articles",
+      "playbooks_ai.json": "21 articles",
+      "reporting.json": "37 articles",
+      "security_compliance_data.json": "11 articles",
+      "smart_views_search.json": "34 articles",
+      "sms_compliance.json": "5 articles",
+      "sms_messaging.json": "29 articles",
+      "tasks_notes.json": "49 articles",
+      "troubleshooting.json": "24 articles",
+      "whatsapp.json": "1 articles",
+      "workflows_automation.json": "57 articles"
+    }
+  },
+  "close-help-docs": {
+    "pages": "208 .txt bodies"
+  }
+}

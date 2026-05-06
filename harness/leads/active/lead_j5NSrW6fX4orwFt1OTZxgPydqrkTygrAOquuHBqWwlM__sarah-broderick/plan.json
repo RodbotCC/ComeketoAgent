@@ -1,142 +1,167 @@
 {
-  "plan_id": "plan_hnl96t63",
+  "plan_id": "plan_sarah_broderick_manual_20260506",
   "close_lead_id": "lead_j5NSrW6fX4orwFt1OTZxgPydqrkTygrAOquuHBqWwlM",
-  "cycle_started_at": "2026-05-06T00:56:38.044Z",
-  "generated_at": "2026-05-06T00:56:38.044Z",
-  "based_on_snapshot_id": "snap_mp9u0j_8",
+  "cycle_started_at": "2026-05-06T11:07:22Z",
+  "generated_at": "2026-05-06T11:07:22Z",
+  "based_on_snapshot_id": "manual_review_20260506_sarah_broderick",
   "status": "draft",
   "primary_goal": "scheduled_call",
-  "goal_summary": "Convert Sarah’s “Maybe” status for a May 15 party into a scheduled phone call with Andre by clarifying party needs and confirming a quick fit check.",
-  "lead_state_summary": "Sarah Broderick is a new lead created on 2026-05-05 and started a live chat that evening (05/05/26 ~7:30PM). Since then, Andre has sent several emails outlining catering service types and tastings, plus a ballpark quote specifically tied to a May 15 party (outgoing emails at 23:58 on 05/05 and at 00:05 and 00:09 on 05/06). There are no workflow enrollments and no phone contact on file (email only). The Box shows a custom field indicating “01. 📞 DAY 1 CALL” and that Andre is the assigned owner.",
+  "goal_summary": "Convert Sarah Broderick's opened quote for a May 15 party into a scheduled 10-minute phone call with Andre by collecting venue/address, food-ready time, service fit, and phone number.",
+  "lead_state_summary": "Sarah asked for catering for a May 15 party for about 25 people, specifically mainly Brazilian appetizers with some meat and rice. Andre has already sent menus/packages, service-style education, tasting information, a ballpark quote for Full Churrasco and Deluxe Churrasco, and a follow-up saying she can call anytime. Sarah opened the first package email and opened the ballpark quote. There is no reply, no phone number, and the opportunity is still flagged NEEDS VENUE NAME.",
   "known_facts": [
-    "Sarah started a live chat around 7:30PM on 2026-05-05.",
-    "Andre emailed multiple messages about catering service types and tastings on 2026-05-05 late evening.",
-    "Andre sent a ballpark quote for Sarah’s May 15 party on 2026-05-06 (00:05) and a follow-up email (00:09).",
-    "Sarah has an email address: sarahbroderick7@gmail.com and no phone number in the box.",
-    "Sarah’s status is currently “Maybe.”"
+    "Sarah Broderick started a live chat on 2026-05-05 around 7:30 PM.",
+    "The event date is 2026-05-15.",
+    "The event is a party for around 25 people.",
+    "Sarah asked for mainly Brazilian appetizers, with some meat and rice.",
+    "Sarah's email is sarahbroderick7@gmail.com.",
+    "No phone number is present in the lead record.",
+    "The opportunity custom field flags NEEDS VENUE NAME.",
+    "Andre sent menus/packages and service-style information.",
+    "Sarah opened the package email and opened the ballpark quote email.",
+    "There are no captured inbound replies after Andre's emails."
   ],
   "unknowns": [
-    "What the May 15 event is (type of gathering) and the guest count.",
-    "Whether Sarah is interested in a tasting, and if so, which date works for her (only allowed dates are May 3, May 17, or May 31).",
-    "The preferred service style (buffet/plated/family-style) and dietary needs.",
-    "Whether Sarah has a target budget range and what prompted the ballpark quote request.",
-    "What phone number Sarah would like Andre to call (none is on file)."
+    "Venue name/address or at least city.",
+    "Food-ready or serving time.",
+    "Whether Sarah wants drop-off trays, staffed buffet, or churrasco-style service.",
+    "Best phone number for Andre to call.",
+    "Whether the Full Churrasco / Deluxe Churrasco quote direction matched what Sarah imagined.",
+    "Budget sensitivity or target budget.",
+    "Dietary restrictions, setup constraints, and delivery/access details."
   ],
-  "best_next_question": "For your May 15 party, what guest count and service style are you aiming for, and what’s the best phone number for a quick 10-minute call so Andre can confirm fit and timing?",
+  "best_next_question": "What venue/address and food-ready time should Andre plan around, and what phone number should he call to confirm the best option for 25 guests?",
   "days": [
     {
       "day": 1,
-      "objective": "Make it easy to respond and move toward scheduling by anchoring the May 15 quote thread and requesting a quick call + phone number.",
+      "objective": "Turn Sarah's opened quote into a tiny reply that gives Andre the practical details needed for a useful call.",
       "required_actions": [
         {
           "channel": "email",
-          "intent": "Ask to schedule a short call with Andre and request a phone number for May 15",
-          "draft_seed": "Subject: Quick question about your May 15 party\n\nHi Sarah,\n\nThanks again for chatting with us. When you mentioned your May 15 party, are you expecting roughly how many guests, and are you leaning more toward a buffet, family-style, or plated service?\n\nIf you’re open to it, Andre can do a quick 10-minute call to confirm what you need and whether our timing works. What’s the best phone number for him to reach you?\n\n—Andre / Comeketo",
-          "notes": "Keep it answer-friendly; request phone number since no phone is on file."
+          "intent": "Ask for venue/address, food-ready time, phone number, and permission for Andre to call today or tomorrow.",
+          "draft_seed": "Subject: Quick call for your May 15 party?\n\nHi Sarah,\n\nI saw you had a chance to look at the ballpark for the May 15 party, so I want to make the next step easy.\n\nBefore Andre locks in whether that Full Churrasco / Deluxe Churrasco direction is the right fit, can you send me these three quick details?\n\n1. The venue/address or city\n2. What time you want food ready for guests\n3. The best phone number for Andre to call\n\nSince the event is next Friday and you're looking for Brazilian appetizers with some meat and rice for about 25 people, a quick 10-minute call is probably the cleanest way to confirm the format and avoid sending you more generic info.\n\nWould Andre be able to call you today or tomorrow?\n\nAndre / Comeketo",
+          "notes": "Do not include another menu link. She already opened the package email and quote. This message should convert interest into logistics."
         }
       ],
-      "send_window": "Email 7:00 AM – 9:00 PM lead-local time",
-      "approval_status": "approved"
+      "send_window": "Email during normal business hours.",
+      "approval_status": "needs_review"
     },
     {
       "day": 2,
-      "objective": "Use SMS (since it’s email-only currently) to get a reply with minimal effort and confirm one scheduling option.",
+      "objective": "If Sarah does not reply, reduce the ask to a binary service-style choice and connect it to a call.",
       "required_actions": [
         {
-          "channel": "sms",
-          "intent": "Get a reply with phone number and 2 call-time options",
-          "draft_seed": "Hi Sarah—Andre here from Comeketo. For your May 15 party, about how many guests are you planning for? And what’s the best phone number so we can do a quick 10-min call? If easier, reply with two times that work for you today or tomorrow.",
-          "notes": "SMS only if lead-local time is within the allowed window; otherwise use email same content."
+          "channel": "email",
+          "intent": "Ask whether she pictures drop-off/trays or staffed/churrasco-style service.",
+          "draft_seed": "Subject: Should we build this as drop-off or staffed service?\n\nHi Sarah,\n\nQuick question so Andre can point you in the right direction for May 15:\n\nAre you picturing this more as:\n\n1. Drop-off / trays for a casual party, or\n2. Staffed buffet / churrasco-style service with the food managed on-site?\n\nEither can work depending on the venue and timing. If you send the venue/address and a good phone number, Andre can call for 10 minutes and tell you which option makes the most sense for 25 guests.\n\nAndre / Comeketo",
+          "notes": "This avoids pushing the higher-service option if Sarah really wanted appetizer-heavy drop-off."
         }
       ],
-      "send_window": "SMS: 9:00 AM – 7:00 PM lead-local time",
+      "send_window": "Email during normal business hours.",
       "approval_status": "not_ready"
     },
     {
       "day": 3,
-      "objective": "If she doesn’t respond yet, clarify tasting readiness and offer only the allowed tasting dates as an optional step (secondary to scheduling).",
+      "objective": "If she opens but still does not reply, use a NEPQ fit question to reveal whether the quote matched her mental picture.",
       "required_actions": [
         {
           "channel": "email",
-          "intent": "Clarify whether a tasting is needed and offer allowed tasting dates as options",
-          "draft_seed": "Subject: May 15 planning + tasting dates that may fit\n\nHi Sarah,\n\nQuick follow-up on your May 15 party—do you want to taste first, or are you mainly looking to lock in the menu and logistics?\n\nIf tasting helps, we currently have these Sunday options:\n• May 17 at 2:00 PM\n• May 31 at 2:00 PM\n\nWhat’s your best guest-count estimate, and which of those (if any) would work for you?\n\n—Andre / Comeketo",
-          "notes": "Only include the two dates that are still reasonable relative to lead creation; do not mention May 3 since it’s in the past."
+          "intent": "Ask whether she wants a lighter appetizer-heavy party menu or a full-meal feel.",
+          "draft_seed": "Subject: Is the quote direction close?\n\nHi Sarah,\n\nOne thing I want to check before Andre keeps building around the quote:\n\nWhen you said mainly Brazilian appetizers with some meat and rice, were you hoping for more of a lighter appetizer-heavy party menu, or closer to a full meal for everyone?\n\nThat changes the best recommendation. If the quote direction feels close, Andre can call you and tighten it around the venue, serve time, and the exact menu mix.\n\nWhat would be the best number for him to reach you?\n\nAndre / Comeketo",
+          "notes": "This proves we heard Sarah's exact food request and gives her a safe way to say the quote was too heavy or not aligned."
         }
       ],
-      "send_window": "Email 7:00 AM – 9:00 PM lead-local time",
+      "send_window": "Email morning or early afternoon.",
       "approval_status": "not_ready"
     },
     {
       "day": 4,
-      "objective": "Directly propose a call scheduling window using a NEPQ-style fit check question (and ask for a phone number again if needed).",
+      "objective": "Create respectful urgency around the May 15 date and ask for a yes/no on continuing.",
       "required_actions": [
         {
-          "channel": "sms",
-          "intent": "Propose a call time window and ask one fit-check question",
-          "draft_seed": "Sarah—quick question: what’s your ideal vibe for May 15 (more casual + hearty or more polished + plated)? Also, what phone number should Andre call, and would you be free around [Tue 3–4pm] or [Tue 5–6pm] to confirm details?",
-          "notes": "Replace bracketed times with a realistic two-option window that falls within SMS hours."
+          "channel": "email",
+          "intent": "Ask whether Andre should still help or whether Sarah went another direction.",
+          "draft_seed": "Subject: May 15 timing check\n\nHi Sarah,\n\nBecause your party is on May 15, I don't want to leave you hanging if we're not the right fit.\n\nShould Andre still help you tighten this up, or did you decide to go another direction?\n\nIf you do want help, just send:\n\n- Venue/address\n- Food-ready time\n- Best phone number\n\nThen Andre can call and tell you plainly what is doable for 25 guests.\n\nAndre / Comeketo",
+          "notes": "Give Sarah permission to say no. A real buyer often replies when the pressure is framed respectfully."
         }
       ],
-      "send_window": "SMS: 9:00 AM – 7:00 PM lead-local time",
+      "send_window": "Email during normal business hours.",
       "approval_status": "not_ready"
     },
     {
       "day": 5,
-      "objective": "Use a task to prompt scheduling—Andre will call once Sarah provides a number; otherwise ask for contact details and event basics.",
+      "objective": "Run a manual recovery check for missing Crisp/live-chat context, then send one more logistics-first email if no phone is found.",
       "required_actions": [
         {
           "channel": "task",
-          "intent": "Call Sarah Broderick to schedule a phone call and confirm guest count + service style for May 15",
-          "draft_seed": "Attempt to reach Sarah via the phone number on file; if none, ask Andre to request the best number and confirm guest count + service style for May 15. Then offer a single 10-min call slot to finalize next steps.",
-          "notes": "Since no phone exists in the box, the practical outcome is Andre uses the task to request a phone number and propose a slot."
+          "intent": "Check Crisp chat for missing phone/address/context; call if a phone exists.",
+          "draft_seed": "Open the Crisp chat link from the lead record and check whether Sarah gave any extra context that did not make it into Close: address/city, phone number, exact serve time, service style, budget, or dietary/setup notes. If a phone number exists in Crisp, call Sarah once. If there is still no phone, send the fallback email.",
+          "notes": "The Close record has a Crisp link, and the lead started through live chat. This is the only plausible place a missing phone/context detail might exist."
+        },
+        {
+          "channel": "email",
+          "intent": "Fallback email asking for the last details needed to make May 15 work.",
+          "draft_seed": "Subject: Last details needed to make May 15 work\n\nHi Sarah,\n\nI'm checking once more because the May 15 date is close.\n\nAndre can help you confirm whether the Brazilian appetizers + meat/rice plan works, but he needs the venue/address and food-ready time before he can give you a reliable next step.\n\nIf you still want help, reply with:\n\n1. Address/city\n2. Food-ready time\n3. Phone number\n\nIf not, no worries at all — I just don't want to keep nudging you if you're already set.\n\nAndre / Comeketo",
+          "notes": "Only send the fallback if the manual Crisp check does not reveal a phone number or better next action."
         }
       ],
-      "send_window": "Task window should align to lead-local business hours; default to SMS hours if scheduling is needed.",
+      "send_window": "Task during business hours; fallback email after manual check.",
       "approval_status": "not_ready"
     },
     {
       "day": 6,
-      "objective": "Answer silently implied objections: budget/timing uncertainty. Ask what matters most so Andre can tailor the phone call agenda.",
+      "objective": "Give Sarah a useful reason to reply by framing the call as the shortest path through the decision.",
       "required_actions": [
         {
           "channel": "email",
-          "intent": "Clarify priorities (budget vs timing vs menu) before the call",
-          "draft_seed": "Subject: To make the call useful—what matters most for May 15?\n\nHi Sarah,\n\nBefore Andre calls you, what matters most for your May 15 party?\n1) Keeping within a specific budget\n2) Locking the menu + dietary needs\n3) Timing/logistics (setup, service flow, cleanup)\n4) Something else\n\nReply with the number, and if you share a phone number, we’ll set a quick time that works.\n\n—Andre / Comeketo",
-          "notes": "Multiple-choice prompts are easy to answer and lead to call scheduling."
+          "intent": "Explain the simplest planning path for 25 guests and ask for phone/address.",
+          "draft_seed": "Subject: Easiest way to plan this for 25\n\nHi Sarah,\n\nFor a party of about 25, the simplest planning path is usually:\n\n1. Confirm whether you want light appetizers or a full-meal feel\n2. Confirm where the food is going and when it needs to be ready\n3. Have Andre recommend the cleanest package from there\n\nThat's why I'm trying to get you onto a quick call instead of sending more PDFs.\n\nIf you want, reply with your phone number and the venue/address, and Andre can help you make the decision quickly.\n\nAndre / Comeketo",
+          "notes": "This frames the call as a shortcut, not a sales appointment."
         }
       ],
-      "send_window": "Email 7:00 AM – 9:00 PM lead-local time",
+      "send_window": "Email in the morning.",
       "approval_status": "not_ready"
     },
     {
       "day": 7,
-      "objective": "Final nudge focused on scheduling outcome: ask for a yes/no and offer one concrete call slot plus request phone number if missing.",
+      "objective": "Close the loop so Andre either gets the call or stops spending active attention on the May 15 opportunity.",
       "required_actions": [
         {
-          "channel": "sms",
-          "intent": "Confirm a specific call slot or ask to reschedule; request phone number if missing",
-          "draft_seed": "Sarah—does a quick call with Andre make sense to finalize May 15? If yes, reply with 1) your phone number and 2) yes for [Wed 4:30pm] or tell me a better time today/tomorrow.",
-          "notes": "Pick a realistic slot that falls within SMS hours for lead-local time."
+          "channel": "email",
+          "intent": "Ask whether to close the loop or help with the May 15 party.",
+          "draft_seed": "Subject: Should I close this out?\n\nHi Sarah,\n\nI don't want to crowd your inbox.\n\nShould I close this out on our side, or would you still like Andre to help with the May 15 party?\n\nIf yes, send the best phone number and venue/address, and he can call you for a quick final fit check.\n\nAndre / Comeketo",
+          "notes": "If she opens this and still does not reply, stop active outreach unless new inbound activity appears."
         }
       ],
-      "send_window": "SMS: 9:00 AM – 7:00 PM lead-local time",
+      "send_window": "Email during normal business hours.",
       "approval_status": "not_ready"
     }
   ],
   "stop_conditions": [
     {
-      "trigger": "Lead replies with stop/not interested/remove me or explicitly declines outreach",
-      "action": "kill"
+      "trigger": "Sarah replies with phone number and venue/address.",
+      "action": "pause cadence and create same-day call task for Andre"
     },
     {
-      "trigger": "Lead schedules the phone call with Andre (confirmed via reply or calendar/workflow record)",
-      "action": "pause"
+      "trigger": "Sarah replies with venue/address but no phone number.",
+      "action": "ask for phone number and offer two concrete call windows"
     },
     {
-      "trigger": "Lead requests tasting as primary next step (and provides a preferred allowed date)",
-      "action": "surface"
+      "trigger": "Sarah says the quote is too high.",
+      "action": "ask whether she wanted a lighter appetizer-heavy plan or a strict budget target; do not defend the quote"
+    },
+    {
+      "trigger": "Sarah says she only wants drop-off.",
+      "action": "route toward a simpler appetizer/tray plan and confirm delivery feasibility"
+    },
+    {
+      "trigger": "Sarah is not interested or already booked someone else.",
+      "action": "stop outreach and mark appropriately"
+    },
+    {
+      "trigger": "Sarah provides a call time.",
+      "action": "create call task, mark scheduled_call objective achieved, and stop remaining days"
     }
   ],
   "approval_required": true,
-  "_mirror_at": "2026-05-06T07:09:56.790Z"
+  "_mirror_at": "2026-05-06T11:07:22Z"
 }

@@ -1,0 +1,205 @@
+{
+  "topic_id": "security_compliance_data",
+  "article_count": 11,
+  "articles": [
+    {
+      "slug": "account-settings",
+      "title": "Account Settings",
+      "url": "https://help.close.com/docs/account-settings",
+      "body_file": "close-help-docs/pages/account-settings.txt",
+      "excerpt": "Profile & Two-Factor Authentication Set your name, country, login email address, and reset your password in your account settings. Your name will be associated with all of the activities you make to a lead, such as any lead communication, writing Notes, and creating Tasks . Country Settings The country selected in your settings will affect the phone numbers you dial. The country code associated with your selected country will be automatically added to each phone number to\u2026",
+      "keywords": [
+        "factor authentication set",
+        "factor authentication two",
+        "country settings the",
+        "connected account",
+        "account settings",
+        "settings",
+        "account"
+      ],
+      "topic": "security_compliance_data"
+    },
+    {
+      "slug": "api-keys-oauth",
+      "title": "API keys & OAuth",
+      "url": "https://help.close.com/docs/api-keys-oauth",
+      "body_file": "close-help-docs/pages/api-keys-oauth.txt",
+      "excerpt": "There are two main ways to authorize (connect) your Close organization to third-party applications or your own internal system: using API keys using OAuth access Both methods are designed to help you automate and sync your sales process with other platforms while maintaining high levels of security and data privacy. Whether a third-party app uses an API key or OAuth to connect to Close depends on how the app's developers decided to set it up. API keys An API key is a secret\u2026",
+      "keywords": [
+        "oauth",
+        "keys",
+        "api"
+      ],
+      "topic": "security_compliance_data"
+    },
+    {
+      "slug": "data-security-and-privacy",
+      "title": "Data security and privacy",
+      "url": "https://help.close.com/docs/data-security-and-privacy",
+      "body_file": "close-help-docs/pages/data-security-and-privacy.txt",
+      "excerpt": "The security and privacy of your data is very important to us, and we have taken significant measures to protect it, through both technical and procedural processes. We will never share your data with any third parties, nor use your data for any purpose. Your data in Close will only be shared/visible to other team members from your organization. Only a few members of our team could see your data, and we have processes in place where we only look at it if needed to diagnose\u2026",
+      "keywords": [
+        "encryption all",
+        "security",
+        "privacy",
+        "data"
+      ],
+      "topic": "security_compliance_data"
+    },
+    {
+      "slug": "enabling-2fa",
+      "title": "Two-factor authentication (2FA)",
+      "url": "https://help.close.com/docs/enabling-2fa",
+      "body_file": "close-help-docs/pages/enabling-2fa.txt",
+      "excerpt": "Two-factor authentication (2FA) is a way of adding additional security to your account. 2FA requires you to enter an extra code when you log in or perform some account-sensitive action (e.g. changing your password). The code is generated from an application on your computer or mobile phone. Just want to reset your password? Learn how to do so here . Setting up 2FA To enable 2FA for your account you will need an application that manages 2FA codes, such as Google\u2026",
+      "keywords": [
+        "google authenticator",
+        "account settings",
+        "authentication",
+        "enabling",
+        "factor",
+        "2fa",
+        "two"
+      ],
+      "topic": "security_compliance_data"
+    },
+    {
+      "slug": "eu-data-privacy-and-gdpr",
+      "title": "GDPR and EU data privacy",
+      "url": "https://help.close.com/docs/eu-data-privacy-and-gdpr",
+      "body_file": "close-help-docs/pages/eu-data-privacy-and-gdpr.txt",
+      "excerpt": "GDPR Overview Close has implemented processes and procedures to ensure we meet both our Data Controller and Data Processor obligations under the European Union\u2019s (EU) General Data Protection Regulation (GDPR). To determine our readiness for GDPR, Close conducted a risk-based gap analysis of current capabilities and validated the assessment with an independent, third-party, GDPR expert - Ken Baylor. Our gap analysis, Cybersecurity Policy, Acceptable Use Policy, and Incident\u2026",
+      "keywords": [
+        "general data protection regulation",
+        "chief cybersecurity officer",
+        "incident response policy",
+        "acceptable use policy",
+        "cybersecurity policy",
+        "data privacy officer",
+        "data controller",
+        "data processor",
+        "european union",
+        "overview close",
+        "security close",
+        "data subject",
+        "ken baylor",
+        "privacy",
+        "data",
+        "gdpr"
+      ],
+      "topic": "security_compliance_data"
+    },
+    {
+      "slug": "german-regulatory-documents",
+      "title": "German Regulatory Documents",
+      "url": "https://help.close.com/docs/german-regulatory-documents",
+      "body_file": "close-help-docs/pages/german-regulatory-documents.txt",
+      "excerpt": "As Twilio, our telephony service provider only supports phone numbers registered to businesses and not individuals, an excerpt from the commercial register (Handelsregisterauszug) is the only document that can be used to register numbers in Germany. Please note that the document's date of issue has to be less than 3 months. For Sole traders that don't have a commercial register (Handelsregisterauszug), you will need to submit: Trade license (\u2018Gewerbeanmeldung\u2019,\u2026",
+      "keywords": [
+        "business registration number",
+        "new regulatory bundle choose",
+        "number notification letter",
+        "freier beruf finanzamt",
+        "regulatory bundles",
+        "business name in",
+        "sole traders",
+        "number type",
+        "regulatory",
+        "as twilio",
+        "documents",
+        "user type",
+        "for sole",
+        "german"
+      ],
+      "topic": "security_compliance_data"
+    },
+    {
+      "slug": "mailgun",
+      "title": "Mailgun",
+      "url": "https://help.close.com/docs/mailgun",
+      "body_file": "close-help-docs/pages/mailgun.txt",
+      "excerpt": "Getting started Create your Mailgun account Create an account with Mailgun . Mailgun offers 5,000 free emails per month for 3 months on their lowest Flex plan. Beyond that, you'll need to pay for email sending from $0.80 / 1000 emails or upgrade to a higher plan. Activate your Mailgun account. Open the Mailgun activation email you received in the email account you used for signup and follow the instructions provided. Adding your email domain name to Mailgun In Mailgun, go\u2026",
+      "keywords": [
+        "mailgun in mailgun",
+        "add new domain",
+        "length some",
+        "in mailgun",
+        "mailgun"
+      ],
+      "topic": "security_compliance_data"
+    },
+    {
+      "slug": "open-source-acknowledgments",
+      "title": "Open Source Acknowledgments",
+      "url": "https://help.close.com/docs/open-source-acknowledgments",
+      "body_file": "close-help-docs/pages/open-source-acknowledgments.txt",
+      "excerpt": "Close loves open source. We publish a number of open source packages at https://github.com/closeio Learn more at https://making.close.com/ Here is a list of acknowledgments for some of the open source packages we use: lamejs (LGPL v3), available at https://github.com/zhuker/lamejs",
+      "keywords": [
+        "acknowledgments",
+        "source",
+        "open"
+      ],
+      "topic": "security_compliance_data"
+    },
+    {
+      "slug": "security-vulnerability-disclosure-policy",
+      "title": "Security Vulnerability Disclosure Policy",
+      "url": "https://help.close.com/docs/security-vulnerability-disclosure-policy",
+      "body_file": "close-help-docs/pages/security-vulnerability-disclosure-policy.txt",
+      "excerpt": "For general details of data security & privacy at Close, see this page . Reporting a Security Vulnerability If you believe you have found a security vulnerability in Close, please email us details to security@close.com. Please include the following details with your report: Description of and potential impact of the vulnerability. A detailed description of the steps required to reproduce the vulnerability (POC scripts, screenshots, screen captures, etc.).",
+      "keywords": [
+        "security vulnerability if",
+        "vulnerability",
+        "disclosure",
+        "security",
+        "policy"
+      ],
+      "topic": "security_compliance_data"
+    },
+    {
+      "slug": "single-sign-on-sso-with-google",
+      "title": "Single Sign On (SSO) with Google",
+      "url": "https://help.close.com/docs/single-sign-on-sso-with-google",
+      "body_file": "close-help-docs/pages/single-sign-on-sso-with-google.txt",
+      "excerpt": "Google Single Sign-On allows you to sign in seamlessly with your Google account, eliminating the hassle of remembering another password. It enhances security and streamlines the task of managing user access within your organization. Instead of using a regular email/password combination you can sign up and log in Close using Sign Up with Google / Log in with Google . Regardless of the way you'll sign up/log into Close, make sure to enable 2FA on your account. Other SSO\u2026",
+      "keywords": [
+        "google single sign",
+        "set password",
+        "sign up",
+        "google",
+        "single",
+        "sign",
+        "sso"
+      ],
+      "topic": "security_compliance_data"
+    },
+    {
+      "slug": "tasks-not-syncing-with-google-calendar",
+      "title": "Tasks not syncing with Google Calendar",
+      "url": "https://help.close.com/docs/tasks-not-syncing-with-google-calendar",
+      "body_file": "close-help-docs/pages/tasks-not-syncing-with-google-calendar.txt",
+      "excerpt": "Why Can\u2019t I See My Close Tasks in Google Calendar? If you previously subscribed to your Close Tasks Calendar via Google Calendar, you may have noticed that your tasks are no longer syncing. This is because Close has sunset this feature due to security concerns. While discussions are ongoing about implementing a more secure solution in the future, you can use Zapier as a workaround to sync your Close Tasks with Google Calendar. How to Sync Close Tasks with Google Calendar\u2026",
+      "keywords": [
+        "google calendar using zapier zapier",
+        "select create detailed event",
+        "zapier click create zap",
+        "close tasks calendar",
+        "google calendar in",
+        "see my close tasks",
+        "sync close tasks",
+        "google calendar",
+        "select new task",
+        "zapier account",
+        "if you haven",
+        "close tasks",
+        "calendar",
+        "syncing",
+        "why can",
+        "google",
+        "set up",
+        "tasks"
+      ],
+      "topic": "security_compliance_data"
+    }
+  ]
+}

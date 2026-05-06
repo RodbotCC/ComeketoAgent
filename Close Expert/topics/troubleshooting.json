@@ -1,0 +1,429 @@
+{
+  "topic_id": "troubleshooting",
+  "article_count": 24,
+  "articles": [
+    {
+      "slug": "a2p-10dlc",
+      "title": "10DLC",
+      "url": "https://help.close.com/docs/a2p-10dlc",
+      "body_file": "close-help-docs/pages/a2p-10dlc.txt",
+      "excerpt": "A2P 10DLC is a new messaging standard introduced by major US carriers that requires all companies sending A2P(Application to person) SMS traffic to be registered. This is the case regardless of whether you are sending a bulk sales campaign or you just use SMS for occasional transactional messages. This only applies to companies messaging in the US and US territories using 10-digit long code phone numbers (like your Close phone numbers). It allows businesses to send\u2026",
+      "keywords": [
+        "10dlc",
+        "a2p",
+        "dlc"
+      ],
+      "topic": "troubleshooting"
+    },
+    {
+      "slug": "activity-recorder",
+      "title": "Record bugs or errors in Close",
+      "url": "https://help.close.com/docs/activity-recorder",
+      "body_file": "close-help-docs/pages/activity-recorder.txt",
+      "excerpt": "Use our activity recorder to report any issues you find in Close. You can find it by heading to the question mark icon in the top right of the screen and clicking the record button and then submitting it to us at Support so we can troubleshoot for you. This is not a typical screen recorder: This tool only records your screen and activities in Close (and some background information that is useful for us). If you change to other apps/windows, they will not be visible at all\u2026",
+      "keywords": [
+        "activity",
+        "recorder",
+        "errors",
+        "record",
+        "close",
+        "bugs"
+      ],
+      "topic": "troubleshooting"
+    },
+    {
+      "slug": "browser-notification-troubleshooting",
+      "title": "Browser Notification Troubleshooting",
+      "url": "https://help.close.com/docs/browser-notification-troubleshooting",
+      "body_file": "close-help-docs/pages/browser-notification-troubleshooting.txt",
+      "excerpt": "Use this guide to troubleshoot potential issues causing you to not see incoming call notifications from your browser while using browser based calling in Close. For context, you should see a notification similar to the one displayed below when receiving a call in Close while you have an active Close browser tab. If you're not seeing these notifications, follow the steps below to troubleshoot: Step 1: Ensure you have an active browser tab with Close loaded when receiving\u2026",
+      "keywords": [
+        "troubleshooting",
+        "desktop app if",
+        "phone settings",
+        "confirm close",
+        "notification",
+        "browser"
+      ],
+      "topic": "troubleshooting"
+    },
+    {
+      "slug": "call-quality-indicator-cqi",
+      "title": "Call Quality",
+      "url": "https://help.close.com/docs/call-quality-indicator-cqi",
+      "body_file": "close-help-docs/pages/call-quality-indicator-cqi.txt",
+      "excerpt": "The Call Quality Indicator (CQI) is a visual indicator that there may be an issue with your call audio quality. These issues are often the result of network quality or hardware problems. The Call Quality Indicator shows possible issues with the headset and Internet connection. When the CQI appears Seeing the CQI doesn\u2019t necessarily mean that the person you are calling is having trouble hearing you, but it can be an early indicator that there is an issue with your network\u2026",
+      "keywords": [
+        "high packet loss this",
+        "high jitter this",
+        "indicator",
+        "quality",
+        "call",
+        "cqi"
+      ],
+      "topic": "troubleshooting"
+    },
+    {
+      "slug": "chloe-faq",
+      "title": "FAQ & Troubleshooting",
+      "url": "https://help.close.com/docs/chloe-faq",
+      "body_file": "close-help-docs/pages/chloe-faq.txt",
+      "excerpt": "General questions What is Chloe? Chloe is Close's built-in AI sales teammate. She makes and receives calls, runs qualification and discovery, and logs everything directly in Close. See our primary Chloe page for a full overview. Which plans include Chloe? Chloe is available on the Growth and Scale plans. Is Chloe free? Chloe is free for eligible Growth and Scale organizations during the open beta period. After beta, Chloe voice calls will use AI credits included with your\u2026",
+      "keywords": [
+        "manage customizations",
+        "send scheduling link",
+        "troubleshooting",
+        "super users",
+        "does chloe",
+        "can chloe",
+        "is chloe",
+        "chloe",
+        "faq"
+      ],
+      "topic": "troubleshooting"
+    },
+    {
+      "slug": "clearing-the-configuration-file",
+      "title": "Clearing the Configuration File",
+      "url": "https://help.close.com/docs/clearing-the-configuration-file",
+      "body_file": "close-help-docs/pages/clearing-the-configuration-file.txt",
+      "excerpt": "Clearing configuration file Mac In the Close Application Menu open Develop > Open Config/Log folder Quit the Close app Copy the config.json file over to your Desktop so you can send it over to support@close.com for debugging Delete the config.json file from this Close folder Re-open your Close app Windows In the Close Application Menu open Develop > Open Config/Log folder Quit the Close app Copy the config.json file over to your Desktop so you can send it over to\u2026",
+      "keywords": [
+        "close application menu",
+        "configuration",
+        "open config",
+        "windows in",
+        "clearing",
+        "mac in",
+        "file"
+      ],
+      "topic": "troubleshooting"
+    },
+    {
+      "slug": "data-security-and-privacy",
+      "title": "Data security and privacy",
+      "url": "https://help.close.com/docs/data-security-and-privacy",
+      "body_file": "close-help-docs/pages/data-security-and-privacy.txt",
+      "excerpt": "The security and privacy of your data is very important to us, and we have taken significant measures to protect it, through both technical and procedural processes. We will never share your data with any third parties, nor use your data for any purpose. Your data in Close will only be shared/visible to other team members from your organization. Only a few members of our team could see your data, and we have processes in place where we only look at it if needed to diagnose\u2026",
+      "keywords": [
+        "encryption all",
+        "security",
+        "privacy",
+        "data"
+      ],
+      "topic": "troubleshooting"
+    },
+    {
+      "slug": "diagnosing-calling-problems",
+      "title": "Diagnosing Calling Problems",
+      "url": "https://help.close.com/docs/diagnosing-calling-problems",
+      "body_file": "close-help-docs/pages/diagnosing-calling-problems.txt",
+      "excerpt": "I sound \"choppy\" on the phone. This is usually caused by a weak network connection. Try out these tips for improving your connection: Use Ethernet instead of Wifi. If using Wifi, connect via 5 GHz instead of 2.4 GHz and move closer to the router. Set up Quality of Service on your router so that your VoIP traffic is prioritized. If you're still getting audio issues, get in touch with support@close.com Make sure to include these details about your network: The make and model\u2026",
+      "keywords": [
+        "open system preferences",
+        "access points",
+        "diagnosing",
+        "problems",
+        "calling"
+      ],
+      "topic": "troubleshooting"
+    },
+    {
+      "slug": "email-sending-limits",
+      "title": "Email Sending Limits",
+      "url": "https://help.close.com/docs/email-sending-limits",
+      "body_file": "close-help-docs/pages/email-sending-limits.txt",
+      "excerpt": "Email Sending Limits are designed to prevent your email accounts from exceeding the sending thresholds set by your email providers. These limits not only safeguard your accounts from potential disconnection from Close and interrupting your email sending, but also help maintain your sender reputation and avoid spam-related issues. Want to learn more? Check out the Close Blog! Gmail Sending Limits Cold Email Tips Cold Email Follow-up Plan Setting Up Your Limits By default,\u2026",
+      "keywords": [
+        "plan setting up your limits by",
+        "email sending limits",
+        "organization admins",
+        "connected accounts",
+        "connected account",
+        "sending limits",
+        "close blog",
+        "sending",
+        "limits",
+        "email"
+      ],
+      "topic": "troubleshooting"
+    },
+    {
+      "slug": "enabling-quality-of-service-qos",
+      "title": "Enabling Quality of Service (QoS)",
+      "url": "https://help.close.com/docs/enabling-quality-of-service-qos",
+      "body_file": "close-help-docs/pages/enabling-quality-of-service-qos.txt",
+      "excerpt": "QoS New to this section? Check out our series on how to debug network related call quality issues . What is QoS? QoS, or Quality of Service, is used to refer to ways in which your router can re-order (or drop) certain types of traffic on your network in order to meet a certain service level. Similar to a traffic light, QoS tells less important traffic to wait so the important traffic from your phone makes it through the intersection without delay. The most common use of QoS\u2026",
+      "keywords": [
+        "internet service provider",
+        "enabling",
+        "quality",
+        "service",
+        "qos"
+      ],
+      "topic": "troubleshooting"
+    },
+    {
+      "slug": "error-logs",
+      "title": "Console Error Logs",
+      "url": "https://help.close.com/docs/error-logs",
+      "body_file": "close-help-docs/pages/error-logs.txt",
+      "excerpt": "If you're experiencing issues with your Close application, error logs might help us in our debugging process where we'll have a better understanding of what went wrong, especially for issues we can't reproduce on our end. Extracting logs for the Desktop app Enable Logging The Close Desktop App includes a built-in logging feature to help capture detailed diagnostic information during troubleshooting. To log your issue: Open the main application menu . Go to Develop > Enable\u2026",
+      "keywords": [
+        "enable logging the close desktop app",
+        "enable logging",
+        "log file once",
+        "open config",
+        "log folder",
+        "console",
+        "error",
+        "logs"
+      ],
+      "topic": "troubleshooting"
+    },
+    {
+      "slug": "german-regulatory-documents",
+      "title": "German Regulatory Documents",
+      "url": "https://help.close.com/docs/german-regulatory-documents",
+      "body_file": "close-help-docs/pages/german-regulatory-documents.txt",
+      "excerpt": "As Twilio, our telephony service provider only supports phone numbers registered to businesses and not individuals, an excerpt from the commercial register (Handelsregisterauszug) is the only document that can be used to register numbers in Germany. Please note that the document's date of issue has to be less than 3 months. For Sole traders that don't have a commercial register (Handelsregisterauszug), you will need to submit: Trade license (\u2018Gewerbeanmeldung\u2019,\u2026",
+      "keywords": [
+        "business registration number",
+        "new regulatory bundle choose",
+        "number notification letter",
+        "freier beruf finanzamt",
+        "regulatory bundles",
+        "business name in",
+        "sole traders",
+        "number type",
+        "regulatory",
+        "as twilio",
+        "documents",
+        "user type",
+        "for sole",
+        "german"
+      ],
+      "topic": "troubleshooting"
+    },
+    {
+      "slug": "increase-call-connections",
+      "title": "Increase Call Connection Rates",
+      "url": "https://help.close.com/docs/increase-call-connections",
+      "body_file": "close-help-docs/pages/increase-call-connections.txt",
+      "excerpt": "Robocalls and spam labeling are major issues in today's communication landscape. Being flagged as spam leads to a decline in trust and response rates when an unidentified phone number is calling, which cut down on answer rates. Registering your phone number is a crucial step to reducing your chances of spam labeling, boosting your phone number's reputation, and ensuring your calls are correctly identified. This can be done with SHAKEN/STIR and Voice Integrity with Close.\u2026",
+      "keywords": [
+        "voice integrity",
+        "united states",
+        "connections",
+        "connection",
+        "increase",
+        "rates",
+        "call"
+      ],
+      "topic": "troubleshooting"
+    },
+    {
+      "slug": "initiating-calls-from-the-web-app",
+      "title": "Initiating calls from the web app",
+      "url": "https://help.close.com/docs/initiating-calls-from-the-web-app",
+      "body_file": "close-help-docs/pages/initiating-calls-from-the-web-app.txt",
+      "excerpt": "There are several options to dial your leads: use the built-in calling feature on the desktop application, the mobile app, or your web browser. Download trouble? If you're working on Mac or Windows and are having issues downloading or opening the Close desktop app, send a message over to our support team . Initiating calls on an external phone system Clicking the Call button or a phone number from a web browser will give you a modal window like this: Web app call modal\u2026",
+      "keywords": [
+        "google voice chrome extension",
+        "chromebook install",
+        "google voice",
+        "initiating",
+        "calls",
+        "app",
+        "web"
+      ],
+      "topic": "troubleshooting"
+    },
+    {
+      "slug": "mailgun",
+      "title": "Mailgun",
+      "url": "https://help.close.com/docs/mailgun",
+      "body_file": "close-help-docs/pages/mailgun.txt",
+      "excerpt": "Getting started Create your Mailgun account Create an account with Mailgun . Mailgun offers 5,000 free emails per month for 3 months on their lowest Flex plan. Beyond that, you'll need to pay for email sending from $0.80 / 1000 emails or upgrade to a higher plan. Activate your Mailgun account. Open the Mailgun activation email you received in the email account you used for signup and follow the instructions provided. Adding your email domain name to Mailgun In Mailgun, go\u2026",
+      "keywords": [
+        "mailgun in mailgun",
+        "add new domain",
+        "length some",
+        "in mailgun",
+        "mailgun"
+      ],
+      "topic": "troubleshooting"
+    },
+    {
+      "slug": "network-logs",
+      "title": "Network Logs",
+      "url": "https://help.close.com/docs/network-logs",
+      "body_file": "close-help-docs/pages/network-logs.txt",
+      "excerpt": "If you're experiencing performance issues with your Close application such as slow loading, network logs might help us in our debugging process where we'll have a better understanding of all the background network requests that are happening between your device and Close servers. Please refer to the video or follow the steps below to get the logs so you can send them over. Logs are packaged in a so-called .har file which will contain all the requests and responses we can\u2026",
+      "keywords": [
+        "inspect element",
+        "network",
+        "logs"
+      ],
+      "topic": "troubleshooting"
+    },
+    {
+      "slug": "opening-links-in-the-desktop-app",
+      "title": "Opening links in the Desktop App",
+      "url": "https://help.close.com/docs/opening-links-in-the-desktop-app",
+      "body_file": "close-help-docs/pages/opening-links-in-the-desktop-app.txt",
+      "excerpt": "You can open Close directly in the Desktop app from links you share in email, Slack, docs, or other tools by using deep links. Who can use this Any Close user with the Desktop app installed and updated in macOS or Windows. Option 1: Open web links in the Desktop app If you prefer to keep using normal https links, you can tell Close to open them in the Desktop app. In the Close web app, open the account menu Click Open in Mac/Windows App Ensure to check 'Always allow\u2026",
+      "keywords": [
+        "troubleshooting quick",
+        "windows app ensure",
+        "command prompt",
+        "close desktop",
+        "open terminal",
+        "click open",
+        "any close",
+        "open run",
+        "desktop",
+        "opening",
+        "links",
+        "app"
+      ],
+      "topic": "troubleshooting"
+    },
+    {
+      "slug": "plans-and-billing",
+      "title": "Plans and Billing",
+      "url": "https://help.close.com/docs/plans-and-billing",
+      "body_file": "close-help-docs/pages/plans-and-billing.txt",
+      "excerpt": "Billing Schedule, Plan, and Users Your Close account is billed according to these three aspects of your subscription: Your Billing Schedule - You can pay for Close on a monthly or annual basis. Your Team's Plan - You can review or change your team's Plan on the Plan page within your Organization settings. See Close's Plans & Pricing. Number of Users - You can invite, remove, or edit a User on the Team Management page within your Organization settings. Telephony Usage\u2026",
+      "keywords": [
+        "telephony usage calling",
+        "your billing schedule",
+        "billing schedule",
+        "users your close",
+        "team management",
+        "payment method",
+        "under settings",
+        "pricing page",
+        "close plans",
+        "pricing you",
+        "see close",
+        "your team",
+        "billing",
+        "plans"
+      ],
+      "topic": "troubleshooting"
+    },
+    {
+      "slug": "reinstalling-the-close-app",
+      "title": "Reinstalling the Close app",
+      "url": "https://help.close.com/docs/reinstalling-the-close-app",
+      "body_file": "close-help-docs/pages/reinstalling-the-close-app.txt",
+      "excerpt": "If you need to reinstall your Close desktop app, please follow the instructions below as simply moving the Close app into the trash isn't sufficient for thorough reinstall. The difference between following these instructions and just dragging an application to the trash is that these instructions will clear key files required for a fresh restart, whereas dragging apps to the trash will miss this. No Close data will be lost during this process. Clearing cookie/session/cache\u2026",
+      "keywords": [
+        "inspect element tab",
+        "reinstalling",
+        "no close",
+        "close",
+        "app"
+      ],
+      "topic": "troubleshooting"
+    },
+    {
+      "slug": "reporting-call-quality-issues",
+      "title": "Reporting call quality issues",
+      "url": "https://help.close.com/docs/reporting-call-quality-issues",
+      "body_file": "close-help-docs/pages/reporting-call-quality-issues.txt",
+      "excerpt": "Reporting calls Our goal is to make sure that every call you make through Close is perfect. To make that goal a reality, we need your feedback \u2013 both good and bad. After every call you make (or answer), you have the option to report an issue by clicking into the menu within the call log. From there, you'll be able to add additional details about your experience. Tell us what went wrong during the call by selecting all the pre-defined issues that match your case. Then, use\u2026",
+      "keywords": [
+        "reporting",
+        "quality",
+        "issues",
+        "call"
+      ],
+      "topic": "troubleshooting"
+    },
+    {
+      "slug": "setting-up-calling",
+      "title": "Calling Setup",
+      "url": "https://help.close.com/docs/setting-up-calling",
+      "body_file": "close-help-docs/pages/setting-up-calling.txt",
+      "excerpt": "Calling Setup in Close To make calls, you can download our Mac/Windows application, use our mobile app, or make calls straight from your browser. Mac/Windows Desktop app Download Close Desktop app here Once you\u2019ve installed the desktop application, simply log in with your Close account you've set up earlier. Calling from Web Browser We support the two latest versions of Safari, Chrome, Opera, Firefox, Brave, and Edge. Make sure your browser is updated to the newest version\u2026",
+      "keywords": [
+        "under notifications settings",
+        "download close desktop",
+        "grant permission",
+        "windows desktop",
+        "web browser we",
+        "calling setup",
+        "close to",
+        "calling",
+        "setting",
+        "setup"
+      ],
+      "topic": "troubleshooting"
+    },
+    {
+      "slug": "tasks-not-syncing-with-google-calendar",
+      "title": "Tasks not syncing with Google Calendar",
+      "url": "https://help.close.com/docs/tasks-not-syncing-with-google-calendar",
+      "body_file": "close-help-docs/pages/tasks-not-syncing-with-google-calendar.txt",
+      "excerpt": "Why Can\u2019t I See My Close Tasks in Google Calendar? If you previously subscribed to your Close Tasks Calendar via Google Calendar, you may have noticed that your tasks are no longer syncing. This is because Close has sunset this feature due to security concerns. While discussions are ongoing about implementing a more secure solution in the future, you can use Zapier as a workaround to sync your Close Tasks with Google Calendar. How to Sync Close Tasks with Google Calendar\u2026",
+      "keywords": [
+        "google calendar using zapier zapier",
+        "select create detailed event",
+        "zapier click create zap",
+        "close tasks calendar",
+        "google calendar in",
+        "see my close tasks",
+        "sync close tasks",
+        "google calendar",
+        "select new task",
+        "zapier account",
+        "if you haven",
+        "close tasks",
+        "calendar",
+        "syncing",
+        "why can",
+        "google",
+        "set up",
+        "tasks"
+      ],
+      "topic": "troubleshooting"
+    },
+    {
+      "slug": "troubleshooting-headset-issues",
+      "title": "Troubleshooting headset issues",
+      "url": "https://help.close.com/docs/troubleshooting-headset-issues",
+      "body_file": "close-help-docs/pages/troubleshooting-headset-issues.txt",
+      "excerpt": "Close cannot access microphone Common reasons for this include: Another application or browser tab is using your microphone already. Check for other browser tabs (Google Hangout, Skype Web, appear.in, etc.) that could be using your microphone. Your anti-virus software is protecting an audio stream coming from sound recording devices. (If you are a Kaspersky customer, please check out this link .) Your microphone is disconnected and your computer has no built-in microphone.\u2026",
+      "keywords": [
+        "troubleshooting",
+        "google hangout",
+        "phone settings",
+        "windows vista",
+        "click start",
+        "skype web",
+        "headset",
+        "issues"
+      ],
+      "topic": "troubleshooting"
+    },
+    {
+      "slug": "windows-screen-issue",
+      "title": "Windows Screen Issue",
+      "url": "https://help.close.com/docs/windows-screen-issue",
+      "body_file": "close-help-docs/pages/windows-screen-issue.txt",
+      "excerpt": "If the app is running but not visible in an active window in Windows (but still visible in the taskbar), the likely reason is that the Close app is open & running, but is just outside the visible area of the screen. Primary Fix Try to drag an app window to the side in Windows to trigger automatic resizing. This will show the apps that are open on the opposite side, which should include Close. Find Close app and click it to set it at a side to side view with the first app.\u2026",
+      "keywords": [
+        "resolution trick windows",
+        "secondary fixes if",
+        "primary fix try",
+        "find close",
+        "windows",
+        "screen",
+        "issue"
+      ],
+      "topic": "troubleshooting"
+    }
+  ]
+}

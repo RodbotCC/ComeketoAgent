@@ -2387,6 +2387,81 @@ function docByFile(snapshot: WorkbenchSnapshot | null, file: string): WorkbenchD
   return snapshot?.docs.find((d) => d.file === file) ?? null;
 }
 
+function docBody(snapshot: WorkbenchSnapshot | null, file: string): string {
+  return docByFile(snapshot, file)?.body || "";
+}
+
+function stripMdInline(raw: string | null | undefined): string {
+  if (!raw) return "";
+  return raw
+    .replace(/!\[[^\]]*]\([^)]*\)/g, "")
+    .replace(/\[([^\]]+)]\([^)]*\)/g, "$1")
+    .replace(/`([^`]+)`/g, "$1")
+    .replace(/\*\*([^*]+)\*\*/g, "$1")
+    .replace(/\*([^*]+)\*/g, "$1")
+    .replace(/[~#>]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function cleanHumanText(raw: string | null | undefined, max = 220): string {
+  const cleaned = stripMdInline(raw)
+    .replace(/\([^)]*(?:acti_|lead_|cont_|user_|stat_|custom\.|status_id)[^)]*\)/gi, "")
+    .replace(/\b(?:acti|lead|cont|user|stat)_[A-Za-z0-9_-]+\b/g, "")
+    .replace(/\bcustom\.[A-Za-z0-9_-]+\b/g, "")
+    .replace(/\s+([,.;:])/g, "$1")
+    .replace(/\s{2,}/g, " ")
+    .trim();
+  return cleaned.length > max ? `${cleaned.slice(0, max - 1).trim()}…` : cleaned;
+}
+
+function mdField(source: string, label: string): string | null {
+  const escaped = label.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const re = new RegExp(`(?:^|\\n)\\s*(?:[-*]\\s*)?\\*\\*${escaped}:\\*\\*\\s*([^\\n]+)`, "i");
+  const m = re.exec(source);
+  return m ? cleanHumanText(m[1], 180) : null;
+}
+
+function extractMdBullets(source: string, max = 4): string[] {
+  return source
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter((line) => /^[-*]\s+/.test(line) || /^\d+\.\s+/.test(line))
+    .map((line) => cleanHumanText(line.replace(/^[-*]\s+/, "").replace(/^\d+\.\s+/, ""), 220))
+    .filter((line) => line.length > 0)
+    .slice(0, max);
+}
+
+function sourceDocRows(snapshot: WorkbenchSnapshot, files: string[]): WorkbenchDocStatus[] {
+  return files
+    .map((f) => docByFile(snapshot, f))
+    .filter((d): d is WorkbenchDocStatus => Boolean(d));
+}
+
+function commKindGlyph(kind: string | null | undefined): string {
+  const k = (kind || "").toLowerCase();
+  if (k.includes("call")) return "☎";
+  if (k.includes("sms")) return "↔";
+  if (k.includes("note")) return "•";
+  return "✉";
+}
+
+function commDirectionLabel(direction: string | null | undefined): string {
+  if (direction === "inbound" || direction === "incoming") return "inbound";
+  if (direction === "outbound" || direction === "outgoing") return "outbound";
+  return "system";
+}
+
+function WidgetPill({
+  children,
+  tone = "observed",
+}: {
+  children: ReactNode;
+  tone?: "observed" | "inferred" | "drafted" | "shipped" | "stale" | "blocked";
+}) {
+  return <span className={`cmk-state-pill cmk-state-pill-${tone}`}>{children}</span>;
+}
+
 function MiniDocRow({ doc }: { doc: WorkbenchDocStatus }) {
   return (
     <div className={`cmk-wb-doc-row${doc.present ? " is-present" : ""}`}>
@@ -2411,6 +2486,173 @@ function WidgetGlyph({ widgetId }: { widgetId: LeadWidgetId }) {
     heartbeat: "HB",
   };
   return <span className="cmk-wb-glyph" aria-hidden>{glyph[widgetId]}</span>;
+}
+
+function ProfileSignalView({
+  snapshot,
+  compact = false,
+}: {
+  snapshot: WorkbenchSnapshot;
+  compact?: boolean;
+}) {
+  const profile = docBody(snapshot, "04_profile.md");
+  const discovery = docBody(snapshot, "06_discovery.md");
+  const alerts = docBody(snapshot, "07_andre_alerts.md");
+  const interpreted = docBody(snapshot, "03_comms_interpreted.md");
+  const facts = [
+    ["Buyer", mdField(profile, "Buyer") || snapshot.lead_name],
+    ["Event", mdField(profile, "Event") || mdField(discovery, "client_type") || "unknown"],
+    ["When", mdField(profile, "When") || mdField(discovery, "event_date") || "unknown"],
+    ["Where", mdField(profile, "Where") || mdField(discovery, "venue") || "unknown"],
+    ["Guests", mdField(profile, "Guest count") || mdField(discovery, "guest_count") || "unknown"],
+  ];
+  const known = facts.filter(([, v]) => !/unknown|tbd|not provided/i.test(v)).length;
+  const unknowns = facts.filter(([, v]) => /unknown|tbd|not provided|needs venue/i.test(v)).map(([k]) => k);
+  const winAngles = extractMdBullets(profile.split(/##\s+Win angles/i)[1] || profile, compact ? 2 : 3);
+  const alertBullets = extractMdBullets(alerts, compact ? 2 : 3);
+  const signals = extractMdBullets(interpreted, compact ? 2 : 3);
+
+  return (
+    <div className={`cmk-signal-view${compact ? " cmk-signal-view-compact" : ""}`}>
+      <div className="cmk-signal-pills">
+        <WidgetPill tone="observed">{known}/5 known</WidgetPill>
+        <WidgetPill tone={unknowns.length ? "blocked" : "shipped"}>
+          {unknowns.length ? `${unknowns.length} open` : "complete"}
+        </WidgetPill>
+        <WidgetPill tone={snapshot.needs.ai.length === 0 ? "inferred" : "stale"}>
+          {snapshot.needs.ai.length === 0 ? "interpreted" : "needs AI"}
+        </WidgetPill>
+      </div>
+
+      <div className="cmk-fact-grid">
+        {facts.map(([label, value]) => (
+          <div key={label} className="cmk-fact-cell">
+            <span>{label}</span>
+            <strong>{value}</strong>
+          </div>
+        ))}
+      </div>
+
+      {!compact && (
+        <div className="cmk-signal-columns">
+          <SignalList title="Win angles" items={winAngles} empty="No win angles found yet." />
+          <SignalList title="Watch" items={alertBullets} empty="No active alerts." />
+        </div>
+      )}
+
+      {compact && (
+        <SignalList title="Current read" items={signals.length ? signals : winAngles} empty="No interpreted read yet." />
+      )}
+    </div>
+  );
+}
+
+function SignalList({ title, items, empty }: { title: string; items: string[]; empty: string }) {
+  return (
+    <div className="cmk-signal-list">
+      <div className="cmk-strip-eyebrow">{title}</div>
+      {items.length ? (
+        <ul>
+          {items.map((item, i) => <li key={i}>{item}</li>)}
+        </ul>
+      ) : (
+        <p>{empty}</p>
+      )}
+    </div>
+  );
+}
+
+function CommsSignalView({ snapshot, compact = false }: { snapshot: WorkbenchSnapshot; compact?: boolean }) {
+  const counts = snapshot.latest_comms.reduce(
+    (acc, c) => {
+      const k = (c.kind || "activity").toLowerCase();
+      if (k.includes("email")) acc.email++;
+      else if (k.includes("sms")) acc.sms++;
+      else if (k.includes("call")) acc.call++;
+      else acc.other++;
+      if (c.direction === "inbound" || c.direction === "incoming") acc.inbound++;
+      if (c.direction === "outbound" || c.direction === "outgoing") acc.outbound++;
+      return acc;
+    },
+    { email: 0, sms: 0, call: 0, other: 0, inbound: 0, outbound: 0 },
+  );
+  const rows = compact ? snapshot.latest_comms.slice(0, 5) : snapshot.latest_comms;
+  return (
+    <div className="cmk-comms-surface">
+      <div className="cmk-signal-pills">
+        <WidgetPill tone={counts.inbound ? "observed" : "stale"}>{counts.inbound} inbound</WidgetPill>
+        <WidgetPill tone={counts.outbound ? "shipped" : "stale"}>{counts.outbound} outbound</WidgetPill>
+        <WidgetPill tone="inferred">{snapshot.counts.comm_files} files</WidgetPill>
+      </div>
+      <div className="cmk-wb-comm-list">
+        {rows.length === 0 ? (
+          <div className="cmk-wb-detail-empty">No comm refs in the continuity ledger yet.</div>
+        ) : rows.map((c, i) => (
+          <div key={`${c.ref}-${i}`} className="cmk-wb-comm-clean">
+            <span className="cmk-wb-comm-clean-glyph" aria-hidden>{commKindGlyph(c.kind)}</span>
+            <div className="cmk-wb-comm-clean-main">
+              <strong>{cleanHumanText(c.preview || c.kind || "activity", compact ? 96 : 150)}</strong>
+              <span>{commDirectionLabel(c.direction)} · {fmtWhen(c.date)}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function LedgerSignalView({
+  snapshot,
+  compact = false,
+}: {
+  snapshot: WorkbenchSnapshot;
+  compact?: boolean;
+}) {
+  const ledger = docBody(snapshot, "08_client_ledger.md");
+  const alerts = docBody(snapshot, "07_andre_alerts.md");
+  const bullets = extractMdBullets(ledger, compact ? 4 : 6);
+  const alertBullets = extractMdBullets(alerts, compact ? 2 : 3);
+  const plan = snapshot.plan;
+  const eventSoon =
+    /event (?:is )?(?:soon|next|within|May)/i.test(ledger + alerts) ||
+    /May\s+\d+/i.test(snapshot.profile_preview || "");
+  return (
+    <div className="cmk-ledger-surface">
+      <div className="cmk-signal-pills">
+        <WidgetPill tone="observed">{snapshot.status_label || "status unknown"}</WidgetPill>
+        <WidgetPill tone={plan?.needs_review ? "drafted" : plan ? "shipped" : "blocked"}>
+          {plan ? `${plan.approved}/${plan.days} approved` : "no plan"}
+        </WidgetPill>
+        <WidgetPill tone={eventSoon ? "blocked" : "inferred"}>{eventSoon ? "timing risk" : "normal timing"}</WidgetPill>
+      </div>
+      <SignalList title={compact ? "Deal state" : "Cadence position"} items={bullets} empty="No continuity read yet." />
+      {!compact && <SignalList title="Operator attention" items={alertBullets} empty="No active alerts." />}
+    </div>
+  );
+}
+
+function RawBoxSignalView({ snapshot, compact = false }: { snapshot: WorkbenchSnapshot; compact?: boolean }) {
+  const rawDocs = sourceDocRows(snapshot, ["00_meta.json", "01_raw_lead.json", "02_continuity.jsonl"]);
+  const aiDocs = snapshot.docs.filter((d) => d.phase === "ai" && d.present).length;
+  return (
+    <div className="cmk-raw-surface">
+      <div className="cmk-wb-kpis">
+        <div><strong>{snapshot.counts.activities}</strong><span>events</span></div>
+        <div><strong>{snapshot.counts.comm_files}</strong><span>comms</span></div>
+        <div><strong>{aiDocs}</strong><span>AI docs</span></div>
+      </div>
+      <div className="cmk-source-matrix">
+        {rawDocs.map((doc) => (
+          <div key={doc.file} className={`cmk-source-row${doc.present ? " is-present" : ""}`}>
+            <span>{doc.label}</span>
+            <strong>{doc.present ? "acquired" : "missing"}</strong>
+            <small>{doc.present ? `${Math.ceil(doc.chars / 1024)}k source` : "run raw sweep"}</small>
+          </div>
+        ))}
+      </div>
+      {!compact && <div className="cmk-wb-detail-note">Last checked {fmtWhen(snapshot.last_checked_at)}. IDs and full JSON stay available to the agent without taking over the screen.</div>}
+    </div>
+  );
 }
 
 function widgetStatus(widgetId: LeadWidgetId, snapshot: WorkbenchSnapshot | null): { label: string; tone: "ready" | "warn" | "idle" } {
@@ -2501,38 +2743,21 @@ function WorkbenchWidgetContent({
   }
 
   if (widgetId === "raw_box") {
-    const docs = ["00_meta.json", "01_raw_lead.json", "02_continuity.jsonl"]
-      .map((f) => docByFile(snapshot, f))
-      .filter((d): d is WorkbenchDocStatus => Boolean(d));
     return (
       <div className="cmk-wb-stack">
-        <div className="cmk-wb-kpis">
-          <div><strong>{snapshot.counts.activities}</strong><span>events</span></div>
-          <div><strong>{snapshot.counts.comm_files}</strong><span>transcripts</span></div>
-        </div>
-        {docs.map((doc) => <MiniDocRow key={doc.file} doc={doc} />)}
+        <RawBoxSignalView snapshot={snapshot} compact />
       </div>
     );
   }
 
   if (widgetId === "ai_profile") {
-    const docs = ["03_comms_interpreted.md", "04_profile.md", "06_discovery.md", "07_andre_alerts.md"]
-      .map((f) => docByFile(snapshot, f))
-      .filter((d): d is WorkbenchDocStatus => Boolean(d));
     return (
       <div className="cmk-wb-stack">
         <div className="cmk-wb-minihead">
           <strong>NEPQ read</strong>
           <span>{snapshot.needs.ai.length === 0 ? "ready for planning" : `${snapshot.needs.ai.length} missing docs`}</span>
         </div>
-        {docs.map((doc) => <MiniDocRow key={doc.file} doc={doc} />)}
-        <div className="cmk-wb-preview cmk-wb-preview-md">
-          {snapshot.profile_preview || snapshot.discovery_preview ? (
-            <MarkdownBody source={snapshot.profile_preview || snapshot.discovery_preview || ""} />
-          ) : (
-            "No AI profile generated yet."
-          )}
-        </div>
+        <ProfileSignalView snapshot={snapshot} compact />
         <button type="button" className="plan-btn" onClick={() => onAction("ai")} disabled={pending || snapshot.needs.raw.length > 0}>
           Refresh AI profile
         </button>
@@ -2543,17 +2768,7 @@ function WorkbenchWidgetContent({
   if (widgetId === "comms") {
     return (
       <div className="cmk-wb-stack">
-        {snapshot.latest_comms.length === 0 ? (
-          <div className="cmk-wb-preview">No comm refs in the continuity ledger yet.</div>
-        ) : snapshot.latest_comms.map((c, i) => (
-          <div key={`${c.ref}-${i}`} className="cmk-wb-comm">
-            <div className="cmk-wb-comm-head">
-              <span>{c.kind || "activity"} · {c.direction || "—"}</span>
-              <span>{fmtWhen(c.date)}</span>
-            </div>
-            <p>{c.preview || c.ref}</p>
-          </div>
-        ))}
+        <CommsSignalView snapshot={snapshot} compact />
       </div>
     );
   }
@@ -2565,13 +2780,7 @@ function WorkbenchWidgetContent({
           <strong>Continuity</strong>
           <span>{snapshot.ledger_preview ? "AI ledger generated" : "waiting on AI pass"}</span>
         </div>
-        <div className="cmk-wb-preview cmk-wb-preview-md">
-          {snapshot.ledger_preview ? (
-            <MarkdownBody source={snapshot.ledger_preview} />
-          ) : (
-            "No client ledger generated yet."
-          )}
-        </div>
+        <LedgerSignalView snapshot={snapshot} compact />
       </div>
     );
   }
@@ -3521,8 +3730,38 @@ function WorkbenchWidgetDetail({
     body = <div className="cmk-wb-skeleton">loading lead workbench…</div>;
   } else if (widgetId === "ai_profile") {
     const profile = docFor("04_profile.md");
-    body = profile?.body ? (
-      <ProfileSectioned source={profile.body} />
+    const discovery = docFor("06_discovery.md");
+    const alerts = docFor("07_andre_alerts.md");
+    body = profile?.body || discovery?.body || alerts?.body ? (
+      <div className="cmk-wb-detail-stack">
+        <ProfileSignalView snapshot={snapshot} />
+        <details className="cmk-source-drawer">
+          <summary>
+            <span className="cmk-strip-eyebrow">Source docs</span>
+            <span>profile · discovery · alerts</span>
+          </summary>
+          <div className="cmk-wb-profile-sections">
+            {profile?.body && (
+              <section className="cmk-wb-profile-section">
+                <div className="cmk-strip-eyebrow">Profile source</div>
+                <div className="cmk-wb-detail-md md-body-host"><MarkdownBody source={normalizeUnknowns(profile.body)} /></div>
+              </section>
+            )}
+            {discovery?.body && (
+              <section className="cmk-wb-profile-section">
+                <div className="cmk-strip-eyebrow">Discovery source</div>
+                <div className="cmk-wb-detail-md md-body-host"><MarkdownBody source={normalizeUnknowns(discovery.body)} /></div>
+              </section>
+            )}
+            {alerts?.body && (
+              <section className="cmk-wb-profile-section">
+                <div className="cmk-strip-eyebrow">Alerts source</div>
+                <div className="cmk-wb-detail-md md-body-host"><MarkdownBody source={normalizeUnknowns(alerts.body)} /></div>
+              </section>
+            )}
+          </div>
+        </details>
+      </div>
     ) : (
       <div className="cmk-wb-detail-empty">
         No AI profile generated yet — run <em>Refresh AI</em> from the Workflow widget after raw substrate is loaded.
@@ -3532,11 +3771,18 @@ function WorkbenchWidgetDetail({
     const ledger = docFor("08_client_ledger.md");
     body = (
       <div className="cmk-wb-detail-stack">
+        <LedgerSignalView snapshot={snapshot} />
         <LedgerAppendForm leadId={leadId} leadName={leadName} onAppended={onReload} />
         {ledger?.body ? (
-          <div className="cmk-wb-detail-md md-body-host">
-            <MarkdownBody source={ledger.body} />
-          </div>
+          <details className="cmk-source-drawer">
+            <summary>
+              <span className="cmk-strip-eyebrow">Ledger source</span>
+              <span>full continuity doc</span>
+            </summary>
+            <div className="cmk-wb-detail-md md-body-host">
+              <MarkdownBody source={normalizeUnknowns(ledger.body)} />
+            </div>
+          </details>
         ) : (
           <div className="cmk-wb-detail-empty">
             Client ledger empty — append the first entry above to seed the file.
@@ -3573,6 +3819,7 @@ function WorkbenchWidgetDetail({
         </div>
       ) : (
         <div className="cmk-wb-detail-stack">
+          <CommsSignalView snapshot={snapshot} compact />
           {snapshot.latest_comms.map((c, i) => (
             <CommRow key={`${c.ref}-${i}`} leadId={leadId} comm={c} />
           ))}
@@ -3584,10 +3831,11 @@ function WorkbenchWidgetDetail({
     const continuity = docFor("02_continuity.jsonl");
     body = (
       <div className="cmk-wb-detail-stack">
+        <RawBoxSignalView snapshot={snapshot} />
         {[
-          { label: "00_meta.json", doc: meta },
-          { label: "01_raw_lead.json", doc: rawLead },
-          { label: "02_continuity.jsonl", doc: continuity },
+          { label: "Meta source", doc: meta },
+          { label: "Lead source", doc: rawLead },
+          { label: "Continuity source", doc: continuity },
         ].map((row) => (
           <details key={row.label} className="cmk-wb-detail-raw">
             <summary>
@@ -4330,6 +4578,81 @@ export function ChatLayout() {
 
   /* ---- Send ---- */
 
+  async function askCloseExpert(question: string) {
+    const text = question.trim();
+    if (!text || loading) return;
+
+    const optimisticUser: Message = {
+      id: newId(),
+      thread_id: activeId ?? "pending",
+      role: "user",
+      content: `/close-expert ${text}`,
+      attachments: [],
+      created_at: new Date().toISOString(),
+    };
+    setMessages((prev) => [...prev, optimisticUser]);
+    setInput("");
+    setLoading(true);
+
+    const ctrl = new AbortController();
+    abortRef.current = ctrl;
+    try {
+      const res = await fetch("/api/specialists/close-expert", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          thread_id: activeId,
+          input: text,
+          conversation: messages.slice(-10).map((m) => ({
+            role: m.role,
+            content: m.content,
+            created_at: m.created_at,
+          })),
+        }),
+        signal: ctrl.signal,
+      });
+      const data = await res.json();
+      if (data.ok || data.assistant_message) {
+        setMessages((prev) => {
+          const without = prev.filter((m) => m.id !== optimisticUser.id);
+          return [...without, data.user_message as Message, data.assistant_message as Message];
+        });
+        if (data.thread_id && data.thread_id !== activeId) setActiveId(data.thread_id);
+        await refreshThreads();
+        toast.push("Close Expert answered", { tone: "success", ttl: 2400 });
+      } else {
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: newId(),
+            thread_id: activeId ?? "pending",
+            role: "assistant",
+            content: `Close Expert error: ${data.error ?? "unknown"}`,
+            attachments: [],
+            created_at: new Date().toISOString(),
+          },
+        ]);
+      }
+    } catch (err) {
+      const aborted = err instanceof DOMException && err.name === "AbortError";
+      const msg = err instanceof Error ? err.message : String(err);
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: newId(),
+          thread_id: activeId ?? "pending",
+          role: "assistant",
+          content: aborted ? "_(Close Expert canceled)_" : `Close Expert error: ${msg}`,
+          attachments: [],
+          created_at: new Date().toISOString(),
+        },
+      ]);
+    } finally {
+      setLoading(false);
+      abortRef.current = null;
+    }
+  }
+
   async function send(textOverride?: string, e?: FormEvent) {
     e?.preventDefault();
     const text = (textOverride ?? input).trim();
@@ -4758,6 +5081,21 @@ export function ChatLayout() {
           setFocusedWidgetId("heartbeat");
           if (layout.scope === "hidden") show("scope");
           toast.push("Workbench preset: heartbeat", { tone: "success" });
+        },
+      },
+      {
+        id: "close-expert",
+        keys: ["/close-expert", "/close", "/cx"],
+        label: "/close-expert",
+        hint: "Ask the Close CRM specialist",
+        run: (rest) => {
+          const q = rest.trim();
+          if (!q) {
+            setInput("/close-expert ");
+            toast.push("Ask Close Expert a Close-specific question", { tone: "warn" });
+            return;
+          }
+          void askCloseExpert(q);
         },
       },
       {
