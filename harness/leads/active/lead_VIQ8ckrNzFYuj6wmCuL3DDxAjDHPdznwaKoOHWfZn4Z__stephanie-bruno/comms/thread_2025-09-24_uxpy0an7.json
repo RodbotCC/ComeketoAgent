@@ -1,0 +1,82 @@
+{
+  "latest_emails": [
+    {
+      "id": "acti_JKjW64SV4SRXB6a5JAkaoBpFKVN5QvBVbk2d1vHJiiu",
+      "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "body_preview": "Hey Stephanie, We’re excited to invite you to a special tasting experience, the perfect\nchance to explore our menu and find the best options for your event! 📅 **Date:** **Sunday, September 28th, 2025*",
+      "date_sent": "2025-09-24T15:46:18.984000+00:00",
+      "opens_summary": null,
+      "to": [
+        "sabruno1@verizon.net"
+      ],
+      "has_attachments": true,
+      "date_created": "2025-09-24T15:46:18.849000+00:00",
+      "date_updated": "2025-09-24T15:46:19.558000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "🍴 You're Invited! Join Our Special Tasting Event",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Comeketo Catering Team <comeketo@m.comeketocatering.com>",
+      "envelope": {
+        "date": "Wed, 24 Sep 2025 15:46:19 +0000",
+        "subject": "🍴 You're Invited! Join Our Special Tasting Event",
+        "from": [
+          {
+            "email": "comeketo@m.comeketocatering.com",
+            "name": "Comeketo Catering Team"
+          }
+        ],
+        "sender": [
+          {
+            "email": "comeketo@m.comeketocatering.com",
+            "name": "Comeketo Catering Team"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "sabruno1@verizon.net",
+            "name": ""
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<175872877910.7.9079029879288593731@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ],
+  "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "created_by_name": "Andre Raw",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "contact_id": null,
+  "lead_id": "lead_VIQ8ckrNzFYuj6wmCuL3DDxAjDHPdznwaKoOHWfZn4Z",
+  "participants": [
+    {
+      "email": "comeketo@m.comeketocatering.com",
+      "name": "Comeketo Catering Team"
+    }
+  ],
+  "activity_at": "2025-09-24T15:46:18.985000+00:00",
+  "latest_normalized_subject": "🍴 You're Invited! Join Our Special Tasting Event",
+  "date_updated": "2025-09-24T15:46:19.579000+00:00",
+  "summary": null,
+  "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "importance": {
+    "type": "important",
+    "reason": "most-recent-communication"
+  },
+  "updated_by_name": "Andre Raw",
+  "_type": "EmailThread",
+  "id": "acti_psxFU5tgDiED7kN3Q94x1AClg1D9zc6qBoMUxpy0aN7",
+  "users": [
+    "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt"
+  ],
+  "user_name": "Andre Raw",
+  "n_emails": 1,
+  "created_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "date_created": "2025-09-24T15:46:18.985000+00:00"
+}
