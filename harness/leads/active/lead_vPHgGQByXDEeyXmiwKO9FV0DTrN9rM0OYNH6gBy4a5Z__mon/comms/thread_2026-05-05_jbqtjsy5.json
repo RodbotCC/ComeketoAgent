@@ -1,0 +1,82 @@
+{
+  "date_updated": "2026-05-05T22:05:39.027000+00:00",
+  "date_created": "2026-05-05T22:05:38.115000+00:00",
+  "lead_id": "lead_vPHgGQByXDEeyXmiwKO9FV0DTrN9rM0OYNH6gBy4a5Z",
+  "created_by_name": "Andre Raw",
+  "activity_at": "2026-05-05T22:05:38.115000+00:00",
+  "user_name": "Andre Raw",
+  "latest_normalized_subject": "Ballpark quote for your son's graduation on June 6",
+  "users": [
+    "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt"
+  ],
+  "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "importance": {
+    "type": "not_important",
+    "reason": "automated-outbound"
+  },
+  "updated_by_name": "Andre Raw",
+  "n_emails": 1,
+  "_type": "EmailThread",
+  "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "created_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "latest_emails": [
+    {
+      "id": "acti_dBzn27u4PRRbHR1px3rZViO6q9gJIAYmn8j6c5GaRcM",
+      "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "body_preview": "Hi Mon, Thank you again for the great conversation we just had over the phone. Based on what you shared about your son's graduation on June 6 and the current count of about 50 people, I put together a",
+      "date_sent": "2026-05-05T22:05:38.114000+00:00",
+      "opens_summary": null,
+      "to": [
+        "marleny_a25@hotmail.com"
+      ],
+      "has_attachments": false,
+      "date_created": "2026-05-05T22:05:37.834000+00:00",
+      "date_updated": "2026-05-05T22:05:38.978000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "Ballpark quote for your son's graduation on June 6",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "comeketo@m.comeketocatering.com",
+      "envelope": {
+        "date": "Tue, 05 May 2026 22:05:38 +0000",
+        "subject": "Ballpark quote for your son's graduation on June 6",
+        "from": [
+          {
+            "email": "comeketo@m.comeketocatering.com",
+            "name": ""
+          }
+        ],
+        "sender": [
+          {
+            "email": "comeketo@m.comeketocatering.com",
+            "name": ""
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "marleny_a25@hotmail.com",
+            "name": ""
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<177801873813.7.1534599284420068366@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ],
+  "contact_id": null,
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "id": "acti_Qpx3yCwwWNgJNoxX2V4VvQfsYDVfJAHkaF8jBQTJSY5",
+  "summary": null,
+  "participants": [
+    {
+      "email": "comeketo@m.comeketocatering.com",
+      "name": ""
+    }
+  ]
+}
