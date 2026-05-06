@@ -1,0 +1,82 @@
+{
+  "id": "acti_dZwy6aGwhAJ4TPWm610wtPuYn5eZtLUbbLoPEBLTrJZ",
+  "importance": {
+    "type": "not_important",
+    "reason": "automated-outbound"
+  },
+  "updated_by_name": "Rhonna Ricafort",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "participants": [
+    {
+      "email": "catering@events.comeketo.com",
+      "name": "Comeketo Catering Events Team"
+    }
+  ],
+  "created_by_name": null,
+  "created_by": null,
+  "date_updated": "2025-11-08T19:36:37.854000+00:00",
+  "_type": "EmailThread",
+  "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "summary": null,
+  "activity_at": "2025-11-08T19:36:32.719000+00:00",
+  "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "users": [
+    "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo"
+  ],
+  "date_created": "2025-11-08T19:36:32.719000+00:00",
+  "latest_normalized_subject": "🥧Do you still need Thanksgiving catering?",
+  "contact_id": null,
+  "user_name": "Rhonna Ricafort",
+  "lead_id": "lead_GOCpFiFs4Mn4h5CdxWEv4QtrFQaIUe8PH8ABdC2QchE",
+  "latest_emails": [
+    {
+      "id": "acti_E0DKs3Uz0XWT8gTXsSJFmQ8RzfIP6MoMbeniytC0Z11",
+      "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+      "body_preview": "Hi Tarin Just checking in — we still have a few Thanksgiving Eve pickup/delivery spots\nopen. If you want to review the Thanksgiving menu again, I attached it below for\nyou. Want me to save a spot for ",
+      "date_sent": "2025-11-08T19:36:32.718000+00:00",
+      "opens_summary": "Opened by Tarin Gayles <taringayles@gmail.com> (2025-11-08)",
+      "to": [
+        "Tarin Gayles <taringayles@gmail.com>"
+      ],
+      "has_attachments": true,
+      "date_created": "2025-11-08T19:21:46.952000+00:00",
+      "date_updated": "2025-11-08T19:36:37.794000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "🥧Do you still need Thanksgiving catering?",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Comeketo Catering Events Team <catering@events.comeketo.com>",
+      "envelope": {
+        "date": "Sat, 08 Nov 2025 19:36:33 +0000",
+        "subject": "🥧Do you still need Thanksgiving catering?",
+        "from": [
+          {
+            "email": "catering@events.comeketo.com",
+            "name": "Comeketo Catering Events Team"
+          }
+        ],
+        "sender": [
+          {
+            "email": "catering@events.comeketo.com",
+            "name": "Comeketo Catering Events Team"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "taringayles@gmail.com",
+            "name": "Tarin Gayles"
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<176263059331.7.1878242424210941017@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ],
+  "n_emails": 1
+}
