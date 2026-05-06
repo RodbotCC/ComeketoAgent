@@ -1,0 +1,20 @@
+{
+  "updated_by_name": "Event Consultant",
+  "task_id": "task_kOBJywwv86A0AE9UF5x73c41DV32cjpWCSSrSlTZFv3",
+  "_type": "TaskCompleted",
+  "users": [],
+  "user_name": "Event Consultant",
+  "date_created": "2026-05-03T16:11:37.256000+00:00",
+  "task_assigned_to": "user_xlkbxzrLqLYx186Eukt9IrPeM9pEuwbV2tFETSWEGpS",
+  "user_id": "user_xlkbxzrLqLYx186Eukt9IrPeM9pEuwbV2tFETSWEGpS",
+  "lead_id": "lead_DyWg3ReiKrcRXHnmv11d1KthbhDmw3ZiT0TBMUOsezA",
+  "task_assigned_to_name": "Event Consultant",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "updated_by": "user_xlkbxzrLqLYx186Eukt9IrPeM9pEuwbV2tFETSWEGpS",
+  "id": "acti_Poul3A3CmPiY6L32R3dl5WhXwsTG5CIK4EWRa6Yv1a5",
+  "date_updated": "2026-05-03T16:11:37.256000+00:00",
+  "activity_at": "2026-05-03T16:11:37.256000+00:00",
+  "task_text": "DAY 2 - CALL",
+  "created_by_name": "Event Consultant",
+  "created_by": "user_xlkbxzrLqLYx186Eukt9IrPeM9pEuwbV2tFETSWEGpS"
+}
