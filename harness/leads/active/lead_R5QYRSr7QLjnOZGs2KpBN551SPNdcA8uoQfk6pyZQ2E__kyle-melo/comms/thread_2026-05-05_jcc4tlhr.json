@@ -1,6 +1,7 @@
 {
-  "id": "acti_lL8pV0q2017B2iayjvSK0agINUrPzMJCf6ijCc4TLHr",
-  "activity_at": "2026-05-05T06:18:10.868000+00:00",
+  "_type": "EmailThread",
+  "latest_normalized_subject": "Understanding Our Catering Service Types",
+  "lead_id": "lead_R5QYRSr7QLjnOZGs2KpBN551SPNdcA8uoQfk6pyZQ2E",
   "latest_emails": [
     {
       "id": "acti_aV4jESPIeSiBPC1QKOlPNs45lCYTl7VcKVZdJermUkv",
@@ -51,32 +52,31 @@
       }
     }
   ],
-  "created_by": null,
-  "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
-  "user_name": "Rhonna Ricafort",
-  "created_by_name": null,
-  "date_created": "2026-05-05T06:18:10.868000+00:00",
-  "latest_normalized_subject": "Understanding Our Catering Service Types",
-  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
-  "_type": "EmailThread",
-  "n_emails": 1,
-  "importance": {
-    "type": "not_important",
-    "reason": "automated-outbound"
-  },
-  "date_updated": "2026-05-05T06:18:12.436000+00:00",
-  "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
-  "summary": null,
-  "updated_by_name": "Rhonna Ricafort",
-  "users": [
-    "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo"
-  ],
   "contact_id": null,
+  "activity_at": "2026-05-05T06:18:10.868000+00:00",
+  "summary": null,
+  "date_updated": "2026-05-05T06:18:12.436000+00:00",
   "participants": [
     {
       "email": "contact@comeketocatering.com",
       "name": "Rhonna Ricafort"
     }
   ],
-  "lead_id": "lead_R5QYRSr7QLjnOZGs2KpBN551SPNdcA8uoQfk6pyZQ2E"
+  "created_by": null,
+  "updated_by_name": "Rhonna Ricafort",
+  "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "user_name": "Rhonna Ricafort",
+  "importance": {
+    "type": "not_important",
+    "reason": "automated-outbound"
+  },
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "users": [
+    "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo"
+  ],
+  "id": "acti_lL8pV0q2017B2iayjvSK0agINUrPzMJCf6ijCc4TLHr",
+  "created_by_name": null,
+  "n_emails": 1,
+  "date_created": "2026-05-05T06:18:10.868000+00:00"
 }
