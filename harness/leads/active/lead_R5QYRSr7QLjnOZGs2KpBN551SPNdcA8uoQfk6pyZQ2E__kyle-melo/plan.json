@@ -45,7 +45,7 @@
         }
       ],
       "send_window": "SMS between 9:00 AM and 12:00 PM lead-local time",
-      "approval_status": "needs_review"
+      "approval_status": "not_ready"
     },
     {
       "day": 2,
@@ -65,7 +65,7 @@
         }
       ],
       "send_window": "Email between 7:30 AM and 10:30 AM lead-local time",
-      "approval_status": "needs_review"
+      "approval_status": "not_ready"
     },
     {
       "day": 3,
@@ -79,7 +79,7 @@
         }
       ],
       "send_window": "SMS between 10:00 AM and 1:00 PM lead-local time",
-      "approval_status": "needs_review"
+      "approval_status": "not_ready"
     },
     {
       "day": 4,
@@ -93,7 +93,7 @@
         }
       ],
       "send_window": "Task for completion between 9:00 AM and 4:00 PM lead-local time",
-      "approval_status": "needs_review"
+      "approval_status": "not_ready"
     },
     {
       "day": 5,
@@ -107,7 +107,7 @@
         }
       ],
       "send_window": "Email between 8:00 AM and 11:00 AM lead-local time",
-      "approval_status": "needs_review"
+      "approval_status": "not_ready"
     },
     {
       "day": 6,
@@ -121,7 +121,7 @@
         }
       ],
       "send_window": "SMS between 9:30 AM and 12:00 PM lead-local time",
-      "approval_status": "needs_review"
+      "approval_status": "not_ready"
     },
     {
       "day": 7,
@@ -135,7 +135,7 @@
         }
       ],
       "send_window": "Task for completion between 10:00 AM and 5:00 PM lead-local time",
-      "approval_status": "needs_review"
+      "approval_status": "not_ready"
     }
   ],
   "stop_conditions": [
@@ -153,5 +153,5 @@
     }
   ],
   "approval_required": true,
-  "_mirror_at": "2026-05-05T19:10:40.559Z"
+  "_mirror_at": "2026-05-06T07:10:09.858Z"
 }
