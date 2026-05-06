@@ -1,0 +1,82 @@
+{
+  "created_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "user_name": "Andre Raw",
+  "participants": [
+    {
+      "email": "comeketo@m.comeketocatering.com",
+      "name": "Comeketo Catering Team"
+    }
+  ],
+  "lead_id": "lead_HtS4SxHM04idXpxM7KoLzJGKJ4L9EPKveE4fzCZQ0LX",
+  "importance": {
+    "type": "not_important",
+    "reason": "by-default"
+  },
+  "users": [
+    "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt"
+  ],
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "updated_by_name": "Andre Raw",
+  "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "latest_normalized_subject": "[EXCLUSIVE] About Our Tastings",
+  "latest_emails": [
+    {
+      "id": "acti_046U9hss2NwCY0hrluRPfgnBwDIe4XmXpvsFV77rwqH",
+      "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "body_preview": "Experience 30+ menu items at our exclusive catering tasting - completely free\nwhen you book 🍽️ ![Comeketo Catering Logo](https://comeketocatering.com/wp-\ncontent/uploads/2025/01/LOGO_WEB.png) [ ![Cate",
+      "date_sent": null,
+      "opens_summary": null,
+      "to": [
+        "tyolita@gmail.com"
+      ],
+      "has_attachments": false,
+      "date_created": "2026-05-05T22:05:19.970000+00:00",
+      "date_updated": "2026-05-05T22:05:25.148000+00:00",
+      "bcc": [],
+      "status": "scheduled",
+      "cc": [],
+      "subject": "[EXCLUSIVE] About Our Tastings",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Comeketo Catering Team <comeketo@m.comeketocatering.com>",
+      "envelope": {
+        "date": "Tue, 05 May 2026 22:05:19 -0000",
+        "subject": "[EXCLUSIVE] About Our Tastings",
+        "from": [
+          {
+            "email": "comeketo@m.comeketocatering.com",
+            "name": "Comeketo Catering Team"
+          }
+        ],
+        "sender": [
+          {
+            "email": "comeketo@m.comeketocatering.com",
+            "name": "Comeketo Catering Team"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "tyolita@gmail.com",
+            "name": ""
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": null,
+        "is_autoreply": false
+      }
+    }
+  ],
+  "summary": null,
+  "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "date_created": "2026-05-05T22:05:19.971000+00:00",
+  "_type": "EmailThread",
+  "date_updated": "2026-05-05T22:05:25.205000+00:00",
+  "activity_at": "2026-05-05T22:05:19.971000+00:00",
+  "contact_id": null,
+  "n_emails": 1,
+  "id": "acti_KezgvrMVJQw0WJtDDsooq169tXS9oirGq53zzUpqnOi",
+  "created_by_name": "Andre Raw"
+}
