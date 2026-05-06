@@ -1,20 +1,18 @@
 {
-  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
-  "latest_normalized_subject": "Ballpark quote for your May 15 party",
-  "participants": [
-    {
-      "email": "comeketo@m.comeketocatering.com",
-      "name": "Comeketo Catering Team"
-    }
-  ],
-  "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
-  "created_by_name": "Andre Raw",
-  "updated_by_name": "Andre Raw",
+  "summary": null,
   "users": [
     "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt"
   ],
-  "activity_at": "2026-05-06T00:10:22.101000+00:00",
-  "summary": null,
+  "user_name": "Andre Raw",
+  "created_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "importance": {
+    "type": "important",
+    "reason": "contains-manual-message"
+  },
+  "contact_id": null,
+  "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "latest_normalized_subject": "Ballpark quote for your May 15 party",
   "latest_emails": [
     {
       "id": "acti_WgffUeVLbKZCAphExAfnG8l22nW1yCOA4pxuCkuHRom",
@@ -113,18 +111,20 @@
       }
     }
   ],
-  "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
-  "created_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
-  "lead_id": "lead_j5NSrW6fX4orwFt1OTZxgPydqrkTygrAOquuHBqWwlM",
-  "date_created": "2026-05-06T00:10:22.101000+00:00",
-  "user_name": "Andre Raw",
-  "contact_id": null,
-  "n_emails": 2,
-  "importance": {
-    "type": "important",
-    "reason": "contains-manual-message"
-  },
+  "date_updated": "2026-05-06T00:10:22.481000+00:00",
   "id": "acti_4UthSaskoTC0kV86nUt9NZQEg8BrQ9d7Tqj7oU6Goce",
+  "created_by_name": "Andre Raw",
+  "lead_id": "lead_j5NSrW6fX4orwFt1OTZxgPydqrkTygrAOquuHBqWwlM",
   "_type": "EmailThread",
-  "date_updated": "2026-05-06T00:10:22.481000+00:00"
+  "date_created": "2026-05-06T00:10:22.101000+00:00",
+  "updated_by_name": "Andre Raw",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "activity_at": "2026-05-06T00:10:22.101000+00:00",
+  "n_emails": 2,
+  "participants": [
+    {
+      "email": "comeketo@m.comeketocatering.com",
+      "name": "Comeketo Catering Team"
+    }
+  ]
 }
