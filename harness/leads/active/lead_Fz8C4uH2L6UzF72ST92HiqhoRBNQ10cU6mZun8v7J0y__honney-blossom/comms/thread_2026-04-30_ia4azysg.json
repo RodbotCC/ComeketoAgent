@@ -1,0 +1,82 @@
+{
+  "activity_at": "2026-04-30T19:12:57.421000+00:00",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "user_name": "Rhonna Ricafort",
+  "date_updated": "2026-04-30T19:13:00.109000+00:00",
+  "created_by": null,
+  "latest_emails": [
+    {
+      "id": "acti_P5HPUm01m3Nu8540Yh7ArYeQzrzgzy2YHurNTX9Pv0i",
+      "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+      "body_preview": "Hey Honney, Just shooting you this quick email, we got your request for more catering info, and our event planner will connect shortly. ❤️ - Comeketo Catering p.s. check out [this quick video](https:/",
+      "date_sent": "2026-04-30T19:12:57.420000+00:00",
+      "opens_summary": null,
+      "to": [
+        "Honney Blossom <loyzany@hotmail.com>"
+      ],
+      "has_attachments": true,
+      "date_created": "2026-04-30T19:12:57.420000+00:00",
+      "date_updated": "2026-04-30T19:13:00.027000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "[✅ CATERING] You're in Honney! ",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Rhonna Ricafort <contact@comeketocatering.com>",
+      "envelope": {
+        "date": "Thu, 30 Apr 2026 19:12:58 +0000",
+        "subject": "[✅ CATERING] You're in Honney! ",
+        "from": [
+          {
+            "email": "contact@comeketocatering.com",
+            "name": "Rhonna Ricafort"
+          }
+        ],
+        "sender": [
+          {
+            "email": "contact@comeketocatering.com",
+            "name": "Rhonna Ricafort"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "loyzany@hotmail.com",
+            "name": "Honney Blossom"
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<177757637781.7.2955336248812287724@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ],
+  "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "participants": [
+    {
+      "email": "contact@comeketocatering.com",
+      "name": "Rhonna Ricafort"
+    }
+  ],
+  "n_emails": 1,
+  "contact_id": null,
+  "updated_by_name": "Rhonna Ricafort",
+  "summary": null,
+  "importance": {
+    "type": "not_important",
+    "reason": "automated-outbound"
+  },
+  "id": "acti_hbBIphRNqTyJVjaG1swNU5M6Eu7XwMKWuLuiA4azYsG",
+  "_type": "EmailThread",
+  "users": [
+    "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo"
+  ],
+  "created_by_name": null,
+  "date_created": "2026-04-30T19:12:57.421000+00:00",
+  "latest_normalized_subject": "[✅ CATERING] You're in Honney!",
+  "lead_id": "lead_Fz8C4uH2L6UzF72ST92HiqhoRBNQ10cU6mZun8v7J0y"
+}
