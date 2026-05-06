@@ -1,0 +1,31 @@
+{
+  "contact_id": "cont_FpRDwmi6gFhG2c1zZ5lValFPaKtQyJxmxL5R3PMPNb4",
+  "counts": {
+    "activities": 40,
+    "calls": 2,
+    "emails": 14,
+    "meetings": 2,
+    "notes": 2,
+    "smses": 12,
+    "subscriptions": 2,
+    "tasks": 1,
+    "threads": 10,
+    "whatsapps": 0
+  },
+  "last_sweep_at": "2026-05-06T10:05:04.099Z",
+  "lead_id": "lead_fYLRdg4Dkb0g7e3asZc4JrhI1hlgTWd4VWG4lwKPn9H",
+  "name": "Monica Quindley",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "primary_email": "quindley95@gmail.com",
+  "primary_phone": "+15089442944",
+  "raw_contract_version": 2,
+  "raw_files": {
+    "comms_dir": "comms/",
+    "continuity": "02_continuity.jsonl",
+    "lead": "01_raw_lead.json"
+  },
+  "status_id": "stat_QprvyII2lMCFsaLCqOJBaCFCvOih97ePMHhJzoyuGNY",
+  "status_label": "🔥 Definitely",
+  "user_id": null,
+  "user_name": null
+}
