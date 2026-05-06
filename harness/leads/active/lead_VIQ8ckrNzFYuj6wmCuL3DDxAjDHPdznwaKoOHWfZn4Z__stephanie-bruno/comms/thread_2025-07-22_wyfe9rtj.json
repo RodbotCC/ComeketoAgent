@@ -1,0 +1,130 @@
+{
+  "latest_emails": [
+    {
+      "id": "acti_9zRkFLjltxegHOJSFR8dqt66aGjOsfxKJveW2qZYJ80",
+      "user_id": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "body_preview": "Hey Stephanie,  \n  \nJust shooting you this quick email,  \nwe got your request for a free tasting  \nand we will connect shortly to set that up\n\n  \n❤️ - Comeketo Catering\n\n  \n\n  \n\n  \n\n  \n\n  \n\n  \n\n  \n\n  ",
+      "date_sent": "2025-07-22T17:48:27.230000+00:00",
+      "opens_summary": null,
+      "to": [
+        "Stephanie Bruno <sabruno1@verizon.net>"
+      ],
+      "has_attachments": true,
+      "date_created": "2025-07-22T17:48:27.230000+00:00",
+      "date_updated": "2025-07-22T17:48:29.837000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "[✅ Tasting] You're in Stephanie! ",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Comeketo Catering <catering@comeketo.com>",
+      "envelope": {
+        "date": "Tue, 22 Jul 2025 17:48:28 +0000",
+        "subject": "[✅ Tasting] You're in Stephanie! ",
+        "from": [
+          {
+            "email": "catering@comeketo.com",
+            "name": "Comeketo Catering"
+          }
+        ],
+        "sender": [
+          {
+            "email": "catering@comeketo.com",
+            "name": "Comeketo Catering"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "sabruno1@verizon.net",
+            "name": "Stephanie Bruno"
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<175320650753.7.16494478073949244223@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    },
+    {
+      "id": "acti_fglBO3T4GDiVMQ0pgg1yItEiaFlA06ZTYbJXN3I0q30",
+      "user_id": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "body_preview": "Hey Stephanie,  \n  \nJust shooting you this quick email,  \nwe got your request for a free tasting  \nand we will connect shortly to set that up\n\n  \n❤️ - Comeketo Catering\n\n  \n\n  \n\n  \n\n  \n\n  \n\n  \n\n  \n\n  ",
+      "date_sent": "2025-07-22T17:26:37.701000+00:00",
+      "opens_summary": null,
+      "to": [
+        "Stephanie <sabruno1@verizon.net>"
+      ],
+      "has_attachments": true,
+      "date_created": "2025-07-22T17:26:37.701000+00:00",
+      "date_updated": "2025-07-22T17:26:40.048000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "[✅ Tasting] You're in Stephanie! ",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Comeketo Catering <catering@comeketo.com>",
+      "envelope": {
+        "date": "Tue, 22 Jul 2025 17:26:38 +0000",
+        "subject": "[✅ Tasting] You're in Stephanie! ",
+        "from": [
+          {
+            "email": "catering@comeketo.com",
+            "name": "Comeketo Catering"
+          }
+        ],
+        "sender": [
+          {
+            "email": "catering@comeketo.com",
+            "name": "Comeketo Catering"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "sabruno1@verizon.net",
+            "name": "Stephanie"
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<175320519803.7.9766154966290934198@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ],
+  "updated_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+  "created_by_name": "Sales Team Event Consultant Team",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "contact_id": null,
+  "lead_id": "lead_VIQ8ckrNzFYuj6wmCuL3DDxAjDHPdznwaKoOHWfZn4Z",
+  "participants": [
+    {
+      "email": "catering@comeketo.com",
+      "name": "Comeketo Catering"
+    }
+  ],
+  "activity_at": "2025-07-22T17:48:27.231000+00:00",
+  "latest_normalized_subject": "[✅ Tasting] You're in Stephanie!",
+  "date_updated": "2025-07-22T17:48:30.074000+00:00",
+  "summary": null,
+  "user_id": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+  "importance": {
+    "type": "not_important",
+    "reason": "automated-outbound"
+  },
+  "updated_by_name": "Sales Team Event Consultant Team",
+  "_type": "EmailThread",
+  "id": "acti_dJuiIzkMWNpfctVCVrWJWB3dt3CdFzOj228WyFE9RtJ",
+  "users": [
+    "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb"
+  ],
+  "user_name": "Sales Team Event Consultant Team",
+  "n_emails": 2,
+  "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+  "date_created": "2025-07-22T17:48:27.231000+00:00"
+}
