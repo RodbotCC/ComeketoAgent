@@ -1,0 +1,30 @@
+{
+  "contact_id": "cont_gGOJulPloRyREGSll7vQXLEZotNKNQ9dv8YtXDAyUpo",
+  "counts": {
+    "activities": 25,
+    "calls": 4,
+    "emails": 1,
+    "meetings": 0,
+    "notes": 5,
+    "smses": 10,
+    "subscriptions": 0,
+    "tasks": 3,
+    "threads": 1
+  },
+  "last_sweep_at": "2026-05-06T00:47:35.656Z",
+  "lead_id": "lead_DyWg3ReiKrcRXHnmv11d1KthbhDmw3ZiT0TBMUOsezA",
+  "name": "Bruna Andrade",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "primary_email": "bgrade80@gmail.com",
+  "primary_phone": "+17742448237",
+  "raw_contract_version": 2,
+  "raw_files": {
+    "comms_dir": "comms/",
+    "continuity": "02_continuity.jsonl",
+    "lead": "01_raw_lead.json"
+  },
+  "status_id": "stat_qGpMKenDu31cIY56uTpvo8evqhcNnK4KDWtz4y9NPz3",
+  "status_label": "🔘 Maybe",
+  "user_id": null,
+  "user_name": null
+}
