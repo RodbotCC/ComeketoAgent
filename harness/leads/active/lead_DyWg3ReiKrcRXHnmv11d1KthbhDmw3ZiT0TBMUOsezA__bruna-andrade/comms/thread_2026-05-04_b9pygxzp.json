@@ -1,0 +1,82 @@
+{
+  "contact_id": null,
+  "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "latest_emails": [
+    {
+      "id": "acti_NA8168FWtqXDUmNc94W1DSqY4NLIKp95VdMv71yzKqP",
+      "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "body_preview": "Oi Bruna, Conforme a nossa ligação, te mandei duas direções no mesmo email para ficar fácil de comparar: opções de bar para 50 pessoas e, separadamente, um ballpark de comida caso você queira olhar os",
+      "date_sent": "2026-05-04T22:55:24.745000+00:00",
+      "opens_summary": "Opened by bgrade80@gmail.com (2 times, latest 2026-05-04)",
+      "to": [
+        "bgrade80@gmail.com"
+      ],
+      "has_attachments": false,
+      "date_created": "2026-05-04T22:55:24.629000+00:00",
+      "date_updated": "2026-05-04T23:03:16.595000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "Cotação inicial de bar + comida para 50 pessoas",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "comeketo@m.comeketocatering.com",
+      "envelope": {
+        "date": "Mon, 04 May 2026 22:55:25 +0000",
+        "subject": "Cotação inicial de bar + comida para 50 pessoas",
+        "from": [
+          {
+            "email": "comeketo@m.comeketocatering.com",
+            "name": ""
+          }
+        ],
+        "sender": [
+          {
+            "email": "comeketo@m.comeketocatering.com",
+            "name": ""
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "bgrade80@gmail.com",
+            "name": ""
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<177793532476.7.10320752985494647999@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ],
+  "latest_normalized_subject": "Cotação inicial de bar + comida para 50 pessoas",
+  "created_by_name": "Andre Raw",
+  "date_updated": "2026-05-04T23:03:16.662000+00:00",
+  "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "lead_id": "lead_DyWg3ReiKrcRXHnmv11d1KthbhDmw3ZiT0TBMUOsezA",
+  "created_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "activity_at": "2026-05-04T22:55:24.746000+00:00",
+  "participants": [
+    {
+      "email": "comeketo@m.comeketocatering.com",
+      "name": ""
+    }
+  ],
+  "_type": "EmailThread",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "user_name": "Andre Raw",
+  "importance": {
+    "type": "not_important",
+    "reason": "automated-outbound"
+  },
+  "summary": null,
+  "updated_by_name": "Andre Raw",
+  "date_created": "2026-05-04T22:55:24.746000+00:00",
+  "id": "acti_hoJvx9nv1e9Ul1zdTKUXMR4TYly8xK1G0tVb9PYGXZP",
+  "users": [
+    "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt"
+  ],
+  "n_emails": 1
+}
