@@ -9,9 +9,10 @@
     "smses": 10,
     "subscriptions": 2,
     "tasks": 2,
-    "threads": 3
+    "threads": 3,
+    "whatsapps": 0
   },
-  "last_sweep_at": "2026-05-06T01:54:52.865Z",
+  "last_sweep_at": "2026-05-06T10:01:33.292Z",
   "lead_id": "lead_VfDrrrVt70oXAgN9dsdFvkuwtv3zOLENDyQhArfGAmz",
   "name": "Talita Betânia",
   "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
