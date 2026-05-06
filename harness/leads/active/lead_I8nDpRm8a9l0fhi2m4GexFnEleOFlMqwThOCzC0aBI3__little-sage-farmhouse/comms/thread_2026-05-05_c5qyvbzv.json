@@ -1,4 +1,24 @@
 {
+  "activity_at": "2026-05-05T17:19:45.271000+00:00",
+  "latest_normalized_subject": "[✅ CATERING] You're in Little!",
+  "created_by": null,
+  "n_emails": 1,
+  "importance": {
+    "type": "not_important",
+    "reason": "automated-outbound"
+  },
+  "_type": "EmailThread",
+  "summary": null,
+  "contact_id": null,
+  "created_by_name": null,
+  "updated_by_name": "Rhonna Ricafort",
+  "date_created": "2026-05-05T17:19:45.271000+00:00",
+  "participants": [
+    {
+      "email": "contact@comeketocatering.com",
+      "name": "Rhonna Ricafort"
+    }
+  ],
   "latest_emails": [
     {
       "id": "acti_qKmatCysOAX5XEfVKC4yB00M2aLNEupkirB9mhNp5vN",
@@ -49,34 +69,14 @@
       }
     }
   ],
-  "user_name": "Rhonna Ricafort",
-  "participants": [
-    {
-      "email": "contact@comeketocatering.com",
-      "name": "Rhonna Ricafort"
-    }
-  ],
-  "date_created": "2026-05-05T17:19:45.271000+00:00",
-  "date_updated": "2026-05-05T17:19:50.617000+00:00",
-  "n_emails": 1,
-  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
-  "summary": null,
   "users": [
     "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo"
   ],
-  "contact_id": null,
-  "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
-  "created_by": null,
-  "updated_by_name": "Rhonna Ricafort",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
   "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
-  "latest_normalized_subject": "[✅ CATERING] You're in Little!",
-  "activity_at": "2026-05-05T17:19:45.271000+00:00",
-  "importance": {
-    "type": "not_important",
-    "reason": "automated-outbound"
-  },
-  "_type": "EmailThread",
-  "created_by_name": null,
   "lead_id": "lead_I8nDpRm8a9l0fhi2m4GexFnEleOFlMqwThOCzC0aBI3",
-  "id": "acti_QKy0Tom03bVGbcJ9nFTVOZWqM5WPmScIx8gC5qyvBzv"
+  "id": "acti_QKy0Tom03bVGbcJ9nFTVOZWqM5WPmScIx8gC5qyvBzv",
+  "date_updated": "2026-05-05T17:19:50.617000+00:00",
+  "user_name": "Rhonna Ricafort",
+  "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo"
 }
