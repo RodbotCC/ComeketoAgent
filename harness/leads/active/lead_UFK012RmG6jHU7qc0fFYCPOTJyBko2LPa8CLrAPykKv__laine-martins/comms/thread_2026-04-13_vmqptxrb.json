@@ -1,0 +1,82 @@
+{
+  "lead_id": "lead_UFK012RmG6jHU7qc0fFYCPOTJyBko2LPa8CLrAPykKv",
+  "id": "acti_7VEpzaECHrZm89qdvc89H2vglyTQXiwpfmHVMqpTxRB",
+  "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "participants": [
+    {
+      "email": "contact@comeketocatering.com",
+      "name": "Rhonna Ricafort"
+    }
+  ],
+  "users": [
+    "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo"
+  ],
+  "updated_by": null,
+  "user_name": "Rhonna Ricafort",
+  "created_by": null,
+  "summary": null,
+  "contact_id": null,
+  "activity_at": "2026-04-13T19:15:08.215000+00:00",
+  "date_created": "2026-04-13T19:15:08.215000+00:00",
+  "importance": {
+    "type": "not_important",
+    "reason": "automated-outbound"
+  },
+  "_type": "EmailThread",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "created_by_name": null,
+  "latest_emails": [
+    {
+      "id": "acti_NGcRYZ2xtbkLTnnzdwUaG41tFK4oNoCX6B0zQigalID",
+      "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+      "body_preview": "Hey Laine, Just shooting you this quick email, we got your request for more catering info, and our event planner will connect shortly. ❤️ - Comeketo Catering p.s. check out [this quick video](https://",
+      "date_sent": null,
+      "opens_summary": null,
+      "to": [
+        "Laine Martins <laine_demoura@hotmail.com>"
+      ],
+      "has_attachments": true,
+      "date_created": "2026-04-13T19:15:08.214000+00:00",
+      "date_updated": "2026-04-13T19:15:08.214000+00:00",
+      "bcc": [],
+      "status": "outbox",
+      "cc": [],
+      "subject": "[✅ CATERING] You're in Laine! ",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Rhonna Ricafort <contact@comeketocatering.com>",
+      "envelope": {
+        "date": null,
+        "subject": "[✅ CATERING] You're in Laine! ",
+        "from": [
+          {
+            "email": "contact@comeketocatering.com",
+            "name": "Rhonna Ricafort"
+          }
+        ],
+        "sender": [
+          {
+            "email": "contact@comeketocatering.com",
+            "name": "Rhonna Ricafort"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "laine_demoura@hotmail.com",
+            "name": "Laine Martins"
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": null,
+        "is_autoreply": false
+      }
+    }
+  ],
+  "date_updated": "2026-04-13T19:15:08.250000+00:00",
+  "n_emails": 1,
+  "updated_by_name": null,
+  "latest_normalized_subject": "[✅ CATERING] You're in Laine!"
+}
