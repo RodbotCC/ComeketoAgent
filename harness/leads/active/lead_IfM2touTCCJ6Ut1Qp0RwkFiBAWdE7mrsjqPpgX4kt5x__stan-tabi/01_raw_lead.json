@@ -1,0 +1,179 @@
+{
+  "addresses": [
+    {
+      "address_1": "",
+      "address_2": "",
+      "city": "Methuen Town",
+      "country": "US",
+      "label": "business",
+      "state": "",
+      "zipcode": "01844"
+    }
+  ],
+  "contacts": [
+    {
+      "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "date_created": "2025-08-04T23:49:08.806000+00:00",
+      "date_updated": "2025-08-04T23:49:08.806000+00:00",
+      "display_name": "Stan Tabi",
+      "emails": [
+        {
+          "email": "stanley.tabi@childrens.harvard.edu",
+          "is_unsubscribed": false,
+          "type": "direct"
+        }
+      ],
+      "id": "cont_7wnHOBYiTjbMZXSm4S7VHir39cGWmBXYL632AgfkvBu",
+      "integration_links": [
+        {
+          "name": "LinkedIn Search",
+          "url": "https://www.linkedin.com/search/results/people/?keywords=Stan%20Tabi"
+        }
+      ],
+      "lead_id": "lead_IfM2touTCCJ6Ut1Qp0RwkFiBAWdE7mrsjqPpgX4kt5x",
+      "name": "Stan Tabi",
+      "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+      "phones": [
+        {
+          "country": "US",
+          "phone": "+16173881260",
+          "phone_formatted": "+1 617-388-1260",
+          "type": "direct"
+        }
+      ],
+      "timezone": "America/New_York",
+      "timezone_source": "inferred_from_phone_number",
+      "title": "Plain Old Phone (best for SMS)",
+      "updated_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "urls": []
+    },
+    {
+      "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "date_created": "2025-08-04T23:49:31.296000+00:00",
+      "date_updated": "2025-08-04T23:49:31.296000+00:00",
+      "display_name": "Stan Tabi",
+      "emails": [],
+      "id": "cont_v0urHyP9EB6mWyamtkL2MmFZyn0o7vbUv4gz0UqhiOs",
+      "integration_links": [
+        {
+          "name": "LinkedIn Search",
+          "url": "https://www.linkedin.com/search/results/people/?keywords=Stan%20Tabi"
+        }
+      ],
+      "lead_id": "lead_IfM2touTCCJ6Ut1Qp0RwkFiBAWdE7mrsjqPpgX4kt5x",
+      "name": "Stan Tabi",
+      "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+      "phones": [
+        {
+          "country": "US",
+          "phone": "+16173881260",
+          "phone_formatted": "+1 617-388-1260",
+          "type": "mobile"
+        }
+      ],
+      "timezone": "America/New_York",
+      "timezone_source": "inferred_from_phone_number",
+      "title": "Facebook # (Best For Calls)",
+      "updated_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "urls": []
+    }
+  ],
+  "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+  "created_by_name": "Sales Team Event Consultant Team",
+  "custom": {
+    "00. 🪖 LEAD OWNER": "01. 😎 Andre",
+    "02. ⚔︎ WORKFLOW WEAPONS": [
+      "5x5",
+      "✉️ FB Lead Form 1SMS 1EMAIL",
+      "🚫 Lost - Win back"
+    ],
+    "05. 👥 Franchise": "Comeketo",
+    "Crisp": [
+      "Created"
+    ],
+    "Crisp ID": 0,
+    "Crisp Link": "https://app.crisp.chat/website/6e2ee3ba-8402-4f3a-8240-aace16ee1bac/contacts/profile/4a4df68e-5091-4e40-a5ef-5e43fe1cb5f2",
+    "🏠 Zip Code": "01844",
+    "🥧Workflow-Thanksgiving-2025": "✅ Active"
+  },
+  "custom.cf_JlnAQRNnjtHxBcHcZL57YpdSZq6W9YlOv3zXG64pLNv": 0,
+  "custom.cf_ZqYD0ISnnLHzqVnxz6nuM8wJErglSBO0HGE0C42iuYi": "✅ Active",
+  "custom.cf_f6hxPXViYgPbzJu8x7XB1nQIxyJHP47eOI6nCuGpc01": [
+    "Created"
+  ],
+  "custom.cf_l37qDcsFYbEZQJhRRrImt3cwFPY23IbG4kjLBJRN3GZ": [
+    "5x5",
+    "✉️ FB Lead Form 1SMS 1EMAIL",
+    "🚫 Lost - Win back"
+  ],
+  "custom.cf_pXTVEI1DdERiT91NKuWAndlV6WuS4n6ZG2334fBR4b8": "01844",
+  "custom.cf_smf4xXJPUNlJQ2QiG6lgzOhQEuEMQibqZL5WZaL0GHe": "https://app.crisp.chat/website/6e2ee3ba-8402-4f3a-8240-aace16ee1bac/contacts/profile/4a4df68e-5091-4e40-a5ef-5e43fe1cb5f2",
+  "custom.cf_vfo9P74IUYaftU7nCUQBxaSmGf69YCC1Bdwbz9w20lU": "Comeketo",
+  "custom.cf_xF8FLufgEx9bsijfRAfHhgIrPBQ5ajuohcazC7OtNmT": "01. 😎 Andre",
+  "date_created": "2025-08-04T23:49:08.783000+00:00",
+  "date_updated": "2026-05-05T20:42:37.014000+00:00",
+  "description": "Methuen Town Zip: 01844\nPeople 50\nEvent Desc: Graduation\nEvent Date: August 16\nCampaign Name:\n01. [CATER[ LF EVERGREEN - QUOTE",
+  "display_name": "Stan Tabi",
+  "html_url": "https://app.close.com/lead/lead_IfM2touTCCJ6Ut1Qp0RwkFiBAWdE7mrsjqPpgX4kt5x/",
+  "id": "lead_IfM2touTCCJ6Ut1Qp0RwkFiBAWdE7mrsjqPpgX4kt5x",
+  "integration_links": [
+    {
+      "name": "Google Search",
+      "url": "https://google.com/search?q=Stan%20Tabi"
+    }
+  ],
+  "name": "Stan Tabi",
+  "opportunities": [
+    {
+      "annualized_expected_value": 0,
+      "annualized_value": 157500,
+      "attachments": [],
+      "confidence": 0,
+      "contact_id": "cont_7wnHOBYiTjbMZXSm4S7VHir39cGWmBXYL632AgfkvBu",
+      "contact_name": "Stan Tabi",
+      "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "created_by_name": "Sales Team Event Consultant Team",
+      "custom.cf_3LZk8uGw0lIvPpNzOMvFn4WwiCXbI91X66Ujvt8UJPx": [
+        "NEEDS VENUE NAME"
+      ],
+      "custom.cf_fs7mrfN5x0M20CyoltczyVg8t0Xul5GFvkC4FNUKvY6": "Customer",
+      "custom.cf_ge7qOebiWpyPvuv7xkzNaYpM8PsmOeNvXasXFOtPXRt": [
+        "Facebook, Paid"
+      ],
+      "custom.cf_goMfyKkS7pFUhmo0xvrl1JvQv1KLaQkfoVo0j93dvhe": "Graduation",
+      "custom.cf_nQLULOLLmtUAh9OwcpJibPc5pQKIqpFOjdGSTwC9ePO": "50",
+      "date_created": "2025-08-04T23:49:17.955000+00:00",
+      "date_lost": "2025-08-08T21:15:32.642000+00:00",
+      "date_updated": "2026-05-05T20:42:37.046000+00:00",
+      "date_won": "2025-08-16",
+      "expected_value": 0,
+      "id": "oppo_vcrtTrQsUBNRnsZ8WUYFzb7TPU1JOb7qjS3HsIHaJ8B",
+      "integration_links": [],
+      "lead_id": "lead_IfM2touTCCJ6Ut1Qp0RwkFiBAWdE7mrsjqPpgX4kt5x",
+      "lead_name": "Stan Tabi",
+      "note": "",
+      "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+      "pipeline_id": "pipe_4s7zfmoJhbc6jcU1aPvIDT",
+      "pipeline_name": "Sales",
+      "status_display_name": "Sales: 👤🔴🚫 Lost Catering Customer 🚫🔴👤",
+      "status_id": "stat_Y6zCMOyYlxCiYx3M0aDHznRaGufh517ezRs856gG5lp",
+      "status_label": "👤🔴🚫 Lost Catering Customer 🚫🔴👤",
+      "status_type": "lost",
+      "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+      "updated_by_name": "Rhonna Ricafort",
+      "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "user_name": "Andre Raw",
+      "value": 157500,
+      "value_currency": "USD",
+      "value_formatted": "$1,575",
+      "value_period": "one_time"
+    }
+  ],
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "status_id": "stat_X4X2dIPrVwMZDbSGxo1xCbkokk0mjPwaqpF5PjK80F3",
+  "status_label": "❌ Disqualified",
+  "tasks": [],
+  "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "updated_by_name": "Rhonna Ricafort",
+  "url": "http://www.childrens.harvard.edu"
+}
