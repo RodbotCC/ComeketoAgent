@@ -1,17 +1,41 @@
 {
+  "activity_at": "2026-05-05T18:30:28.607000+00:00",
+  "latest_normalized_subject": "Understanding Our Catering Service Types",
+  "created_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "n_emails": 2,
+  "importance": {
+    "type": "important",
+    "reason": "most-recent-communication"
+  },
+  "_type": "EmailThread",
+  "summary": null,
+  "contact_id": null,
+  "created_by_name": "Andre Raw",
+  "updated_by_name": "Rhonna Ricafort",
+  "date_created": "2026-05-05T18:30:28.607000+00:00",
+  "participants": [
+    {
+      "email": "contact@comeketocatering.com",
+      "name": "Rhonna Ricafort"
+    },
+    {
+      "email": "comeketo@m.comeketocatering.com",
+      "name": "Comeketo Catering Team"
+    }
+  ],
   "latest_emails": [
     {
       "id": "acti_cqb6VAe7z0b6Yu6bn8nJaLsEj5pv4jgeD5juK8jFRhO",
       "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
       "body_preview": "![Comeketo Catering Logo](https://comeketocatering.com/wp-\ncontent/uploads/2025/01/LOGO_WEB.png) ![Catering Types](https://comeketocatering.com/wp-\ncontent/uploads/2025/06/Header_cateringTypes.jpg) # ",
       "date_sent": "2026-05-05T18:30:28.606000+00:00",
-      "opens_summary": null,
+      "opens_summary": "Opened by Little Sage Farmhouse <miosotygonzalez@gmail.com> (2026-05-06)",
       "to": [
         "Little Sage Farmhouse <miosotygonzalez@gmail.com>"
       ],
       "has_attachments": false,
       "date_created": "2026-05-05T18:30:13.114000+00:00",
-      "date_updated": "2026-05-05T18:30:30.682000+00:00",
+      "date_updated": "2026-05-06T03:51:29.852000+00:00",
       "bcc": [],
       "status": "sent",
       "cc": [],
@@ -53,13 +77,13 @@
       "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
       "body_preview": "![Comeketo Catering Logo](https://comeketocatering.com/wp-\ncontent/uploads/2025/01/LOGO_WEB.png) ![Catering Types](https://comeketocatering.com/wp-\ncontent/uploads/2025/06/Header_cateringTypes.jpg) # ",
       "date_sent": "2026-05-05T17:40:07.598000+00:00",
-      "opens_summary": null,
+      "opens_summary": "Opened by miosotygonzalez@gmail.com (2026-05-06)",
       "to": [
         "miosotygonzalez@gmail.com"
       ],
       "has_attachments": false,
       "date_created": "2026-05-05T17:39:52.286000+00:00",
-      "date_updated": "2026-05-05T17:40:07.987000+00:00",
+      "date_updated": "2026-05-06T03:51:29.851000+00:00",
       "bcc": [],
       "status": "sent",
       "cc": [],
@@ -97,39 +121,15 @@
       }
     }
   ],
-  "user_name": "Rhonna Ricafort",
-  "participants": [
-    {
-      "email": "contact@comeketocatering.com",
-      "name": "Rhonna Ricafort"
-    },
-    {
-      "email": "comeketo@m.comeketocatering.com",
-      "name": "Comeketo Catering Team"
-    }
-  ],
-  "date_created": "2026-05-05T18:30:28.607000+00:00",
-  "date_updated": "2026-05-05T18:30:30.735000+00:00",
-  "n_emails": 2,
-  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
-  "summary": null,
   "users": [
-    "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
-    "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo"
+    "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+    "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt"
   ],
-  "contact_id": null,
-  "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
-  "created_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
-  "updated_by_name": "Rhonna Ricafort",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
   "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
-  "latest_normalized_subject": "Understanding Our Catering Service Types",
-  "activity_at": "2026-05-05T18:30:28.607000+00:00",
-  "importance": {
-    "type": "important",
-    "reason": "most-recent-communication"
-  },
-  "_type": "EmailThread",
-  "created_by_name": "Andre Raw",
   "lead_id": "lead_I8nDpRm8a9l0fhi2m4GexFnEleOFlMqwThOCzC0aBI3",
-  "id": "acti_68F6q2b9yHdZipUukIDD3eE6PMCmz4ZfQkkVksVjxyT"
+  "id": "acti_68F6q2b9yHdZipUukIDD3eE6PMCmz4ZfQkkVksVjxyT",
+  "date_updated": "2026-05-06T03:51:29.929000+00:00",
+  "user_name": "Rhonna Ricafort",
+  "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo"
 }
