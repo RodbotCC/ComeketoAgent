@@ -1,0 +1,82 @@
+{
+  "contact_id": null,
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "latest_normalized_subject": "Raise a Glass to Perfect Events! 🍹",
+  "participants": [
+    {
+      "email": "comeketo@m.comeketocatering.com",
+      "name": "Comeketo Catering Team"
+    }
+  ],
+  "importance": {
+    "type": "not_important",
+    "reason": "automated-outbound"
+  },
+  "lead_id": "lead_c05F6UMCQu2zJJ6H4LWHgR0ZM135nwAtcNAIJquxmOt",
+  "updated_by_name": "Andre Raw",
+  "date_created": "2025-09-29T17:50:29.045000+00:00",
+  "created_by": null,
+  "created_by_name": null,
+  "date_updated": "2025-09-29T18:54:16.871000+00:00",
+  "_type": "EmailThread",
+  "latest_emails": [
+    {
+      "id": "acti_HTXShmAi6UCUzNFXQwH6gfVHEXZrtPCPPaLKF3QhDR1",
+      "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "body_preview": "Pro bartenders & craft cocktails for your event. ![Comeketo Catering Logo](https://comeketocatering.com/wp-\ncontent/uploads/2025/01/LOGO_WEB.png) ![Bar Service](https://comeketocatering.com/wp-\nconten",
+      "date_sent": "2025-09-29T17:50:29.044000+00:00",
+      "opens_summary": "Opened by Ali O'Brien <aliobrien96@gmail.com> (2025-09-29)",
+      "to": [
+        "Ali O'Brien <aliobrien96@gmail.com>"
+      ],
+      "has_attachments": false,
+      "date_created": "2025-09-29T17:50:29.044000+00:00",
+      "date_updated": "2025-09-29T18:54:16.800000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "Raise a Glass to Perfect Events! 🍹",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Comeketo Catering Team <comeketo@m.comeketocatering.com>",
+      "envelope": {
+        "date": "Mon, 29 Sep 2025 17:50:29 +0000",
+        "subject": "Raise a Glass to Perfect Events! 🍹",
+        "from": [
+          {
+            "email": "comeketo@m.comeketocatering.com",
+            "name": "Comeketo Catering Team"
+          }
+        ],
+        "sender": [
+          {
+            "email": "comeketo@m.comeketocatering.com",
+            "name": "Comeketo Catering Team"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "aliobrien96@gmail.com",
+            "name": "Ali O'Brien"
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<175916822932.7.10429269194682137881@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ],
+  "summary": null,
+  "user_name": "Andre Raw",
+  "activity_at": "2025-09-29T17:50:29.045000+00:00",
+  "n_emails": 1,
+  "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "id": "acti_FAwTRHpBP0wfIMxtuOutIQvJnzjUcD6RlIhT7F0jtri",
+  "users": [
+    "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt"
+  ],
+  "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt"
+}
