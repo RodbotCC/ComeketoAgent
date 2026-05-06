@@ -1,0 +1,30 @@
+{
+  "contact_id": "cont_bFPmLAY3tMtCgMZdALdXNHUwVg5IoDeq5vZrRvFKnWE",
+  "counts": {
+    "activities": 8,
+    "calls": 0,
+    "emails": 5,
+    "meetings": 0,
+    "notes": 2,
+    "smses": 0,
+    "subscriptions": 0,
+    "tasks": 0,
+    "threads": 4
+  },
+  "last_sweep_at": "2026-05-06T00:55:16.314Z",
+  "lead_id": "lead_j5NSrW6fX4orwFt1OTZxgPydqrkTygrAOquuHBqWwlM",
+  "name": "Sarah Broderick",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "primary_email": "sarahbroderick7@gmail.com",
+  "primary_phone": null,
+  "raw_contract_version": 2,
+  "raw_files": {
+    "comms_dir": "comms/",
+    "continuity": "02_continuity.jsonl",
+    "lead": "01_raw_lead.json"
+  },
+  "status_id": "stat_qGpMKenDu31cIY56uTpvo8evqhcNnK4KDWtz4y9NPz3",
+  "status_label": "🔘 Maybe",
+  "user_id": null,
+  "user_name": null
+}
