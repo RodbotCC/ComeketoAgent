@@ -1,20 +1,18 @@
 {
-  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
-  "latest_normalized_subject": "[EXCLUSIVE] About Our Tastings",
-  "participants": [
-    {
-      "email": "comeketo@m.comeketocatering.com",
-      "name": "Comeketo Catering Team"
-    }
-  ],
-  "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
-  "created_by_name": "Andre Raw",
-  "updated_by_name": "Andre Raw",
+  "summary": null,
   "users": [
     "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt"
   ],
-  "activity_at": "2026-05-05T23:58:17.911000+00:00",
-  "summary": null,
+  "user_name": "Andre Raw",
+  "created_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "importance": {
+    "type": "not_important",
+    "reason": "by-default"
+  },
+  "contact_id": null,
+  "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "latest_normalized_subject": "[EXCLUSIVE] About Our Tastings",
   "latest_emails": [
     {
       "id": "acti_Ib9Dww4q1lIT6TlBVss4ag5FEQQndW5HpNA0wA3DFAL",
@@ -65,18 +63,20 @@
       }
     }
   ],
-  "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
-  "created_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
-  "lead_id": "lead_j5NSrW6fX4orwFt1OTZxgPydqrkTygrAOquuHBqWwlM",
-  "date_created": "2026-05-05T23:58:17.911000+00:00",
-  "user_name": "Andre Raw",
-  "contact_id": null,
-  "n_emails": 1,
-  "importance": {
-    "type": "not_important",
-    "reason": "by-default"
-  },
+  "date_updated": "2026-05-05T23:58:21.515000+00:00",
   "id": "acti_J6xdTh0s0e53WEFHn4HkceIAsHuLbiA01441BZh30o2",
+  "created_by_name": "Andre Raw",
+  "lead_id": "lead_j5NSrW6fX4orwFt1OTZxgPydqrkTygrAOquuHBqWwlM",
   "_type": "EmailThread",
-  "date_updated": "2026-05-05T23:58:21.515000+00:00"
+  "date_created": "2026-05-05T23:58:17.911000+00:00",
+  "updated_by_name": "Andre Raw",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "activity_at": "2026-05-05T23:58:17.911000+00:00",
+  "n_emails": 1,
+  "participants": [
+    {
+      "email": "comeketo@m.comeketocatering.com",
+      "name": "Comeketo Catering Team"
+    }
+  ]
 }
