@@ -1,17 +1,18 @@
 {
   "contact_id": "cont_sRxKJLWkSzheG6vMJX835WJRFTUTpucsFKKC1bPGieI",
   "counts": {
-    "activities": 20,
-    "calls": 3,
-    "emails": 4,
+    "activities": 28,
+    "calls": 4,
+    "emails": 6,
     "meetings": 0,
     "notes": 3,
-    "smses": 8,
+    "smses": 12,
     "subscriptions": 2,
     "tasks": 1,
-    "threads": 3
+    "threads": 5,
+    "whatsapps": 0
   },
-  "last_sweep_at": "2026-05-05T20:14:16.170Z",
+  "last_sweep_at": "2026-05-06T10:02:00.330Z",
   "lead_id": "lead_vPHgGQByXDEeyXmiwKO9FV0DTrN9rM0OYNH6gBy4a5Z",
   "name": "Mon",
   "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
