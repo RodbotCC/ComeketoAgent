@@ -1,0 +1,82 @@
+{
+  "date_updated": "2026-05-05T14:53:24.707000+00:00",
+  "date_created": "2026-05-05T14:53:23.420000+00:00",
+  "lead_id": "lead_vPHgGQByXDEeyXmiwKO9FV0DTrN9rM0OYNH6gBy4a5Z",
+  "created_by_name": "Andre Raw",
+  "activity_at": "2026-05-05T14:53:23.420000+00:00",
+  "user_name": "Andre Raw",
+  "latest_normalized_subject": "Explore What Comeketo Catering Has to Offer! ✨",
+  "users": [
+    "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt"
+  ],
+  "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "importance": {
+    "type": "not_important",
+    "reason": "by-default"
+  },
+  "updated_by_name": "Andre Raw",
+  "n_emails": 1,
+  "_type": "EmailThread",
+  "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "created_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "latest_emails": [
+    {
+      "id": "acti_Zz1QPsUUiaE49otykPQSi98GpQywkSwAXhrUlVH3DHS",
+      "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "body_preview": "Hi Mon, Just to give you a quick idea — we offer a few different styles, including\ntraditional buffet, more formal plated or family-style meals, and also a fun churrasco (buffet option with on-site gr",
+      "date_sent": "2026-05-05T14:53:23.419000+00:00",
+      "opens_summary": null,
+      "to": [
+        "marleny_a25@hotmail.com"
+      ],
+      "has_attachments": true,
+      "date_created": "2026-05-05T14:53:09.811000+00:00",
+      "date_updated": "2026-05-05T14:53:24.647000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "Explore What Comeketo Catering Has to Offer! ✨",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Comeketo Catering Team <comeketo@m.comeketocatering.com>",
+      "envelope": {
+        "date": "Tue, 05 May 2026 14:53:24 +0000",
+        "subject": "Explore What Comeketo Catering Has to Offer! ✨",
+        "from": [
+          {
+            "email": "comeketo@m.comeketocatering.com",
+            "name": "Comeketo Catering Team"
+          }
+        ],
+        "sender": [
+          {
+            "email": "comeketo@m.comeketocatering.com",
+            "name": "Comeketo Catering Team"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "marleny_a25@hotmail.com",
+            "name": ""
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<177799280383.7.18192842560899656472@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ],
+  "contact_id": null,
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "id": "acti_XR5G2gPH3s93q0LrWyepsrggo8pszEwCFCuqXzZKQWv",
+  "summary": null,
+  "participants": [
+    {
+      "email": "comeketo@m.comeketocatering.com",
+      "name": "Comeketo Catering Team"
+    }
+  ]
+}
