@@ -1,0 +1,82 @@
+{
+  "id": "acti_w0W8E5pCdFHxRtEU45mKQ8xhQoFRI21Anqr0Yh9rCIl",
+  "importance": {
+    "type": "important",
+    "reason": "most-recent-communication"
+  },
+  "updated_by_name": "Rhonna Ricafort",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "participants": [
+    {
+      "email": "catering@events.comeketo.com",
+      "name": "Comeketo Catering Events Team"
+    }
+  ],
+  "created_by_name": null,
+  "created_by": null,
+  "date_updated": "2025-11-18T03:53:10.437000+00:00",
+  "_type": "EmailThread",
+  "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "summary": null,
+  "activity_at": "2025-11-18T03:53:06.563000+00:00",
+  "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "users": [
+    "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo"
+  ],
+  "date_created": "2025-11-18T03:53:06.563000+00:00",
+  "latest_normalized_subject": "🦃Thanksgiving Orders Close Soon (Nov 24)",
+  "contact_id": null,
+  "user_name": "Rhonna Ricafort",
+  "lead_id": "lead_GOCpFiFs4Mn4h5CdxWEv4QtrFQaIUe8PH8ABdC2QchE",
+  "latest_emails": [
+    {
+      "id": "acti_Pg6c5dJ0qGkImUqToQzWYGY4uJ17sKeH42xAd209jZN",
+      "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+      "body_preview": "Hi Tarin, Almost at our limit, would you like us to save a spot for you? 😊 Our Thanksgiving Eve catering cut-off is on **November 24**. If you’d like a spot held for you, reply **YES** now and we’ll t",
+      "date_sent": "2025-11-18T03:53:06.562000+00:00",
+      "opens_summary": "Opened by Tarin Gayles <taringayles@gmail.com> (2025-11-18)",
+      "to": [
+        "Tarin Gayles <taringayles@gmail.com>"
+      ],
+      "has_attachments": true,
+      "date_created": "2025-11-18T03:53:06.562000+00:00",
+      "date_updated": "2025-11-18T03:53:10.344000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "🦃Thanksgiving Orders Close Soon (Nov 24)",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Comeketo Catering Events Team <catering@events.comeketo.com>",
+      "envelope": {
+        "date": "Tue, 18 Nov 2025 03:53:07 +0000",
+        "subject": "🦃Thanksgiving Orders Close Soon (Nov 24)",
+        "from": [
+          {
+            "email": "catering@events.comeketo.com",
+            "name": "Comeketo Catering Events Team"
+          }
+        ],
+        "sender": [
+          {
+            "email": "catering@events.comeketo.com",
+            "name": "Comeketo Catering Events Team"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "taringayles@gmail.com",
+            "name": "Tarin Gayles"
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<176343798687.7.14820556376185602542@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ],
+  "n_emails": 1
+}
