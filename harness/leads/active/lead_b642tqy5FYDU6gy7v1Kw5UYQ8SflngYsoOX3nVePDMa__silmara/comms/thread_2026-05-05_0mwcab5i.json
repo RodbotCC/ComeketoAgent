@@ -1,0 +1,82 @@
+{
+  "user_id": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+  "summary": null,
+  "_type": "EmailThread",
+  "updated_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+  "participants": [
+    {
+      "email": "catering@comeketo.com",
+      "name": "Comeketo Catering"
+    }
+  ],
+  "created_by": null,
+  "activity_at": "2026-05-05T22:56:42.456000+00:00",
+  "n_emails": 1,
+  "latest_normalized_subject": "[✅ Tasting] You're in Silmara!",
+  "id": "acti_DGlNEMUkktEP5Vf38xWaxFjhJ057iyThyu90MWCAB5I",
+  "created_by_name": null,
+  "lead_id": "lead_b642tqy5FYDU6gy7v1Kw5UYQ8SflngYsoOX3nVePDMa",
+  "importance": {
+    "type": "not_important",
+    "reason": "automated-outbound"
+  },
+  "date_updated": "2026-05-05T22:56:56.880000+00:00",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "updated_by_name": "Sales Team Event Consultant Team",
+  "contact_id": null,
+  "users": [
+    "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb"
+  ],
+  "date_created": "2026-05-05T22:56:42.456000+00:00",
+  "user_name": "Sales Team Event Consultant Team",
+  "latest_emails": [
+    {
+      "id": "acti_UcgAibWGBRjSX08OHCbHLpWxXvTFrxmg6UNKw8jtBy0",
+      "user_id": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "body_preview": "Hey Silmara, Just shooting you this quick email, we got your request for a free tasting and we will connect shortly to set that up ❤️ - Comeketo Catering ![email_photo.jpeg](cid:2c29-00e4-b267) \\-- Re",
+      "date_sent": "2026-05-05T22:56:42.455000+00:00",
+      "opens_summary": "Opened by Silmara <jil.yk0707@gmail.com> (2 times, latest 2026-05-05)",
+      "to": [
+        "Silmara <jil.yk0707@gmail.com>"
+      ],
+      "has_attachments": true,
+      "date_created": "2026-05-05T22:56:42.455000+00:00",
+      "date_updated": "2026-05-05T22:56:56.797000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "[✅ Tasting] You're in Silmara! ",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Comeketo Catering <catering@comeketo.com>",
+      "envelope": {
+        "date": "Tue, 05 May 2026 22:56:43 +0000",
+        "subject": "[✅ Tasting] You're in Silmara! ",
+        "from": [
+          {
+            "email": "catering@comeketo.com",
+            "name": "Comeketo Catering"
+          }
+        ],
+        "sender": [
+          {
+            "email": "catering@comeketo.com",
+            "name": "Comeketo Catering"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "jil.yk0707@gmail.com",
+            "name": "Silmara"
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<177802180287.7.12625218509095083183@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ]
+}
