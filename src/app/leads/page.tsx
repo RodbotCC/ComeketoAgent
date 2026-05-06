@@ -12,6 +12,7 @@ import {
 import { env } from "@/lib/env";
 import { isPracticeSeedLead } from "@/lib/practice-seed";
 import { isLeadInScope } from "@/lib/lead-folder-sweeper";
+import { listActiveLeadIds } from "@/lib/lead-folder";
 import { LeadsTableClient } from "./LeadsTableClient";
 import type { LeadRowSeed } from "./LeadActionsRow";
 
@@ -59,6 +60,13 @@ export default async function LeadsPage({ searchParams }: { searchParams: Search
   let leads: LeadRow[] = [];
   let fetchError: string | null = null;
   let statusCatalog: CloseLeadStatusEntry[] = [];
+  let totalAndreCount = 0;
+
+  // Pull the set of leads that have harness substrate. The default index
+  // shows only these — the "working set" Andre is actually moving on.
+  // Unprimed leads can still be found via search (q) or status filter so
+  // operators have an escape hatch.
+  const primedIds = new Set<string>(await listActiveLeadIds().catch(() => []));
 
   const andreUserId = env.CLOSE_USER_ID_ANDRE;
 
@@ -87,9 +95,16 @@ export default async function LeadsPage({ searchParams }: { searchParams: Search
         const raw = (await closeListLeadsByAssigneeAndStatus(andreUserId, statusId, 200)) as LeadRow[];
         leads = sortNewestFirst(raw);
       } else {
-        // Default: Andre-owned + non-terminal + newest first.
+        // Default: Andre-owned + non-terminal + has harness substrate. Leads
+        // without a primed folder are hidden from the default view — sweep
+        // them in (cron / manual /api/cron/sweep-leads) to surface them.
         const owned = (await closeListLeadsByAssignee(andreUserId, 200)) as LeadRow[];
-        leads = sortNewestFirst(owned.filter(isLeadInScope));
+        const inScope = owned.filter(isLeadInScope);
+        totalAndreCount = inScope.length;
+        const primedOnly = primedIds.size > 0
+          ? inScope.filter((l) => primedIds.has(l.id))
+          : inScope;
+        leads = sortNewestFirst(primedOnly);
       }
     } catch (err) {
       fetchError = err instanceof Error ? err.message : String(err);
@@ -114,7 +129,18 @@ export default async function LeadsPage({ searchParams }: { searchParams: Search
             <h1 className="leads-title">Lead Box index</h1>
           </div>
           <div className="leads-toolbar-r">
-            <span className="leads-count">{`${leads.length} leads`}</span>
+            <span
+              className="leads-count"
+              title={
+                !q && !statusId && totalAndreCount > leads.length
+                  ? `Showing ${leads.length} primed leads (Andre owns ${totalAndreCount} active total). Unprimed leads are hidden — find them via search or status filter, or run a sweep.`
+                  : undefined
+              }
+            >
+              {!q && !statusId && totalAndreCount > leads.length
+                ? `${leads.length} primed · ${totalAndreCount - leads.length} unswept`
+                : `${leads.length} leads`}
+            </span>
           </div>
         </div>
 
