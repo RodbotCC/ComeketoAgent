@@ -1,0 +1,82 @@
+{
+  "created_by": null,
+  "summary": null,
+  "updated_by_name": "Andre Raw",
+  "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "participants": [
+    {
+      "email": "comeketo@m.comeketocatering.com",
+      "name": "Comeketo Catering Team"
+    }
+  ],
+  "users": [
+    "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt"
+  ],
+  "activity_at": "2025-07-21T08:19:37.699000+00:00",
+  "importance": {
+    "type": "not_important",
+    "reason": "automated-outbound"
+  },
+  "date_created": "2025-07-21T08:19:37.699000+00:00",
+  "date_updated": "2025-07-21T10:02:25.032000+00:00",
+  "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "lead_id": "lead_IFYcKfswvQIUINN2IzV0ZtSRIRb2QtIF3zAhU0GMRnc",
+  "created_by_name": null,
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "latest_emails": [
+    {
+      "id": "acti_djc0z8wU75YQ2EQTYaMvwd7IuKa3JRHoI2sGKUkLeRQ",
+      "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "body_preview": "Experience 30+ menu items at our exclusive catering tasting - completely free\nwhen you book 🍽️\n\n![Comeketo Catering Logo](https://comeketocatering.com/wp-\ncontent/uploads/2025/01/LOGO_WEB.png)\n\n[ ![Ca",
+      "date_sent": "2025-07-21T08:19:37.698000+00:00",
+      "opens_summary": "Opened by Gabriella Marie <g.m.saintonge@gmail.com> (2 times, latest 2025-07-21)",
+      "to": [
+        "Gabriella Marie <g.m.saintonge@gmail.com>"
+      ],
+      "has_attachments": false,
+      "date_created": "2025-07-21T08:19:37.698000+00:00",
+      "date_updated": "2025-07-21T10:02:24.927000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "[EXCLUSIVE] About Our Tastings",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Comeketo Catering Team <comeketo@m.comeketocatering.com>",
+      "envelope": {
+        "date": "Mon, 21 Jul 2025 08:19:38 +0000",
+        "subject": "[EXCLUSIVE] About Our Tastings",
+        "from": [
+          {
+            "email": "comeketo@m.comeketocatering.com",
+            "name": "Comeketo Catering Team"
+          }
+        ],
+        "sender": [
+          {
+            "email": "comeketo@m.comeketocatering.com",
+            "name": "Comeketo Catering Team"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "g.m.saintonge@gmail.com",
+            "name": "Gabriella Marie"
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<175308597796.7.6954113015086248391@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ],
+  "id": "acti_oK7iWkzafviYltXAlJnjheUTGyTNlzVRa6tCacbZnkq",
+  "user_name": "Andre Raw",
+  "_type": "EmailThread",
+  "n_emails": 1,
+  "latest_normalized_subject": "[EXCLUSIVE] About Our Tastings",
+  "contact_id": null
+}
