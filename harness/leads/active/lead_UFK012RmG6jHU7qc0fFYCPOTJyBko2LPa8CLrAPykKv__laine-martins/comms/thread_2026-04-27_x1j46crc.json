@@ -1,0 +1,82 @@
+{
+  "lead_id": "lead_UFK012RmG6jHU7qc0fFYCPOTJyBko2LPa8CLrAPykKv",
+  "id": "acti_dfq8F1rvONqTxn8AIPJgygky9KnR4Aoh9fzx1j46cRC",
+  "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "participants": [
+    {
+      "email": "team@comeketocatering.com",
+      "name": "Andre Raw"
+    }
+  ],
+  "users": [
+    "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt"
+  ],
+  "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "user_name": "Andre Raw",
+  "created_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "summary": null,
+  "contact_id": null,
+  "activity_at": "2026-04-27T20:19:06.338000+00:00",
+  "date_created": "2026-04-27T20:19:06.338000+00:00",
+  "importance": {
+    "type": "not_important",
+    "reason": "automated-outbound"
+  },
+  "_type": "EmailThread",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "created_by_name": "Andre Raw",
+  "latest_emails": [
+    {
+      "id": "acti_LxkemMHxcJ35gjVA3cyqrGNesOliWPFIJAYSXaOH0YD",
+      "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "body_preview": "Hi Laine, I went back through the last part of our conversation and I still do not have a clear read on what would make the next step feel easy enough for you. Are you still trying to figure out wheth",
+      "date_sent": "2026-04-27T20:19:06.337000+00:00",
+      "opens_summary": "Opened by laine_demoura@hotmail.com (2026-04-28)",
+      "to": [
+        "laine_demoura@hotmail.com"
+      ],
+      "has_attachments": false,
+      "date_created": "2026-04-27T20:19:05.363000+00:00",
+      "date_updated": "2026-04-28T00:51:31.599000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "Quick question about your event",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Andre Raw <team@comeketocatering.com>",
+      "envelope": {
+        "date": "Mon, 27 Apr 2026 20:19:06 +0000",
+        "subject": "Quick question about your event",
+        "from": [
+          {
+            "email": "team@comeketocatering.com",
+            "name": "Andre Raw"
+          }
+        ],
+        "sender": [
+          {
+            "email": "team@comeketocatering.com",
+            "name": "Andre Raw"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "laine_demoura@hotmail.com",
+            "name": ""
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<177732114635.7.13188728904970780048@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ],
+  "date_updated": "2026-04-28T00:51:31.654000+00:00",
+  "n_emails": 1,
+  "updated_by_name": "Andre Raw",
+  "latest_normalized_subject": "Quick question about your event"
+}
