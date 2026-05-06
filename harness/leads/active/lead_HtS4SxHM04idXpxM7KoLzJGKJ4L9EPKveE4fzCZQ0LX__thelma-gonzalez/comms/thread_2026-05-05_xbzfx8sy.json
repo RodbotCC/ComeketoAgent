@@ -1,0 +1,135 @@
+{
+  "created_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "user_name": "Rhonna Ricafort",
+  "participants": [
+    {
+      "email": "contact@comeketocatering.com",
+      "name": "Rhonna Ricafort"
+    },
+    {
+      "email": "comeketo@m.comeketocatering.com",
+      "name": "Comeketo Catering Team"
+    }
+  ],
+  "lead_id": "lead_HtS4SxHM04idXpxM7KoLzJGKJ4L9EPKveE4fzCZQ0LX",
+  "importance": {
+    "type": "important",
+    "reason": "most-recent-communication"
+  },
+  "users": [
+    "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+    "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo"
+  ],
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "updated_by_name": "Rhonna Ricafort",
+  "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "latest_normalized_subject": "Understanding Our Catering Service Types",
+  "latest_emails": [
+    {
+      "id": "acti_tOyoLtiY07P07pBAamGDyrHVYddnRJllOT64Gr4jXYX",
+      "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+      "body_preview": "![Comeketo Catering Logo](https://comeketocatering.com/wp-\ncontent/uploads/2025/01/LOGO_WEB.png) ![Catering Types](https://comeketocatering.com/wp-\ncontent/uploads/2025/06/Header_cateringTypes.jpg) # ",
+      "date_sent": "2026-05-05T22:15:23.094000+00:00",
+      "opens_summary": null,
+      "to": [
+        "Thelma González <tyolita@gmail.com>"
+      ],
+      "has_attachments": false,
+      "date_created": "2026-05-05T22:14:47.530000+00:00",
+      "date_updated": "2026-05-05T22:15:24.739000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "Understanding Our Catering Service Types",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Rhonna Ricafort <contact@comeketocatering.com>",
+      "envelope": {
+        "date": "Tue, 05 May 2026 22:15:23 +0000",
+        "subject": "Understanding Our Catering Service Types",
+        "from": [
+          {
+            "email": "contact@comeketocatering.com",
+            "name": "Rhonna Ricafort"
+          }
+        ],
+        "sender": [
+          {
+            "email": "contact@comeketocatering.com",
+            "name": "Rhonna Ricafort"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "tyolita@gmail.com",
+            "name": "Thelma González"
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<177801932322.7.5883941185824862522@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    },
+    {
+      "id": "acti_U1Z1QOiraBaW1p4IP0mp812ikc1WO08lExWKoOwb5qJ",
+      "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "body_preview": "![Comeketo Catering Logo](https://comeketocatering.com/wp-\ncontent/uploads/2025/01/LOGO_WEB.png) ![Catering Types](https://comeketocatering.com/wp-\ncontent/uploads/2025/06/Header_cateringTypes.jpg) # ",
+      "date_sent": "2026-05-05T22:05:23.668000+00:00",
+      "opens_summary": "Opened by tyolita@gmail.com (2026-05-05)",
+      "to": [
+        "tyolita@gmail.com"
+      ],
+      "has_attachments": false,
+      "date_created": "2026-05-05T22:05:09.810000+00:00",
+      "date_updated": "2026-05-05T22:05:26.277000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "Understanding Our Catering Service Types",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Comeketo Catering Team <comeketo@m.comeketocatering.com>",
+      "envelope": {
+        "date": "Tue, 05 May 2026 22:05:24 +0000",
+        "subject": "Understanding Our Catering Service Types",
+        "from": [
+          {
+            "email": "comeketo@m.comeketocatering.com",
+            "name": "Comeketo Catering Team"
+          }
+        ],
+        "sender": [
+          {
+            "email": "comeketo@m.comeketocatering.com",
+            "name": "Comeketo Catering Team"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "tyolita@gmail.com",
+            "name": ""
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<177801872369.7.9714402795008427187@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ],
+  "summary": null,
+  "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "date_created": "2026-05-05T22:15:23.095000+00:00",
+  "_type": "EmailThread",
+  "date_updated": "2026-05-05T22:15:24.784000+00:00",
+  "activity_at": "2026-05-05T22:15:23.095000+00:00",
+  "contact_id": null,
+  "n_emails": 2,
+  "id": "acti_f1Ckeds1Yb33X2q2WlbthATl6zVai5a0klFXbzfX8sy",
+  "created_by_name": "Andre Raw"
+}
