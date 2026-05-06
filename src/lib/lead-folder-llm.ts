@@ -1,14 +1,16 @@
 /**
- * LLM regeneration for `04_profile.md` and `06_discovery.md` (Atom 7).
+ * LLM regeneration for interpreted client-box docs (Atom 7).
  *
- * Reads `00_meta.json` + `01b_comms_verbatim.md` from a lead's folder, runs
- * OpenAI Responses calls, writes back the prose. Skip-when-hash-matches keeps
- * cost under control: most cron ticks for most leads = zero LLM calls.
+ * Reads the raw lead substrate (`01_raw_lead.json`, `02_continuity.jsonl`, and
+ * referenced `comms/*.json`) from a lead's folder, runs OpenAI Responses
+ * calls, writes back interpreted prose. Skip-when-hash-matches keeps cost
+ * under control: most cron ticks for most leads = zero LLM calls.
  *
  * The Discovery + Personal pages (Atom 8) read these files as their source
  * of truth instead of the deprecated `lead_facts` Supabase table.
  */
 
+import { createHash } from "crypto";
 import OpenAI from "openai";
 import { env } from "./env";
 import { getSettings } from "./settings";
@@ -46,6 +48,35 @@ Voice rules:
 
 Output ONLY the Markdown body (the frontmatter is added by the caller).`;
 
+const COMMS_SYSTEM = `${getSalesPlaybook({ tight: true })}
+
+---
+
+You are interpreting a Comeketo Catering lead's communications for Andre.
+You read the raw Close substrate and produce a concise Markdown comms read.
+
+Required sections, in this order:
+## Timeline read
+Oldest-to-newest narrative of what happened. Mention calls, SMS, email, and
+missed windows only when grounded in the raw records.
+
+## Buyer signals
+What the lead has revealed through behavior, timing, replies, questions,
+silence, objections, and channel preference.
+
+## Deal state
+Where the relationship appears to stand right now. Be direct and evidence-led.
+
+## Next interpretation
+What Andre should understand before he writes or calls. Do not draft the
+outreach here; this is interpretation, not execution.
+
+Rules:
+- Never invent facts.
+- Quote or cite activity dates when a claim depends on a specific comm.
+- If the raw comms are thin, say so.
+- Output ONLY the Markdown body (frontmatter is added by the caller).`;
+
 const DISCOVERY_SYSTEM = `${getSalesPlaybook({ tight: true })}
 
 ---
@@ -81,6 +112,67 @@ Format:
 | guest_count | ~275 | "around 275 family" — call transcript 2026-04-23 |
 
 Output ONLY the Markdown body (the frontmatter is added by the caller).`;
+
+const ALERTS_SYSTEM = `${getSalesPlaybook({ tight: true })}
+
+---
+
+You are generating Andre's lead alerts from the raw Close substrate.
+
+Required sections:
+## Immediate alerts
+Bullets for anything Andre should notice before the next touch: inbound
+messages, missed call windows, status mismatch, timing risk, budget risk,
+dietary/logistics risk, or silence pattern.
+
+## Response frame
+How Andre should respond at the strategy level. Do not write a full message
+unless the raw comms clearly require one.
+
+## Do-not-do
+Moves that would damage this lead right now.
+
+Rules:
+- Ground every alert in raw evidence.
+- No invented urgency.
+- If there are no real alerts, say "No acute alerts." and explain why.
+- Output ONLY the Markdown body (frontmatter is added by the caller).`;
+
+const LEDGER_SYSTEM = `${getSalesPlaybook({ tight: true })}
+
+---
+
+You are generating a global client ledger for one Comeketo lead from the raw
+Close substrate. This is not a prose profile. It is the current state of the
+deal as a ledger Andre can inspect.
+
+Required sections:
+## Cadence position
+Current lifecycle state, most recent inbound/outbound, whether the lead needs
+operator review, and whether the seven-day plan appears stale.
+
+## Recent fires
+Compact table of recent outbound touches. Exactly THREE columns:
+\`Date | Channel | What it said\`.
+- Do NOT add an Actor column — Andre is always the actor in this app, redundant.
+- Do NOT include a full \`activity_id\` column — the IDs are visually noisy
+  and Andre doesn't read them. If you need to cite a specific activity for
+  traceability, append the last 8 chars in brackets at the end of the
+  description, e.g. "Sent ballpark for May 15 [a4f9c8b2]".
+
+## Inbound activity
+Compact table of recent inbound touches. Exactly THREE columns:
+\`Date | Channel | What they said\`. Same rules as Recent fires — no
+activity_id column, no actor column.
+
+## State changes
+Anything that changed the lifecycle state: status, reply, missed window,
+plan action, opt-out, likely terminal signal.
+
+Rules:
+- Use tables where requested. Keep them compact — Andre scans, he doesn't read.
+- Factual descriptions only. No sales pep talk.
+- Output ONLY the Markdown body (frontmatter is added by the caller).`;
 
 type RegenResult =
   | { regenerated: true; reason: "first_run" | "hash_changed" }
@@ -139,7 +231,7 @@ type LeadContext = {
   leadId: string;
   name: string;
   contentHash: string;
-  verbatim: string;
+  rawContext: string;
 };
 
 async function readLeadContext(
@@ -148,30 +240,56 @@ async function readLeadContext(
   const folder = await findLeadFolderPath(leadId);
   if (!folder) return { error: "no_folder" };
 
-  const metaRaw = await readLeadFile(leadId, "00_meta.json");
-  if (!metaRaw) return { error: "no_folder" };
-  let meta: Record<string, unknown>;
+  const leadRaw =
+    (await readLeadFile(leadId, "01_raw_lead.json")) ??
+    (await readLeadFile(leadId, "00_lead.json"));
+  if (!leadRaw) return { error: "no_folder" };
+
+  let lead: Record<string, unknown>;
   try {
-    meta = JSON.parse(metaRaw);
+    lead = JSON.parse(leadRaw) as Record<string, unknown>;
   } catch {
     return { error: "no_folder" };
   }
-  const contentHash =
-    typeof meta.comms_content_hash === "string" ? meta.comms_content_hash : "";
+
   const name =
-    typeof meta.name === "string" && meta.name.length > 0
-      ? meta.name
+    typeof lead.display_name === "string" && lead.display_name.length > 0
+      ? lead.display_name
       : leadId;
 
-  const verbatim = await readLeadFile(leadId, "01b_comms_verbatim.md");
-  if (!verbatim || verbatim.trim().length < 60) return { error: "no_comms" };
+  const continuity =
+    (await readLeadFile(leadId, "02_continuity.jsonl")) ??
+    (await readLeadFile(leadId, "00_continuity.jsonl")) ??
+    "";
+  const refs = parseContinuityRefs(continuity);
+  const comms: Array<{ ref: string; content: string }> = [];
+  for (const ref of refs) {
+    const content = await readLeadFile(leadId, ref);
+    if (content) comms.push({ ref, content });
+  }
 
-  return { leadId, name, contentHash, verbatim };
+  const contentHash = hashRawContext(leadRaw, continuity, comms);
+  const rawContext = buildRawModelContext({
+    leadId,
+    name,
+    leadRaw,
+    continuity,
+    comms,
+  });
+
+  if (rawContext.trim().length < 60) return { error: "no_comms" };
+
+  return { leadId, name, contentHash, rawContext };
 }
 
 async function regenerateOne(
   leadId: string,
-  fileName: "04_profile.md" | "06_discovery.md",
+  fileName:
+    | "03_comms_interpreted.md"
+    | "04_profile.md"
+    | "06_discovery.md"
+    | "07_andre_alerts.md"
+    | "08_client_ledger.md",
   system: string,
 ): Promise<RegenResult> {
   const ctx = await readLeadContext(leadId);
@@ -186,8 +304,8 @@ async function regenerateOne(
   const userInput = [
     `Lead: ${ctx.name} (${leadId})`,
     "",
-    "VERBATIM COMMUNICATIONS:",
-    ctx.verbatim.length > 24000 ? ctx.verbatim.slice(0, 24000) + "\n\n_(truncated)_" : ctx.verbatim,
+    "RAW CLOSE SUBSTRATE:",
+    fitForModel(ctx.rawContext),
   ].join("\n");
 
   const r = await callModel(system, userInput);
@@ -216,6 +334,14 @@ async function regenerateOne(
   };
 }
 
+/** Regenerate the AI-read communications doc (`03_comms_interpreted.md`) for one lead.
+ *  Skip-on-hash-match keeps costs under control. */
+export async function regenerateLeadCommsInterpretation(
+  leadId: string,
+): Promise<RegenResult> {
+  return regenerateOne(leadId, "03_comms_interpreted.md", COMMS_SYSTEM);
+}
+
 /** Regenerate the operator-facing profile (`04_profile.md`) for one lead.
  *  Skip-on-hash-match keeps costs under control. */
 export async function regenerateLeadProfile(
@@ -231,22 +357,42 @@ export async function regenerateLeadDiscovery(
   return regenerateOne(leadId, "06_discovery.md", DISCOVERY_SYSTEM);
 }
 
+export async function regenerateLeadAndreAlerts(
+  leadId: string,
+): Promise<RegenResult> {
+  return regenerateOne(leadId, "07_andre_alerts.md", ALERTS_SYSTEM);
+}
+
+export async function regenerateLeadClientLedger(
+  leadId: string,
+): Promise<RegenResult> {
+  return regenerateOne(leadId, "08_client_ledger.md", LEDGER_SYSTEM);
+}
+
 export type LeadRegenSummary = {
   considered: number;
   in_scope: number;
+  comms: { regenerated: number; skipped: number; errored: number };
   profile: { regenerated: number; skipped: number; errored: number };
   discovery: { regenerated: number; skipped: number; errored: number };
+  alerts: { regenerated: number; skipped: number; errored: number };
+  ledger: { regenerated: number; skipped: number; errored: number };
   errors: Array<{
     lead_id: string;
     name?: string;
-    file: "04_profile.md" | "06_discovery.md";
+    file:
+      | "03_comms_interpreted.md"
+      | "04_profile.md"
+      | "06_discovery.md"
+      | "07_andre_alerts.md"
+      | "08_client_ledger.md";
     message: string;
   }>;
   started_at: string;
   finished_at: string;
 };
 
-/** Regenerate profile + discovery for every Andre-owned, in-scope lead.
+/** Regenerate interpreted docs for every Andre-owned, in-scope lead.
  *  Concurrency-1 against OpenAI to be polite — these aren't latency-sensitive
  *  and serial keeps the cost picture predictable. Per-lead errors don't
  *  abort the run. */
@@ -260,14 +406,32 @@ export async function regenerateAllLeadDocs(): Promise<LeadRegenSummary> {
   const summary: LeadRegenSummary = {
     considered: all.length,
     in_scope: inScope.length,
+    comms: { regenerated: 0, skipped: 0, errored: 0 },
     profile: { regenerated: 0, skipped: 0, errored: 0 },
     discovery: { regenerated: 0, skipped: 0, errored: 0 },
+    alerts: { regenerated: 0, skipped: 0, errored: 0 },
+    ledger: { regenerated: 0, skipped: 0, errored: 0 },
     errors: [],
     started_at: startedAt,
     finished_at: "",
   };
 
   for (const lead of inScope) {
+    const commsR = await regenerateLeadCommsInterpretation(lead.id);
+    if (commsR.regenerated) {
+      summary.comms.regenerated++;
+    } else if (commsR.reason === "error") {
+      summary.comms.errored++;
+      summary.errors.push({
+        lead_id: lead.id,
+        name: lead.display_name,
+        file: "03_comms_interpreted.md",
+        message: commsR.error,
+      });
+    } else {
+      summary.comms.skipped++;
+    }
+
     const profileR = await regenerateLeadProfile(lead.id);
     if (profileR.regenerated) {
       summary.profile.regenerated++;
@@ -297,8 +461,119 @@ export async function regenerateAllLeadDocs(): Promise<LeadRegenSummary> {
     } else {
       summary.discovery.skipped++;
     }
+
+    const alertsR = await regenerateLeadAndreAlerts(lead.id);
+    if (alertsR.regenerated) {
+      summary.alerts.regenerated++;
+    } else if (alertsR.reason === "error") {
+      summary.alerts.errored++;
+      summary.errors.push({
+        lead_id: lead.id,
+        name: lead.display_name,
+        file: "07_andre_alerts.md",
+        message: alertsR.error,
+      });
+    } else {
+      summary.alerts.skipped++;
+    }
+
+    const ledgerR = await regenerateLeadClientLedger(lead.id);
+    if (ledgerR.regenerated) {
+      summary.ledger.regenerated++;
+    } else if (ledgerR.reason === "error") {
+      summary.ledger.errored++;
+      summary.errors.push({
+        lead_id: lead.id,
+        name: lead.display_name,
+        file: "08_client_ledger.md",
+        message: ledgerR.error,
+      });
+    } else {
+      summary.ledger.skipped++;
+    }
   }
 
   summary.finished_at = new Date().toISOString();
   return summary;
+}
+
+function parseContinuityRefs(jsonl: string): string[] {
+  const refs: string[] = [];
+  const seen = new Set<string>();
+  for (const line of jsonl.split("\n")) {
+    const t = line.trim();
+    if (!t) continue;
+    try {
+      const row = JSON.parse(t) as { ref?: unknown };
+      if (
+        typeof row.ref === "string" &&
+        row.ref.startsWith("comms/") &&
+        !seen.has(row.ref)
+      ) {
+        seen.add(row.ref);
+        refs.push(row.ref);
+      }
+    } catch {
+      // Bad continuity rows are ignored here; verify-raw-substrate catches
+      // contract failures. Regen should degrade rather than brick the run.
+    }
+  }
+  return refs;
+}
+
+function hashRawContext(
+  leadRaw: string,
+  continuity: string,
+  comms: Array<{ ref: string; content: string }>,
+): string {
+  const hash = createHash("sha256");
+  hash.update("01_raw_lead.json\n");
+  hash.update(leadRaw);
+  hash.update("\n02_continuity.jsonl\n");
+  hash.update(continuity);
+  for (const c of comms.slice().sort((a, b) => a.ref.localeCompare(b.ref))) {
+    hash.update(`\n${c.ref}\n`);
+    hash.update(c.content);
+  }
+  return `sha256:${hash.digest("hex")}`;
+}
+
+function buildRawModelContext(opts: {
+  leadId: string;
+  name: string;
+  leadRaw: string;
+  continuity: string;
+  comms: Array<{ ref: string; content: string }>;
+}): string {
+  const parts = [
+    `# Raw lead substrate for ${opts.name} (${opts.leadId})`,
+    "",
+    "## 01_raw_lead.json",
+    opts.leadRaw.trim(),
+    "",
+    "## 02_continuity.jsonl",
+    opts.continuity.trim() || "(no activity rows)",
+    "",
+    "## comms/*.json",
+  ];
+
+  if (opts.comms.length === 0) {
+    parts.push("(no comm files referenced)");
+  } else {
+    for (const c of opts.comms) {
+      parts.push("", `### ${c.ref}`, c.content.trim());
+    }
+  }
+
+  return parts.join("\n");
+}
+
+function fitForModel(input: string): string {
+  const maxChars = 24000;
+  if (input.length <= maxChars) return input;
+  return [
+    input.slice(0, maxChars),
+    "",
+    "_Model input truncated for this interpretation pass; raw source files remain complete._",
+  ].join("\n");
 }

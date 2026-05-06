@@ -1,24 +1,29 @@
 import Link from "next/link";
 import { AppHeader } from "@/components/AppHeader";
-import { TabNav } from "@/components/TabNav";
 import {
   closeListLeads,
-  closeListLeadsByStatusId,
+  closeListLeadsByAssignee,
+  closeListLeadsByAssigneeAndStatus,
   closeListLeadStatuses,
+  isOwnedByAndre,
   type CloseLead,
   type CloseLeadStatusEntry,
 } from "@/lib/close";
 import { env } from "@/lib/env";
 import { isPracticeSeedLead } from "@/lib/practice-seed";
+import { isLeadInScope } from "@/lib/lead-folder-sweeper";
+import { LeadsTableClient } from "./LeadsTableClient";
+import type { LeadRowSeed } from "./LeadActionsRow";
 
 export const dynamic = "force-dynamic";
 
 /**
- * /leads — list of leads in the Close org. Click a row → /lead/{id} (Box).
- * Per Guardrails §A1, this is direct Close REST. No MCP path.
+ * /leads — Andre's working universe. Single-tenant by design: only Andre-owned
+ * leads ever surface here, regardless of search or status filter. There is no
+ * org-wide widen, no Jake/other operator path, no escape hatch.
  *
- * Query: ?q=term (GET /lead/?query=) · ?status_id=stat_* (Advanced Filtering).
- * The product treats this as Andre's working universe; there is no owner switcher here.
+ * Query: ?q=term · ?status_id=stat_*. Both filters are intersected with the
+ * Andre-ownership gate before render.
  */
 
 type SearchParams = {
@@ -36,13 +41,12 @@ function leadsListHref(extra?: { q?: string; status_id?: string }): string {
   return qs ? `/leads?${qs}` : "/leads";
 }
 
-function ownerBadge(lead: CloseLead & { user_id?: string; user_name?: string }) {
-  const isAndre = env.CLOSE_USER_ID_ANDRE && lead.user_id === env.CLOSE_USER_ID_ANDRE;
-  const isJake = env.CLOSE_USER_ID_JAKE && lead.user_id === env.CLOSE_USER_ID_JAKE;
-  if (isAndre) return { label: "Andre", tone: "andre" as const };
-  if (isJake) return { label: "Jake", tone: "jake" as const };
-  if (lead.user_name) return { label: lead.user_name, tone: "other" as const };
-  return { label: "—", tone: "other" as const };
+function sortNewestFirst<T extends { date_created?: string }>(rows: T[]): T[] {
+  return [...rows].sort((a, b) => {
+    const ad = a.date_created ? Date.parse(a.date_created) : 0;
+    const bd = b.date_created ? Date.parse(b.date_created) : 0;
+    return bd - ad;
+  });
 }
 
 export default async function LeadsPage({ searchParams }: { searchParams: SearchParams }) {
@@ -53,57 +57,64 @@ export default async function LeadsPage({ searchParams }: { searchParams: Search
 
   type LeadRow = CloseLead & { user_id?: string; user_name?: string };
   let leads: LeadRow[] = [];
-  let totalAll = 0;
   let fetchError: string | null = null;
   let statusCatalog: CloseLeadStatusEntry[] = [];
 
-  try {
-    const [summary, st] = await Promise.all([
-      closeListLeads({ limit: 200 }),
-      closeListLeadStatuses().catch(() => [] as CloseLeadStatusEntry[]),
-    ]);
-    statusCatalog = st;
-    const summaryRows = summary as LeadRow[];
-    totalAll = summaryRows.length;
+  const andreUserId = env.CLOSE_USER_ID_ANDRE;
 
-    if (q) {
-      leads = (await closeListLeads({ limit: 200, query: q })) as LeadRow[];
-      if (statusId) {
-        leads = leads.filter((l) => l.status_id === statusId);
+  if (!andreUserId) {
+    fetchError =
+      "CLOSE_USER_ID_ANDRE is not configured. /leads is single-tenant on Andre — set the env var before this page can render.";
+  } else {
+    try {
+      statusCatalog = await closeListLeadStatuses().catch(() => [] as CloseLeadStatusEntry[]);
+
+      // Always Andre. Always. No org-wide path. Filters layer on top.
+      if (q) {
+        // Search: widen-then-filter (Close `query` cant be intersected with
+        // owner server-side). Belt-and-suspenders: also re-check isOwnedByAndre.
+        const raw = (await closeListLeads({ limit: 200, query: q })) as LeadRow[];
+        const ownedFiltered = raw.filter((l) => isOwnedByAndre(l));
+        const statusFiltered = statusId
+          ? ownedFiltered.filter((l) => l.status_id === statusId)
+          : ownedFiltered;
+        // For search, also drop terminal statuses unless explicitly status-filtered.
+        const finalFiltered = statusId ? statusFiltered : statusFiltered.filter(isLeadInScope);
+        leads = sortNewestFirst(finalFiltered);
+      } else if (statusId) {
+        // Operator chose a status → trust it (so they can intentionally view
+        // Won/Lost/Disqualified inside Andre's universe).
+        const raw = (await closeListLeadsByAssigneeAndStatus(andreUserId, statusId, 200)) as LeadRow[];
+        leads = sortNewestFirst(raw);
+      } else {
+        // Default: Andre-owned + non-terminal + newest first.
+        const owned = (await closeListLeadsByAssignee(andreUserId, 200)) as LeadRow[];
+        leads = sortNewestFirst(owned.filter(isLeadInScope));
       }
-    } else if (statusId) {
-      leads = (await closeListLeadsByStatusId(statusId, 200)) as LeadRow[];
-    } else {
-      leads = summaryRows;
+    } catch (err) {
+      fetchError = err instanceof Error ? err.message : String(err);
     }
-  } catch (err) {
-    fetchError = err instanceof Error ? err.message : String(err);
   }
 
-  const hrefCtx = { q: q || undefined, status_id: statusId || undefined };
   const statusChipLabel =
     statusId && statusCatalog.find((s) => s.id === statusId)?.label;
 
   const emptyMessage = (() => {
-    if (totalAll === 0) return "No leads in this org.";
-    if (q || statusId) return "No leads match the current search and filters.";
-    return "No leads to show.";
+    if (q || statusId) return "No Andre leads match the current search and filters.";
+    return "No active Andre-owned leads. Check the owner tag in Close.";
   })();
 
   return (
     <div className="cme-shell">
       <AppHeader />
-      <TabNav active="leads" />
-
       <main className="leads-main">
         <div className="leads-toolbar">
           <div>
-            <span className="cme-eyebrow">leads</span>
+            <span className="cme-eyebrow">andre · active</span>
             <h1 className="leads-title">Lead Box index</h1>
           </div>
           <div className="leads-toolbar-r">
-            <span className="leads-count">{`${totalAll} total`}</span>
-            <span className="leads-count">{`${leads.length} shown`}</span>
+            <span className="leads-count">{`${leads.length} leads`}</span>
           </div>
         </div>
 
@@ -113,9 +124,9 @@ export default async function LeadsPage({ searchParams }: { searchParams: Search
               type="search"
               name="q"
               defaultValue={qRaw}
-              placeholder="Search leads…"
+              placeholder="Search Andre's leads…"
               className="leads-search-input"
-              aria-label="Search leads"
+              aria-label="Search Andre's leads"
             />
             <select
               name="status_id"
@@ -176,36 +187,17 @@ export default async function LeadsPage({ searchParams }: { searchParams: Search
 
         {!fetchError && leads.length > 0 && (
           <div className="cmk-stack-panel cmk-stack-panel--sage cmk-stack-panel--tight-top cmk-leads-results-panel">
-            <div className="leads-table widget">
-              <div className="leads-row leads-row-head">
-                <div className="leads-col-name">Lead</div>
-                <div className="leads-col-status">Status</div>
-                <div className="leads-col-owner">Owner</div>
-                <div className="leads-col-meta">Updated</div>
-              </div>
-              {leads.map((l) => {
-                const o = ownerBadge(l);
-                const updated = l.date_updated
-                  ? new Date(l.date_updated).toLocaleDateString("en-US", { month: "short", day: "numeric" })
-                  : "—";
-                const practice = isPracticeSeedLead(l.description);
-                return (
-                  <Link key={l.id} href={`/lead/${l.id}`} className="leads-row leads-row-link">
-                    <div className="leads-col-name">
-                      <span className="leads-name">{l.display_name || l.name || "(unnamed)"}</span>
-                      {practice && <span className="leads-practice-badge">practice</span>}
-                    </div>
-                    <div className="leads-col-status">
-                      <span className="leads-status">{l.status_label || "—"}</span>
-                    </div>
-                    <div className="leads-col-owner">
-                      <span className={`leads-owner leads-owner-${o.tone}`}>{o.label}</span>
-                    </div>
-                    <div className="leads-col-meta">{updated}</div>
-                  </Link>
-                );
-              })}
-            </div>
+            <LeadsTableClient
+              seeds={leads.map<LeadRowSeed>((l) => ({
+                lead_id: l.id,
+                display_name: l.display_name || l.name || "(unnamed)",
+                status_label: l.status_label ?? null,
+                status_id: l.status_id ?? null,
+                date_created: l.date_created ?? null,
+                date_updated: l.date_updated ?? null,
+                is_practice: isPracticeSeedLead(l.description),
+              }))}
+            />
           </div>
         )}
       </main>
@@ -222,7 +214,7 @@ export default async function LeadsPage({ searchParams }: { searchParams: Search
           borderTop: "0.5px solid rgba(0,0,0,0.05)",
         }}
       >
-        <span>boxes · index</span>
+        <span>andre · active universe</span>
         <span>direct Close REST</span>
       </footer>
     </div>

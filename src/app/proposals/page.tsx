@@ -1,5 +1,4 @@
 import { AppHeader } from "@/components/AppHeader";
-import { TabNav } from "@/components/TabNav";
 import { displayName, resolveLeadNames } from "@/lib/lead-names";
 import { listPlansForProposalReview } from "@/lib/plans-db";
 import { ProposalReviewBoard, type ProposalPlanItem } from "./ProposalReviewBoard";
@@ -91,7 +90,6 @@ export default async function ProposalsPage() {
   return (
     <div className="cme-shell">
       <AppHeader />
-      <TabNav />
       <main className="proposal-page scroll-hide">
         {err ? (
           <div className="lead-error">

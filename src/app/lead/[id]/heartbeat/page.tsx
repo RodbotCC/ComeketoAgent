@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { HeartbeatPanel } from "../HeartbeatPanel";
-import { LeadSubNav } from "../LeadSubNav";
 import { LeadToolbar } from "../LeadToolbar";
 import { loadLeadBoxPageData, heartbeatLatestFromRow } from "../load-lead-box";
 import { BoxAnalyticsStrip, BoxTimeline, RecentExecutionStrip } from "../BoxTimeline";
@@ -18,7 +17,6 @@ export default async function LeadHeartbeatTabPage({ params }: Props) {
   if ("error" in loaded) {
     return (
       <main className="lead-main">
-        <LeadSubNav leadId={params.id} />
         <div className="cme-eyebrow">lead</div>
         <h1 className="lead-title">Box failed to load</h1>
         <pre className="lead-error">{loaded.error}</pre>
@@ -36,7 +34,6 @@ export default async function LeadHeartbeatTabPage({ params }: Props) {
 
   return (
     <main className="lead-main lead-main--tab scroll-hide">
-      <LeadSubNav leadId={params.id} />
       <LeadToolbar data={data} />
       <BoxAnalyticsStrip
         planFresh={planFresh}

@@ -44,12 +44,12 @@ const MODES: Array<{ key: Mode; title: string; description: string }> = [
   {
     key: "lead-sweep",
     title: "Run lead sweep",
-    description: "Hydrates every Andre-owned, in-progress lead from Close (incl. per-call transcripts) and writes per-lead Markdown folders to the leads-data branch. Idempotent — re-runs with no Close-side changes produce zero commits. Long-running: a full 50-lead sweep takes ~60-90s. Result pane shows {considered, in_scope, swept[], errors[]}. After it completes, browse github.com/RodbotCC/ComeketoAgent/tree/leads-data/harness/leads/active to see the folders materialize.",
+    description: "Hydrates the active Andre lead universe from Close (incl. per-call transcripts) and writes the raw per-lead substrate: 00_meta.json, 01_raw_lead.json, 02_continuity.jsonl, and comms/*.json. First run seeds the newest 25 by date_created, then the active set grows as new Andre leads arrive. Terminal leads archive out. Idempotent — unchanged raw files produce no useful churn.",
   },
   {
     key: "lead-regen",
     title: "Regenerate lead docs (profile + discovery)",
-    description: "For every in-scope lead, regenerates 04_profile.md (operator-facing prose) and 06_discovery.md (slot table + current quest + NEPQ ask) via OpenAI from the lead's 01b_comms_verbatim.md. Skip-on-hash-match: if comms_content_hash hasn't changed since last regen, no LLM call fires. Run after a sweep so the verbatim file is fresh. Cost: at most 2 OpenAI calls per lead with new comms; zero for unchanged leads.",
+    description: "For every in-scope lead, regenerates 03_comms_interpreted.md, 04_profile.md, 06_discovery.md, 07_andre_alerts.md, and 08_client_ledger.md via OpenAI from the raw substrate: 01_raw_lead.json, 02_continuity.jsonl, and referenced comms/*.json. Skip-on-hash-match uses the raw file contents, so unchanged boxes cost zero OpenAI calls.",
   },
 ];
 

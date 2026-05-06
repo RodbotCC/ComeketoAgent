@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { buildPersonalScoreboard } from "@/lib/personal-scoreboard";
-import { TabNav } from "@/components/TabNav";
 import { AppHeader } from "@/components/AppHeader";
 
 export const dynamic = "force-dynamic";
@@ -38,7 +37,6 @@ export default async function PersonalPage({ searchParams = {} }: Props) {
     return (
       <>
         <AppHeader />
-        <TabNav />
         <main className="cmk-personal cmk-personal--full">
           <div className="cme-eyebrow">personal</div>
           <h1 className="lead-title">Scoreboard unavailable</h1>
@@ -57,7 +55,6 @@ export default async function PersonalPage({ searchParams = {} }: Props) {
   return (
     <>
       <AppHeader />
-      <TabNav />
       <main className="cmk-personal cmk-personal--full">
         <header className="cmk-personal-head">
           <div className="cme-eyebrow">player profile</div>

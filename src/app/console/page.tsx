@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { AppHeader } from "@/components/AppHeader";
-import { TabNav } from "@/components/TabNav";
+import { RefreshAllLeadsButton } from "./RefreshAllLeadsButton";
 import { getSettings } from "@/lib/settings";
 import { countPlansNeedingReview, countPlansWithStatus } from "@/lib/plans-db";
 import {
@@ -139,8 +139,6 @@ export default async function ConsolePage({
   return (
     <div className="cme-shell">
       <AppHeader />
-      <TabNav active="console" />
-
       <main className="hb-page-main scroll-hide">
         <div className="hb-page-toolbar">
           <div>
@@ -155,6 +153,7 @@ export default async function ConsolePage({
             </p>
           </div>
           <div className="hb-page-toolbar-r">
+            <RefreshAllLeadsButton />
             <span className={`hb-mode hb-mode-${modeInfo.tone}`}>{modeInfo.label}</span>
             <span className="hb-page-window cmk-console-model">
               {settings.model.length > 28 ? `${settings.model.slice(0, 26)}…` : settings.model}

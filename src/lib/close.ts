@@ -141,7 +141,7 @@ export async function closeListWorkflows(opts: { limit?: number } = {}): Promise
   return r.data;
 }
 
-const LEAD_LIST_FIELDS = [
+const LEAD_LIST_FIELDS_BASE = [
   "id",
   "display_name",
   "name",
@@ -155,6 +155,15 @@ const LEAD_LIST_FIELDS = [
   "user_name",
   "description",
 ] as const;
+
+/**
+ * Lead list fields, dynamically extended with the owner custom field so
+ * ownership tagging comes back on every list call. Comeketo's org tracks
+ * owner in `custom.{CLOSE_OWNER_FIELD_ID}`, not the standard `user_id`.
+ */
+const LEAD_LIST_FIELDS: readonly string[] = env.CLOSE_OWNER_FIELD_ID
+  ? [...LEAD_LIST_FIELDS_BASE, `custom.${env.CLOSE_OWNER_FIELD_ID}`]
+  : LEAD_LIST_FIELDS_BASE;
 
 /** Cap how many leads we scan via `GET /lead/?_skip=` for assignee tabs (org-wide safety). */
 const LEAD_SCAN_MAX_SKIP = 50_000;
@@ -221,7 +230,18 @@ export async function closeListLeadsByAssignee(
   assigneeUserId: string,
   limit = 200
 ): Promise<CloseLead[]> {
-  return scanLeadsMatching((row) => row.user_id === assigneeUserId, limit);
+  // When the caller is asking for Andre AND the org uses a custom owner tag,
+  // resolve ownership via the tag instead of the absent `user_id` field.
+  const useTag =
+    !!env.CLOSE_OWNER_TAG_ANDRE &&
+    !!env.CLOSE_USER_ID_ANDRE &&
+    assigneeUserId === env.CLOSE_USER_ID_ANDRE;
+  return scanLeadsMatching(
+    useTag
+      ? (row) => isOwnedByAndre(row)
+      : (row) => row.user_id === assigneeUserId,
+    limit
+  );
 }
 
 /**
@@ -271,8 +291,14 @@ export async function closeListLeadsByAssigneeAndStatus(
   statusId: string,
   limit = 200
 ): Promise<CloseLead[]> {
+  const useTag =
+    !!env.CLOSE_OWNER_TAG_ANDRE &&
+    !!env.CLOSE_USER_ID_ANDRE &&
+    assigneeUserId === env.CLOSE_USER_ID_ANDRE;
   return scanLeadsMatching(
-    (row) => row.user_id === assigneeUserId && row.status_id === statusId,
+    useTag
+      ? (row) => isOwnedByAndre(row) && row.status_id === statusId
+      : (row) => row.user_id === assigneeUserId && row.status_id === statusId,
     limit
   );
 }
@@ -813,17 +839,56 @@ export type SkipCode =
   | "WORKFLOW_MISMATCH";
 
 /**
+ * Read the value of the owner-tag custom field off a Close lead.
+ * The /lead/ endpoint returns custom fields as flat keys: `custom.cf_xxx`.
+ * Returns "" when the field id env var is unset, the lead lacks the field,
+ * or the value isn't a string.
+ */
+function getOwnerTag(lead: Record<string, unknown>): string {
+  const fieldId = env.CLOSE_OWNER_FIELD_ID;
+  if (!fieldId) return "";
+  const v = lead[`custom.${fieldId}`];
+  return typeof v === "string" ? v : "";
+}
+
+/**
+ * Comeketo's Close org doesn't populate `lead.user_id` for ownership.
+ * Ownership is a custom-field string like "01. 😎 Andre". This helper
+ * abstracts the org-specific ownership read so callers don't care which
+ * mechanism Close is using.
+ *
+ * Returns true when the lead is owned by Andre per the configured tag.
+ * Falls back to standard `user_id === CLOSE_USER_ID_ANDRE` if no custom
+ * tag env is set, so the helper still works in any org that does populate
+ * the standard field.
+ */
+export function isOwnedByAndre(
+  lead: CloseLead & { user_id?: string }
+): boolean {
+  const tag = env.CLOSE_OWNER_TAG_ANDRE;
+  if (tag) {
+    return getOwnerTag(lead as unknown as Record<string, unknown>) === tag;
+  }
+  const andreId = env.CLOSE_USER_ID_ANDRE;
+  return !!(andreId && lead.user_id === andreId);
+}
+
+/**
  * Hard gate per Guardrails §C1+C2. The app only acts on Andre-owned leads
- * that are not Won/Lost. Pass `andreUserId` from env (CLOSE_USER_ID_ANDRE).
- * Returns null when safe, otherwise a SkipCode that must be surfaced.
+ * that are not Won/Lost. Pass `andreUserId` from env (CLOSE_USER_ID_ANDRE)
+ * — kept in the signature for backwards compatibility, but ownership is
+ * now resolved via `isOwnedByAndre` (which prefers the org's custom-field
+ * tag when configured). Returns null when safe, otherwise a SkipCode that
+ * must be surfaced.
  */
 export function checkOwnershipAndStatus(
   lead: CloseLead & { user_id?: string; status_label?: string },
   andreUserId: string
 ): SkipCode | null {
-  // C1: Ownership.
-  if (!andreUserId) return "OWNERSHIP"; // env not configured = treat as gate fail
-  if (lead.user_id && lead.user_id !== andreUserId) return "OWNERSHIP";
+  // C1: Ownership. When neither the custom tag nor the user id is configured,
+  // we have no way to know — fail safe.
+  if (!andreUserId && !env.CLOSE_OWNER_TAG_ANDRE) return "OWNERSHIP";
+  if (!isOwnedByAndre(lead)) return "OWNERSHIP";
   // C2: Status no-touch for outbound. Match Close labels permissively.
   const s = (lead.status_label || "").toLowerCase();
   if (s.includes("won")) return "STATUS_WON";

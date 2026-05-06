@@ -7,7 +7,7 @@
     },
     {
       "path": "/api/cron/sweep-leads",
-      "schedule": "0 */2 * * *"
+      "schedule": "0 * * * *"
     }
   ]
 }

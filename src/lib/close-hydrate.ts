@@ -19,6 +19,7 @@ export type LeadHydration = {
   calls: CloseActivity[];
   emails: CloseActivity[];
   smses: CloseActivity[];
+  whatsapps: CloseActivity[];
   meetings: CloseActivity[];
   notes: CloseActivity[];
   tasks: CloseActivity[];
@@ -46,6 +47,7 @@ export async function hydrateLead(leadId: string): Promise<LeadHydration> {
     calls: enrichedCalls,
     emails: buckets.emails,
     smses: buckets.smses,
+    whatsapps: buckets.whatsapps,
     meetings: buckets.meetings,
     notes: buckets.notes,
     tasks: buckets.tasks,
@@ -61,6 +63,7 @@ type Buckets = {
   calls: CloseActivity[];
   emails: CloseActivity[];
   smses: CloseActivity[];
+  whatsapps: CloseActivity[];
   meetings: CloseActivity[];
   notes: CloseActivity[];
   tasks: CloseActivity[];
@@ -72,6 +75,7 @@ export function bucketActivities(activities: CloseActivity[]): Buckets {
     calls: [],
     emails: [],
     smses: [],
+    whatsapps: [],
     meetings: [],
     notes: [],
     tasks: [],
@@ -87,6 +91,13 @@ export function bucketActivities(activities: CloseActivity[]): Buckets {
         break;
       case "SMS":
         out.smses.push(a);
+        break;
+      // Close has used both spellings historically; match defensively.
+      case "WhatsappMessage":
+      case "WhatsAppMessage":
+      case "Whatsapp":
+      case "WhatsApp":
+        out.whatsapps.push(a);
         break;
       case "Meeting":
         out.meetings.push(a);

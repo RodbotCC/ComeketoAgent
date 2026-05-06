@@ -1,9 +1,5 @@
 import { describe, it, expect } from "vitest";
-import {
-  renderLeadFolder,
-  contentHash,
-  activityFilename,
-} from "./lead-folder-renderer";
+import { renderLeadFolder, activityFilename } from "./lead-folder-renderer";
 import type { LeadHydration } from "./close-hydrate";
 import type { CloseActivity, CloseLead } from "./close";
 
@@ -12,7 +8,7 @@ function lead(overrides: Partial<CloseLead> = {}): CloseLead {
     id: "lead_uePfZilFAKE",
     display_name: "Eliana Lopes",
     status_id: "stat_test",
-    status_label: "🔴 Lost",
+    status_label: "🔘 Maybe",
     user_id: "user_andre",
     user_name: "Andre Raw",
     organization_id: "orga_test",
@@ -46,6 +42,7 @@ function emptyHydration(over: Partial<LeadHydration> = {}): LeadHydration {
     calls: [],
     emails: [],
     smses: [],
+    whatsapps: [],
     meetings: [],
     notes: [],
     tasks: [],
@@ -58,234 +55,100 @@ function emptyHydration(over: Partial<LeadHydration> = {}): LeadHydration {
   };
 }
 
-describe("renderLeadFolder — file map shape", () => {
-  it("always emits the four canonical files", () => {
+describe("renderLeadFolder — raw substrate contract (2026-05-05)", () => {
+  it("emits the canonical raw box files on an empty hydration", () => {
     const out = renderLeadFolder(emptyHydration());
-    expect([...out.keys()].sort()).toEqual([
-      "00_meta.json",
-      "01_comms_digest.md",
-      "01b_comms_verbatim.md",
-      "client_ledger.md",
-    ]);
+    expect(out.has("00_meta.json")).toBe(true);
+    expect(out.has("01_raw_lead.json")).toBe(true);
+    expect(out.has("02_continuity.jsonl")).toBe(true);
   });
 
-  it("never emits 04_profile.md or 06_discovery.md (Atom 7's job)", () => {
+  it("never emits the legacy summary files (digest / verbatim / ledger)", () => {
+    const out = renderLeadFolder(emptyHydration());
+    expect(out.has("01_comms_digest.md")).toBe(false);
+    expect(out.has("01b_comms_verbatim.md")).toBe(false);
+    expect(out.has("client_ledger.md")).toBe(false);
+  });
+
+  it("never emits LLM-derived files (those are phase-2)", () => {
     const out = renderLeadFolder(emptyHydration());
     expect(out.has("04_profile.md")).toBe(false);
     expect(out.has("06_discovery.md")).toBe(false);
-    expect(out.has("10_andre_feedback.md")).toBe(false);
+    expect(out.has("07_andre_alerts.md")).toBe(false);
+    expect(out.has("08_client_ledger.md")).toBe(false);
   });
 
-  it("emits one file per activity in comms/", () => {
-    const out = renderLeadFolder(
-      emptyHydration({
-        emails: [activity({ id: "acti_email1", subject: "Hi" })],
-        smses: [activity({ id: "acti_sms1", _type: "SMS", text: "yo" })],
-        calls: [
-          activity({
-            id: "acti_call1",
-            _type: "Call",
-            duration: 120,
-          }),
-        ],
-        activity_total: 3,
-      }),
-    );
-    const commsFiles = [...out.keys()]
-      .filter((p) => p.startsWith("comms/"))
-      .sort();
-    expect(commsFiles.length).toBe(3);
-    expect(commsFiles[0]).toMatch(/^comms\/call_2026-04-23_/);
-    expect(commsFiles[1]).toMatch(/^comms\/email_2026-04-23_/);
-    expect(commsFiles[2]).toMatch(/^comms\/sms_2026-04-23_/);
-  });
-});
-
-describe("activityFilename", () => {
-  it("matches the Eliana convention: last 8 chars of id, lowercase", () => {
-    const a = activity({
-      id: "acti_GOY8LzV84GHpZPylbkjUcMohj3LjS0581XgaSnaTj4B",
+  it("writes one comms/*.json per activity, mirrored in continuity refs", () => {
+    const a1 = activity({ id: "acti_AAA", _type: "Email" });
+    const a2 = activity({
+      id: "acti_BBB",
       _type: "Call",
-      date_created: "2026-04-23T15:37:47Z",
+      date_created: "2026-04-24T10:00:00Z",
     });
-    expect(activityFilename(a)).toBe("comms/call_2026-04-23_asnatj4b.json");
+    const out = renderLeadFolder(emptyHydration({ emails: [a1], calls: [a2] }));
+    const ref1 = activityFilename(a1)!;
+    const ref2 = activityFilename(a2)!;
+    expect(out.has(ref1)).toBe(true);
+    expect(out.has(ref2)).toBe(true);
+
+    const continuity = out.get("02_continuity.jsonl")!;
+    const lines = continuity.trim().split("\n");
+    expect(lines).toHaveLength(2);
+    const refs = lines.map((l) => (JSON.parse(l) as { ref: string }).ref);
+    expect(refs).toContain(ref1);
+    expect(refs).toContain(ref2);
   });
 
-  it("includes the .json suffix", () => {
-    const a = activity({ _type: "Email", id: "acti_test12345678" });
-    expect(activityFilename(a)?.endsWith(".json")).toBe(true);
-  });
-
-  it("returns null for unrecognized activity types", () => {
-    const a = activity({ _type: "LeadStatusChange" });
-    expect(activityFilename(a)).toBeNull();
+  it("02_continuity.jsonl is sorted by date ascending (oldest first)", () => {
+    const older = activity({
+      id: "acti_OLD",
+      date_created: "2026-04-20T10:00:00Z",
+    });
+    const newer = activity({
+      id: "acti_NEW",
+      date_created: "2026-04-25T10:00:00Z",
+    });
+    const out = renderLeadFolder(emptyHydration({ emails: [newer, older] }));
+    const lines = out.get("02_continuity.jsonl")!.trim().split("\n");
+    const dates = lines.map((l) => (JSON.parse(l) as { date: string }).date);
+    expect(dates).toEqual([older.date_created, newer.date_created]);
   });
 });
 
-describe("00_meta.json", () => {
-  it("populates lead identity fields from the lead payload", () => {
+describe("renderLeadFolder — canonical JSON shape", () => {
+  it("includes sweep envelope in 00_meta.json and raw Close lead in 01_raw_lead.json", () => {
     const out = renderLeadFolder(emptyHydration());
-    const meta = JSON.parse(out.get("00_meta.json")!);
+    const meta = JSON.parse(out.get("00_meta.json")!) as Record<string, unknown>;
+    const raw = JSON.parse(out.get("01_raw_lead.json")!) as Record<string, unknown>;
     expect(meta.lead_id).toBe("lead_uePfZilFAKE");
-    expect(meta.name).toBe("Eliana Lopes");
-    expect(meta.slug).toBe("eliana-lopes");
-    expect(meta.contact_id).toBe("cont_test");
-    expect(meta.primary_email).toBe("eliana.lopes8@icloud.com");
-    expect(meta.primary_phone).toBe("+15089678185");
-    expect(meta.status_label).toBe("🔴 Lost");
+    expect(meta.last_sweep_at).toBe("2026-05-05T14:00:00Z");
+    expect(raw.id).toBe("lead_uePfZilFAKE");
+    expect(raw.display_name).toBe("Eliana Lopes");
+    expect(raw.__sweep).toBeUndefined();
   });
 
-  it("includes counts and a content hash", () => {
-    const out = renderLeadFolder(
-      emptyHydration({
-        emails: [activity({ id: "acti_e1" }), activity({ id: "acti_e2" })],
-        smses: [activity({ id: "acti_s1", _type: "SMS" })],
-        activity_total: 3,
-      }),
-    );
-    const meta = JSON.parse(out.get("00_meta.json")!);
-    expect(meta.counts).toEqual({
-      calls: 0,
-      emails: 2,
-      smses: 1,
-      meetings: 0,
-      notes: 0,
-      tasks: 0,
-      threads: 0,
-      subscriptions: 0,
+  it("preserves all custom.cf_* keys verbatim", () => {
+    const withCustom = lead({
+      // Cast — the CloseLead type doesn't enumerate `custom.*` keys but the
+      // runtime supports them as flat keys.
+      ...({
+        "custom.cf_owner": "01. 😎 Andre",
+        "custom.cf_event": "WEDDING",
+      } as Partial<CloseLead>),
     });
-    expect(meta.activity_total).toBe(3);
-    expect(meta.comms_content_hash).toMatch(/^sha256:[a-f0-9]{64}$/);
-    expect(meta.comms_dirty).toBe(false);
-  });
-});
-
-describe("contentHash", () => {
-  it("is stable when activity set is identical", () => {
-    const h1 = emptyHydration({
-      emails: [activity({ id: "acti_e1" })],
-      activity_total: 1,
-    });
-    const h2 = emptyHydration({
-      emails: [activity({ id: "acti_e1" })],
-      activity_total: 1,
-    });
-    expect(contentHash(h1)).toBe(contentHash(h2));
+    const out = renderLeadFolder(emptyHydration({ lead: withCustom }));
+    const raw = JSON.parse(out.get("01_raw_lead.json")!) as Record<string, unknown>;
+    expect(raw["custom.cf_owner"]).toBe("01. 😎 Andre");
+    expect(raw["custom.cf_event"]).toBe("WEDDING");
   });
 
-  it("changes when an activity is added", () => {
-    const h1 = emptyHydration({
-      emails: [activity({ id: "acti_e1" })],
-      activity_total: 1,
-    });
-    const h2 = emptyHydration({
-      emails: [activity({ id: "acti_e1" }), activity({ id: "acti_e2" })],
-      activity_total: 2,
-    });
-    expect(contentHash(h1)).not.toBe(contentHash(h2));
-  });
-
-  it("does not change when activity order is shuffled (sorts internally)", () => {
-    const h1 = emptyHydration({
-      emails: [activity({ id: "acti_e1" }), activity({ id: "acti_e2" })],
-      activity_total: 2,
-    });
-    const h2 = emptyHydration({
-      emails: [activity({ id: "acti_e2" }), activity({ id: "acti_e1" })],
-      activity_total: 2,
-    });
-    expect(contentHash(h1)).toBe(contentHash(h2));
-  });
-});
-
-describe("01b_comms_verbatim.md content", () => {
-  it("renders email subject + body in blockquote with Close link", () => {
-    const out = renderLeadFolder(
-      emptyHydration({
-        emails: [
-          activity({
-            id: "acti_email1",
-            subject: "Family Reunion inquiry",
-            body_text: "Hey there, just checking in.\nTalk soon.",
-            date_created: "2026-04-23T15:37:55Z",
-          }),
-        ],
-        activity_total: 1,
-      }),
-    );
-    const verbatim = out.get("01b_comms_verbatim.md")!;
-    expect(verbatim).toContain("https://app.close.com/lead/lead_uePfZilFAKE/");
-    expect(verbatim).toContain("📧 Email (outgoing) — 2026-04-23 15:37");
-    expect(verbatim).toContain("Family Reunion inquiry");
-    expect(verbatim).toContain("> Hey there, just checking in.");
-    expect(verbatim).toContain("acti_email1");
-  });
-
-  it("renders call transcript as a blockquote when present", () => {
-    const out = renderLeadFolder(
-      emptyHydration({
-        calls: [
-          activity({
-            id: "acti_call1",
-            _type: "Call",
-            duration: 220,
-            recording_transcript: "Hi Eliana, do you have a minute?",
-          }),
-        ],
-        activity_total: 1,
-      }),
-    );
-    const verbatim = out.get("01b_comms_verbatim.md")!;
-    expect(verbatim).toContain("**Transcript:**");
-    expect(verbatim).toContain("> Hi Eliana, do you have a minute?");
-  });
-
-  it("notes when a call has no transcript", () => {
-    const out = renderLeadFolder(
-      emptyHydration({
-        calls: [
-          activity({ id: "acti_call1", _type: "Call", duration: 3 }),
-        ],
-        activity_total: 1,
-      }),
-    );
-    const verbatim = out.get("01b_comms_verbatim.md")!;
-    expect(verbatim).toContain("(no transcript");
-  });
-});
-
-describe("01_comms_digest.md content", () => {
-  it("groups outbound vs inbound", () => {
-    const out = renderLeadFolder(
-      emptyHydration({
-        smses: [
-          activity({
-            id: "acti_out",
-            _type: "SMS",
-            direction: "outbound",
-            text: "Hi from us",
-          }),
-          activity({
-            id: "acti_in",
-            _type: "SMS",
-            direction: "inbound",
-            text: "Reply from lead",
-            user_name: undefined,
-          }),
-        ],
-        activity_total: 2,
-      }),
-    );
-    const digest = out.get("01_comms_digest.md")!;
-    expect(digest).toContain("Recent fires (us → lead)");
-    expect(digest).toContain("Hi from us");
-    expect(digest).toContain("Inbound activity (lead → us)");
-    expect(digest).toContain("Reply from lead");
-  });
-
-  it("shows 'none yet' when no outbound exists", () => {
-    const out = renderLeadFolder(emptyHydration());
-    const digest = out.get("01_comms_digest.md")!;
-    expect(digest).toContain("_(none yet)_");
+  it("output is byte-stable across renders of the same hydration", () => {
+    const h = emptyHydration({ emails: [activity({ id: "acti_X" })] });
+    const a = renderLeadFolder(h).get("01_raw_lead.json");
+    const b = renderLeadFolder(h).get("01_raw_lead.json");
+    expect(a).toBe(b);
+    const ca = renderLeadFolder(h).get("02_continuity.jsonl");
+    const cb = renderLeadFolder(h).get("02_continuity.jsonl");
+    expect(ca).toBe(cb);
   });
 });

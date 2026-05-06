@@ -10,6 +10,7 @@ import {
   useMemo,
   useRef,
   useState,
+  useTransition,
   type ChangeEvent,
   type FormEvent,
   type ReactNode,
@@ -20,8 +21,16 @@ import { icons } from "@/components/icons";
 import { ContextMenu, type ContextMenuItem } from "@/components/ContextMenu";
 import { Modal } from "@/components/Modal";
 import { useToast } from "@/components/Toast";
-import { LeadPicker } from "./LeadPicker";
-import { PlanDayStrip } from "./PlanDayStrip";
+import {
+  appendClientLedgerEntryAction,
+  generatePlanAction,
+  regenerateClientBoxDocsAction,
+  runLeadBoxWorkflowAction,
+  setDayStatusAction,
+  sweepLeadBoxAction,
+} from "@/app/lead/[id]/actions";
+import type { SevenDayPlan, PlannedTouchpoint } from "@/lib/plan";
+import { emailDraftPlainToPreviewHtml } from "@/lib/email-draft-html";
 
 /* ============ TYPES ============ */
 
@@ -62,6 +71,86 @@ type PaneMode = "hidden" | "normal" | "wide";
 
 type ChatMode = "andre" | "lead";
 
+type LeadWidgetId =
+  | "workflow"
+  | "quick_delegations"
+  | "raw_box"
+  | "ai_profile"
+  | "plan"
+  | "proposal_review"
+  | "comms"
+  | "ledger"
+  | "enrichment"
+  | "heartbeat";
+
+type WorkbenchPreset = "state" | "plan" | "review" | "raw" | "heartbeat";
+
+type WorkbenchContextCard = {
+  widget_id: LeadWidgetId;
+  title: string;
+  lead_id: string;
+  priority: "primary" | "supporting" | "background";
+  summary: string;
+  facts: Array<{ label: string; value: string }>;
+  warnings: string[];
+  open_questions: string[];
+  source_refs: Array<{ kind: "file" | "activity" | "plan" | "heartbeat" | "close"; ref: string }>;
+};
+
+type WorkbenchDocStatus = {
+  file: string;
+  label: string;
+  phase: "raw" | "ai" | "execution" | "operator";
+  present: boolean;
+  chars: number;
+  preview: string | null;
+  body: string | null;
+  generated_at: string | null;
+};
+
+type WorkbenchSnapshot = {
+  ok: true;
+  lead_id: string;
+  folder_state: "present" | "missing";
+  lead_name: string;
+  status_label: string | null;
+  last_checked_at: string | null;
+  counts: { activities: number; comm_files: number; docs_present: number; docs_total: number };
+  docs: WorkbenchDocStatus[];
+  needs: { raw: string[]; ai: string[]; plan: string[] };
+  latest_comms: Array<{
+    date: string | null;
+    kind: string | null;
+    direction: string | null;
+    ref: string | null;
+    activity_id: string | null;
+    preview: string | null;
+  }>;
+  profile_preview: string | null;
+  discovery_preview: string | null;
+  ledger_preview: string | null;
+  alerts_preview: string | null;
+  plan: {
+    plan_id: string;
+    status: string;
+    generated_at: string;
+    primary_goal: unknown;
+    goal_summary: string;
+    best_next_question: string;
+    days: number;
+    needs_review: number;
+    approved: number;
+    sent: number;
+  } | null;
+  heartbeat: {
+    ran_at?: string;
+    actions_fired?: number;
+    actions_skipped?: number;
+    snapshot_match?: boolean | null;
+    plan_was_stale?: boolean | null;
+  } | null;
+};
+
 type ChatLayout = {
   rail: PaneMode;
   scope: PaneMode;
@@ -76,6 +165,80 @@ type ChatLayout = {
 const DEFAULT_LAYOUT: ChatLayout = { rail: "normal", scope: "normal", mode: "andre", lead_id: null, lead_name: null };
 const LAYOUT_KEY = "cmk-chat-layout-v2";
 const LAYOUT_KEY_V1 = "cmk-chat-layout-v1";
+
+const WORKBENCH_WIDGETS: Record<LeadWidgetId, { label: string; summary: string; refs: WorkbenchContextCard["source_refs"] }> = {
+  workflow: {
+    label: "Workflow",
+    summary: "Refresh raw, refresh AI docs, generate or rerun the seven-day plan.",
+    refs: [{ kind: "file", ref: "00_meta.json" }, { kind: "file", ref: "04_profile.md" }, { kind: "plan", ref: "plan.json" }],
+  },
+  quick_delegations: {
+    label: "Quick delegations",
+    summary: "Lead-scoped prompt shortcuts for state, today’s actions, latest comms, and plan refinement.",
+    refs: [{ kind: "close", ref: "close_get_lead_full" }],
+  },
+  raw_box: {
+    label: "Raw Box",
+    summary: "Raw Close substrate: lead object, continuity ledger, and verbatim comm payloads.",
+    refs: [{ kind: "file", ref: "01_raw_lead.json" }, { kind: "file", ref: "02_continuity.jsonl" }],
+  },
+  ai_profile: {
+    label: "AI Profile",
+    summary: "Post-processed profile, NEPQ openers, discovery facts, alerts, and buyer-state interpretation.",
+    refs: [{ kind: "file", ref: "03_comms_interpreted.md" }, { kind: "file", ref: "04_profile.md" }, { kind: "file", ref: "06_discovery.md" }],
+  },
+  plan: {
+    label: "Lead Plan",
+    summary: "Seven-day plan toward a scheduled Andre phone call, including day approvals and draft actions.",
+    refs: [{ kind: "plan", ref: "plan.json" }, { kind: "file", ref: "05_seven_day_plan.md" }],
+  },
+  proposal_review: {
+    label: "Proposal Review",
+    summary: "Plan days that need approval before they can be sent or fired by heartbeat.",
+    refs: [{ kind: "plan", ref: "plan.json" }],
+  },
+  comms: {
+    label: "Latest Comms",
+    summary: "Latest inbound/outbound email, SMS, call, and note activity around the current lead.",
+    refs: [{ kind: "file", ref: "02_continuity.jsonl" }, { kind: "file", ref: "comms/" }],
+  },
+  ledger: {
+    label: "Client Ledger",
+    summary: "Continuity ledger: what happened, what changed, and the current state of the deal.",
+    refs: [{ kind: "file", ref: "08_client_ledger.md" }],
+  },
+  enrichment: {
+    label: "Enrichment",
+    summary: "Operator-added uploads, extracted artifacts, and supplemental facts for this lead.",
+    refs: [{ kind: "file", ref: "intake/" }, { kind: "file", ref: "09_enrichment.md" }],
+  },
+  heartbeat: {
+    label: "Heartbeat",
+    summary: "Execution audit: what fired, what held, and which guardrails affected the plan.",
+    refs: [{ kind: "heartbeat", ref: "latest lead heartbeat" }],
+  },
+};
+
+const PRESET_RIGHT_WIDGETS: Record<WorkbenchPreset, LeadWidgetId[]> = {
+  state: ["ai_profile"],
+  plan: ["plan"],
+  review: ["proposal_review"],
+  raw: ["raw_box"],
+  heartbeat: ["heartbeat"],
+};
+
+function parseWidgetList(raw: string | null): LeadWidgetId[] | null {
+  if (!raw) return null;
+  const out = raw
+    .split(",")
+    .map((x) => x.trim())
+    .filter((x): x is LeadWidgetId => x in WORKBENCH_WIDGETS);
+  return out.length ? [out[0]] : null;
+}
+
+function parsePreset(raw: string | null): WorkbenchPreset {
+  return raw === "plan" || raw === "review" || raw === "raw" || raw === "heartbeat" ? raw : "state";
+}
 
 /* ============ PINBOARD ============
    The right In-Scope dock is a stack of pinned widgets — Andre's active work
@@ -274,47 +437,6 @@ const QUICK_DELEGATIONS: QuickDelegation[] = [
     prompt:
       "Show me what's changed in Close in the last 24h on Andre's leads — replies, status moves, " +
       "stop signals, new opportunities. Cluster by lead.",
-  },
-];
-
-// Lead-mode quick prompts. The chat API receives the lead_id and prepends
-// the Box context so these prompts read naturally without naming the lead.
-const LEAD_QUICK_DELEGATIONS: QuickDelegation[] = [
-  {
-    id: "lead-state",
-    label: "What's the state",
-    hint: "Box, last comms, next move",
-    tone: "sage",
-    prompt:
-      "Give me the state of this lead in three lines: what we know, where we are in the cycle, " +
-      "and the single sharpest next move in NEPQ voice.",
-  },
-  {
-    id: "lead-todays-actions",
-    label: "Draft today's actions",
-    hint: "From the active plan",
-    tone: "lavender",
-    prompt:
-      "Look at the active plan for this lead and draft today's required actions (SMS / email / call task). " +
-      "Show me the drafts before firing anything.",
-  },
-  {
-    id: "lead-comms",
-    label: "Latest comms",
-    hint: "Inbound + outbound",
-    tone: "peach",
-    prompt:
-      "Pull the last 5 activities on this lead — emails, SMS, calls, notes — most recent first. " +
-      "Tell me what's likely on their mind right now.",
-  },
-  {
-    id: "lead-generate-plan",
-    label: "Generate / refine plan",
-    hint: "7-day cycle",
-    tone: "lemon",
-    prompt:
-      "Generate a 7-day plan for this lead in NEPQ voice. If a plan already exists, suggest the " +
-      "smallest refinement that would tighten it given the latest Box state.",
   },
 ];
 
@@ -2033,17 +2155,39 @@ function AnimatedThinking({ deep }: { deep?: boolean }) {
 
 /* ============ EMPTY STATE ============ */
 
-function DemoEmptyState({ onSeed }: { onSeed: (text: string) => void }) {
-  const seeds = [
-    "Set up a 7-day pre-tasting cadence for a wedding on May 18.",
-    "What automations do I have running this week?",
-    "Show me Andre's leads that haven't been touched in a week.",
-  ];
+function DemoEmptyState({
+  onSeed,
+  mode,
+  leadId,
+  leadName,
+}: {
+  onSeed: (text: string) => void;
+  mode: ChatMode;
+  leadId?: string | null;
+  leadName?: string | null;
+}) {
+  const seeds =
+    mode === "lead"
+      ? [
+          "What changed since the last check?",
+          "Why did you pick this primary goal for the cycle?",
+          "Draft today's action from the active plan.",
+        ]
+      : [
+          "Set up a 7-day pre-tasting cadence for a wedding on May 18.",
+          "What automations do I have running this week?",
+          "Show me Andre's leads that haven't been touched in a week.",
+        ];
+
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 16, padding: "40px 20px", color: "var(--ink-soft)" }}>
-      <div className="cmk-empty-breathe" style={{ fontFamily: "var(--serif)", fontSize: 22, color: "var(--ink)", fontStyle: "italic" }}>
-        What are we delegating today?
-      </div>
+    <div className="cmk-empty-shell">
+      {mode === "lead" && leadId ? (
+        <LeadModeEmptyContext leadId={leadId} leadName={leadName ?? null} />
+      ) : (
+        <div className="cmk-empty-breathe" style={{ fontFamily: "var(--serif)", fontSize: 22, color: "var(--ink)", fontStyle: "italic" }}>
+          What are we delegating today?
+        </div>
+      )}
       <div style={{ display: "flex", flexWrap: "wrap", gap: 6, justifyContent: "center", maxWidth: 560 }}>
         {seeds.map((s) => (
           <button
@@ -2058,8 +2202,66 @@ function DemoEmptyState({ onSeed }: { onSeed: (text: string) => void }) {
         ))}
       </div>
       <div style={{ fontSize: 11, color: "var(--ink-faint)", marginTop: 4 }}>
-        Or pick a quick delegation from the rail.
+        {mode === "lead" ? "Ask the agent why — every plan now carries reasoning." : "Or pick a quick delegation from the rail."}
       </div>
+    </div>
+  );
+}
+
+/**
+ * Lead-mode empty state — surfaces the cycle goal + reasoning trail so Andre
+ * lands on something useful when he opens chat cold for a lead. No more
+ * "Using up the week..." void.
+ */
+function LeadModeEmptyContext({ leadId, leadName }: { leadId: string; leadName: string | null }) {
+  const [plan, setPlan] = useState<SevenDayPlan | null>(null);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    let cancelled = false;
+    async function load() {
+      try {
+        const res = await fetch(`/api/lead/${encodeURIComponent(leadId)}/plan`);
+        const data = await res.json();
+        if (!cancelled && data?.ok) setPlan((data.plan as SevenDayPlan) ?? null);
+      } catch { /* leave empty */ }
+      finally { if (!cancelled) setLoading(false); }
+    }
+    void load();
+    return () => { cancelled = true; };
+  }, [leadId]);
+
+  if (loading) {
+    return (
+      <div className="cmk-empty-breathe" style={{ fontFamily: "var(--serif)", fontSize: 18, color: "var(--ink-mid)", fontStyle: "italic" }}>
+        loading {leadName || "lead"}…
+      </div>
+    );
+  }
+  if (!plan) {
+    return (
+      <div className="cmk-empty-card cmk-empty-card-peach">
+        <div className="cmk-strip-eyebrow">{leadName || leadId}</div>
+        <p className="cmk-empty-headline">No active plan yet.</p>
+        <p className="cmk-empty-sub">Generate one from the Workflow widget — once it exists, this panel will show the cycle goal and reasoning trail.</p>
+      </div>
+    );
+  }
+  return (
+    <div className="cmk-empty-card cmk-empty-card-lavender">
+      <div className="cmk-empty-card-row">
+        <div className="cmk-strip-eyebrow">Working on · {leadName || leadId}</div>
+        <span className="cmk-pill cmk-pill-peach">{plan.primary_goal.replace(/_/g, " ")}</span>
+      </div>
+      {plan.goal_summary && (
+        <p className="cmk-empty-headline">{plan.goal_summary}</p>
+      )}
+      {plan.reasoning_trail && plan.reasoning_trail.length > 0 && (
+        <ul className="cmk-empty-reasoning">
+          {plan.reasoning_trail.slice(0, 4).map((b, i) => (
+            <li key={i}>{b}</li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
@@ -2171,6 +2373,1341 @@ function ScopeDock({
         </div>
       </div>
     </ContextMenu>
+  );
+}
+
+function fmtWhen(iso: string | null | undefined): string {
+  if (!iso) return "not yet";
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return "not yet";
+  return d.toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
+}
+
+function docByFile(snapshot: WorkbenchSnapshot | null, file: string): WorkbenchDocStatus | null {
+  return snapshot?.docs.find((d) => d.file === file) ?? null;
+}
+
+function MiniDocRow({ doc }: { doc: WorkbenchDocStatus }) {
+  return (
+    <div className={`cmk-wb-doc-row${doc.present ? " is-present" : ""}`}>
+      <span className="cmk-wb-doc-dot" aria-hidden />
+      <span className="cmk-wb-doc-label">{doc.label}</span>
+      <span className="cmk-wb-doc-meta">{doc.present ? `${Math.ceil(doc.chars / 1024)}k` : "missing"}</span>
+    </div>
+  );
+}
+
+function WidgetGlyph({ widgetId }: { widgetId: LeadWidgetId }) {
+  const glyph: Record<LeadWidgetId, string> = {
+    workflow: "01",
+    quick_delegations: "Q",
+    raw_box: "{}",
+    ai_profile: "AI",
+    plan: "7",
+    proposal_review: "OK",
+    comms: "↔",
+    ledger: "Σ",
+    enrichment: "+",
+    heartbeat: "HB",
+  };
+  return <span className="cmk-wb-glyph" aria-hidden>{glyph[widgetId]}</span>;
+}
+
+function widgetStatus(widgetId: LeadWidgetId, snapshot: WorkbenchSnapshot | null): { label: string; tone: "ready" | "warn" | "idle" } {
+  if (!snapshot) return { label: "LOADING", tone: "idle" };
+  if (widgetId === "workflow") {
+    const missing = snapshot.needs.raw.length + snapshot.needs.ai.length + snapshot.needs.plan.length;
+    return missing === 0 ? { label: "READY", tone: "ready" } : { label: "PARTIAL", tone: "warn" };
+  }
+  if (widgetId === "raw_box") {
+    return snapshot.needs.raw.length === 0 ? { label: "ACQUIRED", tone: "ready" } : { label: "NEEDS RAW", tone: "warn" };
+  }
+  if (widgetId === "ai_profile") {
+    return snapshot.needs.ai.length === 0 ? { label: "INTERPRETED", tone: "ready" } : { label: "NEEDS AI", tone: "warn" };
+  }
+  if (widgetId === "plan") {
+    return snapshot.plan ? { label: snapshot.plan.status === "active" ? "ACTIVE" : snapshot.plan.status.toUpperCase(), tone: "ready" } : { label: "NO PLAN", tone: "warn" };
+  }
+  if (widgetId === "proposal_review") {
+    if (!snapshot.plan) return { label: "NO PLAN", tone: "warn" };
+    return snapshot.plan.needs_review > 0 ? { label: "DRAFT", tone: "warn" } : { label: "CLEARED", tone: "ready" };
+  }
+  if (widgetId === "comms") {
+    return snapshot.latest_comms.length ? { label: "LIVE", tone: "ready" } : { label: "QUIET", tone: "idle" };
+  }
+  if (widgetId === "ledger") {
+    return snapshot.ledger_preview ? { label: "CURRENT", tone: "ready" } : { label: "EMPTY", tone: "warn" };
+  }
+  if (widgetId === "heartbeat") {
+    return snapshot.heartbeat?.ran_at ? { label: "AUDITED", tone: "ready" } : { label: "IDLE", tone: "idle" };
+  }
+  if (widgetId === "enrichment") {
+    return { label: "PARTIAL", tone: "idle" };
+  }
+  return { label: "AVAILABLE", tone: "idle" };
+}
+
+function WorkbenchWidgetContent({
+  widgetId,
+  snapshot,
+  pending,
+  onAction,
+}: {
+  widgetId: LeadWidgetId;
+  snapshot: WorkbenchSnapshot | null;
+  pending: boolean;
+  onAction: (kind: "raw" | "ai" | "plan" | "all") => void;
+}) {
+  if (!snapshot) {
+    return <div className="cmk-wb-skeleton">loading lead workbench…</div>;
+  }
+
+  if (widgetId === "workflow") {
+    const rawReady = snapshot.needs.raw.length === 0;
+    const aiReady = snapshot.needs.ai.length === 0;
+    const planReady = snapshot.needs.plan.length === 0;
+    return (
+      <div className="cmk-wb-workflow">
+        <div className="cmk-wb-stage-grid">
+          {[
+            ["Raw", rawReady, `${snapshot.counts.comm_files} transcript files`],
+            ["AI Docs", aiReady, aiReady ? "profile, discovery, alerts" : `${snapshot.needs.ai.length} docs missing`],
+            ["Plan", planReady, snapshot.plan ? `${snapshot.plan.days} days · ${snapshot.plan.needs_review} review` : "not generated"],
+          ].map(([label, ok, sub]) => (
+            <div key={String(label)} className={`cmk-wb-stage${ok ? " is-done" : ""}`}>
+              <span className="cmk-wb-stage-mark" aria-hidden />
+              <strong>{label}</strong>
+              <span>{sub}</span>
+            </div>
+          ))}
+        </div>
+        <div className="cmk-wb-actions">
+          <button type="button" className="plan-btn" onClick={() => onAction("raw")} disabled={pending}>
+            Refresh raw
+          </button>
+          <button type="button" className="plan-btn" onClick={() => onAction("ai")} disabled={pending || !rawReady}>
+            Regen AI
+          </button>
+          <button type="button" className="plan-btn" onClick={() => onAction("plan")} disabled={pending || !aiReady}>
+            Plan
+          </button>
+          <button type="button" className="plan-btn plan-btn-primary" onClick={() => onAction("all")} disabled={pending}>
+            Run all
+          </button>
+        </div>
+        <div className="cmk-wb-note">Checked {fmtWhen(snapshot.last_checked_at)}</div>
+      </div>
+    );
+  }
+
+  if (widgetId === "raw_box") {
+    const docs = ["00_meta.json", "01_raw_lead.json", "02_continuity.jsonl"]
+      .map((f) => docByFile(snapshot, f))
+      .filter((d): d is WorkbenchDocStatus => Boolean(d));
+    return (
+      <div className="cmk-wb-stack">
+        <div className="cmk-wb-kpis">
+          <div><strong>{snapshot.counts.activities}</strong><span>events</span></div>
+          <div><strong>{snapshot.counts.comm_files}</strong><span>transcripts</span></div>
+        </div>
+        {docs.map((doc) => <MiniDocRow key={doc.file} doc={doc} />)}
+      </div>
+    );
+  }
+
+  if (widgetId === "ai_profile") {
+    const docs = ["03_comms_interpreted.md", "04_profile.md", "06_discovery.md", "07_andre_alerts.md"]
+      .map((f) => docByFile(snapshot, f))
+      .filter((d): d is WorkbenchDocStatus => Boolean(d));
+    return (
+      <div className="cmk-wb-stack">
+        <div className="cmk-wb-minihead">
+          <strong>NEPQ read</strong>
+          <span>{snapshot.needs.ai.length === 0 ? "ready for planning" : `${snapshot.needs.ai.length} missing docs`}</span>
+        </div>
+        {docs.map((doc) => <MiniDocRow key={doc.file} doc={doc} />)}
+        <div className="cmk-wb-preview cmk-wb-preview-md">
+          {snapshot.profile_preview || snapshot.discovery_preview ? (
+            <MarkdownBody source={snapshot.profile_preview || snapshot.discovery_preview || ""} />
+          ) : (
+            "No AI profile generated yet."
+          )}
+        </div>
+        <button type="button" className="plan-btn" onClick={() => onAction("ai")} disabled={pending || snapshot.needs.raw.length > 0}>
+          Refresh AI profile
+        </button>
+      </div>
+    );
+  }
+
+  if (widgetId === "comms") {
+    return (
+      <div className="cmk-wb-stack">
+        {snapshot.latest_comms.length === 0 ? (
+          <div className="cmk-wb-preview">No comm refs in the continuity ledger yet.</div>
+        ) : snapshot.latest_comms.map((c, i) => (
+          <div key={`${c.ref}-${i}`} className="cmk-wb-comm">
+            <div className="cmk-wb-comm-head">
+              <span>{c.kind || "activity"} · {c.direction || "—"}</span>
+              <span>{fmtWhen(c.date)}</span>
+            </div>
+            <p>{c.preview || c.ref}</p>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  if (widgetId === "ledger") {
+    return (
+      <div className="cmk-wb-stack">
+        <div className="cmk-wb-minihead">
+          <strong>Continuity</strong>
+          <span>{snapshot.ledger_preview ? "AI ledger generated" : "waiting on AI pass"}</span>
+        </div>
+        <div className="cmk-wb-preview cmk-wb-preview-md">
+          {snapshot.ledger_preview ? (
+            <MarkdownBody source={snapshot.ledger_preview} />
+          ) : (
+            "No client ledger generated yet."
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  if (widgetId === "proposal_review") {
+    const plan = snapshot.plan;
+    return (
+      <div className="cmk-wb-stack">
+        <div className="cmk-wb-kpis">
+          <div><strong>{plan?.needs_review ?? 0}</strong><span>review</span></div>
+          <div><strong>{plan?.approved ?? 0}</strong><span>approved</span></div>
+          <div><strong>{plan?.sent ?? 0}</strong><span>sent</span></div>
+        </div>
+        <div className="cmk-wb-preview">{plan?.goal_summary || "Generate a plan before review."}</div>
+      </div>
+    );
+  }
+
+  if (widgetId === "enrichment") {
+    const enrichment = docByFile(snapshot, "09_enrichment.md");
+    const overrides = docByFile(snapshot, "10_operator_overrides.md");
+    return (
+      <div className="cmk-wb-stack">
+        {enrichment && <MiniDocRow doc={enrichment} />}
+        {overrides && <MiniDocRow doc={overrides} />}
+        <div className="cmk-wb-preview">Operator-owned context lives here: venue intel, screenshots, constraints, and overrides.</div>
+      </div>
+    );
+  }
+
+  if (widgetId === "heartbeat") {
+    const hb = snapshot.heartbeat;
+    return (
+      <div className="cmk-wb-stack">
+        <div className="cmk-wb-kpis">
+          <div><strong>{hb?.actions_fired ?? 0}</strong><span>fired</span></div>
+          <div><strong>{hb?.actions_skipped ?? 0}</strong><span>held</span></div>
+        </div>
+        <div className="cmk-wb-preview">
+          {hb?.ran_at ? `Last heartbeat ${fmtWhen(hb.ran_at)}.` : "No heartbeat has run for this lead yet."}
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="cmk-wb-preview">
+      {snapshot.plan?.goal_summary || snapshot.profile_preview || "Open a widget or ask the agent what to inspect."}
+    </div>
+  );
+}
+
+function WorkbenchWidgetCard({
+  widgetId,
+  onOpenWidget,
+  snapshot,
+  pending,
+  onAction,
+  children,
+}: {
+  widgetId: LeadWidgetId;
+  onOpenWidget: (widgetId: LeadWidgetId) => void;
+  snapshot: WorkbenchSnapshot | null;
+  pending: boolean;
+  onAction: (kind: "raw" | "ai" | "plan" | "all") => void;
+  children?: ReactNode;
+}) {
+  const def = WORKBENCH_WIDGETS[widgetId];
+  const status = widgetStatus(widgetId, snapshot);
+  return (
+    <section className={`cmk-strip-card cmk-workbench-widget cmk-workbench-widget-${widgetId}`}>
+      <div className="cmk-wb-card-head">
+        <WidgetGlyph widgetId={widgetId} />
+        <div className="cmk-wb-card-title">
+          <div className="cmk-strip-eyebrow">{def.label}</div>
+          <p>{def.summary}</p>
+        </div>
+        <span className={`cmk-wb-status cmk-wb-status-${status.tone}`}>{status.label}</span>
+      </div>
+      {children}
+      <WorkbenchWidgetContent widgetId={widgetId} snapshot={snapshot} pending={pending} onAction={onAction} />
+      <div className="cmk-workbench-widget-links">
+        <button type="button" className="cmk-workbench-link-btn" onClick={() => onOpenWidget(widgetId)}>
+          {children ? "focused for agent" : "share with agent"}
+        </button>
+      </div>
+    </section>
+  );
+}
+
+type CommSummary = WorkbenchSnapshot["latest_comms"][number];
+
+function commTitle(c: CommSummary): string {
+  const kind = c.kind || "activity";
+  if (c.preview) {
+    const firstLine = c.preview.split(/\r?\n/)[0]?.trim() || "";
+    if (firstLine) return firstLine.slice(0, 80);
+  }
+  return `${kind} · ${c.direction || "—"}`;
+}
+
+/**
+ * One row in the Comms widget detail view. Collapsed = title + meta. Expanded =
+ * fetches the full body from /api/lead/{id}/comm?ref=... and renders it. Phone
+ * call rows render the *full* transcript verbatim, never a summary.
+ */
+function CommRow({ leadId, comm }: { leadId: string; comm: CommSummary }) {
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [full, setFull] = useState<{
+    body: string | null;
+    subject: string | null;
+    duration: number | null;
+  } | null>(null);
+  const { addPin } = usePinboardCtx();
+
+  const fetchBody = useCallback(async () => {
+    if (!comm.ref) return;
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch(
+        `/api/lead/${encodeURIComponent(leadId)}/comm?ref=${encodeURIComponent(comm.ref)}`,
+        { cache: "no-store" },
+      );
+      const data = await res.json();
+      if (!res.ok || !data?.ok) {
+        setError(data?.error || `HTTP ${res.status}`);
+      } else {
+        setFull({ body: data.body ?? null, subject: data.subject ?? null, duration: data.duration ?? null });
+      }
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e));
+    } finally {
+      setLoading(false);
+    }
+  }, [leadId, comm.ref]);
+
+  const onToggle = () => {
+    const next = !open;
+    setOpen(next);
+    if (next && !full && !loading && comm.ref) void fetchBody();
+  };
+
+  const isCall = (comm.kind || "").toLowerCase().includes("call");
+  const title = full?.subject || commTitle(comm);
+
+  return (
+    <div className={`cmk-wb-detail-comm cmk-wb-detail-comm-row${open ? " is-open" : ""}`}>
+      <button type="button" className="cmk-wb-comm-row-head" onClick={onToggle}>
+        <span className="cmk-wb-comm-row-glyph" aria-hidden>
+          {isCall ? "📞" : (comm.kind || "").toLowerCase().includes("sms") ? "💬" : "✉️"}
+        </span>
+        <span className="cmk-wb-comm-row-title">{title}</span>
+        <span className="cmk-wb-comm-row-meta">
+          {comm.direction || "—"} · {fmtWhen(comm.date)}
+        </span>
+      </button>
+      {open && (
+        <div className="cmk-wb-comm-row-body">
+          {loading && <div className="cmk-wb-detail-empty">Loading transcript…</div>}
+          {error && <div className="cmk-wb-detail-empty">Failed to load: {error}</div>}
+          {full && !loading && !error && (
+            <>
+              {full.duration ? (
+                <div className="cmk-wb-detail-note">
+                  Call · {Math.round(full.duration / 60)}m {full.duration % 60}s
+                </div>
+              ) : null}
+              {full.body ? (
+                isCall ? (
+                  <pre className="cmk-wb-comm-transcript">{full.body}</pre>
+                ) : (
+                  <div className="cmk-wb-detail-md md-body-host">
+                    <MarkdownBody source={full.body} />
+                  </div>
+                )
+              ) : (
+                <div className="cmk-wb-detail-empty">No body text on this comm.</div>
+              )}
+              {full.body && comm.ref && (
+                <div className="cmk-wb-comm-row-actions">
+                  <button
+                    type="button"
+                    className="cmk-workbench-link-btn"
+                    onClick={() =>
+                      addPin({
+                        kind: "tool-result",
+                        label: `Comm · ${title}`,
+                        sublabel: `${comm.kind || "activity"} · ${fmtWhen(comm.date)}`,
+                        data: {
+                          lead_id: leadId,
+                          tool_name: "comm_transcript",
+                          summary_text: full.body!.slice(0, 4000),
+                        },
+                      })
+                    }
+                  >
+                    pin to chat
+                  </button>
+                </div>
+              )}
+            </>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/**
+ * Split a markdown profile body by h2 (## ) headings and render each section
+ * as its own card with an eyebrow label. Falls back to a single rendered block
+ * if no h2 boundaries are found. Replaces missing-field placeholders like
+ * `(unknown)` / `(?)` with a muted italic span so the eye skips them.
+ */
+function ProfileSectioned({ source }: { source: string }) {
+  const sections = useMemo(() => splitByH2(source), [source]);
+  if (sections.length <= 1) {
+    return (
+      <div className="cmk-wb-detail-md md-body-host">
+        <MarkdownBody source={normalizeUnknowns(source)} />
+      </div>
+    );
+  }
+  return (
+    <div className="cmk-wb-profile-sections">
+      {sections.map((s, i) => (
+        <section key={i} className="cmk-wb-profile-section">
+          <div className="cmk-strip-eyebrow">{s.heading || "Overview"}</div>
+          <div className="cmk-wb-detail-md md-body-host">
+            <MarkdownBody source={normalizeUnknowns(s.body)} />
+          </div>
+        </section>
+      ))}
+    </div>
+  );
+}
+
+function splitByH2(source: string): Array<{ heading: string | null; body: string }> {
+  const lines = source.split(/\r?\n/);
+  const out: Array<{ heading: string | null; body: string }> = [];
+  let current: { heading: string | null; body: string[] } = { heading: null, body: [] };
+  for (const line of lines) {
+    const m = /^##\s+(.+?)\s*$/.exec(line);
+    if (m && !line.startsWith("### ")) {
+      if (current.heading !== null || current.body.some((l) => l.trim())) {
+        out.push({ heading: current.heading, body: current.body.join("\n").trim() });
+      }
+      current = { heading: m[1].trim(), body: [] };
+    } else {
+      current.body.push(line);
+    }
+  }
+  if (current.heading !== null || current.body.some((l) => l.trim())) {
+    out.push({ heading: current.heading, body: current.body.join("\n").trim() });
+  }
+  return out.filter((s) => s.body.trim() || s.heading);
+}
+
+function normalizeUnknowns(md: string): string {
+  // Wrap (unknown), (?), (TBD), (n/a) in muted-italic span so they fade out.
+  return md.replace(/\((unknown|TBD|n\/a|\?)\)/gi, '<span class="cmk-wb-unknown">($1)</span>');
+}
+
+/**
+ * One stage tile in the Workflow widget detail view. Tone-coded per kit
+ * vocabulary: lemon=raw (inputs), lavender=AI (interpretation), peach=plan
+ * (cadence). Filled when ok, hairlined + muted when the stage isn't ready.
+ */
+function WorkflowStageTile({
+  tone,
+  label,
+  ok,
+  meta,
+  sub,
+}: {
+  tone: "lemon" | "lavender" | "peach";
+  label: string;
+  ok: boolean;
+  meta: string;
+  sub: string;
+}) {
+  return (
+    <div className={`cmk-wb-flow-tile cmk-wb-flow-tile-${tone}${ok ? " is-ok" : ""}`}>
+      <div className="cmk-wb-flow-tile-mark" aria-hidden>{ok ? "●" : "○"}</div>
+      <div className="cmk-wb-flow-tile-label">{label}</div>
+      <div className="cmk-wb-flow-tile-meta">{meta}</div>
+      <div className="cmk-wb-flow-tile-sub">{sub}</div>
+    </div>
+  );
+}
+
+/**
+ * Heartbeat queue detail — surfaces what already went out today and what's
+ * waiting to fire next. Loads the plan via `/api/lead/[id]/plan` so per-day
+ * approval_status is available; combines with the heartbeat snapshot's
+ * skip_breakdown for the "held" reasons.
+ */
+function HeartbeatQueueDetail({
+  leadId,
+  snapshot,
+}: {
+  leadId: string;
+  snapshot: WorkbenchSnapshot;
+}) {
+  const [plan, setPlan] = useState<SevenDayPlan | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+    async function load() {
+      setLoading(true);
+      try {
+        const res = await fetch(`/api/lead/${encodeURIComponent(leadId)}/plan`);
+        const data = await res.json();
+        if (!cancelled && data?.ok) setPlan((data.plan as SevenDayPlan) ?? null);
+      } catch {
+        /* show what we have without plan */
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    }
+    void load();
+    return () => { cancelled = true; };
+  }, [leadId]);
+
+  const hb = snapshot.heartbeat;
+  const sentDays = (plan?.days ?? []).filter((d) => d.approval_status === "sent");
+  const queuedDays = (plan?.days ?? []).filter((d) =>
+    d.approval_status === "approved" || d.approval_status === "needs_review",
+  );
+
+  return (
+    <div className="cmk-wb-detail-stack">
+      <div className="cmk-wb-hb-kpis">
+        <div className="cmk-wb-hb-kpi cmk-wb-hb-kpi-mint">
+          <strong>{hb?.actions_fired ?? 0}</strong>
+          <span>fired</span>
+        </div>
+        <div className="cmk-wb-hb-kpi cmk-wb-hb-kpi-rose">
+          <strong>{hb?.actions_skipped ?? 0}</strong>
+          <span>held</span>
+        </div>
+        <div className="cmk-wb-hb-kpi cmk-wb-hb-kpi-sky">
+          <strong>{queuedDays.length}</strong>
+          <span>queued days</span>
+        </div>
+        <div className={`cmk-wb-hb-kpi cmk-wb-hb-kpi-${hb?.snapshot_match === false ? "rose" : "sage"}`}>
+          <strong>{hb?.snapshot_match === false ? "stale" : hb?.snapshot_match ? "fresh" : "—"}</strong>
+          <span>snapshot</span>
+        </div>
+      </div>
+
+      <div className="cmk-wb-detail-note">
+        {hb?.ran_at ? `Last heartbeat ${fmtWhen(hb.ran_at)}` : "No heartbeat has run for this lead yet."}
+        {hb?.plan_was_stale ? " · plan was stale" : ""}
+      </div>
+
+      <div className="cmk-wb-hb-section">
+        <div className="cmk-strip-eyebrow">Sent</div>
+        {loading ? (
+          <div className="cmk-wb-detail-empty">Loading days…</div>
+        ) : sentDays.length === 0 ? (
+          <div className="cmk-wb-detail-empty">Nothing sent yet for this lead.</div>
+        ) : (
+          <ul className="cmk-wb-hb-list">
+            {sentDays.map((d) => (
+              <HeartbeatRow key={`sent-${d.day}`} day={d} tone="mint" />
+            ))}
+          </ul>
+        )}
+      </div>
+
+      <div className="cmk-wb-hb-section">
+        <div className="cmk-strip-eyebrow">Queued / waiting</div>
+        {loading ? (
+          <div className="cmk-wb-detail-empty">Loading days…</div>
+        ) : queuedDays.length === 0 ? (
+          <div className="cmk-wb-detail-empty">Nothing queued. Generate or approve more days from the Plan widget.</div>
+        ) : (
+          <ul className="cmk-wb-hb-list">
+            {queuedDays.map((d) => (
+              <HeartbeatRow
+                key={`q-${d.day}`}
+                day={d}
+                tone={d.approval_status === "approved" ? "sage" : "peach"}
+              />
+            ))}
+          </ul>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function HeartbeatRow({
+  day,
+  tone,
+}: {
+  day: { day: number; objective: string; approval_status: string; required_actions: PlannedTouchpoint[]; send_window: string };
+  tone: "mint" | "sage" | "peach" | "rose";
+}) {
+  const channels = day.required_actions.map((a) => a.channel);
+  const glyphFor = (c: string) => (c === "email" ? "✉️" : c === "sms" ? "💬" : "✅");
+  return (
+    <li className={`cmk-wb-hb-row cmk-wb-hb-row-${tone}`}>
+      <span className="cmk-wb-hb-day">D{day.day}</span>
+      <span className="cmk-wb-hb-glyphs" aria-hidden>
+        {channels.length === 0 ? "—" : channels.map((c, i) => <span key={i}>{glyphFor(c)}</span>)}
+      </span>
+      <span className="cmk-wb-hb-objective">{day.objective}</span>
+      <span className={`cmk-pill cmk-pill-${tone}`}>{day.approval_status.replace(/_/g, " ")}</span>
+      <span className="cmk-wb-hb-when">{day.send_window || "—"}</span>
+    </li>
+  );
+}
+
+/**
+ * Inline append form for the Client Ledger detail view. One textarea, one
+ * button — writes a date-stamped bullet via `appendClientLedgerEntryAction`
+ * and reloads the workbench so the new entry shows up.
+ */
+function LedgerAppendForm({
+  leadId,
+  leadName,
+  onAppended,
+}: {
+  leadId: string;
+  leadName: string | null;
+  onAppended: () => void;
+}) {
+  const [text, setText] = useState("");
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function submit() {
+    const body = text.trim();
+    if (!body || pending) return;
+    setPending(true);
+    setError(null);
+    try {
+      const res = await appendClientLedgerEntryAction(leadId, body, {
+        source: "operator",
+        leadName: leadName || undefined,
+      });
+      if (!res.ok) {
+        setError(res.error);
+      } else {
+        setText("");
+        onAppended();
+      }
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e));
+    } finally {
+      setPending(false);
+    }
+  }
+
+  return (
+    <div className="cmk-wb-ledger-form">
+      <div className="cmk-strip-eyebrow">Append entry</div>
+      <textarea
+        className="cmk-wb-ledger-input"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        placeholder="What changed about this lead? One bullet, your voice."
+        rows={2}
+        onKeyDown={(e) => {
+          if ((e.metaKey || e.ctrlKey) && e.key === "Enter") {
+            e.preventDefault();
+            void submit();
+          }
+        }}
+      />
+      <div className="cmk-wb-ledger-foot">
+        {error && <span className="cmk-wb-ledger-err">{error}</span>}
+        <button
+          type="button"
+          className="plan-btn"
+          onClick={() => void submit()}
+          disabled={pending || !text.trim()}
+        >
+          {pending ? "appending…" : "Append"}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Plan widget detail — 7-day strip + customer-facing artifact preview.
+ *
+ * Shows what will *actually* go out: email rendered as sandboxed-iframe HTML
+ * (links/styling intact, scripts blocked), SMS as a phone-bubble mock, task as
+ * markdown. "Edit with agent" pins the draft into chat so the agent has full
+ * context to collaborate on copy / XHTML / asset placement.
+ */
+function PlanWidgetDetail({ leadId, leadName }: { leadId: string; leadName: string | null }) {
+  const [plan, setPlan] = useState<SevenDayPlan | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [activeDayIdx, setActiveDayIdx] = useState(0);
+  const { addPin } = usePinboardCtx();
+
+  useEffect(() => {
+    let cancelled = false;
+    async function load() {
+      setLoading(true);
+      setError(null);
+      try {
+        const res = await fetch(`/api/lead/${encodeURIComponent(leadId)}/plan`);
+        const data = await res.json();
+        if (cancelled) return;
+        if (data?.ok) {
+          setPlan((data.plan as SevenDayPlan) ?? null);
+        } else {
+          setError(data?.error || "load failed");
+        }
+      } catch (e) {
+        if (!cancelled) setError(e instanceof Error ? e.message : String(e));
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    }
+    void load();
+    return () => { cancelled = true; };
+  }, [leadId]);
+
+  if (loading) return <div className="cmk-wb-detail-empty">Loading plan…</div>;
+  if (error) return <div className="cmk-wb-detail-empty">Plan load failed: {error}</div>;
+  if (!plan) {
+    return (
+      <div className="cmk-wb-detail-empty">
+        No plan for {leadName || "this lead"} yet — generate one from the Workflow widget.
+      </div>
+    );
+  }
+
+  const day = plan.days[activeDayIdx] ?? plan.days[0];
+  const dayToneFor = (status: string): string => {
+    if (status === "sent") return "mint";
+    if (status === "approved") return "sage";
+    if (status === "skipped") return "stale";
+    if (status === "needs_review") return "peach";
+    return "lavender";
+  };
+
+  return (
+    <div className="cmk-wb-plan-detail">
+      {plan.goal_summary && (
+        <div className="cmk-wb-plan-goal">
+          <div className="cmk-strip-eyebrow">Cycle goal</div>
+          <p>{plan.goal_summary}</p>
+        </div>
+      )}
+      {plan.reasoning_trail && plan.reasoning_trail.length > 0 && (
+        <details className="cmk-wb-plan-trail">
+          <summary>
+            <span className="cmk-strip-eyebrow">Why this cycle</span>
+            <span className="cmk-wb-plan-trail-count">{plan.reasoning_trail.length} reasons</span>
+          </summary>
+          <ul>
+            {plan.reasoning_trail.map((bullet, i) => (
+              <li key={i}>{bullet}</li>
+            ))}
+          </ul>
+        </details>
+      )}
+      <div className="cmk-strip-eyebrow">7-day cycle</div>
+      <div className="cmk-wb-plan-strip">
+        {plan.days.map((d, i) => {
+          const tone = dayToneFor(d.approval_status);
+          const isActive = i === activeDayIdx;
+          return (
+            <button
+              key={d.day}
+              type="button"
+              className={`cmk-wb-plan-chip cmk-wb-plan-chip-${tone}${isActive ? " is-active" : ""}`}
+              onClick={() => setActiveDayIdx(i)}
+              title={`Day ${d.day} · ${d.approval_status}`}
+            >
+              <span className="cmk-wb-plan-chip-day">D{d.day}</span>
+              <span className="cmk-wb-plan-chip-status">{d.approval_status.replace(/_/g, " ")}</span>
+            </button>
+          );
+        })}
+      </div>
+
+      <div className="cmk-wb-plan-day-card">
+        <div className="cmk-wb-plan-day-head">
+          <div className="cmk-strip-eyebrow">Day {day.day} · {day.send_window}</div>
+          <h3 className="cmk-wb-plan-day-objective">{day.objective}</h3>
+          {day.reasoning && (
+            <p className="cmk-wb-plan-day-reasoning">{day.reasoning}</p>
+          )}
+        </div>
+        {day.required_actions.length === 0 ? (
+          <div className="cmk-wb-detail-empty">No actions on this day.</div>
+        ) : (
+          day.required_actions.map((a, ai) => (
+            <PlanActionPreview
+              key={`${day.day}-${ai}`}
+              action={a}
+              dayLabel={`Day ${day.day}`}
+              dayNumber={day.day}
+              dayIndex={activeDayIdx}
+              dayStatus={day.approval_status}
+              planId={plan.plan_id}
+              leadId={leadId}
+              leadName={leadName}
+              onPinToAgent={() =>
+                addPin({
+                  kind: "plan-day",
+                  label: `Day ${day.day} · ${a.channel}`,
+                  sublabel: a.intent,
+                  data: {
+                    lead_id: leadId,
+                    plan_id: plan.plan_id,
+                    day: { day_number: day.day, objective: day.objective, approval_status: day.approval_status },
+                    summary_text: a.draft_seed || a.intent,
+                  },
+                })
+              }
+              onRequestChanges={() =>
+                addPin({
+                  kind: "plan-day",
+                  label: `Day ${day.day} · request changes`,
+                  sublabel: a.intent,
+                  data: {
+                    lead_id: leadId,
+                    plan_id: plan.plan_id,
+                    day: { day_number: day.day, objective: day.objective, approval_status: day.approval_status },
+                    summary_text: `REQUEST CHANGES on Day ${day.day} (${a.channel}):\n${a.draft_seed || a.intent}\n\nWhat to change: `,
+                  },
+                })
+              }
+            />
+          ))
+        )}
+      </div>
+    </div>
+  );
+}
+
+function PlanActionPreview({
+  action,
+  dayLabel,
+  dayNumber,
+  dayIndex,
+  dayStatus,
+  planId,
+  leadId,
+  leadName,
+  onPinToAgent,
+  onRequestChanges,
+}: {
+  action: PlannedTouchpoint;
+  dayLabel: string;
+  dayNumber: number;
+  dayIndex: number;
+  dayStatus: string;
+  planId: string;
+  leadId: string;
+  leadName: string | null;
+  onPinToAgent: () => void;
+  onRequestChanges: () => void;
+}) {
+  const [editing, setEditing] = useState(false);
+  const [previewOpen, setPreviewOpen] = useState(false);
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [approving, setApproving] = useState(false);
+  const toast = useToast();
+  const draftText = action.draft_seed?.trim() || action.intent;
+  const rationale = (action.notes || "").trim();
+  const approved = dayStatus === "approved" || dayStatus === "sent";
+
+  async function doApprove() {
+    setApproving(true);
+    try {
+      const fd = new FormData();
+      fd.set("plan_id", planId);
+      fd.set("lead_id", leadId);
+      fd.set("day_index", String(dayIndex));
+      fd.set("status", "approved");
+      await setDayStatusAction(fd);
+      if (typeof window !== "undefined") {
+        window.dispatchEvent(new CustomEvent("comeketo:plan-changed", { detail: { lead_id: leadId } }));
+      }
+      toast.push(`Day ${dayNumber} queued — heartbeat will fire ${action.channel} in send window`, { tone: "success" });
+      setConfirmOpen(false);
+    } catch (e) {
+      toast.push(e instanceof Error ? e.message : "Approve failed", { tone: "error" });
+    } finally {
+      setApproving(false);
+    }
+  }
+
+  function handleEditWithAgent() {
+    onPinToAgent();
+    toast.push("Pinned to chat — agent now sees this draft. Type your edit in the composer.", { tone: "default" });
+  }
+
+  function handleRequestChanges() {
+    onRequestChanges();
+    toast.push("Pinned a request-changes prompt to chat — finish the sentence in the composer.", { tone: "default" });
+  }
+
+  const channelChrome =
+    action.channel === "email" ? { pill: "sky" as const, label: "Email" } :
+    action.channel === "sms"   ? { pill: "peach" as const, label: "SMS" } :
+                                 { pill: "lavender" as const, label: "Task" };
+
+  const head = (
+    <div className="cmk-wb-plan-action-head">
+      <span className={`cmk-pill cmk-pill-${channelChrome.pill}`}>{channelChrome.label}</span>
+      <span className="cmk-wb-plan-action-intent">{action.intent}</span>
+      {action.channel === "email" && (
+        <button type="button" className="cmk-wb-plan-pop-btn" onClick={() => setPreviewOpen(true)} title="Open full email preview">
+          ⤢ full preview
+        </button>
+      )}
+    </div>
+  );
+
+  const footer = (
+    <PlanActionFooter
+      onEdit={() => setEditing((v) => !v)}
+      onPin={handleEditWithAgent}
+      onRequestChanges={handleRequestChanges}
+      onApprove={() => setConfirmOpen(true)}
+      editing={editing}
+      draftText={draftText}
+      dayStatus={dayStatus}
+      approving={approving}
+    />
+  );
+
+  let body: ReactNode;
+  if (action.channel === "email") {
+    const html = emailDraftPlainToPreviewHtml(draftText);
+    const wrapped = wrapEmailPreviewHtml(html);
+    body = (
+      <iframe
+        className="cmk-wb-plan-email-frame"
+        sandbox=""
+        srcDoc={wrapped}
+        title={`${dayLabel} · email preview`}
+      />
+    );
+  } else if (action.channel === "sms") {
+    body = <div className="cmk-wb-plan-sms-bubble">{draftText}</div>;
+  } else {
+    body = (
+      <div className="cmk-wb-detail-md md-body-host">
+        <MarkdownBody source={draftText} />
+      </div>
+    );
+  }
+
+  return (
+    <>
+      <div className={`cmk-wb-plan-action cmk-wb-plan-action-${action.channel}`}>
+        {head}
+        {body}
+        {rationale && <PlanActionRationale text={rationale} />}
+        {footer}
+      </div>
+
+      {/* Full-fidelity email preview popup */}
+      {action.channel === "email" && (
+        <Modal open={previewOpen} onClose={() => setPreviewOpen(false)} width="wide">
+          <div className="cmk-wb-plan-preview-modal">
+            <div className="cmk-wb-plan-preview-head">
+              <div>
+                <div className="cmk-strip-eyebrow">{dayLabel} · what {leadName || "the customer"} will see</div>
+                <h3>{action.intent}</h3>
+              </div>
+              <span className="cmk-pill cmk-pill-sky">EMAIL</span>
+            </div>
+            <iframe
+              className="cmk-wb-plan-preview-frame"
+              sandbox=""
+              srcDoc={wrapEmailPreviewHtml(emailDraftPlainToPreviewHtml(draftText))}
+              title="Full email preview"
+            />
+            {rationale && (
+              <div className="cmk-wb-plan-rationale">
+                <span className="cmk-strip-eyebrow">Why this draft</span>
+                <p>{rationale}</p>
+              </div>
+            )}
+          </div>
+        </Modal>
+      )}
+
+      {/* Approve confirm modal — explicit gate so this never fires by mistake */}
+      <Modal open={confirmOpen} onClose={() => !approving && setConfirmOpen(false)}>
+        <div className="cmk-wb-plan-confirm">
+          <div className="cmk-strip-eyebrow cmk-wb-plan-confirm-eyebrow">⚠ Approve & queue send</div>
+          <h3 className="cmk-wb-plan-confirm-title">
+            Send <span className="cmk-pill cmk-pill-sky">{channelChrome.label.toUpperCase()}</span> to {leadName || "this lead"} on Day {dayNumber}?
+          </h3>
+          <p className="cmk-wb-plan-confirm-body">
+            Approving this day flips its status to <strong>approved</strong>. The next heartbeat will pick it up
+            and — if the org is in <code>approved_plan_execution</code> mode — fire the {channelChrome.label} to
+            the live customer through Close during the send window.
+          </p>
+          <p className="cmk-wb-plan-confirm-warning">
+            This is not a draft save. Cancel out and use <em>Edit with agent</em> if you're not ready to send.
+          </p>
+          <div className="cmk-wb-plan-confirm-foot">
+            <button
+              type="button"
+              className="cmk-wb-plan-btn cmk-wb-plan-btn-ghost"
+              onClick={() => setConfirmOpen(false)}
+              disabled={approving}
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              className="cmk-wb-plan-btn cmk-wb-plan-btn-mint"
+              onClick={() => void doApprove()}
+              disabled={approving || approved}
+            >
+              {approving ? <><Spinner /> approving…</> : "Approve & queue send"}
+            </button>
+          </div>
+        </div>
+      </Modal>
+    </>
+  );
+}
+
+function wrapEmailPreviewHtml(innerHtml: string): string {
+  return `<!doctype html><html><body style="margin:0;padding:24px 28px;background:#FCFBF8;color:#16161A;font-family:Newsreader,Georgia,serif;font-size:14px;line-height:1.55;">${innerHtml}</body></html>`;
+}
+
+function PlanActionRationale({ text }: { text: string }) {
+  return (
+    <div className="cmk-wb-plan-rationale">
+      <span className="cmk-strip-eyebrow">Why this draft</span>
+      <p>{text}</p>
+    </div>
+  );
+}
+
+function Spinner() {
+  return <span className="cmk-spinner" aria-hidden />;
+}
+
+function PlanActionFooter({
+  onEdit,
+  onPin,
+  onApprove,
+  onRequestChanges,
+  editing,
+  draftText,
+  dayStatus,
+  approving,
+}: {
+  onEdit: () => void;
+  onPin: () => void;
+  onApprove: () => void;
+  onRequestChanges: () => void;
+  editing: boolean;
+  draftText: string;
+  dayStatus: string;
+  approving: boolean;
+}) {
+  const approved = dayStatus === "approved" || dayStatus === "sent";
+  return (
+    <>
+      <div className="cmk-wb-plan-action-foot">
+        <div className="cmk-wb-plan-action-foot-left">
+          <button type="button" className="cmk-workbench-link-btn" onClick={onPin}>
+            edit with agent
+          </button>
+          <button type="button" className="cmk-workbench-link-btn" onClick={onEdit}>
+            {editing ? "hide source" : "show source"}
+          </button>
+        </div>
+        <div className="cmk-wb-plan-action-foot-right">
+          <button
+            type="button"
+            className="cmk-wb-plan-btn cmk-wb-plan-btn-ghost"
+            onClick={onRequestChanges}
+            disabled={approving}
+            title="Pin to chat with a request-changes seed"
+          >
+            Request changes
+          </button>
+          <button
+            type="button"
+            className="cmk-wb-plan-btn cmk-wb-plan-btn-mint"
+            disabled={approving || approved}
+            onClick={onApprove}
+            title={approved ? "Already approved" : "Opens a confirmation — approval queues a real send via heartbeat"}
+          >
+            {approved ? "✓ Approved" : "Approve & queue…"}
+          </button>
+        </div>
+      </div>
+      {editing && <pre className="cmk-wb-plan-action-source">{draftText}</pre>}
+    </>
+  );
+}
+
+/**
+ * Substantive right-pane render for a workbench widget.
+ *
+ * `WorkbenchWidgetCard` (above) is the compact rail-style card. This is the
+ * fat detail view: full markdown bodies for prose docs, full transcripts for
+ * comms, real plan-day previews, etc. Each `widgetId` branch is the canonical
+ * "what does this widget show when it's the focus of the right pane" answer.
+ */
+function WorkbenchWidgetDetail({
+  widgetId,
+  snapshot,
+  leadId,
+  leadName,
+  pending,
+  onAction,
+  onShareWithAgent,
+  onReload,
+}: {
+  widgetId: LeadWidgetId;
+  snapshot: WorkbenchSnapshot | null;
+  leadId: string;
+  leadName: string | null;
+  pending: boolean;
+  onAction: (kind: "raw" | "ai" | "plan" | "all") => void;
+  onShareWithAgent: () => void;
+  onReload: () => void;
+}) {
+  const def = WORKBENCH_WIDGETS[widgetId];
+  const status = widgetStatus(widgetId, snapshot);
+  const docFor = (file: string) => docByFile(snapshot, file);
+
+  let body: ReactNode;
+
+  if (widgetId === "plan") {
+    body = <PlanWidgetDetail leadId={leadId} leadName={leadName} />;
+  } else if (!snapshot) {
+    body = <div className="cmk-wb-skeleton">loading lead workbench…</div>;
+  } else if (widgetId === "ai_profile") {
+    const profile = docFor("04_profile.md");
+    body = profile?.body ? (
+      <ProfileSectioned source={profile.body} />
+    ) : (
+      <div className="cmk-wb-detail-empty">
+        No AI profile generated yet — run <em>Refresh AI</em> from the Workflow widget after raw substrate is loaded.
+      </div>
+    );
+  } else if (widgetId === "ledger") {
+    const ledger = docFor("08_client_ledger.md");
+    body = (
+      <div className="cmk-wb-detail-stack">
+        <LedgerAppendForm leadId={leadId} leadName={leadName} onAppended={onReload} />
+        {ledger?.body ? (
+          <div className="cmk-wb-detail-md md-body-host">
+            <MarkdownBody source={ledger.body} />
+          </div>
+        ) : (
+          <div className="cmk-wb-detail-empty">
+            Client ledger empty — append the first entry above to seed the file.
+          </div>
+        )}
+      </div>
+    );
+  } else if (widgetId === "enrichment") {
+    const enrichment = docFor("09_enrichment.md");
+    const overrides = docFor("10_operator_overrides.md");
+    body = (
+      <div className="cmk-wb-detail-stack">
+        {enrichment?.body ? (
+          <div className="cmk-wb-detail-md md-body-host">
+            <div className="cmk-strip-eyebrow">Enrichment</div>
+            <MarkdownBody source={enrichment.body} />
+          </div>
+        ) : (
+          <div className="cmk-wb-detail-empty">No enrichment yet. (Web search via Perplexity comes later.)</div>
+        )}
+        {overrides?.body && (
+          <div className="cmk-wb-detail-md md-body-host">
+            <div className="cmk-strip-eyebrow">Operator overrides</div>
+            <MarkdownBody source={overrides.body} />
+          </div>
+        )}
+      </div>
+    );
+  } else if (widgetId === "comms") {
+    body =
+      snapshot.latest_comms.length === 0 ? (
+        <div className="cmk-wb-detail-empty">
+          No comm refs yet. Once a sweep imports email/SMS/calls, they'll appear here.
+        </div>
+      ) : (
+        <div className="cmk-wb-detail-stack">
+          {snapshot.latest_comms.map((c, i) => (
+            <CommRow key={`${c.ref}-${i}`} leadId={leadId} comm={c} />
+          ))}
+        </div>
+      );
+  } else if (widgetId === "raw_box") {
+    const meta = docFor("00_meta.json");
+    const rawLead = docFor("01_raw_lead.json");
+    const continuity = docFor("02_continuity.jsonl");
+    body = (
+      <div className="cmk-wb-detail-stack">
+        {[
+          { label: "00_meta.json", doc: meta },
+          { label: "01_raw_lead.json", doc: rawLead },
+          { label: "02_continuity.jsonl", doc: continuity },
+        ].map((row) => (
+          <details key={row.label} className="cmk-wb-detail-raw">
+            <summary>
+              <strong>{row.label}</strong>
+              <span>{row.doc?.present ? `${Math.ceil((row.doc.chars || 0) / 1024)}k` : "missing"}</span>
+            </summary>
+            {row.doc?.body && <pre className="cmk-wb-raw-pre">{row.doc.body}</pre>}
+          </details>
+        ))}
+      </div>
+    );
+  } else if (widgetId === "workflow") {
+    const rawReady = snapshot.needs.raw.length === 0;
+    const aiReady = snapshot.needs.ai.length === 0;
+    const planReady = snapshot.needs.plan.length === 0;
+    body = (
+      <div className="cmk-wb-detail-stack">
+        <div className="cmk-wb-flow-grid">
+          <WorkflowStageTile tone="lemon" label="Raw"  ok={rawReady}  meta={`${snapshot.counts.comm_files} transcript files`} sub={snapshot.last_checked_at ? fmtWhen(snapshot.last_checked_at) : "never swept"} />
+          <WorkflowStageTile tone="lavender" label="AI" ok={aiReady} meta={aiReady ? "all AI docs present" : `${snapshot.needs.ai.length} doc${snapshot.needs.ai.length === 1 ? "" : "s"} missing`} sub={`${snapshot.counts.docs_present}/${snapshot.counts.docs_total} present`} />
+          <WorkflowStageTile tone="peach" label="Plan" ok={planReady} meta={snapshot.plan ? `${snapshot.plan.days}-day cycle · ${snapshot.plan.needs_review} review` : "not generated"} sub={snapshot.plan ? snapshot.plan.status : "—"} />
+        </div>
+        <div className="cmk-wb-flow-actions">
+          <button type="button" className="cmk-wb-flow-btn cmk-wb-flow-btn-lemon" onClick={() => onAction("raw")} disabled={pending}>
+            <span className="cmk-wb-flow-btn-glyph" aria-hidden>↻</span> Refresh raw
+          </button>
+          <button type="button" className="cmk-wb-flow-btn cmk-wb-flow-btn-lavender" onClick={() => onAction("ai")} disabled={pending || !rawReady}>
+            <span className="cmk-wb-flow-btn-glyph" aria-hidden>✦</span> Refresh AI
+          </button>
+          <button type="button" className="cmk-wb-flow-btn cmk-wb-flow-btn-peach" onClick={() => onAction("plan")} disabled={pending || !aiReady}>
+            <span className="cmk-wb-flow-btn-glyph" aria-hidden>◐</span> {snapshot.plan ? "Regenerate plan" : "Generate plan"}
+          </button>
+          <button type="button" className="cmk-wb-flow-btn cmk-wb-flow-btn-mint" onClick={() => onAction("all")} disabled={pending}>
+            <span className="cmk-wb-flow-btn-glyph" aria-hidden>⚡</span> Run full pipeline
+          </button>
+        </div>
+        <div className="cmk-wb-detail-note">Last sweep {fmtWhen(snapshot.last_checked_at)}</div>
+      </div>
+    );
+  } else if (widgetId === "heartbeat") {
+    body = <HeartbeatQueueDetail leadId={leadId} snapshot={snapshot} />;
+  } else if (widgetId === "proposal_review") {
+    const plan = snapshot.plan;
+    body = (
+      <div className="cmk-wb-detail-stack">
+        <div className="cmk-wb-kpis">
+          <div><strong>{plan?.needs_review ?? 0}</strong><span>review</span></div>
+          <div><strong>{plan?.approved ?? 0}</strong><span>approved</span></div>
+          <div><strong>{plan?.sent ?? 0}</strong><span>sent</span></div>
+        </div>
+        <div className="cmk-wb-detail-note">
+          {plan?.goal_summary || "Generate a plan before review."}
+        </div>
+        <div className="cmk-wb-detail-note">In a future slice this folds into the Plan widget under a settings flag.</div>
+      </div>
+    );
+  } else {
+    body = (
+      <div className="cmk-wb-detail-empty">
+        {def.summary}
+      </div>
+    );
+  }
+
+  return (
+    <section className={`cmk-wb-detail cmk-wb-detail-${widgetId}`}>
+      <header className="cmk-wb-detail-head">
+        <div className="cmk-wb-detail-head-row">
+          <WidgetGlyph widgetId={widgetId} />
+          <div className="cmk-wb-detail-titles">
+            <div className="cmk-strip-eyebrow">{def.label}</div>
+            <h2 className="cmk-wb-detail-lead">{leadName || leadId}</h2>
+          </div>
+          <span className={`cmk-wb-status cmk-wb-status-${status.tone}`}>{status.label}</span>
+        </div>
+        <p className="cmk-wb-detail-summary">{def.summary}</p>
+      </header>
+      <div className="cmk-wb-detail-body">{body}</div>
+      <footer className="cmk-wb-detail-foot">
+        <button type="button" className="cmk-workbench-link-btn" onClick={onShareWithAgent}>
+          share with agent
+        </button>
+      </footer>
+    </section>
+  );
+}
+
+function WidgetSwitcher({
+  active,
+  onSelect,
+}: {
+  active: LeadWidgetId[];
+  onSelect: (widgetId: LeadWidgetId) => void;
+}) {
+  const order: LeadWidgetId[] = [
+    "plan",
+    "ai_profile",
+    "comms",
+    "ledger",
+    "raw_box",
+    "workflow",
+    "proposal_review",
+    "enrichment",
+    "heartbeat",
+  ];
+  return (
+    <div className="cmk-widget-switcher">
+      {order.map((id) => (
+        <button
+          key={id}
+          type="button"
+          className={`cmk-widget-toggle${active.includes(id) ? " is-active" : ""}`}
+          onClick={() => onSelect(id)}
+          aria-pressed={active.includes(id)}
+        >
+          <span>{WORKBENCH_WIDGETS[id].label}</span>
+          <span aria-hidden>{active.includes(id) ? "open" : "+"}</span>
+        </button>
+      ))}
+    </div>
   );
 }
 
@@ -2391,8 +3928,8 @@ function gridTemplate(rail: PaneMode, scope: PaneMode): string {
   // the tab auto-places into another grid cell and pokes into chat's space.
   // Always returning 3 columns means the chat panel sits in the same grid
   // track regardless of pane state, so toggling never breaks the layout.
-  const railWidth = rail === "hidden" ? "18px" : rail === "wide" ? "440px" : "220px";
-  const scopeWidth = scope === "hidden" ? "18px" : scope === "wide" ? "520px" : "260px";
+  const railWidth = rail === "hidden" ? "18px" : rail === "wide" ? "216px" : "168px";
+  const scopeWidth = scope === "hidden" ? "18px" : scope === "wide" ? "720px" : "620px";
   // minmax(420px, 1fr) prevents chat from being crushed when both side panes
   // go wide on a narrow viewport.
   return `${railWidth} minmax(420px, 1fr) ${scopeWidth}`;
@@ -2421,6 +3958,11 @@ export function ChatLayout() {
   const [slashOpen, setSlashOpen] = useState(false);
   const [slashIndex, setSlashIndex] = useState(0);
   const [nowTick, setNowTick] = useState(0);
+  const [rightWidgets, setRightWidgets] = useState<LeadWidgetId[]>(PRESET_RIGHT_WIDGETS.state);
+  const [focusedWidgetId, setFocusedWidgetId] = useState<LeadWidgetId | null>(null);
+  const [workbenchSnapshot, setWorkbenchSnapshot] = useState<WorkbenchSnapshot | null>(null);
+  const [workbenchError, setWorkbenchError] = useState<string | null>(null);
+  const [workbenchPending, startWorkbenchTransition] = useTransition();
   const abortRef = useRef<AbortController | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const fileRef = useRef<HTMLInputElement>(null);
@@ -2434,6 +3976,57 @@ export function ChatLayout() {
   const linkedLeadId = (searchParams.get("lead") || searchParams.get("lead_id") || "").trim();
   const linkedLeadName = (searchParams.get("leadName") || searchParams.get("lead_name") || "").trim();
   const hasLeadDeepLink = /^lead_[A-Za-z0-9]+$/.test(linkedLeadId);
+  const requestedPreset = parsePreset(searchParams.get("preset"));
+  const rightParam = searchParams.get("right");
+  const requestedRightWidgets = useMemo(
+    () => parseWidgetList(rightParam) ?? PRESET_RIGHT_WIDGETS[requestedPreset],
+    [rightParam, requestedPreset],
+  );
+
+  const reloadWorkbench = useCallback(async (leadId = layout.lead_id) => {
+    if (!leadId) {
+      setWorkbenchSnapshot(null);
+      setWorkbenchError(null);
+      return;
+    }
+    try {
+      const res = await fetch(`/api/lead/${encodeURIComponent(leadId)}/workbench`, { cache: "no-store" });
+      const data = await res.json();
+      if (data.ok) {
+        setWorkbenchSnapshot(data as WorkbenchSnapshot);
+        setWorkbenchError(null);
+      } else {
+        setWorkbenchError(data.error || "workbench load failed");
+      }
+    } catch (err) {
+      setWorkbenchError(err instanceof Error ? err.message : String(err));
+    }
+  }, [layout.lead_id]);
+
+  useEffect(() => {
+    if (layout.mode !== "lead" || !layout.lead_id) {
+      setWorkbenchSnapshot(null);
+      setWorkbenchError(null);
+      return;
+    }
+    void reloadWorkbench(layout.lead_id);
+  }, [layout.mode, layout.lead_id, reloadWorkbench]);
+
+  useEffect(() => {
+    function onVisibility() {
+      if (typeof document !== "undefined" && !document.hidden) void reloadWorkbench();
+    }
+    function onPlanChanged(ev: Event) {
+      const detail = (ev as CustomEvent<{ lead_id?: string }>).detail;
+      if (!detail?.lead_id || detail.lead_id === layout.lead_id) void reloadWorkbench();
+    }
+    document.addEventListener("visibilitychange", onVisibility);
+    window.addEventListener("comeketo:plan-changed", onPlanChanged as EventListener);
+    return () => {
+      document.removeEventListener("visibilitychange", onVisibility);
+      window.removeEventListener("comeketo:plan-changed", onPlanChanged as EventListener);
+    };
+  }, [layout.lead_id, reloadWorkbench]);
 
   useEffect(() => {
     const draftId = searchParams.get("draft");
@@ -2460,21 +4053,26 @@ export function ChatLayout() {
 
   useEffect(() => {
     if (!hydrated || !hasLeadDeepLink) return;
-    const key = `${linkedLeadId}:${linkedLeadName}`;
+    const key = `${linkedLeadId}:${linkedLeadName}:${requestedPreset}:${requestedRightWidgets.join(",")}`;
     if (leadLinkConsumed.current === key) return;
     leadLinkConsumed.current = key;
+    const leadChanged = layout.lead_id !== linkedLeadId;
 
     setMode("lead");
     setLead(linkedLeadId, linkedLeadName || linkedLeadId);
     show("scope");
-    setActiveId(null);
-    setMessages([]);
-    setPending([]);
-    setInput("");
-    setActiveQuickId(null);
-    toast.push("Lead Box loaded in Delegations", { tone: "success" });
+    if (leadChanged) {
+      setActiveId(null);
+      setMessages([]);
+      setPending([]);
+      setInput("");
+      setActiveQuickId(null);
+    }
+    setRightWidgets(requestedRightWidgets);
+    setFocusedWidgetId(requestedRightWidgets[0] ?? null);
+    toast.push(leadChanged ? "Lead Box loaded in Delegations" : "Workbench widgets updated", { tone: "success" });
     queueMicrotask(() => inputRef.current?.focus());
-  }, [hydrated, hasLeadDeepLink, linkedLeadId, linkedLeadName, setMode, setLead, show, toast]);
+  }, [hydrated, hasLeadDeepLink, linkedLeadId, linkedLeadName, layout.lead_id, requestedPreset, requestedRightWidgets, setMode, setLead, show, toast]);
 
   /* ---- Threads ---- */
 
@@ -2764,6 +4362,8 @@ export function ChatLayout() {
           // Lead-mode cockpit context — server prepends a Box summary to the
           // system prompt so the agent stops re-discovering scope via tools.
           lead_id: layout.mode === "lead" ? layout.lead_id ?? undefined : undefined,
+          visible_widgets: visibleWidgetContext,
+          focused_widget_id: focusedWidgetId ?? undefined,
         }),
         signal: ctrl.signal,
       });
@@ -2930,6 +4530,93 @@ export function ChatLayout() {
     }, 0);
   }
 
+  function selectRightWidget(widgetId: LeadWidgetId) {
+    setRightWidgets([widgetId]);
+    setFocusedWidgetId(widgetId);
+    if (layout.scope === "hidden") show("scope");
+  }
+
+  function runWorkbenchAction(kind: "raw" | "ai" | "plan" | "all") {
+    if (!layout.lead_id) return;
+    const leadId = layout.lead_id;
+    startWorkbenchTransition(async () => {
+      const fd = new FormData();
+      fd.set("lead_id", leadId);
+      if (kind === "plan" || kind === "all") fd.set("horizon_days", "7");
+      try {
+        if (kind === "raw") await sweepLeadBoxAction(fd);
+        if (kind === "ai") await regenerateClientBoxDocsAction(fd);
+        if (kind === "plan") await generatePlanAction(fd);
+        if (kind === "all") await runLeadBoxWorkflowAction(fd);
+        await reloadWorkbench(leadId);
+        window.dispatchEvent(new CustomEvent("comeketo:plan-changed", { detail: { lead_id: leadId } }));
+        toast.push(
+          kind === "raw"
+            ? "Raw box refreshed"
+            : kind === "ai"
+              ? "AI docs regenerated"
+              : kind === "plan"
+                ? "Plan regenerated"
+                : "Raw → AI → plan complete",
+          { tone: "success" },
+        );
+      } catch (err) {
+        toast.push(err instanceof Error ? err.message : String(err), { tone: "error", ttl: 7000 });
+      }
+    });
+  }
+
+  const visibleWidgetContext: WorkbenchContextCard[] = useMemo(() => {
+    if (layout.mode !== "lead" || !layout.lead_id) return [];
+    const ordered = rightWidgets;
+    return ordered.map((widgetId, index) => {
+      const def = WORKBENCH_WIDGETS[widgetId];
+      const primary = focusedWidgetId === widgetId || (!focusedWidgetId && index === 0);
+      return {
+        widget_id: widgetId,
+        title: def.label,
+        lead_id: layout.lead_id!,
+        priority: primary ? "primary" : index < 4 ? "supporting" : "background",
+        summary: def.summary,
+        facts: [
+          { label: "lead", value: layout.lead_name || layout.lead_id! },
+          { label: "visible widget", value: "right workbench" },
+          ...(workbenchSnapshot
+            ? [
+                { label: "last checked", value: fmtWhen(workbenchSnapshot.last_checked_at) },
+                { label: "docs", value: `${workbenchSnapshot.counts.docs_present}/${workbenchSnapshot.counts.docs_total}` },
+                widgetId === "plan"
+                  ? {
+                      label: "plan",
+                      value: workbenchSnapshot.plan
+                        ? `${workbenchSnapshot.plan.status}, ${workbenchSnapshot.plan.days} days, ${workbenchSnapshot.plan.needs_review} needs review`
+                        : "missing",
+                    }
+                  : null,
+                widgetId === "comms"
+                  ? { label: "latest comms", value: `${workbenchSnapshot.latest_comms.length} loaded` }
+                  : null,
+              ].filter((x): x is { label: string; value: string } => Boolean(x))
+            : []),
+        ],
+        warnings: workbenchSnapshot
+          ? [
+              ...(workbenchSnapshot.needs.raw.length ? [`Raw missing: ${workbenchSnapshot.needs.raw.join(", ")}`] : []),
+              ...(workbenchSnapshot.needs.ai.length ? [`AI docs missing: ${workbenchSnapshot.needs.ai.join(", ")}`] : []),
+              ...(workbenchSnapshot.needs.plan.length ? ["No seven-day plan generated yet."] : []),
+            ]
+          : [],
+        open_questions:
+          widgetId === "plan"
+            ? ["Is the plan current with the latest raw box and ready for approval?"]
+            : widgetId === "ai_profile"
+              ? ["Are the NEPQ profile and buyer-state interpretation fresh enough to plan from?"]
+              : [],
+        source_refs: def.refs,
+      };
+    });
+  }, [focusedWidgetId, layout.lead_id, layout.lead_name, layout.mode, rightWidgets, workbenchSnapshot]);
+
   /* ---- Live timestamp ticker — refreshes thread "2h" labels every 60s ---- */
 
   useEffect(() => {
@@ -2991,6 +4678,86 @@ export function ChatLayout() {
           } else {
             void send(`Search Close for "${q}" (close_search_leads). If there's an obvious match, read it (close_get_lead_full) and tell me what state it's in.`);
           }
+        },
+      },
+      {
+        id: "workbench-plan",
+        keys: ["/plan-view", "/plan"],
+        label: "/plan",
+        hint: "Open the lead plan widget",
+        run: () => {
+          if (layout.mode !== "lead" || !layout.lead_id) {
+            toast.push("Pick a lead first, then use /plan.", { tone: "warn" });
+            return;
+          }
+          setRightWidgets(PRESET_RIGHT_WIDGETS.plan);
+          setFocusedWidgetId("plan");
+          if (layout.scope === "hidden") show("scope");
+          toast.push("Workbench preset: plan", { tone: "success" });
+        },
+      },
+      {
+        id: "workbench-profile",
+        keys: ["/profile", "/ai"],
+        label: "/profile",
+        hint: "Open the AI profile widget",
+        run: () => {
+          if (layout.mode !== "lead" || !layout.lead_id) {
+            toast.push("Pick a lead first, then use /profile.", { tone: "warn" });
+            return;
+          }
+          setRightWidgets(PRESET_RIGHT_WIDGETS.state);
+          setFocusedWidgetId("ai_profile");
+          if (layout.scope === "hidden") show("scope");
+          toast.push("Workbench preset: AI profile", { tone: "success" });
+        },
+      },
+      {
+        id: "workbench-raw",
+        keys: ["/raw", "/box"],
+        label: "/raw",
+        hint: "Open the raw box widget",
+        run: () => {
+          if (layout.mode !== "lead" || !layout.lead_id) {
+            toast.push("Pick a lead first, then use /raw.", { tone: "warn" });
+            return;
+          }
+          setRightWidgets(PRESET_RIGHT_WIDGETS.raw);
+          setFocusedWidgetId("raw_box");
+          if (layout.scope === "hidden") show("scope");
+          toast.push("Workbench preset: raw box", { tone: "success" });
+        },
+      },
+      {
+        id: "workbench-review",
+        keys: ["/review"],
+        label: "/review",
+        hint: "Open the proposal review widget",
+        run: () => {
+          if (layout.mode !== "lead" || !layout.lead_id) {
+            toast.push("Pick a lead first, then use /review.", { tone: "warn" });
+            return;
+          }
+          setRightWidgets(PRESET_RIGHT_WIDGETS.review);
+          setFocusedWidgetId("proposal_review");
+          if (layout.scope === "hidden") show("scope");
+          toast.push("Workbench preset: review", { tone: "success" });
+        },
+      },
+      {
+        id: "workbench-heartbeat",
+        keys: ["/heartbeat-view", "/hb-view"],
+        label: "/heartbeat-view",
+        hint: "Open the heartbeat widget",
+        run: () => {
+          if (layout.mode !== "lead" || !layout.lead_id) {
+            toast.push("Pick a lead first, then use /heartbeat-view.", { tone: "warn" });
+            return;
+          }
+          setRightWidgets(PRESET_RIGHT_WIDGETS.heartbeat);
+          setFocusedWidgetId("heartbeat");
+          if (layout.scope === "hidden") show("scope");
+          toast.push("Workbench preset: heartbeat", { tone: "success" });
         },
       },
       {
@@ -3234,25 +5001,25 @@ export function ChatLayout() {
         <aside className="cmk-panel cmk-rail" style={{ display: "flex", flexDirection: "column", minHeight: 0 }}>
           <div className="cmk-panel-head">
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              <button
-                type="button"
-                className="cmk-eyebrow cmk-eyebrow-btn"
-                onClick={() => setMode(layout.mode === "andre" ? "lead" : "andre")}
-                title={
-                  layout.mode === "andre"
-                    ? "Switch to Lead mode (bind chat to one lead)"
-                    : "Switch to Andre mode (no lead in scope)"
-                }
-                aria-label={`Switch cockpit mode (currently ${layout.mode})`}
-              >
-                Delegations · {layout.mode === "andre" ? "Andre" : "Lead"}
-                <span className="cmk-eyebrow-btn-glyph" aria-hidden>
-                  ⇄
-                </span>
-              </button>
+              {layout.mode === "lead" ? (
+                <div className="cmk-eyebrow">Widgets</div>
+              ) : (
+                <button
+                  type="button"
+                  className="cmk-eyebrow cmk-eyebrow-btn"
+                  onClick={() => setMode("lead")}
+                  title="Switch to Lead mode (bind chat to one lead)"
+                  aria-label="Switch cockpit mode to lead"
+                >
+                  Delegations · Andre
+                  <span className="cmk-eyebrow-btn-glyph" aria-hidden>
+                    ⇄
+                  </span>
+                </button>
+              )}
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
-              {lastDelegation && !loading && (
+              {layout.mode === "andre" && lastDelegation && !loading && (
                 <button
                   type="button"
                   onClick={() => fireQuickDelegation(lastDelegation)}
@@ -3263,15 +5030,17 @@ export function ChatLayout() {
                   ↻
                 </button>
               )}
-              <button
-                type="button"
-                onClick={handleNewThread}
-                className="cmk-rail-icon-btn"
-                title="New thread (⌘N)"
-                aria-label="New thread"
-              >
-                +
-              </button>
+              {layout.mode === "andre" && (
+                <button
+                  type="button"
+                  onClick={handleNewThread}
+                  className="cmk-rail-icon-btn"
+                  title="New thread (⌘N)"
+                  aria-label="New thread"
+                >
+                  +
+                </button>
+              )}
               <PaneControl
                 mode={layout.rail}
                 onCycle={() => cycle("rail")}
@@ -3281,36 +5050,11 @@ export function ChatLayout() {
           </div>
 
           <div className="cmk-scroll scroll-hide" style={{ flex: 1, overflowY: "auto", padding: 8 }}>
-            {/* ── Lead mode: picker + lead-scoped quick prompts ───────────── */}
+            {/* ── Lead mode: widget navigator only ───────────────────────── */}
             {layout.mode === "lead" && (
-              <div style={{ marginBottom: 8 }}>
-                <LeadPicker
-                  activeLeadId={layout.lead_id}
-                  activeLeadName={layout.lead_name}
-                  onPick={(id, name) => setLead(id, name)}
-                  onClear={() => setLead(null, null)}
-                />
+              <div className="cmk-lead-widget-nav">
                 {layout.lead_id && (
-                  <div className="cmk-quick-list" style={{ marginTop: 8 }}>
-                    {LEAD_QUICK_DELEGATIONS.map((q, qi) => {
-                      const isRunning = activeQuickId === q.id && loading;
-                      return (
-                        <button
-                          key={q.id}
-                          type="button"
-                          onClick={() => fireQuickDelegation(q)}
-                          className={`cmk-quick cmk-quick-${q.tone}${isRunning ? " cmk-quick-running" : ""}`}
-                          disabled={loading}
-                          title={q.prompt}
-                          style={{ animationDelay: `${qi * 50}ms` }}
-                        >
-                          <div className="cmk-quick-label">{q.label}</div>
-                          <div className="cmk-quick-hint">{isRunning ? "running…" : q.hint}</div>
-                          {isRunning && <span className="cmk-quick-flare" aria-hidden />}
-                        </button>
-                      );
-                    })}
-                  </div>
+                  <WidgetSwitcher active={rightWidgets} onSelect={selectRightWidget} />
                 )}
               </div>
             )}
@@ -3468,7 +5212,7 @@ export function ChatLayout() {
           style={{ flex: 1, overflowY: "auto", padding: "16px 18px", display: "flex", flexDirection: "column", gap: 14 }}
         >
           {messages.length === 0 && !loading ? (
-            <DemoEmptyState onSeed={(s) => setInput(s)} />
+            <DemoEmptyState onSeed={(s) => setInput(s)} mode={layout.mode} leadId={layout.lead_id} leadName={layout.lead_name} />
           ) : (
             <>
               {messages.map((msg) =>
@@ -3652,7 +5396,7 @@ export function ChatLayout() {
           <div className="cmk-panel-head">
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <span className="cmk-eyebrow">
-                {layout.mode === "lead" && layout.lead_id ? "Lead plan" : "In scope"}
+                {layout.mode === "lead" && layout.lead_id ? "Lead workbench" : "In scope"}
               </span>
             </div>
             <PaneControl
@@ -3663,7 +5407,30 @@ export function ChatLayout() {
           </div>
           {layout.mode === "lead" && layout.lead_id ? (
             <div className="cmk-scroll scroll-hide" style={{ flex: 1, overflowY: "auto", padding: 10 }}>
-              <PlanDayStrip leadId={layout.lead_id} leadName={layout.lead_name} />
+              <div className="cmk-strip-wrap">
+                {workbenchError && (
+                  <div className="cmk-strip-card">
+                    <div className="cmk-strip-eyebrow">workbench load failed</div>
+                    <p className="muted" style={{ fontSize: 11 }}>{workbenchError}</p>
+                    <button type="button" className="plan-btn" onClick={() => void reloadWorkbench()}>
+                      Retry
+                    </button>
+                  </div>
+                )}
+                {rightWidgets.map((widgetId) => (
+                  <WorkbenchWidgetDetail
+                    key={widgetId}
+                    widgetId={widgetId}
+                    snapshot={workbenchSnapshot}
+                    leadId={layout.lead_id!}
+                    leadName={layout.lead_name}
+                    pending={workbenchPending}
+                    onAction={runWorkbenchAction}
+                    onShareWithAgent={() => setFocusedWidgetId(widgetId)}
+                    onReload={() => void reloadWorkbench()}
+                  />
+                ))}
+              </div>
             </div>
           ) : layout.mode === "lead" ? (
             <div className="cmk-scope-empty" style={{ display: "flex", flexDirection: "column", height: "100%", minHeight: 0, padding: 16 }}>

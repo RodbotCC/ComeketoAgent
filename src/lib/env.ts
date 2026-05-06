@@ -33,6 +33,12 @@ export const env = {
   // sends are "as Andre" — JAKE is for admin/dev actions only.
   CLOSE_USER_ID_JAKE: read("CLOSE_USER_ID_JAKE"),
   CLOSE_USER_ID_ANDRE: read("CLOSE_USER_ID_ANDRE"),
+  /** Comeketo's real Close org doesn't populate the standard `lead.user_id` field —
+   *  ownership lives in a custom field (e.g. value "01. 😎 Andre"). These two env
+   *  vars tell the ownership gate which custom field to read and what string
+   *  value identifies an Andre-owned lead. Discovered 2026-05-05. */
+  CLOSE_OWNER_FIELD_ID: read("CLOSE_OWNER_FIELD_ID"),
+  CLOSE_OWNER_TAG_ANDRE: read("CLOSE_OWNER_TAG_ANDRE"),
   /** Optional. Close's official MCP server URL. When set, the chat agent gets
    *  `close_mcp_list_tools` + `close_mcp_call` as fallback tools for Close
    *  operations not yet wrapped by the direct REST helpers. Blank disables. */

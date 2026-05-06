@@ -18,7 +18,6 @@
  * Each run writes a row to `heartbeat_runs` for audit (Guardrails §O).
  */
 
-import { getSupabaseServer } from "./supabase";
 import { env } from "./env";
 import { getSettings } from "./settings";
 import {
@@ -276,7 +275,6 @@ export async function runHeartbeatForPlan(
   traceId?: string | null
 ): Promise<HeartbeatReport> {
   const startedAt = Date.now();
-  const sb = getSupabaseServer();
   const settings = await getSettings();
 
   // Phase 6: file-canonical plan lookup.
@@ -573,7 +571,6 @@ export type SimulatedPlan = {
  */
 export async function simulatePlanForLead(leadId: string): Promise<SimulatedPlan | null> {
   const startedAt = Date.now();
-  const sb = getSupabaseServer();
   const settings = await getSettings();
 
   // Phase 6: file-canonical plan lookup.

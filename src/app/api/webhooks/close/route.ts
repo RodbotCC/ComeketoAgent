@@ -71,7 +71,7 @@ export async function POST(req: Request) {
       } catch (e) {
         // Folder write failure must not break the webhook ack — Close will
         // retry the whole event otherwise. Sweeper will catch the lead on
-        // its next 2h tick regardless.
+        // its next hourly tick regardless.
         logStructured("warn", "webhook.close", "lead-folder dirty flip failed", {
           lead_id: lid,
           error: e instanceof Error ? e.message : String(e),

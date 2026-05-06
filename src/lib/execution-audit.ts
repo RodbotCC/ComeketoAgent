@@ -50,6 +50,10 @@ export const EXECUTION_LOG_KINDS = [
   "refine_plan_day",
   "refine_whole_plan",
   "day_status_change",
+  "regenerate_client_box_docs",
+  "sweep_lead_box",
+  "run_lead_box_workflow",
+  "append_client_ledger",
 ] as const;
 
 export type ExecutionLogKind = (typeof EXECUTION_LOG_KINDS)[number];

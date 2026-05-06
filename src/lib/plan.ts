@@ -47,6 +47,10 @@ export type SevenDayPlanDay = {
   /** 1-based index within this plan (1 … days.length). */
   day: number;
   objective: string;
+  /** 1-2 sentence rationale: WHY this objective for THIS day, given prior days
+   *  and what the Box says. Optional for back-compat with plans generated
+   *  before the reasoning prompt landed. */
+  reasoning?: string;
   required_actions: PlannedTouchpoint[];
   send_window: string;   // human-readable send window
   approval_status: ApprovalStatus;
@@ -67,6 +71,11 @@ export type SevenDayPlan = {
   primary_goal: PlanGoal;
   goal_summary: string;       // one sentence — what the cycle is FOR
   lead_state_summary: string; // one paragraph — current state in plain English
+  /** 3-5 high-level bullets explaining the AI's reasoning for the cycle as a
+   *  whole: what it noticed in the Box that drove the goal pick, why it
+   *  sequenced days the way it did, what tradeoffs it made. Optional for
+   *  back-compat with plans generated before the reasoning prompt landed. */
+  reasoning_trail?: string[];
   known_facts: string[];
   unknowns: string[];
   best_next_question: string;
@@ -165,6 +174,14 @@ Do NOT invent tasting dates.
 - The "primary_goal" you pick MUST be one of: scheduled_call | tasting | quote | clarify | re_engage.
 - "approval_required" in the JSON spec below is implied always true — plans never auto-execute without Andre's explicit approval.
 
+## Reasoning is required at every level
+Andre and Jake must be able to read your output and understand WHY you sequenced things the way you did. Treat this as the most important part of your job — a great plan with no reasoning is unfit for review.
+- **reasoning_trail** (cycle-level): 3-5 short bullets explaining what you noticed in the Box that drove the goal pick, why you sequenced days this way, and what tradeoffs you made.
+- **reasoning** (per-day): 1-2 sentences explaining WHY this day's objective makes sense GIVEN the prior days and the Box. Reference specific lead facts.
+- **notes** (per-action, REQUIRED — not optional anymore): one sentence explaining why THIS draft for THIS touchpoint. What is this draft trying to accomplish; what NEPQ angle is it taking; why this channel.
+
+If you can't articulate the reasoning for a choice, reconsider the choice — that's the signal you're guessing.
+
 ## Output
 Return ONLY a single JSON object matching this exact shape (no prose, no code fences):
 
@@ -172,6 +189,13 @@ Return ONLY a single JSON object matching this exact shape (no prose, no code fe
   "primary_goal": "scheduled_call" | "tasting" | "quote" | "clarify" | "re_engage",
   "goal_summary": "one sentence — what this ${n}-day cycle is for",
   "lead_state_summary": "one paragraph — concrete current state, name real specifics from the activity feed",
+  "reasoning_trail": [
+    "what you noticed (concrete fact from the Box)",
+    "why you picked this primary_goal",
+    "why this cadence/sequence",
+    "what tradeoff or risk you accepted",
+    "(optional) what you're hoping to learn"
+  ],
   "known_facts": ["fact 1", "fact 2", ...],
   "unknowns": ["unknown 1", "unknown 2", ...],
   "best_next_question": "one specific NEPQ-style question Andre should ask this lead",
@@ -180,8 +204,9 @@ Return ONLY a single JSON object matching this exact shape (no prose, no code fe
     {
       "day": 1,
       "objective": "string",
+      "reasoning": "1-2 sentences — why THIS objective for THIS day, given prior days and the Box",
       "required_actions": [
-        { "channel": "email|sms|task", "intent": "string", "draft_seed": "string", "notes": "optional" }
+        { "channel": "email|sms|task", "intent": "string", "draft_seed": "string", "notes": "REQUIRED — one sentence on why this draft for this touchpoint" }
         /* You MAY include >1 object here when multiple touches the same calendar day are justified. */
       ],
       "send_window": "string"
@@ -333,10 +358,15 @@ export async function generateSevenDayPlanForLead(
   const days: SevenDayPlanDay[] = parsed.days.map((d, i) => ({
     day: i + 1,
     objective: d.objective ?? "",
+    reasoning: typeof d.reasoning === "string" && d.reasoning.trim() ? d.reasoning.trim() : undefined,
     required_actions: d.required_actions ?? [],
     send_window: d.send_window || "9:00 AM – 7:00 PM lead-local",
     approval_status: "needs_review" as const,
   }));
+
+  const reasoningTrail = Array.isArray(parsed.reasoning_trail)
+    ? parsed.reasoning_trail.map((s: unknown) => String(s ?? "").trim()).filter(Boolean)
+    : undefined;
 
   const plan: SevenDayPlan = {
     plan_id: planId,
@@ -348,6 +378,7 @@ export async function generateSevenDayPlanForLead(
     primary_goal: parsed.primary_goal ?? "scheduled_call",
     goal_summary: parsed.goal_summary ?? "",
     lead_state_summary: parsed.lead_state_summary ?? "",
+    reasoning_trail: reasoningTrail,
     known_facts: parsed.known_facts ?? [],
     unknowns: parsed.unknowns ?? [],
     best_next_question: parsed.best_next_question ?? "",
@@ -385,11 +416,12 @@ You will receive:
 You return ONLY a single JSON object (no prose, no code fences) with keys:
 - day (integer): MUST equal the calendar bucket number being revised — see "DAY TO REVISE" in the user message.
 - objective (string)
-- required_actions: array of { "channel": "email|sms|task", "intent": "string", "draft_seed": "string", "tasting_date": "optional", "notes": "optional" }
+- reasoning (string): 1-2 sentences — WHY this objective for THIS day given the rest of the cycle and the operator's instruction.
+- required_actions: array of { "channel": "email|sms|task", "intent": "string", "draft_seed": "string", "tasting_date": "optional", "notes": "REQUIRED — one sentence on why this draft for this touchpoint" }
 - send_window (string)
 
 Example shape (values are illustrative):
-{ "day": 3, "objective": "string", "required_actions": [{ "channel": "email", "intent": "string", "draft_seed": "string" }], "send_window": "string" }
+{ "day": 3, "objective": "...", "reasoning": "...", "required_actions": [{ "channel": "email", "intent": "...", "draft_seed": "...", "notes": "..." }], "send_window": "..." }
 
 Hard rules:
 - Keep the day number unchanged (it must match the day being revised).
@@ -480,6 +512,7 @@ export async function refinePlanDay(
   const newDay: SevenDayPlanDay = {
     day: currentDay.day,
     objective: parsed.objective ?? currentDay.objective,
+    reasoning: typeof parsed.reasoning === "string" && parsed.reasoning.trim() ? parsed.reasoning.trim() : currentDay.reasoning,
     required_actions: parsed.required_actions,
     send_window: parsed.send_window || currentDay.send_window,
     approval_status: "needs_review",
@@ -497,16 +530,17 @@ You will receive:
 1. The CURRENT plan (all ${n} day buckets).
 2. The operator's refinement instruction in plain English.
 
-You return ONLY a single JSON object with the same shape as the original plan generation output:
+You return ONLY a single JSON object with the same shape as the original plan generation output. Reasoning is REQUIRED at every level — Andre must be able to read the output and understand WHY:
 
 {
   "primary_goal": "scheduled_call|tasting|quote|clarify|re_engage",
   "goal_summary": "string",
   "lead_state_summary": "string",
+  "reasoning_trail": ["3-5 bullets — what you noticed, why this goal, why this cadence, what tradeoff"],
   "known_facts": ["..."],
   "unknowns": ["..."],
   "best_next_question": "string",
-  "days": [ { "day":1, "objective":"...", "required_actions":[{"channel":"...","intent":"...","draft_seed":"..."}], "send_window":"..." }, ... exactly ${n} entries with day running 1..${n} ],
+  "days": [ { "day":1, "objective":"...", "reasoning":"1-2 sentences why this day's objective", "required_actions":[{"channel":"...","intent":"...","draft_seed":"...","notes":"REQUIRED — why this draft"}], "send_window":"..." }, ... exactly ${n} entries with day running 1..${n} ],
   "stop_conditions": [{ "trigger":"...", "action":"..." }]
 }
 
@@ -530,6 +564,7 @@ export type RefineWholePlanResult =
         | "primary_goal"
         | "goal_summary"
         | "lead_state_summary"
+        | "reasoning_trail"
         | "known_facts"
         | "unknowns"
         | "best_next_question"
@@ -593,6 +628,7 @@ export async function refineWholePlan(
     primary_goal?: PlanGoal;
     goal_summary?: string;
     lead_state_summary?: string;
+    reasoning_trail?: string[];
     known_facts?: string[];
     unknowns?: string[];
     best_next_question?: string;
@@ -611,10 +647,15 @@ export async function refineWholePlan(
   const days: SevenDayPlanDay[] = parsed.days.map((d, i) => ({
     day: i + 1,
     objective: d.objective,
+    reasoning: typeof d.reasoning === "string" && d.reasoning.trim() ? d.reasoning.trim() : undefined,
     required_actions: d.required_actions ?? [],
     send_window: d.send_window || "9:00 AM – 7:00 PM lead-local",
     approval_status: "needs_review" as const,
   }));
+
+  const reasoningTrail = Array.isArray(parsed.reasoning_trail)
+    ? parsed.reasoning_trail.map((s) => String(s ?? "").trim()).filter(Boolean)
+    : fullPlan.reasoning_trail;
 
   return {
     ok: true,
@@ -622,6 +663,7 @@ export async function refineWholePlan(
       primary_goal: parsed.primary_goal ?? fullPlan.primary_goal,
       goal_summary: parsed.goal_summary ?? fullPlan.goal_summary,
       lead_state_summary: parsed.lead_state_summary ?? fullPlan.lead_state_summary,
+      reasoning_trail: reasoningTrail,
       known_facts: parsed.known_facts ?? fullPlan.known_facts,
       unknowns: parsed.unknowns ?? fullPlan.unknowns,
       best_next_question: parsed.best_next_question ?? fullPlan.best_next_question,

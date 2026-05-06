@@ -2,9 +2,26 @@
 
 Running snapshot of project state. Tapped before & after every move.
 
+## Agent quick read (~1 minute)
+
+**This file is timeline + nuance.** For a tap, skim this box, append under today's date, move on — unless your move **changed** branch layout, canonical stores, deploy wiring, or test counts (**then** update the bullets here in the quick read).
+
+**Current shape (baseline — confirm when touching infra):**
+
+- **Stack:** Next.js app repo `ComeketoAgent`; narrative state in **`harness/`** on **`main`**; production deploy Vercel; live URL historically `comeketo-agent-ra8h.vercel.app` (see deploy docs / Jake).
+- **Lead data:** Active leads live under **`harness/leads/active/`** per-lead folders (`{lead_id}__{slug}`) with contiguous **client box** files **`00_meta.json`–`10_operator_overrides.md`** + `comms/`, **`plan.json`**, **`intake/`**. Sweeper **`src/lib/lead-folder-sweeper.ts`** (~2h cron + `/test`).
+- **Global harness dirs:** `harness/ledger/` (daily JSONL), `harness/approvals/` (monthly JSONL), `harness/heartbeat/` (per-run JSON), plus scaffolded catalogs — see `harness/README.md`.
+- **Supabase:** Auxiliary only (webhook dedupe, chat history, freshness touches, storage, drafts) — not the home for lead prose (`CLAUDE.md`).
+- **Close:** REST integration in `src/lib/close*.ts`; webhooks **`/api/webhooks/close`**. MCP secondary for chat.
+- **Operator UX hotspots:** Cockpit **`/chat`**, proposals **`/proposals`** + Plan workbench overlay on lead Plan tab, **`/workflows`** author/publish, lead **Box / discovery / heartbeat / intake** tabs, **`/test`** diagnostics.
+- **Tests / quality gate:** Harness-era moves commonly cited **~120/120** vitest green + `tsc` clean — re-run after substantive edits (`npm test` / typecheck per project scripts).
+
 ---
 
 ## 2026-05-05
+
+- **after [scaffold — Global.md agent quick read]:** Added top-of-file "Agent quick read" so agents capture current snapshot without reading ~200KB of dated entries; chronology below unchanged.
+- **before [scaffold — Global.md agent quick read]:** Global ledger had grown very large; needed a stable "current shape" blurb at the `# Global` anchor.
 
 - **before/after [delete /lead/[id]/graph sub-tab]:** Snapshot — Graph was a sub-tab on `/lead/[id]` that pre-dated the workbench overlay; now redundant + felt unprofessional. After — entire surface gone: `src/app/lead/[id]/graph/` directory + `PlanGraphView.tsx` deleted; LeadSubNav drops the Graph link; cockpit's `edit plan →` link in `PlanDayStrip` repointed to the lead's Plan page (where the workbench lives). Three stale comments mentioning the graph page rewritten in `PlanDayStrip.tsx`, `PlanPageBeacon.tsx`, `ChatPanel.tsx`. CSS classes orphaned (no JSX refs) but left in `globals.css` until next sweep. tsc clean.
 
@@ -529,5 +546,150 @@ limit 10;
 - **before [Andre-only Leads index cleanup]** — 2026-05-05: Leads index direction: no more Jake/Andre owner switcher on the primary list. The app should present Andre's lead universe and let operators filter by status/search instead.
 - **after [Andre-only Leads index cleanup]** — 2026-05-05: Leads index UX rule updated in code: `/leads` is a single universe view, not an owner-mode selector. Owner-specific enforcement remains in downstream execution/guardrail surfaces; this change only removes the top-level list switcher.
 
+- **before [repo architecture review pass]** — 2026-05-05: Orientation move only. Read the repo, recent changes, and live modified/untracked surfaces to produce a high-signal architecture summary for the current branch/worktree.
+- **after [repo architecture review pass]** — 2026-05-05: Repo re-orientation complete. Summary delivered from `git log`, `git status`, and live diffs on the active harness/sweep files. Current branch is `main`; newest commit is the fake-data wipe ahead of real Close cutover. Active local changes are concentrated in ownership gating, raw lead substrate generation, sweep universe logic, and verification scripts.
+
+- **before [raw lead sweep review + hardening pass]** — 2026-05-05: Review move only. Inspect current raw-substrate sweep edits, compare them to the stated contract, and surface concrete improvements or breakage risks before further implementation.
+
 - **before [push everything to GitHub + Vercel]:** 1 unpushed local commit (`e785d94 Workbench overlay: single-day focus + message preview + better loading`). Tree clean. Pushing main → origin will trigger Vercel build (assuming workbench overlay change is outside `harness/` — it is, it's `src/`).
 - **after [push everything to GitHub+Vercel]:** Done. Local was diverged (1 src/ commit local, 26 harness/ ledger bot commits remote — non-overlapping by path, as designed). Rebased cleanly, committed scaffold taps, pushed. Two pushes total: `b9a7590..1aea56b`. Vercel will rebuild because `src/app/...workbench` changed (outside `harness/`, so `.vercelignore` won't skip it). Live site will pick up workbench overlay improvements within ~1 min.
+
+- **before/after [wipe all fake client lead data]:** Done. Jake is swapping `.env.local` to point at the real Close CRM and wanted a clean slate.
+  - **Files (deleted):** all 4 `harness/leads/active/lead_*` folders (Sinclair, Civic Arts, Trailhead, Friedman); `harness/ledger/2026-05-05.jsonl`; `harness/approvals/2026-05.jsonl`; `harness/heartbeat/2026-05-05/`.
+  - **Files (kept):** all `README.md`, scaffold `_scaffold/`, `harness/assets/global/`, all empty-but-scaffolded subdirs (catalog, automations, people, venues, staff, intelligence, summaries).
+  - **Supabase (rows deleted):** `messages` 120, `threads` 22, `intake_artifacts` 12, `lead_assets` 2, `automation_drafts` 65, `lead_activity_touches` 3, `close_webhook_events` 5, `execution_log` 473, `approval_audit` 29. Storage buckets not touched (any orphaned binaries are harmless).
+  - **Tooling added:** `scripts/wipe-client-data.ts` — reusable, safe to re-run.
+
+- **before/after [check three Close env vars + verify .env.local against real CRM]:** Done.
+  - `CLOSE_CLIENT_ID` / `CLOSE_CLIENT_SECRET` → **dead, no code references** — the app authenticates with `CLOSE_API_KEY` Bearer, not OAuth2. Safe to ignore (or delete from env later).
+  - `CLOSE_WEBHOOK_SIGNATURE_KEY` → only used by `src/app/api/webhooks/close/route.ts` to verify HMAC. Dormant unless a Close webhook subscription is firing at us.
+  - Renamed `CLOSE_USER_ID` → `CLOSE_USER_ID_ANDRE` in `.env.local` (the only name the code reads). Value confirmed: matches "Andre Raw" / team@comeketocatering.com in the live user list.
+  - Live verification against real Close: auth ✅ as Rhonna Ricafort / admin@comeketocatering.com, org "Comeketo Catering", 14,051 leads.
+  - 🚨 Discovered: real org doesn't use `lead.user_id` field at all — ownership lives in a custom field `cf_xF8FLufgEx9bsijfRAfHhgIrPBQ5ajuohcazC7OtNmT` (value `"01. 😎 Andre"`, 1,471 leads). Every ownership gate in the codebase needs a refactor before the agent can see real Andre leads. Logged in Problems.md, awaiting Jake's call.
+
+- **before/after [add custom-field ownership gate]:** Done — verified live.
+  - Added `CLOSE_OWNER_FIELD_ID` + `CLOSE_OWNER_TAG_ANDRE` to env (`src/lib/env.ts` + `.env.local`).
+  - `src/lib/close.ts`: new `isOwnedByAndre(lead)` helper reads the custom-field tag (falls back to `lead.user_id` for orgs that populate the standard field). `checkOwnershipAndStatus` now uses it. `LEAD_LIST_FIELDS` dynamically appends `custom.{CLOSE_OWNER_FIELD_ID}` so the tag comes back on every list response. `closeListLeadsByAssignee` + `closeListLeadsByAssigneeAndStatus` predicates switch to tag-mode when the caller asks for Andre.
+  - 2 inline call sites refactored: `src/app/leads/page.tsx` (owner badge), `src/app/lead/[id]/load-lead-box.ts` (owner name + gate). `tsc --noEmit` clean.
+  - Verification (`scripts/verify-andre-ownership.ts`): pulled 5 leads from real Close → all 5 had `owner-tag: "01. 😎 Andre"` → gate passed 4 active, blocked 1 Won (correct per Guardrails C2). No sweeper run, no harness writes, no Supabase touches.
+  - **Watch:** if Comeketo ever changes the cf_* id or the owner-tag string in Close, the gate goes silent (everything blocks). Both values are env-controlled so the fix is just an env edit.
+
+- [after] raw lead sweep review + hardening pass
+
+- [before] harden raw lead substrate using Elizabeth & Peter model
+
+- [after] harden raw lead substrate using Elizabeth & Peter model
+
+- [before] realign lead subtabs around canonical client box model
+
+- [after] realign lead subtabs around canonical client box model
+
+- [before] final functionality wiring for canonical client box
+
+- [after] final functionality wiring for canonical client box
+
+- [before] add client box preflight for live run safety
+
+- [after] add client box preflight for live run safety
+
+- [before] add in-app client box sweep controls
+
+- [after] add in-app client box sweep controls
+
+- [before] 2026-05-05 starting nav+loading+reactivity sprint per /Users/jakeaaron/.claude/plans/okay-codex-just-seriously-fizzy-lollipop.md. Plan = A1..A4 nav restructure → B1..B4 loading states → C1..C4 reactive loop → D verify+docs.
+
+- [after] 2026-05-05 nav+loading+reactivity sprint shipped. **New IA:** top header collapses to `Comeketo Agent.` wordmark + `Global ▾` (dropdown: console/analytics/heartbeat/workflows/personal/briefing) + `Proposals` + `Leads` + ⚙. Second always-on row = lead subtabs `Client Box · AI Profile · Seven-Day Plan · Delegations · Enrichment · Heartbeat`, disabled when not on a lead. **Files:** new `src/components/GlobalMenu.tsx` (click-outside dropdown), new `src/components/AppHeader.tsx` (client component owns both rows, `usePathname` for highlighting + lead-id extraction), retired `src/components/TabNav.tsx` and `src/app/lead/[id]/LeadSubNav.tsx` (deleted), 15 page callers swept, 5 lead pages stripped of inline subnav. **Loading states:** new `src/app/lead/[id]/box/ClientBoxActions.tsx` wraps Refresh raw box + Regenerate AI docs in `useTransition` with toast; per-AI/execution doc card has its own `↻ regenerate` calling new `regenerateOneClientBoxDocAction(formData)` (`doc_key` ∈ comms/profile/discovery/alerts/ledger). New `GeneratePlanForm.tsx` for plan generation (slow OpenAI). New `EnrollSubmitButton.tsx` (useFormStatus). New `console/RefreshAllLeadsButton.tsx` + `console/actions.ts:sweepAllActiveLeadsAction` calls `sweepActiveLeads()` with confirm dialog. **Reactivity loop:** `BoxActivityWatch` now dispatches `cmk:lead-stale` / `cmk:lead-fresh` window events; `AppHeader` listens and renders an amber dot (#C4923D) on the Client Box subtab when current lead is stale; dot auto-clears on landing on `/lead/[id]/box`. **Auto-regen:** `sweepLeadBoxAction` chains all five AI doc regenerators when raw substrate actually wrote (`result.written > 0`); each regen has its own skip-hash so chain-without-change stays cheap. **Plan staleness** (C3) was already wired pre-sprint via snapshot-id mismatch (`PlanSection.tsx:78`) — confirmed not duplicated. **CLAUDE.md doc list** updated to canonical 10. Verification: `npx tsc --noEmit` clean, `npm test` 16 files / 112 tests passed, `npm run build` clean (lead/[id]/box bundle 9.75 kB → 106 kB First Load). Watch: (a) C4 end-to-end webhook→bump→dot path not driven manually (no live Close webhook fire from this terminal) — verify on dev with `/test` page; (b) `npm run fresh` recommended before next dev run since A4 reshuffles client/server boundaries; (c) auto-chain after sweep can multiply OpenAI cost per real raw change — first regen path is already cheap-when-no-change but worth watching when bulk-sweeping; (d) some less-critical bare `<form action>` callers (intake/asset delete, plan day touch CRUD, kill plan) left bare — fast DB ops covered by `NextTopLoader` route bar; revisit only if Andre reports felt-latency.
+
+- [before] 2026-05-05 leads page is leaking other operators' leads + showing terminal statuses. Need to constrain `/leads` to Andre-owned + active + newest-first, matching Guardrails ownership/status gates and the sweeper's `isLeadInScope` rule.
+
+- [after] 2026-05-05 leads page now renders Andre's working universe by default. **Default fetch path** (no q, no status_id): `closeListLeadsByAssignee(env.CLOSE_USER_ID_ANDRE, 200)` → filter by `isLeadInScope` (drops `✅ Won`, `🔴 Lost`, `🔴 Not Interested` per the sweeper rule) → sort by `date_created` desc. **Search path** (`?q=`): `closeListLeads({query})` → filter by `isOwnedByAndre` → optional status_id → `isLeadInScope` → newest-first. **Status path** (`?status_id=`): uses `closeListLeadsByAssigneeAndStatus(andre, statusId)`; operator-chosen status is honored (no `isLeadInScope` second-guess so they can intentionally see Won/Lost). **Escape hatch:** `?all=1` opts back into org-wide / no scope filter for triage. **Toolbar:** scope chip now reads `Andre · active` (or `all leads in org`) instead of the raw count; `widen ▸` link toggles `?all=1`; `← back to Andre · active` link reverses. **Date column** flipped from `Updated` to `Created` to match the "newest first" sort and the Goals-stated need to start cycles on new leads. Verification: `npx tsc --noEmit` clean, `npm test` 16 files / 112 tests passed. Watch: (a) `TERMINAL_STATUS_LABELS` in `src/lib/lead-folder-sweeper.ts:30-34` only matches `✅ Won`, `🔴 Lost`, `🔴 Not Interested` — labels like `Disqualified`, `Probably Not`, `Internal Lead` are NOT terminal in current rules and will still surface as "active" if they're Andre-owned; expand the set if Andre wants those archived too. (b) `closeListLeadsByAssignee` falls back to `closeListLeads` org-wide if `CLOSE_USER_ID_ANDRE` is unset — the page falls back to org-wide in that case (matches old behavior; not silent). (c) `?all=1` is unsigned — anyone with operator access can flip to org-wide; that's intentional for triage.
+
+- [before] 2026-05-05 promote /leads from a list-of-rows to a control-room: each row gets per-lead Refresh raw box / Regenerate AI docs / Generate seven-day plan with pending UI; freshness chips show whether raw exists, whether Close has activity newer than last sweep, whether AI/plan exist. Hard gate: AI regen + plan generation refuse to run until raw folder exists. All writes confirmed-to-harness via toast path.
+
+- [after] 2026-05-05 /leads is now a control room. **Per-row buttons** (Refresh raw / Regen AI / Plan) with `useTransition` + spinner + label swap. Each button has its own pending state so you can fire several rows in parallel and watch them resolve. **Freshness chips** next to lead name show `raw / no raw`, `AI / no AI`, `plan / no plan`; raw chip flips to `raw · stale` (amber) when `lead.date_updated > 00_meta.last_sweep_at`. **Hard gates** — `regenerateClientBoxDocsAction` and `generatePlanAction` now refuse with a clear error if no harness folder exists yet (cant interpret what we havent gathered). **Save confirmation** — every action toast names the harness path: `harness/leads/active/{lead_id}__…`. **Backend:** new `src/app/leads/freshness.ts:getLeadFreshnessBatch` reads `00_meta.json` per active lead in parallel chunks of 10 (Octokit-cheap; ~25 leads in <2s). New client wrapper `src/app/leads/LeadsTableClient.tsx` fetches freshness once on mount, passes per-row `freshness` prop. New `src/app/leads/LeadActionsRow.tsx` owns the row UI. Verification: `npx tsc --noEmit` clean, `npm test` 16 files / 112 tests passed, `npm run build` clean (/leads 4.16 kB → 103 kB First Load). Watch: (a) freshness fetch is N GitHub calls per visible row — fine for 50, painful for 500; cap or paginate when the universe grows. (b) `rawStaleVsClose` is approximate — `date_updated` jitters on activity-feed touches that may already be in the harness; treat the chip as a hint, not gospel. (c) Plan gate is on the action, not the button — disabled state on the button is UX-only, the server enforces the truth. (d) `harness/leads/active` writes happen via Octokit Contents API in `lead-folder.ts:writeLeadFile` — confirmed wired to GitHub repo branch (no separate write path). (e) Per-doc ↻ already exists on the box page; the leads page is the bulk-orchestration surface.
+
+- [before] 2026-05-05 first cut of /leads control room shipped with awful styling — buttons crammed into the 90px Created column, chips wrapping into the lead name. Reverting to a proper 4-column grid (Lead/Status/Created/Actions) with a dedicated 270px Actions cell. Also stripping all non-Andre paths per Jake: no `?all=1` widen, no Owner column, no Jake/other-operator owner badge — single-tenant by design.
+
+- [after] 2026-05-05 fixed both. **Style:** new `.leads-row-with-actions` grid (`minmax(180px,2fr) minmax(110px,1.1fr) 70px 270px`) gives Actions its own column. Buttons use `.leads-action-btn` (small, calm, 10.5px, sage-tinted primary on Refresh) with `.leads-action-spinner` driven by existing `cmk-spin` keyframe. Freshness chips moved to dedicated `.leads-fresh-chip` styling (lowercase, 9px, uppercase letter-spacing, paper-2 / sage-tint / lemon-tint variants for off / on / stale). When freshness is still loading per row we render a 110×12 shimmer skeleton (`cmk-fresh-pulse`) instead of an inline "loading freshness…" text — stable layout. **Single-tenant:** dropped `?all=1` searchParam entirely, removed `widen ▸` link, removed Owner column + `ownerBadge` helper + `owner_label`/`owner_tone` from `LeadRowSeed`. If `CLOSE_USER_ID_ANDRE` is unset, page now refuses to render with a clear setup error rather than silently widening to org. Eyebrow above the title reads `andre · active` so the scope is part of the page identity, not a chip you can toggle. Verification: `npx tsc --noEmit` clean, `npm test` 16 files / 112 tests passed, `npm run build` clean (/leads 3.77 kB / 103 kB First Load — slightly leaner without the Owner column).
+
+- [before] 2026-05-05 GitHub Contents API quota exhausted within minutes of /leads first dev render. Root cause: per-lead recursive `listLeadFolderFiles` fans out 142 active leads × 10+ files each on every page hit; sweeper running concurrently amplifies. Need to collapse freshness reads to O(1) GitHub calls regardless of lead count.
+
+- [after] 2026-05-05 fixed. Rewrote `src/app/leads/freshness.ts` to use the **Git Trees API** instead of per-lead Contents calls. New flow: one `repos.getBranch` + one `git.getTree({recursive:"true"})` returns every path in the repo, then we filter for `harness/leads/{state}/{lead_id}__{slug}/...` and bucket by lead_id in memory. **Two GitHub calls total**, regardless of how many leads. **Cached for 30s** in the server module so back-to-back navigations dont re-hit GitHub. **Graceful degrade:** if the call fails (quota / flake / 5xx) we return all-empty freshness so rows render with `no raw / no ai / no plan` chips and buttons still work — the action paths still hit Close/Octokit themselves and will create folders on demand. **Dropped:** `last_sweep_at` field and the `raw · stale` chip — getting either requires reading `00_meta.json` per lead, which is exactly what blew the quota. Coarse stale-vs-Close belongs on the per-lead box page, not the index. Verification: `npx tsc --noEmit` clean, `npm test` 112 passed, `npm run build` clean (/leads 3.63 kB / 102 kB). Action item for ops: GitHub PAT quota resets hourly — wait ~30-60 min from the exhaustion timestamp before the leads page will hydrate freshness chips, OR rotate to a fresh PAT.
+
+- [before] enforce raw ai plan workflow state
+
+- [after] enforce raw ai plan workflow state
+
+- [before] align pipeline to booked-call workflow and last-check state
+
+- [before] Workflow source of truth: raw docs -> AI profile docs -> seven-day plan -> Andre phone call scheduled.
+
+- [after] Plan generation is gated behind raw substrate plus required AI docs, preserving the intended order.
+
+- [before] Proposed lead architecture: one agent workbench with dockable contextual widgets and screen-aware chat context.
+
+- [after] Workbench principle locked: center chat is the lead operating room; widgets are contextual instruments, not separate rooms.
+
+- [before] Workbench implementation starts by reusing ChatPanel lead mode and mapping lead tabs to dock presets.
+
+- [after] Workbench widgets now produce compact screen context for the lead-aware agent while exact truth still requires tool/raw reads.
+
+- [after] Workbench presets are now both URL-driven and keyboard-driven.
+
+- **before [read-only app state survey — polishing context]** — 2026-05-05: Jake requested a speed-read snapshot of the repo/app before pairing on small polish. No code changes in this move beyond scaffold taps.
+
+- **after [read-only app state survey — polishing context]** — 2026-05-05: Snapshot delivered in chat. Repo: Next.js 14 app with harness file-canonical lead memory (GitHub Contents/Trees), Close CRM integration with Andre ownership via custom field envs, Supabase for chat/webhooks/touches; nav = Global▾ + Proposals + Leads; lead routes + workbench/chat slice live; git tree has substantial uncommitted local changes per `git status`; polish queue lives in Problems stocktake + Goals P0–P3.
+
+- **before [style sweep — Jake aesthetic alignment chat]** — 2026-05-05: Jake proposes page-by-page alignment to `Aesthetic Asset Kit/` (tokens + components deck); constraints = minimize page scroll, panelized chrome, hover feedback, context menus, subtle motion. No implementation yet — workflow confirmation + kit located in-repo.
+
+- **after [style sweep — Jake aesthetic alignment chat]** — 2026-05-05: Agreed on phased page-by-page passes after Jake shows first target route; kit reference read (`tokens.css` paper/card/rule/ink + 8 tones; `components.css` panels/pills/inputs with hover states). Next step = Jake names page + intent; then audit vs `globals.css`/existing `cmk-*` tokens and implement incrementally.
+
+- **before [sizing calibration workflow]** — 2026-05-05: Jake will pair each page with browser zoom at 100% vs the zoom where the layout already “reads right,” so CSS can target true 100% instead of accidental zoom-compensation.
+
+- **after [sizing calibration workflow]** — 2026-05-05: Locked in-chat. Each page pass: Jake supplies (1) route/surface, (2) zoom % at 100% today, (3) zoom % where it matches intent (optionally viewport WxH + OS scaling). Agent maps delta → token/layout tweaks (`rem`/clamp/root scale), not “zoom harder.”
+
+- **before [/leads Aesthetic Kit pass — panels + labels]** — 2026-05-05: Implement deck-aligned colored trays for harness triage chips + four action buttons; title-case chip labels.
+
+- **after [/leads Aesthetic Kit pass — panels + labels]** — 2026-05-05: `src/app/leads/LeadActionsRow.tsx` + `src/app/globals.css` — fresh panel + sage/sky/lavender on-state pills (observed/inferred/drafted lane colors); peach action panel; slot hovers on buttons; `prefers-reduced-motion` respected for chip/button lift.
+
+- **before [/leads layout — aligned harness strip + static color + name panels]** — 2026-05-05: Same surfaces — symmetry + chroma + title-case Ai.
+
+- **after [/leads layout — aligned harness strip + static color + name panels]** — 2026-05-05: Grid-split lead cell + semantic saturation bumps + lavender status chip + ≤768px lead-column stack.
+
+- **before [/leads CSS fix + status column variable labels]** — 2026-05-06: Repair corrupted globals.css block from prior edit.
+
+- **after [/leads CSS fix + status column variable labels]** — 2026-05-06: `.leads-action-spinner` selector restored; status column uses flex-end + ellipsis pill + tuned grid tracks.
+
+- **before [/leads status column — Maybe / variable labels]** — 2026-05-06: Visual jitter on Maybe vs Disqualified rows.
+
+- **after [/leads status column — Maybe / variable labels]** — 2026-05-06: `globals.css` — status `flex-start`, track `minmax(10rem,13rem)`, tighter `column-gap`.
+
+- **before [/leads name panels — pipeline lane colors]** — 2026-05-06: Visual cue for complete vs stale vs not-started workflow.
+
+- **after [/leads name panels — pipeline lane colors]** — 2026-05-06: `LeadActionsRow.tsx` + `globals.css` — lane modifiers + stale compare Close `date_updated` vs harness meta `last_sweep_at` (via freshness batch).
+
+- 2026-05-06: Active product direction: lead subtabs become chat workbench widgets with visible widget context shared into /api/chat.
+
+- **before [Lead Workbench v2 — widget-native chat]** — 2026-05-06: Workbench skeletons live in `src/app/chat/ChatPanel.tsx` (LeadWidgetId enum L71, content branches L2366–2520). Atomized 9-step plan: A0 universal MarkdownBlock + rail shrink → A1 Profile → A2 Comms (full transcripts) → A3 Plan (iframed customer-facing preview + chat collab) → A4 Client Ledger → A5 Raw Box → A6 Proposal (folded into Plan) → A7 Workflow tighten → A8 Heartbeat queue → A9 Enrichment (defer). `/lead/[id]/*` routes stay as fallbacks.
+
+- **after [Lead Workbench v2 — A0 first slice]** — 2026-05-06: `src/app/chat/ChatPanel.tsx` — `gridTemplate()` rail width 280→168 / 360→216 (40% slimmer); AI Profile + Client Ledger widget previews now render via `MarkdownBody` (existing internal component for chat messages, with `remarkGfm`). `src/app/globals.css` — added `.cmk-wb-preview-md .md-body` rules clamping heading/list/code spacing to 11px tight. TS clean. Live changes are uncommitted.
+
+- **after [Lead Workbench v2 — A1 + A2]** — 2026-05-06: `src/app/chat/ChatPanel.tsx` — added `WorkbenchWidgetDetail` (substantive right-pane render w/ branches for ai_profile, ledger, enrichment, comms, raw_box, workflow, heartbeat, proposal_review) + `CommRow` (click-to-expand transcript row) + `commTitle`/`CommSummary` helpers; right-pane render at `/cmk-strip-wrap` swapped from `WorkbenchWidgetCard` to `WorkbenchWidgetDetail`. `src/app/api/lead/[id]/workbench/route.ts` — `DocStatus.body` field now returns full file body (markdown frontmatter stripped). New file `src/app/api/lead/[id]/comm/route.ts` — `GET ?ref=comms/...json` returns parsed comm payload + extracted body text. `src/app/globals.css` — `.cmk-wb-detail`, `.cmk-wb-detail-md`, `.cmk-wb-detail-stack`, `.cmk-wb-detail-comm-row`, `.cmk-wb-comm-transcript` style suite. All uncommitted.
+
+- **after [Lead Workbench v2 — A3 + Aesthetic Kit color pass]** — 2026-05-06: `src/app/chat/ChatPanel.tsx` — added `PlanWidgetDetail`, `PlanActionPreview`, `PlanActionFooter`; imported `SevenDayPlan`/`PlannedTouchpoint`/`emailDraftPlainToPreviewHtml`; removed `PlanDayStrip` import (legacy file remains for `/lead/[id]/*` pages); `widgetId === "plan"` now routes through `WorkbenchWidgetDetail`. `src/app/globals.css` — added `--mint`/`--mint-deep`/`--blush`/`--blush-deep` tone tokens (Aesthetic Kit Apr 2026); per-widget accent rules (`.cmk-wb-detail-workflow` etc) with tinted heads + 3px accent border-tops; `.cmk-wb-plan-{detail,strip,chip,day-card,day-head,day-objective,action,email-frame,sms-bubble,action-foot,action-source}` plan widget styles; `.cmk-pill-{sky,peach,lavender,mint,sage,rose,lemon,blush}` pill component (8 tones from kit). All uncommitted.
+
+- **after [Lead Workbench v2 — A4 Client Ledger append]** — 2026-05-06: `src/app/lead/[id]/actions.ts` — new `appendClientLedgerEntryAction(leadId, body, { source, leadName })`; imports widened to include `readLeadFile`/`writeLeadFile`/`stripFrontmatter` from `lead-folder`. `src/lib/execution-audit.ts` — added `"append_client_ledger"` to `EXECUTION_LOG_KINDS`. `src/app/chat/ChatPanel.tsx` — new `LedgerAppendForm` component; ledger branch in `WorkbenchWidgetDetail` renders form above markdown body; `WorkbenchWidgetDetail` props extended with `onReload`; right-pane render passes `() => void reloadWorkbench()`. `src/app/globals.css` — `.cmk-wb-ledger-{form,input,foot,err}` styles, peach-tinted to match the Plan/Ledger tone group. All uncommitted.
+
+- **after [Lead Workbench v2 — A7 + A8]** — 2026-05-06: `src/app/chat/ChatPanel.tsx` — added `WorkflowStageTile` (tone-coded stage card), `HeartbeatQueueDetail` (4 KPIs + Sent/Queued lists, fetches /api/lead/[id]/plan), `HeartbeatRow` (single day row); workflow + heartbeat branches in `WorkbenchWidgetDetail` swapped to use them. `src/app/globals.css` — `.cmk-wb-flow-{grid,tile,actions,btn}` workflow styles (lemon/lavender/peach/mint accents) + `.cmk-wb-hb-{kpis,kpi,section,list,row,day,glyphs,objective,when}` heartbeat styles. All uncommitted.
+
+- **after [Workbench polish — Claude Design steal pass]** — 2026-05-06: `src/app/chat/ChatPanel.tsx` — added `ProfileSectioned`, `splitByH2`, `normalizeUnknowns`, `PlanActionRationale`, `approvePlanDay`; `PlanActionPreview` props extended with `dayIndex`/`dayStatus`/`planId`/`leadId`/`onRequestChanges`; `PlanActionFooter` rebuilt with two-side layout + Approve/Request changes pair; `widgetStatus()` rewrote labels to all-caps single words. Imported `setDayStatusAction`. `src/app/globals.css` — `.cmk-wb-status` upgraded with leading dot + bolder type; new `.cmk-wb-plan-{btn,btn-mint,btn-ghost,action-foot-left,action-foot-right}`, `.cmk-wb-plan-rationale`, `.cmk-wb-profile-{sections,section}`, `.cmk-wb-unknown`. All uncommitted.
+
+- **after [Plan reasoning]** — 2026-05-06: `src/lib/plan.ts` — added `reasoning?: string` to `SevenDayPlanDay`, `reasoning_trail?: string[]` to `SevenDayPlan`; updated `buildGenerateSystemPrompt`, `buildRefineDaySystem`, `buildRefineWholePlanSystem` to demand reasoning at every level; parsing in generate + refineDay + refineWholePlan all capture the new fields; `RefineWholePlanResult` Pick widened. `src/lib/lead-plan-fs.ts` — `renderSevenDayPlanMarkdown` now writes Goal Summary, Why this cycle (reasoning_trail), Lead state, per-day Reasoning line, per-action "Why this draft" line. `src/app/chat/ChatPanel.tsx` — `PlanWidgetDetail` adds `.cmk-wb-plan-goal` (peach goal panel) + `.cmk-wb-plan-trail` (collapsible lavender reasoning trail) + `.cmk-wb-plan-day-reasoning` (italic serif under each day's objective); new `LeadModeEmptyContext` component lifts the lead-mode chat empty state — fetches /api/lead/[id]/plan and renders cycle goal_summary + reasoning_trail bullets in a lavender-tinted card with primary_goal pill. `DemoEmptyState` extended with `leadId`/`leadName` props. `src/app/globals.css` — `.cmk-wb-plan-{goal,trail,trail-count,day-reasoning}` + `.cmk-empty-{shell,card,card-lavender,card-peach,card-row,headline,sub,reasoning}` styles. All uncommitted.
+
+- **after [Workbench safety + qualia + preview popup + activity table]** — 2026-05-06: `src/app/chat/ChatPanel.tsx` — `PlanActionPreview` rebuilt with `dayNumber`/`leadName` props, internal `Modal` for confirm + full-preview popups, `useToast` for feedback on Approve / Edit-with-agent / Request-changes; new helpers `wrapEmailPreviewHtml`, `Spinner`; "⤢ full preview" inline button on email action heads. `PlanWidgetDetail` call site passes through new props. `src/lib/lead-folder-llm.ts` — `LEDGER_SYSTEM` prompt rewrite for Recent fires / Inbound activity tables (3 cols, drop actor + activity_id columns, optional `[a4f9c8b2]` short-id citation). `src/app/globals.css` — `.cmk-wb-plan-pop-btn`, `.cmk-wb-plan-preview-{modal,head,frame}`, `.cmk-wb-plan-confirm-{eyebrow,title,body,warning,foot}`, `.cmk-spinner` + `@keyframes cmk-spin` (with reduced-motion fallback), and `.cmk-wb-detail-md.md-body-host .md-body table` overflow-x rules + monospace bracket-citation styling. All uncommitted.
+
+- **PARKED [State-memory final-form pending — Jake on a ride]** — 2026-05-06: Decision deferred to Jake's return. Full inputs logged in Goals (3 candidate end-states) + Problems (harness empty + Supabase 60/40 audit). Summary: harness is the right architecture but origin/main is unprimed; Supabase needs surgical rip-out (`lead_facts`, intake tables, `automation_drafts`, vestigial imports in `execution-audit.ts`) but 3 tables (webhook dedup, chat threads/messages, activity touches) are genuinely load-bearing and stay. Adjacent decision: pre-launch automation strategy is Claude/Cowork/Codex async sweepers populating harness so the in-app agent reads cached substrate (only re-sweeps on stale) — direction is locked, mechanism waits on the canonical-store choice (GitHub vs Mac vs hybrid). When Jake returns, atoms are: (1) pick canonical store, (2) Supabase rip-out (one focused commit), (3) verify/repair sweeper repopulation, (4) wire the agent to the chosen store. **No code changes until then.**
+
+- **after [Supabase rip-out — shipped]** — 2026-05-06: Decision made: status-quo + cleanup. Rip done. Files deleted: `lead-facts.ts`, `automation-drafts.ts`, `manifest-to-close.ts`, `workflow-author-tool.ts`, `workflow-manifest.ts` (+test), `src/app/workflows/`, `src/app/api/workflows/`. Files surgically rewired: `discovery/actions.ts`, `composite-tools.ts`, `journey-score.ts`, `personal-scoreboard.ts`, `heartbeat.ts`, `pipeline-state.ts`, `lead/[id]/actions.ts`. Nav: `workflows` removed from `GlobalMenu`. Supabase footprint: **12 files / 8 tables → 5 files / 4 tables**. Remaining usages all load-bearing: `close_webhook_events` (webhook dedup), `threads`+`messages` (chat history), `lead_activity_touches` (freshness signal). TS clean. Uncommitted. Discovery-fact persistence is now offline pending file-canonical replacement (logged in Problems). Next atom: WhatsApp support → run `seed-active-25.ts` to prime origin/main.
+
+- **after [Migrations cleanup + WhatsApp + first prime]** — 2026-05-06: Migrations dir trimmed to 3 files (close_webhook_events, rls_publishable_denied, execution_audit). CLAUDE.md scrubbed of dead refs. `close-hydrate.ts` + `lead-folder-renderer.ts` + test fixture extended with `whatsapps` bucket (matches 4 `_type` spelling variants). **Harness primed on origin/main: 23 active lead folders, full contract, real customer data — calls/transcripts, emails, SMS, threads, notes, tasks.** Sweeper invoked through `/api/cron/sweep-leads` after `seed-active-25.ts` CLI hit a tsx+octokit subpath issue. Origin advanced from `e93a813` → `1b171c7`. WhatsApp count 0 — verify on first WA-active lead. App's lead reads now hit harness instead of Close fresh on every render.

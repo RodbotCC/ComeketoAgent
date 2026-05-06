@@ -1,13 +1,13 @@
 import Link from "next/link";
-import { LeadSubNav } from "../LeadSubNav";
 import { LeadToolbar } from "../LeadToolbar";
 import { loadLeadBoxPageData } from "../load-lead-box";
 import { journeyScoreForLead } from "@/lib/journey-score";
 import { synthesizeQuest } from "@/lib/quest";
-import { PIPELINE_STAGES, type PipelineStageId } from "@/lib/discovery-map";
 import { DiscoverySlotEditor } from "./DiscoverySlotEditor";
 import { RunScanButton } from "./RunScanButton";
+import { RefreshAiProfileButton } from "./RefreshAiProfileButton";
 import {
+  readLeadFile,
   readLeadProfileBody,
   readLeadDiscoveryBody,
 } from "@/lib/lead-folder";
@@ -37,16 +37,31 @@ function fmtGoal(goal?: string): string {
   return goal.replace(/_/g, " ");
 }
 
-const STAGE_ORDER: PipelineStageId[] = [
-  "lead",
-  "discovery_started",
-  "tasting_booked",
-  "tasting_done",
-  "beo_sent",
-  "agreement_signed",
-  "deposit_in",
-  "event_won",
-];
+function frontmatterField(markdown: string | null, field: string): string | null {
+  if (!markdown?.startsWith("---")) return null;
+  const end = markdown.indexOf("\n---", 3);
+  if (end === -1) return null;
+  const block = markdown.slice(3, end);
+  const m = block.match(new RegExp(`^${field}:\\s*(.+)$`, "m"));
+  return m?.[1]?.trim() || null;
+}
+
+function parseLastSweepAt(metaRaw: string | null): string | null {
+  if (!metaRaw) return null;
+  try {
+    const meta = JSON.parse(metaRaw) as { last_sweep_at?: unknown };
+    return typeof meta.last_sweep_at === "string" ? meta.last_sweep_at : null;
+  } catch {
+    return null;
+  }
+}
+
+function fmtStageDate(iso: string | null): string | null {
+  if (!iso) return null;
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return null;
+  return d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+}
 
 export default async function LeadDiscoveryPage({ params, searchParams = {} }: Props) {
   const rawTab = searchParams["tab"];
@@ -59,7 +74,6 @@ export default async function LeadDiscoveryPage({ params, searchParams = {} }: P
   if ("error" in loaded) {
     return (
       <main className="lead-main">
-        <LeadSubNav leadId={params.id} />
         <div className="cme-eyebrow">lead</div>
         <h1 className="lead-title">Discovery failed to load</h1>
         <pre className="lead-error">{loaded.error}</pre>
@@ -75,7 +89,6 @@ export default async function LeadDiscoveryPage({ params, searchParams = {} }: P
   if ("error" in result) {
     return (
       <main className="lead-main">
-        <LeadSubNav leadId={params.id} />
         <LeadToolbar data={data} />
         <div className="lead-tab-body">
           <div className="cmk-stack-panel cmk-stack-panel--rose">
@@ -95,22 +108,72 @@ export default async function LeadDiscoveryPage({ params, searchParams = {} }: P
     map.completeness >= 0.7 ? "sage" : map.completeness >= 0.4 ? "peach" : "rose";
 
   const isLost = score.stage.current === "lost";
-  const reachedSet = new Set(score.stage.reached.map((r) => r.id));
-  const reachedAtById = new Map(score.stage.reached.map((r) => [r.id, r.reached_at]));
-
   const baseHref = `/lead/${params.id}/discovery`;
 
-  // File-backed LLM-generated content (Atom 7+8). Reads from leads-data branch
+  // File-backed LLM-generated content (Atom 7+8). Reads from the harness branch
   // via Octokit. Returns null when the sweeper hasn't created the folder yet
   // OR when the LLM regen hasn't run for this lead.
-  const [profileBody, discoveryBody] = await Promise.all([
+  const [metaRaw, profileBody, discoveryBody] = await Promise.all([
+    readLeadFile(params.id, "00_meta.json").catch(() => null),
     readLeadProfileBody(params.id).catch(() => null),
     readLeadDiscoveryBody(params.id).catch(() => null),
   ]);
+  const rawCheckedAt = parseLastSweepAt(metaRaw);
+  const aiGeneratedAt =
+    frontmatterField(profileBody, "generated_at") ??
+    frontmatterField(discoveryBody, "generated_at");
+  const planSentCount = plan?.days.filter((d) => d.approval_status === "sent").length ?? 0;
+  const workflowStages = [
+    {
+      id: "discovery",
+      label: "Discovery",
+      reached: true,
+      reached_at: (data.box.lead as { date_created?: string }).date_created ?? null,
+    },
+    {
+      id: "raw_docs",
+      label: "Raw docs acquired",
+      reached: !!metaRaw,
+      reached_at: rawCheckedAt,
+    },
+    {
+      id: "ai_profile",
+      label: "AI docs created",
+      reached: !!(profileBody || discoveryBody),
+      reached_at: aiGeneratedAt,
+    },
+    {
+      id: "plan",
+      label: "Seven-day plan",
+      reached: !!plan,
+      reached_at: plan?.generated_at ?? null,
+    },
+    {
+      id: "review",
+      label: "Approved to act",
+      reached: !!plan && (plan.status === "approved" || plan.status === "active" || plan.status === "completed"),
+      reached_at: plan?.generated_at ?? null,
+    },
+    {
+      id: "active",
+      label: "Outreach active",
+      reached: planSentCount > 0 || plan?.status === "active" || plan?.status === "completed",
+      reached_at: plan?.cycle_started_at ?? null,
+    },
+    {
+      id: "scheduled",
+      label: "Andre call scheduled",
+      reached: plan?.status === "completed",
+      reached_at: null,
+    },
+  ];
+  const reachedIndexes = workflowStages
+    .map((s, i) => (s.reached ? i : -1))
+    .filter((i) => i >= 0);
+  const currentWorkflowIndex = reachedIndexes.length ? Math.max(...reachedIndexes) : 0;
 
   return (
     <main className="lead-main lead-main--tab scroll-hide">
-      <LeadSubNav leadId={params.id} />
       <LeadToolbar data={data} />
 
       <div className="lead-tab-body cmk-discovery-tab cmk-discovery-tab--full">
@@ -206,6 +269,7 @@ export default async function LeadDiscoveryPage({ params, searchParams = {} }: P
                 </div>
               </div>
               <div className="cmk-discovery-profile-actions">
+                <RefreshAiProfileButton leadId={params.id} />
                 <RunScanButton leadId={params.id} />
                 <Link href={`/lead/${params.id}`} className="plan-btn">
                   Open plan
@@ -213,31 +277,33 @@ export default async function LeadDiscoveryPage({ params, searchParams = {} }: P
               </div>
             </div>
 
-            {plan ? (
+            {profileBody || plan ? (
               <div className="cmk-discovery-profile-grid">
-                <article className="cmk-discovery-brief cmk-discovery-brief--wide">
-                  <span className="cme-eyebrow">strategy</span>
-                  <h3>{plan.goal_summary || "No strategy summary yet."}</h3>
-                  {plan.lead_state_summary && <p>{plan.lead_state_summary}</p>}
-                </article>
+                {profileBody && (
+                  <article className="cmk-discovery-brief cmk-discovery-brief--wide">
+                    <span className="cme-eyebrow">ai profile · generated from raw box</span>
+                    <pre className="cmk-discovery-brief-md">{profileBody}</pre>
+                  </article>
+                )}
 
-                {plan.best_next_question && (
+                {plan && (
+                  <article className="cmk-discovery-brief cmk-discovery-brief--wide">
+                    <span className="cme-eyebrow">strategy</span>
+                    <h3>{plan.goal_summary || "No strategy summary yet."}</h3>
+                    {plan.lead_state_summary && <p>{plan.lead_state_summary}</p>}
+                  </article>
+                )}
+
+                {plan?.best_next_question && (
                   <article className="cmk-discovery-brief cmk-discovery-brief--question cmk-discovery-brief--wide">
                     <span className="cme-eyebrow">best next question</span>
                     <blockquote>{plan.best_next_question}</blockquote>
                   </article>
                 )}
-
-                {profileBody && (
-                  <article className="cmk-discovery-brief cmk-discovery-brief--wide">
-                    <span className="cme-eyebrow">profile · generated</span>
-                    <pre className="cmk-discovery-brief-md">{profileBody}</pre>
-                  </article>
-                )}
               </div>
             ) : (
               <div className="cmk-discovery-empty cmk-discovery-profile-empty">
-                Generate a plan first. Discovery will use its plan-derived strategy + best-next-question here. Knowns / unknowns / stop conditions live on the <strong>Briefing</strong> tab.
+                Refresh the raw Client Box, then refresh the AI profile. This tab is the post-processing layer that turns raw comms into NEPQ angles, buyer risks, and useful context before the seven-day plan is generated.
               </div>
             )}
           </section>
@@ -254,6 +320,7 @@ export default async function LeadDiscoveryPage({ params, searchParams = {} }: P
                 </div>
               </div>
               <div className="cmk-discovery-profile-actions">
+                <RefreshAiProfileButton leadId={params.id} />
                 <RunScanButton leadId={params.id} />
                 <Link href={`/lead/${params.id}`} className="plan-btn">
                   Open plan
@@ -261,33 +328,37 @@ export default async function LeadDiscoveryPage({ params, searchParams = {} }: P
               </div>
             </div>
 
-            {plan ? (
+            {plan || discoveryBody ? (
               <div className="cmk-discovery-profile-grid">
-                <article className="cmk-discovery-brief">
-                  <span className="cme-eyebrow">known</span>
-                  {plan.known_facts.length > 0 ? (
+                {plan && (
+                  <article className="cmk-discovery-brief">
+                    <span className="cme-eyebrow">known</span>
+                    {plan.known_facts.length > 0 ? (
                     <ul className="cmk-discovery-brief-list">
                       {plan.known_facts.map((fact, index) => (
                         <li key={`known-${index}`}>{fact}</li>
                       ))}
                     </ul>
-                  ) : (
-                    <p className="cmk-discovery-empty">No plan-derived known facts yet.</p>
-                  )}
-                </article>
+                    ) : (
+                      <p className="cmk-discovery-empty">No plan-derived known facts yet.</p>
+                    )}
+                  </article>
+                )}
 
-                <article className="cmk-discovery-brief">
-                  <span className="cme-eyebrow">unknowns</span>
-                  {plan.unknowns.length > 0 ? (
+                {plan && (
+                  <article className="cmk-discovery-brief">
+                    <span className="cme-eyebrow">unknowns</span>
+                    {plan.unknowns.length > 0 ? (
                     <ul className="cmk-discovery-brief-list">
                       {plan.unknowns.map((unknown, index) => (
                         <li key={`unknown-${index}`}>{unknown}</li>
                       ))}
                     </ul>
-                  ) : (
-                    <p className="cmk-discovery-empty">No open unknowns recorded on the plan.</p>
-                  )}
-                </article>
+                    ) : (
+                      <p className="cmk-discovery-empty">No open unknowns recorded on the plan.</p>
+                    )}
+                  </article>
+                )}
 
                 <article className="cmk-discovery-brief cmk-discovery-brief--wide">
                   <span className="cme-eyebrow">operating note</span>
@@ -297,7 +368,7 @@ export default async function LeadDiscoveryPage({ params, searchParams = {} }: P
                   </p>
                 </article>
 
-                {plan.stop_conditions.length > 0 && (
+                {plan && plan.stop_conditions.length > 0 && (
                   <article className="cmk-discovery-brief cmk-discovery-brief--wide cmk-discovery-brief--stops">
                     <span className="cme-eyebrow">stop conditions</span>
                     <ul className="cmk-discovery-brief-list cmk-discovery-stop-list">
@@ -320,7 +391,7 @@ export default async function LeadDiscoveryPage({ params, searchParams = {} }: P
               </div>
             ) : (
               <div className="cmk-discovery-empty cmk-discovery-profile-empty">
-                Generate a plan first. Briefing surfaces the plan&apos;s knowns / unknowns / stop conditions and any LLM-generated discovery doc.
+                Refresh the AI profile from the raw box. Once the seven-day plan exists, this tab will also show the plan&apos;s knowns, unknowns, and stop conditions.
               </div>
             )}
           </section>
@@ -400,7 +471,7 @@ export default async function LeadDiscoveryPage({ params, searchParams = {} }: P
             <div className="cmk-stack-panel-head">
               <h2 className="cmk-stack-panel-title">Pipeline stage</h2>
               <div className="cmk-stack-panel-meta">
-                catering progression for this lead
+                Comeketo Agent progression: gather truth, interpret it, plan the week, get Andre on the phone
               </div>
             </div>
             {isLost ? (
@@ -410,21 +481,20 @@ export default async function LeadDiscoveryPage({ params, searchParams = {} }: P
               </div>
             ) : (
               <ol className="cmk-discovery-pipeline-list cmk-discovery-pipeline-list--roomy">
-                {STAGE_ORDER.map((stageId) => {
-                  const def = PIPELINE_STAGES.find((s) => s.id === stageId)!;
-                  const reached = reachedSet.has(stageId);
-                  const current = stageId === score.stage.current;
-                  const at = reachedAtById.get(stageId);
+                {workflowStages.map((stage, index) => {
+                  const reached = stage.reached;
+                  const current = index === currentWorkflowIndex;
+                  const at = fmtStageDate(stage.reached_at);
                   return (
                     <li
-                      key={stageId}
+                      key={stage.id}
                       className={`cmk-discovery-pipeline-step${reached ? " is-reached" : ""}${current ? " is-current" : ""}`}
                     >
                       <span className="cmk-discovery-pipeline-dot" aria-hidden />
-                      <span className="cmk-discovery-pipeline-label">{def.label}</span>
+                      <span className="cmk-discovery-pipeline-label">{stage.label}</span>
                       {at && (
                         <span className="cmk-discovery-pipeline-at">
-                          {new Date(at).toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+                          {at}
                         </span>
                       )}
                     </li>

@@ -47,7 +47,6 @@ import { logExecution } from "./execution-audit";
 import OpenAI from "openai";
 import { closeGetLeadFull } from "./close";
 import { DISCOVERY_SLOTS } from "./discovery-map";
-import { upsertLeadFact, upsertLeadFactsBulk } from "./lead-facts";
 import { journeyScoreForLead } from "./journey-score";
 
 // ─── Tool defs (OpenAI Responses tool format, top-level name/desc/params) ───
@@ -596,17 +595,9 @@ export async function dispatchCompositeTool(
           });
           return result;
         }
-        // Persist
-        await upsertLeadFactsBulk(
-          result.facts.map((f) => ({
-            lead_id: leadId,
-            slot_id: f.slot_id,
-            value: f.value,
-            source: "llm_extraction",
-            evidence: f.evidence,
-            extracted_at: new Date().toISOString(),
-          }))
-        );
+        // Persistence offline — lead_facts retired in Supabase rip-out
+        // (2026-05-06). Facts are extracted and logged but not stored until
+        // file-canonical replacement lands.
         await logExecution({
           action_kind: "intake_extract",
           close_lead_id: leadId,
@@ -614,7 +605,8 @@ export async function dispatchCompositeTool(
           payload: {
             tool: "extract_discovery_facts",
             scope: "discovery_map",
-            slots_written: result.facts.map((f) => f.slot_id),
+            slots_extracted: result.facts.map((f) => f.slot_id),
+            note: "lead_facts persistence offline — extraction logged only",
           },
           result: "ok",
         });
@@ -648,14 +640,10 @@ export async function dispatchCompositeTool(
 
         const traceId = opts?.traceId ?? randomUUID();
         try {
-          await upsertLeadFact({
-            lead_id: leadId,
-            slot_id: slotId,
-            value,
-            source: "operator",
-            evidence: { excerpt: "operator-set via chat agent", confidence: 1.0 },
-            extracted_at: new Date().toISOString(),
-          });
+          // No-op: lead_facts persistence retired in Supabase rip-out.
+          // Operator-set values are logged but not stored until file-canonical
+          // replacement lands.
+          void value;
         } catch (err) {
           return { error: err instanceof Error ? err.message : String(err) };
         }

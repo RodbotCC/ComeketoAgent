@@ -2,9 +2,25 @@
 
 Running ledger of blockers, bugs, friction, anything broken. Tapped before & after every move.
 
+## Agent quick read (~1 minute)
+
+**Default:** assume **no open P0**. Append taps under today's `## YYYY-MM-DD`. Only dive the archive when investigating a regression or a specific dated move.
+
+Rolling **watch / friction** (verify in code/issues before treating as blocker — bullets age out as fixes land):
+
+- **Vercel:** "Ignored Build Step" (`git diff --quiet HEAD^ HEAD -- ':!harness'`) is a **manual** dashboard setting — until set, harness-only commits may still trigger rebuilds (see `CLAUDE.md` / `Goals` harness collapse notes).
+- **Git:** Optional cleanup of legacy `leads-data` branch on origin if everything is confirmed on `main`; `findLeadFolderPath` dual-probe for `_leads/` may still add extra API work until removed.
+- **Harness writes:** High commit volume on busy days — normal; watch GitHub rate limits and function timeouts on sweeps (cron has `maxDuration`; see sweeper route).
+- **Product rough edges (known):** Plan-tab asset refs (`{ASSET:<id>}`) may need an expand pass before send; some Discovery/personal paths still mix legacy SQL fallbacks with file reads; orphan `globals.css` from removed surfaces possible — grep before "fixing."
+- **Workflows / Close API:** First live publishes historically surfaced template naming, step_type strings, and HTML validity — treat Close 4xx as signal to adjust `manifest-to-close` / templates, not random flakiness.
+- **Dual-write-era notes** in old bullets (Supabase + harness) are often **historical** — current truth is file-canonical for plans + ledger + approvals + heartbeat per `CLAUDE.md`; don't re-open "should we dual-write" without Jake.
+
 ---
 
 ## 2026-05-05
+
+- **after [scaffold — Problems.md agent quick read]:** Added top-of-file "Agent quick read" for rolling watches; full dated friction log retained below.
+- **before [scaffold — Problems.md agent quick read]:** Problems ledger ~175KB; agents need a short "what might bite" layer without reading every old risk paragraph.
 
 - **after [harness/ Phase 3+4+5]:** Done. 120/120 green. Watch items: (a) **Lossy ledger writes during Vercel function shutdown** — `void appendLedger(...)` is fire-and-forget; if the request returns before Octokit completes, Vercel kills the write. Acceptable during dual-write (Supabase has truth). (b) **`refreshAndMirrorPlan` does an extra Supabase read** after each plan mutation (~50ms). Could be optimized via `.select()` chain. Not blocking. (c) **Commit volume on `harness/`** — peak ~500-1000 commits/day. Vercel ignoreCommand handles build skip; GitHub rate limit 5000/hr = no problem. (d) **First-run sweep populates LATEST plan only**. Older plans stay in Supabase. (e) **`heartbeat_runs.id`** now passed explicitly so file paths match. (f) **Phase 6 NOT done** — Supabase still canonical reads. After 24h clean operation, Phase 6 = remove Supabase insert lines.
 
@@ -428,6 +444,11 @@ Running ledger of blockers, bugs, friction, anything broken. Tapped before & aft
 - **before [Andre-only Leads index cleanup]** — 2026-05-05: UX bug: `/leads` makes the operator choose between Andre/Jake/All/Practice, but the product is now Andre-centered. The owner switch also creates empty "Andre 0" views while All has leads, which reads broken.
 - **after [Andre-only Leads index cleanup]** — 2026-05-05: Owner-switch confusion closed on the Leads index. Watch item: row-level owner badges still show actual Close owner metadata when present; that preserves truth from Close without letting the operator switch the whole page into a dead/irrelevant owner view.
 
+- **before [repo architecture review pass]** — 2026-05-05: Main risk is drowning in dirty-worktree noise and missing the actual structural moves. Need to separate product-facing architecture changes from ordinary local edits.
+- **after [repo architecture review pass]** — 2026-05-05: Noise separated successfully. Highest-risk active change is the substrate contract flip in `lead-folder-renderer.ts`: it drops digest/profile-style outputs from the raw sweep path in favor of pure raw payload files, so any page still expecting the old file set would need checking before the next push.
+
+- **before [raw lead sweep review + hardening pass]** — 2026-05-05: Likely risk areas: phase-2 readers still expecting `00_meta.json` / `01b_comms_verbatim.md`, tests drifting from the new ownership/env model, and a possible mismatch between "review only" intent and partial implementation already in the worktree.
+
 - **stocktake [surface-by-surface friction audit]** — 2026-05-05: Jake's full audit of every operator-facing surface, captured here so nothing gets lost. Not all queued for execution — see Goals.md for the prioritized P0–P3 work order. Catalog by surface:
 
   **🟢 PROPOSALS (the lobby) — ship-grade, two micro-nags**
@@ -472,3 +493,127 @@ Running ledger of blockers, bugs, friction, anything broken. Tapped before & aft
   - **P3** compression + cosmetics — Box atomization · slash-command rework · 🟢→CSS dot · channel-icon disambiguation · Trailhead-card pill asymmetry · write-action visual register.
 
 - 2026-05-05 — before/after [push to GitHub+Vercel]: no known blockers; push is routine.
+
+- 2026-05-05 — before/after [wipe fake client data]: no blockers. Watch: when real Close API key lands and sweeper runs, harness/leads/active/ should repopulate from real Close leads owned by Andre. If sweeper errors, that's the first signal something's off with the new key/account.
+
+- 2026-05-05 — **🚨 NEW BLOCKER [real Close org doesn't use `lead.user_id` for ownership]:** Auth + Andre's user_id are correct (`user_bnfoZDG…PkMt` = "Andre Raw" in user list, 14,051 leads in the Comeketo Catering org). BUT — the standard Close `lead.user_id` field is **absent** on every lead in this org (verified via single-lead fetch: not present at all). Comeketo tags lead ownership via the custom field `custom.cf_xF8FLufgEx9bsijfRAfHhgIrPBQ5ajuohcazC7OtNmT` holding strings like `"01. 😎 Andre"` — 1,471 leads currently tagged that way. Implication: every ownership gate in the codebase (`lead.user_id === env.CLOSE_USER_ID_ANDRE`) will return false → every lead skips with `not_andre_owned` → sweeper imports zero, heartbeat sends nothing. Affected files: `src/lib/lead-folder-sweeper.ts`, `src/lib/heartbeat.ts`, `src/lib/composite-tools.ts`, `src/lib/close-tools.ts` (~10 sites), `src/app/lead/[id]/load-lead-box.ts`, `src/app/leads/page.tsx`, `src/lib/personal-scoreboard.ts`. Decision needed from Jake before code change — Guardrails-level architectural fork.
+
+- 2026-05-05 — RESOLVED [Comeketo ownership-field mismatch]: the `lead.user_id` blocker is fixed by the custom-field gate (verified: 4/5 sample leads pass, 1 correctly blocked as Won). Remaining: do not bulk-sweep yet — hydrate one Box first to confirm end-to-end flow.
+
+- [after] raw lead sweep review + hardening pass
+
+- [before] harden raw lead substrate using Elizabeth & Peter model
+
+- [after] harden raw lead substrate using Elizabeth & Peter model
+
+- [before] realign lead subtabs around canonical client box model
+
+- [after] realign lead subtabs around canonical client box model
+
+- [before] final functionality wiring for canonical client box
+
+- [after] final functionality wiring for canonical client box
+
+- [before] add client box preflight for live run safety
+
+- [after] add client box preflight for live run safety
+
+- [before] add in-app client box sweep controls
+
+- [after] add in-app client box sweep controls
+
+- [before] 2026-05-05 nav competing with lead box for attention; sweep buttons fire blind (no pending UI); subtabs hidden inside lead pages; CLAUDE.md doc references stale 01_comms_digest/04_profile/09_andre_alerts numbering
+
+- [after] 2026-05-05 resolved. Nav demoted to single Global▾ dropdown; lead subtabs always-on; sweep/regen buttons all show pending + toast; CLAUDE.md updated to canonical 10. Remaining friction: (a) C4 webhook→dot path needs a manual `/test` ping to confirm end-to-end against the live SSE stream — not driven from this terminal. (b) Several lower-traffic bare `<form action>` callers (kill plan, intake delete, asset delete, plan day touch CRUD) still fire without an explicit pending button — fast enough to read as instant via NextTopLoader, but worth a second pass if Andre flags felt-latency. (c) Auto-chain after every successful sweep multiplies OpenAI calls per real raw change × number of AI docs (5) — first chain is cheap when nothing changed (skip-hash) but bulk sweep with churn could spike spend; instrument later if needed.
+
+- [before] 2026-05-05 `/leads` page is calling `closeListLeads({limit:200})` which is org-wide — pulls in non-Andre leads + terminal statuses (Lost / Disqualified / Probably Not / Internal Lead etc.). Operator can't tell quickly which ones are "today's working universe."
+
+- [after] 2026-05-05 resolved. `/leads` defaults to Andre-owned + non-terminal + newest-first; org-wide widen via `?all=1`. Open watch: `TERMINAL_STATUS_LABELS` in the sweeper only treats `✅ Won / 🔴 Lost / 🔴 Not Interested` as terminal — `Disqualified`, `Probably Not`, `Internal Lead` are still in scope. If those should be hidden too, expand the set (sweeper file, line ~30) and the leads page will inherit it. Decide with Andre on intent before broadening — `Probably Not` may be a working "needs nurture" state in his head, not "dead."
+
+- [before] 2026-05-05 leads page is read-only — to act on a lead Andre has to drill into the box. We want raw-fetch + AI-regen + plan-gen at the row level so a fresh sprint can ripple from the index page in one motion.
+
+- [after] 2026-05-05 resolved. /leads is the orchestration surface — gather (Refresh raw) → interpret (Regen AI) → execute (Plan) right from the index. Open watch: freshness chips can falsely show `raw · stale` when Close `date_updated` jitters on no-op activity touches; refine later if Andre finds the signal noisy.
+
+- [before] 2026-05-05 (1) /leads first-pass styling was bad — buttons jammed into 90px Created column. (2) /leads still had a `?all=1` widen escape hatch + Owner column even though Andre is the only operator.
+
+- [after] 2026-05-05 both resolved. New 4-col grid with a 270px Actions cell; chip skeleton stops the layout shimmying as freshness loads. Org-wide path deleted; if `CLOSE_USER_ID_ANDRE` is unset, the page hard-fails with a setup message instead of silently widening.
+
+- [before] 2026-05-05 GitHub API rate limit exhausted in dev — `Request quota exhausted for request GET /repos/{owner}/{repo}/contents/{path}` floods the npm run dev log; freshness fetch was the cause (142 leads × N file reads per page render).
+
+- [after] 2026-05-05 resolved at the source — freshness now uses Git Trees recursive (2 calls + 30s cache, all leads). Tail item: token quota itself needs ~1hr to recover after the exhaustion event before chips will hydrate again. Buttons keep working in the meantime because graceful-degrade returns empty-folder freshness rather than throwing.
+
+- [before] enforce raw ai plan workflow state
+
+- [after] enforce raw ai plan workflow state
+
+- [before] align pipeline to booked-call workflow and last-check state
+
+- [before] Lead UI still hides last checked time and pipeline still reflects old catering CRM stages.
+
+- [after] Removed the visible old catering CRM progression from the AI Profile pipeline and corrected the profile-before-plan dependency.
+
+- [before] Lead subtabs duplicate workflow surfaces that should become contextual widgets around delegation chat.
+
+- [after] Proposal preserves current routes while migrating duplicated subtabs into dockable, chat-aware widgets.
+
+- [before] Lead subtab links still navigate to separate pages instead of opening contextual cockpit widgets.
+
+- [after] Separate lead pages remain as deep-link fallbacks, but primary navigation now starts flowing into the lead cockpit.
+
+- [after] Operators can now switch cockpit widget layouts from the composer without leaving chat.
+
+- **before [read-only app state survey — polishing context]** — 2026-05-05: Same move as Global — orient Jake before polish pairing; no product delta.
+
+- **after [read-only app state survey — polishing context]** — 2026-05-05: No new problems logged. Active polish backlog unchanged: surface audit in `stocktake [surface-by-surface friction audit]` (Plan approve-cluster + Kill proximity, Graph placeholder, Discovery restraint naming, Proposals footer ambiguity, etc.). Tooling deferred items still noted historically (`next lint`/ESLint, npm audit if desired).
+
+- **before [style sweep — Jake aesthetic alignment chat]** — 2026-05-05: Risk that "no scroll ever" fights real data volume (long tables, transcripts) and accessibility (`prefers-reduced-motion`, keyboard parity for right-click menus). Mitigation per-page: primary operator task fits viewport; dense lists get panel-internal scroll or split subtabs; motion gated.
+
+- **after [style sweep — Jake aesthetic alignment chat]** — 2026-05-05: Risks noted in-chat for Jake; no new logged blockers until first page scope is chosen.
+
+- **before [sizing calibration workflow]** — 2026-05-05: Zoom-at-which-it-looks-right can reflect OS display scaling + high-DPI; still useful if paired with optional WxH.
+
+- **after [sizing calibration workflow]** — 2026-05-05: Watch: if “looks right” is 67% vs 100%, ratio ~1.5× — may imply root `font-size` or spacing scale shift for that route only vs global token change; decide per page to avoid whiplash.
+
+- **before [/leads style — state panels + title case]** — 2026-05-05: Jake: match Aesthetic Kit state-pill look; colored panels for harness chips + action cluster; no all-caps RAW/AI/PLAN — use Raw / AI / Plan.
+
+- **after [/leads style — state panels + title case]** — 2026-05-05: `LeadActionsRow.tsx` wraps chips in `.leads-fresh-panel` (sage-tint tray) with per-kind pills raw=sage lane, ai=sky, plan=lavender; actions in `.leads-actions-panel` (peach-tint tray); buttons slot-tinted hovers; grid Actions col 288px; removed uppercase chip styling. `AI` kept as standard acronym (not ALL-CAPS word style).
+
+- **before [/leads layout — whitespace + static chroma]** — 2026-05-05: Inline pills tracked name length; color mostly on hover.
+
+- **after [/leads layout — whitespace + static chroma]** — 2026-05-05: Resolved — grid-column alignment for harness strip; name in `.leads-name-panel`; Status column `auto` width; buttons/chips carry lane tint at rest; UI strings use **Ai** per Jake (not acronym AI).
+
+- **before [/leads CSS fix + status column variable labels]** — 2026-05-06: Dev server: PostCSS Unexpected `}` at globals ~5249 (spinner selector dropped).
+
+- **after [/leads CSS fix + status column variable labels]** — 2026-05-06: Syntax fixed; status pills right-aligned + capped width for long Close labels.
+
+- **before [/leads status column — Maybe / variable labels]** — 2026-05-06: Right-edge alignment made short pills float with dead space toward harness strip.
+
+- **after [/leads status column — Maybe / variable labels]** — 2026-05-06: Left-align + fixed-width status track — shared spine for all label lengths.
+
+- **before [/leads name panels — pipeline lane colors]** — 2026-05-06: Same Close vs harness signal as old “raw stale” chip without per-lead Contents reads — uses existing freshness `last_checked_at` + list `date_updated`.
+
+- **after [/leads name panels — pipeline lane colors]** — 2026-05-06: Watch: staleness is Close `date_updated` vs meta `last_sweep_at` (approximate); panel `title` states intent for Andre.
+
+- 2026-05-06: Current lead-chat widgets are mostly placeholders; risk is visual cockpit without actual lead substrate/status/action wiring.
+
+- **before [Lead Workbench v2 — widget-native chat]** — 2026-05-06: Multiple sites render markdown as raw `<pre>` (discovery profile/discovery body, ai_profile/ledger/enrichment widget content). Comms widget shows summaries, not full transcripts. Plan widget doesn't preview the actual customer-facing artifact. Left widget rail eats ~40% more real estate than needed.
+
+- **after [Lead Workbench v2 — A0 first slice]** — 2026-05-06: Discovered architectural issue worth flagging before A1: `WorkbenchWidgetCard` is rendered both in the left rail (compact glance) AND in the right "scope" pane (substantive workspace) — same component, same compact styling, just duplicated. The user's vision (rail = switcher, right pane = detail view) requires splitting into `WorkbenchWidgetCard` (compact) + new `WorkbenchWidgetDetail` (full render of file body, transcripts, plan-day previews, etc.). A1+ atoms will pivot on this split.
+
+- **after [Lead Workbench v2 — A1 + A2]** — 2026-05-06: Architectural split resolved — right pane now renders `WorkbenchWidgetDetail`, left rail keeps `WidgetSwitcher`. Watch items for next slice: (1) A3 needs a sandboxed iframe path for email HTML preview — `emailDraftPlainToPreviewHtml` exists for plain-text fallback but not for rich HTML drafts; (2) `latest_comms` is capped at 6 entries by `latestContinuityRows(_, 6)` — fine for v1 but Andre will want pagination once seven-day cycles compound; (3) `PinboardContext` typed as nullable — must use `usePinboardCtx()` helper, not raw `useContext(PinboardContext)`.
+
+- **after [Lead Workbench v2 — A3 + Aesthetic Kit color pass]** — 2026-05-06: Watch items: (1) Email iframe srcDoc currently wraps `emailDraftPlainToPreviewHtml(draft_seed)` — works for plain drafts, but when day actions start carrying real XHTML/links/images the wrapping logic needs to detect rich vs plain and skip escaping for rich. (2) "Edit with agent" pins the draft text but the agent doesn't yet have a tool to *write back* into the day's draft — it can suggest, but Andre still has to copy/paste into the lead-page workbench. A4+ will close that loop with a `set_plan_day_draft` tool. (3) `PlanDayStrip.tsx` (legacy stack-of-7 cards) is now unused in chat; still imported on `/lead/[id]` pages — keep until those routes are eventually retired. (4) Aesthetic Kit accents are applied via per-widget `.cmk-wb-detail-{id}` selectors — if `LeadWidgetId` adds new ids, new selector pair is needed (border-top + head bg).
+
+- **after [Lead Workbench v2 — A4 Client Ledger append]** — 2026-05-06: Watch items: (1) `appendClientLedgerEntryAction` accepts `source: "operator" | "agent"` but the agent path isn't yet wired — when the chat agent gains a `tool_call` for it, that branch will write `agent` entries automatically when the agent does work for a lead (plan generated, day approved, etc.). (2) Heading insertion uses simple string search for `## YYYY-MM-DD` and `\n## ` — if the ledger ever uses h3 day headings or numbered lists with `## ` body content, insert position can drift. Today's bullet would still land but possibly under a stale section. (3) Each append commits to GitHub — for an Andre+agent loop with rapid taps, expect ~10-20 ledger commits/day per active lead, well under Vercel build threshold (commits to harness/ are filtered).
+
+- **after [Lead Workbench v2 — A7 + A8]** — 2026-05-06: Watch items: (1) Heartbeat queued list shows both `approved` AND `needs_review` days as "queued" — `needs_review` won't actually fire until approved, so visually it might look misleading. The status pill makes it clear, but consider a third section "needs your approval" later. (2) `HeartbeatQueueDetail` makes a second fetch to `/api/lead/[id]/plan` — workbench API already loads plan summary; could merge per-day list into workbench response to save a round trip if Andre opens the heartbeat widget often. (3) Workflow `Run full pipeline` (mint button) calls `onAction("all")` — confirm the parent `runWorkbenchAction` actually handles that kind. (Existing code; not touched in this slice.)
+
+- **after [Workbench polish — Claude Design steal pass]** — 2026-05-06: Watch items: (1) "Why this draft" rationale uses `action.notes` — current plan generator may not always populate notes. When empty, the rationale strip is hidden. To make this consistent, the plan-generator prompt should be updated to always emit a `notes` field with a one-line "why this draft" rationale. (2) Approve from inside the workbench dispatches `comeketo:plan-changed` but doesn't reload the local PlanWidgetDetail's internal `plan` state — relies on parent re-render via the event listener. If the visual state doesn't refresh, add an explicit re-fetch inside PlanWidgetDetail's effect. (3) `ProfileSectioned` hides h2/h3 inside section cards via CSS; if a profile has h3 sub-headings inside a section, they'll be hidden too — consider only hiding the *first* heading per card.
+
+- **after [Plan reasoning]** — 2026-05-06: Watch items: (1) **Existing plans in the system don't have reasoning fields** — they were generated before the prompt change. The UI gracefully hides the panels when fields are missing (no error), but Andre will see no reasoning until plans are regenerated. Strategy: regenerate plans once on next sweep / manual regen — no migration needed because file storage round-trips JSON. (2) The required `notes` per action is enforced in the prompt but not in code (the parser still accepts plans without notes). If the model drifts and skips notes, we silently lose the rationale. Could harden later by validating per-action `notes` and rejecting plans that don't carry it — but for now, prompt pressure should be enough. (3) `LeadModeEmptyContext` makes a /api/lead/[id]/plan fetch on every chat open with no messages — fine but cacheable later. (4) Once plans carry `reasoning_trail`, the **chat agent system prompt** should be updated to read it and weight its responses against the prior reasoning instead of re-deriving — so when Andre asks "why is day 3 SMS instead of email?" the agent has the actual chain-of-thought to reference.
+
+- **CRITICAL [Approve fired live email — root cause + mitigation]** — 2026-05-06: The single-tap Approve button (`setDayStatusAction` → status=approved) silently queued a live customer send via the next heartbeat tick when org `execution_mode === "approved_plan_execution"`. Mitigation shipped this slice: (a) Approve is now a two-step modal-gated action with rose warning strip, (b) button label `Approve & queue…` signals intent. **Open follow-ups:** (1) The org's actual `execution_mode` is invisible in this UI — Andre can't see whether his Approve will dry-run or fire. Should surface the current mode in the confirm modal head as a pill ("execute mode" rose / "approval-only" sage / "draft-only" sage). (2) An Undo affordance (e.g., 30-second toast with "Undo" that flips the day back to needs_review) would catch fat-fingers. (3) Belt-and-suspenders: have the heartbeat itself short-circuit `approved_plan_execution` for the very first approval after a draft session, requiring a separate "Arm sending" toggle to turn it on for the day — defense in depth.
+
+- **RESOLVED [Harness primed]** — 2026-05-06: Sweep ran end-to-end via `/api/cron/sweep-leads`. 23 active lead folders on origin/main with full contract. Open follow-ups: (1) Vercel cron is still configured but its previous failure mode wasn't diagnosed — when sweep runs in prod, watch for whether it actually fires hourly or whether prod-env is missing something local-env has (most likely `CLOSE_USER_ID_ANDRE` or `GITHUB_PAT`). (2) `seed-active-25.ts` CLI is broken by a tsx+octokit subpath resolution issue — not a blocker since the cron endpoint works, but the script's docs claim it's runnable from CLI; either fix the import path or update its top comment to direct callers to the cron endpoint. (3) WhatsApp activity count came back 0 — verify when the first WhatsApp-active lead lands whether `_type` matches any of the 4 spellings we matched (`Whatsapp`, `WhatsApp`, `WhatsappMessage`, `WhatsAppMessage`); inspect a `01_raw_lead.json` activity feed to confirm. (4) Belt-and-suspenders for next time: add a visible harness-health badge in app header so this class of "harness empty / app reads Close fresh on every render" failure is never invisible again.
+
+- **RESOLVED [Supabase rip-out shipped]** — 2026-05-06: Footprint shrunk to 5 files / 4 tables, all load-bearing. **Open follow-up items (deferred — not blocking demo):** (1) Discovery-fact persistence is OFFLINE — slot edits + LLM extractions log but don't save. File-canonical replacement: per-lead `discovery_facts.jsonl` or fenced JSON in `06_discovery.md`. Without this, restraint score and clarity numbers in personal scoreboard read low because they only see Close custom fields. (2) Intake binary download is OFFLINE — `redirectIntakeArtifactDownload` stub redirects with `download_offline` code. UI shows the extracted text, not the original PDF/image. Need a Git Data API binary write to fix properly; or just accept this for the demo since the extracted text is what the agent uses. (3) Asset download is similarly OFFLINE for the same reason — `assets-fs.ts` is the canonical store but the URL flow isn't wired. (4) Intake delete is OFFLINE — `deleteIntakeArtifactAction` stubbed to log + revalidate; needs an Octokit `deleteFile` for the harness intake folder. (5) `execution-audit.ts` file header still says "Supabase is OUT" but the file legitimately uses Supabase for `lead_activity_touches` — comment is misleading and should be updated when somebody is in there.

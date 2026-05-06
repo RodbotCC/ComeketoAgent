@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { PlanSection } from "./PlanSection";
-import { LeadSubNav } from "./LeadSubNav";
 import { LeadToolbar } from "./LeadToolbar";
 import { loadLeadBoxPageData } from "./load-lead-box";
 import { BoxAnalyticsStrip } from "./BoxTimeline";
@@ -19,7 +18,6 @@ export default async function LeadPlanPage({ params }: Props) {
   if ("error" in loaded) {
     return (
       <main className="lead-main">
-        <LeadSubNav leadId={params.id} />
         <div className="cme-eyebrow">lead</div>
         <h1 className="lead-title">Box failed to load</h1>
         <pre className="lead-error">{loaded.error || "(unknown)"}</pre>
@@ -39,7 +37,6 @@ export default async function LeadPlanPage({ params }: Props) {
   return (
     <main className="lead-main lead-main--tab scroll-hide">
       <PlanPageBeacon leadId={params.id} plan={plan} />
-      <LeadSubNav leadId={params.id} />
       <LeadToolbar data={data} />
       <BoxAnalyticsStrip
         planFresh={planFresh}

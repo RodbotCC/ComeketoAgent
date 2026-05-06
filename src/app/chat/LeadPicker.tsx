@@ -104,10 +104,6 @@ export function LeadPicker({
             switch
           </button>
           <span className="cmk-lead-active-sep">·</span>
-          <a href={`/lead/${activeLeadId}`} className="cmk-lead-active-link">
-            view Box
-          </a>
-          <span className="cmk-lead-active-sep">·</span>
           <button type="button" className="cmk-lead-active-link" onClick={onClear}>
             clear
           </button>

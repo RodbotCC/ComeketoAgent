@@ -1,7 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { AppHeader } from "@/components/AppHeader";
-import { TabNav } from "@/components/TabNav";
 import { getHeartbeatRunById, type DayVerdict, type HeartbeatRunRow } from "@/lib/heartbeat";
 import { resolveLeadNames, displayName } from "@/lib/lead-names";
 
@@ -165,7 +164,6 @@ export default async function HeartbeatRunPage({ params }: { params: { run_id: s
     return (
       <div className="cme-shell">
         <AppHeader />
-        <TabNav active="heartbeat" />
         <main className="hb-page-main">
           <p>
             <Link href="/heartbeat" className="lead-back">← back to heartbeat</Link>
@@ -184,8 +182,6 @@ export default async function HeartbeatRunPage({ params }: { params: { run_id: s
   return (
     <div className="cme-shell">
       <AppHeader />
-      <TabNav active="heartbeat" />
-
       <main className="hb-page-main scroll-hide">
         <div className="hb-page-toolbar">
           <div>

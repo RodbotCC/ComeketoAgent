@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic";
  * Deprecated as of Phase 1 of harness/ overhaul (2026-05-05).
  *
  * The intake upload route now extracts text inline and writes the result
- * directly to the lead's folder on the leads-data branch. There is no
+ * directly to the lead's folder on the configured harness branch. There is no
  * separate "extract" step anymore.
  *
  * This stub remains so legacy callers (e.g. ChatPanel's attachment-extract

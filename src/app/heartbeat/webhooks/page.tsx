@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { AppHeader } from "@/components/AppHeader";
-import { TabNav } from "@/components/TabNav";
 import { listRecentCloseWebhookEvents, type CloseWebhookEventRow } from "@/lib/webhook-events";
 import { envStatus } from "@/lib/env";
 import { resolveLeadNames, displayName } from "@/lib/lead-names";
@@ -35,8 +34,6 @@ export default async function WebhookEventsPage({
   return (
     <div className="cme-shell">
       <AppHeader />
-      <TabNav active="heartbeat" />
-
       <main className="hb-page-main scroll-hide">
         <div className="hb-page-toolbar">
           <div>

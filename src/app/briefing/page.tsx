@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { AppHeader } from "@/components/AppHeader";
-import { TabNav } from "@/components/TabNav";
 import { closeListLeads, type CloseLead } from "@/lib/close";
 import { listRecentExecutionGlobal } from "@/lib/execution-audit";
 import { aggregateOperatorTruth } from "@/lib/heartbeat-truth";
@@ -77,7 +76,6 @@ export default async function BriefingPage() {
   return (
     <div className="cme-shell">
       <AppHeader />
-      <TabNav />
       <main className="briefing-page scroll-hide">
         {err ? (
           <div className="lead-error">

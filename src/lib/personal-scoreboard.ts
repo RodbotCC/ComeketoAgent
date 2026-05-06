@@ -4,16 +4,18 @@
  * Aggregates Discovery Map + Journey Score signals across every active
  * lead in Andre's pipeline. Cost-bounded by design:
  *   - 1 Close call (closeListLeadsByAssignee) — gets all leads + custom.*
- *   - 1 Supabase select on lead_facts (all rows for Andre's leads)
  *   - 1 Supabase select on heartbeat_runs (last 30d, scope 'lead')
  * No per-lead Box fetches, no LLM calls.
+ *
+ * Note: lead_facts persistence retired in the Supabase rip-out (2026-05-06).
+ * Until file-canonical discovery facts land, the scoreboard reads slot values
+ * from Close custom fields only. Clarity numbers are conservative as a result.
  *
  * Reuses every pure scorer in discovery-map / journey-score / quest.
  */
 
 import { closeListLeadsByAssignee } from "./close";
 import { env } from "./env";
-import { getSupabaseServer } from "./supabase";
 import {
   DISCOVERY_SLOTS,
   PIPELINE_STAGES,
@@ -21,7 +23,6 @@ import {
   indexCustomFields,
   resolveStage,
   type PipelineStageId,
-  type LeadFactRecord,
 } from "./discovery-map";
 import {
   computeRestraint,
@@ -116,39 +117,8 @@ export async function buildPersonalScoreboard(): Promise<
     return !s.includes("lost");
   });
   const leadIds = active.map((l) => l.id);
-
-  // 2. Batch lead_facts in one query. Treat Supabase errors as empty (page
-  //    still works pre-migration; resolver falls back to Close-only).
-  const factsByLead = new Map<string, Map<string, LeadFactRecord>>();
-  if (leadIds.length > 0) {
-    try {
-      const sb = getSupabaseServer();
-      const { data: factRows } = await sb
-        .from("lead_facts")
-        .select("*")
-        .in("lead_id", leadIds);
-      type Row = {
-        lead_id: string;
-        slot_id: string;
-        value: unknown;
-        source: "llm_extraction" | "operator";
-        evidence: unknown;
-        extracted_at: string;
-      };
-      for (const r of (factRows ?? []) as Row[]) {
-        if (!factsByLead.has(r.lead_id)) factsByLead.set(r.lead_id, new Map());
-        factsByLead.get(r.lead_id)!.set(r.slot_id, {
-          slot_id: r.slot_id,
-          value: r.value,
-          source: r.source,
-          evidence: (r.evidence as LeadFactRecord["evidence"]) ?? null,
-          extracted_at: r.extracted_at,
-        });
-      }
-    } catch {
-      // table may not exist yet — proceed empty
-    }
-  }
+  // lead_facts persistence retired — discovery map reads from Close only
+  // until file-canonical replacement lands.
 
   // 3. Walk leads — compute discovery map + stage per lead.
   let totalXp = 0;
@@ -171,7 +141,7 @@ export async function buildPersonalScoreboard(): Promise<
     const cfMap = indexCustomFields(customFields);
     const map = buildDiscoveryMap({
       customFields: cfMap,
-      leadFacts: factsByLead.get(lead.id),
+      leadFacts: undefined,
     });
     totalXp += map.slots.reduce((sum, s) => {
       if (s.status === "known") return sum + s.slot.weight;

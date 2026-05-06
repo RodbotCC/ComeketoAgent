@@ -61,7 +61,20 @@ Append a short timestamped entry under today's date. One bullet is fine. Mark it
 Per-lead narrative content lives in **files** under `harness/`, not Supabase tables. The harness lives on `main` alongside the code — single branch, single mental model.
 
 **File tree** (full doc at `harness/README.md`):
-- `harness/leads/active/{lead_id}__{slug}/` — per-lead state (`00_meta.json`, `01_comms_digest.md`, `01b_comms_verbatim.md`, `04_profile.md` (LLM-generated), `06_discovery.md` (LLM-generated), `09_andre_alerts.md`, **`10_andre_feedback.md`** (operator override — sweeper never touches), `client_ledger.md`, `comms/{kind}_{date}_{shortid}.json`, `intake/{intake_id}/{meta.json,extracted.md}`).
+- `harness/leads/active/{lead_id}__{slug}/` — per-lead state, contiguous-numbered canonical client box (locked 2026-05-05). Raw substrate first, AI interpretation second, execution third, operator overrides last:
+  - `00_meta.json` (raw — sweep envelope, identifiers, counts)
+  - `01_raw_lead.json` (raw — full Close lead object)
+  - `02_continuity.jsonl` (raw — chronological event index)
+  - `03_comms_interpreted.md` (AI — comms read)
+  - `04_profile.md` (AI — operator-facing profile)
+  - `05_seven_day_plan.md` (execution — human-readable; machine plan in `plan.json`)
+  - `06_discovery.md` (AI — discovery slots / NEPQ openers)
+  - `07_andre_alerts.md` (AI — operator warnings)
+  - `08_client_ledger.md` (execution — state of deal vs plan)
+  - `09_enrichment.md` (operator — manual enrichment)
+  - `10_operator_overrides.md` (operator — Andre/Jake override surface; sweeper never touches)
+  - `comms/{kind}_{date}_{shortid}.json` (raw — verbatim per-activity payloads)
+  - `intake/{intake_id}/{meta.json,extracted.md}` (operator — intake artifacts)
 - `harness/ledger/` — global "what Andre did" ledger (Phase 3+).
 - `harness/{approvals,heartbeat,automations,catalog,staff,venues,people,intelligence,summaries,catalog-content}/` — broader memory categories scaffolded for incremental fill.
 
@@ -73,12 +86,12 @@ Per-lead narrative content lives in **files** under `harness/`, not Supabase tab
 
 **Sweeper** (`src/lib/lead-folder-sweeper.ts`) runs every 2h via Vercel cron, plus manual trigger on `/test`. Idempotent — byte-diff means zero commits when nothing changed.
 
-**What stays in Supabase as auxiliary memory (Phase 6 settled — 2026-05-05):**
+**What stays in Supabase as auxiliary memory (post-rip-out — 2026-05-06):**
 - `close_webhook_events` (transactional unique-index dedup on `event_id`).
 - `threads` + `messages` (chat cockpit history; per-token git commits would be absurd).
 - `lead_activity_touches` (single-row freshness signal updated 1000s of times per day).
-- Storage buckets for >1MB binaries.
-- `automation_drafts` (small surface, deferred per Jake — "garbage anyway").
+
+That's it. Everything else got ripped on 2026-05-06 — `lead_facts`, `automation_drafts`, `intake_artifacts`, `lead_assets`, the `intake` storage bucket, the entire `/workflows` surface. Discovery-fact persistence is currently OFFLINE (slot writes log only) pending file-canonical replacement (`discovery_facts.jsonl` per lead, or fenced JSON in `06_discovery.md`).
 
 **What moved to files (file-canonical — no Supabase writes or reads):**
 - Per-lead profile, discovery, NEPQ openers, comms history, call transcripts, win angles, identity notes, intake artifacts.
@@ -86,10 +99,9 @@ Per-lead narrative content lives in **files** under `harness/`, not Supabase tab
 - Execution log (`harness/ledger/YYYY-MM-DD.jsonl`).
 - Approval audit (`harness/approvals/YYYY-MM.jsonl`).
 - Heartbeat runs (`harness/heartbeat/YYYY-MM-DD/{run_id}.json`).
+- Assets metadata (`assets-fs.ts` — binary download flow not yet wired).
 
 **Don't add new Supabase tables for lead-scoped narrative content.** If a feature wants to attach prose, slots, or contextual data to a single lead, write a new file in that lead's folder. Reach for a table only when (a) cross-lead aggregation is the primary access pattern, (b) the data needs ACID transaction semantics, or (c) per-event commit thrash would dominate.
-
-The deprecated `lead_facts` migration lives in `supabase/_deprecated/` as a record of the architecture pivot — do not re-add it.
 
 ## Product North Star — `Guardrails.md`
 

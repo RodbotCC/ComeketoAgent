@@ -27,6 +27,11 @@ export function BoxActivityWatch({
         const msg = JSON.parse(ev.data) as { type?: string; latestReceivedAt?: string | null };
         if (msg.type === "bump" && msg.latestReceivedAt !== initialRef.current) {
           setBump(true);
+          if (typeof window !== "undefined") {
+            window.dispatchEvent(
+              new CustomEvent("cmk:lead-stale", { detail: { leadId } })
+            );
+          }
         }
       } catch {
         /* ignore */
@@ -63,6 +68,11 @@ export function BoxActivityWatch({
         onClick={() => {
           setBump(false);
           initialRef.current = null;
+          if (typeof window !== "undefined") {
+            window.dispatchEvent(
+              new CustomEvent("cmk:lead-fresh", { detail: { leadId } })
+            );
+          }
           router.refresh();
         }}
       >

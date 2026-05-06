@@ -16,7 +16,6 @@
  * overlay). The cockpit is for chat-driven editing, not visualization.
  */
 import { useEffect, useState, useTransition } from "react";
-import Link from "next/link";
 import { PlanDayCard } from "@/app/lead/[id]/PlanDayCard";
 import { generatePlanAction } from "@/app/lead/[id]/actions";
 import type { SevenDayPlan } from "@/lib/plan";
@@ -163,6 +162,8 @@ export function PlanDayStrip({ leadId, leadName }: { leadId: string; leadName: s
     );
   }
 
+  const needsReviewCount = plan.days.filter((d) => d.approval_status === "needs_review").length;
+  const approvedCount = plan.days.filter((d) => d.approval_status === "approved").length;
   const sentCount = plan.days.filter((d) => d.approval_status === "sent").length;
 
   return (
@@ -172,16 +173,10 @@ export function PlanDayStrip({ leadId, leadName }: { leadId: string; leadName: s
         <div style={{ fontSize: 12, fontFamily: "var(--serif)", margin: "2px 0 4px" }}>
           {plan.days.length}-day cycle · {sentCount} sent
         </div>
-        <div style={{ display: "flex", gap: 10, marginTop: 4, flexWrap: "wrap" }}>
-          <Link href={`/lead/${leadId}`} className="cmk-lead-active-link" style={{ fontSize: 11 }}>
-            edit plan →
-          </Link>
-          <Link href={`/lead/${leadId}/discovery`} className="cmk-lead-active-link" style={{ fontSize: 11 }}>
-            discovery →
-          </Link>
-          <Link href={`/lead/${leadId}`} className="cmk-lead-active-link" style={{ fontSize: 11 }}>
-            full Box →
-          </Link>
+        <div className="cmk-plan-strip-summary">
+          <span>{needsReviewCount} needs review</span>
+          <span>{approvedCount} approved</span>
+          <span>{sentCount} sent</span>
         </div>
       </div>
 

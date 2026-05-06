@@ -22,7 +22,6 @@ import {
   type ApprovalStatus,
   type PlannedTouchpoint,
 } from "@/lib/plan";
-import { getSupabaseServer } from "@/lib/supabase";
 import { codegenPlanForClose, type CodegenResult } from "@/lib/plan-to-close";
 import {
   closeGetLeadFull,
@@ -40,11 +39,173 @@ import { logExecution, logApprovalChange } from "@/lib/execution-audit";
 import { redirect } from "next/navigation";
 import { getIntakeArtifactById } from "@/lib/intake-artifacts";
 import { deleteAssetById, getAssetById } from "@/lib/assets";
+import {
+  regenerateLeadAndreAlerts,
+  regenerateLeadClientLedger,
+  regenerateLeadCommsInterpretation,
+  regenerateLeadDiscovery,
+  regenerateLeadProfile,
+} from "@/lib/lead-folder-llm";
+import { sweepLead } from "@/lib/lead-folder-sweeper";
+import { findLeadFolderPath, listLeadFolderFiles, readLeadFile, writeLeadFile, stripFrontmatter } from "@/lib/lead-folder";
+
+async function regenerateAllAiDocsForLead(leadId: string) {
+  return {
+    comms: await regenerateLeadCommsInterpretation(leadId),
+    profile: await regenerateLeadProfile(leadId),
+    discovery: await regenerateLeadDiscovery(leadId),
+    alerts: await regenerateLeadAndreAlerts(leadId),
+    ledger: await regenerateLeadClientLedger(leadId),
+  };
+}
+
+export async function sweepLeadBoxAction(formData: FormData) {
+  await assertOperatorSession();
+  const leadId = String(formData.get("lead_id") || "");
+  if (!leadId) throw new Error("lead_id required");
+  const result = await sweepLead(leadId);
+  void logExecution({
+    action_kind: "sweep_lead_box",
+    close_lead_id: leadId,
+    payload: result,
+  });
+
+  // Raw substrate changed → chain AI regeneration. Each regen has its own
+  // skip-hash so chains-without-change are cheap; we only chain when something
+  // was actually written so the common no-op case stays a no-op.
+  if (result.written > 0) {
+    try {
+      const chained = await regenerateAllAiDocsForLead(leadId);
+      void logExecution({
+        action_kind: "regenerate_client_box_docs",
+        close_lead_id: leadId,
+        payload: { trigger: "auto_after_sweep", chained },
+      });
+    } catch (err) {
+      void logExecution({
+        action_kind: "regenerate_client_box_docs",
+        close_lead_id: leadId,
+        payload: {
+          trigger: "auto_after_sweep",
+          error: err instanceof Error ? err.message : String(err),
+        },
+      });
+    }
+  }
+
+  revalidatePath(`/lead/${leadId}`, "layout");
+}
+
+export async function regenerateClientBoxDocsAction(formData: FormData) {
+  await assertOperatorSession();
+  const leadId = String(formData.get("lead_id") || "");
+  if (!leadId) throw new Error("lead_id required");
+
+  // Hard gate: AI regen reads the raw substrate. Without a folder there is
+  // nothing to interpret.
+  const folder = await findLeadFolderPath(leadId);
+  if (!folder) {
+    throw new Error(
+      "Refresh raw box from Close first — no harness folder for this lead yet."
+    );
+  }
+
+  const results = await regenerateAllAiDocsForLead(leadId);
+
+  void logExecution({
+    action_kind: "regenerate_client_box_docs",
+    close_lead_id: leadId,
+    payload: results,
+  });
+  revalidatePath(`/lead/${leadId}`, "layout");
+}
+
+export async function runLeadBoxWorkflowAction(formData: FormData) {
+  await assertOperatorSession();
+  const leadId = String(formData.get("lead_id") || "");
+  if (!leadId) throw new Error("lead_id required");
+  const rawH = formData.get("horizon_days");
+  const horizonDays =
+    rawH != null && String(rawH).trim() !== ""
+      ? clampPlanHorizonDays(Number(rawH))
+      : undefined;
+
+  const raw = await sweepLead(leadId);
+  const ai = await regenerateAllAiDocsForLead(leadId);
+  const plan = await generateSevenDayPlanForLead(leadId, { horizonDays });
+  if (!plan.ok) throw new Error(plan.error);
+
+  void logExecution({
+    action_kind: "run_lead_box_workflow",
+    close_lead_id: leadId,
+    payload: { raw, ai, horizonDays: horizonDays ?? "default" },
+  });
+  revalidatePath(`/lead/${leadId}`, "layout");
+  revalidatePath("/proposals");
+}
+
+export type ClientBoxDocKey = "comms" | "profile" | "discovery" | "alerts" | "ledger";
+
+const DOC_REGENERATORS: Record<
+  ClientBoxDocKey,
+  (leadId: string) => Promise<unknown>
+> = {
+  comms: regenerateLeadCommsInterpretation,
+  profile: regenerateLeadProfile,
+  discovery: regenerateLeadDiscovery,
+  alerts: regenerateLeadAndreAlerts,
+  ledger: regenerateLeadClientLedger,
+};
+
+const REQUIRED_AI_DOCS_FOR_PLAN = [
+  "03_comms_interpreted.md",
+  "04_profile.md",
+  "06_discovery.md",
+  "08_client_ledger.md",
+] as const;
+
+async function assertAiDocsReadyForPlan(leadId: string): Promise<void> {
+  const files = await listLeadFolderFiles(leadId);
+  const missing = REQUIRED_AI_DOCS_FOR_PLAN.filter((file) => !files?.has(file));
+  if (missing.length > 0) {
+    throw new Error(
+      `Regenerate AI docs before planning — missing ${missing.join(", ")}.`
+    );
+  }
+}
+
+export async function regenerateOneClientBoxDocAction(formData: FormData) {
+  await assertOperatorSession();
+  const leadId = String(formData.get("lead_id") || "");
+  const docKey = String(formData.get("doc_key") || "") as ClientBoxDocKey;
+  if (!leadId) throw new Error("lead_id required");
+  if (!(docKey in DOC_REGENERATORS)) throw new Error(`unknown doc_key: ${docKey}`);
+
+  const result = await DOC_REGENERATORS[docKey](leadId);
+  void logExecution({
+    action_kind: "regenerate_client_box_docs",
+    close_lead_id: leadId,
+    payload: { doc_key: docKey, result },
+  });
+  revalidatePath(`/lead/${leadId}`, "layout");
+}
 
 export async function generatePlanAction(formData: FormData) {
   await assertOperatorSession();
   const leadId = String(formData.get("lead_id") || "");
   if (!leadId) throw new Error("lead_id required");
+
+  // Hard gate: cannot generate a plan without a hydrated raw substrate.
+  // The plan generator reads from the harness folder; running it before a
+  // sweep silently produces a thin / wrong plan.
+  const folder = await findLeadFolderPath(leadId);
+  if (!folder) {
+    throw new Error(
+      "Refresh raw box from Close first — no harness folder for this lead yet."
+    );
+  }
+  await assertAiDocsReadyForPlan(leadId);
+
   const rawH = formData.get("horizon_days");
   const horizonDays =
     rawH != null && String(rawH).trim() !== ""
@@ -646,18 +807,12 @@ export async function redirectIntakeArtifactDownload(formData: FormData) {
     redirect(leadId ? intakePath("bad_request") : "/leads");
   }
 
-  const row = await getIntakeArtifactById(artifactId);
-  if (!row || row.lead_id !== leadId) {
-    redirect(intakePath("not_found"));
-  }
-
-  const sb = getSupabaseServer();
-  const { data, error } = await sb.storage.from("intake").createSignedUrl(row.storage_path, 120);
-  if (error || !data?.signedUrl) {
-    redirect(intakePath("signed_url"));
-  }
-
-  redirect(data.signedUrl);
+  // Intake binaries are not persisted (file-canonical extracts only — see
+  // `intake-fs.ts`). The download flow now points operators back to the
+  // intake page with an offline code; the UI surfaces the extracted text
+  // inline instead. Re-enable when binary persistence ships.
+  void artifactId;
+  redirect(intakePath("download_offline"));
 }
 
 /**
@@ -671,29 +826,14 @@ export async function deleteIntakeArtifactAction(formData: FormData) {
   const leadId = String(formData.get("lead_id") || "").trim();
   if (!artifactId || !leadId) throw new Error("artifact_id and lead_id required");
 
-  const row = await getIntakeArtifactById(artifactId);
-  if (!row) {
-    revalidatePath(`/lead/${leadId}/intake`);
-    return;
-  }
-  if (row.lead_id !== leadId) throw new Error("artifact lead mismatch");
-
-  const sb = getSupabaseServer();
-  const rm = await sb.storage.from("intake").remove([row.storage_path]);
-  if (rm.error) {
-    void logExecution({
-      action_kind: "intake_extract",
-      close_lead_id: leadId,
-      payload: { artifact_id: artifactId, delete_storage_failed: rm.error.message },
-    });
-  }
-  const { error: dbErr } = await sb.from("intake_artifacts").delete().eq("id", artifactId);
-  if (dbErr) throw new Error(`delete intake row failed: ${dbErr.message}`);
-
+  // Delete is currently a no-op pending the file-tree delete path (would need
+  // an Octokit `deleteFile` for both `meta.json` and `extracted.md` under the
+  // intake folder). For now, log the intent and refresh the page so the UI
+  // doesn't appear frozen. Re-enable when harness intake-delete ships.
   void logExecution({
     action_kind: "intake_extract",
     close_lead_id: leadId,
-    payload: { artifact_id: artifactId, deleted: true, filename: row.filename },
+    payload: { artifact_id: artifactId, delete_attempted: true, note: "harness intake-delete not yet wired" },
   });
   revalidatePath(`/lead/${leadId}/intake`);
   revalidatePath(`/lead/${leadId}/box`);
@@ -709,20 +849,11 @@ export async function redirectAssetDownload(formData: FormData) {
     redirect(leadId ? boxPath("bad_request") : "/leads");
   }
 
-  const row = await getAssetById(assetId);
-  if (!row || (row.scope === "lead" && row.close_lead_id !== leadId)) {
-    redirect(boxPath("not_found"));
-  }
-
-  const sb = getSupabaseServer();
-  const { data, error } = await sb.storage
-    .from(row.storage_bucket)
-    .createSignedUrl(row.storage_path, 120);
-  if (error || !data?.signedUrl) {
-    redirect(boxPath("signed_url"));
-  }
-
-  redirect(data.signedUrl);
+  // Assets storage is file-canonical (assets-fs.ts) but a download URL flow
+  // hasn't been wired through harness yet. Until then, redirect with an
+  // offline code so the UI degrades cleanly.
+  void assetId;
+  redirect(boxPath("download_offline"));
 }
 
 export async function deleteLeadAssetAction(formData: FormData) {
@@ -781,6 +912,77 @@ export async function runHeartbeatNowAction(
     });
     revalidatePath(`/lead/${leadId}`, "layout");
     return { ok: true, report, execution_mode: settings.execution_mode };
+  } catch (err) {
+    return { ok: false, error: err instanceof Error ? err.message : String(err) };
+  }
+}
+
+/**
+ * Append a date-stamped operator entry to `08_client_ledger.md`.
+ *
+ * The Client Ledger is the per-lead running ledger — analogous to the global
+ * Goals/Problems/Global scaffold but scoped to one lead. Both the operator (UI
+ * button) and the chat agent (tool-call) write through this single action so
+ * the file stays the canonical source of truth.
+ *
+ * Idempotent on identical content (writeLeadFile bails on same SHA). Falls
+ * back gracefully if the file or folder doesn't exist yet — creates a stub.
+ */
+export async function appendClientLedgerEntryAction(
+  leadId: string,
+  body: string,
+  opts?: { source?: "operator" | "agent"; leadName?: string },
+): Promise<{ ok: true } | { ok: false; error: string }> {
+  try {
+    await assertOperatorSession();
+    const trimmed = body.trim();
+    if (!leadId || !leadId.startsWith("lead_")) return { ok: false, error: "invalid lead id" };
+    if (!trimmed) return { ok: false, error: "entry body required" };
+    if (trimmed.length > 4000) return { ok: false, error: "entry too long (4000 char max)" };
+
+    const today = new Date().toISOString().slice(0, 10);
+    const source = opts?.source === "agent" ? "agent" : "operator";
+    const bullet = `- **${source} · ${new Date().toISOString().slice(11, 16)}Z** — ${trimmed.replace(/\n+/g, " ")}\n`;
+
+    const existing = await readLeadFile(leadId, "08_client_ledger.md");
+    const frontmatter = existing && existing.startsWith("---") ? existing.slice(0, existing.indexOf("\n---", 3) + 4) + "\n" : "";
+    const bodyOnly = existing ? stripFrontmatter(existing) : "";
+
+    const dayHeading = `## ${today}`;
+    let nextBody: string;
+    if (bodyOnly.includes(dayHeading)) {
+      // Append under today's heading — find the next h2 (or end) and insert before it.
+      const start = bodyOnly.indexOf(dayHeading);
+      const afterHeading = bodyOnly.indexOf("\n", start) + 1;
+      const nextH2 = bodyOnly.indexOf("\n## ", afterHeading);
+      const insertAt = nextH2 === -1 ? bodyOnly.length : nextH2;
+      nextBody = bodyOnly.slice(0, insertAt).replace(/\n*$/, "\n") + bullet + bodyOnly.slice(insertAt);
+    } else {
+      // Prepend a fresh day section so newest is on top.
+      const heading = bodyOnly.startsWith("# ")
+        ? bodyOnly
+        : `# Client Ledger\n\nRunning ledger for this lead. Operator + agent entries land here.\n\n` + bodyOnly;
+      const headerEnd = heading.indexOf("\n\n", heading.indexOf("# "));
+      const insertAt = headerEnd === -1 ? heading.length : headerEnd + 2;
+      nextBody = heading.slice(0, insertAt) + `${dayHeading}\n\n${bullet}\n` + heading.slice(insertAt);
+    }
+
+    const final = frontmatter + nextBody.replace(/\n*$/, "\n");
+
+    // leadName is optional — only used if folder doesn't exist (very rare for
+    // an active lead). Fall back to id-as-name if caller didn't supply.
+    const leadName = opts?.leadName?.trim() || leadId;
+    await writeLeadFile(leadId, leadName, "08_client_ledger.md", final, {
+      commitMessage: `ledger: ${leadId} — ${source} entry`,
+    });
+
+    void logExecution({
+      action_kind: "append_client_ledger",
+      close_lead_id: leadId,
+      payload: { source, length: trimmed.length },
+    });
+
+    return { ok: true };
   } catch (err) {
     return { ok: false, error: err instanceof Error ? err.message : String(err) };
   }

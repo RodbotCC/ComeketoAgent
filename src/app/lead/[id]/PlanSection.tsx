@@ -1,8 +1,8 @@
-import { generatePlanAction } from "./actions";
 import type { SevenDayPlan } from "@/lib/plan";
 import type { IntakeArtifactRow } from "@/lib/intake-artifacts";
 import { PlanCardClient } from "./PlanCardClient";
 import { PlanDaysWorkbench } from "./PlanDaysWorkbench";
+import { GeneratePlanForm } from "./GeneratePlanForm";
 
 type PersistedPlan = SevenDayPlan & {
   approved_at?: string;
@@ -18,8 +18,6 @@ const GOAL_LABEL: Record<SevenDayPlan["primary_goal"], string> = {
   clarify: "Clarify",
   re_engage: "Re-engage",
 };
-
-const HORIZON_PRESETS = [1, 2, 3, 5, 7, 14, 21, 30, 45, 60, 90] as const;
 
 function fmtTime(iso?: string) {
   if (!iso) return "—";
@@ -72,27 +70,7 @@ export function PlanSection({
         <p className="plan-empty-msg">
           No plan yet. Generate from the current Box — NEPQ voice, Guardrails §D. Default week length is 7 days (NEPQ sweep); pick another length for same-day blitz or a longer bridge.
         </p>
-        <form action={generatePlanAction} className="plan-generate-form">
-          <input type="hidden" name="lead_id" value={leadId} />
-          <label className="plan-horizon-label">
-            <span>Calendar days in cycle</span>
-            <input
-              type="number"
-              name="horizon_days"
-              min={1}
-              max={180}
-              defaultValue={defaultHorizonDays}
-              list={`plan-horizon-presets-${leadId}`}
-              className="plan-horizon-input"
-            />
-            <datalist id={`plan-horizon-presets-${leadId}`}>
-              {HORIZON_PRESETS.map((n) => (
-                <option key={n} value={n} />
-              ))}
-            </datalist>
-          </label>
-          <button type="submit" className="plan-btn plan-btn-primary">Generate plan</button>
-        </form>
+        <GeneratePlanForm leadId={leadId} defaultHorizonDays={defaultHorizonDays} />
       </div>
     );
   }

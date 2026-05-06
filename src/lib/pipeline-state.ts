@@ -17,7 +17,6 @@
  * - `closeListLeadsByAssignee` (Close REST) for owner-filtered name map
  */
 
-import { getSupabaseServer } from "./supabase";
 import { closeListLeadsByAssignee, type CloseLead } from "./close";
 import { env } from "./env";
 import { getSettings } from "./settings";
@@ -234,7 +233,6 @@ function walkHeartbeatRuns(
 export async function pipelineStateForOwner(
   owner: PipelineOwner = "andre"
 ): Promise<PipelineStateOut> {
-  const sb = getSupabaseServer();
   const settings = await getSettings();
 
   // 1) Owner → user_id resolution + name map. For 'all' we don't filter and

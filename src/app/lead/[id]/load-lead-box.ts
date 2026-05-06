@@ -2,6 +2,7 @@ import { cache } from "react";
 import {
   closeGetLeadFull,
   checkOwnershipAndStatus,
+  isOwnedByAndre,
   isReplyGateActive,
   type CloseLeadFull,
   type SkipCode,
@@ -107,8 +108,8 @@ export const loadLeadBoxPageData = cache(
     const currentSnapshotId = snapshotIdForBox(box);
     const planEligible = !skip;
 
-    const isAndre = env.CLOSE_USER_ID_ANDRE && leadAny.user_id === env.CLOSE_USER_ID_ANDRE;
-    const isJake = env.CLOSE_USER_ID_JAKE && leadAny.user_id === env.CLOSE_USER_ID_JAKE;
+    const isAndre = isOwnedByAndre(leadAny);
+    const isJake = !!(env.CLOSE_USER_ID_JAKE && leadAny.user_id === env.CLOSE_USER_ID_JAKE);
     const ownerName = isAndre ? "Andre" : isJake ? "Jake" : leadAny.user_name || "—";
 
     const sortedActivities = [...activities].sort(

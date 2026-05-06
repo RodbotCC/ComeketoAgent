@@ -1,14 +1,15 @@
 import { Suspense } from "react";
 import { AppHeader } from "@/components/AppHeader";
-import { TabNav } from "@/components/TabNav";
 import { ChatLayout } from "./ChatPanel";
+
+// Chat reads `useSearchParams` deep inside ChatPanel. Forcing dynamic so
+// Next.js doesn't try to prerender — the page is operator-bound anyway.
+export const dynamic = "force-dynamic";
 
 export default function ChatPage() {
   return (
     <div className="cme-shell chat-shell">
       <AppHeader />
-      <TabNav active="delegations" />
-
       <Suspense fallback={<div className="cmk-chat-suspense">Loading delegations…</div>}>
         <ChatLayout />
       </Suspense>

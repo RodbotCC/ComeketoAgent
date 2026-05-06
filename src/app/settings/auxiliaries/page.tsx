@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { AppHeader } from "@/components/AppHeader";
-import { TabNav } from "@/components/TabNav";
 import {
   getAuxiliaries,
   CAPABILITIES,
@@ -32,8 +31,6 @@ export default async function AuxiliariesPage() {
   return (
     <div className="cme-shell">
       <AppHeader wordmarkHref="/" />
-      <TabNav />
-
       <main className="admin-main">
         <div className="cme-section-label">admin · auxiliaries</div>
         <div style={{ display: "flex", alignItems: "baseline", gap: 14, marginBottom: 4 }}>

@@ -33,8 +33,9 @@ type PlanWithMeta = SevenDayPlan & {
   _mirror_at?: string;
 };
 
-/** Mirror a plan to its lead's harness folder as `plan.json`. Resolves the
- *  lead's display_name via Close to build the slug. Failures swallowed. */
+/** Mirror a plan to its lead's harness folder as machine `plan.json` plus
+ *  human-readable `05_seven_day_plan.md`. Resolves the lead's display_name
+ *  via Close to build the slug. Failures swallowed. */
 export async function mirrorPlanToFile(plan: PlanWithMeta): Promise<void> {
   try {
     let leadName = plan.close_lead_id;
@@ -58,6 +59,15 @@ export async function mirrorPlanToFile(plan: PlanWithMeta): Promise<void> {
     await writeLeadFile(plan.close_lead_id, leadName, "plan.json", content, {
       commitMessage: `plan: ${leadName} — ${plan.status} (${plan.plan_id.slice(-8)})`,
     });
+    await writeLeadFile(
+      plan.close_lead_id,
+      leadName,
+      "05_seven_day_plan.md",
+      renderSevenDayPlanMarkdown(plan, leadName),
+      {
+        commitMessage: `plan: ${leadName} — mirror 05_seven_day_plan.md`,
+      },
+    );
   } catch (e) {
     logStructured("warn", "harness.plans", "mirrorPlanToFile failed", {
       plan_id: plan.plan_id,
@@ -65,6 +75,80 @@ export async function mirrorPlanToFile(plan: PlanWithMeta): Promise<void> {
       message: e instanceof Error ? e.message : String(e),
     });
   }
+}
+
+function renderSevenDayPlanMarkdown(plan: PlanWithMeta, leadName: string): string {
+  const lines: string[] = [
+    `# ${leadName} — Seven-Day Plan`,
+    "",
+    `- Plan ID: \`${plan.plan_id}\``,
+    `- Status: ${plan.status}`,
+    `- Goal: ${plan.primary_goal}`,
+    `- Generated: ${plan.generated_at}`,
+    `- Snapshot: ${plan.based_on_snapshot_id}`,
+    "",
+  ];
+
+  if (plan.goal_summary) {
+    lines.push("## Goal Summary", "", plan.goal_summary, "");
+  }
+  if (plan.reasoning_trail && plan.reasoning_trail.length > 0) {
+    lines.push("## Why this cycle (reasoning)", "");
+    for (const bullet of plan.reasoning_trail) lines.push(`- ${bullet}`);
+    lines.push("");
+  }
+  if (plan.lead_state_summary) {
+    lines.push("## Lead state", "", plan.lead_state_summary, "");
+  }
+
+  lines.push("## Known Facts", "");
+
+  if (plan.known_facts.length === 0) {
+    lines.push("_(none)_");
+  } else {
+    for (const fact of plan.known_facts) lines.push(`- ${fact}`);
+  }
+
+  lines.push("", "## Unknowns", "");
+  if (plan.unknowns.length === 0) {
+    lines.push("_(none)_");
+  } else {
+    for (const unknown of plan.unknowns) lines.push(`- ${unknown}`);
+  }
+
+  lines.push("", "## Days", "");
+  for (const day of plan.days) {
+    lines.push(`### Day ${day.day}`);
+    lines.push("");
+    lines.push(`- Objective: ${day.objective}`);
+    if (day.reasoning) lines.push(`- Reasoning: _${day.reasoning.replace(/\n/g, " ")}_`);
+    lines.push(`- Send window: ${day.send_window}`);
+    lines.push(`- Approval: ${day.approval_status}`);
+    lines.push("");
+    if (day.required_actions.length === 0) {
+      lines.push("_(no required actions)_");
+    } else {
+      for (const action of day.required_actions) {
+        lines.push(`- ${action.channel.toUpperCase()}: ${action.intent}`);
+        if (action.draft_seed) {
+          lines.push(`  Draft seed: ${action.draft_seed.replace(/\n/g, " ")}`);
+        }
+        if (action.notes) lines.push(`  Why this draft: ${action.notes.replace(/\n/g, " ")}`);
+      }
+    }
+    lines.push("");
+  }
+
+  lines.push("## Stop Conditions", "");
+  if (plan.stop_conditions.length === 0) {
+    lines.push("_(none)_");
+  } else {
+    for (const condition of plan.stop_conditions) {
+      lines.push(`- ${condition.trigger}: ${condition.action}`);
+    }
+  }
+
+  return lines.join("\n").replace(/\n{3,}/g, "\n\n") + "\n";
 }
 
 /** Read a single lead's current plan from `plan.json`. Returns null if no
@@ -218,4 +302,3 @@ async function resolveLeadName(leadId: string): Promise<string> {
 }
 
 void resolveLeadName; // referenced indirectly; keep export-clean
-

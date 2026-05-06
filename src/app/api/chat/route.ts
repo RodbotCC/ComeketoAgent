@@ -53,6 +53,17 @@ type ChatRequest = {
    * to re-discover lead context via tool calls.
    */
   lead_id?: string;
+  focused_widget_id?: string;
+  visible_widgets?: Array<{
+    widget_id?: string;
+    title?: string;
+    priority?: "primary" | "supporting" | "background";
+    summary?: string;
+    facts?: Array<{ label?: string; value?: string }>;
+    warnings?: string[];
+    open_questions?: string[];
+    source_refs?: Array<{ kind?: string; ref?: string }>;
+  }>;
 };
 
 /**
@@ -163,6 +174,50 @@ async function buildLeadContextBlock(leadId: string | undefined): Promise<string
   } catch {
     return "";
   }
+}
+
+function buildVisibleWidgetsBlock(body: ChatRequest): string {
+  const widgets = (body.visible_widgets ?? []).slice(0, 8);
+  if (widgets.length === 0) return "";
+
+  const sections = widgets.map((w, index) => {
+    const title = String(w.title || w.widget_id || `Widget ${index + 1}`).slice(0, 80);
+    const priority = w.priority || "supporting";
+    const summary = String(w.summary || "").slice(0, 600);
+    const facts = (w.facts ?? [])
+      .slice(0, 6)
+      .map((f) => `   - ${String(f.label || "fact").slice(0, 40)}: ${String(f.value || "").slice(0, 160)}`)
+      .join("\n");
+    const warnings = (w.warnings ?? [])
+      .slice(0, 4)
+      .map((x) => `   - ${String(x).slice(0, 180)}`)
+      .join("\n");
+    const open = (w.open_questions ?? [])
+      .slice(0, 4)
+      .map((x) => `   - ${String(x).slice(0, 180)}`)
+      .join("\n");
+    const refs = (w.source_refs ?? [])
+      .slice(0, 6)
+      .map((r) => `   - ${String(r.kind || "ref")}: ${String(r.ref || "").slice(0, 140)}`)
+      .join("\n");
+    return [
+      `${index + 1}. ${title} (${priority}${body.focused_widget_id === w.widget_id ? ", focused" : ""})`,
+      summary ? `   Summary: ${summary}` : "",
+      facts ? `   Facts:\n${facts}` : "",
+      warnings ? `   Warnings:\n${warnings}` : "",
+      open ? `   Open questions:\n${open}` : "",
+      refs ? `   Source refs:\n${refs}` : "",
+    ].filter(Boolean).join("\n");
+  });
+
+  return [
+    "",
+    "## Current screen context (Lead Workbench widgets)",
+    "",
+    "The operator is looking at these widgets around the chat. Use this as UI context, not as the source of truth. If an exact fact, send/draft decision, or state transition depends on details, call the appropriate tool or read the raw Box first.",
+    "",
+    sections.join("\n\n"),
+  ].join("\n");
 }
 
 const DEFAULT_INSTRUCTIONS = `You are Comeketo Agent — Andre's automation co-pilot for his catering CRM. You operate his Close instance like a senior salesperson with full RW access. You write tight markdown, never flatter, always act.
@@ -442,6 +497,7 @@ export async function POST(req: Request) {
   // both the deep-think and tool-loop instructions below. Empty string
   // when lead_id is absent or the closeGetLead call fails.
   const leadContextBlock = await buildLeadContextBlock(body.lead_id);
+  const visibleWidgetsBlock = buildVisibleWidgetsBlock(body);
 
   // 1) Resolve thread (create if missing).
   let threadId = body.thread_id;
@@ -506,7 +562,7 @@ export async function POST(req: Request) {
         // Cast: Responses input typing here is permissive at runtime; we pack
         // mixed message/function_call/function_call_output items by spec.
         input: runningInput as unknown as Parameters<typeof client.responses.create>[0]["input"],
-        instructions: (body.instructions ?? DEFAULT_INSTRUCTIONS) + leadContextBlock,
+        instructions: (body.instructions ?? DEFAULT_INSTRUCTIONS) + leadContextBlock + visibleWidgetsBlock,
         // CLOSE_TOOLS = single-lead Close ops (lib/close-tools.ts).
         // COMPOSITE_TOOLS = batch verbs (lib/composite-tools.ts) — find/plan/fire across many leads.
         // getCloseToolsForSettings filters the MCP fallback tools out of the

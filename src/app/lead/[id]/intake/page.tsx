@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { LeadSubNav } from "../LeadSubNav";
 import { loadLeadBoxPageData } from "../load-lead-box";
 import { LeadIntakeBoard } from "./LeadIntakeBoard";
 
@@ -18,7 +17,7 @@ const DOWNLOAD_ERROR_COPY: Record<string, string> = {
 
 /**
  * /lead/[id]/intake — lead-scoped file uploads + extracted-text preview.
- * AppHeader + TabNav come from the `/lead/[id]/layout.tsx` shell.
+ * AppHeader (with global subnav) comes from the `/lead/[id]/layout.tsx` shell.
  */
 export default async function LeadIntakePage({ params, searchParams }: Props) {
   const loaded = await loadLeadBoxPageData(params.id);
@@ -26,7 +25,6 @@ export default async function LeadIntakePage({ params, searchParams }: Props) {
   if ("error" in loaded) {
     return (
       <main className="lead-main">
-        <LeadSubNav leadId={params.id} />
         <div className="cme-eyebrow">lead</div>
         <h1 className="lead-title">Box failed to load</h1>
         <pre className="lead-error">{loaded.error || "(unknown)"}</pre>
@@ -44,8 +42,6 @@ export default async function LeadIntakePage({ params, searchParams }: Props) {
 
   return (
     <main className="lead-main lead-main--tab scroll-hide">
-      <LeadSubNav leadId={params.id} />
-
       <div className="cme-eyebrow">intake · {leadName}</div>
       <h1 className="lead-title">Materials for this lead</h1>
       <p className="muted" style={{ fontSize: 12, marginTop: 4, maxWidth: "44rem" }}>

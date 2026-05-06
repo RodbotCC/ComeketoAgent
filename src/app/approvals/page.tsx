@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { AppHeader } from "@/components/AppHeader";
-import { TabNav } from "@/components/TabNav";
 import { listPlansNeedingReview } from "@/lib/plans-db";
 import { closeGetLeadFull } from "@/lib/close";
 import { snapshotIdForBox } from "@/lib/plan";
@@ -57,8 +56,6 @@ export default async function ApprovalsPage() {
   return (
     <div className="cme-shell">
       <AppHeader />
-      <TabNav active="console" />
-
       <main className="hb-page-main scroll-hide">
         <div className="hb-page-toolbar">
           <div>

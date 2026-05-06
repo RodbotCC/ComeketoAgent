@@ -6,6 +6,7 @@ import {
   type CloseWorkflow,
 } from "@/lib/close";
 import { enrollInSequenceAction } from "./actions";
+import { EnrollSubmitButton } from "./EnrollSubmitButton";
 
 export async function WorkflowEnrollSection({
   leadId,
@@ -92,9 +93,7 @@ export async function WorkflowEnrollSection({
           <input type="checkbox" name="confirm" value="yes" required />
           I confirm enrollment in Close
         </label>
-        <button type="submit" className="plan-btn plan-btn-primary">
-          Enroll contact
-        </button>
+        <EnrollSubmitButton />
       </form>
     </div>
   );

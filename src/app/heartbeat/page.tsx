@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { AppHeader } from "@/components/AppHeader";
-import { TabNav } from "@/components/TabNav";
 import { listRecentHeartbeats, aggregateLast24h, type HeartbeatRunRow } from "@/lib/heartbeat";
 import { aggregateOperatorTruth, type HeartbeatTruthSummary } from "@/lib/heartbeat-truth";
 import { resolveLeadNames, displayName } from "@/lib/lead-names";
@@ -159,7 +158,6 @@ export default async function HeartbeatDashboardPage() {
   return (
     <div className="cme-shell">
       <AppHeader />
-      <TabNav active="heartbeat" />
       <HeartbeatAutoRefresh />
 
       <main className="hb-page-main scroll-hide">

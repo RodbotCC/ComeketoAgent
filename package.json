@@ -14,9 +14,15 @@
     "close:box-audit": "tsx scripts/close-box-audit.ts",
     "close:list-sequences": "tsx scripts/close-list-sequences.ts",
     "close:list-lead-statuses": "tsx scripts/close-list-lead-statuses.ts",
-    "close:search-leads": "tsx scripts/close-search-leads.ts"
+    "close:search-leads": "tsx scripts/close-search-leads.ts",
+    "leads:preflight": "tsx scripts/preflight-client-box.ts",
+    "leads:seed-active": "tsx scripts/seed-active-25.ts",
+    "leads:regen-box": "tsx scripts/regen-client-box-docs.ts",
+    "leads:verify-raw": "tsx scripts/verify-raw-substrate.ts",
+    "leads:verify-box": "tsx scripts/verify-client-box.ts"
   },
   "dependencies": {
+    "@octokit/app": "^16.1.2",
     "@supabase/ssr": "^0.10.2",
     "@supabase/supabase-js": "^2.105.1",
     "next": "^14.2.15",

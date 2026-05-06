@@ -169,14 +169,22 @@ async function testLeadRegen() {
     in_scope: summary.in_scope,
     started_at: summary.started_at,
     finished_at: summary.finished_at,
+    comms: summary.comms,
     profile: summary.profile,
     discovery: summary.discovery,
+    alerts: summary.alerts,
+    ledger: summary.ledger,
     error_count: summary.errors.length,
     errors: summary.errors.slice(0, 10),
     hint:
       summary.in_scope === 0
         ? "0 leads in scope — confirm CLOSE_USER_ID_ANDRE matches your active assignee."
-        : summary.profile.regenerated + summary.discovery.regenerated === 0
+        : summary.comms.regenerated +
+            summary.profile.regenerated +
+            summary.discovery.regenerated +
+            summary.alerts.regenerated +
+            summary.ledger.regenerated ===
+          0
         ? "All leads up to date (hash match on every file). Run lead sweep first if you expect new comms."
         : undefined,
   };

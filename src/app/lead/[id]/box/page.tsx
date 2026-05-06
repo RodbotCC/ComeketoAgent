@@ -5,9 +5,10 @@ import { WorkflowEnrollSection } from "../WorkflowEnrollSection";
 import { WorkflowSubscriptionControls } from "../WorkflowSubscriptionControls";
 import { IntakeArtifactsPanel } from "../IntakeArtifactsPanel";
 import { LeadAssetsPanel } from "../LeadAssetsPanel";
-import { LeadSubNav } from "../LeadSubNav";
 import { LeadToolbar } from "../LeadToolbar";
 import { loadLeadBoxPageData } from "../load-lead-box";
+import { listLeadFolderFiles } from "@/lib/lead-folder";
+import { ClientBoxActions } from "./ClientBoxActions";
 
 export const dynamic = "force-dynamic";
 
@@ -65,11 +66,11 @@ export default async function LeadBoxTabPage({ params, searchParams = {} }: Prop
   const assetDownloadError = assetDownloadUserMessage(assetDlCode);
 
   const loaded = await loadLeadBoxPageData(params.id);
+  const folderFiles = await listLeadFolderFiles(params.id).catch(() => null);
 
   if ("error" in loaded) {
     return (
       <main className="lead-main">
-        <LeadSubNav leadId={params.id} />
         <div className="cme-eyebrow">lead</div>
         <h1 className="lead-title">Box failed to load</h1>
         <pre className="lead-error">{loaded.error}</pre>
@@ -85,12 +86,24 @@ export default async function LeadBoxTabPage({ params, searchParams = {} }: Prop
   const data = loaded;
   const { box, counts, lastInbound, lastOutbound, intakeArtifacts, assets, planEligible, customFields } = data;
   const { lead, activities, subscriptions, email_threads, fetched_at } = box;
+  const commJsonCount = folderFiles
+    ? [...folderFiles.keys()].filter((k) => k.startsWith("comms/") && k.endsWith(".json")).length
+    : 0;
+  const presentDocs = new Set(folderFiles ? [...folderFiles.keys()] : []);
+  if (data.plan) presentDocs.add("05_seven_day_plan.md");
 
   return (
     <main className="lead-main lead-main--tab scroll-hide">
-      <LeadSubNav leadId={params.id} />
       <LeadToolbar data={data} />
       <div className="lead-tab-body">
+        <section className="lead-card widget" style={{ marginBottom: 16 }}>
+          <ClientBoxActions
+            leadId={params.id}
+            presentDocs={[...presentDocs]}
+            commJsonCount={commJsonCount}
+          />
+        </section>
+
         <div className="lead-grid lead-grid--in-tab">
           <section className="lead-col-l lead-col-scroll scroll-hide">
             <BoxPanel

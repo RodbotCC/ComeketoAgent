@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { AppHeader } from "@/components/AppHeader";
-import { TabNav } from "@/components/TabNav";
 import type {
   SourceChannelSnapshot,
   SellerPerformanceSnapshot,
@@ -258,8 +257,6 @@ export default function AnalyticsPage({ searchParams = {} }: Props) {
   return (
     <div className="cme-shell">
       <AppHeader />
-      <TabNav active="analytics" />
-
       <main className="hb-page-main scroll-hide">
         {/* Toolbar */}
         <div className="hb-page-toolbar">

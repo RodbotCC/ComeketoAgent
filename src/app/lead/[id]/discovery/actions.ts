@@ -1,44 +1,30 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { upsertLeadFact, deleteLeadFact } from "@/lib/lead-facts";
-import { upsertLeadFactsBulk } from "@/lib/lead-facts";
 import { extractDiscoveryFactsForLead } from "@/lib/composite-tools";
 import { logExecution } from "@/lib/execution-audit";
 import { randomUUID } from "node:crypto";
 
 /**
- * Operator override — Andre fills (or corrects) a slot from the editor modal.
- * Always wins over llm_extraction values for the same slot.
+ * Discovery slot persistence is currently OFFLINE — Phase 6 of the harness
+ * overhaul retired the Supabase `lead_facts` table without yet wiring a
+ * file-canonical replacement. The operator slot editor still calls these
+ * actions; for now they no-op (the modal closes, the page revalidates), and
+ * the LLM scan still extracts and logs facts but doesn't persist them.
+ *
+ * When discovery memory is re-platformed, write to a per-lead file under
+ * `harness/leads/{lead_id}__{slug}/discovery_facts.jsonl` (or extend
+ * `06_discovery.md` with a fenced JSON block) and re-enable the writes here.
  */
+
 export async function setSlotValueAction(formData: FormData): Promise<void> {
   const leadId = String(formData.get("lead_id") || "");
-  const slotId = String(formData.get("slot_id") || "");
-  const valueRaw = String(formData.get("value") || "").trim();
-  if (!leadId.startsWith("lead_") || !slotId) return;
-
-  if (valueRaw.length === 0) {
-    await deleteLeadFact(leadId, slotId);
-  } else {
-    // Try integer for guest_count; otherwise keep as string.
-    let value: unknown = valueRaw;
-    if (slotId === "guest_count") {
-      const n = Number(valueRaw);
-      if (Number.isFinite(n) && n > 0) value = Math.round(n);
-    }
-    await upsertLeadFact({
-      lead_id: leadId,
-      slot_id: slotId,
-      value,
-      source: "operator",
-      evidence: { excerpt: "operator-entered", confidence: 1.0 },
-      extracted_at: new Date().toISOString(),
-    });
-  }
+  if (!leadId.startsWith("lead_")) return;
+  // No-op pending file-canonical replacement.
   revalidatePath(`/lead/${leadId}/discovery`);
 }
 
-/** Run the LLM discovery extraction. Persists everything it grounds with confidence ≥ 0.6. */
+/** Run the LLM discovery extraction. Currently logs only — does NOT persist. */
 export async function runDiscoveryScanAction(leadId: string): Promise<void> {
   if (!leadId.startsWith("lead_")) return;
   const traceId = randomUUID();
@@ -54,16 +40,6 @@ export async function runDiscoveryScanAction(leadId: string): Promise<void> {
     revalidatePath(`/lead/${leadId}/discovery`);
     return;
   }
-  await upsertLeadFactsBulk(
-    result.facts.map((f) => ({
-      lead_id: leadId,
-      slot_id: f.slot_id,
-      value: f.value,
-      source: "llm_extraction" as const,
-      evidence: f.evidence,
-      extracted_at: new Date().toISOString(),
-    }))
-  );
   await logExecution({
     action_kind: "intake_extract",
     close_lead_id: leadId,
@@ -72,8 +48,9 @@ export async function runDiscoveryScanAction(leadId: string): Promise<void> {
       tool: "extract_discovery_facts",
       scope: "discovery_map",
       source: "ui_button",
-      slots_written: result.facts.map((f) => f.slot_id),
+      slots_extracted: result.facts.map((f) => f.slot_id),
       slots_skipped_already_known: result.skipped_known,
+      note: "lead_facts persistence offline — extraction logged only",
     },
     result: "ok",
   });

@@ -179,12 +179,16 @@ export async function writeLeadFile(
   throw lastErr ?? new Error("writeLeadFile: exhausted retries");
 }
 
-/** Flip `comms_dirty: true` in a lead's `00_meta.json`. Called by the Close
- *  webhook handler so the next sweeper pass knows the lead has fresh data.
+/** Flip `comms_dirty: true` in a lead's `00_state.json`. Called by the Close
+ *  webhook handler so the interpretation lane knows the lead has fresh data.
  *  No-op (returns "no_folder") if the lead has no folder yet — the sweeper
  *  creates the folder on its next tick anyway. Idempotent: writing
  *  `comms_dirty: true` to a file that already has it is a content-unchanged
- *  no-op once `writeLeadFile`'s diff sees identical content.
+ *  no-op once `writeLeadFile` sees identical content.
+ *
+ *  `00_state.json` is intentionally separate from the raw Close substrate:
+ *  `01_raw_lead.json`, `02_continuity.jsonl`, and `comms/*.json` remain exact
+ *  extraction outputs; state is local lifecycle bookkeeping.
  *
  *  Errors are caught at the call site (webhook); this fn surfaces them
  *  honestly so the caller can decide. */
@@ -194,31 +198,43 @@ export async function markLeadCommsDirty(
   const folder = await findLeadFolderPath(leadId);
   if (!folder) return "no_folder";
 
-  const raw = await readLeadFile(leadId, "00_meta.json");
-  if (!raw) return "no_folder";
-
-  let meta: Record<string, unknown>;
-  try {
-    meta = JSON.parse(raw);
-  } catch {
-    return "no_folder";
+  const rawState = await readLeadFile(leadId, "00_state.json");
+  let state: Record<string, unknown> = {};
+  if (rawState) {
+    try {
+      state = JSON.parse(rawState) as Record<string, unknown>;
+    } catch {
+      state = {};
+    }
   }
 
-  if (meta.comms_dirty === true) return "already_dirty";
+  if (state.comms_dirty === true) return "already_dirty";
 
-  meta.comms_dirty = true;
-  meta.last_dirty_at = new Date().toISOString();
+  state.lead_id = leadId;
+  state.comms_dirty = true;
+  state.last_dirty_at = new Date().toISOString();
+  state.last_dirty_source = "close_webhook";
 
-  const name =
-    typeof meta.name === "string" && meta.name.length > 0
-      ? meta.name
-      : leadId;
+  const leadRaw =
+    (await readLeadFile(leadId, "01_raw_lead.json")) ??
+    (await readLeadFile(leadId, "00_lead.json"));
+  let name = leadId;
+  if (leadRaw) {
+    try {
+      const lead = JSON.parse(leadRaw) as Record<string, unknown>;
+      if (typeof lead.display_name === "string" && lead.display_name.length > 0) {
+        name = lead.display_name;
+      }
+    } catch {
+      // Keep leadId fallback; dirty marking should not fail on malformed state.
+    }
+  }
 
   await writeLeadFile(
     leadId,
     name,
-    "00_meta.json",
-    JSON.stringify(meta, null, 2) + "\n",
+    "00_state.json",
+    JSON.stringify(state, null, 2) + "\n",
     {
       commitMessage: `webhook: ${name} comms dirty`,
       state: folder.state,
@@ -250,10 +266,49 @@ export async function readLeadDiscoveryBody(leadId: string): Promise<string | nu
   return raw ? stripFrontmatter(raw) : null;
 }
 
+/** List the lead IDs of every folder currently under `harness/leads/active/`.
+ *  Used by the sweeper to compute the "active universe" — leads that already
+ *  have a folder and therefore stay in scope until they reach a terminal
+ *  status. Returns an empty array on a brand-new install. */
+export async function listActiveLeadIds(): Promise<string[]> {
+  const octo = getOctokit();
+  try {
+    const r = await octo.rest.repos.getContent({
+      owner: REPO_OWNER,
+      repo: REPO_NAME,
+      path: `${LEADS_ROOT}/active`,
+      ref: REPO_BRANCH,
+    });
+    const items = Array.isArray(r.data) ? r.data : [r.data];
+    const ids: string[] = [];
+    for (const it of items) {
+      if (
+        it &&
+        typeof it === "object" &&
+        "type" in it &&
+        it.type === "dir" &&
+        "name" in it &&
+        typeof it.name === "string"
+      ) {
+        // Folder name shape: `{lead_id}__{slug}`. Lead IDs always start with `lead_`.
+        const sep = it.name.indexOf("__");
+        if (sep > 0) {
+          const id = it.name.slice(0, sep);
+          if (id.startsWith("lead_")) ids.push(id);
+        }
+      }
+    }
+    return ids;
+  } catch (e: unknown) {
+    if (statusOf(e) === 404) return [];
+    throw e;
+  }
+}
+
 /** Snapshot every file in a lead's folder. Used by the sweeper (Atom 4) to
  *  diff rendered output against existing state and skip identical writes.
  *  Returns a Map keyed by relative path within the folder (e.g.
- *  `"00_meta.json"`, `"comms/call_2026-04-23_asnatj4b.json"`). Returns null
+ *  `"01_raw_lead.json"`, `"comms/call_2026-04-23_asnatj4b.json"`). Returns null
  *  if the lead has no folder yet (brand-new lead). */
 export async function listLeadFolderFiles(
   leadId: string,

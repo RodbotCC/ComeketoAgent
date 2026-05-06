@@ -21,7 +21,6 @@ import {
   type DiscoveryMap,
   type StageProgress,
 } from "./discovery-map";
-import { getLeadFacts } from "./lead-facts";
 
 // ─── Skip-code classification for the restraint score ────────────────────
 // The skip-code vocabulary in close.ts:741–766 IS the guardrail-discipline
@@ -160,11 +159,11 @@ export async function journeyScoreForLead(
   if ("error" in data) return { error: data.error };
 
   const customFieldsMap = indexCustomFields(data.customFields);
-  const leadFacts = await getLeadFacts(leadId).catch(() => new Map());
+  // lead_facts persistence retired — discovery map reads from Close only.
   const lastInboundAt = data.lastInbound?.date_created ?? null;
   const map = buildDiscoveryMap({
     customFields: customFieldsMap,
-    leadFacts,
+    leadFacts: undefined,
     lastInboundAt,
   });
 
