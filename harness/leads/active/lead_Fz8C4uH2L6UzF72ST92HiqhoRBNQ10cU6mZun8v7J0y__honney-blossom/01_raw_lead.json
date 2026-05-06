@@ -1,0 +1,207 @@
+{
+  "addresses": [],
+  "contacts": [
+    {
+      "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "date_created": "2026-04-30T19:11:54.535000+00:00",
+      "date_updated": "2026-04-30T19:11:54.535000+00:00",
+      "display_name": "Honney Blossom",
+      "emails": [
+        {
+          "email": "loyzany@hotmail.com",
+          "is_unsubscribed": false,
+          "type": "direct"
+        }
+      ],
+      "id": "cont_OmuXNsSU0Hj1Thf9YK4dHcY2aiyhC1NOo1zJd8XieZx",
+      "integration_links": [
+        {
+          "name": "LinkedIn Search",
+          "url": "https://www.linkedin.com/search/results/people/?keywords=Honney%20Blossom"
+        }
+      ],
+      "lead_id": "lead_Fz8C4uH2L6UzF72ST92HiqhoRBNQ10cU6mZun8v7J0y",
+      "name": "Honney Blossom",
+      "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+      "phones": [
+        {
+          "country": "US",
+          "phone": "+17819640481",
+          "phone_formatted": "+1 781-964-0481",
+          "type": "direct"
+        }
+      ],
+      "timezone": "America/New_York",
+      "timezone_source": "inferred_from_phone_number",
+      "title": "Plain Old Phone (best for SMS)",
+      "updated_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "urls": []
+    },
+    {
+      "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "date_created": "2026-04-30T19:13:11.167000+00:00",
+      "date_updated": "2026-04-30T19:13:11.167000+00:00",
+      "display_name": "Honney Blossom",
+      "emails": [],
+      "id": "cont_FurndYHbV14FPRHZB98cPkQ7pDHwxQ5mnmoi5mELYJW",
+      "integration_links": [
+        {
+          "name": "LinkedIn Search",
+          "url": "https://www.linkedin.com/search/results/people/?keywords=Honney%20Blossom"
+        }
+      ],
+      "lead_id": "lead_Fz8C4uH2L6UzF72ST92HiqhoRBNQ10cU6mZun8v7J0y",
+      "name": "Honney Blossom",
+      "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+      "phones": [
+        {
+          "country": "US",
+          "phone": "+17819640481",
+          "phone_formatted": "+1 781-964-0481",
+          "type": "mobile"
+        }
+      ],
+      "timezone": "America/New_York",
+      "timezone_source": "inferred_from_phone_number",
+      "title": "Facebook # (Best For Calls)",
+      "updated_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "urls": []
+    }
+  ],
+  "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+  "created_by_name": "Sales Team Event Consultant Team",
+  "custom": {
+    "00. 🪖 LEAD OWNER": "01. 😎 Andre",
+    "02. ⚔︎ WORKFLOW WEAPONS": [
+      "5x5",
+      "✉️ FB Lead Form 1EMAIL"
+    ],
+    "05. 👥 Franchise": "Comeketo",
+    "7 TP Cadence Follow up": [
+      "01. 📞 DAY 1 CALL"
+    ],
+    "Crisp": [
+      "Created"
+    ],
+    "Crisp ID": 0,
+    "Crisp Link": "https://app.crisp.chat/website/6e2ee3ba-8402-4f3a-8240-aace16ee1bac/contacts/profile/4ecd234b-fe95-4358-ad4e-266b4b7c3998",
+    "FB_AD": "VIDEO  RODS WEDDING & FACELESS",
+    "FB_ADSET": "RODS WEDDING & FACELESS",
+    "FB_CAMPAIGN": "01. [CATER] LF EVERGREEN - QUOTE"
+  },
+  "custom.cf_JlnAQRNnjtHxBcHcZL57YpdSZq6W9YlOv3zXG64pLNv": 0,
+  "custom.cf_NN0HOiT2V7VR8vY0mdaesirgzN0FvEumQoJy6luhMBZ": "RODS WEDDING & FACELESS",
+  "custom.cf_XUgJtr1fW0TOSr4qtiiu1c4MDSZeYeYkkgi4wjriVBE": "VIDEO  RODS WEDDING & FACELESS",
+  "custom.cf_f6hxPXViYgPbzJu8x7XB1nQIxyJHP47eOI6nCuGpc01": [
+    "Created"
+  ],
+  "custom.cf_ka2oCzzw0j2k9T0zlxpQ0udWHP1wUW8fP0LAieNjzXl": [
+    "01. 📞 DAY 1 CALL"
+  ],
+  "custom.cf_l37qDcsFYbEZQJhRRrImt3cwFPY23IbG4kjLBJRN3GZ": [
+    "5x5",
+    "✉️ FB Lead Form 1EMAIL"
+  ],
+  "custom.cf_nzUyCovAbOCJxIG6j5TXccpBmdWlRAFuMLDTAxJ2Y9p": "01. [CATER] LF EVERGREEN - QUOTE",
+  "custom.cf_smf4xXJPUNlJQ2QiG6lgzOhQEuEMQibqZL5WZaL0GHe": "https://app.crisp.chat/website/6e2ee3ba-8402-4f3a-8240-aace16ee1bac/contacts/profile/4ecd234b-fe95-4358-ad4e-266b4b7c3998",
+  "custom.cf_vfo9P74IUYaftU7nCUQBxaSmGf69YCC1Bdwbz9w20lU": "Comeketo",
+  "custom.cf_xF8FLufgEx9bsijfRAfHhgIrPBQ5ajuohcazC7OtNmT": "01. 😎 Andre",
+  "date_created": "2026-04-30T19:11:54.508000+00:00",
+  "date_updated": "2026-05-06T00:15:43.807000+00:00",
+  "description": "People 200\nEvent Desc: \nEvent Date: \nCampaign Name:\n01. [CATER] LF EVERGREEN - QUOTE",
+  "display_name": "Honney Blossom",
+  "html_url": "https://app.close.com/lead/lead_Fz8C4uH2L6UzF72ST92HiqhoRBNQ10cU6mZun8v7J0y/",
+  "id": "lead_Fz8C4uH2L6UzF72ST92HiqhoRBNQ10cU6mZun8v7J0y",
+  "integration_links": [
+    {
+      "name": "Google Search",
+      "url": "https://google.com/search?q=Honney%20Blossom"
+    }
+  ],
+  "name": "Honney Blossom",
+  "opportunities": [
+    {
+      "annualized_expected_value": 126000,
+      "annualized_value": 630000,
+      "attachments": [],
+      "confidence": 20,
+      "contact_id": "cont_OmuXNsSU0Hj1Thf9YK4dHcY2aiyhC1NOo1zJd8XieZx",
+      "contact_name": "Honney Blossom",
+      "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "created_by_name": "Sales Team Event Consultant Team",
+      "custom.cf_3LZk8uGw0lIvPpNzOMvFn4WwiCXbI91X66Ujvt8UJPx": [
+        "NEEDS VENUE NAME"
+      ],
+      "custom.cf_fs7mrfN5x0M20CyoltczyVg8t0Xul5GFvkC4FNUKvY6": "Customer",
+      "custom.cf_ge7qOebiWpyPvuv7xkzNaYpM8PsmOeNvXasXFOtPXRt": [
+        "Facebook, Paid"
+      ],
+      "custom.cf_nQLULOLLmtUAh9OwcpJibPc5pQKIqpFOjdGSTwC9ePO": "200",
+      "date_created": "2026-04-30T19:12:37.686000+00:00",
+      "date_lost": null,
+      "date_updated": "2026-04-30T19:25:29.998000+00:00",
+      "date_won": null,
+      "expected_value": 126000,
+      "id": "oppo_hP0QkA7QFKBnT6ewm2NNUtLV1z7afrfwOeFKLev36sf",
+      "integration_links": [],
+      "lead_id": "lead_Fz8C4uH2L6UzF72ST92HiqhoRBNQ10cU6mZun8v7J0y",
+      "lead_name": "Honney Blossom",
+      "note": "",
+      "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+      "pipeline_id": "pipe_4s7zfmoJhbc6jcU1aPvIDT",
+      "pipeline_name": "Sales",
+      "status_display_name": "Sales: ⬜ 00. Prospect",
+      "status_id": "stat_wVjlEhuB44DBwtfg0AG5LidEKPJOVMfLTyVgMUxWKmI",
+      "status_label": "⬜ 00. Prospect",
+      "status_type": "active",
+      "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+      "updated_by_name": "Rhonna Ricafort",
+      "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "user_name": "Andre Raw",
+      "value": 630000,
+      "value_currency": "USD",
+      "value_formatted": "$6,300",
+      "value_period": "one_time"
+    }
+  ],
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "status_id": "stat_qGpMKenDu31cIY56uTpvo8evqhcNnK4KDWtz4y9NPz3",
+  "status_label": "🔘 Maybe",
+  "tasks": [
+    {
+      "_type": "lead",
+      "agent_config_id": null,
+      "assigned_to": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "assigned_to_name": "Andre Raw",
+      "contact_id": null,
+      "contact_name": null,
+      "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "created_by_name": "Sales Team Event Consultant Team",
+      "date": "2026-05-08",
+      "date_created": "2026-04-30T19:12:58.734000+00:00",
+      "date_updated": "2026-05-05T14:42:15.711000+00:00",
+      "deduplication_key": null,
+      "due_date": "2026-05-08",
+      "id": "task_s2sMPemxt9DrG4lS1NkbOJrGNGx2Q1fNvV57RrthKIT",
+      "is_complete": false,
+      "is_dateless": false,
+      "is_primary_lead_notification": true,
+      "lead_id": "lead_Fz8C4uH2L6UzF72ST92HiqhoRBNQ10cU6mZun8v7J0y",
+      "lead_name": "Honney Blossom",
+      "object_id": null,
+      "object_type": null,
+      "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+      "priority": "medium",
+      "resolution": null,
+      "sequence_id": null,
+      "sequence_subscription_id": null,
+      "text": "get her on the phone fast",
+      "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "updated_by_name": "Andre Raw",
+      "view": "future"
+    }
+  ],
+  "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "updated_by_name": "Rhonna Ricafort",
+  "url": null
+}
