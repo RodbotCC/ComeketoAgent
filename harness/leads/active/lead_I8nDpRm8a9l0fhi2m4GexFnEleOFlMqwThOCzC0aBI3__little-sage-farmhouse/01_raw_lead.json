@@ -113,7 +113,7 @@
   "custom.cf_vfo9P74IUYaftU7nCUQBxaSmGf69YCC1Bdwbz9w20lU": "Comeketo",
   "custom.cf_xF8FLufgEx9bsijfRAfHhgIrPBQ5ajuohcazC7OtNmT": "01. 😎 Andre",
   "date_created": "2026-05-05T17:19:35.540000+00:00",
-  "date_updated": "2026-05-05T18:30:13.194000+00:00",
+  "date_updated": "2026-05-06T03:51:29.940000+00:00",
   "description": "People 150\nEvent Desc: Wedding\nEvent Date: Not determined yet just looking into the future for options\nCampaign Name:\n01. [CATER] LF EVERGREEN - QUOTE",
   "display_name": "Little Sage Farmhouse",
   "html_url": "https://app.close.com/lead/lead_I8nDpRm8a9l0fhi2m4GexFnEleOFlMqwThOCzC0aBI3/",
@@ -146,8 +146,8 @@
       "custom.cf_nQLULOLLmtUAh9OwcpJibPc5pQKIqpFOjdGSTwC9ePO": "150",
       "date_created": "2026-05-05T17:19:39.779000+00:00",
       "date_lost": null,
-      "date_updated": "2026-05-05T17:23:37.191000+00:00",
-      "date_won": "2026-05-05",
+      "date_updated": "2026-05-05T22:16:05.144000+00:00",
+      "date_won": null,
       "expected_value": 113400,
       "id": "oppo_OuA6OgDkAzi9WullOjjDzgPbwxiCSkImTgi4yzp8u6o",
       "integration_links": [],
@@ -161,8 +161,8 @@
       "status_id": "stat_wVjlEhuB44DBwtfg0AG5LidEKPJOVMfLTyVgMUxWKmI",
       "status_label": "⬜ 00. Prospect",
       "status_type": "active",
-      "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
-      "updated_by_name": "Rhonna Ricafort",
+      "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "updated_by_name": "Andre Raw",
       "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
       "user_name": "Andre Raw",
       "value": 567000,
@@ -208,7 +208,7 @@
       "view": "future"
     }
   ],
-  "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
-  "updated_by_name": "Rhonna Ricafort",
+  "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "updated_by_name": "Andre Raw",
   "url": null
 }
