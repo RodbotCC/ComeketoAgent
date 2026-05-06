@@ -1,0 +1,82 @@
+{
+  "n_emails": 1,
+  "user_name": "Rhonna Ricafort",
+  "summary": null,
+  "participants": [
+    {
+      "email": "contact@comeketocatering.com",
+      "name": "Rhonna Ricafort"
+    }
+  ],
+  "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "latest_normalized_subject": "[✅ CATERING] You're in Monica!",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "activity_at": "2026-04-19T13:03:13.893000+00:00",
+  "created_by": null,
+  "users": [
+    "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo"
+  ],
+  "date_updated": "2026-04-19T13:03:20.500000+00:00",
+  "_type": "EmailThread",
+  "latest_emails": [
+    {
+      "id": "acti_v2bIohTdrg7FRsjHmxaueQNwV8ZRhW211HbMjfATxYU",
+      "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+      "body_preview": "Hey Monica, Just shooting you this quick email, we got your request for more catering info, and our event planner will connect shortly. ❤️ - Comeketo Catering p.s. check out [this quick video](https:/",
+      "date_sent": "2026-04-19T13:03:13.892000+00:00",
+      "opens_summary": "Opened by Monica Quindley <quindley95@gmail.com> (2026-04-19)",
+      "to": [
+        "Monica Quindley <quindley95@gmail.com>"
+      ],
+      "has_attachments": true,
+      "date_created": "2026-04-19T13:03:13.892000+00:00",
+      "date_updated": "2026-04-19T13:03:20.434000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "[✅ CATERING] You're in Monica! ",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Rhonna Ricafort <contact@comeketocatering.com>",
+      "envelope": {
+        "date": "Sun, 19 Apr 2026 13:03:14 +0000",
+        "subject": "[✅ CATERING] You're in Monica! ",
+        "from": [
+          {
+            "email": "contact@comeketocatering.com",
+            "name": "Rhonna Ricafort"
+          }
+        ],
+        "sender": [
+          {
+            "email": "contact@comeketocatering.com",
+            "name": "Rhonna Ricafort"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "quindley95@gmail.com",
+            "name": "Monica Quindley"
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<177660379427.8.6778730191935983242@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ],
+  "lead_id": "lead_fYLRdg4Dkb0g7e3asZc4JrhI1hlgTWd4VWG4lwKPn9H",
+  "date_created": "2026-04-19T13:03:13.893000+00:00",
+  "importance": {
+    "type": "not_important",
+    "reason": "automated-outbound"
+  },
+  "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "updated_by_name": "Rhonna Ricafort",
+  "created_by_name": null,
+  "id": "acti_VyVP0tFu2feF9cj2ZuRPX53ZNvLYrmhoMYOQd9ygzv5",
+  "contact_id": null
+}
