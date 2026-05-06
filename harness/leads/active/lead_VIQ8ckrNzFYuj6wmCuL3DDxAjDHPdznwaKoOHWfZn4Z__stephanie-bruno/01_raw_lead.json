@@ -1,0 +1,219 @@
+{
+  "addresses": [
+    {
+      "address_1": "",
+      "address_2": "",
+      "city": "Wingdale",
+      "country": "US",
+      "label": "business",
+      "state": "",
+      "zipcode": "12594"
+    }
+  ],
+  "contacts": [
+    {
+      "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "date_created": "2025-07-22T17:24:50.033000+00:00",
+      "date_updated": "2025-07-22T17:24:50.033000+00:00",
+      "display_name": "Stephanie Bruno",
+      "emails": [
+        {
+          "email": "sabruno1@verizon.net",
+          "is_unsubscribed": false,
+          "type": "direct"
+        }
+      ],
+      "id": "cont_CQwqNIXDWBxWg07WAeDPGNUazLlUpK2pLJfmBPDn6aR",
+      "integration_links": [
+        {
+          "name": "LinkedIn Search",
+          "url": "https://www.linkedin.com/search/results/people/?keywords=Stephanie%20Bruno"
+        }
+      ],
+      "lead_id": "lead_VIQ8ckrNzFYuj6wmCuL3DDxAjDHPdznwaKoOHWfZn4Z",
+      "name": "Stephanie Bruno",
+      "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+      "phones": [
+        {
+          "country": "US",
+          "phone": "+19144918587",
+          "phone_formatted": "+1 914-491-8587",
+          "type": "direct"
+        }
+      ],
+      "timezone": "America/New_York",
+      "timezone_source": "inferred_from_phone_number",
+      "title": "Plain Old Phone (best for SMS)",
+      "updated_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "urls": []
+    },
+    {
+      "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "date_created": "2025-07-22T17:25:06.018000+00:00",
+      "date_updated": "2025-07-22T17:25:06.018000+00:00",
+      "display_name": "Stephanie Bruno",
+      "emails": [],
+      "id": "cont_TQqasFmTKwAG1L6pZ5IaYudMz9g0Bl24SfOnmWqQO7H",
+      "integration_links": [
+        {
+          "name": "LinkedIn Search",
+          "url": "https://www.linkedin.com/search/results/people/?keywords=Stephanie%20Bruno"
+        }
+      ],
+      "lead_id": "lead_VIQ8ckrNzFYuj6wmCuL3DDxAjDHPdznwaKoOHWfZn4Z",
+      "name": "Stephanie Bruno",
+      "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+      "phones": [
+        {
+          "country": "US",
+          "phone": "+19144918587",
+          "phone_formatted": "+1 914-491-8587",
+          "type": "mobile"
+        }
+      ],
+      "timezone": "America/New_York",
+      "timezone_source": "inferred_from_phone_number",
+      "title": "Facebook # (Best For Calls)",
+      "updated_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "urls": []
+    },
+    {
+      "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "date_created": "2025-07-22T17:26:35.342000+00:00",
+      "date_updated": "2025-07-22T17:48:19.078000+00:00",
+      "display_name": "Stephanie",
+      "emails": [
+        {
+          "email": "sabruno1@verizon.net",
+          "is_unsubscribed": false,
+          "type": "direct"
+        }
+      ],
+      "id": "cont_u9oKLbe7FbyVYwSpVmQPNnTKqZ3MAfYAZqMlIwVwrif",
+      "integration_links": [
+        {
+          "name": "LinkedIn Search",
+          "url": "https://www.linkedin.com/search/results/people/?keywords=Stephanie"
+        }
+      ],
+      "lead_id": "lead_VIQ8ckrNzFYuj6wmCuL3DDxAjDHPdznwaKoOHWfZn4Z",
+      "name": "Stephanie",
+      "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+      "phones": [
+        {
+          "country": "US",
+          "phone": "+19144919587",
+          "phone_formatted": "+1 914-491-9587",
+          "type": "direct"
+        }
+      ],
+      "timezone": "America/New_York",
+      "timezone_source": "inferred_from_phone_number",
+      "title": "Free Tasting Interested",
+      "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "urls": []
+    }
+  ],
+  "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+  "created_by_name": "Sales Team Event Consultant Team",
+  "custom": {
+    "00. 🪖 LEAD OWNER": "01. 😎 Andre",
+    "01. 🟢 SCORE": [
+      "05. ➡️ Visited high-intent web pages / website"
+    ],
+    "02. ⚔︎ WORKFLOW WEAPONS": [
+      "5x5",
+      "✉️ FB Lead Form 1SMS 1EMAIL",
+      "🍽️ Free Tasting Opt-In Form"
+    ],
+    "05. 👥 Franchise": "Comeketo",
+    "Crisp": [
+      "Created"
+    ],
+    "Crisp ID": 0,
+    "Crisp Link": "https://app.crisp.chat/website/6e2ee3ba-8402-4f3a-8240-aace16ee1bac/contacts/profile/87843462-9420-41ca-b854-39a4d27f92c2",
+    "🏠 Zip Code": "12594"
+  },
+  "custom.cf_9vVeQH1oYtJbtdHoL9VPwGhNpuCzVCgi95p7MCasszj": [
+    "05. ➡️ Visited high-intent web pages / website"
+  ],
+  "custom.cf_JlnAQRNnjtHxBcHcZL57YpdSZq6W9YlOv3zXG64pLNv": 0,
+  "custom.cf_f6hxPXViYgPbzJu8x7XB1nQIxyJHP47eOI6nCuGpc01": [
+    "Created"
+  ],
+  "custom.cf_l37qDcsFYbEZQJhRRrImt3cwFPY23IbG4kjLBJRN3GZ": [
+    "5x5",
+    "✉️ FB Lead Form 1SMS 1EMAIL",
+    "🍽️ Free Tasting Opt-In Form"
+  ],
+  "custom.cf_pXTVEI1DdERiT91NKuWAndlV6WuS4n6ZG2334fBR4b8": "12594",
+  "custom.cf_smf4xXJPUNlJQ2QiG6lgzOhQEuEMQibqZL5WZaL0GHe": "https://app.crisp.chat/website/6e2ee3ba-8402-4f3a-8240-aace16ee1bac/contacts/profile/87843462-9420-41ca-b854-39a4d27f92c2",
+  "custom.cf_vfo9P74IUYaftU7nCUQBxaSmGf69YCC1Bdwbz9w20lU": "Comeketo",
+  "custom.cf_xF8FLufgEx9bsijfRAfHhgIrPBQ5ajuohcazC7OtNmT": "01. 😎 Andre",
+  "date_created": "2025-07-22T17:24:50.011000+00:00",
+  "date_updated": "2026-05-05T20:43:37.892000+00:00",
+  "description": "Wingdale Zip: 12594\nPeople 150\nEvent Desc: 60th Anniversary\nEvent Date: Sept or October not sure yet\nCampaign Name:\n01. [CATER[ LF EVERGREEN - QUOTE",
+  "display_name": "Stephanie Bruno",
+  "html_url": "https://app.close.com/lead/lead_VIQ8ckrNzFYuj6wmCuL3DDxAjDHPdznwaKoOHWfZn4Z/",
+  "id": "lead_VIQ8ckrNzFYuj6wmCuL3DDxAjDHPdznwaKoOHWfZn4Z",
+  "integration_links": [
+    {
+      "name": "Google Search",
+      "url": "https://google.com/search?q=Stephanie%20Bruno"
+    }
+  ],
+  "name": "Stephanie Bruno",
+  "opportunities": [
+    {
+      "annualized_expected_value": 0,
+      "annualized_value": 450000,
+      "attachments": [],
+      "confidence": 0,
+      "contact_id": "cont_CQwqNIXDWBxWg07WAeDPGNUazLlUpK2pLJfmBPDn6aR",
+      "contact_name": "Stephanie Bruno",
+      "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "created_by_name": "Sales Team Event Consultant Team",
+      "custom.cf_3LZk8uGw0lIvPpNzOMvFn4WwiCXbI91X66Ujvt8UJPx": [
+        "NEEDS VENUE NAME"
+      ],
+      "custom.cf_fs7mrfN5x0M20CyoltczyVg8t0Xul5GFvkC4FNUKvY6": "Customer",
+      "custom.cf_ge7qOebiWpyPvuv7xkzNaYpM8PsmOeNvXasXFOtPXRt": [
+        "Facebook, Paid"
+      ],
+      "custom.cf_goMfyKkS7pFUhmo0xvrl1JvQv1KLaQkfoVo0j93dvhe": "60th Anniversary",
+      "custom.cf_nQLULOLLmtUAh9OwcpJibPc5pQKIqpFOjdGSTwC9ePO": "150",
+      "date_created": "2025-07-22T17:24:56.833000+00:00",
+      "date_lost": "2025-07-22T17:34:48.857000+00:00",
+      "date_updated": "2026-05-05T20:43:37.917000+00:00",
+      "date_won": "2025-10-01",
+      "expected_value": 0,
+      "id": "oppo_NFL769XOtehXTQn6vZlu4FMafSEg5ivzeQORj3Xi230",
+      "integration_links": [],
+      "lead_id": "lead_VIQ8ckrNzFYuj6wmCuL3DDxAjDHPdznwaKoOHWfZn4Z",
+      "lead_name": "Stephanie Bruno",
+      "note": "",
+      "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+      "pipeline_id": "pipe_4s7zfmoJhbc6jcU1aPvIDT",
+      "pipeline_name": "Sales",
+      "status_display_name": "Sales: 🔲🔲 Archived Catering Customer 🔲🔲",
+      "status_id": "stat_JsVAn7jtb6qbyxc0j77Kh6SkONCIC6gpsTF21WUkFvs",
+      "status_label": "🔲🔲 Archived Catering Customer 🔲🔲",
+      "status_type": "lost",
+      "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+      "updated_by_name": "Rhonna Ricafort",
+      "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "user_name": "Andre Raw",
+      "value": 450000,
+      "value_currency": "USD",
+      "value_formatted": "$4,500",
+      "value_period": "one_time"
+    }
+  ],
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "status_id": "stat_X4X2dIPrVwMZDbSGxo1xCbkokk0mjPwaqpF5PjK80F3",
+  "status_label": "❌ Disqualified",
+  "tasks": [],
+  "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "updated_by_name": "Rhonna Ricafort",
+  "url": null
+}
