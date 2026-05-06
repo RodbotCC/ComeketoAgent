@@ -1,23 +1,20 @@
 {
-  "id": "acti_o0IALJVG7VdCH6zEoiUu5MPzs63jXnnX0rFyumzSvsY",
-  "latest_normalized_subject": "Understanding Our Catering Service Types",
-  "lead_id": "lead_LIHTvK1YRHQhJmOIok55LA5bDIckVG9DMkFVwQX35nx",
-  "contact_id": null,
-  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
-  "importance": {
-    "type": "important",
-    "reason": "most-recent-communication"
-  },
-  "date_created": "2026-05-05T18:50:32.519000+00:00",
-  "users": [
-    "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
-    "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo"
+  "participants": [
+    {
+      "email": "contact@comeketocatering.com",
+      "name": "Rhonna Ricafort"
+    },
+    {
+      "email": "comeketo@m.comeketocatering.com",
+      "name": "Comeketo Catering Team"
+    }
   ],
-  "n_emails": 2,
+  "user_name": "Rhonna Ricafort",
+  "id": "acti_o0IALJVG7VdCH6zEoiUu5MPzs63jXnnX0rFyumzSvsY",
+  "date_created": "2026-05-05T18:50:32.519000+00:00",
   "created_by_name": "Andre Raw",
-  "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
-  "updated_by_name": "Rhonna Ricafort",
-  "activity_at": "2026-05-05T18:50:32.519000+00:00",
+  "latest_normalized_subject": "Understanding Our Catering Service Types",
+  "_type": "EmailThread",
   "latest_emails": [
     {
       "id": "acti_8rcxUtEoZKl9Zn2zden1ET13CQskpjLqEOKVs8O9CwI",
@@ -116,20 +113,23 @@
       }
     }
   ],
-  "participants": [
-    {
-      "email": "contact@comeketocatering.com",
-      "name": "Rhonna Ricafort"
-    },
-    {
-      "email": "comeketo@m.comeketocatering.com",
-      "name": "Comeketo Catering Team"
-    }
+  "lead_id": "lead_LIHTvK1YRHQhJmOIok55LA5bDIckVG9DMkFVwQX35nx",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "users": [
+    "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+    "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo"
   ],
   "date_updated": "2026-05-05T18:50:34.259000+00:00",
-  "_type": "EmailThread",
   "summary": null,
-  "user_name": "Rhonna Ricafort",
-  "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
-  "created_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt"
+  "activity_at": "2026-05-05T18:50:32.519000+00:00",
+  "created_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "importance": {
+    "type": "important",
+    "reason": "most-recent-communication"
+  },
+  "n_emails": 2,
+  "contact_id": null,
+  "updated_by_name": "Rhonna Ricafort",
+  "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo"
 }
