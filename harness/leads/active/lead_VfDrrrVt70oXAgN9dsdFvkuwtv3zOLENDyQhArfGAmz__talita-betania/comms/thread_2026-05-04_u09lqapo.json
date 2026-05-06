@@ -1,0 +1,82 @@
+{
+  "lead_id": "lead_VfDrrrVt70oXAgN9dsdFvkuwtv3zOLENDyQhArfGAmz",
+  "participants": [
+    {
+      "email": "comeketo@m.comeketocatering.com",
+      "name": "Comeketo Catering Team"
+    }
+  ],
+  "user_name": "Andre Raw",
+  "n_emails": 1,
+  "created_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "activity_at": "2026-05-04T17:30:49.422000+00:00",
+  "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "latest_emails": [
+    {
+      "id": "acti_Dk7MvHbwjy0Vuquq0c79H5NhhjOkIA5teD9rdxgo36u",
+      "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "body_preview": "Talita, Veja o video abaixo pra entender o Quote. <https://www.loom.com/share/9a53f69b60de4ff29847c0bbaadc5893> Your Comeketo Catering Quote is Attached! To move forward, secure your date, and lock in",
+      "date_sent": null,
+      "opens_summary": null,
+      "to": [
+        "talitahellena261@gmail.com"
+      ],
+      "has_attachments": true,
+      "date_created": "2026-05-04T17:30:49.421000+00:00",
+      "date_updated": "2026-05-04T17:33:41.634000+00:00",
+      "bcc": [],
+      "status": "draft",
+      "cc": [],
+      "subject": "🔒 Quote Talita",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Comeketo Catering Team <comeketo@m.comeketocatering.com>",
+      "envelope": {
+        "date": "Mon, 04 May 2026 17:30:49 -0000",
+        "subject": "🔒 Quote Talita",
+        "from": [
+          {
+            "email": "comeketo@m.comeketocatering.com",
+            "name": "Comeketo Catering Team"
+          }
+        ],
+        "sender": [
+          {
+            "email": "comeketo@m.comeketocatering.com",
+            "name": "Comeketo Catering Team"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "talitahellena261@gmail.com",
+            "name": ""
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": null,
+        "is_autoreply": false
+      }
+    }
+  ],
+  "id": "acti_4FcCQPAPQ4NUXOmueHtYf5MjGeeYRyuGquDU09LqapO",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "date_created": "2026-05-04T17:30:49.422000+00:00",
+  "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "date_updated": "2026-05-04T17:33:41.709000+00:00",
+  "users": [
+    "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt"
+  ],
+  "created_by_name": "Andre Raw",
+  "contact_id": null,
+  "importance": {
+    "type": "not_important",
+    "reason": "by-default"
+  },
+  "_type": "EmailThread",
+  "latest_normalized_subject": "🔒 Quote Talita",
+  "updated_by_name": "Andre Raw",
+  "summary": null
+}
