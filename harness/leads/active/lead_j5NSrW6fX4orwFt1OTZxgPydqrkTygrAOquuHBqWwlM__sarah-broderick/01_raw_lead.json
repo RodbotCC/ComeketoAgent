@@ -1,0 +1,158 @@
+{
+  "addresses": [],
+  "contacts": [
+    {
+      "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "date_created": "2026-05-05T23:30:46.036000+00:00",
+      "date_updated": "2026-05-05T23:56:01.150000+00:00",
+      "display_name": "Sarah Broderick",
+      "emails": [
+        {
+          "email": "sarahbroderick7@gmail.com",
+          "is_unsubscribed": false,
+          "type": "office"
+        }
+      ],
+      "id": "cont_bFPmLAY3tMtCgMZdALdXNHUwVg5IoDeq5vZrRvFKnWE",
+      "integration_links": [
+        {
+          "name": "LinkedIn Search",
+          "url": "https://www.linkedin.com/search/results/people/?keywords=Sarah%20Broderick"
+        }
+      ],
+      "lead_id": "lead_j5NSrW6fX4orwFt1OTZxgPydqrkTygrAOquuHBqWwlM",
+      "name": "Sarah Broderick",
+      "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+      "phones": [],
+      "timezone": null,
+      "timezone_source": null,
+      "title": "From crisp.chat",
+      "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+      "urls": []
+    }
+  ],
+  "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+  "created_by_name": "Sales Team Event Consultant Team",
+  "custom": {
+    "00. 🪖 LEAD OWNER": "01. 😎 Andre",
+    "7 TP Cadence Follow up": [
+      "01. 📞 DAY 1 CALL"
+    ],
+    "Crisp": [
+      "Created"
+    ],
+    "Crisp ID": 0,
+    "Crisp Link": "https://app.crisp.chat/website/6e2ee3ba-8402-4f3a-8240-aace16ee1bac/contacts/profile/9324a164-1897-423b-80ec-dcf2bb113144",
+    "Date of Event": "2026-05-15T15:00:00+00:00"
+  },
+  "custom.cf_FV2xBkviv7BAQZkkjUf8NUOc3fOpPTObMy5lVxZbyiP": "2026-05-15T15:00:00+00:00",
+  "custom.cf_JlnAQRNnjtHxBcHcZL57YpdSZq6W9YlOv3zXG64pLNv": 0,
+  "custom.cf_f6hxPXViYgPbzJu8x7XB1nQIxyJHP47eOI6nCuGpc01": [
+    "Created"
+  ],
+  "custom.cf_ka2oCzzw0j2k9T0zlxpQ0udWHP1wUW8fP0LAieNjzXl": [
+    "01. 📞 DAY 1 CALL"
+  ],
+  "custom.cf_smf4xXJPUNlJQ2QiG6lgzOhQEuEMQibqZL5WZaL0GHe": "https://app.crisp.chat/website/6e2ee3ba-8402-4f3a-8240-aace16ee1bac/contacts/profile/9324a164-1897-423b-80ec-dcf2bb113144",
+  "custom.cf_xF8FLufgEx9bsijfRAfHhgIrPBQ5ajuohcazC7OtNmT": "01. 😎 Andre",
+  "date_created": "2026-05-05T23:30:46.007000+00:00",
+  "date_updated": "2026-05-06T00:09:41.099000+00:00",
+  "description": "looking to cater for a party next saturday the 15th for around 25 people. I am looking for mainly brazilian appetizers, with some meat and rice, etc.",
+  "display_name": "Sarah Broderick",
+  "html_url": "https://app.close.com/lead/lead_j5NSrW6fX4orwFt1OTZxgPydqrkTygrAOquuHBqWwlM/",
+  "id": "lead_j5NSrW6fX4orwFt1OTZxgPydqrkTygrAOquuHBqWwlM",
+  "integration_links": [
+    {
+      "name": "Google Search",
+      "url": "https://google.com/search?q=Sarah%20Broderick"
+    }
+  ],
+  "name": "Sarah Broderick",
+  "opportunities": [
+    {
+      "annualized_expected_value": 0,
+      "annualized_value": 0,
+      "attachments": [],
+      "confidence": 50,
+      "contact_id": "cont_bFPmLAY3tMtCgMZdALdXNHUwVg5IoDeq5vZrRvFKnWE",
+      "contact_name": "Sarah Broderick",
+      "created_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+      "created_by_name": "Rhonna Ricafort",
+      "custom.cf_3LZk8uGw0lIvPpNzOMvFn4WwiCXbI91X66Ujvt8UJPx": [
+        "NEEDS VENUE NAME"
+      ],
+      "custom.cf_FV2xBkviv7BAQZkkjUf8NUOc3fOpPTObMy5lVxZbyiP": "2026-05-15T15:00:00+00:00",
+      "custom.cf_fs7mrfN5x0M20CyoltczyVg8t0Xul5GFvkC4FNUKvY6": "Customer",
+      "custom.cf_ge7qOebiWpyPvuv7xkzNaYpM8PsmOeNvXasXFOtPXRt": [
+        "Crisp Chat"
+      ],
+      "custom.cf_goMfyKkS7pFUhmo0xvrl1JvQv1KLaQkfoVo0j93dvhe": "Party",
+      "custom.cf_nQLULOLLmtUAh9OwcpJibPc5pQKIqpFOjdGSTwC9ePO": "25",
+      "date_created": "2026-05-05T23:50:15.323000+00:00",
+      "date_lost": null,
+      "date_updated": "2026-05-05T23:50:15.323000+00:00",
+      "date_won": null,
+      "expected_value": 0,
+      "id": "oppo_rey40DfdhA029dpBmC0F4AzCgJbcWhgxAvuXvB7Cd2d",
+      "integration_links": [],
+      "lead_id": "lead_j5NSrW6fX4orwFt1OTZxgPydqrkTygrAOquuHBqWwlM",
+      "lead_name": "Sarah Broderick",
+      "note": "",
+      "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+      "pipeline_id": "pipe_4s7zfmoJhbc6jcU1aPvIDT",
+      "pipeline_name": "Sales",
+      "status_display_name": "Sales: ⬜ 00. Prospect",
+      "status_id": "stat_wVjlEhuB44DBwtfg0AG5LidEKPJOVMfLTyVgMUxWKmI",
+      "status_label": "⬜ 00. Prospect",
+      "status_type": "active",
+      "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+      "updated_by_name": "Rhonna Ricafort",
+      "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "user_name": "Andre Raw",
+      "value": 0,
+      "value_currency": "USD",
+      "value_formatted": "",
+      "value_period": "one_time"
+    }
+  ],
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "status_id": "stat_qGpMKenDu31cIY56uTpvo8evqhcNnK4KDWtz4y9NPz3",
+  "status_label": "🔘 Maybe",
+  "tasks": [
+    {
+      "_type": "lead",
+      "agent_config_id": null,
+      "assigned_to": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "assigned_to_name": "Andre Raw",
+      "contact_id": null,
+      "contact_name": null,
+      "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "created_by_name": "Sales Team Event Consultant Team",
+      "date": "2026-05-08",
+      "date_created": "2026-05-05T23:30:46.446000+00:00",
+      "date_updated": "2026-05-05T23:58:12.529000+00:00",
+      "deduplication_key": null,
+      "due_date": "2026-05-08",
+      "id": "task_kfWSCPb1sg3LaWQLwV1flHlac69TrSBL9uSlwr1bMmn",
+      "is_complete": false,
+      "is_dateless": false,
+      "is_primary_lead_notification": true,
+      "lead_id": "lead_j5NSrW6fX4orwFt1OTZxgPydqrkTygrAOquuHBqWwlM",
+      "lead_name": "Sarah Broderick",
+      "object_id": null,
+      "object_type": null,
+      "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+      "priority": "medium",
+      "resolution": null,
+      "sequence_id": null,
+      "sequence_subscription_id": null,
+      "text": "Change the name of the lead once you find it what it is (both lead record and contact name)",
+      "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "updated_by_name": "Andre Raw",
+      "view": "future"
+    }
+  ],
+  "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "updated_by_name": "Andre Raw",
+  "url": null
+}
