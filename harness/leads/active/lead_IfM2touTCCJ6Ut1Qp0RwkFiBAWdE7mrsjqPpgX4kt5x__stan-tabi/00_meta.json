@@ -1,0 +1,31 @@
+{
+  "contact_id": "cont_7wnHOBYiTjbMZXSm4S7VHir39cGWmBXYL632AgfkvBu",
+  "counts": {
+    "activities": 29,
+    "calls": 0,
+    "emails": 13,
+    "meetings": 0,
+    "notes": 2,
+    "smses": 9,
+    "subscriptions": 4,
+    "tasks": 2,
+    "threads": 12,
+    "whatsapps": 0
+  },
+  "last_sweep_at": "2026-05-06T10:07:36.651Z",
+  "lead_id": "lead_IfM2touTCCJ6Ut1Qp0RwkFiBAWdE7mrsjqPpgX4kt5x",
+  "name": "Stan Tabi",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "primary_email": "stanley.tabi@childrens.harvard.edu",
+  "primary_phone": "+16173881260",
+  "raw_contract_version": 2,
+  "raw_files": {
+    "comms_dir": "comms/",
+    "continuity": "02_continuity.jsonl",
+    "lead": "01_raw_lead.json"
+  },
+  "status_id": "stat_X4X2dIPrVwMZDbSGxo1xCbkokk0mjPwaqpF5PjK80F3",
+  "status_label": "❌ Disqualified",
+  "user_id": null,
+  "user_name": null
+}
