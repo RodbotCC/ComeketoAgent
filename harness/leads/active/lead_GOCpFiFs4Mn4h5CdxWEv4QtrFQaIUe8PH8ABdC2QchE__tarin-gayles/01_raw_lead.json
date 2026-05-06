@@ -1,0 +1,175 @@
+{
+  "addresses": [
+    {
+      "address_1": "",
+      "address_2": "",
+      "city": "",
+      "country": "US",
+      "label": "business",
+      "state": "",
+      "zipcode": "91767"
+    }
+  ],
+  "contacts": [
+    {
+      "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "date_created": "2025-07-25T20:36:11.326000+00:00",
+      "date_updated": "2025-07-25T20:36:11.326000+00:00",
+      "display_name": "Tarin Gayles",
+      "emails": [
+        {
+          "email": "taringayles@gmail.com",
+          "is_unsubscribed": false,
+          "type": "direct"
+        }
+      ],
+      "id": "cont_MafKPGEEjR2uJYwyjkVbeNd8dGA8BXOqoPQ9dJi5arR",
+      "integration_links": [
+        {
+          "name": "LinkedIn Search",
+          "url": "https://www.linkedin.com/search/results/people/?keywords=Tarin%20Gayles"
+        }
+      ],
+      "lead_id": "lead_GOCpFiFs4Mn4h5CdxWEv4QtrFQaIUe8PH8ABdC2QchE",
+      "name": "Tarin Gayles",
+      "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+      "phones": [
+        {
+          "country": "US",
+          "phone": "+19092331992",
+          "phone_formatted": "+1 909-233-1992",
+          "type": "direct"
+        }
+      ],
+      "timezone": "America/Los_Angeles",
+      "timezone_source": "inferred_from_phone_number",
+      "title": "Plain Old Phone (best for SMS)",
+      "updated_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "urls": []
+    },
+    {
+      "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "date_created": "2025-07-25T20:36:31.800000+00:00",
+      "date_updated": "2025-07-25T20:36:31.800000+00:00",
+      "display_name": "Tarin Gayles",
+      "emails": [],
+      "id": "cont_o83FB2DkHGypCSffxUQ0xMNVMx8Jja14snapnKPbXSg",
+      "integration_links": [
+        {
+          "name": "LinkedIn Search",
+          "url": "https://www.linkedin.com/search/results/people/?keywords=Tarin%20Gayles"
+        }
+      ],
+      "lead_id": "lead_GOCpFiFs4Mn4h5CdxWEv4QtrFQaIUe8PH8ABdC2QchE",
+      "name": "Tarin Gayles",
+      "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+      "phones": [
+        {
+          "country": "US",
+          "phone": "+19092331992",
+          "phone_formatted": "+1 909-233-1992",
+          "type": "mobile"
+        }
+      ],
+      "timezone": "America/Los_Angeles",
+      "timezone_source": "inferred_from_phone_number",
+      "title": "Facebook # (Best For Calls)",
+      "updated_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "urls": []
+    }
+  ],
+  "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+  "created_by_name": "Sales Team Event Consultant Team",
+  "custom": {
+    "00. 🪖 LEAD OWNER": "01. 😎 Andre",
+    "01. 🟢 SCORE": [
+      "05. ⏰ Immediate need (within 3 months)",
+      "05. 📍 Within immediate area"
+    ],
+    "02. ⚔︎ WORKFLOW WEAPONS": [
+      "5x5",
+      "✉️ FB Lead Form 1SMS 1EMAIL"
+    ],
+    "05. 👥 Franchise": "Comeketo",
+    "🏠 Zip Code": "91767",
+    "🥧Workflow-Thanksgiving-2025": "✅ Active"
+  },
+  "custom.cf_9vVeQH1oYtJbtdHoL9VPwGhNpuCzVCgi95p7MCasszj": [
+    "05. ⏰ Immediate need (within 3 months)",
+    "05. 📍 Within immediate area"
+  ],
+  "custom.cf_ZqYD0ISnnLHzqVnxz6nuM8wJErglSBO0HGE0C42iuYi": "✅ Active",
+  "custom.cf_l37qDcsFYbEZQJhRRrImt3cwFPY23IbG4kjLBJRN3GZ": [
+    "5x5",
+    "✉️ FB Lead Form 1SMS 1EMAIL"
+  ],
+  "custom.cf_pXTVEI1DdERiT91NKuWAndlV6WuS4n6ZG2334fBR4b8": "91767",
+  "custom.cf_vfo9P74IUYaftU7nCUQBxaSmGf69YCC1Bdwbz9w20lU": "Comeketo",
+  "custom.cf_xF8FLufgEx9bsijfRAfHhgIrPBQ5ajuohcazC7OtNmT": "01. 😎 Andre",
+  "date_created": "2025-07-25T20:36:11.300000+00:00",
+  "date_updated": "2026-05-05T20:42:25.378000+00:00",
+  "description": "Zip: 91767\nPeople 100\nEvent Desc: Beach\nEvent Date: 8/30/2025\nCampaign Name:\n01. [CATER[ LF EVERGREEN - QUOTE",
+  "display_name": "Tarin Gayles",
+  "html_url": "https://app.close.com/lead/lead_GOCpFiFs4Mn4h5CdxWEv4QtrFQaIUe8PH8ABdC2QchE/",
+  "id": "lead_GOCpFiFs4Mn4h5CdxWEv4QtrFQaIUe8PH8ABdC2QchE",
+  "integration_links": [
+    {
+      "name": "Google Search",
+      "url": "https://google.com/search?q=Tarin%20Gayles"
+    }
+  ],
+  "name": "Tarin Gayles",
+  "opportunities": [
+    {
+      "annualized_expected_value": 0,
+      "annualized_value": 346500,
+      "attachments": [],
+      "confidence": 0,
+      "contact_id": "cont_MafKPGEEjR2uJYwyjkVbeNd8dGA8BXOqoPQ9dJi5arR",
+      "contact_name": "Tarin Gayles",
+      "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "created_by_name": "Sales Team Event Consultant Team",
+      "custom.cf_3LZk8uGw0lIvPpNzOMvFn4WwiCXbI91X66Ujvt8UJPx": [
+        "NEEDS VENUE NAME"
+      ],
+      "custom.cf_fs7mrfN5x0M20CyoltczyVg8t0Xul5GFvkC4FNUKvY6": "Customer",
+      "custom.cf_ge7qOebiWpyPvuv7xkzNaYpM8PsmOeNvXasXFOtPXRt": [
+        "Facebook, Paid"
+      ],
+      "custom.cf_goMfyKkS7pFUhmo0xvrl1JvQv1KLaQkfoVo0j93dvhe": "Beach",
+      "custom.cf_nQLULOLLmtUAh9OwcpJibPc5pQKIqpFOjdGSTwC9ePO": "100",
+      "date_created": "2025-07-25T20:36:20.698000+00:00",
+      "date_lost": "2025-07-25T20:47:42.302000+00:00",
+      "date_updated": "2026-05-05T20:42:25.408000+00:00",
+      "date_won": "2025-08-30",
+      "expected_value": 0,
+      "id": "oppo_EdFZptB584dw2HN2RWo43ptg2CWGjecrrsaVxoovuCq",
+      "integration_links": [],
+      "lead_id": "lead_GOCpFiFs4Mn4h5CdxWEv4QtrFQaIUe8PH8ABdC2QchE",
+      "lead_name": "Tarin Gayles",
+      "note": "",
+      "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+      "pipeline_id": "pipe_4s7zfmoJhbc6jcU1aPvIDT",
+      "pipeline_name": "Sales",
+      "status_display_name": "Sales: 🔲🔲 Archived Catering Customer 🔲🔲",
+      "status_id": "stat_JsVAn7jtb6qbyxc0j77Kh6SkONCIC6gpsTF21WUkFvs",
+      "status_label": "🔲🔲 Archived Catering Customer 🔲🔲",
+      "status_type": "lost",
+      "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+      "updated_by_name": "Rhonna Ricafort",
+      "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "user_name": "Andre Raw",
+      "value": 346500,
+      "value_currency": "USD",
+      "value_formatted": "$3,465",
+      "value_period": "one_time"
+    }
+  ],
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "status_id": "stat_qGpMKenDu31cIY56uTpvo8evqhcNnK4KDWtz4y9NPz3",
+  "status_label": "🔘 Maybe",
+  "tasks": [],
+  "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "updated_by_name": "Rhonna Ricafort",
+  "url": null
+}
