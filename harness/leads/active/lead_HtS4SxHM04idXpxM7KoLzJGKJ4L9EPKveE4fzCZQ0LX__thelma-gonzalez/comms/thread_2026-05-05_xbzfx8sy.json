@@ -1,29 +1,8 @@
 {
-  "created_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
-  "user_name": "Rhonna Ricafort",
-  "participants": [
-    {
-      "email": "contact@comeketocatering.com",
-      "name": "Rhonna Ricafort"
-    },
-    {
-      "email": "comeketo@m.comeketocatering.com",
-      "name": "Comeketo Catering Team"
-    }
-  ],
-  "lead_id": "lead_HtS4SxHM04idXpxM7KoLzJGKJ4L9EPKveE4fzCZQ0LX",
-  "importance": {
-    "type": "important",
-    "reason": "most-recent-communication"
-  },
-  "users": [
-    "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
-    "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo"
-  ],
   "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
-  "updated_by_name": "Rhonna Ricafort",
-  "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
-  "latest_normalized_subject": "Understanding Our Catering Service Types",
+  "lead_id": "lead_HtS4SxHM04idXpxM7KoLzJGKJ4L9EPKveE4fzCZQ0LX",
+  "date_created": "2026-05-05T22:15:23.095000+00:00",
+  "n_emails": 2,
   "latest_emails": [
     {
       "id": "acti_tOyoLtiY07P07pBAamGDyrHVYddnRJllOT64Gr4jXYX",
@@ -122,14 +101,35 @@
       }
     }
   ],
-  "summary": null,
-  "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
-  "date_created": "2026-05-05T22:15:23.095000+00:00",
-  "_type": "EmailThread",
+  "users": [
+    "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+    "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo"
+  ],
   "date_updated": "2026-05-05T22:15:24.784000+00:00",
+  "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "created_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "importance": {
+    "type": "important",
+    "reason": "most-recent-communication"
+  },
+  "updated_by_name": "Rhonna Ricafort",
+  "created_by_name": "Andre Raw",
+  "latest_normalized_subject": "Understanding Our Catering Service Types",
   "activity_at": "2026-05-05T22:15:23.095000+00:00",
-  "contact_id": null,
-  "n_emails": 2,
   "id": "acti_f1Ckeds1Yb33X2q2WlbthATl6zVai5a0klFXbzfX8sy",
-  "created_by_name": "Andre Raw"
+  "participants": [
+    {
+      "email": "contact@comeketocatering.com",
+      "name": "Rhonna Ricafort"
+    },
+    {
+      "email": "comeketo@m.comeketocatering.com",
+      "name": "Comeketo Catering Team"
+    }
+  ],
+  "summary": null,
+  "_type": "EmailThread",
+  "user_name": "Rhonna Ricafort",
+  "contact_id": null
 }
