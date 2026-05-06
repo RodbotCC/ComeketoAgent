@@ -1,0 +1,159 @@
+{
+  "plan_id": "plan_xyq7fp2h",
+  "close_lead_id": "lead_GOCpFiFs4Mn4h5CdxWEv4QtrFQaIUe8PH8ABdC2QchE",
+  "cycle_started_at": "2026-05-06T11:24:52.727Z",
+  "generated_at": "2026-05-06T11:24:52.727Z",
+  "based_on_snapshot_id": "snap_t1e5uh_32",
+  "status": "draft",
+  "primary_goal": "scheduled_call",
+  "goal_summary": "Get Tarin Gayles onto a scheduled phone call with Andre by resolving logistics questions and making the scheduling ask easy to answer.",
+  "lead_state_summary": "Tarin Gayles is currently marked as Maybe with an active status. Tarin previously replied in SMS with “Okay never mind” (and earlier asked “Hello at 4:30pm” / indicated being in California and asking where Comeketo is located), suggesting some uncertainty and/or the lead pausing quickly. The most recent outreach in the Box is late 2025 Thanksgiving-related email/SMS reminders, with no recorded inbound reply after those messages. Contacts include an email (taringayles@gmail.com) and a confirmed phone number (+19092331992). There are no completed call/tasting confirmations in the activity feed, and the workflow enrollments show finished sequences plus one active goal sequence tied to Andre.",
+  "reasoning_trail": [
+    "The lead has a confirmed phone number and an email, but no evidence of a scheduled call yet; the last observed inbound was “Okay never mind,” indicating they may have stalled or changed direction.",
+    "Primary_goal is scheduled_call because the lead is in Maybe and the Box history suggests engagement without commitment; the next step should be a direct scheduling move with Andre.",
+    "Cadence starts with a small, low-pressure fit/logistics question (easy reply) before proposing two specific call windows; this avoids repeating broad Thanksgiving content.",
+    "Because the last touches were months ago and there’s no event detail captured in the feed, we focus on getting a current timeline and venue/city context so Andre can give reliable guidance on feasibility.",
+    "Tradeoff: we’re not pushing tasting or quote since neither was requested in the feed recently; we’re prioritizing getting a call scheduled first."
+  ],
+  "known_facts": [
+    "Lead name: Tarin Gayles",
+    "Status: Maybe",
+    "Email: taringayles@gmail.com",
+    "Phone: +19092331992",
+    "Custom field: Immediate need within 3 months (05. ⏰ Immediate need (within 3 months))",
+    "Custom field: Within immediate area (05. 📍 Within immediate area)",
+    "Custom field indicates Andre as contact (01. 😎 Andre)",
+    "Most recent outreach in activity feed is Thanksgiving-related emails/SMS in November 2025; no inbound reply after those messages recorded",
+    "An earlier inbound SMS included “Okay never mind” on 2025-07-25"
+  ],
+  "unknowns": [
+    "What exact event date/timing Tarin is planning for (within next 3 months)",
+    "Where the event is (venue address or at least city) and whether it matches the “immediate area” intent",
+    "Guest count / service style (drop-off vs staffed / full-service), since no current specifics are present",
+    "Whether Tarin still wants to talk now (given the prior “Okay never mind” response)"
+  ],
+  "best_next_question": "Quick check so Andre doesn’t give you generic info—what city/venue is the event in (or nearest city) and what’s the event date?",
+  "days": [
+    {
+      "day": 1,
+      "objective": "Re-open interest with a simple “is this still the right direction?” question and collect core logistics (date + city/venue) to enable Andre’s call.",
+      "reasoning": "Given the lead’s recent silence and prior “Okay never mind,” we keep this to one easy, specific question that also gathers the two missing pieces (timeline + location) Andre needs to be useful on the call.",
+      "required_actions": [
+        {
+          "channel": "sms",
+          "intent": "Ask scheduling-fit and collect city/venue + date",
+          "draft_seed": "Hi Tarin—this is Comeketo. Is your catering event still happening within the next ~3 months?\nIf yes, what city/venue (or nearest city) and what date?",
+          "notes": "SMS is appropriate because the lead has a confirmed phone number; the question is binary plus two specifics so it’s low-friction to answer and sets Andre up for an accurate recommendation."
+        }
+      ],
+      "send_window": "9:00 AM – 7:00 PM lead-local time",
+      "approval_status": "needs_review"
+    },
+    {
+      "day": 2,
+      "objective": "Propose two concrete call windows with Andre after eliciting current logistics (or, if unanswered, still attempt scheduling with a lighter ask).",
+      "reasoning": "If Day 1 gets no reply, we don’t send another broad message; instead we make scheduling with Andre concrete using two options, while gently requesting only one missing detail (date).",
+      "required_actions": [
+        {
+          "channel": "email",
+          "intent": "Small logistics follow-up + two call windows ask",
+          "draft_seed": "Subject: Quick timing check for Andre\n\nHi Tarin,\n\nSo Andre can guide you correctly—what’s the event date (or the week)?\nIf it’s easier, Andre can call you at one of these times:\n1) Tue 10–11am\n2) Tue 3–4pm\n\nWhich works best?",
+          "notes": "Email follows a mostly-unanswered SMS and avoids repeating Thanksgiving content; it asks for only the week/date and offers two specific time windows to reduce decision effort for scheduling."
+        }
+      ],
+      "send_window": "7:00 AM – 9:00 PM lead-local time",
+      "approval_status": "needs_review"
+    },
+    {
+      "day": 3,
+      "objective": "Confirm service direction with a binary choice that reduces complexity before Andre’s call.",
+      "reasoning": "The feed doesn’t capture whether Tarin wants drop-off or staffed/full service; a simple binary choice helps Andre prepare and makes the lead more likely to respond and schedule.",
+      "required_actions": [
+        {
+          "channel": "sms",
+          "intent": "Binary service-style question to enable Andre prep",
+          "draft_seed": "Hi Tarin—quick one so Andre can prep: are you looking more for drop-off catering, or a staffed/live service?",
+          "notes": "This keeps pressure low with a single binary question; it also aligns with NEPQ by narrowing unknowns to improve the quality of Andre’s call."
+        }
+      ],
+      "send_window": "9:00 AM – 7:00 PM lead-local time",
+      "approval_status": "needs_review"
+    },
+    {
+      "day": 4,
+      "objective": "Tie the ask directly to Andre’s value and request confirmation of a scheduled time (with fallback options).",
+      "reasoning": "After collecting either some preference (or still no reply), we re-ask for scheduling but with fewer details—time first—while reminding the call is to make decisions quickly.",
+      "required_actions": [
+        {
+          "channel": "email",
+          "intent": "Direct scheduling close with fallback time options",
+          "draft_seed": "Subject: Andre call—what time works?\n\nHi Tarin,\n\nAndre’s happy to help you lock in the right setup, but I’ll need a quick time to call.\nWould you rather:\nA) Thu 12–1pm\nB) Thu 5–6pm\n\nReply with A or B (and feel free to include the city if you have it).",
+          "notes": "Email is used again because we need a response that enables scheduling; A/B options reduce back-and-forth and keep the message decision-focused for Andre."
+        }
+      ],
+      "send_window": "7:00 AM – 9:00 PM lead-local time",
+      "approval_status": "needs_review"
+    },
+    {
+      "day": 5,
+      "objective": "If still silent, re-engage with a single “close-the-loop” question and offer an easy opt-out.",
+      "reasoning": "With multiple touches and no recorded inbound since earlier months, we keep Day 5 to a respectful close-the-loop question; this protects deliverability and avoids unnecessary follow-ups.",
+      "required_actions": [
+        {
+          "channel": "sms",
+          "intent": "Close-the-loop and offer opt-out",
+          "draft_seed": "Tarin—should I pause outreach for now, or is Andre still a good person for you to talk with about your event?",
+          "notes": "A single close-the-loop question matches NEPQ’s low-pressure approach and directly addresses the prior “Okay never mind” signal."
+        }
+      ],
+      "send_window": "9:00 AM – 7:00 PM lead-local time",
+      "approval_status": "needs_review"
+    },
+    {
+      "day": 6,
+      "objective": "Create momentum toward scheduling by asking for the best phone-call window and confirming availability.",
+      "reasoning": "If Tarin doesn’t opt out and we still don’t have a scheduled call, we switch to a “choose your window” prompt so Andre can call without additional back-and-forth.",
+      "required_actions": [
+        {
+          "channel": "task",
+          "intent": "Call Tarin Gayles to schedule Andre phone call (use phone + confirm timezone)",
+          "draft_seed": "Task: Call Tarin Gayles and offer Andre a 15-minute scheduling slot. Ask for best time window today/tomorrow and confirm event city/date briefly before confirming the slot.",
+          "notes": "Because phone exists, we use a task to trigger an operator attempt to lock a time; the task explicitly asks for the minimum needed to schedule with Andre."
+        }
+      ],
+      "send_window": "9:00 AM – 7:00 PM lead-local time",
+      "approval_status": "needs_review"
+    },
+    {
+      "day": 7,
+      "objective": "Final scheduling nudge: confirm call OR confirm that they’re already booked elsewhere, and stop if so.",
+      "reasoning": "The cycle ends with a clear yes/no scheduling ask tied to Andre, plus a polite check for whether they went with someone else—this prevents wasted follow-up.",
+      "required_actions": [
+        {
+          "channel": "email",
+          "intent": "Final attempt to schedule or determine status",
+          "draft_seed": "Subject: Andre call (yes/no)\n\nHi Tarin,\n\nAre you still looking for catering support for this upcoming event?\nIf yes, reply with the phone-calling window you prefer (next 24–48 hours), and I’ll get Andre scheduled.\nIf you’ve already booked someone else, just say so and I’ll stop reaching out.",
+          "notes": "This is a definitive “yes/no + logistics light” email that preserves the option to stop outreach; it’s designed to drive a scheduling commitment or terminal clarification."
+        }
+      ],
+      "send_window": "7:00 AM – 9:00 PM lead-local time",
+      "approval_status": "needs_review"
+    }
+  ],
+  "stop_conditions": [
+    {
+      "trigger": "Lead replies with booked elsewhere, not interested, or stop/pause outreach",
+      "action": "kill"
+    },
+    {
+      "trigger": "Lead schedules a call with Andre (time/date confirmed)",
+      "action": "pause"
+    },
+    {
+      "trigger": "Lead asks to change channel preference (e.g., only email / only SMS)",
+      "action": "surface"
+    }
+  ],
+  "approval_required": true,
+  "_mirror_at": "2026-05-06T11:24:53.223Z"
+}

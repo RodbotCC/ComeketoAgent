@@ -1,0 +1,171 @@
+{
+  "plan_id": "plan_f95o6ej2",
+  "close_lead_id": "lead_7hErLkE0D8EFx8NXcHi7KRrE0lvkx19vDF0geVvwPb4",
+  "cycle_started_at": "2026-05-06T11:23:49.858Z",
+  "generated_at": "2026-05-06T11:23:49.858Z",
+  "based_on_snapshot_id": "snap_9yiyn9_12",
+  "status": "draft",
+  "primary_goal": "scheduled_call",
+  "goal_summary": "Get Felipe from Maybe to a scheduled phone call with Andre by confirming event timing and the most convenient call window/timezone.",
+  "lead_state_summary": "Felipe Oliveira is marked as 🔘 Maybe and came from a Facebook lead form (custom field includes “✉️ FB Lead Form 1SMS 1EMAIL”). He received an SMS asking “What’s the best time of day to give you a call?” and an initial email and later an SMS from Andre saying to share when it’s best to talk. Recent activity shows a management alert related to a lost item on 2025-12-24, but there is no inbound reply in the feed. Contact data includes a phone number (+15088385561) and an email (gatinhophipi_10@hotmail.com). The address/zip field indicates 02601 (Safer to assume local MA/USA) and his area is “Within immediate area.” Event details (date, guest count, and whether he wants drop-off vs staffed) are not present in the feed, so the call must be the next step to clarify logistics and fit with Andre.",
+  "reasoning_trail": [
+    "The lead is labeled Maybe and has not replied after being asked for the best time to talk; there is outbound SMS and email activity but no inbound response shown.",
+    "Phone is available (+15088385561), and Felipe has already been nudged toward a call, so the primary goal is to schedule that call with Andre.",
+    "Sequence starts with an email and then uses follow-up SMS to reduce friction and drive a specific scheduling answer (binary/multiple choice), since a broad menu preview email was sent already.",
+    "Risk accepted: without knowing event date/guest count, we avoid quoting or menu defense; we focus on call scheduling to unlock missing essentials.",
+    "We’re hoping to learn Felipe’s event timing and his exact preferred call window so Andre can call and recommend the right service level."
+  ],
+  "known_facts": [
+    "Lead name: Felipe Oliveira; status: 🔘 Maybe.",
+    "Source includes Facebook lead form (custom field notes “✉️ FB Lead Form 1SMS 1EMAIL”).",
+    "Phone available: +15088385561.",
+    "Email available: gatinhophipi_10@hotmail.com.",
+    "Zip/custom field: 02601.",
+    "Andre already sent an SMS asking when it’s best to talk (2025-12-22 02:19).",
+    "Lead was asked (via SMS) “What’s the best time of day to give you a call?” (2025-12-21 20:19).",
+    "No inbound reply is visible in the activity feed."
+  ],
+  "unknowns": [
+    "Event date/timeline (and whether it’s soon).",
+    "Approximate guest count / service style (drop-off vs staffed).",
+    "Budget/price direction (if any quote was requested)—no quote appears in the feed.",
+    "Felipe’s exact timezone confirmation for scheduling.",
+    "Whether Felipe prefers call in English or Portuguese (SMS content suggests Portuguese)."
+  ],
+  "best_next_question": "Pra eu agendar direitinho com o Andre: o seu evento é em qual data (ou semana) e qual janela de ligação funciona melhor hoje ou amanhã: {opção A} ou {opção B}?",
+  "days": [
+    {
+      "day": 1,
+      "objective": "Ask for a specific call window and event week to enable Andre to call and recommend next steps.",
+      "reasoning": "Felipe has already been asked about call timing but hasn’t answered; the next best step is a low-friction, multiple-choice scheduling request tied to his event week. This keeps pressure low and provides Andre the minimum context to be useful on the call.",
+      "required_actions": [
+        {
+          "channel": "email",
+          "intent": "Request preferred call window (multiple choice) + event week",
+          "draft_seed": "Felipe, tudo bem? Pra eu encaixar uma ligação rápida do Andre contigo: qual janela fica melhor?\n1) Hoje (manhã)\n2) Hoje (tarde)\n3) Amanhã (manhã)\n4) Amanhã (tarde)\n\nE é pra qual semana/data o seu evento (pode ser aproximado)?",
+          "notes": "Email is appropriate because it’s a channel already used and avoids another broad pitch; it asks for specific scheduling options and an event week to unlock missing logistics for Andre."
+        },
+        {
+          "channel": "task",
+          "intent": "Confirm Felipe Oliveira phone validity and preferred timezone using available contact context",
+          "draft_seed": "Operator: verify that +15088385561 is reachable and confirm local timezone context for scheduling in the zip 02601; log timezone for Andre before scheduling call.",
+          "notes": "A task ensures scheduling accuracy since we have no inbound reply and Andre needs timezone clarity to propose exact call times."
+        }
+      ],
+      "send_window": "7:00 AM - 9:00 PM lead-local time",
+      "approval_status": "needs_review"
+    },
+    {
+      "day": 2,
+      "objective": "Binary fit check to reduce back-and-forth: choose drop-off vs staffed.",
+      "reasoning": "If Felipe hasn’t replied to the scheduling email, we should reduce cognitive load with a simple choice. A service-style question helps Andre prepare for the call without needing full details immediately.",
+      "required_actions": [
+        {
+          "channel": "sms",
+          "intent": "Binary choice: drop-off only vs staffed service",
+          "draft_seed": "Oi Felipe! Pra eu preparar a ligação do Andre rapidinho: você quer mais “drop-off” (só entrega) ou serviço com equipe no local?",
+          "notes": "SMS is direct and easy to answer; it provides Andre immediate context for what to discuss on the call while still being low pressure."
+        }
+      ],
+      "send_window": "9:00 AM - 7:00 PM lead-local time",
+      "approval_status": "needs_review"
+    },
+    {
+      "day": 3,
+      "objective": "Schedule-close with two exact call windows (today/tomorrow) to get to a scheduled phone call.",
+      "reasoning": "After a service-style nudge, we return to scheduling with constrained options (two windows) to drive an actionable yes. This respects that he hasn’t responded yet and avoids additional menu content.",
+      "required_actions": [
+        {
+          "channel": "sms",
+          "intent": "Propose two call windows and ask which he prefers",
+          "draft_seed": "Felipe, vou deixar o Andre já com o caminho certo: qual janela pra gente conversar?\nA) 2:00–2:30pm\nB) 4:30–5:00pm\nResponde A ou B?",
+          "notes": "Two-option SMS is designed for quick replies; it converts scheduling intent into a concrete selection that Andre can honor."
+        }
+      ],
+      "send_window": "9:00 AM - 7:00 PM lead-local time",
+      "approval_status": "needs_review"
+    },
+    {
+      "day": 4,
+      "objective": "Answer likely hesitation: ask for the event date/week and approximate guest range using a single multiple-choice question.",
+      "reasoning": "If we still don’t have any inbound response, we need the minimum event context to make the call worth it. Multiple choice keeps it easy and prevents long messages.",
+      "required_actions": [
+        {
+          "channel": "email",
+          "intent": "Request event week and guest range (multiple choice)",
+          "draft_seed": "Felipe, só pra o Andre te orientar certo na ligação:\n1) Seu evento é em qual semana (ou data aproximada)?\n2) Quantas pessoas, mais ou menos?\n- até 20\n- 21–40\n- 41–70\n- 70+",
+          "notes": "This email is not broad; it asks for exactly the missing inputs that Andre would need to recommend service level on a call."
+        }
+      ],
+      "send_window": "7:00 AM - 9:00 PM lead-local time",
+      "approval_status": "needs_review"
+    },
+    {
+      "day": 5,
+      "objective": "If no reply, confirm the phone number and ask whether email or phone is better for Andre’s first contact.",
+      "reasoning": "With repeated unanswered touches, the next message should clarify the best contact method without re-asking the same question. Confirming phone also reduces execution risk for Andre’s scheduling call.",
+      "required_actions": [
+        {
+          "channel": "sms",
+          "intent": "Confirm contact preference and phone number",
+          "draft_seed": "Felipe, só confirmando: esse é o melhor número pra falar com o Andre, +15088385561?\nSe preferir, me diz “email” que a gente organiza por aqui.",
+          "notes": "This uses a gentle confirmation and offers a clear alternative path; it reduces friction and improves the chance of a scheduled call."
+        }
+      ],
+      "send_window": "9:00 AM - 7:00 PM lead-local time",
+      "approval_status": "needs_review"
+    },
+    {
+      "day": 6,
+      "objective": "Low-pressure yes/no close: offer two fallback options to end the loop and get scheduling.",
+      "reasoning": "At this point, a respectful yes/no helps determine commitment level. If he’s still interested, he can pick one simple option to enable scheduling; if not, we pause.",
+      "required_actions": [
+        {
+          "channel": "email",
+          "intent": "Yes/No + scheduling preference",
+          "draft_seed": "Felipe, faz sentido a gente marcar uma ligação rápida do Andre?\nResponde com:\n- “Sim” + qual melhor dia (hoje/amanhã)\nou\n- “Prefiro depois”",
+          "notes": "A direct yes/No reduces back-and-forth and is aligned with NEPQ: get commitment signal and scheduling preference in one answer."
+        }
+      ],
+      "send_window": "7:00 AM - 9:00 PM lead-local time",
+      "approval_status": "needs_review"
+    },
+    {
+      "day": 7,
+      "objective": "If still silent, surface the lost/management alert gently and offer a final scheduling prompt to re-activate.",
+      "reasoning": "Since there was a management alert indicating a lost state, this day should re-open the path carefully. The objective is either to schedule a call or gracefully stop if he’s not engaging.",
+      "required_actions": [
+        {
+          "channel": "task",
+          "intent": "Andre follow-up readiness: prepare call script contingent on recipient reply",
+          "draft_seed": "Operator/Andre: prepare a short call script for Felipe focusing on event week, guest count range, and drop-off vs staffed; do not call yet—wait for Felipe’s confirmation of a window.",
+          "notes": "This is a preparation task because there is no inbound reply yet; it sets Andre up to move immediately once Felipe chooses a window."
+        },
+        {
+          "channel": "sms",
+          "intent": "Final prompt with single scheduling choice",
+          "draft_seed": "Felipe, quando você prefere que o Andre te ligue: hoje ou amanhã?",
+          "notes": "This is the simplest possible scheduling question to get a response and complete the cycle goal without adding new broad information."
+        }
+      ],
+      "send_window": "9:00 AM - 7:00 PM lead-local time",
+      "approval_status": "needs_review"
+    }
+  ],
+  "stop_conditions": [
+    {
+      "trigger": "Felipe schedules the call with Andre (any confirmed time in reply)",
+      "action": "pause"
+    },
+    {
+      "trigger": "Felipe replies “not interested” / “stop” / “remove me” / “booked elsewhere”",
+      "action": "kill"
+    },
+    {
+      "trigger": "Felipe provides a different phone or confirms a new best channel",
+      "action": "surface"
+    }
+  ],
+  "approval_required": true,
+  "_mirror_at": "2026-05-06T11:23:50.283Z"
+}
