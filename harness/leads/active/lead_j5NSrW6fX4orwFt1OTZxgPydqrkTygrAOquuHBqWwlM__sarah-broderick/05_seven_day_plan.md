@@ -38,7 +38,7 @@
 
 - Objective: Use SMS (since it’s email-only currently) to get a reply with minimal effort and confirm one scheduling option.
 - Send window: SMS: 9:00 AM – 7:00 PM lead-local time
-- Approval: needs_review
+- Approval: not_ready
 
 - SMS: Get a reply with phone number and 2 call-time options
   Draft seed: Hi Sarah—Andre here from Comeketo. For your May 15 party, about how many guests are you planning for? And what’s the best phone number so we can do a quick 10-min call? If easier, reply with two times that work for you today or tomorrow.
@@ -48,7 +48,7 @@
 
 - Objective: If she doesn’t respond yet, clarify tasting readiness and offer only the allowed tasting dates as an optional step (secondary to scheduling).
 - Send window: Email 7:00 AM – 9:00 PM lead-local time
-- Approval: needs_review
+- Approval: not_ready
 
 - EMAIL: Clarify whether a tasting is needed and offer allowed tasting dates as options
   Draft seed: Subject: May 15 planning + tasting dates that may fit  Hi Sarah,  Quick follow-up on your May 15 party—do you want to taste first, or are you mainly looking to lock in the menu and logistics?  If tasting helps, we currently have these Sunday options: • May 17 at 2:00 PM • May 31 at 2:00 PM  What’s your best guest-count estimate, and which of those (if any) would work for you?  —Andre / Comeketo
@@ -58,7 +58,7 @@
 
 - Objective: Directly propose a call scheduling window using a NEPQ-style fit check question (and ask for a phone number again if needed).
 - Send window: SMS: 9:00 AM – 7:00 PM lead-local time
-- Approval: needs_review
+- Approval: not_ready
 
 - SMS: Propose a call time window and ask one fit-check question
   Draft seed: Sarah—quick question: what’s your ideal vibe for May 15 (more casual + hearty or more polished + plated)? Also, what phone number should Andre call, and would you be free around [Tue 3–4pm] or [Tue 5–6pm] to confirm details?
@@ -68,7 +68,7 @@
 
 - Objective: Use a task to prompt scheduling—Andre will call once Sarah provides a number; otherwise ask for contact details and event basics.
 - Send window: Task window should align to lead-local business hours; default to SMS hours if scheduling is needed.
-- Approval: needs_review
+- Approval: not_ready
 
 - TASK: Call Sarah Broderick to schedule a phone call and confirm guest count + service style for May 15
   Draft seed: Attempt to reach Sarah via the phone number on file; if none, ask Andre to request the best number and confirm guest count + service style for May 15. Then offer a single 10-min call slot to finalize next steps.
@@ -78,7 +78,7 @@
 
 - Objective: Answer silently implied objections: budget/timing uncertainty. Ask what matters most so Andre can tailor the phone call agenda.
 - Send window: Email 7:00 AM – 9:00 PM lead-local time
-- Approval: needs_review
+- Approval: not_ready
 
 - EMAIL: Clarify priorities (budget vs timing vs menu) before the call
   Draft seed: Subject: To make the call useful—what matters most for May 15?  Hi Sarah,  Before Andre calls you, what matters most for your May 15 party? 1) Keeping within a specific budget 2) Locking the menu + dietary needs 3) Timing/logistics (setup, service flow, cleanup) 4) Something else  Reply with the number, and if you share a phone number, we’ll set a quick time that works.  —Andre / Comeketo
@@ -88,7 +88,7 @@
 
 - Objective: Final nudge focused on scheduling outcome: ask for a yes/no and offer one concrete call slot plus request phone number if missing.
 - Send window: SMS: 9:00 AM – 7:00 PM lead-local time
-- Approval: needs_review
+- Approval: not_ready
 
 - SMS: Confirm a specific call slot or ask to reschedule; request phone number if missing
   Draft seed: Sarah—does a quick call with Andre make sense to finalize May 15? If yes, reply with 1) your phone number and 2) yes for [Wed 4:30pm] or tell me a better time today/tomorrow.
