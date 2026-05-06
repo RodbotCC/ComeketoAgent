@@ -1,0 +1,82 @@
+{
+  "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "summary": null,
+  "_type": "EmailThread",
+  "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "participants": [
+    {
+      "email": "contact@comeketocatering.com",
+      "name": "Rhonna Ricafort"
+    }
+  ],
+  "created_by": null,
+  "activity_at": "2026-05-05T23:03:51.012000+00:00",
+  "n_emails": 1,
+  "latest_normalized_subject": "[✅ CATERING] You're in Silmara!",
+  "id": "acti_FWFFvkGoXqB65NeLgq6sOwRzPS8i3S97YciCx2d6Ul3",
+  "created_by_name": null,
+  "lead_id": "lead_b642tqy5FYDU6gy7v1Kw5UYQ8SflngYsoOX3nVePDMa",
+  "importance": {
+    "type": "not_important",
+    "reason": "automated-outbound"
+  },
+  "date_updated": "2026-05-05T23:04:00.809000+00:00",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "updated_by_name": "Rhonna Ricafort",
+  "contact_id": null,
+  "users": [
+    "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo"
+  ],
+  "date_created": "2026-05-05T23:03:51.012000+00:00",
+  "user_name": "Rhonna Ricafort",
+  "latest_emails": [
+    {
+      "id": "acti_FVOThQYGjxkdYrb8lvqWP58mMDVeXJabUe9lJsZUCOD",
+      "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+      "body_preview": "Hey Silmara, Just shooting you this quick email, we got your request for more catering info, and our event planner will connect shortly. ❤️ - Comeketo Catering p.s. check out [this quick video](https:",
+      "date_sent": "2026-05-05T23:03:51.011000+00:00",
+      "opens_summary": "Opened by Silmara <jil.yk0707@gmail.com> (3 times, latest 2026-05-05)",
+      "to": [
+        "Silmara <jil.yk0707@gmail.com>"
+      ],
+      "has_attachments": true,
+      "date_created": "2026-05-05T23:03:51.011000+00:00",
+      "date_updated": "2026-05-05T23:04:00.728000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "[✅ CATERING] You're in Silmara! ",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Rhonna Ricafort <contact@comeketocatering.com>",
+      "envelope": {
+        "date": "Tue, 05 May 2026 23:03:51 +0000",
+        "subject": "[✅ CATERING] You're in Silmara! ",
+        "from": [
+          {
+            "email": "contact@comeketocatering.com",
+            "name": "Rhonna Ricafort"
+          }
+        ],
+        "sender": [
+          {
+            "email": "contact@comeketocatering.com",
+            "name": "Rhonna Ricafort"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "jil.yk0707@gmail.com",
+            "name": "Silmara"
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<177802223138.7.12207457967555733267@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ]
+}
