@@ -37,7 +37,7 @@
 
 - Objective: Convert Kyle's broad morning availability into a specific call time.
 - Send window: SMS between 9:00 AM and 12:00 PM lead-local time
-- Approval: needs_review
+- Approval: not_ready
 
 - SMS: Ask Kyle to choose a specific morning time for a phone call with Andre
   Draft seed: Kyle, you mentioned mornings work. What time tomorrow morning is easiest for a quick call with Andre about your 8/8 wedding?
@@ -47,7 +47,7 @@
 
 - Objective: If Kyle replies with a time, create a call task; if not, use email to lower friction and offer a simple choice.
 - Send window: Email between 7:30 AM and 10:30 AM lead-local time
-- Approval: needs_review
+- Approval: not_ready
 
 - TASK: Call Kyle Melo at the time he selects to confirm needs and move toward a quote
   Draft seed: If Kyle replies with a morning time, Andre calls then and asks about guest count, venue, and what matters most for the wedding meal.
@@ -60,7 +60,7 @@
 
 - Objective: Clarify one planning detail that naturally leads into a phone conversation.
 - Send window: SMS between 10:00 AM and 1:00 PM lead-local time
-- Approval: needs_review
+- Approval: not_ready
 
 - SMS: Ask one concrete event-planning question to re-open conversation and support scheduling
   Draft seed: For your 8/8 wedding, what are you planning around most right now — guest count, menu style, or budget?
@@ -70,7 +70,7 @@
 
 - Objective: Have Andre manually review the Box and prepare a tailored call approach based on any new engagement.
 - Send window: Task for completion between 9:00 AM and 4:00 PM lead-local time
-- Approval: needs_review
+- Approval: not_ready
 
 - TASK: Review Kyle Melo's live chat, email opens/replies, and SMS history before next outreach
   Draft seed: Check whether Kyle engaged with the interactive menu or live chat details, then prepare one tailored question for his wedding priorities before the next touch.
@@ -80,7 +80,7 @@
 
 - Objective: Re-engage with a low-pressure question that makes the call feel useful, not salesy.
 - Send window: Email between 8:00 AM and 11:00 AM lead-local time
-- Approval: needs_review
+- Approval: not_ready
 
 - EMAIL: Ask a decision-framing question linked to his wedding plans
   Draft seed: Subject: For your 8/8 wedding  Kyle, when you picture the food side of the wedding, what do you want to make sure goes right?
@@ -90,7 +90,7 @@
 
 - Objective: Make one final SMS attempt this cycle to secure a yes/no on a morning call.
 - Send window: SMS between 9:30 AM and 12:00 PM lead-local time
-- Approval: needs_review
+- Approval: not_ready
 
 - SMS: Ask for permission to hold a short morning call window with Andre
   Draft seed: Would it be easier if I had Andre hold a short morning slot for you, or would you rather text a couple details first?
@@ -100,7 +100,7 @@
 
 - Objective: Close the cycle with an internal next-step decision based on responsiveness.
 - Send window: Task for completion between 10:00 AM and 5:00 PM lead-local time
-- Approval: needs_review
+- Approval: not_ready
 
 - TASK: Assess response pattern and decide whether to continue toward scheduled call or downgrade to longer-term re-engagement
   Draft seed: If Kyle has replied, schedule/confirm the call with Andre. If silent, note that he stated mornings work, summarize all touches this week, and queue a later re-engagement instead of adding another outbound today.
