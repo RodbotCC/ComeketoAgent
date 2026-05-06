@@ -1,0 +1,171 @@
+{
+  "addresses": [
+    {
+      "address_1": "",
+      "address_2": "",
+      "city": "",
+      "country": "US",
+      "label": "business",
+      "state": "",
+      "zipcode": "02188"
+    }
+  ],
+  "contacts": [
+    {
+      "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "date_created": "2025-09-24T13:46:16.846000+00:00",
+      "date_updated": "2025-09-24T13:46:16.846000+00:00",
+      "display_name": "Ali O'Brien",
+      "emails": [
+        {
+          "email": "aliobrien96@gmail.com",
+          "is_unsubscribed": false,
+          "type": "direct"
+        }
+      ],
+      "id": "cont_Vo2QYfG8LRvwjK1tJDrzOvOVszRCoItzshP6lJjZoPc",
+      "integration_links": [
+        {
+          "name": "LinkedIn Search",
+          "url": "https://www.linkedin.com/search/results/people/?keywords=Ali%20O%27Brien"
+        }
+      ],
+      "lead_id": "lead_c05F6UMCQu2zJJ6H4LWHgR0ZM135nwAtcNAIJquxmOt",
+      "name": "Ali O'Brien",
+      "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+      "phones": [
+        {
+          "country": "US",
+          "phone": "+17812641739",
+          "phone_formatted": "+1 781-264-1739",
+          "type": "direct"
+        }
+      ],
+      "timezone": "America/New_York",
+      "timezone_source": "inferred_from_phone_number",
+      "title": "Plain Old Phone (best for SMS)",
+      "updated_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "urls": []
+    },
+    {
+      "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "date_created": "2025-09-24T13:46:37.007000+00:00",
+      "date_updated": "2025-09-24T13:46:37.007000+00:00",
+      "display_name": "Ali O'Brien",
+      "emails": [],
+      "id": "cont_Vdr8rcYkCZZdHMQ5h1Rg4EpDjhxfq42fThaiX3kp1vh",
+      "integration_links": [
+        {
+          "name": "LinkedIn Search",
+          "url": "https://www.linkedin.com/search/results/people/?keywords=Ali%20O%27Brien"
+        }
+      ],
+      "lead_id": "lead_c05F6UMCQu2zJJ6H4LWHgR0ZM135nwAtcNAIJquxmOt",
+      "name": "Ali O'Brien",
+      "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+      "phones": [
+        {
+          "country": "US",
+          "phone": "+17812641739",
+          "phone_formatted": "+1 781-264-1739",
+          "type": "mobile"
+        }
+      ],
+      "timezone": "America/New_York",
+      "timezone_source": "inferred_from_phone_number",
+      "title": "Facebook # (Best For Calls)",
+      "updated_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "urls": []
+    }
+  ],
+  "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+  "created_by_name": "Sales Team Event Consultant Team",
+  "custom": {
+    "00. 🪖 LEAD OWNER": "01. 😎 Andre",
+    "01. 🟢 SCORE": [
+      "05. 📍 Within immediate area"
+    ],
+    "02. ⚔︎ WORKFLOW WEAPONS": [
+      "5x5",
+      "✉️ FB Lead Form 1SMS 1EMAIL"
+    ],
+    "05. 👥 Franchise": "Comeketo",
+    "🏠 Zip Code": "02188"
+  },
+  "custom.cf_9vVeQH1oYtJbtdHoL9VPwGhNpuCzVCgi95p7MCasszj": [
+    "05. 📍 Within immediate area"
+  ],
+  "custom.cf_l37qDcsFYbEZQJhRRrImt3cwFPY23IbG4kjLBJRN3GZ": [
+    "5x5",
+    "✉️ FB Lead Form 1SMS 1EMAIL"
+  ],
+  "custom.cf_pXTVEI1DdERiT91NKuWAndlV6WuS4n6ZG2334fBR4b8": "02188",
+  "custom.cf_vfo9P74IUYaftU7nCUQBxaSmGf69YCC1Bdwbz9w20lU": "Comeketo",
+  "custom.cf_xF8FLufgEx9bsijfRAfHhgIrPBQ5ajuohcazC7OtNmT": "01. 😎 Andre",
+  "date_created": "2025-09-24T13:46:16.825000+00:00",
+  "date_updated": "2026-05-05T20:48:21.052000+00:00",
+  "description": "Zip: 02188\nPeople 125\nEvent Desc: Wedding (backyard )\nEvent Date: 09/19/2026\nCampaign Name:\n01. [CATER[ LF EVERGREEN - QUOTE",
+  "display_name": "Ali O'Brien",
+  "html_url": "https://app.close.com/lead/lead_c05F6UMCQu2zJJ6H4LWHgR0ZM135nwAtcNAIJquxmOt/",
+  "id": "lead_c05F6UMCQu2zJJ6H4LWHgR0ZM135nwAtcNAIJquxmOt",
+  "integration_links": [
+    {
+      "name": "Google Search",
+      "url": "https://google.com/search?q=Ali%20O%27Brien"
+    }
+  ],
+  "name": "Ali O'Brien",
+  "opportunities": [
+    {
+      "annualized_expected_value": 0,
+      "annualized_value": 472500,
+      "attachments": [],
+      "confidence": 0,
+      "contact_id": "cont_Vo2QYfG8LRvwjK1tJDrzOvOVszRCoItzshP6lJjZoPc",
+      "contact_name": "Ali O'Brien",
+      "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "created_by_name": "Sales Team Event Consultant Team",
+      "custom.cf_3LZk8uGw0lIvPpNzOMvFn4WwiCXbI91X66Ujvt8UJPx": [
+        "NEEDS VENUE NAME"
+      ],
+      "custom.cf_fs7mrfN5x0M20CyoltczyVg8t0Xul5GFvkC4FNUKvY6": "Customer",
+      "custom.cf_ge7qOebiWpyPvuv7xkzNaYpM8PsmOeNvXasXFOtPXRt": [
+        "Facebook, Paid"
+      ],
+      "custom.cf_goMfyKkS7pFUhmo0xvrl1JvQv1KLaQkfoVo0j93dvhe": "Wedding (backyard )",
+      "custom.cf_nQLULOLLmtUAh9OwcpJibPc5pQKIqpFOjdGSTwC9ePO": "125",
+      "date_created": "2025-09-24T13:46:25.859000+00:00",
+      "date_lost": "2025-11-05T13:32:42.852000+00:00",
+      "date_updated": "2026-05-05T20:48:21.081000+00:00",
+      "date_won": "2026-09-19",
+      "expected_value": 0,
+      "id": "oppo_ZOX5rxfeu1PNsUhGY0nksTQXrXiEbJlHYVyQfTJmNaC",
+      "integration_links": [],
+      "lead_id": "lead_c05F6UMCQu2zJJ6H4LWHgR0ZM135nwAtcNAIJquxmOt",
+      "lead_name": "Ali O'Brien",
+      "note": "",
+      "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+      "pipeline_id": "pipe_4s7zfmoJhbc6jcU1aPvIDT",
+      "pipeline_name": "Sales",
+      "status_display_name": "Sales: 📵⛔️DO NOT CALL LIST 📵⛔️🙅‍♀️",
+      "status_id": "stat_67hPLsdjX3G7QhSIXmHWAXNOQz0w4Ka2YapnQwhSzLC",
+      "status_label": "📵⛔️DO NOT CALL LIST 📵⛔️🙅‍♀️",
+      "status_type": "lost",
+      "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+      "updated_by_name": "Rhonna Ricafort",
+      "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "user_name": "Andre Raw",
+      "value": 472500,
+      "value_currency": "USD",
+      "value_formatted": "$4,725",
+      "value_period": "one_time"
+    }
+  ],
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "status_id": "stat_X4X2dIPrVwMZDbSGxo1xCbkokk0mjPwaqpF5PjK80F3",
+  "status_label": "❌ Disqualified",
+  "tasks": [],
+  "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "updated_by_name": "Rhonna Ricafort",
+  "url": null
+}
