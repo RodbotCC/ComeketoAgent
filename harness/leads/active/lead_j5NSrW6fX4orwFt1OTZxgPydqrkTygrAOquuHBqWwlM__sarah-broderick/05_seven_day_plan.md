@@ -28,7 +28,7 @@
 
 - Objective: Make it easy to respond and move toward scheduling by anchoring the May 15 quote thread and requesting a quick call + phone number.
 - Send window: Email 7:00 AM – 9:00 PM lead-local time
-- Approval: needs_review
+- Approval: approved
 
 - EMAIL: Ask to schedule a short call with Andre and request a phone number for May 15
   Draft seed: Subject: Quick question about your May 15 party  Hi Sarah,  Thanks again for chatting with us. When you mentioned your May 15 party, are you expecting roughly how many guests, and are you leaning more toward a buffet, family-style, or plated service?  If you’re open to it, Andre can do a quick 10-minute call to confirm what you need and whether our timing works. What’s the best phone number for him to reach you?  —Andre / Comeketo
