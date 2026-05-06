@@ -1,0 +1,31 @@
+{
+  "contact_id": "cont_NkCWWIKmJaowK5NYXGl6xFxvCX7UiyLNkGkl3JUjgUV",
+  "counts": {
+    "activities": 12,
+    "calls": 0,
+    "emails": 2,
+    "meetings": 0,
+    "notes": 2,
+    "smses": 3,
+    "subscriptions": 2,
+    "tasks": 2,
+    "threads": 2,
+    "whatsapps": 0
+  },
+  "last_sweep_at": "2026-05-06T10:07:11.964Z",
+  "lead_id": "lead_7hErLkE0D8EFx8NXcHi7KRrE0lvkx19vDF0geVvwPb4",
+  "name": "Felipe Oliveira",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "primary_email": "gatinhophipi_10@hotmail.com",
+  "primary_phone": "+15088385561",
+  "raw_contract_version": 2,
+  "raw_files": {
+    "comms_dir": "comms/",
+    "continuity": "02_continuity.jsonl",
+    "lead": "01_raw_lead.json"
+  },
+  "status_id": "stat_qGpMKenDu31cIY56uTpvo8evqhcNnK4KDWtz4y9NPz3",
+  "status_label": "🔘 Maybe",
+  "user_id": null,
+  "user_name": null
+}
