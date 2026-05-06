@@ -1,0 +1,31 @@
+{
+  "contact_id": "cont_MafKPGEEjR2uJYwyjkVbeNd8dGA8BXOqoPQ9dJi5arR",
+  "counts": {
+    "activities": 32,
+    "calls": 0,
+    "emails": 13,
+    "meetings": 0,
+    "notes": 2,
+    "smses": 12,
+    "subscriptions": 3,
+    "tasks": 2,
+    "threads": 11,
+    "whatsapps": 0
+  },
+  "last_sweep_at": "2026-05-06T10:08:03.859Z",
+  "lead_id": "lead_GOCpFiFs4Mn4h5CdxWEv4QtrFQaIUe8PH8ABdC2QchE",
+  "name": "Tarin Gayles",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "primary_email": "taringayles@gmail.com",
+  "primary_phone": "+19092331992",
+  "raw_contract_version": 2,
+  "raw_files": {
+    "comms_dir": "comms/",
+    "continuity": "02_continuity.jsonl",
+    "lead": "01_raw_lead.json"
+  },
+  "status_id": "stat_qGpMKenDu31cIY56uTpvo8evqhcNnK4KDWtz4y9NPz3",
+  "status_label": "🔘 Maybe",
+  "user_id": null,
+  "user_name": null
+}
