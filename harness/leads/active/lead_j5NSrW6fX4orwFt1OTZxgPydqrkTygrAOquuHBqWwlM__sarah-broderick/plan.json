@@ -50,7 +50,7 @@
         }
       ],
       "send_window": "SMS: 9:00 AM – 7:00 PM lead-local time",
-      "approval_status": "needs_review"
+      "approval_status": "not_ready"
     },
     {
       "day": 3,
@@ -64,7 +64,7 @@
         }
       ],
       "send_window": "Email 7:00 AM – 9:00 PM lead-local time",
-      "approval_status": "needs_review"
+      "approval_status": "not_ready"
     },
     {
       "day": 4,
@@ -78,7 +78,7 @@
         }
       ],
       "send_window": "SMS: 9:00 AM – 7:00 PM lead-local time",
-      "approval_status": "needs_review"
+      "approval_status": "not_ready"
     },
     {
       "day": 5,
@@ -92,7 +92,7 @@
         }
       ],
       "send_window": "Task window should align to lead-local business hours; default to SMS hours if scheduling is needed.",
-      "approval_status": "needs_review"
+      "approval_status": "not_ready"
     },
     {
       "day": 6,
@@ -106,7 +106,7 @@
         }
       ],
       "send_window": "Email 7:00 AM – 9:00 PM lead-local time",
-      "approval_status": "needs_review"
+      "approval_status": "not_ready"
     },
     {
       "day": 7,
@@ -120,7 +120,7 @@
         }
       ],
       "send_window": "SMS: 9:00 AM – 7:00 PM lead-local time",
-      "approval_status": "needs_review"
+      "approval_status": "not_ready"
     }
   ],
   "stop_conditions": [
@@ -138,5 +138,5 @@
     }
   ],
   "approval_required": true,
-  "_mirror_at": "2026-05-06T07:06:50.192Z"
+  "_mirror_at": "2026-05-06T07:09:56.790Z"
 }
