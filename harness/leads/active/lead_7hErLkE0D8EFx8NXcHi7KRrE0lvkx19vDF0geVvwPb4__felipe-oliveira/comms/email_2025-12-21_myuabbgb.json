@@ -1,0 +1,108 @@
+{
+  "followup_sequence_id": null,
+  "email_account_id": "emailacct_cM0OYvq47SOFqO8wIsADypvEONwFh56CuWk48bv47PX",
+  "subject": "[✅ CATERING] You're in Felipe! ",
+  "date_updated": "2025-12-21T20:19:37.049000+00:00",
+  "date_sent": "2025-12-21T20:19:34.657000+00:00",
+  "template_id": "tmpl_00Fz0b76VVa1s0513kjupplycwaQxUVrxihO1mvnzlW",
+  "created_by": null,
+  "send_attempts": [],
+  "bulk_email_action_id": null,
+  "opens": [],
+  "body_text_quoted": [
+    {
+      "expand": true,
+      "text": "Hey Felipe,  \n  \nJust shooting you this quick email,  \nwe got your request for more catering info,  \nand our event planner will connect shortly.\n\n  \n❤️ - Comeketo Catering\n\n  \n\n  \n\n  \n\np.s. check out [this quick video](https://dom-12.wistia.com/medias/bu7v9ttoaa)\nto see what's in store when you select our Brazilian BBQ Option\n\n  \n\n  \n\n  \n\n  \n\n  \n\n  \n\n  \n\n[![email_photo.jpeg](cid:2c29-00e4-b267)](https://dom-12.wistia.com/medias/bu7v9ttoaa)\n\n  \n\n  \n\n  \n\\--\n\nRegards,  \n**Toni Llagas**\n\n**Comeketo Catering**  \n👤 **Sales & Event Consulting Team**\n\n📲 My Direct Line: [(978) 7](tel:9787092442)40 -7311\n\n📲 Catering Main: [(978) 381-1212](tel:9783811212)  \n[Facebook](https://www.facebook.com/comeketocatering) | [Instagram](https://instagram.com/comeketocatering) | [Website](https://comeketocatering.com/)\n\n  \n\n  \n\nTo stop receiving these emails, click\n[here](https://app.close.com/go/unsubscribe/orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq/gatinhophipi_10%40hotmail.com/6PuEL1I4AZggsqc0BZss_GUOgi6kf1JVvq9NGtOmjy8=/)"
+    }
+  ],
+  "contact_id": "cont_NkCWWIKmJaowK5NYXGl6xFxvCX7UiyLNkGkl3JUjgUV",
+  "sender": "Comeketo Catering <catering@comeketo.com>",
+  "date_created": "2025-12-21T20:19:34.657000+00:00",
+  "attachments": [
+    {
+      "size": 226836,
+      "content_type": "image/jpeg",
+      "filename": "email_photo.jpeg",
+      "content_id": "2c29-00e4-b267",
+      "inline_only": true,
+      "url": "https://app.close.com/go/file/persisted/orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq/activity.email/acti_qzMA9P0zJlCg5Z9Bgds8NohYUkwL7Sq5huMMYuAbBgB/5JESTXXB4Gy0fV6BJA9YSw/email_photo.jpeg/",
+      "thumbnail_url": "https://app.close.com/go/file/persisted/orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq/activity.email/acti_qzMA9P0zJlCg5Z9Bgds8NohYUkwL7Sq5huMMYuAbBgB/5JESTXXB4Gy0fV6BJA9YSw/email_photo.jpeg/thumbnail/"
+    }
+  ],
+  "bcc": [],
+  "in_reply_to_id": null,
+  "activity_at": "2025-12-21T20:19:34.657000+00:00",
+  "sequence_subscription_id": "sub_6xsr10D27ZFqg2lk3uMOHy",
+  "opens_summary": null,
+  "direction": "outgoing",
+  "need_smtp_credentials": false,
+  "thread_id": "acti_O5lIrLYFB4T6AkKO9vK1TY5jlAv41lwHGitEVmKlIwy",
+  "agent_action_reason": null,
+  "has_reply": false,
+  "lead_id": "lead_7hErLkE0D8EFx8NXcHi7KRrE0lvkx19vDF0geVvwPb4",
+  "body_preview": "Hey Felipe, Just shooting you this quick email, we got your request for more catering info, and our event planner will connect shortly. ❤️ - Comeketo Catering p.s. check out [this quick video](https:/",
+  "send_as_id": null,
+  "date_scheduled": null,
+  "followup_sequence_delay": null,
+  "updated_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+  "users": [],
+  "created_by_name": null,
+  "envelope": {
+    "date": "Sun, 21 Dec 2025 20:19:36 +0000",
+    "subject": "[✅ CATERING] You're in Felipe! ",
+    "from": [
+      {
+        "email": "catering@comeketo.com",
+        "name": "Comeketo Catering"
+      }
+    ],
+    "sender": [
+      {
+        "email": "catering@comeketo.com",
+        "name": "Comeketo Catering"
+      }
+    ],
+    "reply_to": [],
+    "to": [
+      {
+        "email": "gatinhophipi_10@hotmail.com",
+        "name": "Felipe Oliveira"
+      }
+    ],
+    "cc": [],
+    "bcc": [],
+    "in_reply_to": null,
+    "message_id": "<176634837494.7.6713304353008417655@smtpgw.close.com>",
+    "is_autoreply": false
+  },
+  "_type": "Email",
+  "body_html": "<div>Hey Felipe, <br><br>Just shooting you this quick email,<br>we got your request for more catering info,<br>and our event planner will connect shortly.</div><div><br>❤️ - Comeketo Catering</div><div><br></div><div><br></div><div><br></div><div>p.s. check out <a href=\"https://dom-12.wistia.com/medias/bu7v9ttoaa\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">this quick video</a> to see what's in store when you select our Brazilian BBQ Option</div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><a href=\"https://dom-12.wistia.com/medias/bu7v9ttoaa\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"><img src=\"cid:2c29-00e4-b267\" alt=\"email_photo.jpeg\"></a></div><span data-system-generated=\"signature\"><br><div><br></div><div><br>--</div><div>Regards,<br><strong><span style=\"color: rgb(13, 115, 13); background-color: #FFCFCF\">Toni Llagas</span></strong></div><div><strong><span style=\"color: rgb(84, 20, 168)\">Comeketo Catering</span></strong><br><span style=\"background-color: #E0F9AB\">👤 </span><strong><span style=\"color: rgb(84, 20, 168); background-color: #E0F9AB\">Sales &amp; Event Consulting Team</span></strong></div><div>📲 My Direct Line: <a href=\"tel:9787092442\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">(978) 7</a>40 -7311</div><div>📲 Catering Main: <a href=\"tel:9783811212\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">(978) 381-1212</a><br><a href=\"https://www.facebook.com/comeketocatering\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">Facebook</a> | <a href=\"https://instagram.com/comeketocatering\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">Instagram</a> | <a href=\"https://comeketocatering.com/\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">Website</a></div><div><br></div><div><br></div></span><span data-system-generated=\"unsubscribe-footer\"><p><div style=\"font-size: 11px; color: gray\">To stop receiving these emails, click <a href=\"https://app.close.com/go/unsubscribe/orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq/gatinhophipi_10%40hotmail.com/6PuEL1I4AZggsqc0BZss_GUOgi6kf1JVvq9NGtOmjy8=/\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">here</a></div></p></span>",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "status": "sent",
+  "updated_by_name": "Sales Team Event Consultant Team",
+  "id": "acti_qzMA9P0zJlCg5Z9Bgds8NohYUkwL7Sq5huMMYuAbBgB",
+  "sequence_name": "FB Ads - Standard Generic Hello EMail & SMS",
+  "references": [],
+  "body_html_quoted": [
+    {
+      "expand": true,
+      "html": "<div>Hey Felipe, <br><br>Just shooting you this quick email,<br>we got your request for more catering info,<br>and our event planner will connect shortly.</div><div><br>❤️ - Comeketo Catering</div><div><br></div><div><br></div><div><br></div><div>p.s. check out <a href=\"https://dom-12.wistia.com/medias/bu7v9ttoaa\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">this quick video</a> to see what's in store when you select our Brazilian BBQ Option</div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><a href=\"https://dom-12.wistia.com/medias/bu7v9ttoaa\" target=\"_blank\" rel=\"noopener noreferrer nofollow\"><img src=\"cid:2c29-00e4-b267\" alt=\"email_photo.jpeg\"></a></div><span data-system-generated=\"signature\"><br><div><br></div><div><br>--</div><div>Regards,<br><strong><span style=\"color: rgb(13, 115, 13); background-color: #FFCFCF\">Toni Llagas</span></strong></div><div><strong><span style=\"color: rgb(84, 20, 168)\">Comeketo Catering</span></strong><br><span style=\"background-color: #E0F9AB\">👤 </span><strong><span style=\"color: rgb(84, 20, 168); background-color: #E0F9AB\">Sales &amp; Event Consulting Team</span></strong></div><div>📲 My Direct Line: <a href=\"tel:9787092442\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">(978) 7</a>40 -7311</div><div>📲 Catering Main: <a href=\"tel:9783811212\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">(978) 381-1212</a><br><a href=\"https://www.facebook.com/comeketocatering\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">Facebook</a> | <a href=\"https://instagram.com/comeketocatering\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">Instagram</a> | <a href=\"https://comeketocatering.com/\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">Website</a></div><div><br></div><div><br></div></span><span data-system-generated=\"unsubscribe-footer\"><p></p><div style=\"font-size: 11px; color: gray\">To stop receiving these emails, click <a href=\"https://app.close.com/go/unsubscribe/orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq/gatinhophipi_10%40hotmail.com/6PuEL1I4AZggsqc0BZss_GUOgi6kf1JVvq9NGtOmjy8=/\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">here</a></div></span>"
+    }
+  ],
+  "message_ids": [
+    "<176634837494.7.13293092475971912627@smtpgw.close.com>",
+    "<176634837494.7.6713304353008417655@smtpgw.close.com>"
+  ],
+  "agent_config_id": null,
+  "followup_sequence_add_cc_bcc": false,
+  "sequence_id": "seq_0ABLudk3zuARZlVwMSYKhQ",
+  "ai_draft": null,
+  "cc": [],
+  "user_id": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+  "user_name": "Sales Team Event Consultant Team",
+  "template_name": "[IMPORTANT] We got your request",
+  "to": [
+    "Felipe Oliveira <gatinhophipi_10@hotmail.com>"
+  ],
+  "body_text": "Hey Felipe,  \n  \nJust shooting you this quick email,  \nwe got your request for more catering info,  \nand our event planner will connect shortly.\n\n  \n❤️ - Comeketo Catering\n\n  \n\n  \n\n  \n\np.s. check out [this quick video](https://dom-12.wistia.com/medias/bu7v9ttoaa)\nto see what's in store when you select our Brazilian BBQ Option\n\n  \n\n  \n\n  \n\n  \n\n  \n\n  \n\n  \n\n[![email_photo.jpeg](cid:2c29-00e4-b267)](https://dom-12.wistia.com/medias/bu7v9ttoaa)\n\n  \n\n  \n\n  \n\\--\n\nRegards,  \n**Toni Llagas**\n\n**Comeketo Catering**  \n👤 **Sales & Event Consulting Team**\n\n📲 My Direct Line: [(978) 7](tel:9787092442)40 -7311\n\n📲 Catering Main: [(978) 381-1212](tel:9783811212)  \n[Facebook](https://www.facebook.com/comeketocatering) | [Instagram](https://instagram.com/comeketocatering) | [Website](https://comeketocatering.com/)\n\n  \n\n  \n\nTo stop receiving these emails, click\n[here](https://app.close.com/go/unsubscribe/orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq/gatinhophipi_10%40hotmail.com/6PuEL1I4AZggsqc0BZss_GUOgi6kf1JVvq9NGtOmjy8=/)"
+}

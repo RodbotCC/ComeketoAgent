@@ -1,0 +1,82 @@
+{
+  "id": "acti_A9HWgzjyOO4xsNKt4ElobSDl0saZX0BkUcHzq5PzVrn",
+  "importance": {
+    "type": "not_important",
+    "reason": "automated-outbound"
+  },
+  "updated_by_name": "Rhonna Ricafort",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "participants": [
+    {
+      "email": "catering@events.comeketo.com",
+      "name": "Comeketo Catering Events Team"
+    }
+  ],
+  "created_by_name": null,
+  "created_by": null,
+  "date_updated": "2025-11-12T03:18:15.558000+00:00",
+  "_type": "EmailThread",
+  "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "summary": null,
+  "activity_at": "2025-11-12T03:18:11.091000+00:00",
+  "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "users": [
+    "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo"
+  ],
+  "date_created": "2025-11-12T03:18:11.091000+00:00",
+  "latest_normalized_subject": "🥧Thanksgiving Cut-Off Coming Up (Limited Slots)",
+  "contact_id": null,
+  "user_name": "Rhonna Ricafort",
+  "lead_id": "lead_GOCpFiFs4Mn4h5CdxWEv4QtrFQaIUe8PH8ABdC2QchE",
+  "latest_emails": [
+    {
+      "id": "acti_SRBUFFEk6f8ZadygabPVXHwqanAtmZtbY7Ups8XO0YH",
+      "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+      "body_preview": "Hi Tarin, Our Thanksgiving Eve catering **cut-off is November 24**. We’re down to the **last few trays and delivery windows.** ✅ Family package (feeds 5) ($175) ✅ Trays, meats, sides ✅ Delivered hot &",
+      "date_sent": "2025-11-12T03:18:11.090000+00:00",
+      "opens_summary": "Opened by Tarin Gayles <taringayles@gmail.com> (2025-11-12)",
+      "to": [
+        "Tarin Gayles <taringayles@gmail.com>"
+      ],
+      "has_attachments": true,
+      "date_created": "2025-11-12T00:47:57.144000+00:00",
+      "date_updated": "2025-11-12T03:18:15.499000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "🥧Thanksgiving Cut-Off Coming Up (Limited Slots)",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Comeketo Catering Events Team <catering@events.comeketo.com>",
+      "envelope": {
+        "date": "Wed, 12 Nov 2025 03:18:11 +0000",
+        "subject": "🥧Thanksgiving Cut-Off Coming Up (Limited Slots)",
+        "from": [
+          {
+            "email": "catering@events.comeketo.com",
+            "name": "Comeketo Catering Events Team"
+          }
+        ],
+        "sender": [
+          {
+            "email": "catering@events.comeketo.com",
+            "name": "Comeketo Catering Events Team"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "taringayles@gmail.com",
+            "name": "Tarin Gayles"
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<176291749144.7.5276330956337107067@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ],
+  "n_emails": 1
+}

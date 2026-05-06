@@ -1,0 +1,157 @@
+{
+  "plan_id": "plan_rrrc9vkl",
+  "close_lead_id": "lead_R5QYRSr7QLjnOZGs2KpBN551SPNdcA8uoQfk6pyZQ2E",
+  "cycle_started_at": "2026-05-05T19:10:40.141Z",
+  "generated_at": "2026-05-05T19:10:40.141Z",
+  "based_on_snapshot_id": "snap_vsh29v_12",
+  "status": "draft",
+  "primary_goal": "scheduled_call",
+  "goal_summary": "Use Kyle's stated morning availability and same-day engagement to secure a specific phone time with Andre for his 08/08/26 wedding.",
+  "lead_state_summary": "Kyle Melo came in from a Facebook lead form on 05/05 for a wedding on 08/08/26. He replied by SMS at 11:09 saying \"Any time in the morning\" after being asked the best time for a call, which is the clearest buying signal so far. Since then, there were two outbound call attempts at 13:21, an email at 13:22 with \"Comeketo´s Interactive Menu,\" and a note that live chat started at 10:06 AM. He is already enrolled in active workflows, including \"5x5,\" \"✉️ FB Lead Form 1EMAIL,\" and \"01. 📞 DAY 1 CALL,\" so this plan should avoid duplicating those sequences and focus on converting his stated availability into a booked call.",
+  "known_facts": [
+    "Lead name is Kyle Melo.",
+    "Kyle's phone number is +16174809931.",
+    "Kyle's email is kylemelo1999@gmail.com.",
+    "The event type is Wedding.",
+    "The event date is 2026-08-08.",
+    "Kyle came in from a Facebook Ads lead form.",
+    "An outbound SMS asked for the best time of day to call.",
+    "Kyle replied by SMS on 2026-05-05 at 11:09: \"Any time in the morning.\"",
+    "Two outbound call attempts were made on 2026-05-05 at 13:21.",
+    "An email titled \"Comeketo´s Interactive Menu\" was sent on 2026-05-05 at 13:22.",
+    "A note says live chat started on 2026-05-05 at 10:06 AM.",
+    "The lead is already in active workflows and should not be re-enrolled into the same sequence."
+  ],
+  "unknowns": [
+    "What specific morning time works best for Kyle for a call with Andre.",
+    "Guest count.",
+    "Venue or service location.",
+    "Budget range.",
+    "Preferred service style for the wedding.",
+    "Whether Kyle is the decision-maker or coordinating with a partner/family.",
+    "Whether he reviewed the interactive menu email."
+  ],
+  "best_next_question": "Kyle, when you said mornings work, what time tomorrow morning would be easiest for a quick call with Andre so we can understand what you want for 8/8?",
+  "days": [
+    {
+      "day": 1,
+      "objective": "Convert Kyle's broad morning availability into a specific call time.",
+      "required_actions": [
+        {
+          "channel": "sms",
+          "intent": "Ask Kyle to choose a specific morning time for a phone call with Andre",
+          "draft_seed": "Kyle, you mentioned mornings work. What time tomorrow morning is easiest for a quick call with Andre about your 8/8 wedding?",
+          "notes": "Last meaningful inbound was SMS, so lean SMS next. Keep it specific and easy to answer."
+        }
+      ],
+      "send_window": "SMS between 9:00 AM and 12:00 PM lead-local time",
+      "approval_status": "not_ready"
+    },
+    {
+      "day": 2,
+      "objective": "If Kyle replies with a time, create a call task; if not, use email to lower friction and offer a simple choice.",
+      "required_actions": [
+        {
+          "channel": "task",
+          "intent": "Call Kyle Melo at the time he selects to confirm needs and move toward a quote",
+          "draft_seed": "If Kyle replies with a morning time, Andre calls then and asks about guest count, venue, and what matters most for the wedding meal.",
+          "notes": "Only execute if Kyle responds with a specific time. No telephony channel allowed, so use task."
+        },
+        {
+          "channel": "email",
+          "intent": "Offer a simple scheduling choice tied to Kyle's stated morning preference",
+          "draft_seed": "Subject: Quick call for your wedding\n\nKyle, you mentioned mornings are best. Would a quick call tomorrow morning or the next morning be easier for you?",
+          "notes": "Use only if no confirmed call time has been set by send time. Distinct intent from day 1 SMS."
+        }
+      ],
+      "send_window": "Email between 7:30 AM and 10:30 AM lead-local time",
+      "approval_status": "not_ready"
+    },
+    {
+      "day": 3,
+      "objective": "Clarify one planning detail that naturally leads into a phone conversation.",
+      "required_actions": [
+        {
+          "channel": "sms",
+          "intent": "Ask one concrete event-planning question to re-open conversation and support scheduling",
+          "draft_seed": "For your 8/8 wedding, what are you planning around most right now — guest count, menu style, or budget?",
+          "notes": "NEPQ-style question to get a reply without pushing. If he answers, pivot to booking the call."
+        }
+      ],
+      "send_window": "SMS between 10:00 AM and 1:00 PM lead-local time",
+      "approval_status": "not_ready"
+    },
+    {
+      "day": 4,
+      "objective": "Have Andre manually review the Box and prepare a tailored call approach based on any new engagement.",
+      "required_actions": [
+        {
+          "channel": "task",
+          "intent": "Review Kyle Melo's live chat, email opens/replies, and SMS history before next outreach",
+          "draft_seed": "Check whether Kyle engaged with the interactive menu or live chat details, then prepare one tailored question for his wedding priorities before the next touch.",
+          "notes": "Keeps the day active without over-messaging and respects frequency caps."
+        }
+      ],
+      "send_window": "Task for completion between 9:00 AM and 4:00 PM lead-local time",
+      "approval_status": "not_ready"
+    },
+    {
+      "day": 5,
+      "objective": "Re-engage with a low-pressure question that makes the call feel useful, not salesy.",
+      "required_actions": [
+        {
+          "channel": "email",
+          "intent": "Ask a decision-framing question linked to his wedding plans",
+          "draft_seed": "Subject: For your 8/8 wedding\n\nKyle, when you picture the food side of the wedding, what do you want to make sure goes right?",
+          "notes": "Short, calm, and designed to invite a real response. If he replies, move to scheduling a call."
+        }
+      ],
+      "send_window": "Email between 8:00 AM and 11:00 AM lead-local time",
+      "approval_status": "not_ready"
+    },
+    {
+      "day": 6,
+      "objective": "Make one final SMS attempt this cycle to secure a yes/no on a morning call.",
+      "required_actions": [
+        {
+          "channel": "sms",
+          "intent": "Ask for permission to hold a short morning call window with Andre",
+          "draft_seed": "Would it be easier if I had Andre hold a short morning slot for you, or would you rather text a couple details first?",
+          "notes": "Gives Kyle control and two easy paths forward."
+        }
+      ],
+      "send_window": "SMS between 9:30 AM and 12:00 PM lead-local time",
+      "approval_status": "not_ready"
+    },
+    {
+      "day": 7,
+      "objective": "Close the cycle with an internal next-step decision based on responsiveness.",
+      "required_actions": [
+        {
+          "channel": "task",
+          "intent": "Assess response pattern and decide whether to continue toward scheduled call or downgrade to longer-term re-engagement",
+          "draft_seed": "If Kyle has replied, schedule/confirm the call with Andre. If silent, note that he stated mornings work, summarize all touches this week, and queue a later re-engagement instead of adding another outbound today.",
+          "notes": "Avoids unnecessary outbound while preserving context for the next cycle."
+        }
+      ],
+      "send_window": "Task for completion between 10:00 AM and 5:00 PM lead-local time",
+      "approval_status": "not_ready"
+    }
+  ],
+  "stop_conditions": [
+    {
+      "trigger": "Kyle asks to stop, unsubscribe, or says he is no longer interested",
+      "action": "kill"
+    },
+    {
+      "trigger": "Kyle replies with a specific call time or explicitly agrees to speak with Andre",
+      "action": "pause"
+    },
+    {
+      "trigger": "Kyle asks a direct question about pricing, menu, guest count, or availability",
+      "action": "surface"
+    }
+  ],
+  "approval_required": true,
+  "_mirror_at": "2026-05-06T07:10:09.858Z"
+}

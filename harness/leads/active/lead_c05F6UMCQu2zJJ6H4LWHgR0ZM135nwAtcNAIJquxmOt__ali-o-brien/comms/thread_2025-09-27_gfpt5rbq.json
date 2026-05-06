@@ -1,0 +1,82 @@
+{
+  "contact_id": null,
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "latest_normalized_subject": "[EXCLUSIVE] About Our Tastings",
+  "participants": [
+    {
+      "email": "team@comeketocatering.com",
+      "name": "Andre Raw"
+    }
+  ],
+  "importance": {
+    "type": "not_important",
+    "reason": "by-default"
+  },
+  "lead_id": "lead_c05F6UMCQu2zJJ6H4LWHgR0ZM135nwAtcNAIJquxmOt",
+  "updated_by_name": "Andre Raw",
+  "date_created": "2025-09-27T20:03:17.476000+00:00",
+  "created_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "created_by_name": "Andre Raw",
+  "date_updated": "2025-09-28T02:43:43.873000+00:00",
+  "_type": "EmailThread",
+  "latest_emails": [
+    {
+      "id": "acti_rVh4s8I7bCr2jirULflModFLXQyww3OiWK2Im22Knt5",
+      "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "body_preview": "Experience 30+ menu items at our exclusive catering tasting - completely free\nwhen you book 🍽️ ![Comeketo Catering Logo](https://comeketocatering.com/wp-\ncontent/uploads/2025/01/LOGO_WEB.png) [ ![Cate",
+      "date_sent": "2025-09-27T20:03:17.475000+00:00",
+      "opens_summary": "Opened by aliobrien96@gmail.com (2025-09-28)",
+      "to": [
+        "aliobrien96@gmail.com"
+      ],
+      "has_attachments": false,
+      "date_created": "2025-09-27T20:02:59.425000+00:00",
+      "date_updated": "2025-09-28T02:43:43.841000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "[EXCLUSIVE] About Our Tastings",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Andre Raw <team@comeketocatering.com>",
+      "envelope": {
+        "date": "Sat, 27 Sep 2025 20:03:17 +0000",
+        "subject": "[EXCLUSIVE] About Our Tastings",
+        "from": [
+          {
+            "email": "team@comeketocatering.com",
+            "name": "Andre Raw"
+          }
+        ],
+        "sender": [
+          {
+            "email": "team@comeketocatering.com",
+            "name": "Andre Raw"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "aliobrien96@gmail.com",
+            "name": ""
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<175900339749.7.17620529319676916696@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ],
+  "summary": null,
+  "user_name": "Andre Raw",
+  "activity_at": "2025-09-27T20:03:17.476000+00:00",
+  "n_emails": 1,
+  "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "id": "acti_iViqebZKqkCjJhfQRgYYXxdvlUt8GR0Cw4qgFpt5rBQ",
+  "users": [
+    "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt"
+  ],
+  "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt"
+}

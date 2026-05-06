@@ -1,0 +1,31 @@
+{
+  "contact_id": "cont_Vo2QYfG8LRvwjK1tJDrzOvOVszRCoItzshP6lJjZoPc",
+  "counts": {
+    "activities": 46,
+    "calls": 11,
+    "emails": 12,
+    "meetings": 0,
+    "notes": 3,
+    "smses": 11,
+    "subscriptions": 3,
+    "tasks": 3,
+    "threads": 10,
+    "whatsapps": 0
+  },
+  "last_sweep_at": "2026-05-06T10:05:06.677Z",
+  "lead_id": "lead_c05F6UMCQu2zJJ6H4LWHgR0ZM135nwAtcNAIJquxmOt",
+  "name": "Ali O'Brien",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "primary_email": "aliobrien96@gmail.com",
+  "primary_phone": "+17812641739",
+  "raw_contract_version": 2,
+  "raw_files": {
+    "comms_dir": "comms/",
+    "continuity": "02_continuity.jsonl",
+    "lead": "01_raw_lead.json"
+  },
+  "status_id": "stat_X4X2dIPrVwMZDbSGxo1xCbkokk0mjPwaqpF5PjK80F3",
+  "status_label": "❌ Disqualified",
+  "user_id": null,
+  "user_name": null
+}

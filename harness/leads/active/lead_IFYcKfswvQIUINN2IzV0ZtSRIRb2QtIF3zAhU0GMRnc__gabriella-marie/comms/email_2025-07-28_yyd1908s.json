@@ -1,0 +1,98 @@
+{
+  "status": "sent",
+  "sequence_id": "seq_0cfHT8bHbW6dw30GC6pMN5",
+  "template_name": "Oh No, We Lost You",
+  "followup_sequence_id": null,
+  "updated_by_name": "Sales Team Event Consultant Team",
+  "bulk_email_action_id": null,
+  "thread_id": "acti_2s0QGYJAi7VUJ1IhKX57YSN2e9R7dgrxhh1RHycHL5c",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "users": [],
+  "envelope": {
+    "date": "Mon, 28 Jul 2025 13:51:00 +0000",
+    "subject": "[⚠️ ACTION NEEDED] Oh No, We Lost You",
+    "from": [
+      {
+        "email": "catering@comeketo.com",
+        "name": "Comeketo Catering"
+      }
+    ],
+    "sender": [
+      {
+        "email": "catering@comeketo.com",
+        "name": "Comeketo Catering"
+      }
+    ],
+    "reply_to": [],
+    "to": [
+      {
+        "email": "g.m.saintonge@gmail.com",
+        "name": "Gabriella Marie"
+      }
+    ],
+    "cc": [],
+    "bcc": [],
+    "in_reply_to": null,
+    "message_id": "<175371065989.7.8021250968515432381@smtpgw.close.com>",
+    "is_autoreply": false
+  },
+  "opens": [],
+  "_type": "Email",
+  "template_id": "tmpl_S9xR9ZuAmXQ1WYXampVq8b60bNDvKAjWISzyMpk04DU",
+  "need_smtp_credentials": false,
+  "date_sent": "2025-07-28T13:50:59.528000+00:00",
+  "send_as_id": null,
+  "subject": "[⚠️ ACTION NEEDED] Oh No, We Lost You",
+  "date_scheduled": null,
+  "body_text": "Still need catering help? Last Chance\n\n  \n\n  \n\n  \n\\--\n\nRegards,  \n**Toni Llagas**\n\n**Comeketo Catering**  \n👤 **Sales & Event Consulting Team**\n\n📲 My Direct Line: [(978) 7](tel:9787092442)40 -7311\n\n📲 Catering Main: [(978) 381-1212](tel:9783811212)  \n[Facebook](https://www.facebook.com/comeketocatering) | [Instagram](https://instagram.com/comeketocatering) | [Website](https://comeketocatering.com/)\n\n  \n\n  \n\nTo stop receiving these emails, click\n[here](https://app.close.com/go/unsubscribe/orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq/g.m.saintonge@gmail.com/KgAQD_gVGcpBJUX4BJy1f3nwHmIc1gQayuisJqtwpVs=/)",
+  "created_by": null,
+  "has_reply": false,
+  "ai_draft": null,
+  "date_created": "2025-07-28T13:50:59.528000+00:00",
+  "contact_id": "cont_0C5EnU23MYUGVrRxjodEe3ny3IYhozroZvNGqJKbFVS",
+  "lead_id": "lead_IFYcKfswvQIUINN2IzV0ZtSRIRb2QtIF3zAhU0GMRnc",
+  "body_text_quoted": [
+    {
+      "expand": true,
+      "text": "Still need catering help? Last Chance\n\n  \n\n  \n\n  \n\\--\n\nRegards,  \n**Toni Llagas**\n\n**Comeketo Catering**  \n👤 **Sales & Event Consulting Team**\n\n📲 My Direct Line: [(978) 7](tel:9787092442)40 -7311\n\n📲 Catering Main: [(978) 381-1212](tel:9783811212)  \n[Facebook](https://www.facebook.com/comeketocatering) | [Instagram](https://instagram.com/comeketocatering) | [Website](https://comeketocatering.com/)\n\n  \n\n  \n\nTo stop receiving these emails, click\n[here](https://app.close.com/go/unsubscribe/orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq/g.m.saintonge@gmail.com/KgAQD_gVGcpBJUX4BJy1f3nwHmIc1gQayuisJqtwpVs=/)"
+    }
+  ],
+  "activity_at": "2025-07-28T13:50:59.528000+00:00",
+  "sequence_name": "🚫 Lost - Winback",
+  "attachments": [],
+  "in_reply_to_id": null,
+  "followup_sequence_delay": null,
+  "body_preview": "Still need catering help? Last Chance \\-- Regards, **Toni Llagas** **Comeketo Catering** 👤 **Sales & Event Consulting Team** 📲 My Direct Line: [(978) 7](tel:9787092442)40 -7311 📲 Catering Main: [(978)",
+  "id": "acti_p88gteaVnfU8VQynRIXUmLC9Diqzc0XLNiMyYd1908S",
+  "agent_action_reason": null,
+  "message_ids": [
+    "<175371065989.7.8021250968515432381@smtpgw.close.com>",
+    "<175371065989.7.1049509202336209058@smtpgw.close.com>"
+  ],
+  "body_html_quoted": [
+    {
+      "expand": true,
+      "html": "<div>Still need catering help?  Last Chance</div><br><div><br></div><div><br>--</div><div>Regards,<br><strong><span style=\"color: rgb(13, 115, 13); background-color: #FFCFCF\">Toni Llagas</span></strong></div><div><strong><span style=\"color: rgb(84, 20, 168)\">Comeketo Catering</span></strong><br><span style=\"background-color: #E0F9AB\">👤 </span><strong><span style=\"color: rgb(84, 20, 168); background-color: #E0F9AB\">Sales &amp; Event Consulting Team</span></strong></div><div>📲 My Direct Line: <a href=\"tel:9787092442\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">(978) 7</a>40 -7311</div><div>📲 Catering Main: <a href=\"tel:9783811212\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">(978) 381-1212</a><br><a href=\"https://www.facebook.com/comeketocatering\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">Facebook</a> | <a href=\"https://instagram.com/comeketocatering\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">Instagram</a> | <a href=\"https://comeketocatering.com/\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">Website</a></div><div><br></div><div><br></div><p></p><div style=\"font-size: 11px; color: gray\">To stop receiving these emails, click <a href=\"https://app.close.com/go/unsubscribe/orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq/g.m.saintonge@gmail.com/KgAQD_gVGcpBJUX4BJy1f3nwHmIc1gQayuisJqtwpVs=/\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">here</a></div>"
+    }
+  ],
+  "agent_config_id": null,
+  "direction": "outgoing",
+  "sender": "Comeketo Catering <catering@comeketo.com>",
+  "updated_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+  "cc": [],
+  "send_attempts": [],
+  "body_html": "<div>Still need catering help?  Last Chance</div><br><div><br></div><div><br>--</div><div>Regards,<br><strong><span style=\"color: rgb(13, 115, 13); background-color: #FFCFCF\">Toni Llagas</span></strong></div><div><strong><span style=\"color: rgb(84, 20, 168)\">Comeketo Catering</span></strong><br><span style=\"background-color: #E0F9AB\">👤 </span><strong><span style=\"color: rgb(84, 20, 168); background-color: #E0F9AB\">Sales &amp; Event Consulting Team</span></strong></div><div>📲 My Direct Line: <a href=\"tel:9787092442\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">(978) 7</a>40 -7311</div><div>📲 Catering Main: <a href=\"tel:9783811212\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">(978) 381-1212</a><br><a href=\"https://www.facebook.com/comeketocatering\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">Facebook</a> | <a href=\"https://instagram.com/comeketocatering\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">Instagram</a> | <a href=\"https://comeketocatering.com/\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">Website</a></div><div><br></div><div><br></div><p><div style=\"font-size: 11px; color: gray\">To stop receiving these emails, click <a href=\"https://app.close.com/go/unsubscribe/orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq/g.m.saintonge@gmail.com/KgAQD_gVGcpBJUX4BJy1f3nwHmIc1gQayuisJqtwpVs=/\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">here</a></div></p>",
+  "email_account_id": "emailacct_cM0OYvq47SOFqO8wIsADypvEONwFh56CuWk48bv47PX",
+  "user_id": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+  "sequence_subscription_id": "sub_2aBcSeTQqWJYGNoy8534x7",
+  "created_by_name": null,
+  "bcc": [],
+  "references": [],
+  "to": [
+    "Gabriella Marie <g.m.saintonge@gmail.com>"
+  ],
+  "user_name": "Sales Team Event Consultant Team",
+  "followup_sequence_add_cc_bcc": false,
+  "date_updated": "2025-07-28T13:51:01.367000+00:00",
+  "opens_summary": null
+}

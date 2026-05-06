@@ -1,0 +1,82 @@
+{
+  "date_updated": "2026-05-05T14:46:56.009000+00:00",
+  "date_created": "2026-05-05T14:46:53.756000+00:00",
+  "lead_id": "lead_vPHgGQByXDEeyXmiwKO9FV0DTrN9rM0OYNH6gBy4a5Z",
+  "created_by_name": null,
+  "activity_at": "2026-05-05T14:46:53.756000+00:00",
+  "user_name": "Rhonna Ricafort",
+  "latest_normalized_subject": "[✅ CATERING] You're in Mon!",
+  "users": [
+    "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo"
+  ],
+  "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "importance": {
+    "type": "not_important",
+    "reason": "automated-outbound"
+  },
+  "updated_by_name": "Rhonna Ricafort",
+  "n_emails": 1,
+  "_type": "EmailThread",
+  "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "created_by": null,
+  "latest_emails": [
+    {
+      "id": "acti_PPm1mDmqC9UhOPHQjGyorF8nnmm0zZjbYGHeuqIh7uL",
+      "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+      "body_preview": "Hey Mon, Just shooting you this quick email, we got your request for more catering info, and our event planner will connect shortly. ❤️ - Comeketo Catering p.s. check out [this quick video](https://do",
+      "date_sent": "2026-05-05T14:46:53.755000+00:00",
+      "opens_summary": null,
+      "to": [
+        "Mon <marleny_a25@hotmail.com>"
+      ],
+      "has_attachments": true,
+      "date_created": "2026-05-05T14:46:53.755000+00:00",
+      "date_updated": "2026-05-05T14:46:55.905000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "[✅ CATERING] You're in Mon! ",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Rhonna Ricafort <contact@comeketocatering.com>",
+      "envelope": {
+        "date": "Tue, 05 May 2026 14:46:54 +0000",
+        "subject": "[✅ CATERING] You're in Mon! ",
+        "from": [
+          {
+            "email": "contact@comeketocatering.com",
+            "name": "Rhonna Ricafort"
+          }
+        ],
+        "sender": [
+          {
+            "email": "contact@comeketocatering.com",
+            "name": "Rhonna Ricafort"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "marleny_a25@hotmail.com",
+            "name": "Mon"
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<177799241408.7.1129881382880493822@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ],
+  "contact_id": null,
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "id": "acti_vZULEjYiZ8iqIDzhWt3HUnJviLHfU9ebrFQvyv22pBk",
+  "summary": null,
+  "participants": [
+    {
+      "email": "contact@comeketocatering.com",
+      "name": "Rhonna Ricafort"
+    }
+  ]
+}

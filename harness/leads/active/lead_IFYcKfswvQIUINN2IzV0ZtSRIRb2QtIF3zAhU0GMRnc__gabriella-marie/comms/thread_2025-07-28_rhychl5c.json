@@ -1,0 +1,82 @@
+{
+  "created_by": null,
+  "summary": null,
+  "updated_by_name": "Sales Team Event Consultant Team",
+  "updated_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+  "participants": [
+    {
+      "email": "catering@comeketo.com",
+      "name": "Comeketo Catering"
+    }
+  ],
+  "users": [
+    "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb"
+  ],
+  "activity_at": "2025-07-28T13:50:59.529000+00:00",
+  "importance": {
+    "type": "not_important",
+    "reason": "automated-outbound"
+  },
+  "date_created": "2025-07-28T13:50:59.529000+00:00",
+  "date_updated": "2025-07-28T13:51:01.432000+00:00",
+  "user_id": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+  "lead_id": "lead_IFYcKfswvQIUINN2IzV0ZtSRIRb2QtIF3zAhU0GMRnc",
+  "created_by_name": null,
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "latest_emails": [
+    {
+      "id": "acti_p88gteaVnfU8VQynRIXUmLC9Diqzc0XLNiMyYd1908S",
+      "user_id": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "body_preview": "Still need catering help? Last Chance\n\n  \n\n  \n\n  \n\\--\n\nRegards,  \n**Toni Llagas**\n\n**Comeketo Catering**  \n👤 **Sales & Event Consulting Team**\n\n📲 My Direct Line: [(978) 7](tel:9787092442)40 -7311\n\n📲 C",
+      "date_sent": "2025-07-28T13:50:59.528000+00:00",
+      "opens_summary": null,
+      "to": [
+        "Gabriella Marie <g.m.saintonge@gmail.com>"
+      ],
+      "has_attachments": false,
+      "date_created": "2025-07-28T13:50:59.528000+00:00",
+      "date_updated": "2025-07-28T13:51:01.367000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "[⚠️ ACTION NEEDED] Oh No, We Lost You",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Comeketo Catering <catering@comeketo.com>",
+      "envelope": {
+        "date": "Mon, 28 Jul 2025 13:51:00 +0000",
+        "subject": "[⚠️ ACTION NEEDED] Oh No, We Lost You",
+        "from": [
+          {
+            "email": "catering@comeketo.com",
+            "name": "Comeketo Catering"
+          }
+        ],
+        "sender": [
+          {
+            "email": "catering@comeketo.com",
+            "name": "Comeketo Catering"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "g.m.saintonge@gmail.com",
+            "name": "Gabriella Marie"
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<175371065989.7.8021250968515432381@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ],
+  "id": "acti_2s0QGYJAi7VUJ1IhKX57YSN2e9R7dgrxhh1RHycHL5c",
+  "user_name": "Sales Team Event Consultant Team",
+  "_type": "EmailThread",
+  "n_emails": 1,
+  "latest_normalized_subject": "[⚠️ ACTION NEEDED] Oh No, We Lost You",
+  "contact_id": null
+}

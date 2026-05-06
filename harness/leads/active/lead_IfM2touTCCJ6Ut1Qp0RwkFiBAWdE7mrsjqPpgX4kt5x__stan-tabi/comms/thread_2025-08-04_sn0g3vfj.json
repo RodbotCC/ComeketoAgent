@@ -1,0 +1,82 @@
+{
+  "updated_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "_type": "EmailThread",
+  "date_updated": "2025-08-04T23:49:32.770000+00:00",
+  "created_by_name": null,
+  "latest_emails": [
+    {
+      "id": "acti_norTL6z9QrAupeaHqV76S3hUcljZfSj5dSHHiOn6AIH",
+      "user_id": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "body_preview": "Hey Stan,  \n  \nJust shooting you this quick email,  \nwe got your request for more catering info,  \nand our event planner will connect shortly.\n\n  \n❤️ - Comeketo Catering\n\n  \n\n  \n\n  \n\np.s. check out [t",
+      "date_sent": "2025-08-04T23:49:28.336000+00:00",
+      "opens_summary": null,
+      "to": [
+        "Stan Tabi <stanley.tabi@childrens.harvard.edu>"
+      ],
+      "has_attachments": true,
+      "date_created": "2025-08-04T23:49:28.336000+00:00",
+      "date_updated": "2025-08-04T23:49:32.680000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "[✅ CATERING] You're in Stan! ",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Comeketo Catering <catering@comeketo.com>",
+      "envelope": {
+        "date": "Mon, 04 Aug 2025 23:49:29 +0000",
+        "subject": "[✅ CATERING] You're in Stan! ",
+        "from": [
+          {
+            "email": "catering@comeketo.com",
+            "name": "Comeketo Catering"
+          }
+        ],
+        "sender": [
+          {
+            "email": "catering@comeketo.com",
+            "name": "Comeketo Catering"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "stanley.tabi@childrens.harvard.edu",
+            "name": "Stan Tabi"
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<175435136870.6.11850695272177721397@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ],
+  "id": "acti_LHpd1Cg9mdsWXP18yGbS5vxHAWUWBvwDyLXsn0G3Vfj",
+  "contact_id": null,
+  "user_id": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+  "created_by": null,
+  "user_name": "Sales Team Event Consultant Team",
+  "activity_at": "2025-08-04T23:49:28.337000+00:00",
+  "lead_id": "lead_IfM2touTCCJ6Ut1Qp0RwkFiBAWdE7mrsjqPpgX4kt5x",
+  "updated_by_name": "Sales Team Event Consultant Team",
+  "date_created": "2025-08-04T23:49:28.337000+00:00",
+  "n_emails": 1,
+  "summary": null,
+  "importance": {
+    "type": "not_important",
+    "reason": "automated-outbound"
+  },
+  "users": [
+    "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb"
+  ],
+  "latest_normalized_subject": "[✅ CATERING] You're in Stan!",
+  "participants": [
+    {
+      "email": "catering@comeketo.com",
+      "name": "Comeketo Catering"
+    }
+  ]
+}

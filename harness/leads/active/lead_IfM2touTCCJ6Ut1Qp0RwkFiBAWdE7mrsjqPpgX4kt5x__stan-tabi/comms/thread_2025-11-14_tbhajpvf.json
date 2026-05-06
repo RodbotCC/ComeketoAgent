@@ -1,0 +1,82 @@
+{
+  "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "_type": "EmailThread",
+  "date_updated": "2025-11-14T15:33:07.390000+00:00",
+  "created_by_name": null,
+  "latest_emails": [
+    {
+      "id": "acti_w07fto5zajYYjGptznPUN7G4Qeb8HPUcCGBlcCMBirR",
+      "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+      "body_preview": "Hi Stan Just checking in — we still have a few Thanksgiving Eve pickup/delivery spots\nopen. If you want to review the Thanksgiving menu again, I attached it below for\nyou. Want me to save a spot for y",
+      "date_sent": "2025-11-14T15:33:05.287000+00:00",
+      "opens_summary": null,
+      "to": [
+        "Stan Tabi <stanley.tabi@childrens.harvard.edu>"
+      ],
+      "has_attachments": true,
+      "date_created": "2025-11-12T14:07:19.839000+00:00",
+      "date_updated": "2025-11-14T15:33:07.341000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "🥧Do you still need Thanksgiving catering?",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Comeketo Catering Events Team <catering@events.comeketo.com>",
+      "envelope": {
+        "date": "Fri, 14 Nov 2025 15:33:06 +0000",
+        "subject": "🥧Do you still need Thanksgiving catering?",
+        "from": [
+          {
+            "email": "catering@events.comeketo.com",
+            "name": "Comeketo Catering Events Team"
+          }
+        ],
+        "sender": [
+          {
+            "email": "catering@events.comeketo.com",
+            "name": "Comeketo Catering Events Team"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "stanley.tabi@childrens.harvard.edu",
+            "name": "Stan Tabi"
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<176313438588.7.5792282297837177963@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ],
+  "id": "acti_NnH9By8ndcqFg146PkURDF9qKGpcWOfJHuMTbHaJPVf",
+  "contact_id": null,
+  "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "created_by": null,
+  "user_name": "Rhonna Ricafort",
+  "activity_at": "2025-11-14T15:33:05.288000+00:00",
+  "lead_id": "lead_IfM2touTCCJ6Ut1Qp0RwkFiBAWdE7mrsjqPpgX4kt5x",
+  "updated_by_name": "Rhonna Ricafort",
+  "date_created": "2025-11-14T15:33:05.288000+00:00",
+  "n_emails": 1,
+  "summary": null,
+  "importance": {
+    "type": "not_important",
+    "reason": "automated-outbound"
+  },
+  "users": [
+    "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo"
+  ],
+  "latest_normalized_subject": "🥧Do you still need Thanksgiving catering?",
+  "participants": [
+    {
+      "email": "catering@events.comeketo.com",
+      "name": "Comeketo Catering Events Team"
+    }
+  ]
+}

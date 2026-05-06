@@ -1,0 +1,20 @@
+{
+  "task_text": "[OOPS] Please add a task to your most recently updated lead",
+  "users": [],
+  "updated_by_name": "Rhonna Ricafort",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "task_assigned_to_name": "Sales Team Event Consultant Team",
+  "created_by_name": "Rhonna Ricafort",
+  "date_created": "2026-05-04T17:13:07.802000+00:00",
+  "_type": "TaskCompleted",
+  "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "date_updated": "2026-05-04T17:13:07.802000+00:00",
+  "task_assigned_to": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+  "id": "acti_RLcmMVgoFAZSLJbjUIBO6Oe5YlIIV6mCArpuprabVnH",
+  "lead_id": "lead_VfDrrrVt70oXAgN9dsdFvkuwtv3zOLENDyQhArfGAmz",
+  "user_name": "Rhonna Ricafort",
+  "activity_at": "2026-05-04T17:13:07.802000+00:00",
+  "created_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "task_id": "task_RUP5e9m5qC00Jx5cwitJHDGZdLdlUhUgx914JUXsieE"
+}

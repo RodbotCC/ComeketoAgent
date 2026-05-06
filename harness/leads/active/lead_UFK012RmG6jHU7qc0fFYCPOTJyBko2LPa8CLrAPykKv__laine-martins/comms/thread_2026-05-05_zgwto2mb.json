@@ -1,0 +1,82 @@
+{
+  "lead_id": "lead_UFK012RmG6jHU7qc0fFYCPOTJyBko2LPa8CLrAPykKv",
+  "id": "acti_CAFm7eB4tYuIuD46PQpk9SC1UHZo7M4I6kHzgwTo2mB",
+  "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "participants": [
+    {
+      "email": "contact@comeketocatering.com",
+      "name": "Rhonna Ricafort"
+    }
+  ],
+  "users": [
+    "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo"
+  ],
+  "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "user_name": "Rhonna Ricafort",
+  "created_by": null,
+  "summary": null,
+  "contact_id": null,
+  "activity_at": "2026-05-05T07:10:02.482000+00:00",
+  "date_created": "2026-05-05T07:10:02.482000+00:00",
+  "importance": {
+    "type": "important",
+    "reason": "most-recent-communication"
+  },
+  "_type": "EmailThread",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "created_by_name": null,
+  "latest_emails": [
+    {
+      "id": "acti_FhO0ZIGbG3kFDXpJSyOp1rwY4AWG2LsNzoFhmDl6sSG",
+      "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+      "body_preview": "Discover these two legendary services. ![Comeketo Catering Logo](https://comeketocatering.com/wp-\ncontent/uploads/2025/01/LOGO_WEB.png) ![](https://comeketocatering.com/wp-content/uploads/2025/06/Head",
+      "date_sent": "2026-05-05T07:10:02.481000+00:00",
+      "opens_summary": "Opened by Laine Martins <laine_demoura@hotmail.com> (2026-05-06)",
+      "to": [
+        "Laine Martins <laine_demoura@hotmail.com>"
+      ],
+      "has_attachments": false,
+      "date_created": "2026-05-04T22:55:20.846000+00:00",
+      "date_updated": "2026-05-06T01:53:36.343000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "Our Famous Churrasco & Rodizio",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Rhonna Ricafort <contact@comeketocatering.com>",
+      "envelope": {
+        "date": "Tue, 05 May 2026 07:10:03 +0000",
+        "subject": "Our Famous Churrasco & Rodizio",
+        "from": [
+          {
+            "email": "contact@comeketocatering.com",
+            "name": "Rhonna Ricafort"
+          }
+        ],
+        "sender": [
+          {
+            "email": "contact@comeketocatering.com",
+            "name": "Rhonna Ricafort"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "laine_demoura@hotmail.com",
+            "name": "Laine Martins"
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<177796500261.7.8641595082487262829@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ],
+  "date_updated": "2026-05-06T01:53:36.418000+00:00",
+  "n_emails": 1,
+  "updated_by_name": "Rhonna Ricafort",
+  "latest_normalized_subject": "Our Famous Churrasco & Rodizio"
+}

@@ -1,0 +1,171 @@
+{
+  "addresses": [
+    {
+      "address_1": "",
+      "address_2": "",
+      "city": "",
+      "country": "US",
+      "label": "business",
+      "state": "",
+      "zipcode": "02601"
+    }
+  ],
+  "contacts": [
+    {
+      "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "date_created": "2025-12-21T20:19:23.870000+00:00",
+      "date_updated": "2025-12-21T20:19:23.870000+00:00",
+      "display_name": "Felipe Oliveira",
+      "emails": [
+        {
+          "email": "gatinhophipi_10@hotmail.com",
+          "is_unsubscribed": false,
+          "type": "direct"
+        }
+      ],
+      "id": "cont_NkCWWIKmJaowK5NYXGl6xFxvCX7UiyLNkGkl3JUjgUV",
+      "integration_links": [
+        {
+          "name": "LinkedIn Search",
+          "url": "https://www.linkedin.com/search/results/people/?keywords=Felipe%20Oliveira"
+        }
+      ],
+      "lead_id": "lead_7hErLkE0D8EFx8NXcHi7KRrE0lvkx19vDF0geVvwPb4",
+      "name": "Felipe Oliveira",
+      "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+      "phones": [
+        {
+          "country": "US",
+          "phone": "+15088385561",
+          "phone_formatted": "+1 508-838-5561",
+          "type": "direct"
+        }
+      ],
+      "timezone": "America/New_York",
+      "timezone_source": "inferred_from_phone_number",
+      "title": "Plain Old Phone (best for SMS)",
+      "updated_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "urls": []
+    },
+    {
+      "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "date_created": "2025-12-21T20:19:32.387000+00:00",
+      "date_updated": "2025-12-21T20:19:32.387000+00:00",
+      "display_name": "Felipe Oliveira",
+      "emails": [],
+      "id": "cont_qGrWOfG2tlSTXBHGofRnOkOCza3HeHrVCKpGzKUNke0",
+      "integration_links": [
+        {
+          "name": "LinkedIn Search",
+          "url": "https://www.linkedin.com/search/results/people/?keywords=Felipe%20Oliveira"
+        }
+      ],
+      "lead_id": "lead_7hErLkE0D8EFx8NXcHi7KRrE0lvkx19vDF0geVvwPb4",
+      "name": "Felipe Oliveira",
+      "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+      "phones": [
+        {
+          "country": "US",
+          "phone": "+15088385561",
+          "phone_formatted": "+1 508-838-5561",
+          "type": "mobile"
+        }
+      ],
+      "timezone": "America/New_York",
+      "timezone_source": "inferred_from_phone_number",
+      "title": "Facebook # (Best For Calls)",
+      "updated_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "urls": []
+    }
+  ],
+  "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+  "created_by_name": "Sales Team Event Consultant Team",
+  "custom": {
+    "00. 🪖 LEAD OWNER": "01. 😎 Andre",
+    "01. 🟢 SCORE": [
+      "05. 📍 Within immediate area"
+    ],
+    "02. ⚔︎ WORKFLOW WEAPONS": [
+      "5x5",
+      "✉️ FB Lead Form 1SMS 1EMAIL"
+    ],
+    "05. 👥 Franchise": "Comeketo",
+    "🏠 Zip Code": "02601"
+  },
+  "custom.cf_9vVeQH1oYtJbtdHoL9VPwGhNpuCzVCgi95p7MCasszj": [
+    "05. 📍 Within immediate area"
+  ],
+  "custom.cf_l37qDcsFYbEZQJhRRrImt3cwFPY23IbG4kjLBJRN3GZ": [
+    "5x5",
+    "✉️ FB Lead Form 1SMS 1EMAIL"
+  ],
+  "custom.cf_pXTVEI1DdERiT91NKuWAndlV6WuS4n6ZG2334fBR4b8": "02601",
+  "custom.cf_vfo9P74IUYaftU7nCUQBxaSmGf69YCC1Bdwbz9w20lU": "Comeketo",
+  "custom.cf_xF8FLufgEx9bsijfRAfHhgIrPBQ5ajuohcazC7OtNmT": "01. 😎 Andre",
+  "date_created": "2025-12-21T20:19:23.848000+00:00",
+  "date_updated": "2026-05-05T20:43:00.574000+00:00",
+  "description": "Zip: 02601\nPeople 20\nEvent Desc: Natal\nEvent Date: 24 de dezembro\nCampaign Name:\n01. [CATER[ LF EVERGREEN - QUOTE",
+  "display_name": "Felipe Oliveira",
+  "html_url": "https://app.close.com/lead/lead_7hErLkE0D8EFx8NXcHi7KRrE0lvkx19vDF0geVvwPb4/",
+  "id": "lead_7hErLkE0D8EFx8NXcHi7KRrE0lvkx19vDF0geVvwPb4",
+  "integration_links": [
+    {
+      "name": "Google Search",
+      "url": "https://google.com/search?q=Felipe%20Oliveira"
+    }
+  ],
+  "name": "Felipe Oliveira",
+  "opportunities": [
+    {
+      "annualized_expected_value": 0,
+      "annualized_value": 63000,
+      "attachments": [],
+      "confidence": 0,
+      "contact_id": "cont_NkCWWIKmJaowK5NYXGl6xFxvCX7UiyLNkGkl3JUjgUV",
+      "contact_name": "Felipe Oliveira",
+      "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "created_by_name": "Sales Team Event Consultant Team",
+      "custom.cf_3LZk8uGw0lIvPpNzOMvFn4WwiCXbI91X66Ujvt8UJPx": [
+        "NEEDS VENUE NAME"
+      ],
+      "custom.cf_fs7mrfN5x0M20CyoltczyVg8t0Xul5GFvkC4FNUKvY6": "Customer",
+      "custom.cf_ge7qOebiWpyPvuv7xkzNaYpM8PsmOeNvXasXFOtPXRt": [
+        "Facebook, Paid"
+      ],
+      "custom.cf_goMfyKkS7pFUhmo0xvrl1JvQv1KLaQkfoVo0j93dvhe": "Natal",
+      "custom.cf_nQLULOLLmtUAh9OwcpJibPc5pQKIqpFOjdGSTwC9ePO": "20",
+      "date_created": "2025-12-21T20:19:27.551000+00:00",
+      "date_lost": "2025-12-24T13:34:43.916000+00:00",
+      "date_updated": "2026-05-05T20:43:00.604000+00:00",
+      "date_won": "2025-12-21",
+      "expected_value": 0,
+      "id": "oppo_cLrN3jBiuKAwR6UEav9cHdIDjKookXEBxY08ydLaK4Q",
+      "integration_links": [],
+      "lead_id": "lead_7hErLkE0D8EFx8NXcHi7KRrE0lvkx19vDF0geVvwPb4",
+      "lead_name": "Felipe Oliveira",
+      "note": "",
+      "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+      "pipeline_id": "pipe_4s7zfmoJhbc6jcU1aPvIDT",
+      "pipeline_name": "Sales",
+      "status_display_name": "Sales: 🔲🔲 Archived Catering Customer 🔲🔲",
+      "status_id": "stat_JsVAn7jtb6qbyxc0j77Kh6SkONCIC6gpsTF21WUkFvs",
+      "status_label": "🔲🔲 Archived Catering Customer 🔲🔲",
+      "status_type": "lost",
+      "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+      "updated_by_name": "Rhonna Ricafort",
+      "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "user_name": "Andre Raw",
+      "value": 63000,
+      "value_currency": "USD",
+      "value_formatted": "$630",
+      "value_period": "one_time"
+    }
+  ],
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "status_id": "stat_qGpMKenDu31cIY56uTpvo8evqhcNnK4KDWtz4y9NPz3",
+  "status_label": "🔘 Maybe",
+  "tasks": [],
+  "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "updated_by_name": "Rhonna Ricafort",
+  "url": null
+}

@@ -1,0 +1,82 @@
+{
+  "n_emails": 1,
+  "user_name": "Andre Raw",
+  "summary": null,
+  "participants": [
+    {
+      "email": "team@comeketocatering.com",
+      "name": "Andre Raw"
+    }
+  ],
+  "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "latest_normalized_subject": "Explore What Comeketo Catering Has to Offer! ✨",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "activity_at": "2026-04-19T13:56:00.405000+00:00",
+  "created_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "users": [
+    "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt"
+  ],
+  "date_updated": "2026-04-19T14:01:46.365000+00:00",
+  "_type": "EmailThread",
+  "latest_emails": [
+    {
+      "id": "acti_TawAGi22kdzOSN40ySySvldEtoKED9ilZJFdNrAJR9Q",
+      "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "body_preview": "Hi Monica Quindley, Just to give you a quick idea — we offer a few different styles, including\ntraditional buffet, more formal plated or family-style meals, and also a fun churrasco (buffet option wit",
+      "date_sent": "2026-04-19T13:56:00.404000+00:00",
+      "opens_summary": "Opened by quindley95@gmail.com (2 times, latest 2026-04-19)",
+      "to": [
+        "quindley95@gmail.com"
+      ],
+      "has_attachments": true,
+      "date_created": "2026-04-19T13:55:44.734000+00:00",
+      "date_updated": "2026-04-19T14:01:46.304000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "Explore What Comeketo Catering Has to Offer! ✨",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Andre Raw <team@comeketocatering.com>",
+      "envelope": {
+        "date": "Sun, 19 Apr 2026 13:56:01 +0000",
+        "subject": "Explore What Comeketo Catering Has to Offer! ✨",
+        "from": [
+          {
+            "email": "team@comeketocatering.com",
+            "name": "Andre Raw"
+          }
+        ],
+        "sender": [
+          {
+            "email": "team@comeketocatering.com",
+            "name": "Andre Raw"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "quindley95@gmail.com",
+            "name": ""
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<177660696083.7.13340490214858703148@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ],
+  "lead_id": "lead_fYLRdg4Dkb0g7e3asZc4JrhI1hlgTWd4VWG4lwKPn9H",
+  "date_created": "2026-04-19T13:56:00.405000+00:00",
+  "importance": {
+    "type": "not_important",
+    "reason": "by-default"
+  },
+  "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "updated_by_name": "Andre Raw",
+  "created_by_name": "Andre Raw",
+  "id": "acti_jW52TGsnMVATk2fbBITUJiNTuQpxY7PkaHzEmapD082",
+  "contact_id": null
+}

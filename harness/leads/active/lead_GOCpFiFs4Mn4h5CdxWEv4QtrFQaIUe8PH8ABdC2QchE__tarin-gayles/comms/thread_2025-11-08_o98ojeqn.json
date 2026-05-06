@@ -1,0 +1,82 @@
+{
+  "id": "acti_OzBjNkTSRdifKTJ5N174Yl9wutXqPqYxjb9o98oJeqn",
+  "importance": {
+    "type": "not_important",
+    "reason": "automated-outbound"
+  },
+  "updated_by_name": "Rhonna Ricafort",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "participants": [
+    {
+      "email": "catering@events.comeketo.com",
+      "name": "Comeketo Catering Events Team"
+    }
+  ],
+  "created_by_name": null,
+  "created_by": null,
+  "date_updated": "2025-11-08T02:15:12.030000+00:00",
+  "_type": "EmailThread",
+  "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "summary": null,
+  "activity_at": "2025-11-08T02:15:08.820000+00:00",
+  "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "users": [
+    "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo"
+  ],
+  "date_created": "2025-11-08T02:15:08.820000+00:00",
+  "latest_normalized_subject": "Thanksgiving Package (Feeds 5) – Only $175",
+  "contact_id": null,
+  "user_name": "Rhonna Ricafort",
+  "lead_id": "lead_GOCpFiFs4Mn4h5CdxWEv4QtrFQaIUe8PH8ABdC2QchE",
+  "latest_emails": [
+    {
+      "id": "acti_IdiWEFdeTkbXQErTX6Suj411H00sBHYuOE39ALoIegq",
+      "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+      "body_preview": "Hi Tarin, Thanksgiving is almost here — and we still have **limited Thanksgiving Eve\ncatering spots** open for trays, platters, and full meal bundles. ✅ Feeds a family of 5 ✅ Pick up available or deli",
+      "date_sent": "2025-11-08T02:15:08.819000+00:00",
+      "opens_summary": "Opened by Tarin Gayles <taringayles@gmail.com> (2025-11-08)",
+      "to": [
+        "Tarin Gayles <taringayles@gmail.com>"
+      ],
+      "has_attachments": true,
+      "date_created": "2025-11-08T01:50:29.460000+00:00",
+      "date_updated": "2025-11-08T02:15:11.956000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "Thanksgiving Package (Feeds 5) – Only $175",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Comeketo Catering Events Team <catering@events.comeketo.com>",
+      "envelope": {
+        "date": "Sat, 08 Nov 2025 02:15:09 +0000",
+        "subject": "Thanksgiving Package (Feeds 5) – Only $175",
+        "from": [
+          {
+            "email": "catering@events.comeketo.com",
+            "name": "Comeketo Catering Events Team"
+          }
+        ],
+        "sender": [
+          {
+            "email": "catering@events.comeketo.com",
+            "name": "Comeketo Catering Events Team"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "taringayles@gmail.com",
+            "name": "Tarin Gayles"
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<176256810913.7.12658420519641486136@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ],
+  "n_emails": 1
+}

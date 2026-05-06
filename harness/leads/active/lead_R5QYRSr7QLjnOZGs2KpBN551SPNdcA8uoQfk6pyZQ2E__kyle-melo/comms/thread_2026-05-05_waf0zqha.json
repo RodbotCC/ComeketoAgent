@@ -1,0 +1,82 @@
+{
+  "_type": "EmailThread",
+  "latest_normalized_subject": "Comeketo´s Interactive Menu",
+  "lead_id": "lead_R5QYRSr7QLjnOZGs2KpBN551SPNdcA8uoQfk6pyZQ2E",
+  "latest_emails": [
+    {
+      "id": "acti_1fkziZoVkhljjg1LW8EwbNH3iRfvo7cllNeNdkI8t8e",
+      "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "body_preview": "Hey Jenn! Quick question before Sunday's tasting — have you had a chance to\ncheck out our full menu yet? I put together an interactive one with all 99+ items and a price calculator: <https://rawdre.gi",
+      "date_sent": "2026-05-05T13:22:53.472000+00:00",
+      "opens_summary": null,
+      "to": [
+        "kylemelo1999@gmail.com"
+      ],
+      "has_attachments": false,
+      "date_created": "2026-05-05T13:22:10.141000+00:00",
+      "date_updated": "2026-05-05T13:22:54.331000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "Comeketo´s Interactive Menu",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Comeketo Catering Team <comeketo@m.comeketocatering.com>",
+      "envelope": {
+        "date": "Tue, 05 May 2026 13:22:53 +0000",
+        "subject": "Comeketo´s Interactive Menu",
+        "from": [
+          {
+            "email": "comeketo@m.comeketocatering.com",
+            "name": "Comeketo Catering Team"
+          }
+        ],
+        "sender": [
+          {
+            "email": "comeketo@m.comeketocatering.com",
+            "name": "Comeketo Catering Team"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "kylemelo1999@gmail.com",
+            "name": ""
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<177798737349.7.13232655808555541461@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ],
+  "contact_id": null,
+  "activity_at": "2026-05-05T13:22:53.473000+00:00",
+  "summary": null,
+  "date_updated": "2026-05-05T13:22:54.385000+00:00",
+  "participants": [
+    {
+      "email": "comeketo@m.comeketocatering.com",
+      "name": "Comeketo Catering Team"
+    }
+  ],
+  "created_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "updated_by_name": "Andre Raw",
+  "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "user_name": "Andre Raw",
+  "importance": {
+    "type": "important",
+    "reason": "most-recent-communication"
+  },
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "users": [
+    "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt"
+  ],
+  "id": "acti_uZrwHAjroaNRCENLArRqjUnxM14GUHulwq5WAf0ZqHa",
+  "created_by_name": "Andre Raw",
+  "n_emails": 1,
+  "date_created": "2026-05-05T13:22:53.473000+00:00"
+}

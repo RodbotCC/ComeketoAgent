@@ -1,0 +1,92 @@
+{
+  "n_emails": 1,
+  "user_name": "Andre Raw",
+  "summary": null,
+  "participants": [
+    {
+      "email": "team@comeketocatering.com",
+      "name": "Comeketo Catering"
+    }
+  ],
+  "updated_by": null,
+  "latest_normalized_subject": "Invitation: Monica Quindley PAX 4 Tasting @ Sun May 17, 2026 2pm - 4pm (EDT) (bibi@comeketo.com)",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "activity_at": "2026-04-27T21:39:12.001000+00:00",
+  "created_by": null,
+  "users": [
+    "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt"
+  ],
+  "date_updated": "2026-04-27T21:39:21.593000+00:00",
+  "_type": "EmailThread",
+  "latest_emails": [
+    {
+      "id": "acti_RRQbHKxt98cZvM3vNXnvcDo7SRWdAy8JMATkJU8y8yb",
+      "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "body_preview": "Monica Quindley PAX 4 Tasting\nSunday May 17, 2026 ⋅ 2pm – 4pm\nEastern Time - New York Location\n199 Main St, Fitchburg, MA 01420, USA https://www.google.com/maps/search/199+Main+St,+Fitchburg,+MA+01420",
+      "date_sent": "2026-04-27T21:39:12+00:00",
+      "opens_summary": null,
+      "to": [
+        "bibi@comeketo.com",
+        "quindley95@gmail.com"
+      ],
+      "has_attachments": true,
+      "date_created": "2026-04-27T21:39:12+00:00",
+      "date_updated": "2026-04-27T21:39:21.576000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "Invitation: Monica Quindley PAX 4 Tasting @ Sun May 17, 2026 2pm - 4pm (EDT) (bibi@comeketo.com)",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Comeketo Catering <team@comeketocatering.com>",
+      "envelope": {
+        "date": "Mon, 27 Apr 2026 21:39:12 +0000",
+        "subject": "Invitation: Monica Quindley PAX 4 Tasting @ Sun May 17, 2026 2pm - 4pm (EDT) (bibi@comeketo.com)",
+        "from": [
+          {
+            "email": "team@comeketocatering.com",
+            "name": "Comeketo Catering"
+          }
+        ],
+        "sender": [
+          {
+            "email": "calendar-notification@google.com",
+            "name": "Google Calendar"
+          }
+        ],
+        "reply_to": [
+          {
+            "email": "team@comeketocatering.com",
+            "name": "Comeketo Catering"
+          }
+        ],
+        "to": [
+          {
+            "email": "bibi@comeketo.com",
+            "name": ""
+          },
+          {
+            "email": "quindley95@gmail.com",
+            "name": ""
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<calendar-a771ead3-c9e2-4441-af8a-ae35b6fad9f4@google.com>",
+        "is_autoreply": false
+      }
+    }
+  ],
+  "lead_id": "lead_fYLRdg4Dkb0g7e3asZc4JrhI1hlgTWd4VWG4lwKPn9H",
+  "date_created": "2026-04-27T21:39:12.001000+00:00",
+  "importance": {
+    "type": "not_important",
+    "reason": "scheduling-emails"
+  },
+  "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "updated_by_name": null,
+  "created_by_name": null,
+  "id": "acti_2H5VoVoaRH1vvJzKxFGFimq9lFhfclYWRG2m3Qv4eXI",
+  "contact_id": null
+}

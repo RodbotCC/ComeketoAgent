@@ -1,0 +1,82 @@
+{
+  "contact_id": null,
+  "activity_at": "2026-05-02T23:35:15.810000+00:00",
+  "created_by": null,
+  "lead_id": "lead_VfDrrrVt70oXAgN9dsdFvkuwtv3zOLENDyQhArfGAmz",
+  "n_emails": 1,
+  "created_by_name": null,
+  "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "importance": {
+    "type": "not_important",
+    "reason": "automated-outbound"
+  },
+  "summary": null,
+  "date_created": "2026-05-02T23:35:15.810000+00:00",
+  "latest_normalized_subject": "[✅ CATERING] You're in Talita!",
+  "user_name": "Rhonna Ricafort",
+  "latest_emails": [
+    {
+      "id": "acti_BDzdmU9ISHSuMtdXaoOHBehgVuhs4eImlOA01VYlKQG",
+      "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+      "body_preview": "Hey Talita, Just shooting you this quick email, we got your request for more catering info, and our event planner will connect shortly. ❤️ - Comeketo Catering p.s. check out [this quick video](https:/",
+      "date_sent": "2026-05-02T23:35:15.809000+00:00",
+      "opens_summary": "Opened by Talita Betânia <talitahellena261@gmail.com> (2026-05-02)",
+      "to": [
+        "Talita Betânia <talitahellena261@gmail.com>"
+      ],
+      "has_attachments": true,
+      "date_created": "2026-05-02T23:35:15.809000+00:00",
+      "date_updated": "2026-05-02T23:35:22.087000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "[✅ CATERING] You're in Talita! ",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Rhonna Ricafort <contact@comeketocatering.com>",
+      "envelope": {
+        "date": "Sat, 02 May 2026 23:35:16 +0000",
+        "subject": "[✅ CATERING] You're in Talita! ",
+        "from": [
+          {
+            "email": "contact@comeketocatering.com",
+            "name": "Rhonna Ricafort"
+          }
+        ],
+        "sender": [
+          {
+            "email": "contact@comeketocatering.com",
+            "name": "Rhonna Ricafort"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "talitahellena261@gmail.com",
+            "name": "Talita Betânia"
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<177776491616.7.6987633412588493388@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ],
+  "updated_by_name": "Rhonna Ricafort",
+  "_type": "EmailThread",
+  "users": [
+    "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo"
+  ],
+  "date_updated": "2026-05-02T23:35:22.144000+00:00",
+  "participants": [
+    {
+      "email": "contact@comeketocatering.com",
+      "name": "Rhonna Ricafort"
+    }
+  ],
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "id": "acti_XSxwpyri7eMZdEERRo9bURtujEYTNDAkkEbMxx73Ee3"
+}

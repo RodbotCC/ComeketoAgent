@@ -1,0 +1,31 @@
+{
+  "contact_id": "cont_CQwqNIXDWBxWg07WAeDPGNUazLlUpK2pLJfmBPDn6aR",
+  "counts": {
+    "activities": 37,
+    "calls": 4,
+    "emails": 4,
+    "meetings": 0,
+    "notes": 7,
+    "smses": 8,
+    "subscriptions": 6,
+    "tasks": 9,
+    "threads": 3,
+    "whatsapps": 0
+  },
+  "last_sweep_at": "2026-05-06T10:05:33.487Z",
+  "lead_id": "lead_VIQ8ckrNzFYuj6wmCuL3DDxAjDHPdznwaKoOHWfZn4Z",
+  "name": "Stephanie Bruno",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "primary_email": "sabruno1@verizon.net",
+  "primary_phone": "+19144918587",
+  "raw_contract_version": 2,
+  "raw_files": {
+    "comms_dir": "comms/",
+    "continuity": "02_continuity.jsonl",
+    "lead": "01_raw_lead.json"
+  },
+  "status_id": "stat_X4X2dIPrVwMZDbSGxo1xCbkokk0mjPwaqpF5PjK80F3",
+  "status_label": "❌ Disqualified",
+  "user_id": null,
+  "user_name": null
+}

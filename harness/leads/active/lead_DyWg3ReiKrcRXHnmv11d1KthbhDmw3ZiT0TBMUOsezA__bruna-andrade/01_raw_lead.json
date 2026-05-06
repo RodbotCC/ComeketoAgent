@@ -1,0 +1,220 @@
+{
+  "addresses": [
+    {
+      "address_1": "",
+      "address_2": "",
+      "city": "Framingham",
+      "country": "US",
+      "label": "business",
+      "state": "",
+      "zipcode": "01701"
+    }
+  ],
+  "contacts": [
+    {
+      "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "date_created": "2026-05-02T13:33:58.253000+00:00",
+      "date_updated": "2026-05-02T13:33:58.253000+00:00",
+      "display_name": "Bruna Andrade",
+      "emails": [
+        {
+          "email": "bgrade80@gmail.com",
+          "is_unsubscribed": false,
+          "type": "direct"
+        }
+      ],
+      "id": "cont_gGOJulPloRyREGSll7vQXLEZotNKNQ9dv8YtXDAyUpo",
+      "integration_links": [
+        {
+          "name": "LinkedIn Search",
+          "url": "https://www.linkedin.com/search/results/people/?keywords=Bruna%20Andrade"
+        }
+      ],
+      "lead_id": "lead_DyWg3ReiKrcRXHnmv11d1KthbhDmw3ZiT0TBMUOsezA",
+      "name": "Bruna Andrade",
+      "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+      "phones": [
+        {
+          "country": "US",
+          "phone": "+17742448237",
+          "phone_formatted": "+1 774-244-8237",
+          "type": "direct"
+        }
+      ],
+      "timezone": "America/New_York",
+      "timezone_source": "inferred_from_phone_number",
+      "title": "Plain Old Phone (best for SMS)",
+      "updated_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "urls": []
+    },
+    {
+      "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "date_created": "2026-05-02T13:34:13.109000+00:00",
+      "date_updated": "2026-05-02T13:34:13.109000+00:00",
+      "display_name": "Bruna Andrade",
+      "emails": [],
+      "id": "cont_HMlyW8igVmG0R8LyjzPG0Slii5GGuX1QaOFK8VYmXpt",
+      "integration_links": [
+        {
+          "name": "LinkedIn Search",
+          "url": "https://www.linkedin.com/search/results/people/?keywords=Bruna%20Andrade"
+        }
+      ],
+      "lead_id": "lead_DyWg3ReiKrcRXHnmv11d1KthbhDmw3ZiT0TBMUOsezA",
+      "name": "Bruna Andrade",
+      "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+      "phones": [
+        {
+          "country": "US",
+          "phone": "+17742448237",
+          "phone_formatted": "+1 774-244-8237",
+          "type": "mobile"
+        }
+      ],
+      "timezone": "America/New_York",
+      "timezone_source": "inferred_from_phone_number",
+      "title": "Facebook # (Best For Calls)",
+      "updated_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "urls": []
+    }
+  ],
+  "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+  "created_by_name": "Sales Team Event Consultant Team",
+  "custom": {
+    "00. 🪖 LEAD OWNER": "01. 😎 Andre",
+    "01. 🟢 SCORE": [
+      "05. 📍 Within immediate area"
+    ],
+    "05. 👥 Franchise": "Comeketo",
+    "7 TP Cadence Follow up": [
+      "01. 📞 DAY 1 CALL"
+    ],
+    "Crisp": [
+      "Created"
+    ],
+    "Crisp ID": 0,
+    "Crisp Link": "https://app.crisp.chat/website/6e2ee3ba-8402-4f3a-8240-aace16ee1bac/contacts/profile/4ef8a71e-2e5d-42da-a300-7ec846224bec",
+    "Date of Event": "2026-05-23T15:00:00+00:00",
+    "FB_AD": "01. BAR SERVICE  CBO",
+    "FB_ADSET": "01. BAR SERVICE \\ CBO",
+    "FB_CAMPAIGN": "01.BAR SERVICE",
+    "🏠 Zip Code": "01701"
+  },
+  "custom.cf_9vVeQH1oYtJbtdHoL9VPwGhNpuCzVCgi95p7MCasszj": [
+    "05. 📍 Within immediate area"
+  ],
+  "custom.cf_FV2xBkviv7BAQZkkjUf8NUOc3fOpPTObMy5lVxZbyiP": "2026-05-23T15:00:00+00:00",
+  "custom.cf_JlnAQRNnjtHxBcHcZL57YpdSZq6W9YlOv3zXG64pLNv": 0,
+  "custom.cf_NN0HOiT2V7VR8vY0mdaesirgzN0FvEumQoJy6luhMBZ": "01. BAR SERVICE \\ CBO",
+  "custom.cf_XUgJtr1fW0TOSr4qtiiu1c4MDSZeYeYkkgi4wjriVBE": "01. BAR SERVICE  CBO",
+  "custom.cf_f6hxPXViYgPbzJu8x7XB1nQIxyJHP47eOI6nCuGpc01": [
+    "Created"
+  ],
+  "custom.cf_ka2oCzzw0j2k9T0zlxpQ0udWHP1wUW8fP0LAieNjzXl": [
+    "01. 📞 DAY 1 CALL"
+  ],
+  "custom.cf_nzUyCovAbOCJxIG6j5TXccpBmdWlRAFuMLDTAxJ2Y9p": "01.BAR SERVICE",
+  "custom.cf_pXTVEI1DdERiT91NKuWAndlV6WuS4n6ZG2334fBR4b8": "01701",
+  "custom.cf_smf4xXJPUNlJQ2QiG6lgzOhQEuEMQibqZL5WZaL0GHe": "https://app.crisp.chat/website/6e2ee3ba-8402-4f3a-8240-aace16ee1bac/contacts/profile/4ef8a71e-2e5d-42da-a300-7ec846224bec",
+  "custom.cf_vfo9P74IUYaftU7nCUQBxaSmGf69YCC1Bdwbz9w20lU": "Comeketo",
+  "custom.cf_xF8FLufgEx9bsijfRAfHhgIrPBQ5ajuohcazC7OtNmT": "01. 😎 Andre",
+  "date_created": "2026-05-02T13:33:58.236000+00:00",
+  "date_updated": "2026-05-05T15:02:01.201000+00:00",
+  "description": "Framingham Zip: 01701\nPeople 50\nEvent Desc: \nEvent Date: May 23\nCampaign Name:\n01.BAR SERVICE\nBrazilian lead",
+  "display_name": "Bruna Andrade",
+  "html_url": "https://app.close.com/lead/lead_DyWg3ReiKrcRXHnmv11d1KthbhDmw3ZiT0TBMUOsezA/",
+  "id": "lead_DyWg3ReiKrcRXHnmv11d1KthbhDmw3ZiT0TBMUOsezA",
+  "integration_links": [
+    {
+      "name": "Google Search",
+      "url": "https://google.com/search?q=Bruna%20Andrade"
+    }
+  ],
+  "name": "Bruna Andrade",
+  "opportunities": [
+    {
+      "annualized_expected_value": 31500,
+      "annualized_value": 157500,
+      "attachments": [],
+      "confidence": 20,
+      "contact_id": "cont_gGOJulPloRyREGSll7vQXLEZotNKNQ9dv8YtXDAyUpo",
+      "contact_name": "Bruna Andrade",
+      "created_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "created_by_name": "Sales Team Event Consultant Team",
+      "custom.cf_3LZk8uGw0lIvPpNzOMvFn4WwiCXbI91X66Ujvt8UJPx": [
+        "NEEDS VENUE NAME"
+      ],
+      "custom.cf_4iS3pwsKnTLC5xOag48Kh9ov20M6ena5mQ5ylAwHZLD": "Bar / Beverage",
+      "custom.cf_fs7mrfN5x0M20CyoltczyVg8t0Xul5GFvkC4FNUKvY6": "Customer",
+      "custom.cf_ge7qOebiWpyPvuv7xkzNaYpM8PsmOeNvXasXFOtPXRt": [
+        "Facebook, Paid"
+      ],
+      "custom.cf_nQLULOLLmtUAh9OwcpJibPc5pQKIqpFOjdGSTwC9ePO": "50",
+      "date_created": "2026-05-02T13:34:03.364000+00:00",
+      "date_lost": null,
+      "date_updated": "2026-05-04T22:56:53.707000+00:00",
+      "date_won": "2026-05-23",
+      "expected_value": 31500,
+      "id": "oppo_3H1vohppAs2qUtY7CoCMXwSn7wy9nIgVr4vBLv1ofyE",
+      "integration_links": [],
+      "lead_id": "lead_DyWg3ReiKrcRXHnmv11d1KthbhDmw3ZiT0TBMUOsezA",
+      "lead_name": "Bruna Andrade",
+      "note": "",
+      "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+      "pipeline_id": "pipe_4s7zfmoJhbc6jcU1aPvIDT",
+      "pipeline_name": "Sales",
+      "status_display_name": "Sales: 🔥 05A. Quote sent",
+      "status_id": "stat_vZwZN4xJrTPIc6F7P2efylTbDWGFFgBcx8gHD9SM30N",
+      "status_label": "🔥 05A. Quote sent",
+      "status_type": "active",
+      "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "updated_by_name": "Andre Raw",
+      "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "user_name": "Andre Raw",
+      "value": 157500,
+      "value_currency": "USD",
+      "value_formatted": "$1,575",
+      "value_period": "one_time"
+    }
+  ],
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "status_id": "stat_qGpMKenDu31cIY56uTpvo8evqhcNnK4KDWtz4y9NPz3",
+  "status_label": "🔘 Maybe",
+  "tasks": [
+    {
+      "_type": "lead",
+      "agent_config_id": null,
+      "assigned_to": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "assigned_to_name": "Andre Raw",
+      "contact_id": null,
+      "contact_name": null,
+      "created_by": "user_xlkbxzrLqLYx186Eukt9IrPeM9pEuwbV2tFETSWEGpS",
+      "created_by_name": "Event Consultant",
+      "date": "2026-05-07",
+      "date_created": "2026-05-03T16:11:34.024000+00:00",
+      "date_updated": "2026-05-05T14:39:28.419000+00:00",
+      "deduplication_key": null,
+      "due_date": "2026-05-07",
+      "id": "task_gypeA3vIt2R1gO1VDX55Ta35WbPNUb8f4JCwrq9UdSW",
+      "is_complete": false,
+      "is_dateless": false,
+      "is_primary_lead_notification": true,
+      "lead_id": "lead_DyWg3ReiKrcRXHnmv11d1KthbhDmw3ZiT0TBMUOsezA",
+      "lead_name": "Bruna Andrade",
+      "object_id": null,
+      "object_type": null,
+      "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+      "priority": "medium",
+      "resolution": null,
+      "sequence_id": null,
+      "sequence_subscription_id": null,
+      "text": "DAY 3 - EMAIL ONLY",
+      "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "updated_by_name": "Andre Raw",
+      "view": "future"
+    }
+  ],
+  "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "updated_by_name": "Andre Raw",
+  "url": null
+}

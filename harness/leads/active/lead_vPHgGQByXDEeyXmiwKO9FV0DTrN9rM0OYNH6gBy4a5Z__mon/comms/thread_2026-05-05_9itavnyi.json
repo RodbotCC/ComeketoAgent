@@ -1,0 +1,82 @@
+{
+  "date_updated": "2026-05-05T22:01:15.777000+00:00",
+  "date_created": "2026-05-05T22:01:14.901000+00:00",
+  "lead_id": "lead_vPHgGQByXDEeyXmiwKO9FV0DTrN9rM0OYNH6gBy4a5Z",
+  "created_by_name": "Andre Raw",
+  "activity_at": "2026-05-05T22:01:14.901000+00:00",
+  "user_name": "Andre Raw",
+  "latest_normalized_subject": "[EXCLUSIVE] About Our Tastings",
+  "users": [
+    "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt"
+  ],
+  "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "importance": {
+    "type": "not_important",
+    "reason": "by-default"
+  },
+  "updated_by_name": "Andre Raw",
+  "n_emails": 1,
+  "_type": "EmailThread",
+  "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "created_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "latest_emails": [
+    {
+      "id": "acti_RiqCNy760OqqQ5WXQzRUAhyViieyKD9mTrUgHMSxQRc",
+      "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "body_preview": "Experience 30+ menu items at our exclusive catering tasting - completely free\nwhen you book 🍽️ ![Comeketo Catering Logo](https://comeketocatering.com/wp-\ncontent/uploads/2025/01/LOGO_WEB.png) [ ![Cate",
+      "date_sent": "2026-05-05T22:01:14.900000+00:00",
+      "opens_summary": null,
+      "to": [
+        "marleny_a25@hotmail.com"
+      ],
+      "has_attachments": false,
+      "date_created": "2026-05-05T22:00:56.230000+00:00",
+      "date_updated": "2026-05-05T22:01:15.724000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "[EXCLUSIVE] About Our Tastings",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Comeketo Catering Team <comeketo@m.comeketocatering.com>",
+      "envelope": {
+        "date": "Tue, 05 May 2026 22:01:15 +0000",
+        "subject": "[EXCLUSIVE] About Our Tastings",
+        "from": [
+          {
+            "email": "comeketo@m.comeketocatering.com",
+            "name": "Comeketo Catering Team"
+          }
+        ],
+        "sender": [
+          {
+            "email": "comeketo@m.comeketocatering.com",
+            "name": "Comeketo Catering Team"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "marleny_a25@hotmail.com",
+            "name": ""
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<177801847492.7.2144450474123435664@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ],
+  "contact_id": null,
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "id": "acti_3y07jqYiZDQIIWiSaWuBGXOOaWVJQj8SvtU9ItaVNyI",
+  "summary": null,
+  "participants": [
+    {
+      "email": "comeketo@m.comeketocatering.com",
+      "name": "Comeketo Catering Team"
+    }
+  ]
+}

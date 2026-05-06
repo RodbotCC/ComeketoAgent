@@ -1,0 +1,82 @@
+{
+  "_type": "EmailThread",
+  "latest_normalized_subject": "[✅ CATERING] You're in Kyle!",
+  "lead_id": "lead_R5QYRSr7QLjnOZGs2KpBN551SPNdcA8uoQfk6pyZQ2E",
+  "latest_emails": [
+    {
+      "id": "acti_rqYeHBqq4tLIg7i1PWnpAC8XQgA9wHD9Mb5Q8WTW7tH",
+      "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+      "body_preview": "Hey Kyle, Just shooting you this quick email, we got your request for more catering info, and our event planner will connect shortly. ❤️ - Comeketo Catering p.s. check out [this quick video](https://d",
+      "date_sent": "2026-05-05T04:09:20.434000+00:00",
+      "opens_summary": "Opened by Kyle Melo <kylemelo1999@gmail.com> (2 times, latest 2026-05-05)",
+      "to": [
+        "Kyle Melo <kylemelo1999@gmail.com>"
+      ],
+      "has_attachments": true,
+      "date_created": "2026-05-05T01:58:59.226000+00:00",
+      "date_updated": "2026-05-05T04:09:29.639000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "[✅ CATERING] You're in Kyle! ",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Rhonna Ricafort <contact@comeketocatering.com>",
+      "envelope": {
+        "date": "Tue, 05 May 2026 04:09:21 +0000",
+        "subject": "[✅ CATERING] You're in Kyle! ",
+        "from": [
+          {
+            "email": "contact@comeketocatering.com",
+            "name": "Rhonna Ricafort"
+          }
+        ],
+        "sender": [
+          {
+            "email": "contact@comeketocatering.com",
+            "name": "Rhonna Ricafort"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "kylemelo1999@gmail.com",
+            "name": "Kyle Melo"
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<177795416076.7.8596737766280869933@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ],
+  "contact_id": null,
+  "activity_at": "2026-05-05T04:09:20.435000+00:00",
+  "summary": null,
+  "date_updated": "2026-05-05T04:09:29.713000+00:00",
+  "participants": [
+    {
+      "email": "contact@comeketocatering.com",
+      "name": "Rhonna Ricafort"
+    }
+  ],
+  "created_by": null,
+  "updated_by_name": "Rhonna Ricafort",
+  "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "user_name": "Rhonna Ricafort",
+  "importance": {
+    "type": "not_important",
+    "reason": "automated-outbound"
+  },
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "users": [
+    "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo"
+  ],
+  "id": "acti_4wAS7aRUxhspWIARggrFN408Yh3ROwcBhlSGCstIuLX",
+  "created_by_name": null,
+  "n_emails": 1,
+  "date_created": "2026-05-05T04:09:20.435000+00:00"
+}

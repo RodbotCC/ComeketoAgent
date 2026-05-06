@@ -1,0 +1,82 @@
+{
+  "created_by": null,
+  "summary": null,
+  "updated_by_name": "Andre Raw",
+  "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "participants": [
+    {
+      "email": "comeketo@m.comeketocatering.com",
+      "name": "Comeketo Catering Team"
+    }
+  ],
+  "users": [
+    "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt"
+  ],
+  "activity_at": "2025-07-28T10:37:03.077000+00:00",
+  "importance": {
+    "type": "not_important",
+    "reason": "automated-outbound"
+  },
+  "date_created": "2025-07-28T10:37:03.077000+00:00",
+  "date_updated": "2025-07-28T10:37:03.998000+00:00",
+  "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "lead_id": "lead_IFYcKfswvQIUINN2IzV0ZtSRIRb2QtIF3zAhU0GMRnc",
+  "created_by_name": null,
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "latest_emails": [
+    {
+      "id": "acti_MOxD7GO1lUAU9cOJkGG4Nf3J9YqLKLQwsQ0vJIA0BlI",
+      "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "body_preview": "Discover these two legendary services.\n\n![Comeketo Catering Logo](https://comeketocatering.com/wp-\ncontent/uploads/2025/01/LOGO_WEB.png)\n\n![](https://comeketocatering.com/wp-content/uploads/2025/06/He",
+      "date_sent": "2025-07-28T10:37:03.076000+00:00",
+      "opens_summary": null,
+      "to": [
+        "Gabriella Marie <g.m.saintonge@gmail.com>"
+      ],
+      "has_attachments": false,
+      "date_created": "2025-07-28T10:37:03.076000+00:00",
+      "date_updated": "2025-07-28T10:37:03.904000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "Our Famous Churrasco & Rodizio",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Comeketo Catering Team <comeketo@m.comeketocatering.com>",
+      "envelope": {
+        "date": "Mon, 28 Jul 2025 10:37:03 +0000",
+        "subject": "Our Famous Churrasco & Rodizio",
+        "from": [
+          {
+            "email": "comeketo@m.comeketocatering.com",
+            "name": "Comeketo Catering Team"
+          }
+        ],
+        "sender": [
+          {
+            "email": "comeketo@m.comeketocatering.com",
+            "name": "Comeketo Catering Team"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "g.m.saintonge@gmail.com",
+            "name": "Gabriella Marie"
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<175369902335.7.296409234603276990@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ],
+  "id": "acti_jp1rD6zdEybNQjj7bStqO0eG4cw9NokbvmCX64PqSRI",
+  "user_name": "Andre Raw",
+  "_type": "EmailThread",
+  "n_emails": 1,
+  "latest_normalized_subject": "Our Famous Churrasco & Rodizio",
+  "contact_id": null
+}

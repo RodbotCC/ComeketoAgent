@@ -1,0 +1,31 @@
+{
+  "contact_id": "cont_0C5EnU23MYUGVrRxjodEe3ny3IYhozroZvNGqJKbFVS",
+  "counts": {
+    "activities": 40,
+    "calls": 13,
+    "emails": 7,
+    "meetings": 0,
+    "notes": 2,
+    "smses": 10,
+    "subscriptions": 4,
+    "tasks": 3,
+    "threads": 7,
+    "whatsapps": 0
+  },
+  "last_sweep_at": "2026-05-06T09:59:52.608Z",
+  "lead_id": "lead_IFYcKfswvQIUINN2IzV0ZtSRIRb2QtIF3zAhU0GMRnc",
+  "name": "Gabriella Marie",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "primary_email": "g.m.saintonge@gmail.com",
+  "primary_phone": "+18435324523",
+  "raw_contract_version": 2,
+  "raw_files": {
+    "comms_dir": "comms/",
+    "continuity": "02_continuity.jsonl",
+    "lead": "01_raw_lead.json"
+  },
+  "status_id": "stat_X4X2dIPrVwMZDbSGxo1xCbkokk0mjPwaqpF5PjK80F3",
+  "status_label": "❌ Disqualified",
+  "user_id": null,
+  "user_name": null
+}

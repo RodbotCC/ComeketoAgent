@@ -1,0 +1,82 @@
+{
+  "lead_id": "lead_UFK012RmG6jHU7qc0fFYCPOTJyBko2LPa8CLrAPykKv",
+  "id": "acti_9JDWH6idFhMpXoPuQ6UBRY7SRojpeosiYmwAsOeP4Zf",
+  "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "participants": [
+    {
+      "email": "contact@comeketocatering.com",
+      "name": "Rhonna Ricafort"
+    }
+  ],
+  "users": [
+    "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo"
+  ],
+  "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "user_name": "Rhonna Ricafort",
+  "created_by": null,
+  "summary": null,
+  "contact_id": null,
+  "activity_at": "2026-04-14T16:50:36.732000+00:00",
+  "date_created": "2026-04-14T16:50:36.732000+00:00",
+  "importance": {
+    "type": "not_important",
+    "reason": "automated-outbound"
+  },
+  "_type": "EmailThread",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "created_by_name": null,
+  "latest_emails": [
+    {
+      "id": "acti_NPoqhrIq96rAmvJpWLVZDVReiP9pKEjbecYnbDbcsG4",
+      "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+      "body_preview": "![Comeketo Catering Logo](https://comeketocatering.com/wp-\ncontent/uploads/2025/01/LOGO_WEB.png) ![Catering Types](https://comeketocatering.com/wp-\ncontent/uploads/2025/06/Header_cateringTypes.jpg) # ",
+      "date_sent": "2026-04-14T16:50:36.731000+00:00",
+      "opens_summary": null,
+      "to": [
+        "Laine Martins <laine_demoura@hotmail.com>"
+      ],
+      "has_attachments": false,
+      "date_created": "2026-04-13T20:31:10.636000+00:00",
+      "date_updated": "2026-04-14T16:50:38.423000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "Understanding Our Catering Service Types",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Rhonna Ricafort <contact@comeketocatering.com>",
+      "envelope": {
+        "date": "Tue, 14 Apr 2026 16:50:37 +0000",
+        "subject": "Understanding Our Catering Service Types",
+        "from": [
+          {
+            "email": "contact@comeketocatering.com",
+            "name": "Rhonna Ricafort"
+          }
+        ],
+        "sender": [
+          {
+            "email": "contact@comeketocatering.com",
+            "name": "Rhonna Ricafort"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "laine_demoura@hotmail.com",
+            "name": "Laine Martins"
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<177618543694.7.12647424023285324265@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ],
+  "date_updated": "2026-04-14T16:50:38.493000+00:00",
+  "n_emails": 1,
+  "updated_by_name": "Rhonna Ricafort",
+  "latest_normalized_subject": "Understanding Our Catering Service Types"
+}

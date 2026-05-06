@@ -1,0 +1,82 @@
+{
+  "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "_type": "EmailThread",
+  "date_updated": "2025-08-05T01:37:25.930000+00:00",
+  "created_by_name": "Andre Raw",
+  "latest_emails": [
+    {
+      "id": "acti_Ty1hw5iCmvcVoyGbzsDrCOc5s0UylSgNvfNZQo7YgIO",
+      "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "body_preview": "Hey Stan let me know the best time to reach you so we can talk about your\nGraduation August 16!\n\n  \n\nWe’re excited to invite you to a special tasting experience — the perfect\nchance to explore our men",
+      "date_sent": "2025-08-05T01:37:24.580000+00:00",
+      "opens_summary": null,
+      "to": [
+        "stanley.tabi@childrens.harvard.edu"
+      ],
+      "has_attachments": true,
+      "date_created": "2025-08-05T01:36:28.154000+00:00",
+      "date_updated": "2025-08-05T01:37:25.910000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "🍴 You're Invited! Join Our Special Tasting Event",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Andre Raw <team@comeketocatering.com>",
+      "envelope": {
+        "date": "Tue, 05 Aug 2025 01:37:25 +0000",
+        "subject": "🍴 You're Invited! Join Our Special Tasting Event",
+        "from": [
+          {
+            "email": "team@comeketocatering.com",
+            "name": "Andre Raw"
+          }
+        ],
+        "sender": [
+          {
+            "email": "team@comeketocatering.com",
+            "name": "Andre Raw"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "stanley.tabi@childrens.harvard.edu",
+            "name": ""
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<175435784472.8.12126741058249241336@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ],
+  "id": "acti_g1nUfPGSpnORrTxvW8y2YRkOsLbZDrgL6Ac0WapjvFQ",
+  "contact_id": null,
+  "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "created_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "user_name": "Andre Raw",
+  "activity_at": "2025-08-05T01:37:24.581000+00:00",
+  "lead_id": "lead_IfM2touTCCJ6Ut1Qp0RwkFiBAWdE7mrsjqPpgX4kt5x",
+  "updated_by_name": "Andre Raw",
+  "date_created": "2025-08-05T01:37:24.581000+00:00",
+  "n_emails": 1,
+  "summary": null,
+  "importance": {
+    "type": "not_important",
+    "reason": "by-default"
+  },
+  "users": [
+    "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt"
+  ],
+  "latest_normalized_subject": "🍴 You're Invited! Join Our Special Tasting Event",
+  "participants": [
+    {
+      "email": "team@comeketocatering.com",
+      "name": "Andre Raw"
+    }
+  ]
+}

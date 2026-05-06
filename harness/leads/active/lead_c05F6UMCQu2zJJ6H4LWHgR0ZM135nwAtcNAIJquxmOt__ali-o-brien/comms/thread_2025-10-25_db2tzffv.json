@@ -1,0 +1,82 @@
+{
+  "contact_id": null,
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "latest_normalized_subject": "Explore What Comeketo Catering Has to Offer! ✨",
+  "participants": [
+    {
+      "email": "team@comeketocatering.com",
+      "name": "Andre Raw"
+    }
+  ],
+  "importance": {
+    "type": "not_important",
+    "reason": "automated-outbound"
+  },
+  "lead_id": "lead_c05F6UMCQu2zJJ6H4LWHgR0ZM135nwAtcNAIJquxmOt",
+  "updated_by_name": "Andre Raw",
+  "date_created": "2025-10-25T01:37:28.868000+00:00",
+  "created_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "created_by_name": "Andre Raw",
+  "date_updated": "2025-10-25T01:37:32.171000+00:00",
+  "_type": "EmailThread",
+  "latest_emails": [
+    {
+      "id": "acti_egDggWyqlxOVEuG2kR65K2WSLa3YqKyEuHO3mTyPxOi",
+      "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "body_preview": "Hi Ali O'Brien, Just to give you a quick idea — we offer a few different styles, including\ntraditional buffet, more formal plated or family-style meals, and also a fun churrasco (buffet option with on",
+      "date_sent": "2025-10-25T01:37:28.867000+00:00",
+      "opens_summary": null,
+      "to": [
+        "aliobrien96@gmail.com"
+      ],
+      "has_attachments": true,
+      "date_created": "2025-10-25T01:36:32.324000+00:00",
+      "date_updated": "2025-10-25T01:37:32.146000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "Explore What Comeketo Catering Has to Offer! ✨",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Andre Raw <team@comeketocatering.com>",
+      "envelope": {
+        "date": "Sat, 25 Oct 2025 01:37:29 +0000",
+        "subject": "Explore What Comeketo Catering Has to Offer! ✨",
+        "from": [
+          {
+            "email": "team@comeketocatering.com",
+            "name": "Andre Raw"
+          }
+        ],
+        "sender": [
+          {
+            "email": "team@comeketocatering.com",
+            "name": "Andre Raw"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "aliobrien96@gmail.com",
+            "name": ""
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<176135624926.7.13003311884411113822@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ],
+  "summary": null,
+  "user_name": "Andre Raw",
+  "activity_at": "2025-10-25T01:37:28.868000+00:00",
+  "n_emails": 1,
+  "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "id": "acti_adhq0R93fvsPbXoAVfr37VEavZeF4JBhe6GDB2tzffv",
+  "users": [
+    "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt"
+  ],
+  "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt"
+}

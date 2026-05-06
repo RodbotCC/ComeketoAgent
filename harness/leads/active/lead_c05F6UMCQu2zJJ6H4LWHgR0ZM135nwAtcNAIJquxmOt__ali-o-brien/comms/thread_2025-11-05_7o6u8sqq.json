@@ -1,0 +1,82 @@
+{
+  "contact_id": null,
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "latest_normalized_subject": "New Appetizer Menu Preview 🍤 – Photos & Pricing Inside",
+  "participants": [
+    {
+      "email": "team@comeketocatering.com",
+      "name": "Andre Raw"
+    }
+  ],
+  "importance": {
+    "type": "not_important",
+    "reason": "by-default"
+  },
+  "lead_id": "lead_c05F6UMCQu2zJJ6H4LWHgR0ZM135nwAtcNAIJquxmOt",
+  "updated_by_name": "Andre Raw",
+  "date_created": "2025-11-05T13:31:06.394000+00:00",
+  "created_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "created_by_name": "Andre Raw",
+  "date_updated": "2025-11-05T20:38:18.192000+00:00",
+  "_type": "EmailThread",
+  "latest_emails": [
+    {
+      "id": "acti_rxrV5lYUVqhWXr5XVjKXrALQyYRCkRWD7zRBXxcRWKv",
+      "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "body_preview": "Hi Ali Here’s the link to our **Appetizer Menu** with photos, descriptions, and\nprices, including the **charcuterie and platter options** for your selection: 📎 [View Menu\nPDF](https://drive.google.com",
+      "date_sent": "2025-11-05T13:31:06.393000+00:00",
+      "opens_summary": "Opened by aliobrien96@gmail.com (2 times, latest 2025-11-05)",
+      "to": [
+        "aliobrien96@gmail.com"
+      ],
+      "has_attachments": false,
+      "date_created": "2025-11-05T13:30:49.544000+00:00",
+      "date_updated": "2025-11-05T20:38:18.146000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "New Appetizer Menu Preview 🍤 – Photos & Pricing Inside",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Andre Raw <team@comeketocatering.com>",
+      "envelope": {
+        "date": "Wed, 05 Nov 2025 13:31:06 +0000",
+        "subject": "New Appetizer Menu Preview 🍤 – Photos & Pricing Inside",
+        "from": [
+          {
+            "email": "team@comeketocatering.com",
+            "name": "Andre Raw"
+          }
+        ],
+        "sender": [
+          {
+            "email": "team@comeketocatering.com",
+            "name": "Andre Raw"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "aliobrien96@gmail.com",
+            "name": ""
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<176234946642.7.2883267459042393484@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ],
+  "summary": null,
+  "user_name": "Andre Raw",
+  "activity_at": "2025-11-05T13:31:06.394000+00:00",
+  "n_emails": 1,
+  "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "id": "acti_goB7PBTSfuHIgJBZ6477CgFBxuBoFhUiX6b7O6U8sqQ",
+  "users": [
+    "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt"
+  ],
+  "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt"
+}

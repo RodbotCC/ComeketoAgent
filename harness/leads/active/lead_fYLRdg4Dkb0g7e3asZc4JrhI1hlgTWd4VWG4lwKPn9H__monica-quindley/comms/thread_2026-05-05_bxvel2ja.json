@@ -1,0 +1,283 @@
+{
+  "n_emails": 5,
+  "user_name": "Andre Raw",
+  "summary": null,
+  "participants": [
+    {
+      "email": "comeketo@m.comeketocatering.com",
+      "name": "Comeketo Catering Team"
+    },
+    {
+      "email": "quindley95@gmail.com",
+      "name": "Monica Quindley"
+    },
+    {
+      "email": "team@comeketocatering.com",
+      "name": "Andre Raw"
+    }
+  ],
+  "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "latest_normalized_subject": "Few Days Away! Your Tasting Event Details 🎉🍽️",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "activity_at": "2026-05-05T22:07:12.617000+00:00",
+  "created_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "users": [
+    "user_4eCOmuq2IkJZtH9gkd7otWarVwRTVkCvzxj5V11tHmM",
+    "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt"
+  ],
+  "date_updated": "2026-05-05T22:08:38.364000+00:00",
+  "_type": "EmailThread",
+  "latest_emails": [
+    {
+      "id": "acti_RnDxyJlGP8Wte5JMWzeGRVqLnYqUGS6TVx8rdV8vCZd",
+      "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "body_preview": "Ok Monica, Let´s talk whenever you are back :) \\----- Regards, **Andre Raw** _​​_ Catering Event Coordinator 📲 C: [(978) 235-3791](tel:19782353791) 📲 W: [(978) 381-1212](tel:9783811212) [Facebook](htt",
+      "date_sent": "2026-05-05T22:07:12.616000+00:00",
+      "opens_summary": "Opened by quindley95@gmail.com (2 times, latest 2026-05-05)",
+      "to": [
+        "quindley95@gmail.com"
+      ],
+      "has_attachments": true,
+      "date_created": "2026-05-05T22:06:24.806000+00:00",
+      "date_updated": "2026-05-05T22:08:38.303000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "Re: Few Days Away! Your Tasting Event Details 🎉🍽️",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Comeketo Catering Team <comeketo@m.comeketocatering.com>",
+      "envelope": {
+        "date": "Tue, 05 May 2026 22:07:12 +0000",
+        "subject": "Re: Few Days Away! Your Tasting Event Details 🎉🍽️",
+        "from": [
+          {
+            "email": "comeketo@m.comeketocatering.com",
+            "name": "Comeketo Catering Team"
+          }
+        ],
+        "sender": [
+          {
+            "email": "comeketo@m.comeketocatering.com",
+            "name": "Comeketo Catering Team"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "quindley95@gmail.com",
+            "name": ""
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": "<CAN6ob2GgAVynsY7G8jurMcTDepSRtE0VNJiY3NYnSBK-1EhdGw@mail.gmail.com>",
+        "message_id": "<177801883281.7.7613292696121304407@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    },
+    {
+      "id": "acti_Gn11YtpfVC8l3ea28oslu8J84FgGGpcfT6WavLvAfHl",
+      "user_id": "user_4eCOmuq2IkJZtH9gkd7otWarVwRTVkCvzxj5V11tHmM",
+      "body_preview": "Hello, just wanted to let you know that I am not going to be able to make\n31st. I will be out of town . I think I'm gonna have to hold off on the\ntasting for now and we'll figure this out when I get b",
+      "date_sent": null,
+      "opens_summary": null,
+      "to": [
+        "comeketo@m.comeketocatering.com"
+      ],
+      "has_attachments": true,
+      "date_created": "2026-05-05T21:50:41+00:00",
+      "date_updated": "2026-05-05T21:52:02.290000+00:00",
+      "bcc": [],
+      "status": "inbox",
+      "cc": [],
+      "subject": "Re: Few Days Away! Your Tasting Event Details 🎉🍽️",
+      "send_as_id": null,
+      "direction": "incoming",
+      "sender": "Monica Quindley <quindley95@gmail.com>",
+      "envelope": {
+        "date": "Tue, 5 May 2026 17:50:41 -0400",
+        "subject": "Re: Few Days Away! Your Tasting Event Details 🎉🍽️",
+        "from": [
+          {
+            "email": "quindley95@gmail.com",
+            "name": "Monica Quindley"
+          }
+        ],
+        "sender": [
+          {
+            "email": "quindley95@gmail.com",
+            "name": "Monica Quindley"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "comeketo@m.comeketocatering.com",
+            "name": "Comeketo Catering Team"
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": "<177798650892.7.3445190266650372199@smtpgw.close.com>",
+        "message_id": "<CAN6ob2GgAVynsY7G8jurMcTDepSRtE0VNJiY3NYnSBK-1EhdGw@mail.gmail.com>",
+        "is_autoreply": false
+      }
+    },
+    {
+      "id": "acti_d8TpP7AxHnySTnD5F4Ru3iTwUVrT9cmoXpXmRhZVP8H",
+      "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "body_preview": "I´m gonna bump you to the tasting on May 31st, Hope your mom gets better soon :) \\----- Regards, **Andre Raw** _​​_ Catering Event Coordinator 📲 C: [(978) 235-3791](tel:19782353791) 📲 W: [(978) 381-12",
+      "date_sent": "2026-05-05T13:08:28.725000+00:00",
+      "opens_summary": "Opened by quindley95@gmail.com (5 times, latest 2026-05-05)",
+      "to": [
+        "quindley95@gmail.com"
+      ],
+      "has_attachments": true,
+      "date_created": "2026-05-05T13:07:17.009000+00:00",
+      "date_updated": "2026-05-05T22:06:34.081000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "Re: Few Days Away! Your Tasting Event Details 🎉🍽️",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Comeketo Catering Team <comeketo@m.comeketocatering.com>",
+      "envelope": {
+        "date": "Tue, 05 May 2026 13:08:29 +0000",
+        "subject": "Re: Few Days Away! Your Tasting Event Details 🎉🍽️",
+        "from": [
+          {
+            "email": "comeketo@m.comeketocatering.com",
+            "name": "Comeketo Catering Team"
+          }
+        ],
+        "sender": [
+          {
+            "email": "comeketo@m.comeketocatering.com",
+            "name": "Comeketo Catering Team"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "quindley95@gmail.com",
+            "name": ""
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": "<CAN6ob2GHrOnt9Lb6sMzVJJep_HFsxK_Qksw=X7Qe5hcBmB8anQ@mail.gmail.com>",
+        "message_id": "<177798650892.7.15317707937503541907@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    },
+    {
+      "id": "acti_4f1XGg6uLseFW4GFimZThxiYPU3kuqEiynk6lOW361Q",
+      "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "body_preview": "Hello, wanted to let you know that we will not be able to attend this\nweekend. My mom fell and broke her arm and will have to take care of her.\nAlso, my daughter's fiancé got mandated to work this wee",
+      "date_sent": null,
+      "opens_summary": null,
+      "to": [
+        "team@comeketocatering.com"
+      ],
+      "has_attachments": true,
+      "date_created": "2026-05-05T00:55:03+00:00",
+      "date_updated": "2026-05-05T00:56:07.821000+00:00",
+      "bcc": [],
+      "status": "inbox",
+      "cc": [],
+      "subject": "Re: Few Days Away! Your Tasting Event Details 🎉🍽️",
+      "send_as_id": null,
+      "direction": "incoming",
+      "sender": "Monica Quindley <quindley95@gmail.com>",
+      "envelope": {
+        "date": "Mon, 4 May 2026 20:55:03 -0400",
+        "subject": "Re: Few Days Away! Your Tasting Event Details 🎉🍽️",
+        "from": [
+          {
+            "email": "quindley95@gmail.com",
+            "name": "Monica Quindley"
+          }
+        ],
+        "sender": [
+          {
+            "email": "quindley95@gmail.com",
+            "name": "Monica Quindley"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "team@comeketocatering.com",
+            "name": "Andre Raw"
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": "<177732595528.7.18067976516979642857@smtpgw.close.com>",
+        "message_id": "<CAN6ob2GHrOnt9Lb6sMzVJJep_HFsxK_Qksw=X7Qe5hcBmB8anQ@mail.gmail.com>",
+        "is_autoreply": false
+      }
+    },
+    {
+      "id": "acti_cxB0CVw49AYS5cOPc8xOsx9g3gGJbcxtdhqUy1rSZeU",
+      "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "body_preview": "**Hi Monica,** The countdown is on! 🎉 We can’t wait to see you **Sunday May 17** for an\nincredible tasting experience. Get ready to enjoy a variety of delicious\ndishes, meet our team, and start bringi",
+      "date_sent": "2026-04-27T21:39:15.160000+00:00",
+      "opens_summary": "Opened by quindley95@gmail.com (5+ times, latest 2026-05-05)",
+      "to": [
+        "quindley95@gmail.com"
+      ],
+      "has_attachments": true,
+      "date_created": "2026-04-27T21:38:00.832000+00:00",
+      "date_updated": "2026-05-05T22:06:34.080000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "Few Days Away! Your Tasting Event Details 🎉🍽️",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Andre Raw <team@comeketocatering.com>",
+      "envelope": {
+        "date": "Mon, 27 Apr 2026 21:39:15 +0000",
+        "subject": "Few Days Away! Your Tasting Event Details 🎉🍽️",
+        "from": [
+          {
+            "email": "team@comeketocatering.com",
+            "name": "Andre Raw"
+          }
+        ],
+        "sender": [
+          {
+            "email": "team@comeketocatering.com",
+            "name": "Andre Raw"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "quindley95@gmail.com",
+            "name": ""
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<177732595529.7.12395545853751880822@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ],
+  "lead_id": "lead_fYLRdg4Dkb0g7e3asZc4JrhI1hlgTWd4VWG4lwKPn9H",
+  "date_created": "2026-05-05T22:07:12.617000+00:00",
+  "importance": {
+    "type": "important",
+    "reason": "has-response"
+  },
+  "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "updated_by_name": "Andre Raw",
+  "created_by_name": "Andre Raw",
+  "id": "acti_cAg0NFBLl4n4oq1kAurk4VFHGqiHIU40R8QBXVEL2Ja",
+  "contact_id": null
+}

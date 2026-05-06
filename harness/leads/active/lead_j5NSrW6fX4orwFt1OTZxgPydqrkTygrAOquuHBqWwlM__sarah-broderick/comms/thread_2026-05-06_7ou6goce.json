@@ -1,0 +1,130 @@
+{
+  "summary": null,
+  "users": [
+    "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt"
+  ],
+  "user_name": "Andre Raw",
+  "created_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "importance": {
+    "type": "important",
+    "reason": "contains-manual-message"
+  },
+  "contact_id": null,
+  "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "latest_normalized_subject": "Ballpark quote for your May 15 party",
+  "latest_emails": [
+    {
+      "id": "acti_WgffUeVLbKZCAphExAfnG8l22nW1yCOA4pxuCkuHRom",
+      "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "body_preview": "I hope all this info helps since the event is next week. You can call me at any time I will help you \\----- Regards, **Andre Raw** _​​_ Catering Event Coordinator 📲 C: [(978) 235-3791](tel:19782353791",
+      "date_sent": "2026-05-06T00:10:22.100000+00:00",
+      "opens_summary": null,
+      "to": [
+        "sarahbroderick7@gmail.com"
+      ],
+      "has_attachments": false,
+      "date_created": "2026-05-06T00:09:41.057000+00:00",
+      "date_updated": "2026-05-06T00:10:22.433000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "Re: Ballpark quote for your May 15 party",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Comeketo Catering Team <comeketo@m.comeketocatering.com>",
+      "envelope": {
+        "date": "Wed, 06 May 2026 00:10:22 +0000",
+        "subject": "Re: Ballpark quote for your May 15 party",
+        "from": [
+          {
+            "email": "comeketo@m.comeketocatering.com",
+            "name": "Comeketo Catering Team"
+          }
+        ],
+        "sender": [
+          {
+            "email": "comeketo@m.comeketocatering.com",
+            "name": "Comeketo Catering Team"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "sarahbroderick7@gmail.com",
+            "name": ""
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": "<177802595172.7.189719585299629284@smtpgw.close.com>",
+        "message_id": "<177802622213.7.8796043251360763797@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    },
+    {
+      "id": "acti_5aCBIn7rCmKzREE66z66yAhs8N3mHbf7NbR0Lc0D8VO",
+      "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "body_preview": "Hi Sarah, Thanks again for reaching out. Since this event is right around the corner, I wanted to keep this simple and give you a real ballpark so we can close this quickly if the direction feels righ",
+      "date_sent": "2026-05-06T00:05:51.703000+00:00",
+      "opens_summary": "Opened by sarahbroderick7@gmail.com (2026-05-06)",
+      "to": [
+        "sarahbroderick7@gmail.com"
+      ],
+      "has_attachments": false,
+      "date_created": "2026-05-06T00:05:50.742000+00:00",
+      "date_updated": "2026-05-06T00:05:53.984000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "Ballpark quote for your May 15 party",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "comeketo@m.comeketocatering.com",
+      "envelope": {
+        "date": "Wed, 06 May 2026 00:05:52 +0000",
+        "subject": "Ballpark quote for your May 15 party",
+        "from": [
+          {
+            "email": "comeketo@m.comeketocatering.com",
+            "name": ""
+          }
+        ],
+        "sender": [
+          {
+            "email": "comeketo@m.comeketocatering.com",
+            "name": ""
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "sarahbroderick7@gmail.com",
+            "name": ""
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<177802595172.7.189719585299629284@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ],
+  "date_updated": "2026-05-06T00:10:22.481000+00:00",
+  "id": "acti_4UthSaskoTC0kV86nUt9NZQEg8BrQ9d7Tqj7oU6Goce",
+  "created_by_name": "Andre Raw",
+  "lead_id": "lead_j5NSrW6fX4orwFt1OTZxgPydqrkTygrAOquuHBqWwlM",
+  "_type": "EmailThread",
+  "date_created": "2026-05-06T00:10:22.101000+00:00",
+  "updated_by_name": "Andre Raw",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "activity_at": "2026-05-06T00:10:22.101000+00:00",
+  "n_emails": 2,
+  "participants": [
+    {
+      "email": "comeketo@m.comeketocatering.com",
+      "name": "Comeketo Catering Team"
+    }
+  ]
+}

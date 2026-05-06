@@ -1,0 +1,31 @@
+{
+  "contact_id": "cont_2oZFHRg7fZH4siusjJ19wTtxtU8tIaLplXZCrZH8yf2",
+  "counts": {
+    "activities": 26,
+    "calls": 3,
+    "emails": 3,
+    "meetings": 0,
+    "notes": 6,
+    "smses": 10,
+    "subscriptions": 2,
+    "tasks": 2,
+    "threads": 3,
+    "whatsapps": 0
+  },
+  "last_sweep_at": "2026-05-06T10:01:33.292Z",
+  "lead_id": "lead_VfDrrrVt70oXAgN9dsdFvkuwtv3zOLENDyQhArfGAmz",
+  "name": "Talita Betânia",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "primary_email": "talitahellena261@gmail.com",
+  "primary_phone": "+17743866002",
+  "raw_contract_version": 2,
+  "raw_files": {
+    "comms_dir": "comms/",
+    "continuity": "02_continuity.jsonl",
+    "lead": "01_raw_lead.json"
+  },
+  "status_id": "stat_qGpMKenDu31cIY56uTpvo8evqhcNnK4KDWtz4y9NPz3",
+  "status_label": "🔘 Maybe",
+  "user_id": null,
+  "user_name": null
+}

@@ -1,0 +1,82 @@
+{
+  "created_by": null,
+  "summary": null,
+  "updated_by_name": "Sales Team Event Consultant Team",
+  "updated_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+  "participants": [
+    {
+      "email": "catering@comeketo.com",
+      "name": "Comeketo Catering"
+    }
+  ],
+  "users": [
+    "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb"
+  ],
+  "activity_at": "2025-07-06T14:06:25.212000+00:00",
+  "importance": {
+    "type": "not_important",
+    "reason": "automated-outbound"
+  },
+  "date_created": "2025-07-06T14:06:25.212000+00:00",
+  "date_updated": "2025-07-06T14:06:35.161000+00:00",
+  "user_id": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+  "lead_id": "lead_IFYcKfswvQIUINN2IzV0ZtSRIRb2QtIF3zAhU0GMRnc",
+  "created_by_name": null,
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "latest_emails": [
+    {
+      "id": "acti_GqZooVZ4YL1N1MNva9ZH7ekL5wqT3dRKNmdNIBjaWZ4",
+      "user_id": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "body_preview": "Hey Gabriella,  \n  \nJust shooting you this quick email,  \nwe got your request for more catering info,  \nand our event planner will connect shortly.\n\n  \n❤️ - Comeketo Catering\n\n  \n\n  \n\n  \n\np.s. check o",
+      "date_sent": "2025-07-06T14:06:25.211000+00:00",
+      "opens_summary": "Opened by Gabriella Marie <g.m.saintonge@gmail.com> (2025-07-06)",
+      "to": [
+        "Gabriella Marie <g.m.saintonge@gmail.com>"
+      ],
+      "has_attachments": true,
+      "date_created": "2025-07-06T14:06:25.211000+00:00",
+      "date_updated": "2025-07-06T14:06:34.950000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "[✅ CATERING] You're in Gabriella! ",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Comeketo Catering <catering@comeketo.com>",
+      "envelope": {
+        "date": "Sun, 06 Jul 2025 14:06:26 +0000",
+        "subject": "[✅ CATERING] You're in Gabriella! ",
+        "from": [
+          {
+            "email": "catering@comeketo.com",
+            "name": "Comeketo Catering"
+          }
+        ],
+        "sender": [
+          {
+            "email": "catering@comeketo.com",
+            "name": "Comeketo Catering"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "g.m.saintonge@gmail.com",
+            "name": "Gabriella Marie"
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<175181078560.7.9003205743991598849@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ],
+  "id": "acti_Gh1FVf6m3LEdAPz5LeC12rWRKB9xSRHUbkdxpiNwx5S",
+  "user_name": "Sales Team Event Consultant Team",
+  "_type": "EmailThread",
+  "n_emails": 1,
+  "latest_normalized_subject": "[✅ CATERING] You're in Gabriella!",
+  "contact_id": null
+}

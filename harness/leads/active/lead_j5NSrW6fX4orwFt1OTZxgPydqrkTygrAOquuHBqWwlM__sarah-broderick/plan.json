@@ -1,0 +1,142 @@
+{
+  "plan_id": "plan_hnl96t63",
+  "close_lead_id": "lead_j5NSrW6fX4orwFt1OTZxgPydqrkTygrAOquuHBqWwlM",
+  "cycle_started_at": "2026-05-06T00:56:38.044Z",
+  "generated_at": "2026-05-06T00:56:38.044Z",
+  "based_on_snapshot_id": "snap_mp9u0j_8",
+  "status": "draft",
+  "primary_goal": "scheduled_call",
+  "goal_summary": "Convert Sarah’s “Maybe” status for a May 15 party into a scheduled phone call with Andre by clarifying party needs and confirming a quick fit check.",
+  "lead_state_summary": "Sarah Broderick is a new lead created on 2026-05-05 and started a live chat that evening (05/05/26 ~7:30PM). Since then, Andre has sent several emails outlining catering service types and tastings, plus a ballpark quote specifically tied to a May 15 party (outgoing emails at 23:58 on 05/05 and at 00:05 and 00:09 on 05/06). There are no workflow enrollments and no phone contact on file (email only). The Box shows a custom field indicating “01. 📞 DAY 1 CALL” and that Andre is the assigned owner.",
+  "known_facts": [
+    "Sarah started a live chat around 7:30PM on 2026-05-05.",
+    "Andre emailed multiple messages about catering service types and tastings on 2026-05-05 late evening.",
+    "Andre sent a ballpark quote for Sarah’s May 15 party on 2026-05-06 (00:05) and a follow-up email (00:09).",
+    "Sarah has an email address: sarahbroderick7@gmail.com and no phone number in the box.",
+    "Sarah’s status is currently “Maybe.”"
+  ],
+  "unknowns": [
+    "What the May 15 event is (type of gathering) and the guest count.",
+    "Whether Sarah is interested in a tasting, and if so, which date works for her (only allowed dates are May 3, May 17, or May 31).",
+    "The preferred service style (buffet/plated/family-style) and dietary needs.",
+    "Whether Sarah has a target budget range and what prompted the ballpark quote request.",
+    "What phone number Sarah would like Andre to call (none is on file)."
+  ],
+  "best_next_question": "For your May 15 party, what guest count and service style are you aiming for, and what’s the best phone number for a quick 10-minute call so Andre can confirm fit and timing?",
+  "days": [
+    {
+      "day": 1,
+      "objective": "Make it easy to respond and move toward scheduling by anchoring the May 15 quote thread and requesting a quick call + phone number.",
+      "required_actions": [
+        {
+          "channel": "email",
+          "intent": "Ask to schedule a short call with Andre and request a phone number for May 15",
+          "draft_seed": "Subject: Quick question about your May 15 party\n\nHi Sarah,\n\nThanks again for chatting with us. When you mentioned your May 15 party, are you expecting roughly how many guests, and are you leaning more toward a buffet, family-style, or plated service?\n\nIf you’re open to it, Andre can do a quick 10-minute call to confirm what you need and whether our timing works. What’s the best phone number for him to reach you?\n\n—Andre / Comeketo",
+          "notes": "Keep it answer-friendly; request phone number since no phone is on file."
+        }
+      ],
+      "send_window": "Email 7:00 AM – 9:00 PM lead-local time",
+      "approval_status": "approved"
+    },
+    {
+      "day": 2,
+      "objective": "Use SMS (since it’s email-only currently) to get a reply with minimal effort and confirm one scheduling option.",
+      "required_actions": [
+        {
+          "channel": "sms",
+          "intent": "Get a reply with phone number and 2 call-time options",
+          "draft_seed": "Hi Sarah—Andre here from Comeketo. For your May 15 party, about how many guests are you planning for? And what’s the best phone number so we can do a quick 10-min call? If easier, reply with two times that work for you today or tomorrow.",
+          "notes": "SMS only if lead-local time is within the allowed window; otherwise use email same content."
+        }
+      ],
+      "send_window": "SMS: 9:00 AM – 7:00 PM lead-local time",
+      "approval_status": "not_ready"
+    },
+    {
+      "day": 3,
+      "objective": "If she doesn’t respond yet, clarify tasting readiness and offer only the allowed tasting dates as an optional step (secondary to scheduling).",
+      "required_actions": [
+        {
+          "channel": "email",
+          "intent": "Clarify whether a tasting is needed and offer allowed tasting dates as options",
+          "draft_seed": "Subject: May 15 planning + tasting dates that may fit\n\nHi Sarah,\n\nQuick follow-up on your May 15 party—do you want to taste first, or are you mainly looking to lock in the menu and logistics?\n\nIf tasting helps, we currently have these Sunday options:\n• May 17 at 2:00 PM\n• May 31 at 2:00 PM\n\nWhat’s your best guest-count estimate, and which of those (if any) would work for you?\n\n—Andre / Comeketo",
+          "notes": "Only include the two dates that are still reasonable relative to lead creation; do not mention May 3 since it’s in the past."
+        }
+      ],
+      "send_window": "Email 7:00 AM – 9:00 PM lead-local time",
+      "approval_status": "not_ready"
+    },
+    {
+      "day": 4,
+      "objective": "Directly propose a call scheduling window using a NEPQ-style fit check question (and ask for a phone number again if needed).",
+      "required_actions": [
+        {
+          "channel": "sms",
+          "intent": "Propose a call time window and ask one fit-check question",
+          "draft_seed": "Sarah—quick question: what’s your ideal vibe for May 15 (more casual + hearty or more polished + plated)? Also, what phone number should Andre call, and would you be free around [Tue 3–4pm] or [Tue 5–6pm] to confirm details?",
+          "notes": "Replace bracketed times with a realistic two-option window that falls within SMS hours."
+        }
+      ],
+      "send_window": "SMS: 9:00 AM – 7:00 PM lead-local time",
+      "approval_status": "not_ready"
+    },
+    {
+      "day": 5,
+      "objective": "Use a task to prompt scheduling—Andre will call once Sarah provides a number; otherwise ask for contact details and event basics.",
+      "required_actions": [
+        {
+          "channel": "task",
+          "intent": "Call Sarah Broderick to schedule a phone call and confirm guest count + service style for May 15",
+          "draft_seed": "Attempt to reach Sarah via the phone number on file; if none, ask Andre to request the best number and confirm guest count + service style for May 15. Then offer a single 10-min call slot to finalize next steps.",
+          "notes": "Since no phone exists in the box, the practical outcome is Andre uses the task to request a phone number and propose a slot."
+        }
+      ],
+      "send_window": "Task window should align to lead-local business hours; default to SMS hours if scheduling is needed.",
+      "approval_status": "not_ready"
+    },
+    {
+      "day": 6,
+      "objective": "Answer silently implied objections: budget/timing uncertainty. Ask what matters most so Andre can tailor the phone call agenda.",
+      "required_actions": [
+        {
+          "channel": "email",
+          "intent": "Clarify priorities (budget vs timing vs menu) before the call",
+          "draft_seed": "Subject: To make the call useful—what matters most for May 15?\n\nHi Sarah,\n\nBefore Andre calls you, what matters most for your May 15 party?\n1) Keeping within a specific budget\n2) Locking the menu + dietary needs\n3) Timing/logistics (setup, service flow, cleanup)\n4) Something else\n\nReply with the number, and if you share a phone number, we’ll set a quick time that works.\n\n—Andre / Comeketo",
+          "notes": "Multiple-choice prompts are easy to answer and lead to call scheduling."
+        }
+      ],
+      "send_window": "Email 7:00 AM – 9:00 PM lead-local time",
+      "approval_status": "not_ready"
+    },
+    {
+      "day": 7,
+      "objective": "Final nudge focused on scheduling outcome: ask for a yes/no and offer one concrete call slot plus request phone number if missing.",
+      "required_actions": [
+        {
+          "channel": "sms",
+          "intent": "Confirm a specific call slot or ask to reschedule; request phone number if missing",
+          "draft_seed": "Sarah—does a quick call with Andre make sense to finalize May 15? If yes, reply with 1) your phone number and 2) yes for [Wed 4:30pm] or tell me a better time today/tomorrow.",
+          "notes": "Pick a realistic slot that falls within SMS hours for lead-local time."
+        }
+      ],
+      "send_window": "SMS: 9:00 AM – 7:00 PM lead-local time",
+      "approval_status": "not_ready"
+    }
+  ],
+  "stop_conditions": [
+    {
+      "trigger": "Lead replies with stop/not interested/remove me or explicitly declines outreach",
+      "action": "kill"
+    },
+    {
+      "trigger": "Lead schedules the phone call with Andre (confirmed via reply or calendar/workflow record)",
+      "action": "pause"
+    },
+    {
+      "trigger": "Lead requests tasting as primary next step (and provides a preferred allowed date)",
+      "action": "surface"
+    }
+  ],
+  "approval_required": true,
+  "_mirror_at": "2026-05-06T07:09:56.790Z"
+}

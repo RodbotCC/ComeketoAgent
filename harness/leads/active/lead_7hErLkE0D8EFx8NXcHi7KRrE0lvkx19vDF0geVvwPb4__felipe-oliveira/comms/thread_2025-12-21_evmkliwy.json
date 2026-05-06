@@ -1,0 +1,82 @@
+{
+  "user_id": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+  "date_created": "2025-12-21T20:19:34.658000+00:00",
+  "user_name": "Sales Team Event Consultant Team",
+  "activity_at": "2025-12-21T20:19:34.658000+00:00",
+  "lead_id": "lead_7hErLkE0D8EFx8NXcHi7KRrE0lvkx19vDF0geVvwPb4",
+  "contact_id": null,
+  "updated_by_name": "Sales Team Event Consultant Team",
+  "participants": [
+    {
+      "email": "catering@comeketo.com",
+      "name": "Comeketo Catering"
+    }
+  ],
+  "n_emails": 1,
+  "created_by_name": null,
+  "date_updated": "2025-12-21T20:19:37.091000+00:00",
+  "latest_emails": [
+    {
+      "id": "acti_qzMA9P0zJlCg5Z9Bgds8NohYUkwL7Sq5huMMYuAbBgB",
+      "user_id": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+      "body_preview": "Hey Felipe, Just shooting you this quick email, we got your request for more catering info, and our event planner will connect shortly. ❤️ - Comeketo Catering p.s. check out [this quick video](https:/",
+      "date_sent": "2025-12-21T20:19:34.657000+00:00",
+      "opens_summary": null,
+      "to": [
+        "Felipe Oliveira <gatinhophipi_10@hotmail.com>"
+      ],
+      "has_attachments": true,
+      "date_created": "2025-12-21T20:19:34.657000+00:00",
+      "date_updated": "2025-12-21T20:19:37.049000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "[✅ CATERING] You're in Felipe! ",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Comeketo Catering <catering@comeketo.com>",
+      "envelope": {
+        "date": "Sun, 21 Dec 2025 20:19:36 +0000",
+        "subject": "[✅ CATERING] You're in Felipe! ",
+        "from": [
+          {
+            "email": "catering@comeketo.com",
+            "name": "Comeketo Catering"
+          }
+        ],
+        "sender": [
+          {
+            "email": "catering@comeketo.com",
+            "name": "Comeketo Catering"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "gatinhophipi_10@hotmail.com",
+            "name": "Felipe Oliveira"
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<176634837494.7.6713304353008417655@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ],
+  "_type": "EmailThread",
+  "users": [
+    "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb"
+  ],
+  "created_by": null,
+  "latest_normalized_subject": "[✅ CATERING] You're in Felipe!",
+  "summary": null,
+  "updated_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+  "id": "acti_O5lIrLYFB4T6AkKO9vK1TY5jlAv41lwHGitEVmKlIwy",
+  "importance": {
+    "type": "not_important",
+    "reason": "automated-outbound"
+  },
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq"
+}

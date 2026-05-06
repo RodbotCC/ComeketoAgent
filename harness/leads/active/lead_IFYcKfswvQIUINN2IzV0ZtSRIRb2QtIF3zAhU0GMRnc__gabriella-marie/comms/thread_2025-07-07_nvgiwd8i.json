@@ -1,0 +1,82 @@
+{
+  "created_by": null,
+  "summary": null,
+  "updated_by_name": "Andre Raw",
+  "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "participants": [
+    {
+      "email": "comeketo@m.comeketocatering.com",
+      "name": "Comeketo Catering Team"
+    }
+  ],
+  "users": [
+    "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt"
+  ],
+  "activity_at": "2025-07-07T04:38:49.340000+00:00",
+  "importance": {
+    "type": "not_important",
+    "reason": "automated-outbound"
+  },
+  "date_created": "2025-07-07T04:38:49.340000+00:00",
+  "date_updated": "2025-07-07T22:46:31.798000+00:00",
+  "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "lead_id": "lead_IFYcKfswvQIUINN2IzV0ZtSRIRb2QtIF3zAhU0GMRnc",
+  "created_by_name": null,
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "latest_emails": [
+    {
+      "id": "acti_VMTfc0VMIkA9Dk0ybaEp1F9fsQs1BTrxfQXHihJrapV",
+      "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "body_preview": "![Comeketo Catering Logo](https://comeketocatering.com/wp-\ncontent/uploads/2025/01/LOGO_WEB.png)\n\n![Catering Types](https://comeketocatering.com/wp-\ncontent/uploads/2025/06/Header_cateringTypes.jpg)\n\n",
+      "date_sent": "2025-07-07T04:38:49.339000+00:00",
+      "opens_summary": "Opened by Gabriella Marie <g.m.saintonge@gmail.com> (2025-07-07)",
+      "to": [
+        "Gabriella Marie <g.m.saintonge@gmail.com>"
+      ],
+      "has_attachments": false,
+      "date_created": "2025-07-07T04:38:49.339000+00:00",
+      "date_updated": "2025-07-07T22:46:31.696000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "Understanding Our Catering Service Types",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Comeketo Catering Team <comeketo@m.comeketocatering.com>",
+      "envelope": {
+        "date": "Mon, 07 Jul 2025 04:38:50 +0000",
+        "subject": "Understanding Our Catering Service Types",
+        "from": [
+          {
+            "email": "comeketo@m.comeketocatering.com",
+            "name": "Comeketo Catering Team"
+          }
+        ],
+        "sender": [
+          {
+            "email": "comeketo@m.comeketocatering.com",
+            "name": "Comeketo Catering Team"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "g.m.saintonge@gmail.com",
+            "name": "Gabriella Marie"
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<175186312960.7.4867421688306742027@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ],
+  "id": "acti_Qe0EAWJzAP8Ax6GLtAa6rNAZyy4OFF3qTMTnvgiwD8I",
+  "user_name": "Andre Raw",
+  "_type": "EmailThread",
+  "n_emails": 1,
+  "latest_normalized_subject": "Understanding Our Catering Service Types",
+  "contact_id": null
+}

@@ -1,0 +1,97 @@
+{
+  "created_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "user_name": "Bibi De Los Santos",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "activity_at": "2026-05-31T18:00:00+00:00",
+  "attached_call_ids": [],
+  "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "playbook_reason": null,
+  "title": "Monica Quindley PAX 4 Tasting CANCELLED FOR NOW",
+  "duration": 7200,
+  "note": "Close lead: https://app.close.com/lead/lead_fYLRdg4Dkb0g7e3asZc4JrhI1hlgTWd4VWG4lwKPn9H/\nEmail: quindley95@gmail.com\nPhone: +1 508-944-2944\nEvent: Wedding\nGuests: 150\nEvent date: 6/12/27",
+  "user_note_date_updated": null,
+  "conference_links": [
+    {
+      "type": "GOOGLE_MEET",
+      "url": "https://meet.google.com/cwd-smyr-wwe"
+    }
+  ],
+  "location": "199 Main St, Fitchburg, MA 01420, USA",
+  "ends_at": "2026-05-31T20:00:00+00:00",
+  "user_note_html": null,
+  "date_updated": "2026-05-05T22:42:13.427000+00:00",
+  "actual_duration": null,
+  "provider_calendar_ids": [
+    "c_94028059f8c1d8983b3670878891f4f8477561086c6fef6da7552762a6f7cd49@group.calendar.google.com",
+    "team@comeketocatering.com"
+  ],
+  "calendar_event_link": "https://www.google.com/calendar/event?eid=N3NzbDY3aG9taTBmcDJmdWlrZTRtdmJoMnQgY185NDAyODA1OWY4YzFkODk4M2IzNjcwODc4ODkxZjRmODQ3NzU2MTA4NmM2ZmVmNmRhNzU1Mjc2MmE2ZjdjZDQ5QGc",
+  "outcome_autofill_reasoning": null,
+  "contact_id": null,
+  "is_recurring": false,
+  "date_created": "2026-04-27T21:39:15.457000+00:00",
+  "user_id": "user_4eCOmuq2IkJZtH9gkd7otWarVwRTVkCvzxj5V11tHmM",
+  "connected_account_id": "emailacct_V698oi1uFg2nnhvbdLhaItEGsTdNCmlQUEla8QF32rZ",
+  "user_note": null,
+  "notetaker_id": null,
+  "source": "calendar",
+  "user_note_mentions": [],
+  "starts_at": "2026-05-31T18:00:00+00:00",
+  "integrations": [],
+  "calendar_event_uids": [
+    "7ssl67homi0fp2fuike4mvbh2t"
+  ],
+  "conversation_type_reason": null,
+  "outcome_reason": null,
+  "created_by_name": "Andre Raw",
+  "outcome_id": null,
+  "conversation_type_id": null,
+  "provider_calendar_event_id": "7ssl67homi0fp2fuike4mvbh2t",
+  "summary": null,
+  "provider_calendar_type": "google",
+  "users": [
+    "user_4eCOmuq2IkJZtH9gkd7otWarVwRTVkCvzxj5V11tHmM",
+    "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt"
+  ],
+  "_type": "Meeting",
+  "playbook_id": null,
+  "lead_id": "lead_fYLRdg4Dkb0g7e3asZc4JrhI1hlgTWd4VWG4lwKPn9H",
+  "updated_by_name": "Andre Raw",
+  "id": "acti_KEChtUsuOlkgzGEFcpwsapKMDYbQ3f5THQwTVF64iVW",
+  "outcome_autofill_confidence": null,
+  "attendees": [
+    {
+      "email": "bibi@comeketo.com",
+      "name": null,
+      "status": "noreply",
+      "user_id": "user_4eCOmuq2IkJZtH9gkd7otWarVwRTVkCvzxj5V11tHmM",
+      "contact_id": null,
+      "is_organizer": false
+    },
+    {
+      "email": "c_94028059f8c1d8983b3670878891f4f8477561086c6fef6da7552762a6f7cd49@group.calendar.google.com",
+      "name": "=?utf-8?q?=E2=98=95_Catering_Tastings?=",
+      "status": "yes",
+      "user_id": null,
+      "contact_id": null,
+      "is_organizer": true
+    },
+    {
+      "email": "quindley95@gmail.com",
+      "name": null,
+      "status": "noreply",
+      "user_id": null,
+      "contact_id": "cont_FpRDwmi6gFhG2c1zZ5lValFPaKtQyJxmxL5R3PMPNb4",
+      "is_organizer": false
+    },
+    {
+      "email": "team@comeketocatering.com",
+      "name": null,
+      "status": "noreply",
+      "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "contact_id": null,
+      "is_organizer": false
+    }
+  ],
+  "status": "canceled"
+}

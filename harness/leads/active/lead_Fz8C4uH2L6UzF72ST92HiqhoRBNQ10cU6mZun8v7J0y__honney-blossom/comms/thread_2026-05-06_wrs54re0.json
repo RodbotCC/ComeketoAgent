@@ -1,0 +1,82 @@
+{
+  "activity_at": "2026-05-06T00:15:43.438000+00:00",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "user_name": "Rhonna Ricafort",
+  "date_updated": "2026-05-06T00:15:45.379000+00:00",
+  "created_by": null,
+  "latest_emails": [
+    {
+      "id": "acti_ILGkciTjOfXLZb9IuriyJtRBd7GUbMm4gxlIxQbicGd",
+      "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+      "body_preview": "Pro bartenders & craft cocktails for your event. ![Comeketo Catering Logo](https://comeketocatering.com/wp-\ncontent/uploads/2025/01/LOGO_WEB.png) ![Bar Service](https://comeketocatering.com/wp-\nconten",
+      "date_sent": "2026-05-06T00:15:43.437000+00:00",
+      "opens_summary": null,
+      "to": [
+        "Honney Blossom <loyzany@hotmail.com>"
+      ],
+      "has_attachments": false,
+      "date_created": "2026-05-06T00:15:43.437000+00:00",
+      "date_updated": "2026-05-06T00:15:45.322000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "Raise a Glass to Perfect Events! 🍹",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Rhonna Ricafort <contact@comeketocatering.com>",
+      "envelope": {
+        "date": "Wed, 06 May 2026 00:15:44 +0000",
+        "subject": "Raise a Glass to Perfect Events! 🍹",
+        "from": [
+          {
+            "email": "contact@comeketocatering.com",
+            "name": "Rhonna Ricafort"
+          }
+        ],
+        "sender": [
+          {
+            "email": "contact@comeketocatering.com",
+            "name": "Rhonna Ricafort"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "loyzany@hotmail.com",
+            "name": "Honney Blossom"
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<177802654371.7.3203289046976320042@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ],
+  "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "participants": [
+    {
+      "email": "contact@comeketocatering.com",
+      "name": "Rhonna Ricafort"
+    }
+  ],
+  "n_emails": 1,
+  "contact_id": null,
+  "updated_by_name": "Rhonna Ricafort",
+  "summary": null,
+  "importance": {
+    "type": "important",
+    "reason": "most-recent-communication"
+  },
+  "id": "acti_iYk1iLYtNJYAFCcbe1hY4Mp3KsWLM5quvKrWRS54Re0",
+  "_type": "EmailThread",
+  "users": [
+    "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo"
+  ],
+  "created_by_name": null,
+  "date_created": "2026-05-06T00:15:43.438000+00:00",
+  "latest_normalized_subject": "Raise a Glass to Perfect Events! 🍹",
+  "lead_id": "lead_Fz8C4uH2L6UzF72ST92HiqhoRBNQ10cU6mZun8v7J0y"
+}

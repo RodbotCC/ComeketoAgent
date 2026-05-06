@@ -1,0 +1,121 @@
+{
+  "agent_action_reason": null,
+  "user_name": "Sales Team Event Consultant Team",
+  "date_sent": "2026-05-05T22:56:42.455000+00:00",
+  "to": [
+    "Silmara <jil.yk0707@gmail.com>"
+  ],
+  "send_as_id": null,
+  "send_attempts": [],
+  "template_name": "Tasting",
+  "bcc": [],
+  "subject": "[✅ Tasting] You're in Silmara! ",
+  "opens": [
+    {
+      "opened_at": "2026-05-05T22:56:52.357000+00:00",
+      "opened_by": "Silmara <jil.yk0707@gmail.com>",
+      "ip_address": "74.125.151.200",
+      "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.135 Safari/537.36 Edge/12.246 Mozilla/5.0"
+    },
+    {
+      "opened_at": "2026-05-05T22:56:56.797000+00:00",
+      "opened_by": "Silmara <jil.yk0707@gmail.com>",
+      "ip_address": "74.125.210.193",
+      "user_agent": "Mozilla/5.0 (Windows NT 5.1; rv:11.0) Gecko Firefox/11.0 (via ggpht.com GoogleImageProxy)"
+    }
+  ],
+  "users": [],
+  "updated_by_name": "Sales Team Event Consultant Team",
+  "sequence_name": "Free Tasting",
+  "template_id": "tmpl_f4ZuR0YtVQVL4XhV6B4tNICwAjHmOXSlPq8VwybQ6jH",
+  "date_created": "2026-05-05T22:56:42.455000+00:00",
+  "message_ids": [
+    "<177802180287.7.9903078987038036938@smtpgw.close.com>",
+    "<177802180287.7.12625218509095083183@smtpgw.close.com>"
+  ],
+  "_type": "Email",
+  "ai_draft": null,
+  "sequence_subscription_id": "sub_74GDHvUxVQShCnBUfuHVwW",
+  "has_reply": false,
+  "contact_id": "cont_hDF1a9rkJpQW9wHQXU2tGZcVBgNkHeu5SfRv47tXUAs",
+  "user_id": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "activity_at": "2026-05-05T22:56:42.455000+00:00",
+  "body_preview": "Hey Silmara, Just shooting you this quick email, we got your request for a free tasting and we will connect shortly to set that up ❤️ - Comeketo Catering ![email_photo.jpeg](cid:2c29-00e4-b267) \\-- Re",
+  "sender": "Comeketo Catering <catering@comeketo.com>",
+  "email_account_id": "emailacct_cM0OYvq47SOFqO8wIsADypvEONwFh56CuWk48bv47PX",
+  "body_text_quoted": [
+    {
+      "expand": true,
+      "text": "Hey Silmara,  \n  \nJust shooting you this quick email,  \nwe got your request for a free tasting  \nand we will connect shortly to set that up\n\n  \n❤️ - Comeketo Catering\n\n  \n\n  \n\n  \n\n  \n\n  \n\n  \n\n  \n\n  \n\n![email_photo.jpeg](cid:2c29-00e4-b267)\n\n  \n\n  \n\n  \n\\--\n\nRegards,  \n**Toni Llagas**\n\n**Comeketo Catering**  \n👤 **Sales & Event Consulting Team**\n\n📲 My Direct Line: [(978) 7](tel:9787092442)40 -7311\n\n📲 Catering Main: [(978) 381-1212](tel:9783811212)  \n[Facebook](https://www.facebook.com/comeketocatering) | [Instagram](https://instagram.com/comeketocatering) | [Website](https://comeketocatering.com/)\n\n  \n\n  \n\nTo stop receiving these emails, click\n[here](https://app.close.com/go/unsubscribe/orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq/jil.yk0707%40gmail.com/py2OOP1TrKr6RyWwEfk_6gRT80vBqGjOAf-\nauLiTpY4=/)"
+    }
+  ],
+  "envelope": {
+    "date": "Tue, 05 May 2026 22:56:43 +0000",
+    "subject": "[✅ Tasting] You're in Silmara! ",
+    "from": [
+      {
+        "email": "catering@comeketo.com",
+        "name": "Comeketo Catering"
+      }
+    ],
+    "sender": [
+      {
+        "email": "catering@comeketo.com",
+        "name": "Comeketo Catering"
+      }
+    ],
+    "reply_to": [],
+    "to": [
+      {
+        "email": "jil.yk0707@gmail.com",
+        "name": "Silmara"
+      }
+    ],
+    "cc": [],
+    "bcc": [],
+    "in_reply_to": null,
+    "message_id": "<177802180287.7.12625218509095083183@smtpgw.close.com>",
+    "is_autoreply": false
+  },
+  "need_smtp_credentials": false,
+  "id": "acti_UcgAibWGBRjSX08OHCbHLpWxXvTFrxmg6UNKw8jtBy0",
+  "followup_sequence_delay": null,
+  "date_updated": "2026-05-05T22:56:56.797000+00:00",
+  "sequence_id": "seq_2Z2hOnCm4n3jsWuuKKAi5k",
+  "date_scheduled": null,
+  "thread_id": "acti_DGlNEMUkktEP5Vf38xWaxFjhJ057iyThyu90MWCAB5I",
+  "attachments": [
+    {
+      "size": 226836,
+      "content_type": "image/jpeg",
+      "filename": "email_photo.jpeg",
+      "content_id": "2c29-00e4-b267",
+      "inline_only": true,
+      "url": "https://app.close.com/go/file/persisted/orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq/activity.email/acti_UcgAibWGBRjSX08OHCbHLpWxXvTFrxmg6UNKw8jtBy0/5JESTXXB4Gy0fV6BJA9YSw/email_photo.jpeg/",
+      "thumbnail_url": "https://app.close.com/go/file/persisted/orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq/activity.email/acti_UcgAibWGBRjSX08OHCbHLpWxXvTFrxmg6UNKw8jtBy0/5JESTXXB4Gy0fV6BJA9YSw/email_photo.jpeg/thumbnail/"
+    }
+  ],
+  "followup_sequence_id": null,
+  "created_by": null,
+  "body_html_quoted": [
+    {
+      "expand": true,
+      "html": "<div>Hey Silmara, <br><br>Just shooting you this quick email,<br>we got your request for a free tasting<br>and we will connect shortly to set that up</div><div><br>❤️ - Comeketo Catering</div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><img src=\"cid:2c29-00e4-b267\" alt=\"email_photo.jpeg\"></div><span data-system-generated=\"signature\"><br><div><br></div><div><br>--</div><div>Regards,<br><strong><span style=\"color: rgb(13, 115, 13); background-color: #FFCFCF\">Toni Llagas</span></strong></div><div><strong><span style=\"color: rgb(84, 20, 168)\">Comeketo Catering</span></strong><br><span style=\"background-color: #E0F9AB\">👤 </span><strong><span style=\"color: rgb(84, 20, 168); background-color: #E0F9AB\">Sales &amp; Event Consulting Team</span></strong></div><div>📲 My Direct Line: <a href=\"tel:9787092442\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">(978) 7</a>40 -7311</div><div>📲 Catering Main: <a href=\"tel:9783811212\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">(978) 381-1212</a><br><a href=\"https://www.facebook.com/comeketocatering\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">Facebook</a> | <a href=\"https://instagram.com/comeketocatering\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">Instagram</a> | <a href=\"https://comeketocatering.com/\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">Website</a></div><div><br></div><div><br></div></span><span data-system-generated=\"unsubscribe-footer\"><p></p><div style=\"font-size: 11px; color: gray\">To stop receiving these emails, click <a href=\"https://app.close.com/go/unsubscribe/orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq/jil.yk0707%40gmail.com/py2OOP1TrKr6RyWwEfk_6gRT80vBqGjOAf-auLiTpY4=/\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">here</a></div></span>"
+    }
+  ],
+  "cc": [],
+  "references": [],
+  "agent_config_id": null,
+  "followup_sequence_add_cc_bcc": false,
+  "created_by_name": null,
+  "lead_id": "lead_b642tqy5FYDU6gy7v1Kw5UYQ8SflngYsoOX3nVePDMa",
+  "status": "sent",
+  "direction": "outgoing",
+  "opens_summary": "Opened by Silmara <jil.yk0707@gmail.com> (2 times, latest 2026-05-05)",
+  "in_reply_to_id": null,
+  "bulk_email_action_id": null,
+  "body_html": "<div>Hey Silmara, <br><br>Just shooting you this quick email,<br>we got your request for a free tasting<br>and we will connect shortly to set that up</div><div><br>❤️ - Comeketo Catering</div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><br></div><div><img src=\"cid:2c29-00e4-b267\" alt=\"email_photo.jpeg\"></div><span data-system-generated=\"signature\"><br><div><br></div><div><br>--</div><div>Regards,<br><strong><span style=\"color: rgb(13, 115, 13); background-color: #FFCFCF\">Toni Llagas</span></strong></div><div><strong><span style=\"color: rgb(84, 20, 168)\">Comeketo Catering</span></strong><br><span style=\"background-color: #E0F9AB\">👤 </span><strong><span style=\"color: rgb(84, 20, 168); background-color: #E0F9AB\">Sales &amp; Event Consulting Team</span></strong></div><div>📲 My Direct Line: <a href=\"tel:9787092442\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">(978) 7</a>40 -7311</div><div>📲 Catering Main: <a href=\"tel:9783811212\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">(978) 381-1212</a><br><a href=\"https://www.facebook.com/comeketocatering\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">Facebook</a> | <a href=\"https://instagram.com/comeketocatering\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">Instagram</a> | <a href=\"https://comeketocatering.com/\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">Website</a></div><div><br></div><div><br></div></span><span data-system-generated=\"unsubscribe-footer\"><p><div style=\"font-size: 11px; color: gray\">To stop receiving these emails, click <a href=\"https://app.close.com/go/unsubscribe/orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq/jil.yk0707%40gmail.com/py2OOP1TrKr6RyWwEfk_6gRT80vBqGjOAf-auLiTpY4=/\" target=\"_blank\" rel=\"noopener noreferrer nofollow\">here</a></div></p></span>",
+  "updated_by": "user_Qe4EQmudsDGv0qezgctuAWKkPHR2s0Kj5x6SgiZiHlb",
+  "body_text": "Hey Silmara,  \n  \nJust shooting you this quick email,  \nwe got your request for a free tasting  \nand we will connect shortly to set that up\n\n  \n❤️ - Comeketo Catering\n\n  \n\n  \n\n  \n\n  \n\n  \n\n  \n\n  \n\n  \n\n![email_photo.jpeg](cid:2c29-00e4-b267)\n\n  \n\n  \n\n  \n\\--\n\nRegards,  \n**Toni Llagas**\n\n**Comeketo Catering**  \n👤 **Sales & Event Consulting Team**\n\n📲 My Direct Line: [(978) 7](tel:9787092442)40 -7311\n\n📲 Catering Main: [(978) 381-1212](tel:9783811212)  \n[Facebook](https://www.facebook.com/comeketocatering) | [Instagram](https://instagram.com/comeketocatering) | [Website](https://comeketocatering.com/)\n\n  \n\n  \n\nTo stop receiving these emails, click\n[here](https://app.close.com/go/unsubscribe/orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq/jil.yk0707%40gmail.com/py2OOP1TrKr6RyWwEfk_6gRT80vBqGjOAf-\nauLiTpY4=/)"
+}

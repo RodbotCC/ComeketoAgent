@@ -1,0 +1,82 @@
+{
+  "summary": null,
+  "users": [
+    "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt"
+  ],
+  "user_name": "Andre Raw",
+  "created_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "importance": {
+    "type": "not_important",
+    "reason": "by-default"
+  },
+  "contact_id": null,
+  "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "latest_normalized_subject": "Explore What Comeketo Catering Has to Offer! ✨",
+  "latest_emails": [
+    {
+      "id": "acti_CA7JUqIiKfWHOY6vDF2UzfTgxsG5eUpYLv8OZ6cZf76",
+      "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "body_preview": "Hi Sarah Broderick, Just to give you a quick idea — we offer a few different styles, including\ntraditional buffet, more formal plated or family-style meals, and also a fun churrasco (buffet option wit",
+      "date_sent": "2026-05-05T23:58:08.292000+00:00",
+      "opens_summary": "Opened by sarahbroderick7@gmail.com (2026-05-05)",
+      "to": [
+        "sarahbroderick7@gmail.com"
+      ],
+      "has_attachments": true,
+      "date_created": "2026-05-05T23:57:50.990000+00:00",
+      "date_updated": "2026-05-05T23:58:17.590000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "Explore What Comeketo Catering Has to Offer! ✨",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Comeketo Catering Team <comeketo@m.comeketocatering.com>",
+      "envelope": {
+        "date": "Tue, 05 May 2026 23:58:08 +0000",
+        "subject": "Explore What Comeketo Catering Has to Offer! ✨",
+        "from": [
+          {
+            "email": "comeketo@m.comeketocatering.com",
+            "name": "Comeketo Catering Team"
+          }
+        ],
+        "sender": [
+          {
+            "email": "comeketo@m.comeketocatering.com",
+            "name": "Comeketo Catering Team"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "sarahbroderick7@gmail.com",
+            "name": ""
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<177802548871.7.5575696171664842413@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ],
+  "date_updated": "2026-05-05T23:58:17.655000+00:00",
+  "id": "acti_IqK1DXUKNCqN9lbQ0cwScjlYC2WLACrYFWuVMwzbd8z",
+  "created_by_name": "Andre Raw",
+  "lead_id": "lead_j5NSrW6fX4orwFt1OTZxgPydqrkTygrAOquuHBqWwlM",
+  "_type": "EmailThread",
+  "date_created": "2026-05-05T23:58:08.293000+00:00",
+  "updated_by_name": "Andre Raw",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "activity_at": "2026-05-05T23:58:08.293000+00:00",
+  "n_emails": 1,
+  "participants": [
+    {
+      "email": "comeketo@m.comeketocatering.com",
+      "name": "Comeketo Catering Team"
+    }
+  ]
+}
