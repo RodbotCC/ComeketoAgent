@@ -1,6 +1,18 @@
 {
-  "contact_id": null,
+  "created_by_name": "Andre Raw",
+  "summary": null,
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "user_name": "Andre Raw",
   "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "latest_normalized_subject": "Cotação inicial de bar + comida para 50 pessoas",
+  "contact_id": null,
+  "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "_type": "EmailThread",
+  "users": [
+    "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt"
+  ],
+  "updated_by_name": "Andre Raw",
+  "date_updated": "2026-05-04T23:03:16.662000+00:00",
   "latest_emails": [
     {
       "id": "acti_NA8168FWtqXDUmNc94W1DSqY4NLIKp95VdMv71yzKqP",
@@ -51,32 +63,20 @@
       }
     }
   ],
-  "latest_normalized_subject": "Cotação inicial de bar + comida para 50 pessoas",
-  "created_by_name": "Andre Raw",
-  "date_updated": "2026-05-04T23:03:16.662000+00:00",
-  "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
-  "lead_id": "lead_DyWg3ReiKrcRXHnmv11d1KthbhDmw3ZiT0TBMUOsezA",
+  "importance": {
+    "type": "not_important",
+    "reason": "automated-outbound"
+  },
+  "id": "acti_hoJvx9nv1e9Ul1zdTKUXMR4TYly8xK1G0tVb9PYGXZP",
+  "n_emails": 1,
+  "date_created": "2026-05-04T22:55:24.746000+00:00",
   "created_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
-  "activity_at": "2026-05-04T22:55:24.746000+00:00",
   "participants": [
     {
       "email": "comeketo@m.comeketocatering.com",
       "name": ""
     }
   ],
-  "_type": "EmailThread",
-  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
-  "user_name": "Andre Raw",
-  "importance": {
-    "type": "not_important",
-    "reason": "automated-outbound"
-  },
-  "summary": null,
-  "updated_by_name": "Andre Raw",
-  "date_created": "2026-05-04T22:55:24.746000+00:00",
-  "id": "acti_hoJvx9nv1e9Ul1zdTKUXMR4TYly8xK1G0tVb9PYGXZP",
-  "users": [
-    "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt"
-  ],
-  "n_emails": 1
+  "lead_id": "lead_DyWg3ReiKrcRXHnmv11d1KthbhDmw3ZiT0TBMUOsezA",
+  "activity_at": "2026-05-04T22:55:24.746000+00:00"
 }
