@@ -1,16 +1,20 @@
 {
-  "lead_id": "lead_VfDrrrVt70oXAgN9dsdFvkuwtv3zOLENDyQhArfGAmz",
-  "participants": [
-    {
-      "email": "contact@comeketocatering.com",
-      "name": "Rhonna Ricafort"
-    }
-  ],
-  "user_name": "Rhonna Ricafort",
-  "n_emails": 1,
-  "created_by": null,
+  "contact_id": null,
   "activity_at": "2026-05-04T04:49:09.255000+00:00",
+  "created_by": null,
+  "lead_id": "lead_VfDrrrVt70oXAgN9dsdFvkuwtv3zOLENDyQhArfGAmz",
+  "n_emails": 1,
+  "created_by_name": null,
   "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "importance": {
+    "type": "not_important",
+    "reason": "automated-outbound"
+  },
+  "summary": null,
+  "date_created": "2026-05-04T04:49:09.255000+00:00",
+  "latest_normalized_subject": "Understanding Our Catering Service Types",
+  "user_name": "Rhonna Ricafort",
   "latest_emails": [
     {
       "id": "acti_8RziAzOas5XhlXQ5M62CpVOwBfldBczufyMuc5JZh64",
@@ -61,22 +65,18 @@
       }
     }
   ],
-  "id": "acti_Riu8INxY8jHLyMzZfwF9am6ZK2MNR23KvcN9DOQoxO9",
-  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
-  "date_created": "2026-05-04T04:49:09.255000+00:00",
-  "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
-  "date_updated": "2026-05-04T04:49:10.883000+00:00",
+  "updated_by_name": "Rhonna Ricafort",
+  "_type": "EmailThread",
   "users": [
     "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo"
   ],
-  "created_by_name": null,
-  "contact_id": null,
-  "importance": {
-    "type": "not_important",
-    "reason": "automated-outbound"
-  },
-  "_type": "EmailThread",
-  "latest_normalized_subject": "Understanding Our Catering Service Types",
-  "updated_by_name": "Rhonna Ricafort",
-  "summary": null
+  "date_updated": "2026-05-04T04:49:10.883000+00:00",
+  "participants": [
+    {
+      "email": "contact@comeketocatering.com",
+      "name": "Rhonna Ricafort"
+    }
+  ],
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
+  "id": "acti_Riu8INxY8jHLyMzZfwF9am6ZK2MNR23KvcN9DOQoxO9"
 }
