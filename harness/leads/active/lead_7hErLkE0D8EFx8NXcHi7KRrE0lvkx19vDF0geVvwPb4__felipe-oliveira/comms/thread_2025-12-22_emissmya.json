@@ -1,0 +1,82 @@
+{
+  "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "date_created": "2025-12-22T02:19:21.175000+00:00",
+  "user_name": "Andre Raw",
+  "activity_at": "2025-12-22T02:19:21.175000+00:00",
+  "lead_id": "lead_7hErLkE0D8EFx8NXcHi7KRrE0lvkx19vDF0geVvwPb4",
+  "contact_id": null,
+  "updated_by_name": "Andre Raw",
+  "participants": [
+    {
+      "email": "team@comeketocatering.com",
+      "name": "Andre Raw"
+    }
+  ],
+  "n_emails": 1,
+  "created_by_name": "Andre Raw",
+  "date_updated": "2025-12-22T02:19:22.231000+00:00",
+  "latest_emails": [
+    {
+      "id": "acti_r3OALHphz6txoqF230c2Yun2SP14RWFYVAAAuvx1wxN",
+      "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+      "body_preview": "Hi Felipe Vamos trocar uma ideia pra eu poder te ajudar o quanto antes. Here’s the link to our **Appetizer Menu** with photos, descriptions, and\nprices, including the **charcuterie and platter options",
+      "date_sent": "2025-12-22T02:19:21.174000+00:00",
+      "opens_summary": null,
+      "to": [
+        "gatinhophipi_10@hotmail.com"
+      ],
+      "has_attachments": false,
+      "date_created": "2025-12-22T02:18:46.239000+00:00",
+      "date_updated": "2025-12-22T02:19:22.188000+00:00",
+      "bcc": [],
+      "status": "sent",
+      "cc": [],
+      "subject": "New Appetizer Menu Preview 🍤 – Photos & Pricing Inside",
+      "send_as_id": null,
+      "direction": "outgoing",
+      "sender": "Andre Raw <team@comeketocatering.com>",
+      "envelope": {
+        "date": "Mon, 22 Dec 2025 02:19:21 +0000",
+        "subject": "New Appetizer Menu Preview 🍤 – Photos & Pricing Inside",
+        "from": [
+          {
+            "email": "team@comeketocatering.com",
+            "name": "Andre Raw"
+          }
+        ],
+        "sender": [
+          {
+            "email": "team@comeketocatering.com",
+            "name": "Andre Raw"
+          }
+        ],
+        "reply_to": [],
+        "to": [
+          {
+            "email": "gatinhophipi_10@hotmail.com",
+            "name": ""
+          }
+        ],
+        "cc": [],
+        "bcc": [],
+        "in_reply_to": null,
+        "message_id": "<176636996119.7.9700082379279385271@smtpgw.close.com>",
+        "is_autoreply": false
+      }
+    }
+  ],
+  "_type": "EmailThread",
+  "users": [
+    "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt"
+  ],
+  "created_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "latest_normalized_subject": "New Appetizer Menu Preview 🍤 – Photos & Pricing Inside",
+  "summary": null,
+  "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "id": "acti_NyfeLppguepR3bvoYtFVREpfjckXIAvHurWemisSmya",
+  "importance": {
+    "type": "important",
+    "reason": "most-recent-communication"
+  },
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq"
+}
