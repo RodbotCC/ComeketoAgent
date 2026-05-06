@@ -91,7 +91,8 @@
     "Date of Event": "2026-06-06T15:00:00+00:00",
     "FB_AD": "VIDEO  RODS WEDDING & FACELESS",
     "FB_ADSET": "RODS WEDDING & FACELESS",
-    "FB_CAMPAIGN": "01. [CATER] LF EVERGREEN - QUOTE"
+    "FB_CAMPAIGN": "01. [CATER] LF EVERGREEN - QUOTE",
+    "System": "-"
   },
   "custom.cf_9vVeQH1oYtJbtdHoL9VPwGhNpuCzVCgi95p7MCasszj": [
     "05. ⏰ Immediate need (within 3 months)"
@@ -111,11 +112,12 @@
     "✉️ FB Lead Form 1EMAIL"
   ],
   "custom.cf_nzUyCovAbOCJxIG6j5TXccpBmdWlRAFuMLDTAxJ2Y9p": "01. [CATER] LF EVERGREEN - QUOTE",
+  "custom.cf_rmV7IfUJeD0mmcr9dEnC0ELO1s8gxcTcuXzkbDa2iHf": "-",
   "custom.cf_smf4xXJPUNlJQ2QiG6lgzOhQEuEMQibqZL5WZaL0GHe": "https://app.crisp.chat/website/6e2ee3ba-8402-4f3a-8240-aace16ee1bac/contacts/profile/88e7d3f0-3ab4-41a5-b31f-0bb5a72e0451",
   "custom.cf_vfo9P74IUYaftU7nCUQBxaSmGf69YCC1Bdwbz9w20lU": "Comeketo",
   "custom.cf_xF8FLufgEx9bsijfRAfHhgIrPBQ5ajuohcazC7OtNmT": "01. 😎 Andre",
   "date_created": "2026-05-05T14:46:44.280000+00:00",
-  "date_updated": "2026-05-05T17:36:31.975000+00:00",
+  "date_updated": "2026-05-05T22:09:55.316000+00:00",
   "description": "People 65\nEvent Desc: High school Graduation\nEvent Date: 6/06/2026\nCampaign Name:\n01. [CATER] LF EVERGREEN - QUOTE",
   "display_name": "Mon",
   "html_url": "https://app.close.com/lead/lead_vPHgGQByXDEeyXmiwKO9FV0DTrN9rM0OYNH6gBy4a5Z/",
@@ -208,10 +210,10 @@
       "text": "Facebook Lead Ads: Mon\nCampaign: RODS WEDDING & FACELESS",
       "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
       "updated_by_name": "Andre Raw",
-      "view": "future"
+      "view": "inbox"
     }
   ],
-  "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
-  "updated_by_name": "Rhonna Ricafort",
+  "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "updated_by_name": "Andre Raw",
   "url": null
 }
