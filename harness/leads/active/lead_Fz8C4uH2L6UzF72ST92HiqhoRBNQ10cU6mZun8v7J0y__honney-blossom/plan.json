@@ -1,0 +1,161 @@
+{
+  "plan_id": "plan_u0y2yy7c",
+  "close_lead_id": "lead_Fz8C4uH2L6UzF72ST92HiqhoRBNQ10cU6mZun8v7J0y",
+  "cycle_started_at": "2026-05-06T11:24:31.112Z",
+  "generated_at": "2026-05-06T11:24:31.112Z",
+  "based_on_snapshot_id": "snap_pvn8vm_21",
+  "status": "draft",
+  "primary_goal": "scheduled_call",
+  "goal_summary": "Get Honney Blossom onto a scheduled phone call with Andre by resolving the current communication gap and locking in basic event logistics quickly.",
+  "lead_state_summary": "Honney Blossom is a Maybe lead created 2026-04-30 (Facebook lead form + live chat started same day). There have been multiple outbound attempts: SMS asking best time to call (sent 04/30 19:13), then a call attempt that reached briefly (inbound call noted 04/30 19:37) followed by more call/SMS attempts where calls were not answered (outbound call 05/04 15:24; SMS 05/05 18:01 asking if they’re still waiting on someone else before they can move the event date). Most recently, an email titled “Raise a Glass to Perfect Events! 🍹” was sent 2026-05-06 00:15 and there is no evidence of a reply to the newest message. The lead has a phone number (+17819640481) and also a Crisp chat link. Custom fields indicate 'RODS WEDDING & FACELESS' (plus 'VIDEO RODS WEDDING & FACELESS') and the quote workflow is present ('01. [CATER] LF EVERGREEN - QUOTE'), but the activity feed shows no confirmed event date/time, venue/address, or guest count yet.",
+  "reasoning_trail": [
+    "Honney has phone contact (+17819640481) and has already received multiple call/SMS touches plus at least two emails; the most recent action is an email at 00:15 on 05/06 with no reply.",
+    "The primary blocker to progressing is not channel availability—it’s that the lead hasn’t committed to an agreed time and the needed logistics (event timing/venue) aren’t confirmed; therefore the correct move is to schedule a call with Andre.",
+    "Cadence is sequenced to minimize additional broad info (recent email was a larger subject) and instead use a small, answerable scheduling question with two concrete options.",
+    "Risk accepted: if the lead is waiting on someone else (05/05 18:01 SMS), we’ll still ask for a specific best call window rather than asking for all logistics at once.",
+    "Hope to learn: the best time for Andre to call and whether the event date/venue are still being finalized."
+  ],
+  "known_facts": [
+    "Lead name: Honney Blossom; status: Maybe.",
+    "Phone number on file: +17819640481.",
+    "Email on file: loyzany@hotmail.com.",
+    "Live chat started 2026-04-30 19:18 (from lead activity).",
+    "Outbound SMS asking “What's the best time of day to give you a call?” sent 2026-04-30 19:13.",
+    "Outbound call attempts were not answered (noted 2026-04-30 19:39 calls; 2026-05-04 15:24 call attempt).",
+    "Outbound SMS 2026-05-05 18:01 asks whether Honney is still waiting on someone else before moving the event date.",
+    "Most recent outbound is an email sent 2026-05-06 00:15 with subject “Raise a Glass to Perfect Events! 🍹”.",
+    "Crisp chat link exists for this lead.",
+    "Custom fields mention: 'RODS WEDDING & FACELESS' and 'VIDEO RODS WEDDING & FACELESS'."
+  ],
+  "unknowns": [
+    "Confirmed event date (and whether they are still waiting on someone else).",
+    "Venue/address (or at least city) and any service constraints.",
+    "Guest count / range.",
+    "Whether Honney prefers staffed service vs drop-off (not explicitly confirmed).",
+    "Best phone call window for Andre that Honney will answer."
+  ],
+  "best_next_question": "Andre can do a quick 10-minute call—what time works better for you: today after 5pm or tomorrow around 12pm?",
+  "days": [
+    {
+      "day": 1,
+      "objective": "Convert the recent email into a scheduled Andre phone call by offering two specific time options.",
+      "reasoning": "Honney has a phone number and the latest touch (email) likely needs a direct scheduling prompt. Two concrete options reduce effort and address the prior question about waiting on someone else.",
+      "required_actions": [
+        {
+          "channel": "sms",
+          "intent": "Schedule call with Andre using two concrete options",
+          "draft_seed": "Hey Honney—Andre here. I sent an email a few minutes ago.\n\nCan I call you for 10 minutes today after 5pm, or tomorrow around 12pm?",
+          "notes": "Uses SMS (lead has phone and was previously responsive to timing prompts) and keeps it low-friction with a binary scheduling choice to move directly toward a scheduled call."
+        }
+      ],
+      "send_window": "9:00 AM – 7:00 PM (lead-local time)",
+      "approval_status": "needs_review"
+    },
+    {
+      "day": 2,
+      "objective": "If no reply, confirm the remaining key logistics in a minimal way that justifies the call and helps Andre prepare.",
+      "reasoning": "If Honney didn’t answer day 1, the next best step is to ask one small logistics question that also signals what Andre will cover on the call (event timing/venue).",
+      "required_actions": [
+        {
+          "channel": "email",
+          "intent": "Small logistics check to prep Andre for a scheduled call",
+          "draft_seed": "Hi Honney,\n\nQuick one so Andre can come prepared: are you closer to finalizing (1) the event date and city/venue, or (2) the date is still moving?\n\nReply 1 or 2 and we’ll lock in a call time.",
+          "notes": "Email is appropriate since an email was just sent and may still be unread; the 1-or-2 format is easy, answers the 'waiting on someone else' theme, and sets up call readiness without broad info."
+        }
+      ],
+      "send_window": "7:00 AM – 9:00 PM (lead-local time)",
+      "approval_status": "needs_review"
+    },
+    {
+      "day": 3,
+      "objective": "Get a commitment to a call time via a follow-up that references the unanswered scheduling question.",
+      "reasoning": "After an email with a binary reply prompt, the next move should be a direct SMS to secure a time; this matches the repeated outreach pattern while reducing message breadth.",
+      "required_actions": [
+        {
+          "channel": "sms",
+          "intent": "Secure a call time with a shorter follow-up",
+          "draft_seed": "Honney—should Andre call you at 5:30pm today or 12:30pm tomorrow?",
+          "notes": "A short SMS increases response likelihood and provides two concrete alternatives to convert interest into a scheduled call."
+        }
+      ],
+      "send_window": "9:00 AM – 7:00 PM (lead-local time)",
+      "approval_status": "needs_review"
+    },
+    {
+      "day": 4,
+      "objective": "If still no reply, use Crisp chat link to check whether Honney is active there and offer to schedule through that channel.",
+      "reasoning": "The Box shows a Crisp chat link and prior live chat activity; if SMS/email aren’t getting responses, an operator task to check the chat can reveal context and enable scheduling without over-messaging.",
+      "required_actions": [
+        {
+          "channel": "task",
+          "intent": "Check Crisp chat link for latest messages and availability; prompt for call scheduling",
+          "draft_seed": "Use the lead’s Crisp chat link to check whether Honney is currently active or left a message thread with event details. If there’s no active thread, attempt to surface a scheduling option for Andre (2 time slots) inside Crisp.",
+          "notes": "This respects the communication reality (calls unanswered, recent email unanswered) by checking the likely place they engaged (Crisp/live chat) and using the operator to bridge the gap."
+        }
+      ],
+      "send_window": "7:00 AM – 9:00 PM (lead-local time)",
+      "approval_status": "needs_review"
+    },
+    {
+      "day": 5,
+      "objective": "Ask for just the missing timeline detail needed to justify the Andre call (date or week).",
+      "reasoning": "If logistics remain unknown, Andre can’t reliably prepare. The smallest actionable ask is the event timing at the week/day level, not full details.",
+      "required_actions": [
+        {
+          "channel": "sms",
+          "intent": "Timeline clarification (date/week) to prep call",
+          "draft_seed": "Honney—so Andre can recommend the right setup: what week is the event in (and roughly the day)? If it’s easier, just tell me “this weekend” / “next weekend” / “2+ weeks out.”",
+          "notes": "This targets the highest-impact unknown (event timing) with simple selectable answers, keeping pressure low while moving the conversation toward a scheduled call."
+        }
+      ],
+      "send_window": "9:00 AM – 7:00 PM (lead-local time)",
+      "approval_status": "needs_review"
+    },
+    {
+      "day": 6,
+      "objective": "Request the best next step: scheduled call OR quick opt-out/close-the-loop if they’re not progressing.",
+      "reasoning": "After several outreach attempts with no reply, we should add a respectful close-the-loop. This prevents wasting Andre’s time and clarifies whether to pause outreach.",
+      "required_actions": [
+        {
+          "channel": "email",
+          "intent": "Yes/no close-the-loop that either schedules a call or pauses",
+          "draft_seed": "Hi Honney,\n\nDo you still want Andre to talk through catering options with you by phone?\n\nReply with either:\nA) Yes—call me, and share a preferred time window, or\nB) Not for now, I’ll reach out later.\n\nThanks!",
+          "notes": "A clear A/B response reduces ambiguity after silence, protects the relationship, and directly sets up the scheduled call if they choose A."
+        }
+      ],
+      "send_window": "7:00 AM – 9:00 PM (lead-local time)",
+      "approval_status": "needs_review"
+    },
+    {
+      "day": 7,
+      "objective": "Last attempt to schedule: offer a single short call window and ask for confirmation.",
+      "reasoning": "If there’s still no reply by day 7, the final touch should be extremely specific to increase the odds of confirmation and avoid additional broad questioning.",
+      "required_actions": [
+        {
+          "channel": "sms",
+          "intent": "Final scheduling attempt with one confirmable window",
+          "draft_seed": "Honney—last try: can Andre call you for 10 minutes tomorrow at 1:00pm? Reply YES and we’ll hold it.",
+          "notes": "One confirmable window is the highest-friction-free scheduling ask after multiple prior touches; asking for “YES” makes the next step unambiguous."
+        }
+      ],
+      "send_window": "9:00 AM – 7:00 PM (lead-local time)",
+      "approval_status": "needs_review"
+    }
+  ],
+  "stop_conditions": [
+    {
+      "trigger": "Lead replies and schedules a call with Andre",
+      "action": "kill"
+    },
+    {
+      "trigger": "Lead replies with 'not interested' / 'stop' / 'remove me'",
+      "action": "kill"
+    },
+    {
+      "trigger": "Lead shares venue/address and preferred call window (sufficient to schedule)",
+      "action": "surface"
+    }
+  ],
+  "approval_required": true,
+  "_mirror_at": "2026-05-06T11:24:31.551Z"
+}
