@@ -1,24 +1,18 @@
 {
-  "date_updated": "2026-05-05T22:01:15.777000+00:00",
   "date_created": "2026-05-05T22:01:14.901000+00:00",
-  "lead_id": "lead_vPHgGQByXDEeyXmiwKO9FV0DTrN9rM0OYNH6gBy4a5Z",
-  "created_by_name": "Andre Raw",
-  "activity_at": "2026-05-05T22:01:14.901000+00:00",
-  "user_name": "Andre Raw",
-  "latest_normalized_subject": "[EXCLUSIVE] About Our Tastings",
-  "users": [
-    "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt"
-  ],
-  "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
   "importance": {
     "type": "not_important",
     "reason": "by-default"
   },
-  "updated_by_name": "Andre Raw",
+  "id": "acti_3y07jqYiZDQIIWiSaWuBGXOOaWVJQj8SvtU9ItaVNyI",
   "n_emails": 1,
-  "_type": "EmailThread",
-  "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
-  "created_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "latest_normalized_subject": "[EXCLUSIVE] About Our Tastings",
+  "participants": [
+    {
+      "email": "comeketo@m.comeketocatering.com",
+      "name": "Comeketo Catering Team"
+    }
+  ],
   "latest_emails": [
     {
       "id": "acti_RiqCNy760OqqQ5WXQzRUAhyViieyKD9mTrUgHMSxQRc",
@@ -70,13 +64,19 @@
     }
   ],
   "contact_id": null,
-  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
-  "id": "acti_3y07jqYiZDQIIWiSaWuBGXOOaWVJQj8SvtU9ItaVNyI",
+  "users": [
+    "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt"
+  ],
+  "_type": "EmailThread",
+  "user_id": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "activity_at": "2026-05-05T22:01:14.901000+00:00",
+  "lead_id": "lead_vPHgGQByXDEeyXmiwKO9FV0DTrN9rM0OYNH6gBy4a5Z",
   "summary": null,
-  "participants": [
-    {
-      "email": "comeketo@m.comeketocatering.com",
-      "name": "Comeketo Catering Team"
-    }
-  ]
+  "created_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "user_name": "Andre Raw",
+  "updated_by_name": "Andre Raw",
+  "updated_by": "user_bnfoZDGbTqBZ4wcDGqRqTwjRKiwLnQ4mpV3i2enPkMt",
+  "date_updated": "2026-05-05T22:01:15.777000+00:00",
+  "created_by_name": "Andre Raw",
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq"
 }
