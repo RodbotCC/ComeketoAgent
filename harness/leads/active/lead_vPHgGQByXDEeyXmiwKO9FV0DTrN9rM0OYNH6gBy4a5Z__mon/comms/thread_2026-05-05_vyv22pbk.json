@@ -1,24 +1,18 @@
 {
-  "date_updated": "2026-05-05T14:46:56.009000+00:00",
   "date_created": "2026-05-05T14:46:53.756000+00:00",
-  "lead_id": "lead_vPHgGQByXDEeyXmiwKO9FV0DTrN9rM0OYNH6gBy4a5Z",
-  "created_by_name": null,
-  "activity_at": "2026-05-05T14:46:53.756000+00:00",
-  "user_name": "Rhonna Ricafort",
-  "latest_normalized_subject": "[✅ CATERING] You're in Mon!",
-  "users": [
-    "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo"
-  ],
-  "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
   "importance": {
     "type": "not_important",
     "reason": "automated-outbound"
   },
-  "updated_by_name": "Rhonna Ricafort",
+  "id": "acti_vZULEjYiZ8iqIDzhWt3HUnJviLHfU9ebrFQvyv22pBk",
   "n_emails": 1,
-  "_type": "EmailThread",
-  "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
-  "created_by": null,
+  "latest_normalized_subject": "[✅ CATERING] You're in Mon!",
+  "participants": [
+    {
+      "email": "contact@comeketocatering.com",
+      "name": "Rhonna Ricafort"
+    }
+  ],
   "latest_emails": [
     {
       "id": "acti_PPm1mDmqC9UhOPHQjGyorF8nnmm0zZjbYGHeuqIh7uL",
@@ -70,13 +64,19 @@
     }
   ],
   "contact_id": null,
-  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq",
-  "id": "acti_vZULEjYiZ8iqIDzhWt3HUnJviLHfU9ebrFQvyv22pBk",
+  "users": [
+    "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo"
+  ],
+  "_type": "EmailThread",
+  "user_id": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "activity_at": "2026-05-05T14:46:53.756000+00:00",
+  "lead_id": "lead_vPHgGQByXDEeyXmiwKO9FV0DTrN9rM0OYNH6gBy4a5Z",
   "summary": null,
-  "participants": [
-    {
-      "email": "contact@comeketocatering.com",
-      "name": "Rhonna Ricafort"
-    }
-  ]
+  "created_by": null,
+  "user_name": "Rhonna Ricafort",
+  "updated_by_name": "Rhonna Ricafort",
+  "updated_by": "user_CUH7ddlLe50fkckpnBqndk8HYyEfGpa0ldxggccxqPo",
+  "date_updated": "2026-05-05T14:46:56.009000+00:00",
+  "created_by_name": null,
+  "organization_id": "orga_pOyYOigKEELdmODukgjigCD5pTRewtmBW1yq6YXkskq"
 }
